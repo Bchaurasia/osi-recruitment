@@ -1,0 +1,12 @@
+<div class="nav-side-menu">
+	<div class="brand">Admin</div>
+	<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
+		data-target="#menu-content"></i>
+	<div class="menu-list">
+		<ul id="menu-content" ng-repeat="t in tabs"
+			class="menu-content collapse out">
+			<li ng-class="{active: isActive(t.route)}" ui-sref="{{t.route}}" active="t.active">{{t.heading}} <a
+				data-toggle="tab"></a></li>
+		</ul>
+	</div>
+</div>

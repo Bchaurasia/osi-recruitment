@@ -1,0 +1,68 @@
+<div style="width: 90%">
+
+	<div ng-class="cls" ng-show="message" align="center"
+		style="width: 650px; position: relative; left: -60; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	
+	<form name="clientForm">
+
+	<div align="center">
+
+		<div class="panel panel-default" style="width: 90%">
+			<div class="panel-heading" style="height: 36px;">
+				<center>
+					<span>Client Info</span>
+				</center>
+			</div>
+			<div class="panel-body" style="background-color: #F8F8F8">
+				<div class="row" style="padding-bottom: 10px;">
+					<div align="left" class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Client
+								Name:
+							</label>
+						</div>
+						<div class="col-md-3">
+							<input type="text" name="clientName" id="clientName"
+								placeholder="Enter Client Name" ng-model="client.clientName" />
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="col-md-2" align="left">
+							<label class="lbl" for="location"> <i
+								class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location*
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="location" placeholder="Select Location"
+								ng-disabled="disLocation" ng-model="client.locations"
+								ng-options="o as o for o in locations | orderBy:'toString()'"
+								class="form-control input-sm" id="location"
+								style="color: black" required>
+								<option value='' disabled="disabled">Select Location</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div align="center">
+			<button class="btn btn-info active" ng-disabled="clientForm.$invalid"
+				type="submit" ng-click="submit()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Save
+			</button>
+			<button class="btn btn-info active" ui-sref="admin.client.list">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</div>
+
+	</div>
+	
+	</form>
+</div>
+<br>
+.

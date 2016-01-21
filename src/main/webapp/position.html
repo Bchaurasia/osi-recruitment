@@ -1,0 +1,76 @@
+<html lang="en" ng-app="erApp" ng-controller="positionCtrl">
+<head>
+<meta charset="utf-8">
+<title>Employee Referral Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script src="lib/angular/js/angular.min.js"></script>
+<script src="lib/angular/js/ng-grid-1.3.2.js"></script>
+<script src="lib/utility/js/jquery-1.11.2.min.js"></script>
+<script src="js/masks.js"></script>
+<script src="lib/angular/js/angular-block-ui.min.js"></script>
+<script src="lib/angular/js/angular-file-upload-shim.min.js"></script>
+<script src="lib/angular/js/angular-file-upload.js"></script>
+<script src="lib/bootstrap/js/bootstrap.js"></script>
+<script src="lib/angular/js/ng-grid.debug.js"></script>
+<!-- <script src="lib/angular/js/ng-grid-flexible-height.js"></script> -->
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="lib/angular/css/ng-grid.css" />
+<script src="lib/angular/js/angular-route.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/position/searchPosition.js"></script>
+<script type="text/javascript" src="js/position/editPosition.js"></script>
+<script type="text/javascript" src="js/position/createPosition.js"></script>
+<link href="lib/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="lib/angular/css/ng-tags-input.min.css">
+<link href="lib/angular/css/angular-block-ui.min.css" rel="stylesheet">
+<script src="lib/bootstrap/js/ng-tags-input.min.js"></script>
+<link href="static/css/home.css" rel="stylesheet">
+<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+        rel="stylesheet"> -->
+<link href="lib/bootstrap/font/font-awesome.min.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/dashboard.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+   
+</head>
+<body>
+<div id="wrapper">
+
+<!------------------------------------------------------ keep header here ---------------------------------------------->
+                                            <div ng-include="'header.html'"></div>
+<!------------------------------------------------------ --------------------------------------------------------------->
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+              
+              <center>
+              	<div ng-view>
+              	</div></center>
+              	
+              	</div>
+        <!-- /span12 --> 
+      </div>
+      <!-- /row --> 
+      
+    </div>
+    <!-- /container -->
+  </div>
+  <!-- /main-inner --> 
+</div>
+              	
+	         	
+
+<!------------------------------------------------------ keep footer here ---------------------------------------------->
+                                            <div id="footer" ng-include="'footer.html'">footer</div>
+<!----------------------------------------------------------------------- ---------------------------------------------->
+
+
+</div>
+ </body>
+</html> 

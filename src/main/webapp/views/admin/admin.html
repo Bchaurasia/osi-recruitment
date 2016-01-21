@@ -1,0 +1,34 @@
+<style>
+.nav {
+	margin-top: 27px;
+	margin-left: 69px;
+}
+
+/* .navbar-collaspe{ */
+/* margin-left: -8%; */
+/* } */
+.nav-admin li a {
+	padding: 9px;
+}
+
+.nav-admin li.active>a {
+	background: #00ACD5;
+	border-bottom: 2px solid red;
+}
+
+.nav-admin li.active:hover>a {
+	background: #00ACD5;
+	border-bottom: 4px solid white;
+}
+
+.nav-admin li.active:visited>a {
+	background: #00ACD5;
+	border-bottom: 4px solid white;
+}
+</style>
+
+<!------------------------------------------------------ SIDEBAR ---------------------------------------------->
+	<div ng-include="'views/admin/admin-sidebar.html'"></div>
+<!------------------------------------------------------ ------------------------------------------------------>
+	<div ui-view style="margin-left: 179px;"></div>
+	<br>

@@ -1,0 +1,53 @@
+<div ng-class="cls" ng-show="message" align="center"
+	 style="width: 650px; position: relative; left: -60; height:50">
+		<h5>{{message}}</h5>
+</div>
+
+<button ng-hide="dis" style="position:relative;left: 20%;  top: 30px;"" class="btn btn-info active" ng-click="alHide();Skills1()">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+<br>
+<div class="row">
+	<div align="left" class="col-md-3"></div>
+	<div class="col-md-5">
+		<div ng-hide="dis">
+			<table id="users"
+				style="width: 350px;margin-left: -5%" id="InterviewRound">
+				<tr>
+					<th width="20px">#</th>
+					<th width="80px">Interview Rounds</th>
+<!-- 					<th width="40px">Delete</th> -->
+				</tr>
+				<tr ng-repeat="interviewRound in interviewRounds">
+					<td>{{$index +1}}</td>
+					<td class="td-style" align="center">{{interviewRound}}</td>
+					<!-- <td align="center"><a class="glyphicon glyphicon-remove" ng-click="deleteInterviewRound($index,interviewRound)"></a></td> -->
+				</tr>
+			</table>
+		</div>
+		<div class="panel panel-default" style="width:600px;margin-left: -8%" ng-hide="dis2">
+			<div class="panel-heading" style="height:36px;">
+			<center><span style="color:white;">Add Interview Rounds</span></center>
+			</div>
+  			<div class="panel-body">
+			<table>
+		<tr>
+		<td style="padding-right:20px;"><label class="lbl" for="Designation"> <i
+							class="glyphicon icon-filter"></i>&nbsp;&nbsp;Interview Round:
+						</label></td>
+		<td><input type="text" name="" class="form-control" ng-change="hideError=true"
+						ng-model="newInterviewRound" placeholder="Enter InterviewRound..."></td>
+						<td style="padding-left:20px;"><button class="btn btn-info active" ng-click="save();">Save</button></td>
+						<td style="padding-left: 20px;"><button class="btn btn-info active" ng-click="cancel();">Cancel</button></td>
+						</tr>
+		</table>
+					<medium ng-hide = "hideError"  style="color:red;">can't leave the text field blank</medium>
+			<br> <br> 
+			
+		</div>
+	</div><br>
+	
+	</div>
+</div></div>
+
+

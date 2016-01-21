@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" type="image/x-icon" href="static/images/nisum_favicon.ico" />
+<title>Nisum Technologies</title>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="lib/bootstrap/css/bootstrap-responsive.min.css"
+	rel="stylesheet" type="text/css" />
+
+<link href="lib/bootstrap/font/font-awesome.css" rel="stylesheet">
+<link href="lib/bootstrap/font/google_font.css" rel="stylesheet">
+
+<link href="static/css/style.css" rel="stylesheet" type="text/css">
+<link href="static/css/signin.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="lib/angular/js/angular.min.js"></script>
+<script type="text/javascript" src="lib/angular/js/angular-route.min.js"></script>
+
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript"
+	src="lib/utility/js/google-plus-signin.js"></script>
+<script src="lib/utility/js/jquery-1.11.2.min.js"></script>
+
+<link href="lib/utility/css/bootstrap-social.css" rel="stylesheet"
+	type="text/css">
+<link href="lib/utility/css/font-awesome.css" rel="stylesheet"
+	type="text/css">
+<link href="lib/utility/css/docs.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Font+Name">
+<script type="text/javascript" src="lib/utility/js/docs.js"></script>
+<script type="text/javascript" src="js/linkedin_login.js"></script>
+
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+	//here goes the api key, and the callback function
+	api_key: 75bm8w66omcy7b
+	//onLoad: onLinkedInLoad
+	authorize: true
+</script>
+</head>
+
+<body ng-app="myApp">
+
+	<div ng-controller="myContoler">
+
+		<div class="navbar navbar-fixed-top">
+
+			<div class="navbar-inner">
+
+				<div class="container" style="padding: 32px 0 34px 0;">
+					<div class="custom-header">
+						<a href="login.html" class="col-md-2"><img class="navbar-brand"
+							src="static/images/nisum_logo_sky.png" alt="Nisum Technologies"
+							width="150" height="60" style="padding: 0px; margin-left: 7%"
+							title="Nisum Technologies" /></a>
+							<h1 class="col-md-4" style="font-size: 300%;color: white;">Recruitment Portal</h1>
+					</div>
+					
+
+				</div>
+				<!-- /container -->
+
+			</div>
+			<!-- /navbar-inner -->
+
+		</div>
+		<!-- /navbar -->
+
+		<div class="login-inner-container">
+			<div class="account-container"
+				style="width: 500px; height: 200px; position: relative; left: 120px;">
+				<div class="content clearfix">
+
+					<div class="google-signin">
+						<div class="field">
+
+							<div style="display: none">
+								<form id="login-form" action="j_spring_security_check"
+									method="post">
+									<div class="center">
+										<input type="text" name="j_username" id="j_username"
+											maxlength="50" /> <input type="password" name="j_password"
+											id="j_password" maxlength="50" /> <input type="submit"
+											value="Login" id="login-submit" />
+									</div>
+								</form>
+							</div>
+							<div ng-app="directive.g+signin"
+								style="position: relative; top: -75px; left: 10px;">
+								<google-plus-signin
+									clientid="982095460700-r2em1ubormovperomp1vlbm0r3m54rlt.apps.googleusercontent.com">
+								<a id="signInG" class="btn btn-block btn-social btn-google">
+									<i class="fa fa-google-plus"></i> Sign in with google
+								</a> </google-plus-signin>
+								<!-- <script type="in/Login"></script> -->
+								<!-- <input type="image"  src ="images/Signin_Linkedin_2.gif" onclick="onLinkedInLoad()" alt="submit" value="Sign in using LinkedIn account" /> -->
+								<!-- <button id="linkedIn" onclick="onLinkedInLoad()"></button> -->
+
+							</div>
+							<div id="profiles"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /content -->
+
+		</div>
+		<!-- /account-container -->
+	</div>
+	<div center>
+		<div class="footer">
+			<div class="footer-inner">
+				<div class="container">
+					<div class="row">
+						<div align="center" class="span12">
+							&copy; 2015 <a href="http://www.nisum.com/">OSI Technologies</a>.
+						</div>
+						<!-- /span12 -->
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /footer-inner -->
+		</div>
+		<!-- /footer -->
+		</center>
+	</div>
+
+	<script src="lib/bootstrap/js/bootstrap.js"></script>
+
+	<script src="js/signin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<h2 class="heading-name">Report Management</h2><br>
+<div ng-controller="reportManagementCtrl" class="searchposition-container">
+	<div class="row" style="margin-top: 3%;margin-left: 10px">
+	<div class="col-md-4 ">
+	<label class="lbl "
+				for="jobcode"><i class="glyphicon glyphicon-barcode" ></i>
+					Jobcodes</label>
+	<select
+				name="jc" ng-model="candidate.jobcodeProfile" ng-change = "getReportStatus(candidate.jobcodeProfile)" required
+				placeholder="Select Jobcode" 
+				ng-options="item.jobcode as item.jobcode for item in positions | orderBy:'toString()'"
+				 id="jc" style="color: black;height: 30px;width: 71%;border-radius: 5px">
+			</select>
+	</div>
+	<div class="col-md-4">
+	<label class="lbl"
+				for="jobcode"><i class="glyphicon glyphicon-calendar"}"></i>&nbsp;&nbsp;From
+					Date</label> <input type="date" name="input" ng-model="exampless.value"
+				style="width: 57%;height: 30px;border-radius: 5px"
+				placeholder="From Date" />
+	</div>
+	<div class="col-md-3">
+	<label class="lbl"
+				for="jobcode"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;
+					To Date</label> <input type="date" id="exampleInput" name="input"
+				ng-model="example.value"
+				style="width: 57%;height: 30px;border-radius: 5px"
+				placeholder="From Date" />
+	</div>
+	<div class="col-md-1">
+	<a href="#reportInfo" style="margin-left: -35px"
+				id="" ng-disabled="searchDisable"
+				class="btn btn-info active" ng-hide="positionhidden"
+				ng-click="searchPosition()" ng-disabled="report.$invalid"> <span
+				class="glyphicon glyphicon-search"  
+				></span> 
+			</a>
+    </div>
+	</div>
+	<br>
+</div> 

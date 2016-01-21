@@ -1,0 +1,172 @@
+<html lang="en" ng-app="erApp" ng-controller="createUserController">
+<head>
+<meta charset="utf-8">
+<title>Employee Referral Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script src="lib/angular/js/angular.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.js"></script>
+<script src="lib/utility/js/jquery-1.11.2.min.js"></script>
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/createUser.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/angular/css/ng-tags-input.min.css">
+<script src="lib/bootstrap/js/ng-tags-input.min.js"></script>
+<link href="lib/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="static/css/home.css" rel="stylesheet">
+<link href="lib/bootstrap/font/google_font.css" rel="stylesheet">
+<script src="lib/bootstrap/js/bootstrap.js"></script>
+<link href="lib/bootstrap/font/font-awesome.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/dashboard.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div id="wrapper">
+
+<!------------------------------------------------------ keep header here ---------------------------------------------->
+                                            <div ng-include="'header.html'"></div>
+<!------------------------------------------------------ --------------------------------------------------------------->
+<center>
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+        
+       <div class="widget widget-table action-table">
+            <div class="form-container"><br>
+            
+              <center><h1>Create User</h1></center><br>
+              
+              
+              
+					<form action="#" name="userForm" onvalidate>
+					<form id="integerForm" role="form" class="form-horizontal">
+						<table border="0" cellpadding="5">
+						<tr><td>
+						<div class="control-group"
+							ng-class="{ 'has-error' : userForm.userId.$invalid && !userForm.userId.$pristine &&! userForm.userId.$required}">
+							<label for="userId" class="lbl">User Id:</label></td><td> <input type="email"
+								name="userId" class="form-control input-sm" id="userId" ng-change="changeEvent()" 
+								ng-model="user.userId" placeholder="Enter user Id" required></td></tr><tr><td></td><td>
+							<span
+								ng-show="userForm.userId.$invalid && !userForm.userId.$pristine  "
+								class="help-block">A Valid Email Id Should Be Entered</span> <span
+								ng-show="userForm.userId.$required" class="help-block">Email
+								Id Is Required</span>
+						</div></td></tr>
+						<tr><td>
+						<div class="control-group"
+							ng-class="{ 'has-error' : userForm.userName.$invalid && !userForm.userName.$pristine }">
+							<label for="userName" class="lbl">Name:</label></td><td> <input type="text" ng-change="changeEvent()"
+								name="userName" class="form-control input-sm" id="userName"
+								ng-model="user.name" placeholder="Enter name"
+								ng-pattern="/^[a-zA-Z _]*$/" required></td></tr><tr><td></td><td> <span
+								ng-show="userForm.userName.$invalid && !userForm.userName.$pristine && !userForm.userName.$error.userName"
+								class="help-block"> Enter A Valid Name</span> <span
+								class="help-block" ng-show="userForm.userName.$error.number">Name
+								Is Required !!</span>
+						</div></td></tr>
+						<tr><td>
+						<div class="control-group"
+							ng-class="{ 'has-error' : userForm.emplyoeeId.$invalid && !userForm.emplyoeeId.$pristine }">
+							<label for="emplyoeeId" class="lbl">Employee Id:</label></td><td> <input
+								type="number" name="emplyoeeId" class="form-control input-sm" ng-change="changeEvent()" 
+								id="emplyoeeId" ng-model="user.empId"
+								ng-pattern="^[0-9]*$" 
+								placeholder="Enter employee Id" required></td></tr><tr><td></td><td> <span
+								class="help-block"
+								ng-show="userForm.emplyoeeId.$invalid && !userForm.emplyoeeId.$pristine&& !userForm.emplyoeeId.$error.number">A
+								Valid Employee Id is required.</span> <span class="help-block"
+								ng-show="userForm.emplyoeeId.$error.$number">Employee Id
+								is invalid!!</span> <span class="help-block"
+								ng-show="userForm.emplyoeeId.$error.$error.maxlength">Employee
+								Id is too long</span>
+						</div></td></tr>
+						<tr><td>
+						<div class="control-group"
+							ng-class="{ 'has-error' : userForm.experience.$invalid && !userForm.experience.$pristine }">
+							<label for="experience" class="lbl">Experience:</label></td><td> <input type="number" ng-change="changeEvent()" 
+								name="experience" class="form-control input-sm" id="experience"
+								ng-model="user.experience" placeholder="Enter Experience"
+								ng-pattern="^[0-9]*$" 
+								required></td></tr><tr><td></td><td> <span class="help-block"
+								ng-show="userForm.experience.$invalid && !userForm.experience.$pristine&& !userForm.experience.$error.number">Years
+								Of Experience Is Required</span> <span class="help-block"
+								ng-show="userForm.experience.$error.$number">Entry is
+								invalid!!</span>
+						</div></td></tr>
+						<tr><td>
+						<div class="control-group"
+							ng-class="{ 'has-error' : userForm.mobileNo.$invalid && !userForm.mobileNo.$pristine }">
+							<label for="mobileNo" class="lbl">Mobile No:</label></td><td> <input type="number" ng-change="changeEvent()" 
+								ng-model="user.mobileNumber" name="mobileNo" id="mobileNo"
+								ngPattern="1234567890" ng-maxlength="10" class="form-control input-sm"
+								placeholder="Enter mobile number" required></td></tr><tr><td></td><td> <span
+								class="help-block"
+								ng-show="userForm.mobileNo.$required && !userForm.mobileNo.$pristine && !userForm.mobileNo.$error.number">Valid
+								Mobile Number is required.</span> <span class="help-block"
+								ng-show="userForm.mobileNo.$error.number">Mobile Number
+								is invalid!!</span> <span class="help-block"
+								ng-show="userForm.mobileNo.$error.maxlength">Mobile
+								Number is too long</span>
+						</div></td></tr>
+						<tr><td>
+						<div class="control-group"
+							ng-class="{ 'has-error' : userForm.userDesignation.$invalid && !userForm.userDesignation.$pristine }">
+							<label for="userDesignation" class="lbl">Designation:</label></td><td> <input
+								type="text" name="userDesignation" class="form-control input-sm" ng-change="changeEvent()" 
+								id="userDesignation" ng-model="user.designation"
+								ng-pattern="/^[a-zA-Z _]*$/"
+								placeholder="Enter Designation" required></td></tr><tr><td></td><td> <span
+								ng-show=" userForm.userDesignation.$invalid && !userForm.userDesignation.$pristine"
+								class="help-block">A Valid Designation is required.</span>
+						</div></td></tr>
+						<tr><td>
+						<div class="control-group">
+							<label for="name" class="lbl">Role:</label></td><td> <select class="form-control input-sm" ng-change="changeEvent()" 
+								ng-model="selectedRole" name="roles" ng-options = "o as o for o in options | orderBy:'toString()'">
+							</select>
+						</div><br></td></tr>
+						<tr><td></td><td>
+						<div class="control-group">
+						<input type="submit" class="btn btn-info"
+							ng-click="submit()" value=Register name="post" align="center" ng-disabled="enableDisbleButton"  />
+							</div></td></tr>
+							</table>
+						</form>
+						</form>
+						</div>
+
+          </div>
+         
+         
+         </div>
+        <!-- /span12 --> 
+      </div>
+      <!-- /row --> 
+      
+    </div>
+    <!-- /container -->
+  </div>
+  <!-- /main-inner --> 
+</div>
+
+<!-- /main -->
+
+<!------------------------------------------------------ keep footer here ---------------------------------------------->
+                                            <div ng-include="'footer.html'">footer</div>
+<!----------------------------------------------------------------------- ---------------------------------------------->
+
+
+</div>
+</center>
+</body>
+</html>
+						
+
+         

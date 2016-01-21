@@ -1,0 +1,94 @@
+<div ng-class="cls" ng-show="message" align="center"
+	style="width: 650px; position: relative; left: -60; height: 50">
+	<h5 style="margin-top: 2px;">{{message}}</h5>
+</div>
+
+<div ng-hide="dis">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-3">
+			<div class="input-group">
+				<input class="form-control" ng-model="search"
+					ng-change="changePage()" placeholder="Enter Search String"
+					type="search"
+					style="width: 80%; left: 10%; top: -1px; border: 1px solid rgb(194, 191, 191);" />
+				<span class="input-group-addon"
+					style="position: relative; left: -10%; top: -1px;"> <span
+					class="glyphicon glyphicon-search"></span>
+				</span>
+			</div>
+			<br>
+		</div>
+		<div class="col-md-1" style="margin-left: -4%">
+			<button class ="btn btn-info active" ng-click="alHide();Skills1()">
+			<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+	</div>
+	<table id="users" style="width: 30%">
+		<tr>
+			<th width="20px">#</th>
+			<th width="80px">Skills</th>
+			<th width="40px">Delete</th>
+		</tr>
+		<tr class="animate-repeat"
+			ng-repeat="skill in skills | orderBy:'toString()' | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+			<td>{{$index +1}}</td>
+			<td class="td-style">{{skill}}</td>
+			<td align="center"><a class="glyphicon glyphicon-remove"
+				ng-click="deleteSkill($index,skill)"></a></td>
+		</tr>
+	</table>
+<br>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-2">
+			<h5>Total Skills : {{ skills.length }}</h5>
+		</div>
+
+		<div class="col-md-4">
+			<ul class="pagination pull-right">
+				<li ng-class="{disabled: currentPage == 0}"><a href
+					ng-click="prevPage()">Prev</a></li>
+				<li ng-repeat="n in range(currentPage)"
+					ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+					href ng-bind="n + 1"></a></li>
+				<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
+					href ng-click="nextPage()">Next</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+
+<div class="panel panel-default" style="width: 600px; margin-left: -8%"
+	ng-hide="dis2">
+	<div class="panel-heading" style="height: 36px;">
+		<center>
+			<span style="color: white;">Add Skills</span>
+		</center>
+	</div>
+	<div class="panel-body">
+		<table>
+			<tr>
+				<td style="padding-right: 20px;"><label class="lbl"
+					for="Designation"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skill:
+				</label></td>
+				<td><input type="text" name="" class="form-control"
+					ng-change="hideError=true" ng-model="newSkill"
+					placeholder="Enter Skill..."></td>
+				<td style="padding-left: 20px;"><button
+						class="btn btn-info active" ng-click="save();">Save</button></td>
+				<td style="padding-left: 20px;"><button class="btn btn-info active" ng-click="cancel();">Cancel</button></td>		
+			</tr>
+		</table>
+		<medium ng-hide="hideError" style="color:red;">can't leave
+		the text field blank</medium>
+		<br>
+
+	</div>
+</div>
+<br>
+
+

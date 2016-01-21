@@ -1,0 +1,190 @@
+<h3 class="heading-name">Create Offer</h3>
+<div class="container">
+	<form name="form" class="form-horizontal" onvalidate>
+		<div class="panel panel-default">
+			<div class="panel-heading text-center margin-bottom">
+				<Strong class="panel-title">Candidate Details</Strong>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Select Candidate<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input type="text" name="name" class="form-control"
+								ng-disabled="true" ng-model="profile.candidateName"
+								style="width: 220px;">
+						</div>
+						<label class="lbl col-md-2"><i
+							class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select
+							JobCode <b style="color: red;">*</b></label>
+						<div class="col-md-3">
+							<input type="text" name="jobcode" class="form-control"
+								ng-disabled="true" ng-model="candidate.jobcodeProfile"
+								style="width: 220px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Email Id<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input class="form-control" type="email" name="emailId"
+								ng-model="candidate.emailId" class="form-control"
+								ng-disabled="true" placeholder="Enter Email Id" required>
+						</div>
+						<label class="lbl col-md-2"><i
+							class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Mobile<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input class="form-control" type="text" name="mobileNo"
+								ng-model="profile.mobileNo" class="form-control"
+								ng-disabled="true" placeholder="Enter Mobile No" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;Client<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input class="form-control" type="text" name="client"
+								ng-model="candidate.client" class="form-control"
+								ng-disabled="true" placeholder="Select Client" required>
+						</div>
+						<label class="lbl col-md-2"><i
+							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Report Manager <b
+							style="color: red;">*</b></label>
+						<div class="col-md-3">
+							<select name="reportManager"
+								ng-model="candidate.reportingManager"
+								ng-options="o.name as o.name for o in managers | orderBy:'toString()'"
+								class="form-control input-sm">
+								<option value='' disabled="disabled">Select Reporting
+									Manager</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Project<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input class="form-control input-sm" type="text" name="project"
+								ng-model="candidate.project" class="form-control"
+								placeholder="Enter Project Name" required>
+						</div>
+						<label class="lbl col-md-2"><i
+							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;HR Manager<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input class="form-control input-sm" type="text" name="hrManager"
+								ng-model="candidate.hrManager" class="form-control"
+								ng-disabled="true" placeholder="Select HR Manager" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Immigration
+							Status<span style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<select name="immigration" placeholder="Immigration Status"
+								required ng-model="candidate.imigrationStatus"
+								ng-options="o for o in iStatus" class="form-control">
+								<option value='' disabled="disabled">Select Immigration
+									Status</option>
+							</select>
+						</div>
+						<label class="lbl col-md-2"><i
+							class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Joining Date<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input type="text" class="form-control" ng-click="open($event)"
+								datepicker-popup="{{format}}" ng-model="candidate.joiningDate"
+								is-open="opened" min-date="minDate" max-date="'2016-06-22'"
+								datepicker-options="dateOptions"
+								placeholder="Select Joining Date"
+								date-disabled="disabled(date, mode)" ng-required="true"
+								close-text="Close" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-euro"></i>&nbsp;&nbsp;Relocation
+							Allowance<span style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<select name="relAlowance"
+								ng-model="candidate.relocationAllowance"
+								ng-options="o for o in allowances" class="form-control input-sm">
+								<option value='' disabled="disabled">Select Relocation
+									Allowance</option>
+							</select>
+						</div>
+						<label class="lbl col-md-2"><i
+							class="glyphicon glyphicon-euro"></i>&nbsp;&nbsp;Sign-on Bonus<span
+							style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<select name="bonus" ng-model="candidate.singInBonus"
+								ng-options="o for o in bonus" class="form-control input-sm">
+								<option value='' disabled="disabled">Select Sign-on
+									Bonus</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-file"></i>&nbsp;&nbsp;Select Offer
+							Letter<span style="color: red;">*</span></label>
+						<div class="col-md-3">
+							<input id="uploadFile" type="file" class="custom-file-input"
+								ng-file-select="upload($files)" valid-file required /> <small
+								ng-show="fileError" style="color: red;">File Extensions
+								Accepted: [doc, docx, pdf]</small>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="lbl col-md-2 col-md-offset-1"><i
+							class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Comment</label>
+						<div class="col-md-8">
+							<textarea cols="500" rows="10" name="comment"
+								ng-model="candidate.comments" placeholder="Place for Comment..."
+								style="width: 94%; height: 70px; padding: 2px 12px;"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div align="center">
+			<button type="submit" class="btn btn-primary" ng-click="saveOffer()"
+				ng-disabled="form.$invalid || invalidFile">
+				<span class="glyphicon glyphicon-ok-circle"></span> Save
+			</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="submit" class="btn btn-primary" ng-click="cancel()">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</div>
+		<br> <br>
+	</form>
+</div>
+
+<style>
+.form-group {
+	text-align: left;
+	padding-bottom: 1%;
+}
+
+.form-horizontal .lbl {
+	padding-left: 0%;
+}
+
+.select2-container .select2-choice {
+	height: 32px;
+	border-radius: 1px;
+	padding-left: 5%;
+}
+
+.select2-drop-active {
+	width: 220px;
+}
+</style>

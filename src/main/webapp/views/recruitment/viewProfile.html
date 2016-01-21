@@ -1,0 +1,374 @@
+
+<div ng-controller="editProfileCtrl">
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; left: -60; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+
+
+	<accordion close-others=false> <accordion-group
+		is-open="status.isFirstOpen"> <accordion-heading>
+	<font style="color: white;"> Personal Details<i
+		class="pull-right glyphicon"
+		ng-class="{'glyphicon-minus': status.isFirstOpen, 'glyphicon-plus': !status.isFirstOpen}"></i></font>
+	</accordion-heading>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="candidateName"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Candidate Name*</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.candidateName"
+					onbeforesave="validateChar($data)" e-required>{{
+					candidate.candidateName }} </a>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="emailId"><i
+					class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Email Id*</label>
+			</div>
+			<div class="col-md-3">{{ candidate.emailId }}</div>
+		</div>
+	</div>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-3">
+				<span
+					ng-show="CreateCandidate.candidateName.$invalid  && !CreateCandidate.candidateName.$pristine"
+					class="help-block">Enter A Valid Name!</span>
+
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2"></div>
+			<div class="col-md-3">
+				<span
+					ng-show="CreateCandidate.emailId.$dirty && CreateCandidate.emailId.$invalid">
+					<span class="help-block" class="error"
+					ng-show="CreateCandidate.emailId.$error.email"> Valid
+						Email-id is required</span>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="mobileNo"><i
+					class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;MobileNo*</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.mobileNo"
+					onbeforesave="validatePhNo($data)" e-required>{{
+					candidate.mobileNo || "--" }}</a>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="altmobileNo"><i
+					class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Alt. MobileNo</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.altmobileNo"
+					onbeforesave="validatePhNo($data)">{{ candidate.altmobileNo ||
+					"--" }}</a>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="passportNo"><i
+					class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Passport No.</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.passportNo"
+					onbeforesave="validateAlphanumeric($data)">{{
+					candidate.passportNo || "--" }}</a>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="notes"><i
+					class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Current Address*</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.address" e-required>{{
+					candidate.address || "--" }}</a>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="skypeId"><i
+					class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Skype Id.</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.skypeId"
+					onbeforesave="validateAlphanumeric($data)">{{ candidate.skypeId
+					|| "--" }}</a>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2"></div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	</accordion-group> <br>
+	<accordion-group is-open="status1.open"> <accordion-heading>
+	<font style="color: white;"> Professinal Details <i
+		class="pull-right glyphicon"
+		ng-class="{'glyphicon-minus': status1.open, 'glyphicon-plus': !status1.open}"></i></font>
+	</accordion-heading>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="qualification"><i
+					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Qualification*</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="candidate.qualification"
+					e-ng-options="o as o for o in info.qualification" e-required>
+					{{ candidate.qualification }} </a>
+
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="Specialisation"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Specialisation</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.stream"
+					onbeforesave="validateChar($data)">{{ candidate.stream || "--"
+					}}</a>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="Experience"><i
+					class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience</label>
+			</div>
+			<div class="col-md-3">
+				<div class="col-md-6">
+					Years <a href="#" editable-select="candidate.expYear" onaftersave="getDesignations()" 
+						e-ng-options="o as o for o in info.expYears">{{candidate.expYear
+						|| "--"}}</a>
+
+				</div>
+				<div class="col-md-6">
+					Months: <a href="#" editable-select="candidate.expMonth"
+						e-ng-options="o as o for o in info.expMonths">{{candidate.expMonth
+						|| "--"}}</a>
+					</td>
+				</div>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="skills"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills</label>
+			</div>
+			<div class="col-md-3">
+					<a herf="" ng-hide="dis1" ng-click="skillss()"><i
+						ng-repeat="skills in candidate.primarySkills">{{skills}}{{$last
+							? '' : ', '}}</i></a>
+					<ui-select multiple ng-model="candidate.primarySkills"
+						ng-hide="hideSkillss" 
+						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+						id="skills" ui-select-required ng-disabled="disabled">
+					<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
+					<ui-select-choices
+						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+					{{color}} </ui-select-choices> </ui-select>
+				</div>
+				<div class="col-md-1">
+					<button class="glyphicon glyphicon-ok btn btn-primary"
+						" ng-hide="hideSkillss" ng-click="skillss1()"></button>
+				</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="Plocation"><i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Designation*
+				</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="candidate.designation" onaftersave="setJobCodes()"
+					e-ng-options="o as o for o in profiledesignations" e-required>
+					{{ candidate.designation || "--" }} </a>
+
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="CurrentEmp"><i
+					class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Current
+					Employer</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.currentEmployer">{{
+					candidate.currentEmployer || "--" }}</a>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="ReferredBy"><i
+					class="glyphicon glyphicon-registration-mark"></i>&nbsp;&nbsp;Recruitment
+					Team</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="candidate.hrAssigned"
+					e-ng-options="o as o for o in recruitmentData">{{
+					candidate.hrAssigned || "--" }}</a>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="jobcode"><i
+					class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select Jobcode</label>
+			</div>
+			<div class="col-md-3">
+				<a href="" ng-hide="hidejobcode" ng-click="jobcodes()"><i>
+						{{candidate.jobcodeProfile.join(', ') || "--"}}</i></a>
+				<ui-select ng-hide="hidejobcodemenu" multiple style="width:180px;"
+					ng-model="candidate.jobcodeProfile" theme="select2"
+					ng-disabled="disabled"> <ui-select-match
+					placeholder="Select JobCodes..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="color in jobcodelist | orderBy:'toString()' | filter:$select.search">
+				{{color}}</ui-select-choices> </ui-select>
+			</div>
+			<!-- {{jobcodelist}} -->
+			<div class="col-md-1">
+				<button class="glyphicon glyphicon-ok btn btn-primary"
+					" ng-hide="hidejobcodemenu" ng-click="jobcodesave()"></button>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="additionalNotes"><i
+					class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Additional Notes</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="candidate.notes">{{ candidate.notes
+					|| "--" }}</a>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="download"><i
+					class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Download*</label>
+			</div>
+			<div class="col-md-3">
+				<!-- 	 <a ng-href="{{download()}}" download>Download</a>  -->
+				<a href="" ng-click="download()">Download</a>
+			</div>
+		</div>
+	</div>
+	</accordion-group> <br>
+	<center>
+		<div ng-show="hasRole('ROLE_ADMIN,ROLE_HR')">
+			<table ng-hide="tableHide" id="interview" style="left: 0px;"
+				border="2">
+				<tr>
+					<th>Name</th>
+					<th>Email ID</th>
+					<th>Skills</th>
+					<th>Job Code</th>
+					<th>Schedule</th>
+					<th>Feedback</th>
+					<th>Status</th>
+				</tr>
+				<tr ng-repeat="item in interviewDetails">
+					<td>{{item.candidateName}}</td>
+					<td>{{item.candidateEmail}}</td>
+					<td><i ng-repeat="skills in item.candidateSkills">{{skills}}{{$last
+							? '' : ', '}}</i></td>
+					<td><i ng-repeat="jobcode in item.positionId">{{jobcode}}{{$last
+							? '' : ', '}}</i></td>
+					<td><a href="" id="" class="interview-schedule"
+						ng-click="schedule(item.positionId,item.candidateEmail)"> <span
+							class="glyphicon glyphicon-plus"
+							style="position: relative; top: 1px;" />
+					</a></td>
+					<td>
+						<button style="background-color: #F8F8F8; border: 0px;" href=""
+							id="" class="interview-feedback"
+							ng-disabled="disableFeedback(item.rounds)"
+							ng-click="feedback(item.currentPositionId,item.candidateEmail)">
+							<span class="glyphicon glyphicon-envelope"
+								style="position: relative; top: 1px;"></span>
+						</button>
+					</td>
+					<td style="font-weight: bold">{{item.progress}}</td>
+				</tr>
+			</table>
+		</div>
+	</center>
+	<br>
+	<div align="center">
+		<a href="" class="btn btn-primary" ng-click="updateProfileDetails()">
+			<span class="glyphicon glyphicon-ok"></span> Update
+		</a>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.searchProfile"
+			class="btn btn-primary"> <span class="glyphicon glyphicon-remove"></span>
+			Cancel
+		</a>
+	</div>
+
+	</accordion-group> </accordion>
+
+	<div></div>
+
+</div>
+<br>
+<br>
+.

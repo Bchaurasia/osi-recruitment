@@ -1,0 +1,44 @@
+<html>
+<body style="font-family:calibri; font-size:15px; background-color:#F9FCF7;">
+
+<div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black; border-color:#004C7F;">
+<div style="padding-left:20px; padding-right:20px;">
+<p style="color: black;font-size:15px; font-family:Calibri;">
+Hi $cname,<br><br>
+
+You have been shortlisted for the position and are invited to attend an interview.<br>
+The details of your interview are: <br><br>
+ 
+
+<table style="width:450px; border: 0px solid Gray;">
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Interview Round :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Type of Interview:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$typeOfInterview</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Date Of Interview</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$interviewDateTime</td> 
+</tr>
+
+</table>
+<br><br>
+ We are definitely looking forward to speaking with you then.<br> <br> Have a nice day! 
+<br><br>
+
+ <span style="font-size:15px">Regards,</span><br>
+ <span style="font-size:15px">Recruitment Team,</span><br>
+ <span style="font-color:Gray;color:Gray;font-size:15px"><a href="http://nisum.com/index.html">Nisum Technologies<b></a></span><br>
+</div>
+</div>
+<div style="background-color:#D0D0D0;border-color:#004C7F;">
+<a href="http://nisum.com" target="_blank"><img src="http://www.nisum.com/images/logo.png"></a>
+
+</div> 
+<br>
+</body>
+</form>
+</html>

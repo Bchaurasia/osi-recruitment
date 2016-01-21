@@ -1,0 +1,124 @@
+<div class="container">
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; left: -60; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+
+
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<style>
+.select2-container-multi .select2-choices {
+	min-height: 26px;
+	width: 245px;
+}
+
+.select2-drop-active {
+	width: 245px;
+}
+</style>
+
+	<form name="CreateDesignation" onvalidate>
+
+		<div align="center">
+			<div class="row" style="padding-bottom: 10px;">
+				<div align="left" style="margin-right: 15px" class="control-group">
+					<div class="col-md-1" align="left"></div>
+					<div class="col-md-2" align="left">
+						<label class="lbl" for="designation"><i
+							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Designation: <b
+							style="color: red;">*</b></label>
+					</div>
+					<div class="col-md-3" style="display: inline;">
+						<input style="width: 245px; margin-left: 0%;" type="text"
+							id="designation" ng-minlength="3" ng-maxlength="30"
+							name="designation" class="form-control"
+							ng-model="designation.designation" required
+							placeholder="Enter Designation"> <span
+							class="validation-error"
+							ng-show="submitted && CreateDesignation.designation.$invalid">Please
+							provide Designation</span>
+						<div class="validation-error"
+							ng-show="(CreateDesignation.designation.$dirty || invalidSubmitAttempt) && CreateDesignation.designation.$error.required">
+							Designation is required.</div>
+					</div>
+
+				</div>
+
+				<div class="control-group">
+					<div class="col-md-2" align="left">
+						<label class="lbl" for="notes"><i
+							class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills<b
+							style="color: red;">*</b></label>
+					</div>
+					<div class="col-md-3" style="width: auto; left: -111px;">
+						<ui-select multiple ng-model="designation.skills"
+							ng-keypress="myFunct($event)" name="pskills" theme="select2"
+							id="skills" ui-select-required ng-disabled="disabled">
+						<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
+						<ui-select-choices
+							repeat="skill in pskills | filter:$select.search">
+						{{skill}} </ui-select-choices> </ui-select>
+						<span class="validation-error"
+							ng-show="submitted && CreateDesignation.pskills.$invalid">Please
+							enter your key skills.</span>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-bottom: 10px;">
+				<div align="left" class="control-group">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<label class="lbl" for="Experience"><i
+							class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience<b
+							style="color: red;">*</b></label>
+					</div>
+					<div class="col-md-3">
+						<div class="col-md-6" align="left" style="margin-left: -15px;">
+							<select name="minExpYear" id="minExpYear"
+								ng-change="toggleProDisable()" ng-model="designation.minExpYear"
+								ng-options="o as o for o in expYear"
+								class="form-control input-sm" required
+								style="color: black; width: 118px; padding: 0px;">
+								<option value='' disabled="disabled">MinExpYears</option>
+							</select>
+							<span class="validation-error"
+								ng-show="submitted && CreateDesignation.minExpYear.$invalid">Please
+								specify your minExpYear..</span>
+							<div class="validation-error"
+								ng-show="( CreateDesignation.minExpYear.$dirty || invalidSubmitAttempt) && CreateDesignation.minExpYear.$error.required">
+								Please select minExpYear.</div>
+						</div>
+						<div class="col-md-6" align="left" style="margin-left: 13px;">
+							<select name="maxExpYear" id="maxExpYear"
+								ng-change="toggleProDisable();validate()" ng-model="designation.maxExpYear"
+								ng-options="o as o for o in expYear"
+								class="form-control input-sm" required
+								style="color: black; width: 118px; padding: 0px;">
+								<option value='' disabled="disabled">MaxExpYears</option>
+							</select>
+							<span class="validation-error"
+								ng-show="submitted && CreateDesignation.maxExpYear.$invalid">Please
+								specify your maxExpYear..</span>
+							<div class="validation-error"
+								ng-show="( CreateDesignation.maxExpYear.$dirty || invalidSubmitAttempt) && CreateDesignation.maxExpYear.$error.required">
+								Please select maxExpYear.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div align="center">
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid"
+				ng-click="save()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Save
+				</button>
+				&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.designation.list"
+					class="btn btn-info active"> <span
+					class="glyphicon glyphicon-remove"></span> Cancel
+				</a>
+			</div>
+		</div>
+		<br> <br>
+	</form>
+</div>

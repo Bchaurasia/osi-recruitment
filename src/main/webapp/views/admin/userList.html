@@ -1,0 +1,29 @@
+<center>
+	<div class="ui-widget control-group">
+		<div  style="width: 650px; position: relative; left: -60; height:50" ng-class="adminCls" ng-show="message" align="center">
+			{{message}}</div>
+		<!--<div id="users">	
+			<datagrid column-header='col' attributes='att' obj='myData' editfun='editUser(val)' search-enable='true' array-attributes='att1'></datagrid>	
+		</div>
+		-->
+		 <table id="users" style="margin-left: -10%" class="usersTable" >
+			<tr>
+				<th>Name</th>
+				<th>Email ID</th>
+				<th>Roles</th>
+				<th>Client</th>
+				<th>Edit</th>
+			</tr>
+			
+			<tr ng-repeat="user in myData">
+				<td>{{user.name}}</td>
+				<td><a ng-click="editUser(user)" ui-sref="admin.users.edit">{{user.emailId}}</a></td>
+				<td><i>{{ user.roles.join(',')}}</i></td>
+				<td>{{user.clientName}}</td>
+				<td align="center"><a ng-click="editUser(user)" ui-sref="admin.users.edit" 
+					class="glyphicon glyphicon-edit"></a></td>
+			</tr>
+			<br>
+		</table> 
+	</div>
+</center>

@@ -1,0 +1,98 @@
+<div>
+	<h2 class="heading-name">
+		Position Management - Search
+	</h2>
+	<br>
+
+	<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; top: -35px; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	<div class="searchposition-container" style="">
+		<br>
+		<form action="#" name="createPosition" class="searchPosition" onvalidate>
+			<form id="integerForm" role="form" class="form-horizontal">
+				<table border="0" cellpadding="4" style="margin-top: -5px;">
+
+					<tr>
+						<td><a id="rsBtn1" href="#recruitment/createPosition"
+							class="btn btn-info active"
+							ng-disabled="hasNotRole('ROLE_ADMIN,ROLE_HR')" style="left: -156px;position: relative;top: -2px;"> <span
+								class="glyphicon glyphicon-plus" style="top: 2px;height: 18px"></span>
+						</a></td>
+						<td>
+							<div class="input-group">
+            				<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="search" 
+            				style="width: 151px;left: -400px;top: -1px;border: 1px solid rgb(194, 191, 191);"/>
+            					 <span class="input-group-addon" style="position: relative;left: -401px;top: -1px;">
+      								<span class="glyphicon glyphicon-search"></span>
+								</span>
+        					</div>
+						</td>
+
+						<!-- <td><a id="approveBtn" href="" class="btn btn-primary"
+							ng-show="hasRole('ROLE_MANAGER')"> <span
+								class="glyphicon glyphicon-ok" style="top: 1px;"></span> Approve
+						</a></td> -->
+					</tr>
+					<br> 
+				</table>
+				<br> <br> <br>
+				<div style="left: 110px; position: relative;">
+					<table ng-hide="tableHide" id="interview"
+						class="table table-striped"
+						style="margin-left: 0px; width: 94%; top: -18px;">
+						<thead>
+							<tr>
+								<th>Job code</th>
+								<th>Designation</th>
+								<th>Experience</th>
+								<th>Location</th>
+								<th>Client</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="animate-repeat"
+								ng-repeat="data in position | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+								<td class="mdl-data-table__cell--non-numeric"><a style="cursor:pointer;"
+									ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
+								<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
+								<td class="mdl-data-table__cell--non-numeric">{{data.experienceRequired}}</td>
+								<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
+								<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>
+								<td class="mdl-data-table__cell--non-numeric"><center><a href="" style="cursor:pointer;" ng-click="editPosition(data.jobcode)">
+									<span class="glyphicon glyphicon-edit" style="top:3px;"></span></a></center></td>
+							
+							</tr>
+							<tr class="animate-repeat" ng-if="results.length == 0">
+								<td>No results found...</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-md-3">
+							<h5 style="left: -122px; position: relative;">Total Positions
+								: {{ position.length }}</h5>
+						</div>
+
+						<div class="col-md-9" align="right">
+							<div class="pagination ">
+								<ul class="nav nav-tabs" style="top: -45px;">
+									<li ng-class="{disabled: currentPage == 0}"><a href
+										ng-click="prevPage()">Prev</a></li>
+									<li ng-repeat="n in range(currentPage)"
+										ng-class="{active: n == currentPage}" ng-click="setPage()">
+										<a href ng-bind="n + 1"></a>
+									</li>
+									<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
+										href ng-click="nextPage()" style="margin-right: 165px;">Next</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+			</form>
+		</form>
+	</div>
+
+</div>

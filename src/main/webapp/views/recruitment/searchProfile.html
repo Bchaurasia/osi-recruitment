@@ -1,0 +1,18 @@
+<h2 class="heading-name">Profile Management - Search</h2>
+<br>
+<div ng-class="cls" ng-show="message" align="center"
+	style="width: 850px; position: relative; top: -35px; height: 50">
+	<h5 style="margin-top: 2px;">{{message}}</h5>
+</div>
+
+<div class="searchposition-container" style="">
+	<br>
+	<form action="#" name="searchProfile" onvalidate id="integerForm"
+		role="form" class="form-horizontal">
+		<div>
+			<datagrid column-header='col' attributes='att' obj='myData'
+				editfun='editProfile(val)' addlink='recruitment/createProfile'
+				search-enable='true' array-attributes='att1'></datagrid>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,257 @@
+<div ng-controller="editPositionCtrl">
+
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<div ng-class=" cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; left: -60; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<accordion close-others=false> <accordion-group
+		is-open="status.isFirstOpen"> <accordion-heading>
+	<font style="color: white" align="center"> Position Details<i
+		class="pull-right glyphicon" ng-class="{}"></i></font> </accordion-heading>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="designation"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Designation*:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.designation"
+					onaftersave="getData()" e-ng-options="o as o for o in designation1"
+					e-required> {{ position.designation}} </a>
+
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="location"><i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location*:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.location"
+					e-ng-options="o as o for o in info.locations" e-required> {{
+					position.location}} </a>
+
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="experience"><i
+					class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience*:</label>
+			</div>
+			<div class="col-md-3">
+				<div class="col-md-3">MIN:</div>
+				<div class="col-md-3">
+					<a href="#" editable-select="position.minExpYear"
+						e-ng-options="o as o for o in info.expYears" e-required> {{
+						position.minExpYear}} </a>
+
+				</div>
+				<div class="col-md-3">MAX:</div>
+				<div class="col-md-3">
+					<a href="#" editable-select="position.maxExpYear"
+						e-ng-options="o as o for o in info.expYears" e-required> {{
+						position.maxExpYear}} </a>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="client"><i
+					class="glyphicon glyphicon-grain"></i>&nbsp;&nbsp;Client:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.client"
+					e-ng-options="o as o for o in clients" e-required> {{
+					position.client }} </a>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="primarySkill"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;primary Skills.*:</label>
+			</div>
+			<div class="col-md-2">
+				<a href="" ng-hide="dis2" ng-click="skills()" e-required><i
+					ng-repeat="skills in position.primarySkills">{{skills}}{{$last
+						? '' : ', '}}</i></a>
+				<ui-select ng-hide="hideSkills" multiple
+					ng-model="position.primarySkills" ng-keypress="myFunct($event)"
+					name='sk.primarySkills' id="skills" ui-select-required
+					theme="select2" ng-disabled="disabled"> <ui-select-match
+					placeholder="Select skill...">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="skill in pskills | orderBy:'toString()' | filter:$select.search">
+				{{skill}} </ui-select-choices> </ui-select>
+			</div>
+			<div class="col-md-1">
+				<button class="glyphicon glyphicon-ok btn btn-primary"
+					ng-hide="hideSkills" ng-click="skill()"></button>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="secondarySkill"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;secondarySkills:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="position.secondarySkills">{{position.secondarySkills
+					|| "--" }}</a>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="jobProfile"><i
+					class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Job
+					Description.*:</label>
+			</div>
+			<div class="col-md-3">
+
+				<a href="#" editable-text="position.jobProfile" e-required>{{position.jobProfile}}</a>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="iRounds"><i
+					class="glyphicon glyphicon-home"></i>&nbsp;InterviewRounds:</label>
+			</div>
+			<div class="col-md-3">
+				<a herf="" ng-hide="dis" ng-click="irs()" e-required><i
+					ng-repeat="round in position.interviewRounds">{{round}}{{$last
+						? '' : ', '}}</i></a>
+				<ui-select ng-hide="hideRounds" multiple
+					ng-model="position.interviewRounds" theme="select2"
+					ng-disabled="disabled"> <ui-select-match
+					placeholder="Select Rounds..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="color in interviewRounds | orderBy:'toString()' | filter:$select.search">
+				{{color}} </ui-select-choices> </ui-select>
+			</div>
+			<div class="col-md-1">
+				<button class="glyphicon glyphicon-ok btn btn-primary"
+					ng-hide="hideRounds" ng-click="irs1()"></button>
+			</div>
+		</div>
+	</div>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="HiringManager:"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;HiringManager:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.hiringManager"
+					e-ng-options="o as o for o in managers" e-required> {{
+					position.hiringManager}} </a>
+
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="Priority"><i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Priority:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.priority"
+					e-ng-options="o as o for o in info.Priority" e-required> {{
+					position.priority}} </a>
+
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="interviewer"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Point Of Contact:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.interviewer"
+					e-ng-options="o as o for o in interviewers" e-required> {{
+					position.interviewer}} </a>
+
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="JobType"><i
+					class="glyphicon glyphicon-flash"></i>&nbsp;&nbsp;JobType*:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.jobType"
+					e-ng-options="o as o for o in info.jobType" e-required> {{
+					position.jobType}} </a>
+
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="Salary"><i
+					class="glyphicon glyphicon-tree-conifer"></i>&nbsp;&nbsp;Salary*:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.salary"
+					e-ng-options="o as o for o in info.salary" e-required> {{
+					position.salary}} </a>
+
+			</div>
+		</div>
+	</div>
+	<div class="row" align="left">
+		<div class="col-md-1"></div>
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="noOfPositions"><i
+					class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Of Positions:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-text="position.noOfPositions">{{position.noOfPositions
+					|| "--" }}</a>
+			</div>
+		</div>
+	</div>
+	</accordion-group> </accordion>
+</div>
+<div align="center">
+	<a class="btn btn-info active" ng-click="updatePositionDetails()"
+		ng-disabled="hasNotRole('ROLE_ADMIN,ROLE_HR')"> <span
+		class="glyphicon glyphicon-ok"></span> Update
+	</a>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.searchPosition"
+		class="btn btn-info active"> <span
+		class="glyphicon glyphicon-remove"></span> Cancel
+	</a>
+</div>
+<br>
+<br>
+<br>
+</div>

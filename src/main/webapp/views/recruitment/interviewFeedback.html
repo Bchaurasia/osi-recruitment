@@ -1,0 +1,192 @@
+<div class="container">
+<div ng-controller="interviewFeedbackCtrl" align="center">
+
+<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; left: 90; height:50">
+			<h5 style=" margin-top: 2px;">{{message}}</h5>
+	</div>
+
+<form name="feedback_form">
+<div align="center">
+
+<div class="panel panel-default" style="position:relative;width:1000px;">
+			<div class="panel-heading" style="height:50px;">
+			<center><h4 style="color:white;">Interview Feedback Form - {{profile.candidateName}}</h4></center>
+			</div>
+  			<div class="panel-body" align="left">
+  			<div class="row">
+  			<div align="left">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">			
+					<label class="lbl" for="interviewRound"><i class="glyphicon icon-chevron-right"></i>&nbsp;&nbsp;Interview Round<b style="color:red;">*</b>: </label>
+				</div>
+				<div class="col-md-3" style="display: inline;">
+				<select ng-model="interviewFeedback.roundName"   ng-change="setfeedbackData(interviewFeedback.roundName);roundInfo()" class="form-control input-sm" id="interviewers" ng-options="o as o for o in position.interviewRounds | orderBy:'toString()'" required>
+					<option value="" disabled="disabled">Select Round</option>
+					</select>
+				</div>   
+			</div>	
+  			</div>
+  			
+        <div class="row" align="left">
+        	<div align="left">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-2">			
+					<label class="lbl" align="left">Interviewer Name: </label>
+				</div>
+				<div class="col-md-3" style="display: inline;">
+					<b>{{interviewSchedule.interviewerName}}</b>
+				   
+				</div>   
+			</div>	
+				
+				<div class="control-group">
+					<div class="col-md-2">
+					<label class="lbl" align="left">Job Code: </label>
+					 	
+					</div>
+					<div class="col-md-3">	
+					
+					<b>{{interviewSchedule.jobcode}}</b>
+								
+					</div>					
+				</div>
+        </div>
+        <br>
+		<div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">			
+						<label class="lbl" for="date" align="left">Interview Date: </label>
+					</div>
+					<div class="col-md-3">
+						<b>{{interviewSchedule.interviewDateTime | date:'medium'}}</b>
+					</div>
+			</div>   
+				
+			<div class="control-group">
+				<div class="col-md-2" >
+				 	<label class="lbl" for="emailId" align="left">Type: </label>
+				</div>
+				<div class="col-md-3">	
+						<b>{{interviewSchedule.typeOfInterview}}</b>
+				</div>					
+			</div>
+        </div>
+        <br>
+		<div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">		
+					<label class="lbl">Duration<b style="color :red;">*</b>: </label>	
+					<br><br>
+					<label class="lbl" align="left">Additional Skills: </label>
+					</div>
+					<div class="col-md-3">
+					<select name="duration" placeholder="Select Duration"
+							ng-model="interviewFeedback.duration" ng-disabled="disableFields"
+							ng-options="o as o for o in info.interviewDuration "
+							class="form-control input-sm" id="duration"
+							style="color: black" required>
+							<option value='' disabled="disabled">Select Duration</option>
+						</select><br>	
+						<textarea ng-model="interviewFeedback.additionalSkills" style="width:180px;" ng-disabled="disableFields"></textarea>
+					</div>
+					
+			</div>   
+				
+			<div class="control-group"  ng-hide="disableSkills">
+				<div class="col-md-2">
+				<label class="lbl" align="left">Rate Skills<b style="color :red;">*</b>: </label>
+				</div>
+				<div class="col-md-4">	
+					<ul ng-repeat="round in interviewFeedback.rateSkills" style="position:relative;right:39px;">
+	    						<li>
+	      							<b>{{ round.skill }}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+	      							<rating ng-model="round.rating"   max="10" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+	    						</li>
+	 					</ul>
+				</div>					
+			</div>
+			<div class="control-group" ng-hide="disableStatus">
+			<div class="col-md-2">
+				<label class="lbl" align="left">Status<b style="color :red;"></b>: </label></div>
+				<div class="col-md-3">	 
+				<select name="status" placeholder="Select status" 
+							ng-model="interviewFeedback1.status" 
+							ng-options="o as o for o in info.status "
+							class="form-control input-sm" id="status"
+							style="color: black;width: 80%" >
+							<option value='' disabled="disabled">Select Status</option>
+						</select>
+						</div>
+						
+			</div>
+			
+			<div>
+			</div>
+			<div class= "control-group">
+			
+			</div>
+			
+        </div>
+	<br>
+        <div class="row">
+        	<div>
+					<div class="col-md-1">
+					<div class="row" style="padding-bottom: 10px;padding-left:20px;">
+				
+			</div>
+					</div>
+					
+					<div class="col-md-2">			
+						<label class="lbl" align="left">Strenghts<b style="color :red;">*</b>: </label>
+					</div>
+					<div class="col-md-3">
+						<textarea ng-model="interviewFeedback.strengths" style="width:180px;" ng-disabled="disableFields" required></textarea>
+					</div>
+			</div>   
+				
+			<div class="control-group">
+				<div class="col-md-2">
+				 	<label class="lbl" align="left">Areas Of Improvement<b style="color :red;">*</b>: </label>
+				</div>
+				<div class="col-md-3">	
+				<textarea ng-model="interviewFeedback.improvement" style="width:180px;" ng-disabled="disableFields" required></textarea>
+				</div>					
+			</div>
+        </div>
+        <br>
+        
+        <div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2"></div>
+					<div class="col-md-3"></div>
+			</div>   
+				
+			<div class="control-group">
+				<div class="col-md-2" align="left">
+				 	
+				</div>
+				<div class="col-md-6" align="right">
+				<!-- <a href="" class="btn btn-primary" ng-click="scheduleNextInterview()" ng-hide="disableSchedule">
+         <span class="glyphicon glyphicon-ok-circle"></span> Schedule Next Round
+    </a> -->
+					<a href="" class="btn btn-info active" ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow" ng-disabled="feedback_form.$invalid">
+         <span class="glyphicon glyphicon-ok-circle"></span> Submit
+    </a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="" class="btn btn-info active" ui-sref="recruitment.interviewManagement" ng-disabled="">
+         <span class="glyphicon glyphicon-remove"></span> Cancel
+    </a>
+							
+				</div>					
+			</div>
+        </div>
+
+        </div></div></div>
+</form>  
+  
+  </div>
+  </div>

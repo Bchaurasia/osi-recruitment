@@ -1,0 +1,5 @@
+package com.nisum.employee.ref.domain;
+
+public enum ProfileStatus {
+	NOT_INITIALISED, INITIALISED, SCHEDULED, INTERVIEW_INPROGRESS, SELECTED, REJECTED, HOLD, OFFER_RELEASED, NOT_RESPONDED;
+}

@@ -1,0 +1,78 @@
+<div ng-controller="showInterviewCtrl" align="center">
+
+<div class="panel panel-default" style="width:860px;">
+			<div class="panel-heading" style="height:50px;">
+			<center><h4><span style="color:white;">Interview Details Of - {{interviewData.candidateName}}</span></h4></center>
+			</div>
+  			<div class="panel-body" style="background-color: #F8F8F8 ">
+			<div class="row" style="padding-bottom: 10px;">
+				<div align="left" class="control-group">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<label class="lbl">Job Code: 
+						</label>
+					</div>
+					<div class="col-md-3" style="display: inline;">
+						<b>{{interviewData.currentPositionId}}</b>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<div class="col-md-2" align="left">
+						<label class="lbl">  Round : 
+						</label>
+					</div>
+					<div class="col-md-3">
+						<b>{{interviewSetData[0].roundName}}</b>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row" style="padding-bottom: 10px;">
+				<div align="left" class="control-group">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<label class="lbl">Interviewer Name: 
+						</label>
+					</div>
+					<div class="col-md-3" style="display: inline;">
+						<b>{{interviewSetData[0].interviewerName}}</b>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<div class="col-md-2" align="left">
+						<label class="lbl"> Date : 
+						</label>
+					</div>
+					<div class="col-md-3">
+						<b>{{interviewSetData[0].interviewDateTime | date:'medium'}}</b>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row" style="padding-bottom: 10px;">
+				<div align="left" class="control-group">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<label class="lbl">Type : 
+						</label>
+					</div>
+					<div class="col-md-3" style="display: inline;">
+						{{interviewSetData[0].typeOfInterview}}
+					</div>
+				</div>
+
+				<div class="control-group">
+					<div class="col-md-2" align="left">
+						<label class="lbl"> Location : 
+						</label>
+					</div>
+					<div class="col-md-3">
+						{{interviewSetData[0].interviewLocation}}
+					</div>
+				</div>
+			</div>
+</div></div>
+
+</div>

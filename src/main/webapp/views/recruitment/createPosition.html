@@ -1,0 +1,281 @@
+<div style="width: 90%;">
+	<form name="position_form">
+
+		<input type="text" name="jobcode" ng-hide="true"
+			ng-model="position.jobcode">
+		<div class="panel panel-default">
+			<div class="panel-heading" style="height: 50px;" align="center">
+				<h4 style="color: white;">Create Position</h4>
+			</div>
+			<div class="panel-body" align="left">
+				<br>
+
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="Designations"> <i
+								class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Designation<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="designations" placeholder="Select Designations"
+								required ng-model="position.designation" ng-change="getData()"
+								ng-options="o as o for o in designation1 | orderBy:'toString()'"
+								class="form-control input-sm" id="designation">
+								<option value='' disabled="disabled">Select Designation</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="col-md-2">
+							<label class="lbl" for="client"> <i
+								class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Client<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="client" placeholder="Select Client"
+								ng-model="position.client"
+								ng-options="o as o for o in client | orderBy:'toString()'"
+								ng-change="getInterviewers(position.client)"
+								class="form-control input-sm" id="client" required>
+								<option value='' disabled="disabled">Select Client</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="experience"> <i
+								class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Exp.
+								Required<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-1 col-xs-4">
+							<select name="minExpYear" id="minExpYear"
+								ng-change="toggleProDisable()" ng-model="position.minExpYear"
+								ng-options="o as o for o in info.expYears"
+								class="form-control input-sm" required  style="color: graytext;width: 125%">
+								<option value='' disabled="disabled">Min</option>
+							</select>
+						</div>
+						<div class="col-md-1 col-xs-4">
+							<select name="maxExpYear" id="maxExpYear"
+								ng-change="toggleProDisable()" ng-model="position.maxExpYear"
+								ng-options="o as o for o in info.expYears"
+								class="form-control input-sm" required  style="color: graytext;width: 125%">
+								<option value='' disabled="disabled">Max</option>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="location"> <i
+								class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="location" placeholder="Select Location"
+								ng-disabled="disLocation" ng-model="position.location"
+								ng-options="o as o for o in info.locations | orderBy:'toString()'"
+								class="form-control input-sm" id="location" required>
+								<option value='' disabled="disabled">Select Location</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="pSkills"> <i
+								class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Primary Skills<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<ui-select multiple ng-model="position.primarySkills"
+								ng-keypress="myFunct($event)" name='sk.primarySkills'
+								id="skills" ui-select-required theme="select2"
+								ng-disabled="disabled"> <ui-select-match
+								placeholder="Select skill...">{{$item}}</ui-select-match> <ui-select-choices
+								repeat="skill in pskills | orderBy:'toString()' | filter:$select.search">
+							{{skill}} </ui-select-choices> </ui-select>
+						</div>
+					</div>
+
+					<div class="control-group form-group">
+						<div class="col-md-2">
+							<label class="lbl" for="sSkills"><i
+								class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Secondary
+								Skills</label>
+						</div>
+						<div class="col-md-3">
+							<input id="secondarySkills" name="secondarySkills"
+								aa-field="secondarySkills" class="form-control input-sm"
+								ng-model="position.secondarySkills"
+								placeholder="Enter Secondary Skills">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="Irounds"> <i
+								class="glyphicon icon-filter"></i>&nbsp;&nbsp;Interview Rounds<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<ui-select multiple ng-keypress="myFunct($event)"
+								ng-model="position.interviewRounds" name="ir.interviewRounds"
+								id="irounds" ui-select-required theme="select2"
+								ng-disabled="disabled"> <ui-select-match
+								placeholder="Select Rounds..">{{$item}}</ui-select-match> <ui-select-choices
+								repeat="round in interview | orderBy:'toString()' | filter:$select.search">
+							{{round}} </ui-select-choices> </ui-select>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="col-md-2">
+							<label class="lbl" for="hiringManager"> <i
+								class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring Manager<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="designation" placeholder="Select Designation"
+								required ng-model="position.hiringManager"
+								ng-options="o as o for o in managers"
+								class="form-control input-sm" id="hiringManager">
+								<option value='' disabled="disabled">Select Hiring
+									Manager</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="Priority"> <i
+								class="glyphicon glyphicon-leaf"></i>&nbsp;&nbsp;Priority<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="Priority" placeholder="Select Designation" required
+								ng-model="position.priority"
+								ng-options="o as o for o in info.Priority"
+								class="form-control input-sm" id="Priority">
+								<option value='' disabled="disabled">Select Priority</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="col-md-2">
+							<label class="lbl" for="interviewer"> <i
+								class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;Point Of
+								Contact
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="designation" placeholder="Select interviewer"
+								ng-model="position.interviewer"
+								ng-options="o as o for o in filterNames | orderBy:'toString()'"
+								class="form-control input-sm" id="designation">
+								<option value='' disabled="disabled">Select Point Of
+									Contact</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="JobType"> <i
+								class="glyphicon glyphicon-flash"></i>&nbsp;&nbsp;JobType<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="JobType" placeholder="Select JobType" required
+								ng-model="position.jobType"
+								ng-options="o as o for o in info.jobType"
+								class="form-control input-sm" id="JobType">
+								<option value='' disabled="disabled">Select JobType</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="col-md-2">
+							<label class="lbl" for="Salary"> <i
+								class="glyphicon glyphicon-tree-conifer"></i>&nbsp;&nbsp;Salary
+							</label>
+						</div>
+						<div class="col-md-3">
+							<select name="designation" placeholder="Select interviewer"
+								ng-model="position.salary"
+								ng-options="o as o for o in info.salary"
+								class="form-control input-sm" id="Salary">
+								<option value='' disabled="disabled">Select Salary</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Number
+								Of Positions:</label>
+						</div>
+						<div class="col-md-3">
+							<input type="number" id="numberOfPositions" name="numberOfPosition"
+								aa-field="numberOfPositions" class="form-control input-sm"
+								ng-model="position.noOfPositions"
+								placeholder="Enter Number Of Position">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="control-group">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<label class="lbl" for="jobDescription"> <i
+								class="glyphicon icon-comment"></i>&nbsp;&nbsp;Job Description<b class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-8">
+							<textarea cols="50" rows="5" name="jobProfile" id="jobProfile"
+								ng-model="position.jobProfile" my-maxlength="10"
+								placeholder="Enter Job Description"
+								style="height: 100px; width: 100%" required
+								data-errormessage-value-missing="Add some text"></textarea>
+						</div>
+
+					</div>
+				</div>
+				<br>
+				<div align="center">
+					<button class="btn btn-info active" type="submit"
+						ng-disabled="position_form.$invalid" ng-click="submit()">
+						<span class="glyphicon glyphicon-ok-circle"></span> Save
+					</button>
+					<button class="btn btn-info active"
+						ui-sref="recruitment.searchPosition">
+						<span class="glyphicon glyphicon-remove"></span> Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,78 @@
+<div ng-class="cls" ng-show="message" align="center"
+	style="width: 650px; height: 50px; margin-top: 10px; margin-left: -10%">
+	<h5 style="margin-top: 2px;">{{message}}</h5>
+</div>
+<div align="center">
+
+	<accordion close-others=false> <accordion-group
+		is-open="status.isFirstOpen"> <accordion-heading>
+	<font style="color: white;">Edit Designation<i
+		class="pull-right glyphicon" ng-class="{}"></i></font> </accordion-heading> <br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2" align="left">
+				<label class="lbl" for="designation"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Designation:</label>
+			</div>
+			<div class="col-md-3">{{deg.designation}}</div>
+		</div>
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="skills"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills.*:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="" ng-hide="dis2" ng-click="skills()" e-required><i
+					ng-repeat="skills in deg.skills">{{skills}}{{$last ? '' : ',
+						'}}</i></a>
+				<ui-select ng-hide="hideSkills" multiple ui-select-required
+					ng-model="deg.skills" theme="select2" ng-disabled="disabled">
+				<ui-select-match placeholder="Select skills..">{{$item}}</ui-select-match>
+				<ui-select-choices repeat="skill in pskills | filter:$select.search">
+				{{skill}} </ui-select-choices> </ui-select>
+			</div>
+
+			<div class="col-md-1">
+				<button class="glyphicon glyphicon-ok btn btn-primary"
+					ng-hide="!dis2" ng-click="skills1()"></button>
+			</div>
+		</div>
+		</div>
+		<div class="row" align="left">
+			<div class="control-group">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<label class="lbl" for="Experience"><i
+						class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience</label>
+				</div>
+				<div class="col-md-1">
+					Min: <a href="#" editable-select="deg.minExpYear"
+						onbeforesave="validate1($data)"
+						e-ng-options="o as o for o in expYear">{{deg.minExpYear ||
+						"--"}}</a>
+
+				</div>
+				<div class="col-md-1">
+					Max: <a href="#" editable-select="deg.maxExpYear"
+						onbeforesave="validate($data)"
+						e-ng-options="o as o for o in expYear">{{deg.maxExpYear ||
+						"--"}}</a>
+				</div>
+			</div>
+		</div>
+
+	<br>
+	<br>
+	<div align="center">
+		<button class="btn btn-primary" type="submit" ng-click="submit()">
+			<span class="glyphicon glyphicon-ok-circle"></span> Save
+		</button>
+		<button class="btn btn-primary" ui-sref="admin.designation.list">
+			<span class="glyphicon glyphicon-remove"></span> Cancel
+		</button>
+	</div>
+</div>
+
+<br>
+

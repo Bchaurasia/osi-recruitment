@@ -1,0 +1,215 @@
+<div class="container" ng-controller="editUserCtrl">
+
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; left: -60; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<div align="center">
+		<accordion close-others=false> <accordion-group
+			is-open="status.isFirstOpen"> <accordion-heading>
+		<font style="color: white;"> User Information<i
+			class="pull-right glyphicon"
+			ng-class="{'glyphicon-minus': status.isFirstOpen, 'glyphicon-plus': !status.isFirstOpen}"></i></font>
+		</accordion-heading>
+
+		<div class="row" align="left">
+			<div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<label class="lbl" for="uname"><i
+						class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Full Name<b
+						style="color: red;">*</b> : </label>
+				</div>
+				<div class="col-md-3" style="display: inline;">
+
+					<a href="#" editable-text="user.name">{{ user.name || "Click
+						Here To Edit" }}</a>
+
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="col-md-2">
+					<label class="lbl" for="date"><i
+						class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Your Email<b
+						style="color: red;">*</b> : </label>
+				</div>
+				<div class="col-md-3">
+
+					<b>{{user.emailId || "Enter Email-Id"}}</b>
+
+				</div>
+			</div>
+		</div>
+		<br>
+		
+		<div class="row" align="left">
+			<div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<label class="lbl"><i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;
+						Mobile<b style="color: red;">*</b>: </label>
+				</div>
+				<div class="col-md-3">
+					<a href="#" maxlength="15" editable-text="user.mobileNumber" 
+					onbeforesave="validatePhNo($data)" e-required>{{
+						user.mobileNumber || "click Here To Edit" }}</a>
+
+				</div>
+			</div>
+			<div>
+				<div class="col-md-2">
+					<label class="lbl" for="skypeId"><i
+						class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Skype ID:</label>
+				</div>
+				<div class="col-md-3">
+					<a href="#" maxlength="15" editable-text="user.skypeId"
+					onbeforesave="validateSkypeId($data)" e-required>{{
+						user.skypeId || "click Here To Edit" }}</a>
+				</div>
+			</div>
+		</div>
+		<br>
+		
+		<div class="row" align="left">
+			<div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<label class="lbl"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;DOB
+						<b style="color: red;">*</b> : </label>
+				</div>
+				<div class="col-md-3">
+					<a href="" ng-click="openCal()" ng-hide="calendar">{{
+						user.dob || "click here to edit..." | date:'dd/MM/yyyy'}}</a><input
+						ng-hide="hideCal" type="text" datepicker-popup="dd-MMMM-yyyy"
+						ng-model="user.dob" is-open="isOpen"
+						ng-click="isOpen = true" max-date="maxDate"
+						datepicker-options="dateOptions"
+						placeholder="Select Date of Birth"
+						date-disabled="disabled(date, mode)" ng-required="true"
+						close-text="Close" class="input-md" /><span
+						class="input-group-btn"> </span>
+					<div>
+						<button class="glyphicon glyphicon-ok btn btn-primary"
+							ng-hide="hideCal" ng-click="closeCal()"
+							style="width: 40px; height: 28px;"></button>
+					</div>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="col-md-2">
+					<label class="lbl" for="skypeId"><i
+						class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Location : </label>
+				</div>
+				<div class="col-md-3">
+					<a href="#" editable-text="user.location">{{ user.location ||
+						"Enter Location" }}</a>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row" align="left">
+			<div class="control-group">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<label class="lbl" for="primarySkill"><i
+						class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Roles :</label>
+				</div>
+				<div class="col-md-3">
+					<b ng-repeat="role in user.roles">{{role}}{{$last ? '' : ', '}}</b>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="col-md-2">
+					<label class="lbl" for="user.skills"> <i
+						class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills :
+					</label>
+				</div>
+				<div class="col-md-3">
+					<b ng-repeat="skill in user.skills">{{skill}}{{$last ? '' : ',
+						'}}</b>
+				</div>
+			</div>
+		</div>
+		<div class="row" align="left">
+			<div ng-hide="hideDetails" class="control-group">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<label class="lbl" for="client"><i
+						class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Client<b
+						style="color: red;">*</b> :</label>
+				</div>
+				<div class="col-md-3">
+					<b>{{user.clientName || "Not Assigned yet"}}</b>
+				</div>
+			</div>
+		</div>
+		</accordion-group> <accordion-group ng-hide="hideDetails" is-open="status.open"
+			class="accordionBg"> <accordion-heading>
+		<font style="color: white">Available Time-Slots</font> <i
+			class="pull-right glyphicon accordionHeader"
+			ng-class="{'glyphicon-minus': status.open, 'glyphicon-plus': !status.open}"></i>
+		</accordion-heading>
+
+		<div class="row" align="left" style="padding-bottom: 10px;">
+			<div align="center" class="control-group"">
+				<label class="lbl">Not Available : <input type="checkbox"
+					ng-model="user.isNotAvailable">
+				</label><br />
+				<fieldset ng-disabled="user.isNotAvailable">
+					<table id="timeSLots" ng-disabled="user.isNotAvailable">
+						<tr>
+							<th>Day</th>
+							<th>Time</th>
+							<th>Hour</th>
+							<th><button class="btn btn-primary" ng-click="addSlot()">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button></th>
+						</tr>
+						<tr ng-repeat="slot in user.timeSlots">
+							<td><div>
+									<select style="line-height: 20px;" ng-model='slot.day'
+										ng-options='day for day in days'>
+										<option value="">Select Day</option>
+									</select>
+								</div></td>
+							<td><div>
+									<timepicker ng-model="slot.time" ng-change="changed()"
+										hour-step="1" minute-step="10" show-meridian="true"
+										arrowkeys="false"></timepicker>
+								</div></td>
+							<td>
+								<div>
+									<select style="line-height: 20px;" ng-model='slot.hour'
+										ng-options='hour for hour in hours'>
+										<option value="">Select Hour</option>
+									</select>
+								</div>
+							</td>
+							<td>
+								<button class="btn btn-primary" ng-click="removeSlot($index)">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+			</div>
+		</div>
+		</accordion-group> <br>
+		<center>
+			<button class="btn btn-primary" ng-click="update()" type="submit">
+				<span class="glyphicon glyphicon-ok-circle"></span> Save
+			</button>
+			<button class="btn btn-primary btn-large" ui-sref="main">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</center>
+
+		</accordion>
+		<br>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<div class="nav-side-menu">
+	<div class="brand">Recruitment</div>
+	<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
+		data-target="#menu-content"></i>
+	<div class="menu-list">
+		<ul id="menu-content" class="menu-content collapse out">
+			<li ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-class="{active: isActive('recruitment.searchProfile')}" ui-sref="recruitment.searchProfile"><i
+				class="glyphicon glyphicon-user"></i>&nbsp; Profile
+			</li>
+			<li ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR')" ng-class="{active: isActive('recruitment.searchPosition') }" ui-sref="recruitment.searchPosition"><i
+				class="glyphicon glyphicon-th-list"></i>&nbsp; Position
+			</li>
+			<li ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-class="{active: isActive('recruitment.interviewManagement')}" ui-sref="recruitment.interviewManagement"><i
+				class="glyphicon glyphicon-tags"></i>&nbsp; Interview
+			</li>
+		</ul>
+	</div>
+</div>

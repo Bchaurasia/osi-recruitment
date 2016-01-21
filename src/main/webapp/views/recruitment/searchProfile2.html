@@ -1,0 +1,99 @@
+<div>
+<h2 class="heading-name">Profile Management - Search</h2><br>
+<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; top: -35px; height:50">
+			<h5 style=" margin-top: 2px;">{{message}}</h5>
+	</div>
+<div style="width:1050px;" class="alert alert-danger" role="alert" ng-hide="errorHide"><p style="font-size:3ex;"><b>{{errorMsg}}</b></p></div>
+
+ <div class="searchposition-container">
+		<br>
+		<form action="#" name="searchProfile" onvalidate id="integerForm"
+			role="form" class="form-horizontal">
+				<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-5" style="left: -64px;"
+					ng-class="{ 'has-error' : searchPosition.designations.$invalid && !searchPosition.designations.$pristine }">
+					<!-- <div class="ui-widget control-group"
+							ng-class="{ 'has-error' : searchProfile.candidateName.$invalid && !searchProfile.candidateName.$pristine }">
+								<input name="candidateName" class="form-control input-sm" ng-change="changePage()" 
+								style="position:absolute;top:35px;left: 35px;top:10px;border-radius: 5px"
+								id="candidateName" ng-model="candidateName" placeholder="Enter Search String" required> 
+						</div> -->
+						<div class="input-group">
+            				<input class="form-control" ng-model="candidateName" ng-change="changePage()" placeholder="Enter Search String" type="search" 
+            				style="width: 151px;left: 23px;top: 20px;border: 1px solid rgb(194, 191, 191);"/>
+            					 <span class="input-group-addon" style="position: relative;left: -197px;top: 20px;">
+      								<span class="glyphicon glyphicon-search"></span>
+								</span>
+        				</div>
+						<a id="rsBtn1" ui-sref="recruitment.createProfile" class="btn btn-info active" ng-disabled="hasNotRole('ROLE_ADMIN,ROLE_HR,ROLE_USER,ROLE_MANAGER,ROLE_INTERVIEWER')" style="left: 239px;top: 19px;">
+         		 <span class="glyphicon glyphicon-plus" style="position:aboslute;top:2px;height: 19px"></span>
+       			 </a>
+					<!-- <a href="" id="searchBtn" ng-disabled="searchDisable" class="btn btn-primary" style="left: 200px;top:8px;">
+         		 <span class="glyphicon glyphicon-search" style="position:aboslute;top:1px;"></span> Search
+       			 </a> --><br>
+       			 <!-- <a id="approveBtn" href="" class="btn btn-primary" ng-disabled="approveBtnDisable">
+         		 <span class="glyphicon glyphicon-ok" style="position:aboslute;top:1px;"></span> Schedule
+       			 </a> -->
+       			 
+				</div>
+			</div>
+				<br>
+				<br>
+				<br>
+				<!-- <div class="gridStyleProfile" ng-grid="gridOptions"></div>-->
+				<div style="left: 110px;position: relative;">
+				<table ng-hide="tableHide" id="interview" class="table table-striped"
+					style="margin-left: 0px; width: 94%;top: -18px;">
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email Id</th>
+						<th>Designation</th>
+						<th>Experience</th>
+						<th>Current Employer</th>
+						<th>Assigned Job Code</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="animate-repeat" ng-repeat="data in myData | filter: candidateName | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+						<td class="mdl-data-table__cell--non-numeric"><a style="cursor:pointer;"
+							ng-click="editProfile(data.emailId,data.jobcodeProfile)">{{data.candidateName}}</a></td>
+						<td class="mdl-data-table__cell--non-numeric">{{data.emailId}}</td>
+						<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
+						<td class="mdl-data-table__cell--non-numeric">{{data.expYear}}</td>
+						<td class="mdl-data-table__cell--non-numeric">{{data.currentEmployer}}</td>
+						<td class="mdl-data-table__cell--non-numeric"><i
+							ng-repeat="id in data.jobcodeProfile">{{id}}{{$last ? '' : ', '}}<br></i></td>
+					</tr>
+					<tr class="animate-repeat" ng-if="results.length == 0">
+					<td>No results found...</td>
+				</tr>
+					</tbody>
+				</table>
+				<div class="row">
+				<div class="col-md-3">
+					<h5 style="left: -122px;position: relative;">Total Profiles : {{ myData.length }}</h5>
+				</div>
+				
+				<div class="col-md-9" align="right">
+				<div class="pagination">
+						<ul class="nav nav-tabs" style="top: -45px;">
+							<li ng-class="{disabled: currentPage == 0}"><a href
+								ng-click="prevPage()">Prev</a></li>
+							<li ng-repeat="n in range(currentPage)"
+								ng-class="{active: n == currentPage}" ng-click="setPage()">
+								<a href ng-bind="n + 1"></a>
+							</li>
+							<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
+								href ng-click="nextPage()" style="margin-right: 165px;">Next</a></li>
+						</ul>
+					</div>
+				</div>
+				</div>
+					
+				</div>
+			</form>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<html>
+<body style="font-family:Calibri;">
+<div style="border-style:solid;border-width:1px;background-color:#F9FCF7;">
+
+<div style="padding-left:20px;padding-right:20px;">
+<p style="font-size:18px;">Hi Team,<br><br>This mail is to inform that the interview feedback for <b>$roundName</b> of <b>$cname</b> for <b>$jobcode</b> has been submitted by $iname.
+</p>
+#set($count = 1)
+<table style="width:450px;border-collapse: collapse;">
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Skills</p></th> 
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Ratings</p></th>
+#foreach($rating in $ratingList)
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">$count. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">$rating.skill</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$rating.rating</p></td>
+</tr>
+#set($count=$count+1)
+#end
+</table>
+<br>
+<p style="font-size:18px;">
+$cname's strengths:<br> 
+<b>$strengths</b>
+<br><br>
+$cname's area of improvements:<br>
+<b>$improvements</b>
+</p>
+<p style="font-size:18px;">Regards,<br>
+$iname</p>
+
+</div>
+</div>
+<div style="background-color:#D0D0D0;border-color:#004C7F;height:30px;">
+<a href="http://nisum.com" target="_blank"><img src="http://www.nisum.com/images/logo.png"></a>
+</div>
+</body>
+</html>
+

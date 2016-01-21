@@ -1,0 +1,223 @@
+<div style="width: 90%">
+<div ng-controller="scheduleInterviewCtrl" align="left">
+
+		<div ng-class="cls" ng-show="message" align="center"
+			style="width: 850px; position: relative; left: 90; height:50">
+			<h5 style=" margin-top: 2px;">{{message}}</h5>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" style="height:50px;">
+			<center><h4 style="color:white;align="center">Interview Schedule Form - {{profile.candidateName}}</h4></center>
+			</div>
+  			<div class="panel-body"><br>
+        
+        <form name="schedule_form" ng-submit="schedule()">
+
+            <div class="row">
+        	<div align="left">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">			
+					<label class="lbl" for="interviewRound"><i class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Job Code<b style="color:red;">*</b>: </label>
+				</div>
+				<div class="col-md-3" style="display: inline;" ng-hide="hasRole('ROLE_INTERVIEWER')">
+				<select ng-model="jobCodeSel"   ng-change="getJobCodeRound()" class="form-control input-sm" id="interviewers" ng-options="o as o for o in jobcode | orderBy:'toString()'" required>
+					<option value="" disabled="disabled">Select Jobcode</option>
+					</select>
+				</div>
+				<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+					{{jobCodeSel}}
+				</div>   
+			</div>	
+				
+			<div class="control-group">
+				<div class="col-md-2" align="left"></div>
+				<div class="col-md-3"></div>
+			</div>
+        	</div>
+		<br>
+            <div class="row">
+        	<div align="left">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">			
+					<label class="lbl" for="interviewRound"><i class="glyphicon icon-chevron-right"></i>&nbsp;&nbsp;Interview Round<b style="color:red;">*</b>: </label>
+				</div>
+				<div class="col-md-3" style="display: inline;" ng-hide="hasRole('ROLE_INTERVIEWER')">
+				<select ng-model="interviewschedule.roundName"   ng-change="setRounds(interviewschedule.roundName);roundInfo()" class="form-control input-sm" id="interviewers" ng-options="o as o for o in position.interviewRounds | orderBy:'toString()'" required>
+					<option value="" disabled="disabled">Select Round</option>
+					</select>
+				</div>
+				<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+					{{interviewschedule.roundName}}
+				</div>   
+			</div>	
+			<div class="control-group">
+				<div class="col-md-2" align="left">
+					<label class="lbl" for="candidateName"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Interviewer Name<b style="color:red;">*</b>: </label> 	
+				</div>
+				<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">	
+				<select name="interviewerName" ng-hide="hasRole('ROLE_INTERVIEWER')" ng-change="setvalues()" placeholder="Select InterviewerName" required
+						ng-model="interviewschedule.interviewerName" ng-options = "o as o for o in interviewerNames" class="form-control input-sm" id="interviewerName"  style="color: black">
+						<option value='' disabled="disabled">Select Interviewer</option>
+				</select>
+				<!-- <div class="error" 
+        			ng-show="schedule_form.iname.$dirty && schedule_form.iname.$invalid && !schedule_form.iname.$pristine">
+	    			<small class="error" style="color:red;" 
+	        				ng-show="schedule_form.iname.$error.required">
+	        				Interviewer Name Is Required!
+	    			</small>
+	    			<small class="error" style="color:red;" 
+	            			ng-show="schedule_form.iname.$error.minlength">
+	            			Your name is required to be at least 3 characters
+	    			</small>	
+				</div> -->					
+				</div>
+				<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+					{{interviewschedule.interviewerName}}
+				</div>
+        </div>
+        </div>
+        <br>
+        <div class="row">
+        	<div align="left">
+				<div class="col-md-1"></div>
+				<div class="col-md-2">			
+					
+					<label class="lbl" for="date"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Interview Date<b style="color:red;">*</b>: </label>
+				</div>
+				<div class="col-md-3" style="display: inline;">
+					<div class="dropdown">	
+		    	   		<input type="text" id="dLabel" name="idate" style="margin-top:5px;background-color: white;" data-ng-model="data.date"  ng-bind="data.date" data-toggle="dropdown" data-target="#" placeholder="Click Here To Select Date..." ng-disabled = "disableDate" class="dropdown-toggle form-control" readonly required />
+		    			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			        		<datetimepicker data-ng-model="data.date" data-on-set-time="onTimeSet(newDate, oldDate)"
+			                        data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }">
+			                </datetimepicker>
+		    			</ul>
+					</div>	
+					<small style="color: red;" ng-hide="hidePrvDateMsg">Please select a future date!</small>
+    			</div>
+				</div>   
+			
+		<div class = "control-group">	
+			<div class="col-md-2" align = "left">			
+				<label class="lbl" for="Days"><i class="glyphicon icon-chevron-right"></i>&nbsp;&nbsp;Available Days </label>
+			</div>
+			<div class="col-md-3">
+				<div ng-repeat = "day in interviewerData.timeSlots">
+						<b>{{day.day}} </b>
+				</div> 
+			</div>		
+		</div>	
+    </div>
+        <br>
+		<div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">			
+						<label class="lbl"><i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Interviewer Mob. No.<b style="color:red;">*</b>: 	</label>
+					</div>
+					<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">
+						<input type="text" maxlength="15" ng-model="interviewschedule.interviewerMobileNumber" id="mobileNo"
+									 class="form-control" ng-disabled = "true" placeholder="Enter 10 Digit Mobile No." required/>
+									
+					</div>
+					<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+						{{interviewschedule.interviewerMobileNumber}}
+				</div>
+			</div>   
+				
+			<div class="control-group">
+				<div class="col-md-2" align = "left">			
+						<label class="lbl"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Interviewer Email Id<b style="color:red;">*</b>: </label>
+					</div>
+					<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">
+						
+						<input type="email" ng-change="" ng-model="interviewschedule.emailIdInterviewer" name="emailIdInterviewer" id="emailIdInterviewer"
+								 class="form-control" ng-disabled = "true" placeholder="Enter Email Id.." required>
+					</div>
+					<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+						{{interviewschedule.emailIdInterviewer}}
+					</div>						
+			</div>
+        </div>
+        
+        <br>
+		<div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">			
+						<label class="lbl" for="skypeId"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Skype ID<b style="color:red;">*</b>:</label>
+					</div>
+					<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">
+						<input type="text" ng-change="" ng-model="interviewschedule.skypeId" name="altmobileNo" id="skypeId"
+								ngPattern="" class="form-control" placeholder="Enter Skype ID." ng-disabled = "true" required/>	
+					</div>
+					<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+						{{interviewschedule.skypeId}}
+					</div>
+			</div>   
+				
+			<div class="control-group">
+				<div class="col-md-2" align="left">
+				<label class="lbl" for="emailId"><i class="glyphicon glyphicon-random"></i>&nbsp;&nbsp;Type Of Interview<b style="color:red;">*</b>: </label>
+				</div>
+				<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">	
+					
+					<select class="form-control" placeholder="Select Type Of Interview" ng-disabled="hasRole('ROLE_INTERVIEWER')" id="typeOfInterview" ng-model="sel.selectedtypeOfInterview" ng-options="o as o for o in info.typeOfInterview | orderBy:'toString()'" required style="color: black" required>
+						<option value='' disabled="disabled">Select Type Of Interview</option>
+						</select>	
+						
+				</div>	
+				<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+						{{sel.selectedtypeOfInterview}}
+				</div>				
+			</div>
+        </div>
+        
+        <br>
+        
+        <div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">			
+						<label class="lbl" for="location"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location<b style="color:red;">*</b>: </label>
+					</div>
+					<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">
+						<select class="form-control" ng-change="changeSchedule" placeholder="Select Location" id="location" ng-model="sel.selectedLocation" ng-options="o as o for o in info.locations | orderBy:'toString()'" required style="color: black" ng-disabled = "true" required>
+						<option value='' disabled="disabled">Location</option>
+						</select>					
+					</div>
+					<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+						{{sel.selectedLocation}}
+					</div>
+				</div>   
+        </div><br>
+        
+         <div class="row">
+        	<div align="left">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">	
+					 <label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Additional Notes: </label>
+				</div>
+				<div class="col-md-3" ng-hide="hasRole('ROLE_INTERVIEWER')">	
+   					 <textarea class="form-control" id="intNotes" style="width:605px; height:164px;" ng-model="interviewschedule.additionalNotes"></textarea>
+				</div>		
+				<div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))">
+						{{interviewschedule.additionalNotes}}
+					</div>
+			</div>
+        </div><br>		
+        
+    <div class="col-md-3" style = "left: 400px;">	
+    <button  class="btn btn-info active" ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');!(scheduleButnHide)" ng-disabled="scheduleButnDis" type="button" ng-click="reSchedule()"><span class="glyphicon glyphicon-ok-circle"></span> Re-Schedule</button>
+    <button  class="btn btn-info active" ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide" ng-disabled="scheduleButnDis" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> Schedule</button>
+	<a href="" class="btn btn-info active" ui-sref="recruitment.interviewManagement" ng-disabled="">
+         <span class="glyphicon glyphicon-remove"></span> Back
+    </a>
+				</div>
+        <br>
+        </form>
+        </div>
+        </div>
+    </div>
+  </div>
+  <br><br>.

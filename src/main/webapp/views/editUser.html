@@ -1,0 +1,194 @@
+
+<div class="widget widget-table action-table">
+	<div class="form-container">
+		<br>
+
+		<center>
+			<h1>Edit User</h1>
+		</center>
+		<br>
+
+
+
+
+		<form action="#" name="userForm" onvalidate>
+			<form id="integerForm" role="form" class="form-horizontal">
+				<table border="0" cellpadding="4">
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{ 'has-error' : userForm.userId.$invalid && !userForm.userId.$pristine }">
+								<label class="lbl" for="userId">User Id :</label>
+						</td>
+						<td><input type="text" name="jobcode"
+							ng-init="enableDisableButton=true" class="form-control"
+							id="userId" ng-model="editUser.userId"
+							placeholder="Enter user Id" ng-disabled="true" required required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span
+							ng-show="userForm.userId.$invalid  && !userForm.userId.$pristine"
+							class="help-block">user Id required.</span>
+							</div></td>
+					</tr>
+
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{ 'has-error' : userForm.userName.$invalid && !userForm.userName.$pristine }">
+								<label class="lbl" for="userName">User Name :</label>
+						</td>
+						<td><input type="text" name="jobcode"
+							ng-init="enableDisableButton=true" class="form-control"
+							id="userName" ng-model="editUser.name"
+							placeholder="Enter user name" ng-disabled="true" required
+							required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span
+							ng-show="userForm.userName.$invalid  && !userForm.userName.$pristine"
+							class="help-block">user name is required.</span>
+							</div></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{'has-error' :userForm.employeeId.$invalid && !userForm.employeeId.$pristine}">
+								<label class="lbl" for="name">Employee Id :</label>
+						</td>
+						<td><input type="number" name="employeeId"
+							class="form-control" ng-init="enableDisableButton=true"
+							ng-pattern="^[0-9]*$" id="employeeId" ng-model="editUser.empId"
+							ng-disabled="enableDisableButton" required
+							ng-init="enableDisableButton=true"
+							placeholder="Enter employee Id" ngPattern="1234567890 "
+							ng-maxlength="10" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span class="help-block"
+							ng-show="userForm.employeeId.$error.required && !userForm.employeeId.$pristine && !userForm.employeeId.$error.number">Numbers
+								should be entered</span> <span class="help-block"
+							ng-show="userForm.employeeId.$error.string">Invalid Value</span>
+							</div></td>
+					</tr>
+
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{'has-error' :userForm.experience.$invalid && !userForm.experience.$pristine}">
+								<label class="lbl" for="name">Experience :</label>
+						</td>
+						<td><input type="number" name="experience"
+							class="form-control" ng-init="enableDisableButton=true"
+							ng-pattern="^[0-9]*$" id="experience"
+							ng-model="editUser.experience" ng-disabled="enableDisableButton"
+							required ng-init="enableDisableButton=true"
+							placeholder="Enter experience" ngPattern="1234567890 "
+							ng-maxlength="10" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span class="help-block"
+							ng-show="userForm.experience.$error.required && !userForm.experience.$pristine && !userForm.experience.$error.number">Numbers
+								should be entered</span> <span class="help-block"
+							ng-show="userForm.experience.$error.string">Invalid Value</span>
+							</div></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{'has-error' :userForm.mobileNumber.$invalid && !userForm.mobileNumber.$pristine}">
+								<label class="lbl" for="name">Mobile No :</label>
+						</td>
+						<td><input type="number" name="mobileNo" class="form-control"
+							ng-init="enableDisableButton=true" ng-pattern="^[0-9]*$"
+							id="mobileNo" ng-model="editUser.mobileNumbermobileNo"
+							ng-disabled="enableDisableButton" required
+							ng-init="enableDisableButton=true" placeholder="Enter mobule No"
+							ngPattern="1234567890 " ng-maxlength="10" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span class="help-block"
+							ng-show="userForm.mobileNumber.$error.required && !userForm.mobileNo.$pristine && !userForm.mobileNo.$error.number">Numbers
+								should be entered</span> <span class="help-block"
+							ng-show="userForm.mobileNumber.$error.string">Invalid
+								Value</span>
+							</div></td>
+					</tr>
+
+
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{'has-error' :userForm.designation.$invalid && !userForm.designation.$pristine}">
+								<label class="lbl" for="name">Designation :</label>
+						</td>
+						<td><input type="text" name="designation"
+							ng-init="enableDisableButton=true" ng-pattern="/^[a-zA-Z _]*$/"
+							class="form-control" id="designation"
+							ng-model="editUser.designation" placeholder="Enter Designation"
+							ng-disabled="enableDisableButton" required
+							ng-init="enableDisableButton=true" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span
+							ng-show="userForm.designation.$invalid  && !userForm.designation.$pristine"
+							class="help-block">A Valid Designation is required.</span>
+							</div></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="control-group"
+								ng-class="{'has-error' :userForm.roles .$invalid && !userForm.roles .$pristine}">
+								<label class="lbl" for="roles ">Role :</label>
+						</td>
+						<td><select class="form-control" name="v"
+							ng-init="enableDisableButton=true" ng-model="editUser.roles "
+							id="experienceRequired" ng-disabled="enableDisableButton"
+							required ng-init="enableDisableButton=true">
+								<option value="1">Analyst</option>
+								<option value="2">Admin</option>
+								<option value="3">HR</option>
+								<option value="4">SystemAdmin</option>
+								<option value="4">Others</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><span class="help-block"
+							ng-show="userForm.roles .$invalid && !userForm.roles .$pristine">Role
+								is required.</span>
+							</div></td>
+					</tr>
+
+					<tr>
+						<td></td>
+						<td>
+							<div class="control-group">
+								<input type="button" class="btn btn-info" ng-click="editUser()"
+									value=Edit ng-disabled="disableEditButton"
+									ng-init="disableEditButton=false" name="post" align="center"
+									style="color: 0000FF; width: 80px; margin-left: -47%;" /> <input
+									type="button" class="btn btn-info"
+									ng-click="updateeditUserDetails()"
+									ng-disabled="enableDisableButton"
+									ng-init="enableDisableButton=true" value=Update name="post"
+									align="center" style="color: 0000FF" /> <input type="button"
+									class="btn btn-info" ng-click="cancel()" value=Cancel
+									name="post" align="center" style="color: 0000FF" />
+							</div>
+						</td>
+					</tr>
+
+				</table>
+
+			</form>
+		</form>
+	</div>
+
+</div>
