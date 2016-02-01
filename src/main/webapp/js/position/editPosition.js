@@ -78,8 +78,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 		
 	    $scope.updatePositionDetails = function() {
 	    	
-	    alert($scope.position.salary);
-		/*var position1={};
+		var position1={};
 		var skills =[];
 		if ($scope.position !== undefined) {
 			 angular.forEach($scope.position.primarySkills, function(value, key) {
@@ -101,6 +100,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 		     position1.interviewer = $scope.position.interviewer;
 		     position1.jobType = $scope.position.jobType;
 		     position1.salary = $scope.position.salary;
+		     position1.minExpYear=$scope.position.minExpYear;
+		     position1.maxExpYear=$scope.position.maxExpYear;
+		     console.log(angular.toJson("data----"+position1));
 		     positionService.updatePosition(position1).then(
 			    function(msg){
 			    	  $scope.sendNotification(msg,'recruitment/searchPosition');
@@ -108,7 +110,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 			    	$scope.message=errorMsg;
 					$scope.cls=appConstants.ERROR_CLASS;
 			     });
-		}*/
+		}
 	}
 	$scope.status = {
 			isFirstOpen: true,

@@ -1,4 +1,4 @@
-<div ng-controller="editPositionCtrl">
+<div >
 
 	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
 	<div ng-class=" cls" ng-show="message" align="center"
@@ -19,10 +19,7 @@
 					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Designation*:</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="position.designation"
-					onaftersave="getData()" e-ng-options="o as o for o in designation1"
-					e-required> {{ position.designation}} </a>
-
+			{{ position.designation}}
 			</div>
 		</div>
 
@@ -32,10 +29,7 @@
 					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location*:</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="position.location"
-					e-ng-options="o as o for o in info.locations" e-required> {{
-					position.location}} </a>
-
+				{{position.location}}
 			</div>
 		</div>
 	</div>
@@ -54,13 +48,14 @@
 					<a href="#" editable-select="position.minExpYear"
 						e-ng-options="o as o for o in info.expYears" e-required> {{
 						position.minExpYear}} </a>
-
+					<!-- {{position.minExpYear}} -->
 				</div>
 				<div class="col-md-3">MAX:</div>
 				<div class="col-md-3">
 					<a href="#" editable-select="position.maxExpYear"
 						e-ng-options="o as o for o in info.expYears" e-required> {{
 						position.maxExpYear}} </a>
+					<!-- 	{{position.maxExpYear}} -->
 
 				</div>
 			</div>
@@ -72,9 +67,9 @@
 					class="glyphicon glyphicon-grain"></i>&nbsp;&nbsp;Client:</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="position.client"
+				<!-- <a href="#" editable-select="position.client"
 					e-ng-options="o as o for o in clients" e-required> {{
-					position.client }} </a>
+					position.client }} </a> -->{{position.client}}
 			</div>
 		</div>
 	</div>

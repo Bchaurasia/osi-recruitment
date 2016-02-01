@@ -242,7 +242,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
 			return "Valid Email-id is required..";
 	};
 	$scope.validatePhNo = function(data) {
-		if (/^\+?\d{10,12}$/.test(data)) {
+		if (/^\+?\d{12}$/.test(data)) {
 			return true;
 		} else
 			return "Enter valid mobile number..";
@@ -277,7 +277,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
         $scope.jobcodeTemp=$scope.candidate.jobcodeProfile;
 	}
 	$scope.skillss1 = function(){
-		if($scope.candidate.primarySkills.length===0)
+		if($scope.candidate.primarySkills===undefined)
 		{
 			$scope.cls=appConstants.ERROR_CLASS;
 			$scope.message="Select atleast one Skill.";
