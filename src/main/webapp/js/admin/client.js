@@ -1,19 +1,44 @@
-app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$timeout', '$log','$location', '$state', 'jobCodeService1','appConstants','sharedDataService','clientService', 
-                             function($scope,$rootScope, $http, $q, $window, $timeout, $log, $location, $state, jobCodeService1,appConstants,sharedDataService,clientService) {
+app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$timeout', '$log','$location', '$state', 'jobCodeService1','appConstants','sharedDataService','clientService','infoService',
+                             function($scope,$rootScope, $http, $q, $window, $timeout, $log, $location, $state, jobCodeService1,appConstants,sharedDataService,clientService,infoService) {
 	
 	$scope.client = {};
 	$scope.clients = {};
-
+	$scope.info={};
 	$scope.col=["Clients","Location"];
-	
+	$scope.location=[];
 	$scope.att=["clientName","locations"];
-	//$scope.att1=["roles"];
-	
+	// $scope.att1=["roles"];
+	$scope.data = {};
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
 	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": []};
 	
-    $scope.locations = $rootScope.info.locations;
+	
+
+	
+// function getInfoData(response) {
+// return response.data;
+//	 	
+// }
+	$scope.onload = function(){
+		
+		if($rootScope.info!=undefined)
+		{
+			
+			
+	    $scope.locations = $rootScope.info.locations;
+		}
+		else{
+			$scope.data = infoService.getInfo();
+			
+			angular.forEach($scope.data, function(userr){
+				$scope.location.push(userr.value.locations);
+			});
+		}
+	}
+	
+	$scope.onload();
+	
 	$scope.client.locations="";
 	clientService.getClientInfo()
 	 .then(setClients);
@@ -65,7 +90,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.editClient = function(data){
 		jobCodeService1.setclientId(data.clientId);
 		jobCodeService1.setclientName(data.clientName);
-		//location.href='#admin/client/editClient';
+		// location.href='#admin/client/editClient';
 		$state.go('admin.client.editClient');
 	}
 	
