@@ -7,25 +7,15 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.col=["Clients","Location"];
 	$scope.location=[];
 	$scope.att=["clientName","locations"];
-	// $scope.att1=["roles"];
 	$scope.data = {};
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
 	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": []};
-	
-	
 
-	
-// function getInfoData(response) {
-// return response.data;
-//	 	
-// }
 	$scope.onload = function(){
 		
 		if($rootScope.info!=undefined)
-		{
-			
-			
+		{		
 	    $scope.locations = $rootScope.info.locations;
 		}
 		else{

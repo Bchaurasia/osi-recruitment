@@ -158,7 +158,12 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 	    $scope.message = "";
 	    $scope.cls = '';
 	}
-	
+	$scope.validateNoOfPosition = function(data) {
+		if (data>0) {
+			return true;
+		} else
+			return "Number of Positions should be Atleast One!..";
+	};
 	$scope.getData = function() {
 	    $scope.deg  =_.find($scope.designations,function(obj){
 			return obj.designation == $scope.position.designation; 

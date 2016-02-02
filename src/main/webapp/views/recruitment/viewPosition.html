@@ -230,7 +230,7 @@
 					class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Of Positions:</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="position.noOfPositions">{{position.noOfPositions
+				<a href="#" editable-text="position.noOfPositions" onbeforesave="validateNoOfPosition($data)">{{position.noOfPositions
 					|| "--" }}</a>
 			</div>
 		</div>
