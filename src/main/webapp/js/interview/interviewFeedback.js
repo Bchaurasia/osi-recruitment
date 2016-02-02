@@ -149,7 +149,9 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 		} 
 		})
 			}else{
+				$scope.cls = 'alert alert-danger alert-error';
 				$scope.message = "Please Schedule Interview for this Round";
+				$timeout( function(){ $scope.alHide(); }, 3000);
 				$scope.disableFields = true;
 				$scope.submitShow = false;
 				$scope.interviewSchedule = {};
