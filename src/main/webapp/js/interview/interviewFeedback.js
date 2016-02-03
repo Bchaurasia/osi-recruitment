@@ -103,7 +103,10 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 	    $scope.cls = '';
 	    $location.path("recruitment/interviewManagement");
 	}
-	
+	$scope.alHide1 =  function(){
+	    $scope.message = "";
+	    $scope.cls = '';
+	}
 	
 	
 	$scope.setfeedbackData = function(roundName){
@@ -151,7 +154,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 			}else{
 				$scope.cls = 'alert alert-danger alert-error';
 				$scope.message = "Please Schedule Interview for this Round";
-				$timeout( function(){ $scope.alHide(); }, 3000);
+				$timeout( function(){ $scope.alHide1(); }, 3000);
 				$scope.disableFields = true;
 				$scope.submitShow = false;
 				$scope.interviewSchedule = {};
