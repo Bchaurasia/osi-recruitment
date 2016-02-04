@@ -15,8 +15,11 @@ public class MongoConfig extends AbstractMongoConfiguration{
 	@Value("${db.name}")
 	private String mongoDbName;
 
-	@Value("${db.mongo.client}")
+	@Value("${db.mongo.host}")
 	private String mongoClient;
+	
+	@Value("${db.mongo.port}")
+	private String mongoPort;
 
 
 	@Bean
@@ -31,7 +34,7 @@ public class MongoConfig extends AbstractMongoConfiguration{
 
 	@Override
 	public Mongo mongo() throws Exception {
-		return new MongoClient(mongoClient);
+		return new MongoClient(mongoClient,Integer.valueOf(mongoPort));
 	}
 
 }

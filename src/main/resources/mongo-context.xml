@@ -3,11 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-
 		    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 	
-    <bean id="mongoClient" class="com.mongodb.MongoClient"/>
-
+	<mongo:mongo host="${db.mongo.host}" port="${db.mongo.port}" id="mongoClient" />
+	
    <mongo:db-factory dbname="${db.name}" mongo-ref="mongoClient" id="mongoDbFactory"/>
 
    <bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext"/>

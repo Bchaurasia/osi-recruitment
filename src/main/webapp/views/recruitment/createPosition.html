@@ -235,13 +235,13 @@
 						<div class="col-md-1"></div>
 						<div class="col-md-2">
 							<label class="lbl"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Number
-								Of Positions:</label>
+								Of Positions:<b class="mandatory">*</b></label>
 						</div>
 						<div class="col-md-3">
 							<input type="number" id="numberOfPositions" name="numberOfPosition"
 								aa-field="numberOfPositions" class="form-control input-sm"
 								ng-model="position.noOfPositions"
-								placeholder="Enter Number Of Position" pattern="\d*">
+								placeholder="Enter Number Of Position" pattern="\d*" required>
 						</div>
 						<div class="validation-error"
 							ng-show="(position_form.numberOfPosition.$dirty  || invalidSubmitAttempt) && position_form.numberOfPosition.$error.pattern">

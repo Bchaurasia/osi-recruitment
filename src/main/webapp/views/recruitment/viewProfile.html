@@ -182,15 +182,16 @@
 			</div>
 			<div class="col-md-3">
 				<div class="col-md-6">
-					Years <a href="#" editable-select="candidate.expYear" onaftersave="getDesignations()" 
+					Years <!-- <a href="#" editable-select="candidate.expYear" onaftersave="getDesignations()" 
 						e-ng-options="o as o for o in info.expYears">{{candidate.expYear
-						|| "--"}}</a>
-
+						|| "--"}}</a> -->
+					{{candidate.expYear	|| "--"}}
 				</div>
 				<div class="col-md-6">
-					Months: <a href="#" editable-select="candidate.expMonth"
+					Months: <!-- <a href="#" editable-select="candidate.expMonth"
 						e-ng-options="o as o for o in info.expMonths">{{candidate.expMonth
-						|| "--"}}</a>
+						|| "--"}}</a> -->
+				    {{candidate.expMonth || "--"}}
 					</td>
 				</div>
 			</div>
@@ -231,9 +232,10 @@
 				</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="candidate.designation" onaftersave="setJobCodes()"
+				<!-- <a href="#" editable-select="candidate.designation" onaftersave="setJobCodes()"
 					e-ng-options="o as o for o in profiledesignations" e-required>
-					{{ candidate.designation || "--" }} </a>
+					{{ candidate.designation || "--" }} </a> -->
+					{{ candidate.designation || "--" }}
 
 			</div>
 		</div>
