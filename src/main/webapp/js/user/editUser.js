@@ -79,7 +79,7 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 			return "Enter valid mobile number..";
 	};
 	$scope.validateSkypeId = function(data) {
-		if (/^[a-zA-Z0-9]+$/.test(data)) {
+		if (/^[a-z][a-z0-9\.,\-_]{5,31}$/.test(data)) {
 			return true;
 		} else
 			return "Enter valid SkypeId..";

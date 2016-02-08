@@ -151,7 +151,7 @@
 						<input type="text" name="passportNo"
 							class="form-control" id="passportNo"
 							ng-model="candidate.passportNo" placeholder="Enter Passport No."
-							ng-pattern="/^[a-zA-Z _0-9]*$/"> <span
+							 > <span
 							class="validation-error"
 							ng-show="(CreateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && CreateCandidate.passportNo.$error.pattern">
 							Provide a valid passport number</span>
@@ -166,8 +166,12 @@
 					</div>
 					<div class="col-md-3">
 						<input type="text" name="skypeId" class="form-control"
-							id="skypeID" ng-model="candidate.skypeId"
-							placeholder="Enter Skype Id..." required>
+							id="skypeId" ng-model="candidate.skypeId"  
+							placeholder="Enter Skype Id..." required
+							ng-pattern="/^[a-z][a-z0-9\.,\-_]{5,31}$/" >
+							
+					   <span class="validation-error" ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
+							Provide a valid Skype Id</span>
 					</div>
 				</div>
 			</div>
