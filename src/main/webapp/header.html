@@ -13,7 +13,7 @@ padding: 9px;
 }
 
 .nav-header li.active> a {
-background: #00ACD5;
+background: #004D87;
 border-bottom: 4px solid #CD5C5C;
 } 
 
@@ -23,12 +23,12 @@ border-bottom: 4px solid #CD5C5C;
 } 
 
 .nav-header li.active:visited> a{
-background: #00ACD5;
+background: #004D87;
 border-bottom: 4px solid #CD5C5C;}
 </style>
 
 
-<div class="navbar navbar-fixed-top mdl-shadow--4dp" style="background: #00ACD5;height: auto">
+<div class="navbar navbar-fixed-top mdl-shadow--4dp" style="background: #004D87;height: auto">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle"
 			data-target=".navbar-responsive-collaspe" data-toggle="collapse"
@@ -38,41 +38,41 @@ border-bottom: 4px solid #CD5C5C;}
 		</button>
 
 		<span><a href="#main"><img class="navbar-brand"
-				src="static/images/nisum_logo_sky.png" alt="Nisum Technologies"
-				width="150" height="60" style="padding: 0px; margin-left: 7%"
+				src="static/images/osi.png" alt="OSI Technologies"
+				width="150" height="60" style="padding: 0px; margin-left: 7%;border: 2px solid white;"
 				title="Nisum Technologies" /></a>
 			<h1
 				style="font-size: 20px; font-size: 19px;color: white;margin-left: 13px;">Recruitment
 				Portal</h1></span>
 	</div>
-	<div class=" navbar-collaspe collaspe navbar-responsive-collaspe" ng-controller="headerCtrl">
+	<div class=" navbar-collaspe collaspe navbar-responsive-collaspe"  id="nav" ng-controller="headerCtrl">
 		<ul class="nav nav-tabs nav-header">
-			<li class="active"><a data-toggle="tab" href="#main"
+			<li ui-sref-active="active"><a  ui-sref="main"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
 <!-- 				<i class="glyphicon glyphicon-home"></i> -->
 				<span id="Dashboard">&nbsp;&nbsp;Dashboard</span></a></li>
-			<li><a data-toggle="tab" href="#recruitment/searchProfile" data-target="#recruitment"
+			<li ui-sref-active="active"><a  ui-sref="recruitment.searchProfile" data-target="#recruitment"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
 <!-- 				<i class="glyphicon glyphicon-phone-alt"></i> -->
 				<span>&nbsp;&nbsp;Recruitment</span></a></li>		
-			<!-- <li><a data-toggle="tab" href="#searchPosition"
+			<!-- <li><a  href="#searchPosition"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR')" ng-click="alHide()"><i
 					class="glyphicon glyphicon-list" ></i><span>&nbsp;&nbsp;Position</span></a></li>
-			<li><a data-toggle="tab" href="#searchProfile"
+			<li><a  href="#searchProfile"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()"><i
 					class="glyphicon glyphicon-file"></i><span>&nbsp;&nbsp;Profile</span></a></li>
-			<li><a data-toggle="tab" href="#interviewManagement"
+			<li><a  href="#interviewManagement"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()"><i
 					class="glyphicon glyphicon-phone-alt"></i><span>&nbsp;&nbsp;Interview</span></a></li> -->
-			<li><a data-toggle="tab" href="#offer"
+			<li ui-sref-active="active"><a  ui-sref="offer.list"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
 <!-- 				<i class="glyphicon glyphicon-gift"></i> -->
 				<span>&nbsp;&nbsp;Offer</span></a></li>
-			<li><a data-toggle="tab" href="#report"
+			<li ui-sref-active="active"><a  ui-sref="report"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
 <!-- 				<i class="glyphicon glyphicon-list-alt"></i> -->
 				<span>&nbsp;&nbsp;Reports</span></a></li>
-			<li><a data-toggle="tab" href="#admin/users" data-target="#admin"
+			<li ui-sref-active="active"><a  ui-sref="admin" data-target="#admin"
 				ng-show="hasRole('ROLE_ADMIN')" ng-click="alHide()">
 <!-- 				<i class="glyphicon glyphicon-user"></i> -->
 					<span>&nbsp;&nbsp;Admin</span></a></li>

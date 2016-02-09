@@ -7,6 +7,7 @@
 	$scope.hideCal = true;
 	$scope.noOfPositions = "";
 	
+	
 	var position_URL = 'resources/position';
 	
 	$http.get(position_URL).success(function(data, status, headers, config) {
