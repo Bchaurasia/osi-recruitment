@@ -29,6 +29,11 @@ body {
 	color: red;
 }
 
+#headerColor{
+	background: #004D87;
+	height: auto
+}
+
 p {
 	font: 13px/1.7em 'Open Sans';
 }

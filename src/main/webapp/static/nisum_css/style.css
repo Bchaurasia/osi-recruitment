@@ -29,6 +29,11 @@ body {
 	color: red;
 }
 
+#headerColor{
+	background: #00ACD5;
+	height: auto
+}
+
 p {
 	font: 13px/1.7em 'Open Sans';
 }
@@ -105,7 +110,7 @@ input, button, select, textarea {
 }
 
 .navbar .nav .dropdown-menu a {
-	color: #00ACD5;
+	color: #004D87;
 }
 
 .navbar .nav .dropdown-menu a:hover {

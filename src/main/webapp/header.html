@@ -28,7 +28,7 @@ border-bottom: 4px solid #CD5C5C;}
 </style>
 
 
-<div class="navbar navbar-fixed-top mdl-shadow--4dp" style="background: #004D87;height: auto">
+<div class="navbar navbar-fixed-top mdl-shadow--4dp" id="headerColor">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle"
 			data-target=".navbar-responsive-collaspe" data-toggle="collapse"
@@ -45,13 +45,13 @@ border-bottom: 4px solid #CD5C5C;}
 				style="font-size: 20px; font-size: 19px;color: white;margin-left: 13px;">Recruitment
 				Portal</h1></span>
 	</div>
-	<div class=" navbar-collaspe collaspe navbar-responsive-collaspe"  id="nav" ng-controller="headerCtrl">
+	<div class=" navbar-collaspe collaspe navbar-responsive-collaspe" ng-controller="headerCtrl">
 		<ul class="nav nav-tabs nav-header">
 			<li ui-sref-active="active"><a  ui-sref="main"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
 <!-- 				<i class="glyphicon glyphicon-home"></i> -->
 				<span id="Dashboard">&nbsp;&nbsp;Dashboard</span></a></li>
-			<li ui-sref-active="active"><a  ui-sref="recruitment.searchProfile" data-target="#recruitment"
+			<li ui-sref-active="active"><a  ui-sref="recruitment" data-target="#recruitment"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
 <!-- 				<i class="glyphicon glyphicon-phone-alt"></i> -->
 				<span>&nbsp;&nbsp;Recruitment</span></a></li>		
