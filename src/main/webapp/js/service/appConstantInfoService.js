@@ -1,5 +1,5 @@
 app.constant('appConstants',{
-			   APP_TITLE : "OSI Technologies - Recruitment Portal",
+			   APP_TITLE : "Recruitment Portal",
 			   APP_HEARER:"Recruitment Portal",
 			   APP_DESCRIPTION:"Nisum Recruitment Portal",
 			   APP_COMPANY:"Nisum Technologies",

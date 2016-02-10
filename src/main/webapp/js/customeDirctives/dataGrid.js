@@ -82,7 +82,7 @@ angular.module('components', [])
 											'ng-class="{active: n == currentPage}" ng-click="setPage()">'+
 											'<a href ng-bind="n + 1"></a>'+
 										'</li>'+
-										'<li ng-class="{disabled: currentPage == pageCount() - 1}"><a '+
+										'<li ng-class="{disabled: currentPage == page}"><a '+
 											'href ng-click="nextPage()">Next</a></li>'+
 									'</ul>'+
 							'</div></div>');
@@ -140,7 +140,9 @@ angular.module('components', [])
 		  };
 
 		  $scope.nextPage = function() {
-		    if ($scope.currentPage < $scope.pageCount()) {
+			  $scope.page = $scope.pageCount()-1;
+			  console.log($scope.page);
+		    if ($scope.currentPage < $scope.page) {
 		      $scope.currentPage++;
 		    }
 		  };
