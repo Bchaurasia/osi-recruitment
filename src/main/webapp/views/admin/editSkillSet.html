@@ -53,7 +53,7 @@
 				<li ng-repeat="n in range(currentPage)"
 					ng-class="{active: n == currentPage}" ng-click="setPage()"><a
 					href ng-bind="n + 1"></a></li>
-				<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
+				<li ng-class="{disabled: currentPage == page}"><a
 					href ng-click="nextPage()">Next</a></li>
 			</ul>
 		</div>

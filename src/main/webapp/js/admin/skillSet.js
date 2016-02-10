@@ -150,7 +150,8 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 		  };
 
 		  $scope.nextPage = function() {
-		    if ($scope.currentPage < $scope.pageCount()) {
+			  $scope.page = $scope.pageCount()-1;  
+		    if ($scope.currentPage < $scope.page) {
 		      $scope.currentPage++;
 		    }
 		  };

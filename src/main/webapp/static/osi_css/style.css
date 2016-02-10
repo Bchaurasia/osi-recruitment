@@ -33,7 +33,12 @@ body {
 	background: #004D87;
 	height: auto
 }
-
+#logostyle {
+	padding: 0px;
+	margin-left: 8%;
+	height: 80px;
+	width: 150px
+}
 p {
 	font: 13px/1.7em 'Open Sans';
 }
@@ -2763,7 +2768,7 @@ table.fc-border-separate {
 	position: relative;
 	width: 88%;
 	top: 11px;
-	left: 6%;
+	left: 1%;
 }
 
 .nav>li.active {

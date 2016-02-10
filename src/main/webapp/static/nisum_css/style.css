@@ -4,7 +4,7 @@ Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 	/*------------------------------------------------------------------
 [1. Global]
-*/        
+*/         
 html {
 	margin: 0;
 	padding: 0;
@@ -25,21 +25,31 @@ body {
 	width: 900px;
 	height: 250px;
 }
-.mandatory-field{
+
+.mandatory-field {
 	color: red;
 }
 
-#headerColor{
+#headerColor {
 	background: #00ACD5;
 	height: auto
+}
+
+#logostyle {
+	padding: 0px;
+	margin-left: 7%;
+	height: 80px;
+	width: 182px
 }
 
 p {
 	font: 13px/1.7em 'Open Sans';
 }
-input{
+
+input {
 	width: 100%;
 }
+
 input, button, select, textarea {
 	font-family: 'Open Sans';
 }
@@ -1153,6 +1163,7 @@ table.fc-border-separate {
 .fc .ui-draggable-dragging .fc-event-bg, .fc-select-helper .fc-event-bg
 	{
 	display: none\9
+
 }
 
 .fc-event-vert .ui-resizable-s {
@@ -2516,6 +2527,7 @@ table.fc-border-separate {
 .fc .ui-draggable-dragging .fc-event-bg, .fc-select-helper .fc-event-bg
 	{
 	display: none\9
+
 }
 
 .fc-event-vert .ui-resizable-s {
@@ -2763,7 +2775,7 @@ table.fc-border-separate {
 	position: relative;
 	width: 88%;
 	top: 11px;
-	left: 6%;
+	left: 1%;
 }
 
 .nav>li.active {
@@ -2856,7 +2868,7 @@ table.fc-border-separate {
 	margin-bottom: 3%;
 }
 
-.add_btn{
+.add_btn {
 	width: 45px;
-  height: 33px;
+	height: 33px;
 }
