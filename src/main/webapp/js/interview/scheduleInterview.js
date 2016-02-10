@@ -95,6 +95,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','jobCodeSer
 			        			  $scope.interviewerNames.push(hrName.name);
 			        		  });
 			        	  }
+			        	  	if(roundName !=  "hrRound"){
 							angular.forEach($scope.usersInfo,function(userInfo) {
 								if(!_.isUndefined(_.findWhere(roundUser, {emailId: userInfo.emailId})) && !userInfo.isNotAvailable){
 									var commSkills = _.intersection($scope.profile.primarySkills,userInfo.skills);
@@ -104,6 +105,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','jobCodeSer
 								}
 								
 							});
+							}
 			          }	
 			
 				var rounds =[];	
@@ -194,7 +196,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','jobCodeSer
 		var interviewerName = $scope.interviewschedule.interviewerName;
 		selectedDay = $filter('date')(newDate, 'EEEE');
 		
-			$http.get('resources/user?emailId='+sessionStorage.userId)
+			$http.get('resources/user?emailId='+$scope.interviewschedule.emailIdInterviewer)
 			.success(function(data, status, headers, config) {
 				$scope.interviewerData = data[0];
 			}).
