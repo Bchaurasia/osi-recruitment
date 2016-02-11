@@ -105,16 +105,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 		     console.log(angular.toJson("data----"+position1));
 		     positionService.updatePosition(position1).then(
 			    function(msg){
-			    	/*  $scope.sendNotification(msg,'recruitment/searchPosition');*/
-			    	var path = 'recruitment/searchPosition';
-					/*$scope.message=msg;*/
-					jobCodeService1.setmessage(msg);
-					//$scope.cls=appConstants.SUCCESS_CLASS;
-					jobCodeService1.setclass(appConstants.SUCCESS_CLASS);
-					$timeout( function(){ $scope.alHide(); }, 5000);
-					if(path.length > 0){
-						$location.path(path);
-					}
+			    	$scope.sendNotification(msg,'recruitment/searchPosition');
 			    }).catch(function(errorMsg){
 			    	$scope.message=errorMsg;
 					$scope.cls=appConstants.ERROR_CLASS;

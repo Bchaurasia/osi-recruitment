@@ -4,15 +4,7 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
 	$scope.data = {};
-	$scope.message = jobCodeService1.getmessage();
-	$scope.cls = jobCodeService1.getclass();
-	$timeout( function(){ $scope.alHide(); }, 3000);
-	
-	$scope.alHide =  function(){
-	    $scope.message = "";
-	    $scope.cls = '';
-	}
-	
+	$scope.message1="";	
 	$scope.title = "Search";
 	
 	positionService.getPosition().then(function(data){
@@ -101,12 +93,12 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 	
 	
 	$scope.onSuccess = function(data) {
-		$scope.message = "shared successfully";
+		$scope.message1 = "shared successfully";
 	  }
 
 	  // Handle an error response from the API call
 	$scope.onError = function(error) {
-		$scope.message = error.message;
+		$scope.message1 = error.message;
 	  }
 	
 	

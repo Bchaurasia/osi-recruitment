@@ -63,6 +63,11 @@ angular.module('erApp')
 				$location.path(path);
 		}
 	}
+	$scope.positionMessage = function(msg,path){
+		$scope.message = jobCodeService1.getmessage();
+		$scope.cls = jobCodeService1.getclass();
+		$timeout( function(){ $scope.alHide(); }, 3000);
+	}
 	
 	$scope.alHide =  function(){
 	    $scope.message = "";
