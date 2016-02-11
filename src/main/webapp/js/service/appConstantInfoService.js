@@ -1,9 +1,9 @@
 app.constant('appConstants',{
 			   APP_TITLE : "Recruitment Portal",
 			   APP_HEARER:"Recruitment Portal",
-			   APP_DESCRIPTION:"Nisum Recruitment Portal",
-			   APP_COMPANY:"Nisum Technologies",
-			   APP_COPY_RIGHT:"2015 Nisum Technologies.",
+			   APP_DESCRIPTION:"OSI Recruitment Portal",
+			   APP_COMPANY:"OSI Technologies",
+			   APP_COPY_RIGHT:"2015 OSI Technologies.",
 			   APP_VERSION: "1.0",
 			   ITEMS_PER_PAGE:7,
 			   
