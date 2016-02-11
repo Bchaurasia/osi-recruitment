@@ -200,7 +200,7 @@
 		<div class="control-group">
 			<div class="col-md-2">
 				<label class="lbl" for="skills"><i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills</label>
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills:*</label>
 			</div>
 			<div class="col-md-3">
 					<a herf="" ng-hide="dis1" ng-click="skillss()"><i
@@ -209,7 +209,8 @@
 					<ui-select multiple ng-model="candidate.primarySkills"
 						ng-hide="hideSkillss" 
 						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-						id="skills" ui-select-required ng-disabled="disabled">
+						id="skills" ui-select-required ng-disabled="disabled"
+						on-remove="validateSkills()">
 					<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
 					<ui-select-choices
 						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
@@ -272,13 +273,13 @@
 		<div class="control-group">
 			<div class="col-md-2">
 				<label class="lbl" for="jobcode"><i
-					class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select Jobcode</label>
+					class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select Jobcode*</label>
 			</div>
 			<div class="col-md-3">
 				<a href="" ng-hide="hidejobcode" ng-click="jobcodes()"><i>
 						{{candidate.jobcodeProfile.join(', ') || "--"}}</i></a>
 				<ui-select ng-hide="hidejobcodemenu" multiple style="width:180px;"
-					ng-model="candidate.jobcodeProfile" theme="select2"
+					ng-model="candidate.jobcodeProfile" on-remove="validateJobcode($data)" theme="select2"
 					ng-disabled="disabled"> <ui-select-match
 					placeholder="Select JobCodes..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in jobcodelist | orderBy:'toString()' | filter:$select.search">
@@ -358,7 +359,7 @@
 	</center>
 	<br>
 	<div align="center">
-		<a href="" class="btn btn-primary" ng-click="updateProfileDetails()">
+		<a href="" class="btn btn-primary" ng-disabled="validateProfile()" ng-click="updateProfileDetails()">
 			<span class="glyphicon glyphicon-ok"></span> Update
 		</a>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.searchProfile"
 			class="btn btn-primary"> <span class="glyphicon glyphicon-remove"></span>

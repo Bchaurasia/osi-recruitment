@@ -50,6 +50,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
 	$scope.sk = {};
 	$scope.sk.jobcodeProfile = [];
 	$scope.sk.primarySkills = [];
+	$scope.validate="";
 	
 	$scope.init = function() {
 		if(jobCodeService1.getjobCode() == undefined || jobCodeService1.getprofileUserId() == undefined) {
@@ -132,7 +133,47 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
         $scope.disableEditButton = true;
         $scope.Done = true;
 	}
-	
+/*	$scope.validateSkills = function() {
+		if($scope.candidate.primarySkills===undefined){
+			$scope.validate=true;
+			return "Select atleast one Skill.";
+		}
+		else{
+			$scope.validate=false;
+			return true;
+		}
+		if($scope.candidate.primarySkills===undefined)
+		{
+			$scope.cls=appConstants.ERROR_CLASS;
+			$scope.message="Select atleast one Skill.";
+			$scope.gotoAnchor();
+			$timeout( function(){ $scope.alHide(); }, 3000);
+			$scope.candidate.primarySkills=$scope.skillTemp;
+			return;
+		}
+        $scope.hideSkillss = true;
+        $scope.dis1 = false;
+	}
+	$scope.validateJobcode = function(data) {
+		if($scope.candidate.jobcodeProfile.length===0 ){
+			$scope.validate=true;
+			"Select atleast one Job code.";
+			$scope.candidate.jobcodeProfile=$scope.jobcodeTemp;
+			return "Select 1 jobcode";
+		}
+		else{
+		//	$scope.validate=false;
+			return true;
+		}
+	}*/
+	$scope.validateProfile = function(data) {
+		if($scope.candidate.primarySkills===undefined || $scope.candidate.jobcodeProfile.length===0 ){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	$scope.updateProfileDetails = function() {
 		if($scope.candidate !== undefined){
 			var dt = new Date();
