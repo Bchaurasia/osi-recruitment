@@ -1,5 +1,5 @@
-app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log','$location','appConstants','clientService','positionService','userService','designationService', 
-                                      			function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log,$location,appConstants,clientService, positionService,userService,designationService) {
+app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log','$location','appConstants','clientService','positionService','userService','designationService', 'jobCodeService1',
+                                      			function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log,$location,appConstants,clientService, positionService,userService,designationService,jobCodeService1) {
 	$scope.jbDisabled = true;
     $scope.position ={};
     $scope.position.jobProfile="";
@@ -118,8 +118,11 @@ app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$
     $scope.loadRounds = function(query) {
     	$scope.interview=$scope.info.interviewRounds;
 		return $scope.interview; 
-	};
-	
+	}
+	$scope.alHide =  function(){
+	    $scope.message = "";
+	    $scope.cls = '';
+	}
 	$scope.reset = function() {
 		$scope.position = angular.copy($scope.master);
 		$scope.position={};
@@ -135,7 +138,16 @@ app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$
 				.catch(errorMsg);
 			
 			function successMsg(msg){
-				$scope.sendNotification(msg,'recruitment/searchPosition');
+				//$scope.sendNotification(msg,'recruitment/searchPosition');
+				var path = 'recruitment/searchPosition';
+				/*$scope.message=msg;*/
+				jobCodeService1.setmessage(msg);
+			//	$scope.cls=appConstants.SUCCESS_CLASS;
+				jobCodeService1.setclass(appConstants.SUCCESS_CLASS);
+				$timeout( function(){ $scope.alHide(); }, 5000);
+				if(path.length > 0){
+					$location.path(path);
+				}
 			}
 			
 			function errorMsg(msg){

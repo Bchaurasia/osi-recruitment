@@ -1,10 +1,17 @@
-app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants) {
+app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout',
+                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout) {
 
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
 	$scope.data = {};
-	$scope.message = "";
+	$scope.message = jobCodeService1.getmessage();
+	$scope.cls = jobCodeService1.getclass();
+	$timeout( function(){ $scope.alHide(); }, 3000);
+	
+	$scope.alHide =  function(){
+	    $scope.message = "";
+	    $scope.cls = '';
+	}
 	
 	$scope.title = "Search";
 	

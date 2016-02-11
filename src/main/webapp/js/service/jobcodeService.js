@@ -6,7 +6,8 @@ angular.module('erApp')
 		   var profileUserId;
 		   	var jobCode;
 			var designation;
-			
+			var message;
+			var cls;
 			return {
 		        setjobCode: function(code) {
 		           jobCode=code;
@@ -39,6 +40,18 @@ angular.module('erApp')
 		        },
 		        getclientName: function() {
 		        	return clientName;
+		     },
+		     setmessage: function(code) {
+		    	 message=code;
+		        },
+		        getmessage: function() {
+		        	return message;
+		     },
+		     setclass: function(code) {
+		    	 cls=code;
+		        },
+		        getclass: function() {
+		        	return cls;
 		     },
 		     setDesignation: function(code) {
 		    	 designation=code;
