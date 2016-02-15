@@ -10,7 +10,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.data = {};
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
-	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": []};
+	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": [],"managerRound":[],"hrRound":[]};
 
 	$scope.onload = function(){
 		
