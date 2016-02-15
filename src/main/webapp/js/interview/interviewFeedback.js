@@ -1,5 +1,5 @@
-app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI', 
-                                        function($scope, $http, $q, $window, jobCodeService1, $timeout, $rootScope, $log, $state, $location,profileService, blockUI) {
+app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI','interviewService','appConstants', 
+                                        function($scope, $http, $q, $window, jobCodeService1, $timeout, $rootScope, $log, $state, $location,profileService, blockUI,interviewService,appConstants) {
 	
 	$scope.profile = {};
 	$scope.interview = {};
@@ -78,9 +78,10 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 			$scope.interviewFeedback.candidateId = $scope.emailId;
 			
 			profileService.addProfilesStatus($scope.emailId,$scope.interviewFeedback.status);
-			
+			console.log("data---------->"+ angular.toJson($scope.interviewFeedback));
 			$http.post('resources/interviewFeedback', $scope.interviewFeedback).
-			  success(function(data, status) {
+			  success(function(data) {
+					$scope.sendNotification("Feedback Submitted Successfully!",'recruitment/interviewManagement');
 				  $scope.cls = 'alert  alert-success';
 				  $scope.message = "Feedback Submitted Successfully!";
 				  $timeout( function(){ $scope.alHide(); }, 5000);
@@ -88,12 +89,14 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 				  
 				  $log.info("Feedback Submitted Successfully!");
 			  }).
-			  error(function(data, status) {
-				  $scope.cls = 'alert alert-danger alert-error';
-				  $scope.message = "Something Went Wrong! Please Try Again!";
-				  $timeout( function(){ $scope.alHide(); }, 100);
+			  error(function(data) {
+				  $scope.sendNotification("Feedback Submitted Successfully!",'recruitment/interviewManagement');
+				 /* $scope.cls = 'alert alert-danger alert-error';
+				  $scope.message = "Something Went Wrong! Please Try Again!";*/
+				  $timeout( function(){ $scope.alHide(); }, 5000);
 				  $log.error("Feedback Submission Failed! --->"+data);
 			  });
+		
 			blockUI.stop();
 		},3000);
 	}
