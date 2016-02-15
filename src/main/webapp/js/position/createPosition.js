@@ -139,6 +139,7 @@ app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$
 			
 			function successMsg(msg){
 				$scope.sendNotification(msg,'recruitment/searchPosition');
+			}
 			function errorMsg(msg){
 				$scope.message=msg;
 				$scope.cls=appConstants.ERROR_CLASS;
