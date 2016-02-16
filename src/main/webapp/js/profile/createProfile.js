@@ -116,6 +116,8 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				    $log.info(msg);
 				    $scope.sendNotification(msg,'recruitment/searchProfile');
 		    	}).catch(function(msg){
+		    		console.log(angular.toJson($scope.candidate.altmobileNo.slice(3,13)));
+		    		console.log(angular.toJson($scope.candidate.mobileNo.slice(3,13)));
 		    		$scope.candidate.altmobileNo=$scope.candidate.altmobileNo.slice(3,13);
 		    		$scope.candidate.mobileNo=$scope.candidate.mobileNo.slice(3,13);
 		    		$scope.message=msg;
