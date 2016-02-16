@@ -116,6 +116,8 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				    $log.info(msg);
 				    $scope.sendNotification(msg,'recruitment/searchProfile');
 		    	}).catch(function(msg){
+		    		$scope.candidate.altmobileNo=$scope.candidate.altmobileNo.slice(3,13);
+		    		$scope.candidate.mobileNo=$scope.candidate.mobileNo.slice(3,13);
 		    		$scope.message=msg;
 		    		$scope.cls=appConstants.ERROR_CLASS;
 					$log.error(msg);
