@@ -36,7 +36,6 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	@Autowired
 	private ProfileService profileService;
 	
-	@Override
 	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException{
 		InterviewDetails interviewDetails = null;
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewFeedback.getCandidateId());
@@ -48,7 +47,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		}
 		return null;
 	}
-	@Override
+	
 	public InterviewDetails  scheduleInterview(InterviewSchedule interviewSchedule) throws Exception{
 		InterviewDetails interviewDetails = null;
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewSchedule.getCandidateId());
@@ -89,12 +88,12 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 		return interviewDetails2;
 	}
-	@Override
+	
 	public InterviewDetails  createInterview(InterviewDetails interviewDetails){
 			interviewDetailsRepository.scheduleInterview(interviewDetails);
 		return interviewDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterview(String interviewerId) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -102,7 +101,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByInterviewer(String interviewerEmail) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -120,13 +119,13 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		return checkDetails;
 	}
 	
-	@Override
+	
 	public List<InterviewDetails> getAll() {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		List<InterviewDetails> checkDetails = mongoOperations.findAll(InterviewDetails.class, "InterviewDetails");
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByJobCode(String jobCode) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -134,7 +133,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByCandidateId(String candidateId) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -142,7 +141,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByClient(String client) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -150,7 +149,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByProgress(String progress) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -158,7 +157,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewBySkill(String skill) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -166,11 +165,11 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public void updateInterviewDetails(InterviewDetails interviewDetails) {
 		interviewDetailsRepository.updateinterviewDetails(interviewDetails);
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByDesignation(String designation) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -178,7 +177,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public List<InterviewDetails> getInterviewByinterviewId(String interviewId) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
@@ -186,7 +185,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-	@Override
+	
 	public InterviewDetails enrichInterviewDetails(InterviewDetails interviewDetails2 ,InterviewSchedule interviewSchedule){
 		if(interviewDetails2.getRounds()!=null) {
 			int size = interviewDetails2.getRounds().size();
@@ -210,7 +209,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		}
 		return interviewDetails2;
 	}
-	@Override
+	
 	public InterviewDetails enrichInterviewDetails2(InterviewDetails interviewDetails2, InterviewFeedback interviewFeedback){
 		int i = 0;
 		if(interviewDetails2.getRounds().get(i).getInterviewFeedback()==null){

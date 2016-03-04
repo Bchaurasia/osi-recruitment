@@ -132,13 +132,12 @@ app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$
 		if ($scope.position !== undefined) {
 
 			$scope.position.jobcode = $scope.setJobCode($scope.position.designation,$scope.position.client,$scope.position.location);
-			
 			positionService.createPosition($scope.position)
 				.then(successMsg)
 				.catch(errorMsg);
 			
 			function successMsg(msg){
-				$scope.sendNotification(msg,'recruitment/searchPosition');
+				$scope.sendNotification(msg,'recruitment/position');
 			}
 			function errorMsg(msg){
 				$scope.message=msg;

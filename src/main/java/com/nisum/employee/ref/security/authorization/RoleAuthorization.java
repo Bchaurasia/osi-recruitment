@@ -24,7 +24,6 @@ public class RoleAuthorization implements IAuthorization {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
-	@Override
 	public List<GrantedAuthority> authorize(String userId) {
 		
 		log.debug("-------------------------------------------");

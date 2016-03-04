@@ -22,11 +22,11 @@ public class InterviewService implements IInterviewService{
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	@Override
+	
 	public void prepareInterview(InterviewDetails interview) {
 		interviewRepository.save(interview);
 	}
-	@Override
+	
 	public List<InterviewDetails> interviewCheck(String candidateId) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();

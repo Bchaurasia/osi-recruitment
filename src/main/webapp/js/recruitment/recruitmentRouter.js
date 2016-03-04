@@ -75,4 +75,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER"]);
             }
     	}})
+    	
+    .state('recruitment.positionSearch', {url:'/positionSearch', views: {'': {templateUrl: 'views/recruitment/positionSearch.html', controller: 'positionSearchCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_MANAGER","ROLE_ADMIN"]);
+            }
+    	}
+    })
+    .state('recruitment.positionView', {url:'/positionView', views: {'': {templateUrl: 'views/recruitment/positionView.html', controller: 'viewPositionCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_MANAGER","ROLE_ADMIN"]);
+            }
+    	}
+    })
 }]);

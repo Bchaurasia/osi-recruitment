@@ -14,28 +14,23 @@ public class AppInfoService implements IAppInfoService{
 	@Autowired
 	 InfoRepository skillsRequired;
 	
-	@Override
 	public ArrayList<InfoEntity> retrieveSkills() {
 		return skillsRequired.retrieveSkills();
 	}
 
-	@Override
 	public void prepareInfo(InfoEntity info) {
 		skillsRequired.prepareInfo(info);
 	}
 
-	@Override
 	public void updateInfo(InfoEntity info) {
 		skillsRequired.updateInfo(info);
 	}
 
-	@Override
 	public void updateDesigInfo(InfoEntity info) {
 		skillsRequired.updateInfo(info);
 		
 	}
 
-	@Override
 	public void updateInterviewRoundsInfo(InfoEntity info) {
 		skillsRequired.updateInfo(info);
 	}

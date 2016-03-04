@@ -14,22 +14,22 @@ public class DesignationService implements IDesignationService{
 	@Autowired
 	DesignationRepository designationRepository;
 
-	@Override
+	
 	public ArrayList<Designation> retrieveDesignations() {
 		return designationRepository.retrieveDesignations();
 	}
 
-	@Override
+	
 	public void prepareDesignation(Designation designation) {
 			designationRepository.prepareDesignations(designation);
 	}
 
-	@Override
+	
 	public void updateDesignation(Designation designation) {
 		designationRepository.updateDesignations(designation);
 	}
 
-	@Override
+	
 	public void deleteDesignation(String designation) {
 		designationRepository.removeDesignations(designation);
 		

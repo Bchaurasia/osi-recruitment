@@ -1,0 +1,199 @@
+<div >
+
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<div ng-class=" cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; left: -60; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+	<accordion close-others=false> <accordion-group
+		is-open="status.isFirstOpen"> <accordion-heading>
+	<font style="color: white" align="center"> Position Details<i
+		class="pull-right glyphicon" ng-class="{}"></i></font> </accordion-heading>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="designation"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Designation*:</label>
+			</div>
+			<div class="col-md-3">
+			{{ position.designation}}
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="location"><i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location*:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.location}}
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="experience"><i
+					class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience*:</label>
+			</div>
+			<div class="col-md-3">
+				<div class="col-md-3">MIN:</div>
+				<div class="col-md-3">
+					{{position.minExpYear}}
+				</div>
+				<div class="col-md-3">MAX:</div>
+				<div class="col-md-3">
+						{{position.maxExpYear}}
+
+				</div>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="client"><i
+					class="glyphicon glyphicon-grain"></i>&nbsp;&nbsp;Client:</label>
+			</div>
+			<div class="col-md-3">
+					{{position.client}}
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="primarySkill"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;primary Skills.*:</label>
+			</div>
+			<div class="col-md-2">
+				{{skills}}{{$last ? '' : ', '}}
+			</div>
+		</div>
+
+		<div class="control-group">
+		<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="secondarySkill"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;secondarySkills:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.secondarySkills|| "--" }}
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="jobProfile"><i
+					class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Job
+					Description.*:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.jobProfile}}
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="iRounds"><i
+					class="glyphicon glyphicon-home"></i>&nbsp;InterviewRounds:</label>
+			</div>
+			<div class="col-md-3">
+				{{round}}{{$last? '' : ', '}}
+			</div>
+		</div>
+	</div>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="HiringManager:"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;HiringManager:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.hiringManager}}
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="Priority"><i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Priority:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.priority}}
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="interviewer"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Point Of Contact:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.interviewer}}
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="row" align="left">
+		<div class="control-group">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<label class="lbl" for="JobType"><i
+					class="glyphicon glyphicon-flash"></i>&nbsp;&nbsp;JobType*:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.jobType}}
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="Salary"><i
+					class="glyphicon glyphicon-tree-conifer"></i>&nbsp;&nbsp;Salary*:</label>
+			</div>
+			<div class="col-md-3">
+				 {{position.salary}}
+			</div>
+		</div>
+	</div>
+	<div class="row" align="left">
+		<div class="col-md-1"></div>
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="noOfPositions"><i
+					class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Of Positions*:</label>
+			</div>
+			<div class="col-md-3">
+				{{position.noOfPositions|| "--" }}
+			</div>
+		</div>
+	</div>
+	</accordion-group> </accordion>
+</div>
+<div align="center">
+	</a>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.positionSearch"
+		class="btn btn-info active"> <span
+		class="glyphicon glyphicon-remove"></span> Cancel
+	</a>
+</div>
+<br>
+<br>
+<br>
+</div>

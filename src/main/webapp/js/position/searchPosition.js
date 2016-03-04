@@ -21,6 +21,7 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 	$scope.changePage = function(){
 		$scope.currentPage = 0;
 	}
+	
 	$scope.range = function (start) {
 		var pageCnt = $scope.pageCount();
         var ret = [];

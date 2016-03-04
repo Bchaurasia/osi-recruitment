@@ -54,7 +54,7 @@ function getInfoData(response) {
 		info.typeOfInterview = $filter('filter')(data,{key:'typeOfInterview'})[0].value;
 		info.interviewDuration = $filter('filter')(data,{key:'interviewDuration'})[0].value;
 		info.skills = $filter('filter')(data,{key:'skills'})[0].value;
-		info.Priority = $filter('filter')(data,{key:'Priority'})[0].value;
+		info.Priority = $filter('filter')(data,{key:'Priority'}).length == 0 ? {} : $filter('filter')(data,{key:'Priority'})[0].value;
 		info.jobType = $filter('filter')(data,{key:'jobType'})[0].value;
 		info.salary = $filter('filter')(data,{key:'salary'})[0].value;
 		info.status = $filter('filter')(data,{key:'status'})[0].value;

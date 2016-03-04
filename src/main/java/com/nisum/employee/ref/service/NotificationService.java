@@ -98,7 +98,7 @@ public class NotificationService implements INotificationService{
 	UserNotificationService userNotificationService;
 	
 	
-	@Override
+	
 	public String sendScheduleMail(InterviewSchedule interviewSchedule, String mobileNo, String altMobileNo, String skypeId) throws Exception{
 		
 		try{
@@ -174,7 +174,7 @@ public class NotificationService implements INotificationService{
 		return "Mails Sent Successfully!";
 	}
 
-	@Override
+	
 	public void sendFeedbackMail(InterviewFeedback interviewFeedback)
 			throws MessagingException {
 
