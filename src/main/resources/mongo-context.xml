@@ -16,7 +16,7 @@
          <null/>
       </constructor-arg>
    </bean>
-   <mongo:auditing/>
+   <mongo:auditing mapping-context-ref="mappingContext"/>
 
     <bean id="mappingMongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
@@ -24,7 +24,7 @@
         <property name="typeMapper" ref="defaultMongoTypeMapper"/>
     </bean>
     
-    <mongo:mapping-converter id="converter" />
+    <mongo:mapping-converter id="converter" base-package="com.nisum.employee.ref.domain"/>
     
     <bean name="gridFsTemplate"
 		class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
