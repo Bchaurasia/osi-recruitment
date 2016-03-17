@@ -6,6 +6,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.proj
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,15 +36,11 @@ public class PositionRepository {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	@Autowired
-	private ElasticsearchRepository elasticsearchRepository;
-	
 	public void save(Position position) {
 		mongoOperations.save(position);
 	}
 
 	public void preparePosition(Position position) {
-		elasticsearchRepository.indexPositionObject(position);
 		mongoOperations.save(position);
 	}
 	
@@ -73,10 +70,10 @@ public class PositionRepository {
 	}
 
 	public List<Position> retrievePositionByClient(String client) {
-		/*Query query = new Query();
+		Query query = new Query();
 		query.addCriteria(Criteria.where("client").regex(Pattern.compile(client, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
-		List<Position> positionDatails = mongoOperations.find(query, Position.class);*/
-		return elasticsearchRepository.searchPosition(client);
+		List<Position> positionDatails = mongoOperations.find(query, Position.class);
+		return positionDatails;
 	}
 	
 	public List<Position> retrieveAllPositions() {
