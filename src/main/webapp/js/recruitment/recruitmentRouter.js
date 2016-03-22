@@ -75,4 +75,35 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER"]);
             }
     	}})
+    	
+    	
+    	
+    	.state('recruitment.searchRequisition', {url:'/searchRequisition', views: {'': {templateUrl: 'views/recruitment/searchRequisition.html', controller: 'searchRequisitionCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVAL"]);
+            }
+    	}
+	    })
+	    .state('recruitment.createRequisition', {url:'/createRequisition', views: {'': {templateUrl: 'views/recruitment/createRequisition.html', controller: 'createRequisitionCtrl'}},
+	    	resolve : {
+	    		permission: function(authorizationService,$route) {
+	    			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVAL"]);
+	            }
+	    	}
+	    })
+	    .state('recruitment.editRequisition', {url:'/editRequisition', views: {'': {templateUrl: 'views/recruitment/viewRequisition.html', controller: 'editRequisitionCtrl'}},
+	    	resolve : {
+	    		permission: function(authorizationService,$route) {
+	    			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVAL"]);
+	            }
+	    	}
+	    })
+	    .state('recruitment.cloneRequisition', {url:'/cloneRequisition', views: {'': {templateUrl: 'views/recruitment/cloneRequisition.html', controller: 'cloneRequisitionCtrl'}},
+	    	resolve : {
+	    		permission: function(authorizationService,$route) {
+	    			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVAL"]);
+	            }
+	    	}
+	    })
 }]);

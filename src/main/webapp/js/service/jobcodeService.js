@@ -8,6 +8,7 @@ angular.module('erApp')
 			var designation;
 			var message;
 			var cls;
+			var requisitionId;
 			return {
 		        setjobCode: function(code) {
 		           jobCode=code;
@@ -58,6 +59,13 @@ angular.module('erApp')
 		        },
 		        getDesignation: function() {
 		        	return designation;
-		     }
+		     },
+		     setRequisitionId: function(code) {
+		        	requisitionId=code;
+			        },
+			getRequisitionId: function() {
+			        	return requisitionId;
+			     }
+		        
 		    };	
-		});	
+		});

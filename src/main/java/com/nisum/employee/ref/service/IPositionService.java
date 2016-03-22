@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.PositionAggregate;
+import com.nisum.employee.ref.domain.Requisition;
 
 public interface IPositionService {
 	public void preparePosition(Position position);
@@ -23,4 +24,6 @@ public interface IPositionService {
 	public List<Position> retrievePositionbasedOnLocation(String location);
 
 	public List<PositionAggregate> retrieveAllPositionsAggregate();
+	
+	public void createRequitionPosition(Requisition requisition);
 }

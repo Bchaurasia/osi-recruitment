@@ -1,0 +1,95 @@
+<br>
+	<h2 class="heading-name">
+		Requisition Management - Search
+	</h2>
+	<br>
+	
+	<div ng-class="cls" ng-show="message" align="center"
+		style="width: 850px; position: relative; top: -35px; height: 50">
+		<h5 style="margin-top: 2px;">{{message}}</h5>
+	</div>
+	<div class="searchposition-container" style="">
+		<br>
+		<form action="#" name="createRequisition" class="searchRequisition" onvalidate>
+			<form id="integerForm" role="form" class="form-horizontal">
+				<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-4">
+				<div class="input-group">
+            				<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="search" 
+            				style="width: 80%;border: 1px solid rgb(194, 191, 191);"/>
+            					 <span class="input-group-addon" style="position: relative;left: -19%">
+      								<span class="glyphicon glyphicon-search"></span>
+								</span>
+        					</div>
+				</div>
+				<div class="col-md-1">
+				<a id="rsBtn1"  href="#recruitment/createRequisition"
+							class="btn btn-info active"
+							ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"> <span
+								class="glyphicon glyphicon-plus"></span>
+						</a>
+				</div>
+				</div>
+				<br> <br> <br>
+					<table ng-hide="tableHide" id="interview"
+						class="table table-striped"
+						style="margin-left: 0px; width: 94%; top: -18px;">
+						<thead>
+							<tr>
+								<th>RequisitionId</th>
+								<th>Position</th>
+								<th>Min-Exp</th>
+								<th>Max-Exp</th>
+								<th>Client</th>
+								<th>Clone</th>
+								<!-- <th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">Approve</th> -->
+								<!-- <th>Share</th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="animate-repeat"
+								ng-repeat="data in allRequisitions">
+								<td><a style="cursor:pointer;"
+									ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
+								<td>{{data.position}}</td>
+								<td>{{data.minExpYear}}</td>
+								<td>{{data.maxExpYear}}</td>
+								<td>{{data.client}}</td>
+								<td align="center"><a style="cursor:pointer;"
+									ng-click="cloneRequisition(data.requisitionId)"><span class="glyphicon glyphicon-copy"></span></a></td>
+								<!-- <td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a style="cursor:pointer;"><span class="glyphicon glyphicon-ok-circle"></span></a></td> -->
+								<!-- <td class="mdl-data-table__cell--non-numeric"><left>
+								</left>&nbsp;&nbsp;&nbsp;
+								<right><a href="" style="cursor:pointer;" ng-click="shareContent(data.jobcode)">
+									<img src="https://simplesharebuttons.com/images/somacro/linkedin.png" width="20" height="20" title="Share on Linked In" /></a></right>
+								</td> -->
+							
+							</tr>
+							<tr class="animate-repeat" ng-if="results.length == 0">
+								<td>No results found...</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-md-3">
+							<h5>Total Requisitions
+								: {{allRequisitions.length }}</h5>
+						</div>
+
+						<div class="col-md-9">
+								<ul class="pagination pull-right">
+									<li ng-class="{disabled: currentPage == 0}"><a href
+										ng-click="prevPage()">Prev</a></li>
+									<li ng-repeat="n in range(currentPage)"
+										ng-class="{active: n == currentPage}" ng-click="setPage()">
+										<a href ng-bind="n + 1"></a>
+									</li>
+									<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
+										href ng-click="nextPage()">Next</a></li>
+								</ul>
+						</div>
+					</div><br><br>
+			</form>
+		</form>
+	</div>

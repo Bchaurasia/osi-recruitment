@@ -27,12 +27,17 @@ import javax.mail.internet.MimeMultipart;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
+import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.domain.UserNotification;
 @Service
@@ -87,6 +92,8 @@ public class NotificationService implements INotificationService{
 	private String SRC_INTERVIEWER_VM;
 	@Value("${SRC_FEEDBACK_HR_VM}")
 	private String SRC_FEEDBACK_HR_VM;
+	@Value("${SRC_JOB_REQUISITION_VM}")
+    private String SRC_JOB_REQUISITION_VM;
 
 	@Autowired
 	IProfileService profileService;
@@ -214,8 +221,8 @@ public class NotificationService implements INotificationService{
 
 	private Template getVelocityTemplate(String templetName) {
 		Properties prop = new Properties();
-		String absolutePath=new File(Thread.currentThread().getContextClassLoader().getResource("").getFile()).getParentFile().getParentFile().getPath();
-		prop.put(FILE_RESOURCE_LOADER_PATH, absolutePath+WEB_INF_CLASSES_VM);
+		String absolutePath=new File(Thread.currentThread().getContextClassLoader().getResource("").getFile()).getPath();
+		prop.put(FILE_RESOURCE_LOADER_PATH, absolutePath+"/vm");
 		Velocity.init(prop);
 		return Velocity.getTemplate(templetName);
 	}
@@ -264,5 +271,45 @@ public class NotificationService implements INotificationService{
 			}
 			return FORMATTER.format(convertedDate);
 	}
+
+
+	@Override
+	public void sendJobRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
+			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
+
+		String userId = requisitionApproverDetails.getApproverEmailId();
+		String message = "Approve the Requisition";
+		String readStatus="No";
+		updateUserNotification(userId, message,readStatus);
+		
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+		
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_JOB_REQUISITION_VM);
+		
+		VelocityContext context = new VelocityContext();
+		context.put("approverName", requisitionApproverDetails.getApproverName());
+		
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+		
+		Message message1 = getMessage();
+		message1.setFrom(new InternetAddress(from));
+		message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(userId));
+		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Requisition "+requisitionApproverDetails.getJobRequisitionId());
+		
+		message1.setContent(writer.toString(), TEXT_HTML);
+
+		Transport.send(message1);
+		
+	}
+	
+	private void updateUserNotification(String userId, String message,String readStatus) {
+		UserNotification userNotification = new UserNotification();
+		userNotification.setUserId(userId);
+		userNotification.setMessage(message);
+		userNotification.setRead(readStatus);
+	}
+
 }
 

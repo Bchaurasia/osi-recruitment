@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "sequence")
+@Document(collection = "Sequence")
 public class SequenceId {
 
 	@Id

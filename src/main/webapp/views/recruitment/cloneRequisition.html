@@ -1,0 +1,248 @@
+<accordion close-others=false> <accordion-group
+	is-open="status.isFirstOpen"> <accordion-heading>
+<font style="color: white" align="center"> Job Requisition<i
+	class="pull-right glyphicon" ng-class="{}"></i></font> </accordion-heading>
+
+<div class="row" align="left">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<label class="lbl" for="designation"><i
+				class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Position:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-select="requisition.position" onaftersave="getData()"
+					e-ng-options="o as o for o in designation1" e-required>
+			{{ requisition.position}}
+			</a>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl" for="experience"><i
+				class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<div class="col-md-3">Min:</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="requisition.minExpYear" 
+					e-ng-options="o as o for o in info.expYears" onaftersave="validateMinExpYear(requisition.minExpYear, requisition.maxExpYear)" e-required>
+				{{requisition.minExpYear}}
+				</a>
+			</div>
+			<div class="col-md-3">Max:</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="requisition.maxExpYear"
+					e-ng-options="o as o for o in info.expYears" e-required>
+				{{requisition.maxExpYear}}
+				</a>
+			</div>
+			<span class="validation-error" ng-show="minExpYearErr">Min Exp cannot be greater than Max Exp</span>
+		</div>
+	</div>
+	</div>
+
+<div class="row" align="left">
+	<div class="control-group">
+     <div class="col-md-1"></div>
+	 	<div class="col-md-2">
+			<label class="lbl" for="location"><i
+	  			class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Requisition
+				Date:<b class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-date="requisition.requisitionDate" onaftersave="requisitionDateChange(requisition.requisitionDate, requisition.targetDate)" 
+				e-min="{{today | date : 'yyyy-MM-dd' }}" e-required>
+			{{requisition.requisitionDate}}
+			</a>
+			<span class="validation-error" ng-show="reqErr">Requisition date should not be after Target Date.</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Target
+				Date:<b class="mandatory">*</b></label>
+		</div>
+		<!--  div class="col-md-3">
+			<a href="#" editable-date="requisition.targetDate"
+				onaftersave="dateChange(requisition.targetDate)" e-min="{{today | date : 'yyyy-MM-dd' }}" e-required>
+				{{requisition.targetDate}}</a>
+		</div -->
+		<div class="col-md-3">
+			<input type="date" ng-model="targetDate" min="{{today | date : 'yyyy-MM-dd' }}" ng-change="dateChange(targetDate)"
+				id="targetDate" required>
+			<span class="validation-error" ng-show="targetErr">Target date should not be before Requisition Date.</span>
+		</div>
+	</div>
+</div>
+<div class="row" align="left">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<label class="lbl" for="jobProfile"><i
+				class="glyphicon glyphicon-usd"></i>&nbsp;&nbsp;Client:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+
+			<a href="#" editable-select="requisition.client"
+				e-ng-options="o as o for o in clients" e-required>
+				{{requisition.client}} </a>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl" for="location"><i
+				class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+		<a href="#" editable-select="requisition.location"
+					e-ng-options="o as o for o in info.locations" e-required>
+		{{requisition.location}}
+		</a>
+		</div>
+	</div>
+</div>
+<div class="row" align="left">
+	 <div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<label class="lbl" for="experience"><i
+				class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. of Positions:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-text="requisition.noOfPositions"
+				onbeforesave="validateNoOfPosition($data)" e-required>
+				{{requisition.noOfPositions}} </a>
+			<br>	
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="validation-error" ng-show="positionErr">No. Positions should be between 1-99!</span>	
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl" for="primarySkill"><i
+				class="glyphicon glyphicon-folder-close"></i>&nbsp;&nbsp;Skills:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-2">
+			<a href="" ng-hide="dis2" ng-click="skills()" e-required>
+				<i ng-repeat="skills in requisition.skillType">{{skills || "--"
+					}}{{$last ? '' : ', '}}</i></a>
+			<ui-select ng-hide="hideSkills" multiple
+				ng-model="requisition.skillType" ng-keypress="myFunct($event)"
+				name='sk.primarySkills' id="skills" ui-select-required
+				theme="select2" ng-disabled="disabled" ng-change="validateSkills()"> <ui-select-match
+				placeholder="Select skill...">{{$item}}</ui-select-match> <ui-select-choices
+				repeat="skill in pskills | orderBy:'toString()' | filter:$select.search">
+			{{skill || "--" }} </ui-select-choices> </ui-select>
+		</div>
+		<div class="col-md-1">
+			<button class="glyphicon glyphicon-ok btn btn-primary"
+				ng-hide="hideSkills" ng-click="skill()"></button>
+		</div>
+		<span class="validation-error" ng-show="skillErr"> Select
+			atleast one Primary Skill.</span>
+	</div>
+</div>
+<div class="row" align="left">
+				<div class="col-md-4 lbl">
+					&nbsp;&nbsp;<font style="font-style: italic;"><span
+						class="label label-primary lbl">Educational Details:</span></font>
+				</div>
+</div>
+<div class="row" align="left"
+	ng-repeat=" requisition in requisition.qualifications">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<label class="lbl" for="designation"><i
+				class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Qualification:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-select="requisition.qualification"
+				e-ng-options="o as o for o in qualification" e-required> {{
+				requisition.qualification}}</a>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl"><i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-text="requisition.percent" onaftersave="validatePercentage($data)" e-required>
+				{{requisition.percent}}% </a>
+			<br>	
+			&nbsp;&nbsp;<span class="validation-error" ng-show="percentageErr">Percentage should be between 1-99!</span>	
+		</div>
+		
+	</div>
+</div>
+<div class="row" align="left">
+				<div class="col-md-4 lbl">
+					&nbsp;&nbsp;<font style="font-style: italic;"><span
+						class="label label-primary lbl">Approvers Details:</span></font>
+				</div>
+</div>
+<div class="row" align="left">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<label class="lbl" for="designation"><i
+				class="glyphicon glyphicon-user"></i>&nbsp;&nbsp; Approval 1:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-select="requisition.approval1"
+				e-ng-options="o.name for o in approvals" e-required>
+				{{requisition.approval1.name || "--" }}</a>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;
+				Approval 2:</label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-select="requisition.approval2"
+				e-ng-options="o.name for o in approvals" e-required>
+				{{requisition.approval2.name || "--" }}</a>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2" align="left">
+			<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Comment
+				:</label>
+		</div>
+		<div class="col-md-8" align="left">
+		<a href="#" editable-textarea="requisition.comment" cols="50" rows="4" >
+				{{requisition.comment || "--" }}</a>
+		</div>
+	</div>
+</div>
+
+</accordion-group> </accordion>
+
+<div align="center">
+	<a class="btn btn-info active" ng-disabled="disableCloneBtn" ng-click="cloneRequisitionDetails()">
+		<span class="glyphicon glyphicon-ok"></span> Clone
+	</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	 <a ui-sref="recruitment.searchRequisition"
+		class="btn btn-info active"> <span
+		class="glyphicon glyphicon-remove"></span> Cancel
+	</a>
+</div>
+<br>
+<br>
+<br>
