@@ -18,6 +18,8 @@ print("ClientInfo Collection Created!");
 db.createCollection("UserNotification");
 db.createCollection("Designation");
 print("Designation Collection Created!");
+db.createCollection("Sequence");
+print("Sequence Collection Created!");
 
 db.Info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 
@@ -25,7 +27,7 @@ db.Info.insert({"_id":"Locations",value: ["Hyderabad", "Pune", "Bengaluru","SF",
 
 db.Info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "JQuery","Java Script","Ruby","JPA","JSP","iBatis","Rest WebService","Spring","Hibernate","C","C++","Oracle","MySQL","DB2","TeraData","MongoDB","Neo4J","CouchDB"]});
 
-db.Info.insert({"_id":"UserRoles",value: ["ROLE_HR", "ROLE_MANAGER", "ROLE_USER","ROLE_ADMIN","ROLE_INTERVIEWER"]});
+db.Info.insert({"_id":"UserRoles",value: ["ROLE_HR", "ROLE_MANAGER", "ROLE_USER","ROLE_ADMIN","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]});
 
 db.Info.insert({"_id":"expYears",value: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15"]});
 
@@ -57,24 +59,16 @@ db.UserInfo.insert({"_id":"sgaikwad@nisum.com",'name':"Swapnil Gaikwad","mobileN
 db.UserInfo.insert({"_id":"asahai@nisum.com",'name':"Abhijeet Sahai","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"asahai",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"pdokhale@nisum.com",'name':"Pooja Dokhale","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"pooja",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"rgund@nisum.com",'name':"Ruturaj Gund","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"rgund",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
+db.UserInfo.insert({"_id":"dthorat@nisum.com",'name':"Dattatray Thorat","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"rgund",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
+
 
 //User data
-db.UserInfo.insert({"_id":"vyerra@nisum.com",'name':"Vikram Yerra","mobileNumber":"+919032003399","dob":"",location:"SF",skypeId:"vyerra",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
-db.UserInfo.insert({"_id":"bpitta@nisum.com",'name':"Babita Pitta","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"bpitta",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"atiwari@nisum.com",'name':"Abhishek Tiwari","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"atiwari",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"sparopate@nisum.com",'name':"Sanket Paropate","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"sparopate",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 
 db.UserInfo.insert({"_id":"osirecruitauser@gmail.com",'name':"Osi AdminUser","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"osirecruitauser",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"osirecruithruser@gmail.com",'name':"Osi HRUser","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"osirecruitauser",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"osirecruithiuser@gmail.com",'name':"Osi InterviewerUser","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"osirecruitiuser",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
-
-db.UserInfo.insert({"_id":"mkasam@nisum.com",'name':"Mallikarjun Kasam","mobileNumber":"","dob":"",location:"SF",skypeId:"mkasam",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
-db.UserInfo.insert({"_id":"gdevi@nisum.com",'name':"Gayathri Devi","mobileNumber":"","dob":"",location:"SF",skypeId:"",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
-db.UserInfo.insert({"_id":"alewis@nisum.com",'name':"Ariel Lewis","mobileNumber":"","dob":"",location:"SF",skypeId:"",roles:["ROLE_HR"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
-db.UserInfo.insert({"_id":"azaffar@nisum.com",'name':"Aliza Zaffar ","mobileNumber":"","dob":"",location:"SF",skypeId:"",roles:["ROLE_HR"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
-
-
-
 
 db.clientInfo.insert([{"_id":"GAPGID","clientName":"GAP GID","locations":"SF","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
                 	  {"_id":"GAPCORP","clientName":"GapCorp","locations":"Pune","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
@@ -99,6 +93,10 @@ db.Designation.insert([{"_id":"Developer","maxExpYear":"3","minExpYear":"0","ski
                        {"_id":"Iteration Manager","maxExpYear":"8","minExpYear":"5","skills":["Java","C"]},
                        {"_id":"Project Manager","maxExpYear":"15","minExpYear":"10","skills":["Java","C"]}
                      ]);
+
+db.Sequence.insert({"_id":"REQ","seq":0});
+db.Sequence.insert({"_id":"JOB","seq":0});
+
 print("Data Inserted Into Info Collection!");
 print("");
 print("Following Collections Are In The osirpdb: ");
