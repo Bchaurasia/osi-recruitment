@@ -3,22 +3,8 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 
 	$scope.showApprovalBtn = false;
 	$scope.allRequisitions={};
-	
-	$scope.allRequisitions.length=0;
-//	requisitionService.getAllRequisitions().then(function(data){
-//    	$scope.allRequisitions = data;
-//    	alert($scope.allRequisitions.length);
-//    	angular.forEach($scope.allRequisitions,function(requisitions){
-//    		if(requisitions.approval1 == $scope.user.name){
-//    			$scope.showApprovalBtn = true;
-//			}
-//    		else{
-//    			$scope.showApprovalBtn = false;
-//    		}
-//		})
-//    }).catch(function(msg){
-//    	$log.error(msg); 
-//    })
+	$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
+
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
 	}).error(function(data, status, headers, config) {
