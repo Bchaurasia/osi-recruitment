@@ -67,15 +67,15 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 			$scope.showApprovalBtn = !$scope.requisition.approval1.approved;
 			$scope.showApprovedBtn = $scope.requisition.approval1.approved;
 			
-		}else if( $scope.user.name === $scope.requisition.approval2.name){
+		}else if( $scope.user.name === $scope.requisition.approval2.name && $scope.requisition.approval1.approved){
 			
 			$scope.showApprovalBtn = !$scope.requisition.approval2.approved;
 			$scope.showApprovedBtn = $scope.requisition.approval2.approved;
 			
 		} else{}
 		
-		if( ($scope.requisition.approval1.approved && $scope.requisition.approval2 === undefined) ||
-				($scope.requisition.approval1.approved && $scope.requisition.approval2 !== undefined &&  $scope.requisition.approval2.approved))
+		if( ($scope.requisition.approval1.approved && $scope.requisition.approval2 === null) ||
+				($scope.requisition.approval1.approved && $scope.requisition.approval2 !== null &&  $scope.requisition.approval2.approved))
 		{
 			$scope.disableUpdateBtn = true;
 			

@@ -83,7 +83,7 @@ public class PositionService implements IPositionService{
 		position.setMaxExpYear(requisition.getMaxExpYear());
 		position.setPrimarySkills(requisition.getSkillType());
 		position.setInterviewRounds(interviewRounds);
-        position.setJobcode("JOB_"+requisition.getRequisitionId()+"_"+sequenceRepository.getNextSequenceId("JOB"));
+        position.setJobcode("JOB_"+sequenceRepository.getNextSequenceId("JOB"));
 		return position;
 	}
 }
