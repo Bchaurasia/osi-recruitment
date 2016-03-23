@@ -14,6 +14,7 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.minExpYear=[];
 	$scope.maxExpYear=[];
 	$scope.approvals=[];
+	$scope.requisitionManager=[];
 	$scope.client =[];
 	$scope.primarySkills = [];
 	$scope.reqId = 0;
@@ -78,6 +79,14 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 			$scope.approvals.push(user.name);
 		})
 		
+		var	hrUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+						angular.forEach(hrUser,function(user){
+						var hr={};
+						hr.name = user.name;
+						hr.emailId = user.emailId;
+						$scope.requisitionManager.push(hr);
+					});
+				$scope.requisitionManager =_.sortBy($scope.requisitionManager, 'name');
 	  });
 	
 	designationService.getDesignation().then(function(data){
