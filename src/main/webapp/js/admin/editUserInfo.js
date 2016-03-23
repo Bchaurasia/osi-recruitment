@@ -8,6 +8,8 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 	$scope.hideCal = true;
 	$scope.hideDetails = true;
 	$scope.hideRoles = true;
+	$scope.clients=[];
+	$scope.hideClient = true;
 	
 	$scope.col=["Name","Email Id","Roles","Client"];
 	
@@ -60,6 +62,15 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		}
 	}
 	
+	$scope.validateUser = function(data) {
+			if( $scope.userToEdit.clientName.length===0 ){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+	
 	$scope.alHide =  function(){
 	    $scope.message = "";
 	    $scope.cls = '';
@@ -68,9 +79,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		if(userToEdit.name!=null && userToEdit.name!="Click Here To Edit"){
 			if(userToEdit.mobileNumber!=null && userToEdit.mobileNumber!="Click Here To Edit"){
 				if(userToEdit.skypeId!=null && userToEdit.skypeId!="Click Here To Edit"){
-					if(userToEdit.skills!=null && userToEdit.skills!="Click Here To Edit"){
 						return true;
-					}	
 				}	
 			}	
 		}
@@ -81,7 +90,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		var date=new Date();
 		if(date<$scope.userToEdit.dob){
 			$scope.message = "select Proper Date";
-			$scope.adminCls = appConstants.ERROR_CLASS;
+			$scope.adminCls=appConstants.ERROR_CLASS;
 			$timeout( function(){ $scope.alHide(); }, 5000);
 		}
 	}
@@ -92,6 +101,16 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		$scope.tempRoles=$scope.userToEdit.roles;
 	}
 	
+	$scope.skills = function(){
+				$scope.hideClient = false;
+				$scope.dis2 = true;
+	}
+		
+	$scope.editClient = function(){
+				$scope.hideClient = false;
+				$scope.hideClientView = true;
+				$scope.tempClient=$scope.userToEdit.clientName;
+	}
 	$scope.openCal = function(){
 		$scope.calendar = true;
 		$scope.hideCal = false;
@@ -117,7 +136,20 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		$scope.hideRoles = true;
 		$scope.hideView = false;	
 	}
-
+	
+	$scope.hideClient1 = function(){
+				if($scope.userToEdit.clientName.length===0)
+				{
+					$scope.message="Select at least one Client";
+					$scope.adminCls=appConstants.ERROR_CLASS;
+					  $timeout( function(){ $scope.alHide(); }, 5000);
+					  $scope.userToEdit.clientName = $scope.tempClient;
+					return;
+				}
+				$scope.hideClient = true;
+				$scope.hideClientView = false;	
+	}
+	
 	$scope.today = function() {
 	    $scope.dt = new Date();
 	  };

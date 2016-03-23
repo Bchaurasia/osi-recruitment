@@ -1,13 +1,12 @@
 package com.nisum.employee.ref.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Getter;
-import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -18,14 +17,14 @@ public class UserInfo {
 	String name;
 	String dob;
 	String doj;
-	String clientName;
-	String projectName;
-	String location;
-	List<String> roles;
-	ArrayList<String> skills;
-	String mobileNumber;
 	String skypeId;
+	String location;
+	String projectName;
+	String mobileNumber;
+	Boolean isNotAvailable;
+	List<String> roles;
+	List<String> clientName;
+	List<String> skills;
 	List<String> categories;
 	List<TimeSlots> timeSlots;
-	Boolean isNotAvailable = false;
 }

@@ -13,21 +13,21 @@
 		</div>
 		<div class="panel-body">
 
-				<div class="form-group row">
-					<label class="lbl col-md-2 col-md-offset-1"><i
-						class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Full Name<b
-						class="mandatory-field">*</b> : </label>
-					<div class="col-md-3">
-						<a href="#" editable-text="userToEdit.name"
-							onbeforesave="validateChar($data)" e-required>{{
-							userToEdit.name || "Click Here To Edit" }}</a>
-					</div>
-					<label class="lbl col-md-2"><i
-						class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Email : </label>
-					<div class="col-md-3">
-						<b>{{userToEdit.emailId || "Enter Email-Id"}}</b>
-					</div>
+			<div class="form-group row">
+				<label class="lbl col-md-2 col-md-offset-1"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Full Name<b
+					class="mandatory-field">*</b> : </label>
+				<div class="col-md-3">
+					<a href="#" editable-text="userToEdit.name"
+						onbeforesave="validateChar($data)" e-required>{{
+						userToEdit.name || "Click Here To Edit" }}</a>
 				</div>
+				<label class="lbl col-md-2"><i
+					class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Email : </label>
+				<div class="col-md-3">
+					<b>{{userToEdit.emailId || "Enter Email-Id"}}</b>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="lbl col-md-2 col-md-offset-1"><i
 					class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp; Mobile<b
@@ -81,11 +81,10 @@
 							ng-repeat="role in userToEdit.roles">{{role}}{{$last ? '' :
 							', '}}</div></a>
 
-					<ui-select ng-hide="hideRoles" multiple ui-select-required
+					<ui-select ng-hide="hideRoles"   multiple ui-select-required
 						style="width:180px;" ng-model="userToEdit.roles" theme="select2">
 					<ui-select-match placeholder="Select roles..">{{$item}}</ui-select-match>
-					<ui-select-choices
-						repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
+					<ui-select-choices  tooltips  tooltip-side="right"	repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
 					{{allRoles}} </ui-select-choices> </ui-select>
 					<div>
 						<button class="glyphicon glyphicon-ok btn btn-primary"
@@ -94,14 +93,13 @@
 					</div>
 				</div>
 				<label class="lbl col-md-2"> <i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills<b
-					class="mandatory-field">*</b> :
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills:
 				</label>
 
 				<div class="col-md-3">
 					<ui-select multiple ng-model="userToEdit.skills"
 						style="width:180px;" ng-keypress="myFunct($event)"
-						name='sk.skills' ui-select-required theme="select2"> <ui-select-match
+						name='sk.skills' theme="select2"> <ui-select-match
 						placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
 						repeat="skill in info.skills | orderBy:'toString()' | filter:$select.search">
 					{{skill}} </ui-select-choices> </ui-select>
@@ -109,11 +107,20 @@
 			</div>
 			<div class="form-group row">
 				<label class="lbl col-md-2 col-md-offset-1"><i
-					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Client :</label>
+					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Client <b
+					class="mandatory-field">*</b>:</label>
 				<div class="col-md-3">
-					<a href="#" editable-select="userToEdit.clientName"
-						e-ng-options="o as o for o in clientList"> {{
-						userToEdit.clientName || "Select Client" }} </a>
+					<a href="" ng-hide="hideClientView" ng-click="editClient()"><i>
+							{{ userToEdit.clientName.join(', ') || "Enter clients"}}</i></a>
+					<ui-select ng-hide="hideClient" multiple style="width:180px;"
+						ng-model="userToEdit.clientName" theme="select2"
+						ng-keypress="myFunct($event)"> <ui-select-match
+						placeholder="Select Clients">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="client in clientList | orderBy:'toString()' | filter:$select.search">
+					{{client}}</ui-select-choices> </ui-select>
+					<button class="glyphicon glyphicon-ok btn btn-primary"
+						ng-hide="hideClient" ng-click="hideClient1()"
+						style="width: 40px; height: 28px;"></button>
 				</div>
 			</div>
 
@@ -179,7 +186,7 @@
 	</div>
 
 	<div align="center">
-		<button class="btn btn-info active" ng-click="update()" type="submit">
+		<button class="btn btn-info active" ng-disabled="validateUser()" ng-click="update()" type="submit">
 			<span class="glyphicon glyphicon-ok-circle"></span> Save
 		</button>
 		&nbsp;
