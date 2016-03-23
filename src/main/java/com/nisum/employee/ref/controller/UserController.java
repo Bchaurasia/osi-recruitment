@@ -32,7 +32,7 @@ public class UserController {
 		return new ResponseEntity<String>("User registered Successfully", HttpStatus.OK);
 	}
 
-	@Secured({"ROLE_USER","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_USER","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveUsers(	@RequestParam(value = "emailId", required = false) String emailId, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "clientName", required = false) String clientName) {
 		List<UserInfo> userInfos = null;
@@ -52,7 +52,7 @@ public class UserController {
 				: new ResponseEntity<List<UserInfo>>(userInfos, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_USER","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_USER","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateUser(@RequestBody UserInfo user) {

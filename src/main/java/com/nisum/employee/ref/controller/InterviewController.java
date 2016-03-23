@@ -27,7 +27,7 @@ public class InterviewController {
 	@Autowired
 	private InterviewDetailsService interviewDetailsService;
 	
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/interviewSchedule", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createInterviewSchedule(@RequestBody InterviewSchedule interviewSchedule) throws Exception {
@@ -35,7 +35,7 @@ public class InterviewController {
 		return new ResponseEntity<InterviewDetails>(interviewSchedule2, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/interviewRe-Schedule", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> reScheduleInterviewSchedule(@RequestBody InterviewSchedule interviewSchedule) throws Exception {
@@ -43,7 +43,7 @@ public class InterviewController {
 		return new ResponseEntity<InterviewDetails>(interviewSchedule2, HttpStatus.OK);
 	}
 
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/interviewFeedback", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> saveFeedback(@RequestBody InterviewFeedback interviewFeedback) {
@@ -54,7 +54,7 @@ public class InterviewController {
 		}
 		return new ResponseEntity<InterviewFeedback>(interviewFeedback, HttpStatus.OK);
 	}
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/createInterview", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createInterviewDetails(@RequestBody InterviewDetails interviewDetails) {
@@ -66,7 +66,7 @@ public class InterviewController {
 		return new ResponseEntity<InterviewDetails>(interviewDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterview", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewerId", required = true) String interviewerId) {
 		List<InterviewDetails> checkDetails = interviewDetailsService.getInterview(interviewerId);
@@ -74,7 +74,7 @@ public class InterviewController {
 				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterviewByParam", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterview(@RequestParam(value = "jobCode", required = false) String jobCode,@RequestParam(value = "candiateId", required = false) String candiateId, @RequestParam(value = "client", required = false) String client, @RequestParam(value = "progress", required = false) String progress, @RequestParam(value = "skill", required = false) String skill, @RequestParam(value = "designation", required = false) String designation, @RequestParam(value = "interviewId", required = false) String interviewId) {
 		List<InterviewDetails> checkDetails = null;
