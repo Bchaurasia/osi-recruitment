@@ -128,7 +128,7 @@
 								</div>
 								<div class="col-md-4">
 									<ul ng-repeat="round in interviewFeedback.rateSkills"
-										style="position: relative; right: 39px;">
+										style="position: relative; right: 39px;" ng-disabled="disableFields">
 										<li><b>{{ round.skill }}</b>&nbsp;&nbsp;&nbsp;&nbsp; <rating
 												ng-model="round.rating" max="10" readonly="false"
 												on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
