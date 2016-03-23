@@ -24,11 +24,10 @@ public class Position extends AuditEntity {
 	String jobProfile;
 	String location;
 	String client;
-	String hiringManager;
 	String priority;
 	Integer noOfPositions;
 	String interviewer;
 	String jobType;
 	String salary;
-
+	UserVO hiringManager;
 }

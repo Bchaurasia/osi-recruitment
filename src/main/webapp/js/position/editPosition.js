@@ -10,6 +10,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 	$scope.position.primarySkills = {};
 	$scope.primarySkills =[];
 	$scope.managers = [];
+	$scope.hiringManager = [];
 	$scope.designation1=[];
 	$scope.designations={};
 	$scope.minExpYear=[];
@@ -57,6 +58,16 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 			if(user.roles.indexOf("ROLE_INTERVIEWER") >= 0 )
 			$scope.interviewers.push(user.name);
 		})
+		
+		var	hrUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+					angular.forEach(hrUser,function(user){
+							var hr={};
+							hr.name = user.name;
+							hr.emailId = user.emailId;
+							$scope.hiringManager.push(hr);
+							
+						});
+					$scope.hiringManager =_.sortBy($scope.hiringManager, 'name');
 		
 	  });
 			
