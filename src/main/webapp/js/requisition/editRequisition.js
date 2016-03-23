@@ -184,6 +184,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 
 	$scope.updateRequisitionDetails = function(){
 		if ($scope.requisition !== undefined) {
+			alert(angular.toJson($scope.requisition));
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');
@@ -232,7 +233,6 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
-		console.log("Requisition: "+angular.toJson($scope.allRequisitions));
 		$scope.reqId = $scope.allRequisitions.length;
 	}).error(function(data, status, headers, config) {
 		$log.error(data);
