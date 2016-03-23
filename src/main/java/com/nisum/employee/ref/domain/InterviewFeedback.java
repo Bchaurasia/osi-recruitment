@@ -23,4 +23,5 @@ public class InterviewFeedback {
 	String duration;
 	String candidateId;
 	String candidateName;
+	String status;
 }

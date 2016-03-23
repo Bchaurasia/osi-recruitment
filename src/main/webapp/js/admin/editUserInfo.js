@@ -68,9 +68,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		if(userToEdit.name!=null && userToEdit.name!="Click Here To Edit"){
 			if(userToEdit.mobileNumber!=null && userToEdit.mobileNumber!="Click Here To Edit"){
 				if(userToEdit.skypeId!=null && userToEdit.skypeId!="Click Here To Edit"){
-					if(userToEdit.skills!=null && userToEdit.skills!="Click Here To Edit"){
 						return true;
-					}	
 				}	
 			}	
 		}

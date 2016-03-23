@@ -94,14 +94,13 @@
 					</div>
 				</div>
 				<label class="lbl col-md-2"> <i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills<b
-					class="mandatory-field">*</b> :
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills :
 				</label>
 
 				<div class="col-md-3">
 					<ui-select multiple ng-model="userToEdit.skills"
 						style="width:180px;" ng-keypress="myFunct($event)"
-						name='sk.skills' ui-select-required theme="select2"> <ui-select-match
+						name='sk.skills'  theme="select2"> <ui-select-match
 						placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
 						repeat="skill in info.skills | orderBy:'toString()' | filter:$select.search">
 					{{skill}} </ui-select-choices> </ui-select>
