@@ -62,12 +62,12 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	
 	var approvalBtn = function(){
 		
-		if($scope.user.name === $scope.requisition.approval1.name )
+		if($scope.user.emailId === $scope.requisition.approval1.emailId )
 		{
 			$scope.showApprovalBtn = !$scope.requisition.approval1.approved;
 			$scope.showApprovedBtn = $scope.requisition.approval1.approved;
 			
-		}else if( $scope.user.name === $scope.requisition.approval2.name && $scope.requisition.approval1.approved){
+		}else if( $scope.user.emailId === $scope.requisition.approval2.emailId && $scope.requisition.approval1.approved){
 			
 			$scope.showApprovalBtn = !$scope.requisition.approval2.approved;
 			$scope.showApprovedBtn = $scope.requisition.approval2.approved;
