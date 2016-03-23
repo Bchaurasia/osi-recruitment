@@ -194,49 +194,7 @@
 		</div>
 	</div>
 	<br>
-
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="JobType"><i
-					class="glyphicon glyphicon-flash"></i>&nbsp;&nbsp;JobType*:</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="position.jobType"
-					e-ng-options="o as o for o in info.jobType" e-required> {{
-					position.jobType}} </a>
-
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="Salary"><i
-					class="glyphicon glyphicon-tree-conifer"></i>&nbsp;&nbsp;Salary*:</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="position.salary"
-					e-ng-options="o as o for o in info.salary" e-required> {{
-					position.salary}} </a>
-
-			</div>
-		</div>
-	</div>
-	<div class="row" align="left">
-		<div class="col-md-1"></div>
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="noOfPositions"><i
-					class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Of Positions*:</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="position.noOfPositions" onbeforesave="validateNoOfPosition($data)">{{position.noOfPositions
-					|| "--" }}</a>
-			</div>
-		</div>
-	</div>
-	</accordion-group> </accordion>
+</accordion-group> </accordion>
 </div>
 <div align="center">
 	<a class="btn btn-info active" ng-click="updatePositionDetails()"
