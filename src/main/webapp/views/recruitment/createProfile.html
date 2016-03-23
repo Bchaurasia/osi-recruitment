@@ -381,12 +381,12 @@
 					<div class="col-md-2">
 						<label class="lbl" for="jobcode"><i
 							class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select
-							Jobcode<b class="mandatory-field">*</b></label>
+							Jobcode</label>
 					</div>
 					<div class="col-md-3">
 						<ui-select multiple ng-model="sk.jobcodeProfile" id="jobcode"
 							ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-							ui-select-required ng-disabled="disabled">
+							ng-disabled="disabled">
 						<ui-select-match placeholder="Select JobCodes..">{{$item.jobcode}}</ui-select-match>
 						<ui-select-choices
 							repeat="position in positionData | orderBy:'toString()' | filter:$select.search">

@@ -273,13 +273,13 @@
 		<div class="control-group">
 			<div class="col-md-2">
 				<label class="lbl" for="jobcode"><i
-					class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select Jobcode*</label>
+					class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select Jobcode</label>
 			</div>
 			<div class="col-md-3">
 				<a href="" ng-hide="hidejobcode" ng-click="jobcodes()"><i>
 						{{candidate.jobcodeProfile.join(', ') || "--"}}</i></a>
 				<ui-select ng-hide="hidejobcodemenu" multiple style="width:180px;"
-					ng-model="candidate.jobcodeProfile" on-remove="validateJobcode($data)" theme="select2"
+					ng-model="candidate.jobcodeProfile" theme="select2"
 					ng-disabled="disabled"> <ui-select-match
 					placeholder="Select JobCodes..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in jobcodelist | orderBy:'toString()' | filter:$select.search">

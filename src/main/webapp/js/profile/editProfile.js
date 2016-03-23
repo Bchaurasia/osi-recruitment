@@ -167,12 +167,10 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
 		}
 	}*/
 	$scope.validateProfile = function(data) {
-		if($scope.candidate.primarySkills===undefined || $scope.candidate.jobcodeProfile.length===0 ){
+		if($scope.candidate.primarySkills===undefined){
 			return true;
 		}
-		else{
 			return false;
-		}
 	}
 	$scope.updateProfileDetails = function() {
 		if($scope.candidate !== undefined){
@@ -331,16 +329,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
         $scope.dis1 = false;
 	}
 	$scope.jobcodesave = function(){
-		if($scope.candidate.jobcodeProfile.length===0)
-		{
-			$scope.cls=appConstants.ERROR_CLASS;
-			$scope.message="Select atleast one Job code.";
-			$scope.gotoAnchor();
-			$timeout( function(){ $scope.alHide(); }, 3000);
-			$scope.candidate.jobcodeProfile=$scope.jobcodeTemp;
-			return;
-		}
-        $scope.hidejobcodemenu = true;
+		$scope.hidejobcodemenu = true;
         $scope.hidejobcode = false;
 	}
 	$scope.feedback = function(positionId, candidateEmail) {
