@@ -84,7 +84,7 @@ public class PositionService implements IPositionService{
 		position.setPrimarySkills(requisition.getSkillType());
 		position.setInterviewRounds(interviewRounds);
 		position.setHiringManager(requisition.getRequisitionManager());
-        position.setJobcode("JOB_"+requisition.getRequisitionId()+"_"+sequenceRepository.getNextSequenceId("JOB"));
+        position.setJobcode("JOB_"+sequenceRepository.getNextSequenceId("JOB"));
 		return position;
 	}
 }

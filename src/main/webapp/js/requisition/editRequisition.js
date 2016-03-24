@@ -63,20 +63,20 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	
 	var approvalBtn = function(){
 		
-		if($scope.user.name === $scope.requisition.approval1.name )
+		if($scope.user.emailId === $scope.requisition.approval1.emailId )
 		{
 			$scope.showApprovalBtn = !$scope.requisition.approval1.approved;
 			$scope.showApprovedBtn = $scope.requisition.approval1.approved;
 			
-		}else if( $scope.user.name === $scope.requisition.approval2.name){
+		}else if( $scope.user.emailId === $scope.requisition.approval2.emailId && $scope.requisition.approval1.approved){
 			
 			$scope.showApprovalBtn = !$scope.requisition.approval2.approved;
 			$scope.showApprovedBtn = $scope.requisition.approval2.approved;
 			
 		} else{}
 		
-		if( ($scope.requisition.approval1.approved && $scope.requisition.approval2 === undefined) ||
-				($scope.requisition.approval1.approved && $scope.requisition.approval2 !== undefined &&  $scope.requisition.approval2.approved))
+		if( ($scope.requisition.approval1.approved && $scope.requisition.approval2 === null) ||
+				($scope.requisition.approval1.approved && $scope.requisition.approval2 !== null &&  $scope.requisition.approval2.approved))
 		{
 			$scope.disableUpdateBtn = true;
 			
@@ -195,6 +195,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 
 	$scope.updateRequisitionDetails = function(){
 		if ($scope.requisition !== undefined) {
+			alert(angular.toJson($scope.requisition));
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');
@@ -243,7 +244,6 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
-		console.log("Requisition: "+angular.toJson($scope.allRequisitions));
 		$scope.reqId = $scope.allRequisitions.length;
 	}).error(function(data, status, headers, config) {
 		$log.error(data);

@@ -127,20 +127,6 @@
 	<div class="control-group">
 		<div class="col-md-1"></div>
 		<div class="col-md-2">
-			<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
-				HR :<b class="mandatory">*</b>
-			</label>
-		</div>
-		<div class="col-md-3">
-			<a href="#" editable-select="requisition.requisitionManager"
-				e-ng-options="o.name for o in requisitionManager" e-required> {{
-				requisition.requisitionManager.name || "--" }}</a>
-		</div>
-	</div>
-	
-	
-	<div class="control-group">
-		<div class="col-md-2">
 			<label class="lbl" for="experience"><i
 				class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Positions:<b
 				class="mandatory">*</b></label>
@@ -151,10 +137,23 @@
 				{{requisition.noOfPositions}} </a>
 		</div>
 	</div>
+	
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
+				HR :<b class="mandatory">*</b>
+			</label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-select="requisition.requisitionManager"
+				e-ng-options="o.name for o in requisitionManager" e-required> {{
+				requisition.requisitionManager.name || "--" }}</a>
+		</div>
+	</div>
 </div>
 <div class="row" align="left">
-<div class="control-group">
-		<div class="col-md-1"></div>
+<div class="col-md-1"></div>
+	<div class="control-group">
 		<div class="col-md-2">
 			<label class="lbl" for="primarySkill"><i
 				class="glyphicon glyphicon-folder-close"></i>&nbsp;&nbsp;Skills:<b
@@ -179,6 +178,7 @@
 		<span class="validation-error" ng-show="skillErr"> Select
 			atleast one Primary Skill.</span>
 	</div>
+
 </div>
 <div class="row">
 	<div class="control-group">
@@ -274,8 +274,7 @@
 									ng-show="hasRole('ROLE_REQUISITION_MANAGER')"
 									e-ng-options="o.name for o in approvals"> {{
 									requisition.approval1.name || "--" }}</a> <span
-									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval1.name
-									|| "--" }}</span>
+									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval1.name	|| "--" }}</span>
 
 							</div>
 						</div>
@@ -297,7 +296,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-5" >
+	<div class="col-sm-5" ng-show="requisition.approval2 !== null">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Approval 2</div>
 			<div class="row">
@@ -344,15 +343,16 @@
 
 </accordion-group> </accordion>
 <div align="center">
-	<button class="btn btn-info active"
+	<a class="btn btn-info active"
 		ng-show="showApprovalBtn || showApprovedBtn"
 		ng-disabled="showApprovedBtn" ng-click="approve()"> <span
 		class="glyphicon glyphicon-ok-circle"></span> Approve
-	</button>
-	<button class="btn btn-info active" ng-disabled="validateRequisition() || disableUpdateBtn"
-		ng-click="updateRequisitionDetails()" > <span
-		class="glyphicon glyphicon-ok" ></span> Update
-	</button>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.searchRequisition"
+	</a>
+	<a class="btn btn-info active" ng-disabled="validateRequisition() || disableUpdateBtn"
+		ng-show="showUpdateBtn" ng-click="updateRequisitionDetails()"> <span
+		class="glyphicon glyphicon-ok" ng-disabled="disabled"></span> Update
+	</a>
+	<a ui-sref="recruitment.searchRequisition"
 		class="btn btn-info active"> <span
 		class="glyphicon glyphicon-remove"></span> Cancel
 	</a>
