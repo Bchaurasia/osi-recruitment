@@ -28,7 +28,7 @@ public class PositionController {
 	@Autowired
 	private PositionService  positionService;
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/position", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createPosition(@RequestBody Position position) {
@@ -37,7 +37,7 @@ public class PositionController {
 		return new ResponseEntity<Position>(position, HttpStatus.OK);
 	}
 
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/position", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updatePosition(@RequestBody Position position) {
@@ -46,7 +46,7 @@ public class PositionController {
 		return new ResponseEntity<String>(jsonObj, HttpStatus.ACCEPTED);
 	}
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/position", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionByClient(@RequestParam(value = "client", required = false) String client,
 			@RequestParam(value = "designation", required = false) String designation
@@ -62,7 +62,7 @@ public class PositionController {
 				: new ResponseEntity<List<Position>>(positionsDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchPositionsBasedOnJobCode", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionsBasedOnJobCode(@RequestParam(value = "jobcode", required = true) String jobcode) {
 		Position positionsDetail = positionService.retrievePositionsbasedOnJobCode(jobcode);
@@ -70,7 +70,7 @@ public class PositionController {
 				: new ResponseEntity<Position>(positionsDetail, HttpStatus.OK);
 	} 
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchPositionBasedOnLocation", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievesearchPositionbasedOnLocation(@RequestParam(value = "location", required = true) String location,@RequestParam(value = "expYear", required = false) String expYear,@RequestParam(value = "primarySkills", required = false) String primarySkills) {
 		List<Position> positionsDetail = positionService.retrievePositionbasedOnLocation(location);
@@ -78,7 +78,7 @@ public class PositionController {
 				: new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
 	} 
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getPositionsByAggregation", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveAllPositionsAggregate() {
 		List<PositionAggregate> positionsDetail = positionService.retrieveAllPositionsAggregate();

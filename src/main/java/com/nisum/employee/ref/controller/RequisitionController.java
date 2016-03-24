@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-//@RequestMapping(value="/requisition")
 public class RequisitionController {
 
 
@@ -39,8 +38,7 @@ public class RequisitionController {
 	
 	private RequisitionApproverDetails requisitionApproverDetails = new RequisitionApproverDetails();
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-//	@RequestMapping(method = RequestMethod.POST)
+	@Secured({"ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/requisition",method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createRequisition(@RequestBody Requisition requisition)  throws Exception {
@@ -65,7 +63,7 @@ public class RequisitionController {
 		
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN","ROLE_REQUISITION_APPROVER"})
 	@ResponseBody
 	@RequestMapping(value="/approveRequisition",method = RequestMethod.POST)
 	public ResponseEntity<?> approveRequisition(@RequestBody Requisition requisition) throws Exception{
@@ -86,7 +84,7 @@ public class RequisitionController {
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/requisition",method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateRequisition(@RequestBody Requisition requisition) throws Exception{
@@ -101,7 +99,7 @@ public class RequisitionController {
 		return new ResponseEntity<String>(jsonObj, HttpStatus.ACCEPTED);
 	}
 
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@ResponseBody
 	@RequestMapping(value="/requisition",method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveAllRequisitions() {
@@ -111,7 +109,7 @@ public class RequisitionController {
 	}
 
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/requisitionById" , method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> retrieveRequisitionBasedOnId(@RequestParam(value = "requisitionId", required = true) String requisitionId) {
@@ -123,30 +121,4 @@ public class RequisitionController {
 			return new ResponseEntity<String>("{\"msg\":\"Requisition Id is empty\"}", HttpStatus.BAD_REQUEST);
 		}
 	}
-//
-//	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-//	@RequestMapping(value="/basedOnClient" , method = RequestMethod.GET)
-//	@ResponseBody
-//	public ResponseEntity<?> retrieveRequisitionsBasedOnClient(@RequestParam(value = "client", required = true) String client) {
-//		if(!client.isEmpty()){
-//			List<Requisition> requisitionsDetails = requisitionService.retrieveRequisitionsByClient(client);
-//			return (requisitionsDetails.isEmpty()) ? new ResponseEntity<String>("{\"msg\":\"No requisition found based on requested client\"}", HttpStatus.NOT_FOUND)
-//					: new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
-//		} else{
-//			return new ResponseEntity<String>("{\"msg\":\"client name is empty\"}", HttpStatus.BAD_REQUEST);
-//		}
-//	}
-//
-//	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-//	@RequestMapping(value = "/basedOnPosition", method = RequestMethod.GET)
-//	public ResponseEntity<?> retrieveRequisitionsBasedOnPosition(@RequestParam(value = "position", required = true) String position) {
-//		if(!position.isEmpty()){
-//			List<Requisition> requisitionsDetails = requisitionService.retrieveRequisitionsByPosition(position);
-//			return (requisitionsDetails.isEmpty()) ? new ResponseEntity<String>("{\"msg\":\"No requisition found based on requested position\"}", HttpStatus.NOT_FOUND)
-//					: new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
-//		} else{
-//			return new ResponseEntity<String>("{\"msg\":\"position name is empty\"}", HttpStatus.BAD_REQUEST);
-//		}
-//	}
-
 }

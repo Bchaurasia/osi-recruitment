@@ -195,7 +195,6 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 
 	$scope.updateRequisitionDetails = function(){
 		if ($scope.requisition !== undefined) {
-			alert(angular.toJson($scope.requisition));
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');

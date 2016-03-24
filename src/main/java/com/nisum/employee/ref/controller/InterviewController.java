@@ -99,7 +99,7 @@ public class InterviewController {
 				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail,@RequestParam(value = "jobCode", required = false) String jobCode) {
 		List<InterviewDetails> checkDetails = null;
@@ -113,7 +113,7 @@ public class InterviewController {
 				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/interview", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateIntewrviewDetails(@RequestBody InterviewDetails interviewDetails) {
