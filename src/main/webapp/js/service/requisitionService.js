@@ -7,7 +7,7 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		getRequisitionById : getRequisitionById,
 		updateRequisition : updateRequisition,
 		getAllRequisitions : getAllRequisitions,
-		approveRequisition:approveRequisition
+		approveRequisition: approveRequisition
 		
 	};
 	
