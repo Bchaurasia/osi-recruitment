@@ -1,30 +1,31 @@
 <style>
-
 .nav {
-margin-top: 27px; margin-left:100px;
+	margin-top: 27px;
+	margin-left: 100px;
 }
 
-	/* .navbar-collaspe{ */
-	/* margin-left: -8%; */
-	/* } */
-
-.nav-header li a{
-padding: 9px;
+/* .navbar-collaspe{ */
+/* margin-left: -8%; */
+/* } */
+.nav-header li a {
+	padding: 9px;
 }
 
-.nav-header li.active> a {
-background: #004D87;
-border-bottom: 4px solid #CD5C5C;
-} 
+.nav-header li.active>a {
+	background: #004D87;
+	border-bottom: 4px solid #CD5C5C;
+}
 
-.nav-header li.active> a {
-/* background: red;
- */border-bottom: 4px solid #CD5C5C;
-} 
+.nav-header li.active>a {
+	/* background: red;
+ */
+	border-bottom: 4px solid #CD5C5C;
+}
 
-.nav-header li.active:visited> a{
-background: #004D87;
-border-bottom: 4px solid #CD5C5C;}
+.nav-header li.active:visited>a {
+	background: #004D87;
+	border-bottom: 4px solid #CD5C5C;
+}
 </style>
 
 
@@ -33,27 +34,32 @@ border-bottom: 4px solid #CD5C5C;}
 		<button type="button" class="navbar-toggle"
 			data-target=".navbar-responsive-collaspe" data-toggle="collapse"
 			style="margin-right: 10%; border-radius: 2px soild white;">
-			<span class="sr-only" style="background: white;">Toggle navigation</span> <span class="icon-bar" style="background: white;"></span>
-			<span class="icon-bar" style="background: white;"></span> <span class="icon-bar" style="background: white;"></span>
+			<span class="sr-only" style="background: white;">Toggle
+				navigation</span> <span class="icon-bar" style="background: white;"></span>
+			<span class="icon-bar" style="background: white;"></span> <span
+				class="icon-bar" style="background: white;"></span>
 		</button>
 
 		<span><a href="#main"><img class="navbar-brand"
-				src="static/osi_images/logo.png" alt="OSI Technologies" id="logostyle"
-				title="Nisum Technologies" /></a>
-			<!-- <h1
+				src="static/osi_images/logo.png" alt="OSI Technologies"
+				id="logostyle" title="Nisum Technologies" /></a> <!-- <h1
 				style="font-size: 20px; font-size: 19px;color: white;margin-left: 13px;">Recruitment
 				Portal</h1></span> -->
 	</div>
-	<div class=" navbar-collaspe collaspe navbar-responsive-collaspe" ng-controller="headerCtrl">
+	<div class=" navbar-collaspe collaspe navbar-responsive-collaspe"
+		ng-controller="headerCtrl">
 		<ul class="nav nav-tabs nav-header">
-			<li ui-sref-active="active"><a  ui-sref="main"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
-<!-- 				<i class="glyphicon glyphicon-home"></i> -->
-				<span id="Dashboard">&nbsp;&nbsp;Dashboard</span></a></li>
-			<li ui-sref-active="active"><a  ui-sref="recruitment" data-target="#recruitment"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
-<!-- 				<i class="glyphicon glyphicon-phone-alt"></i> -->
-				<span>&nbsp;&nbsp;Recruitment</span></a></li>		
+			<li ui-sref-active="active"><a ui-sref="main"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+					<!-- 				<i class="glyphicon glyphicon-home"></i> --> <span
+					id="Dashboard">&nbsp;&nbsp;Dashboard</span>
+			</a></li>
+			<li ui-sref-active="active"><a ui-sref="recruitment"
+				data-target="#recruitment"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+				ng-click="alHide()"> <!-- 				<i class="glyphicon glyphicon-phone-alt"></i> -->
+					<span>&nbsp;&nbsp;Recruitment</span></a></li>
+
 			<!-- <li><a  href="#searchPosition"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR')" ng-click="alHide()"><i
 					class="glyphicon glyphicon-list" ></i><span>&nbsp;&nbsp;Position</span></a></li>
@@ -63,26 +69,28 @@ border-bottom: 4px solid #CD5C5C;}
 			<li><a  href="#interviewManagement"
 				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()"><i
 					class="glyphicon glyphicon-phone-alt"></i><span>&nbsp;&nbsp;Interview</span></a></li> -->
-			<li ui-sref-active="active"><a  ui-sref="offer.list"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
-<!-- 				<i class="glyphicon glyphicon-gift"></i> -->
-				<span>&nbsp;&nbsp;Offer</span></a></li>
-			<li ui-sref-active="active"><a  ui-sref="report"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
-<!-- 				<i class="glyphicon glyphicon-list-alt"></i> -->
-				<span>&nbsp;&nbsp;Reports</span></a></li>
-			<li ui-sref-active="active"><a  ui-sref="admin" data-target="#admin"
-				ng-show="hasRole('ROLE_ADMIN')" ng-click="alHide()">
-<!-- 				<i class="glyphicon glyphicon-user"></i> -->
+
+			<li ui-sref-active="active"><a ui-sref="offer.list"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+					<!-- 				<i class="glyphicon glyphicon-gift"></i> --> <span>&nbsp;&nbsp;Offer</span>
+			</a></li>
+			<li ui-sref-active="active"><a ui-sref="report"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+				ng-click="alHide()"> <!-- 				<i class="glyphicon glyphicon-list-alt"></i> -->
+					<span>&nbsp;&nbsp;Reports</span></a></li>
+			<li ui-sref-active="active"><a ui-sref="admin"
+				data-target="#admin" ng-show="hasRole('ROLE_ADMIN')"
+				ng-click="alHide()"> <!-- 				<i class="glyphicon glyphicon-user"></i> -->
+
 					<span>&nbsp;&nbsp;Admin</span></a></li>
 			<li class="dropdown pull-right"><a href=""
 				class="dropdown-toggle" data-toggle="dropdown"
 				style="text-decoration: none; color: white;" ng-click="alHide()">
-				<i class="glyphicon glyphicon-user"></i>
-				&nbsp;{{user.name}}&nbsp;<span
+					<i class="glyphicon glyphicon-user"></i> &nbsp;{{user.name}}&nbsp;<span
 					class="badge badge-default"
 					style="background-color: #FB5557; position: relative; top: -10px;">
-						{{count}} </span><b class="caret"></b></a>
+						{{count}} </span><b class="caret"></b>
+			</a>
 				<ul class="dropdown-menu pull-right">
 					<li><a href="#viewUser" ng-click="alHide()"><i
 							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
