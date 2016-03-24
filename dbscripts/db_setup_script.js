@@ -59,6 +59,7 @@ db.UserInfo.insert({"_id":"asahai@nisum.com",'name':"Abhijeet Sahai","mobileNumb
 db.UserInfo.insert({"_id":"pdokhale@nisum.com",'name':"Pooja Dokhale","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"pooja",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"rgund@nisum.com",'name':"Ruturaj Gund","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"rgund",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.UserInfo.insert({"_id":"dthorat@nisum.com",'name':"Dattatray Thorat","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"rgund",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
+db.UserInfo.insert({"_id":"ajkakade@nisum.com",'name':"Ajinkya Kakade","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"rgund",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 
 
 //User data

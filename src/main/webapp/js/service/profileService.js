@@ -8,6 +8,8 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		updateProfiles : updateProfiles,
 		getProfileById : getProfileById,
 		getProfiles : getProfiles,
+		addSearchProfiles:addSearchProfiles,
+		searchProfile:searchProfile,
 		addProfilesStatus : addProfilesStatus
 	};
 	
@@ -16,26 +18,36 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		 .then(getProlilesData)
 		 .catch(sendErrorprofileMsg);
 	}
-	
+	function searchProfile(searchVal){
+		return $http.get('resources/positionSearch?emailId='+searchVal)
+		.then(getProlilesData)
+		.catch(sendErrorprofileMsg);
+	}
 	function getProfiles(){
-		return $http.get('resources/profile')
+		return $http.get('resources/profileSearch')
 			 .then(getProlilesData)
 			 .catch(sendErrorprofileMsg);
 	}
 	
 	function addProfiles(profile){
-		return $http.post('resources/profile', profile)
+		return $http.post('resources/profileSearch', profile)
 		.then(createProfileSuccess)
 		.catch(sendCreateErrorprofileMsg);
 	}
 	
+	function addSearchProfiles(profile){
+		return $http.post('resources/profileSearch', profile)
+		.then(createProfileSuccess)
+		.catch(sendCreateErrorprofileMsg);
+	}
+
 	function addProfilesStatus(emailId,status){
 		return $http.post('resources/status?emailId='+emailId+'&status='+status)
 		
 	}
 	
 	function updateProfiles(profile){
-		return $http.put('resources/profile', profile)
+		return $http.put('resources/profileSearch', profile)
 		.then(updateProfileSuccess)
 		.catch(sendErrorprofileMsg);
 	}

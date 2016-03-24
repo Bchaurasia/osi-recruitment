@@ -1,5 +1,5 @@
-app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout','positionSearchService',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout,positionSearchService) {
+app.controller('positionSearchCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','positionSearchService','appConstants','$timeout',
+                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,positionSearchService,appConstants,$timeout) {
 
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
@@ -27,8 +27,6 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 			$scope.position = data;
 		})
 	}
-	
-	
 	
 	$scope.range = function (start) {
 		var pageCnt = $scope.pageCount();
@@ -75,9 +73,10 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 		  };
 	
 	
-	$scope.editPosition = function(jobcodeProfile) {
+	$scope.viewPosition = function(jobcodeProfile) {
+		alert('Inside  viewPosition ::'+ jobcodeProfile);
 		jobCodeService1.setjobCode(jobcodeProfile);
-		location.href='#recruitment/viewPosition';
+		location.href='#recruitment/positionView';
 	};
 	
 	$scope.shareContent = function(jobcodeProfile)  {

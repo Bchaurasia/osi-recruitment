@@ -1,4 +1,4 @@
-package com.nisum.employee.ref.controller;
+/*package com.nisum.employee.ref.controller;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class ProfileController {
+public class ProfileSearchController {
 
 	@Autowired
 	private IProfileService profileService;
@@ -131,3 +131,4 @@ public class ProfileController {
 }
 
 
+*/
