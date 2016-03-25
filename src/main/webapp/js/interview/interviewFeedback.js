@@ -18,7 +18,10 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 	$scope.roundList = [];
 	$scope.disableSchedule = true;
 	$scope.hideSubmit = false;
+	$scope.userRole = $rootScope.user.roles;
 	var i = 0;
+	
+	//alert("current user role:"+$rootScope.user.roles);
 	
 	
 	$scope.init = function() {
@@ -37,6 +40,11 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
 	$scope.info = $rootScope.info;
+	(function(){
+		if(_.contains($scope.userRole, "ROLE_INTERVIEWER")){
+			$scope.info.status = ["Hired", "OnHold", "Rejected"];
+		}
+	}())
 	$q.all([profile_url, interview_URL, position_URL]).then(
 			function(response){
 			$scope.profile = response[0].data[0];
