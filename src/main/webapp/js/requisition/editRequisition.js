@@ -21,6 +21,31 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	$scope.reqId = 0;
 	var ran = Math.floor((Math.random()*999)+1);
 	var id = jobCodeService1.getRequisitionId();
+	$scope.requisition= {};
+	$scope.requisition.qualifications = [];
+	
+	$scope.lengthOfQualifications = function() {
+		if($scope.requisition.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+		
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				percent:'70'
+		};
+		$scope.requisition.qualifications.push(addQualification);
+	};
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.requisition.qualifications.length - 1 == 0)) {
+			$scope.requisition.qualifications.splice(index,1);
+		} 
+	}
 	
 	$scope.skills = function(){
 		$scope.hideSkills = false;

@@ -74,11 +74,6 @@
 				{{requisition.targetDate || "dd-mm-yyyy"}}</a>
 				<span class="validation-error" ng-show="targetErr"><br>Target date should not be before Requisition date</span>
 		</div>
-		<!-- <div class="col-md-3">
-			<input type="date" ng-model="targetDate" min="{{today | date : 'yyyy-MM-dd' }}" ng-change="dateChange(targetDate)"
-				id="targetDate" required>
-			<span class="validation-error" ng-show="targetErr">Target date should not be before Requisition Date.</span>
-		</div> -->
 	</div>
 </div>
 <div class="row" align="left">
@@ -211,7 +206,14 @@
 		<div class="col-md-3">
 			<a href="#" editable-select="requisition.qualification"
 				e-ng-options="o as o for o in qualification" e-required> {{
-				requisition.qualification}}</a>
+				requisition.qualification||"--"}}</a>
+			<!-- <select placeholder="Select Qualification"
+									ng-model="requisition.qualification" id="qualification"
+									ng-options="o as o for o in qualification | orderBy:'toString()'"
+									class="form-control input-sm">
+									<option value='' disabled="disabled">Select
+										Qualification</option>
+			</select> -->
 		</div>
 	</div>
 
@@ -220,13 +222,15 @@
 			<label class="lbl"><i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:<b
 				class="mandatory">*</b></label>
 		</div>
-		<div class="col-md-3">
-			<a href="#" editable-text="requisition.percent" onaftersave="validatePercentage($data)" e-required>
-				{{requisition.percent}}% </a>
-			<br>	
-			&nbsp;&nbsp;<span class="validation-error" ng-show="percentageErr">Percentage should be between 1-99!</span>	
+		<div class="col-md-2">
+			<input ng-model="requisition.percent" type="range" min="1" max="100" required>
+				<span> {{requisition.percent}}</span>
 		</div>
-		
+		<div class="col-md-1">
+						<span class="glyphicon glyphicon-remove" ng-show="lengthOfQualifications()" style="cursor: pointer;"
+								ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span id="addButtonColumn" ng-show="$last" class="glyphicon glyphicon-plus" ng-click="addColumnCriteria()"> </span>
+		</div>
 	</div>
 </div>
 <div class="row" align="left">

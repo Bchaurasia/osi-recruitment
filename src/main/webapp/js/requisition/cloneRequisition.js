@@ -22,6 +22,37 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.today = new Date();
 	$scope.disabled = false;
 	
+	$scope.requisition= {};
+	$scope.requisition.qualifications = [];
+	
+	$scope.lengthOfQualifications = function() {
+		if($scope.requisition.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	/*
+	$scope.qualifications={
+			qualification:'',
+			percent:''
+		};*/
+	
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				percent:'70'
+		};
+		$scope.requisition.qualifications.push(addQualification);
+	};
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.requisition.qualifications.length - 1 == 0)) {
+			$scope.requisition.qualifications.splice(index,1);
+		} 
+	}
+	
 	$scope.skills = function(){
 		$scope.hideSkills = false;
 		$scope.dis2 = true;
