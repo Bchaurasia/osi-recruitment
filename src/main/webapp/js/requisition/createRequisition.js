@@ -27,7 +27,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.clientList=[];
 	$scope.approvals = [];
 	$scope.hr = [];
-	$scope.qualifications = [];
+	//$scope.qualifications = [];
 	$scope.requisition ={};
 	$scope.approver={};
 	$scope.approvalEmailId = "";
@@ -47,13 +47,45 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.reqId=0;
 	$scope.requisition.noOfPositions = "";
 	$scope.requisition.qualifications = [];
-	$scope.requisition.qualifications.qualification = "";
-	$scope.requisition.qualifications.percent = "";
+	//$scope.requisition.qualifications.qualification = "";
+	//$scope.requisition.qualifications.percent = "";
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.skill=[];
 	$scope.today = new Date();
-	var ran = Math.floor((Math.random()*999)+1);
+	//var ran = Math.floor((Math.random()*999)+1);
+	//$scope.requisition= {};
+	//$scope.requisition.qualifications = [];
+	$scope.qualification = $scope.info.qualification;
+	
+	$scope.lengthOfQualifications = function() {
+		if($scope.requisition.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	
+	$scope.requisition.qualifications=[{
+			qualification:'',
+			percent:'70'
+		}];
+	
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				percent:'70'
+		};
+		$scope.requisition.qualifications.push(addQualification);
+		checkForEnableCreateButton();
+	};
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.requisition.qualifications.length - 1 == 0)) {
+			$scope.requisition.qualifications.splice(index,1);
+		} 
+	}
 	
 	$scope.comment = function(){
 		$scope.commentBox = true;
@@ -242,23 +274,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.requisition.maxExpYear = $scope.deg.maxExpYear;
 		}
 	
-	$scope.saveQualification = function(index) {
-		// $scope.hideQualification = false;
-		if($scope.qualification.qualification != null && $scope.qualification.qualification != "" && $scope.qualification.percent != null && $scope.qualification.percent != ""){
-			$scope.hideQualification = false;
-			$scope.qualifications.push({'qualification':$scope.qualification.qualification,"percent":$scope.qualification.percent});
-			$scope.dropdownQualification.splice(index,1);
-			$scope.qualification.qualification = "";
-			$scope.qualification.percent = "";
-		}
-		checkForEnableCreateButton();
-	}
-	
-	$scope.deleteQualification = function(index){
-		$scope.dropdownQualification.push($scope.qualifications[index].qualification);
-		$scope.qualifications.splice(index,1);
-		checkForEnableCreateButton();
-	}
 	
 	userService.getUsers()
 	.then(function(data){
@@ -290,21 +305,13 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$log.error(data);
 	})
 	
-//	//Sets Requisition Id in Ascending.
-//	$scope.setRequisitionId = function(){
-//		var id = $scope.reqId + 1;
-//		return "REQ_" + id;
-//    }
-	
 	$scope.submit = function(){
 		if ($scope.requisition !== undefined) {
 			
 			$scope.requisition.requisitionManager.name = $scope.role.name;
 			$scope.requisition.requisitionManager.emailId = $scope.role.emailId;
-			//$scope.requisition.requisitionId=$scope.setRequisitionId();
 			var date1 = new Date($scope.targetDate);
 			$scope.requisition.targetDate = date1.getDate()+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear();
-			$scope.requisition.qualifications = $scope.qualifications;
 			
 			requisitionService.createRequisition($scope.requisition)
 			.then(successMsg)
@@ -322,7 +329,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	}
 	
 	function checkForEnableCreateButton(){
-		if($scope.qualifications == "" || $scope.requisition.approval1.name == ""){
+		if($scope.requisition.qualifications == "" || $scope.requisition.approval1.name == ""){
 			$scope.disableCreateBtn  =  true;
 		}else{
 			$scope.disableCreateBtn  =  false;

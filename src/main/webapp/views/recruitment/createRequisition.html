@@ -222,68 +222,43 @@
 					&nbsp;&nbsp;<font style="font-style: italic;"><span
 						class="label label-primary lbl">Educational Details:</span></font>
 				</div></div>
-						<div class="row" ng-repeat="o in qualifications">
-						<div class="control-group">
-							<div class="col-md-1"></div>
-							<div class="col-md-2">
-								<label class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Qualification
-									: <b  ng-if="!checkForQualification()" class="mandatory">*</b>
-								</label>
-							</div>
-							<div class="col-md-3" align="left">{{o.qualification}}</div>
-						</div>
-
-						<div class="control-group">
-							<div class="col-md-2">
-								<label class="lbl"> <i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:
-								<b  ng-if="!checkForQualification()" class="mandatory">*</b>
-								</label>
-							</div>
-							<div class="col-md-3" align="left">{{o.percent}}%</div>
-							<div class="col-md-1">
-								<span class="glyphicon glyphicon-remove"
-									style="cursor: pointer;" ng-click="deleteQualification($index)"></span>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="control-group">
-							<div class="col-md-1"></div>
-							<div class="col-md-2">
-								<label class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Qualification
-									:<b  ng-if="checkForQualification()" class="mandatory">*</b>
-								</label>
-							</div>
-							<div class="col-md-3">
-								<select name="qualification" placeholder="Select Qualification"
-									ng-model="qualification.qualification" id="qualification"
-									ng-options="o as o for o in info.qualification | orderBy:'toString()'"
+	<div class="row" align="left"
+	ng-repeat=" requisition in requisition.qualifications">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<label class="lbl" for="designation"><i
+				class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Qualification:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<select placeholder="Select Qualification"
+									ng-model="requisition.qualification" id="qualification"
+									ng-options="o as o for o in qualification | orderBy:'toString()'"
 									class="form-control input-sm">
 									<option value='' disabled="disabled">Select
 										Qualification</option>
-								</select>
-							</div>
-						</div>
+			</select>
+		</div>
+	</div>
 
-						<div class="control-group">
-							<div class="col-md-2">
-								<label class="lbl"> <i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:
-								<b ng-if="checkForQualification()" class="mandatory">*</b>
-								</label>
-							</div>
-							<div class="col-md-3">
-								<input aa-field="numberOfPositions"
-									ng-model="qualification.percent" type="range" min="1" max="100">
-								<span> {{qualification.percent}}</span>
-							</div>
-							<div class="col-md-1">
-								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
-									ng-click="saveQualification($index)"></span>
-							</div>
-						</div>
-					</div>
-					
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl"><i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-2">
+			<input ng-model="requisition.percent" type="range" min="1" max="100" required>
+				<span> {{requisition.percent}}</span>
+		</div>
+		<div class="col-md-1">
+						<span class="glyphicon glyphicon-remove" ng-show="lengthOfQualifications()" style="cursor: pointer;"
+								ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span id="addButtonColumn" ng-show="$last" class="glyphicon glyphicon-plus" ng-click="addColumnCriteria()"> </span>
+		</div>
+	</div>
+</div>
+										
 					<div class="row" align="left">
 				<div class="col-md-4 lbl">
 					&nbsp;&nbsp;<font style="font-style: italic;"><span
