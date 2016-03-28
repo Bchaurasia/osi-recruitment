@@ -152,15 +152,14 @@
 		<div class="control-group">
 			<div class="col-md-1"></div>
 			<div class="col-md-2">
-				<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
-					HR :<b class="mandatory">*</b>
-				</label>
+				<label class="lbl" for="HiringManager:"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;HiringManager:</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="position.hiringManager" 
-					e-ng-options="o.name for o in hiringManager" e-required>
-					{{ position.hiringManager.name	|| "--" }}</a>
-					
+				<a href="#" editable-select="position.hiringManager.name"
+					e-ng-options="o as o for o in managers" e-required> {{
+					position.hiringManager.name}} </a>
+
 			</div>
 		</div>
 

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.PositionAggregate;
+import com.nisum.employee.ref.search.PositionIndexRepository;
+import com.nisum.employee.ref.search.PositionSearchService;
 import com.nisum.employee.ref.service.PositionService;
 
 
@@ -27,6 +29,12 @@ public class PositionController {
 
 	@Autowired
 	private PositionService  positionService;
+	
+	@Autowired
+	private PositionIndexRepository positionIndexRepository;
+	
+	@Autowired
+	private PositionSearchService positionSearchService;
 	
 	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/position", method = RequestMethod.POST)
@@ -41,7 +49,15 @@ public class PositionController {
 	@RequestMapping(value="/position", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updatePosition(@RequestBody Position position) {
-		positionService.updatePosition(position);
+		if (positionIndexRepository.exists(position.getJobcode())) {
+			positionIndexRepository.delete(position.getJobcode());
+			positionIndexRepository.save(position);
+			positionService.updatePosition(position);
+		} else {
+			positionIndexRepository.save(position);
+			positionService.updatePosition(position);
+			
+		}
 		String jsonObj="{\"msg\":\"position successfully Updated\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.ACCEPTED);
 	}
@@ -50,12 +66,15 @@ public class PositionController {
 	@RequestMapping(value = "/position", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionByClient(@RequestParam(value = "client", required = false) String client,
 			@RequestParam(value = "designation", required = false) String designation
-			) {
+			) throws Exception {
 		List<Position> positionsDetails;
-		if(!StringUtils.isEmpty(designation)){
-			positionsDetails = positionService.retrievePositionsbasedOnDesignation(designation);
+		if(!StringUtils.isEmpty(client)){
+			positionsDetails = positionSearchService.getPostionByName(client);
 		}else{
-			positionsDetails = (!StringUtils.isEmpty(client)) ? positionService.retrievePositionByClient(client) : positionService.retrieveAllPositions();
+			positionsDetails = positionSearchService.getAllPostions();
+		}
+		if(!StringUtils.isEmpty(designation)){
+			positionsDetails = positionSearchService.getPostionByDesignation(designation);
 		}
 		
 		return (null == positionsDetails) ? new ResponseEntity<String>( "Positions not found", HttpStatus.NOT_FOUND)
