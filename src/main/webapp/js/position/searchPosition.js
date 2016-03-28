@@ -1,5 +1,5 @@
-app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout','positionSearchService',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout,positionSearchService) {
+app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout',
+                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout) {
 
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
@@ -21,14 +21,6 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 	$scope.changePage = function(){
 		$scope.currentPage = 0;
 	}
-	
-	$scope.searchPosition = function(searchVal){
-		positionSearchService.searchPosition(searchVal).then(function(data) {
-			$scope.position = data;
-		})
-	}
-	
-	
 	
 	$scope.range = function (start) {
 		var pageCnt = $scope.pageCount();

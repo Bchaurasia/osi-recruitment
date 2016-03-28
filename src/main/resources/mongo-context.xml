@@ -24,7 +24,7 @@
         <property name="typeMapper" ref="defaultMongoTypeMapper"/>
     </bean>
     
-    <mongo:mapping-converter id="converter" base-package="com.nisum.employee.ref.domain"/>
+    <mongo:mapping-converter id="converter"/>
     
     <bean name="gridFsTemplate"
 		class="org.springframework.data.mongodb.gridfs.GridFsTemplate">

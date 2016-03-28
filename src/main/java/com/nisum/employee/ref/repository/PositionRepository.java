@@ -22,7 +22,6 @@ import org.springframework.stereotype.Repository;
 
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.PositionAggregate;
-import com.nisum.employee.ref.search.PositionIndexRepository;
 
 
 @Repository
@@ -37,15 +36,11 @@ public class PositionRepository {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	@Autowired
-	private PositionIndexRepository positionIndexRepository;
-	
 	public void save(Position position) {
 		mongoOperations.save(position);
 	}
 
 	public void preparePosition(Position position) {
-		positionIndexRepository.save(position);
 		mongoOperations.save(position);
 	}
 	

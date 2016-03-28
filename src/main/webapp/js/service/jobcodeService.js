@@ -8,7 +8,6 @@ angular.module('erApp')
 			var designation;
 			var message;
 			var cls;
-			var userName;
 			var requisitionId;
 			return {
 		        setjobCode: function(code) {
@@ -24,12 +23,7 @@ angular.module('erApp')
 		        getprofileUserId: function() {
 		        	return profileUserId;
 		        },
-		        setuserName: function(code) {
-		        	userName=code;
-		        },
-		        getuserName: function() {
-		        	return userName;
-		        },
+		        
 		        setinterviewRound: function(code) {
 		       	 interviewRound=code;
 		        },

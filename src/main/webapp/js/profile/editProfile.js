@@ -63,7 +63,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
 	$scope.init();
 	
 	var interview_URL = 'resources/getInterview?interviewerId='+$scope.emailId+"_"+$scope.jobCode;
-	var URL = 'resources/profileSearch?emailId='+$scope.emailId;
+	var URL = 'resources/profile?emailId='+$scope.emailId;
 	var InterviewDetails_URL = 'resources/getInterviewByParam?candiateId='+$scope.emailId;
 	
 	$http.get('resources/user').success(function(data, status, headers, config) {

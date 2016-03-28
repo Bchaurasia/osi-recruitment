@@ -6,7 +6,7 @@ angular.module('erApp')
 	                       function($scope, $http,$anchorScroll,$rootScope,$filter,$location,$timeout,appConstants,infoService,userService,sharedDataService) {
 	$scope.user = {};
 	$scope.info ={};
-	 $scope.user.roles=[];
+	
 	$scope.title = appConstants.APP_TITLE;
 	$scope.header = appConstants.APP_HEARER;
 	$scope.copy_right = appConstants.APP_COPY_RIGHT;

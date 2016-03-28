@@ -52,7 +52,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		})
 	}
 	 $scope.submit = function() {
-		
 		 if ($scope.CreateCandidate.$valid) {
 			 $scope.submitted = false;
 		    	var dt = new Date();
@@ -106,7 +105,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    			$scope.InterviewDetails.clientName = pos.client;
 		    		}
 		    	})
-		    	 console.log("Profile data->: "+angular.toJson($scope.candidate));
+		    	
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);
 		    		interviewService.createInterview($scope.InterviewDetails);
