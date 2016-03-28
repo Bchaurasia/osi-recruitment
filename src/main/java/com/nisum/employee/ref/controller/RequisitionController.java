@@ -50,9 +50,9 @@ public class RequisitionController {
 		}
 		
 		requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
-		String jsonObj="Requisition created successfully and send notification to "+ requisitionApproverDetails.getApproverName()+".";
-		String jsonObj1="{\"msg\":\""+ jsonObj+ "\"}";
-		return new ResponseEntity<String>(jsonObj1, HttpStatus.OK);
+		String message="Requisition created successfully and notification sent to "+ requisitionApproverDetails.getApproverName()+".";
+		String jsonObj="{\"msg\":\""+ message+ "\"}";
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 		
 	}
 
@@ -95,8 +95,9 @@ public class RequisitionController {
 			setRequisitionApprovalDetails(requisitionApproverDetails, requisition.getApproval2(),requisition.getRequisitionId());
 		}
 		requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
-		String jsonObj="{\"msg\":\"Requisition successfully Updated and send notification to \"}" + requisitionApproverDetails.getApproverName() + "." ;
-		return new ResponseEntity<String>(jsonObj, HttpStatus.ACCEPTED);
+		String message="Requisition successfully Updated and notification sent to "+ requisitionApproverDetails.getApproverName()+".";
+		String jsonObj="{\"msg\":\""+ message+ "\"}";
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})

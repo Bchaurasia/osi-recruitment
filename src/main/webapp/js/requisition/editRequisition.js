@@ -21,6 +21,31 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	$scope.reqId = 0;
 	var ran = Math.floor((Math.random()*999)+1);
 	var id = jobCodeService1.getRequisitionId();
+	$scope.requisition= {};
+	$scope.requisition.qualifications = [];
+	
+	$scope.lengthOfQualifications = function() {
+		if($scope.requisition.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+		
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				percent:'70'
+		};
+		$scope.requisition.qualifications.push(addQualification);
+	};
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.requisition.qualifications.length - 1 == 0)) {
+			$scope.requisition.qualifications.splice(index,1);
+		} 
+	}
 	
 	$scope.skills = function(){
 		$scope.hideSkills = false;
@@ -44,7 +69,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		$scope.skillErr = false;
 	}
 	$scope.validateRequisition = function() {
-		if($scope.requisition.skillType=== undefined){
+		if($scope.requisition === undefined || $scope.requisition.skillType=== undefined){
 			return true;
 		}
 		else{
@@ -146,7 +171,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		if (data>0 && data<=99) {
 			return true;
 		} else
-			return "No. Positions should be between 1-99!";
+			return "No. of Positions should be between 1-99!";
 	};
 	
 	
@@ -205,33 +230,6 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		}
 	}
 	
-	$scope.cloneRequisitionDetails = function(){
-		if ($scope.requisition !== undefined) {
-			
-			delete $scope.requisition.createdDate;
-			delete $scope.requisition.createdBy;
-			delete $scope.requisition.lastModifiedDate;
-			delete $scope.requisition.lastModifiedBy;
-			delete $scope.requisition.version;
-		//	$scope.requisition.requisitionId=$scope.setRequisitionId();
-			$scope.requisition.requisitionDate.toString();
-			 requisitionService.createRequisition($scope.requisition)
-				.then(successMsg)
-				.catch(errorMsg);
-				
-				function successMsg(msg){
-					$scope.sendNotification(msg,'recruitment/searchRequisition');
-				}
-				
-				function errorMsg(msg){
-					$scope.message=msg;
-					$scope.cls=appConstants.ERROR_CLASS;
-				}
-			
-		}
-	}
-	
-	
 	$scope.getData = function() {
         $scope.deg  =_.find($scope.designations,function(obj){
               return obj.designation == $scope.requisition.position; 
@@ -247,12 +245,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	}).error(function(data, status, headers, config) {
 		$log.error(data);
 	});
-	
-//	$scope.setRequisitionId = function(){
-//		var id = $scope.reqId + 1;
-//		return "REQ_" + id;
-//    }
-	
+		
 	positionService.getPosition().then(function(data){
 		 $scope.position=data;
 		 $scope.posId = $scope.position.length;

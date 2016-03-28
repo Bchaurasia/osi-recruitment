@@ -18,30 +18,33 @@
 			</a>
 		</div>
 	</div>
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl" for="experience"><i
-				class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">
-			<div class="col-md-3">Min:</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="requisition.minExpYear" 
-					e-ng-options="o as o for o in info.expYears" onaftersave="validateMinExpYear(requisition.minExpYear, requisition.maxExpYear)" e-required>
-				{{requisition.minExpYear}}
-				</a>
-			</div>
-			<div class="col-md-3">Max:</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="requisition.maxExpYear"
-					e-ng-options="o as o for o in info.expYears" e-required>
-				{{requisition.maxExpYear}}
-				</a>
-			</div>
-			<span class="validation-error" ng-show="minExpYearErr">Min Exp cannot be greater than Max Exp</span>
-		</div>
-	</div>
+	
+	<div class="control-group form-group">
+
+						<div class="col-md-2">
+							<label class="lbl" for="experience"> <i
+								class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Exp. Required:<b
+								class="mandatory">*</b>
+							</label>
+						</div>
+						<div class="col-md-1 col-xs-4">
+							<input id="minExpYear" type="range" name="minExpYear"
+								ng-model="requisition.minExpYear" min="1" max="15" required
+								ng-change="min(requisition.minExpYear)" /> <span class="value">Min:{{requisition.minExpYear}}</span>
+						</div>
+						<div class="col-md-1 col-xs-4">
+							<input id="maxExpYear" type="range" name="maxExpYear"
+								ng-model="requisition.maxExpYear" min="1" max="15" required
+								required ng-change="max(requisition.maxExpYear)" /> <span
+								class="value">Max:{{requisition.maxExpYear}}</span>
+						</div>
+						<!-- <div range-slider min="0" max="15" model-min="requisition.minExpYear" model-max="requisition.maxExpYear"></div> -->
+						<span class="validation-error" ng-show="minErr"> Min Exp
+							should not be greater than Max Exp.</span> <span
+							class="validation-error" ng-show="maxErr"> Max Exp should
+							not be less than Min Exp.</span>
+					</div>
+	
 	</div>
 
 <div class="row" align="left">
@@ -53,11 +56,11 @@
 				Date:<b class="mandatory">*</b></label>
 		</div>
 		<div class="col-md-3">
-			<a href="#" editable-date="requisition.requisitionDate" onaftersave="requisitionDateChange(requisition.requisitionDate, requisition.targetDate)" 
+			<a href="#" editable-date="requisition.requisitionDate" 
+			onaftersave="validateRequisitionDate(requisition.requisitionDate)"
 				e-min="{{today | date : 'yyyy-MM-dd' }}" e-required>
-			{{requisition.requisitionDate}}
-			</a>
-			<span class="validation-error" ng-show="reqErr">Requisition date should not be after Target Date.</span>
+			{{requisition.requisitionDate || "dd-mm-yyyy"}}</a>
+			<span class="validation-error" ng-show="reqErr"><br>Requisition date should be before Target date</span>
 		</div>
 	</div>
 	<div class="control-group">
@@ -65,15 +68,11 @@
 			<label class="lbl"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Target
 				Date:<b class="mandatory">*</b></label>
 		</div>
-		<!--  div class="col-md-3">
+		 <div class="col-md-3">
 			<a href="#" editable-date="requisition.targetDate"
-				onaftersave="dateChange(requisition.targetDate)" e-min="{{today | date : 'yyyy-MM-dd' }}" e-required>
-				{{requisition.targetDate}}</a>
-		</div -->
-		<div class="col-md-3">
-			<input type="date" ng-model="targetDate" min="{{today | date : 'yyyy-MM-dd' }}" ng-change="dateChange(targetDate)"
-				id="targetDate" required>
-			<span class="validation-error" ng-show="targetErr">Target date should not be before Requisition Date.</span>
+				onaftersave="validateTargetDate(requisition.targetDate)" e-min="{{today | date : 'yyyy-MM-dd' }}"  e-required>
+				{{requisition.targetDate || "dd-mm-yyyy"}}</a>
+				<span class="validation-error" ng-show="targetErr"><br>Target date should not be before Requisition date</span>
 		</div>
 	</div>
 </div>
@@ -130,8 +129,7 @@
 			<a href="#" editable-text="requisition.noOfPositions"
 				onbeforesave="validateNoOfPosition($data)" e-required>
 				{{requisition.noOfPositions}} </a>
-			<br>	
-			&nbsp;&nbsp;&nbsp;&nbsp;<span class="validation-error" ng-show="positionErr">No. Positions should be between 1-99!</span>	
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="validation-error" ng-show="positionErr">No. of Positions should be between 1-99!</span>	
 		</div>
 	</div>
 </div>
@@ -164,7 +162,32 @@
 			atleast one Primary Skill.</span>
 	</div>
 </div>
-
+<div class="row">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2" align="left">
+			<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Job
+				Description :</label>
+		</div>
+		<div class="col-md-8" align="left">
+			<a href="#" editable-textarea="requisition.jobDescription" cols="50"
+				rows="4"> {{requisition.jobDescription || "--" }}</a>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="control-group">
+		<div class="col-md-1"></div>
+		<div class="col-md-2" align="left">
+			<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Requisition
+				Comment :</label>
+		</div>
+		<div class="col-md-8" align="left">
+			<a href="#" editable-textarea="requisition.comment" cols="50"
+				rows="4"> {{requisition.comment || "--" }}</a>
+		</div>
+	</div>
+</div>
 <div class="row" align="left">
 				<div class="col-md-4 lbl">
 					&nbsp;&nbsp;<font style="font-style: italic;"><span
@@ -183,7 +206,14 @@
 		<div class="col-md-3">
 			<a href="#" editable-select="requisition.qualification"
 				e-ng-options="o as o for o in qualification" e-required> {{
-				requisition.qualification}}</a>
+				requisition.qualification||"--"}}</a>
+			<!-- <select placeholder="Select Qualification"
+									ng-model="requisition.qualification" id="qualification"
+									ng-options="o as o for o in qualification | orderBy:'toString()'"
+									class="form-control input-sm">
+									<option value='' disabled="disabled">Select
+										Qualification</option>
+			</select> -->
 		</div>
 	</div>
 
@@ -192,13 +222,15 @@
 			<label class="lbl"><i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:<b
 				class="mandatory">*</b></label>
 		</div>
-		<div class="col-md-3">
-			<a href="#" editable-text="requisition.percent" onaftersave="validatePercentage($data)" e-required>
-				{{requisition.percent}}% </a>
-			<br>	
-			&nbsp;&nbsp;<span class="validation-error" ng-show="percentageErr">Percentage should be between 1-99!</span>	
+		<div class="col-md-2">
+			<input ng-model="requisition.percent" type="range" min="1" max="100" required>
+				<span> {{requisition.percent}}</span>
 		</div>
-		
+		<div class="col-md-1">
+						<span class="glyphicon glyphicon-remove" ng-show="lengthOfQualifications()" style="cursor: pointer;"
+								ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span id="addButtonColumn" ng-show="$last" class="glyphicon glyphicon-plus" ng-click="addColumnCriteria()"> </span>
+		</div>
 	</div>
 </div>
 <div class="row" align="left">
@@ -234,21 +266,6 @@
 		</div>
 	</div>
 </div>
-
-<div class="row">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2" align="left">
-			<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Comment
-				:</label>
-		</div>
-		<div class="col-md-8" align="left">
-		<a href="#" editable-textarea="requisition.comment" cols="50" rows="4" >
-				{{requisition.comment || "--" }}</a>
-		</div>
-	</div>
-</div>
-
 </accordion-group> </accordion>
 
 <div align="center">
