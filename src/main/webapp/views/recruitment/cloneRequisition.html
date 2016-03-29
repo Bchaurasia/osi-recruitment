@@ -226,11 +226,11 @@
 			<input ng-model="requisition.percent" type="range" min="1" max="100" required>
 				<span> {{requisition.percent}}</span>
 		</div>
-		<div class="col-md-1">
-						<span class="glyphicon glyphicon-remove" ng-show="lengthOfQualifications()" style="cursor: pointer;"
-								ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<span id="addButtonColumn" ng-show="$last" class="glyphicon glyphicon-plus" ng-click="addColumnCriteria()"> </span>
-		</div>
+		<div class="col-md-1"><div class="row">
+			&nbsp;&nbsp;<button class="glyphicon glyphicon-remove" ng-show="lengthOfQualifications()" style="cursor: pointer;"
+								ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button id="addButtonColumn" ng-disabled="checkDisability(requisition.qualification)" ng-show="$last" class="glyphicon glyphicon-plus" ng-click="addColumnCriteria()"></button>
+		 </div>
 	</div>
 </div>
 <div class="row" align="left">
@@ -269,14 +269,11 @@
 </accordion-group> </accordion>
 
 <div align="center">
-	<a class="btn btn-info active" ng-disabled="disableCloneBtn" ng-click="cloneRequisitionDetails()">
+	<button class="btn btn-info active" ng-disabled="validateClone() || disableCloneBtn || disableCloneBtnMin || disableCloneBtnMax || disableCloneBtnPer || disableCloneBtnPosition" ng-click="cloneRequisitionDetails()">
 		<span class="glyphicon glyphicon-ok"></span> Clone
-	</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a ui-sref="recruitment.searchRequisition"
+	</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button ui-sref="recruitment.searchRequisition"
 		class="btn btn-info active"> <span
 		class="glyphicon glyphicon-remove"></span> Cancel
-	</a>
+	</button>
 </div>
-<br>
-<br>
-<br>

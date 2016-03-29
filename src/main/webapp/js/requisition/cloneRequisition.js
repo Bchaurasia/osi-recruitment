@@ -3,11 +3,15 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.hideSkills = true;
 	$scope.skillErr = false;
 	$scope.minExpYearErr = false;
-	$scope.disableCloneBtn = false;
 	$scope.positionErr = false;
 	$scope.percentageErr = false;
 	$scope.reqErr=false;
 	$scope.targetErr = false;
+	$scope.disableCloneBtn = true;
+	$scope.disableCloneBtnPosition = false;
+	$scope.disableCloneBtnPer = false;
+	$scope.disableCloneBtnMin = false;
+	$scope.disableCloneBtnMax = false;
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.qualification = $scope.info.qualification;
@@ -17,7 +21,6 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.approvals=[];
 	$scope.requisitionManager=[];
 	$scope.client =[];
-	var ran = Math.floor((Math.random()*999)+1);
 	var id = jobCodeService1.getRequisitionId();
 	$scope.today = new Date();
 	$scope.disabled = false;
@@ -33,12 +36,6 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 			return true;
 		}
 	};
-	/*
-	$scope.qualifications={
-			qualification:'',
-			percent:''
-		};*/
-	
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -72,10 +69,27 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		
 	}
 	
+	$scope.checkDisability = function(qualification){
+				if(qualification){
+					$scope.disableCloneBtn  =  false;
+					return false;
+				}
+				else{
+					$scope.disableCloneBtn  =  true;
+					return true;
+				}
+	}
 	
 	requisitionService.getRequisitionById(id).then(function(data){
     	$scope.requisition =data;
     	$scope.requisition.targetDate = "";
+    	$scope.requisition.approval1.comment="";
+       	$scope.requisition.approval1.approved=false;
+   
+       	if(null !=$scope.requisition.approval2){
+    	    		$scope.requisition.approval2.comment="";
+    	        	$scope.requisition.approval2.approved=false;
+    	    	}
     	var date = new Date();
     	$scope.requisition.requisitionDate = date.getDate()+'-' + (date.getMonth()+1) + '-'+date.getFullYear();
     	$scope.requisitionDate = angular.copy($scope.requisition.requisitionDate);
@@ -134,11 +148,9 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		if($scope.targetDate < $scope.requisitionDate)
 			{
 			$scope.targetErr = true;
-			 $scope.disabled = true; 
 			 $scope.requisition.targetDate = "";
 			}
 		else{
-			$scope.targetErr = false;
 			$scope.requisition.targetDate = targetDate.getDate()+'-' + (targetDate.getMonth()+1) + '-'+targetDate.getFullYear();
 		}
 	}
@@ -148,8 +160,7 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 			if($scope.requisitionDate > $scope.targetDate)
 				{
 				$scope.reqErr = true;
-				 $scope.disabled1 = true; 
-				 $scope.requisition.requisitionDate = "";
+				$scope.requisition.requisitionDate = "";
 				}
 			else{
 				$scope.reqErr = false;
@@ -212,11 +223,11 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		var Value2 = parseInt($scope.requisition.maxExpYear);
 		if(Value1 > Value2){
 			$scope.minErr = true;
-			$scope.disabled1 = true;
+			$scope.disableCloneBtnMin = true;
 		}
 		else{
 			$scope.minErr = false;
-			$scope.disabled1 = false;
+			$scope.disableCloneBtnMin = false;
 		}
 	}
 	
@@ -228,11 +239,11 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		
 		if(Value1 < Value2){
 			$scope.maxErr = true;
-			$scope.disabled = true;
+			$scope.disableCloneBtnMax = true;
 		}
 		else{
 			$scope.maxErr = false;
-			$scope.disabled = false;
+			$scope.disableCloneBtnMax = false;
 		}
 	}
 	
@@ -240,10 +251,11 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		var data1 = parseInt(data);
 		if(data1<=0 || data1 > 99) {
 			$scope.positionErr = true;
-			$scope.disableCloneBtn = true;
+			$scope.disableCloneBtnPosition = true;
+		
 		}else{
 			$scope.positionErr = false;
-			$scope.disableCloneBtn = false;
+			$scope.disableCloneBtnPosition = false;
 		}
 	};
 	
@@ -252,11 +264,19 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		var data1 = parseInt(data);
 		if(data1===0 || data1 > 99) {
 			$scope.percentageErr = true;
-			$scope.disableCloneBtn = true;
+			$scope.disableCloneBtnPer = true;
 		}else{
 			$scope.percentageErr = false;
-			$scope.disableCloneBtn = false;
+			$scope.disableCloneBtnPer = false;
 		}
 	};
 	
+	$scope.validateClone = function(data) {
+			if($scope.requisition.requisitionDate==="" || $scope.requisition.targetDate==="" ){
+					return true;
+				}
+				else{
+					return false;
+				}
+	}
 }]);

@@ -5,6 +5,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	$scope.dateErr = false;
 	$scope.showApprovalBtn = false;
 	$scope.showApprovedBtn = false;
+	$scope.showApproveBtn = false;
 	$scope.showUpdateBtn = true;
 	$scope.disableUpdateBtn = false;
 	$scope.info = $rootScope.info;
@@ -19,7 +20,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	$scope.client =[];
 	$scope.position = {};
 	$scope.reqId = 0;
-	var ran = Math.floor((Math.random()*999)+1);
+	//var ran = Math.floor((Math.random()*999)+1);
 	var id = jobCodeService1.getRequisitionId();
 	$scope.requisition= {};
 	$scope.requisition.qualifications = [];
@@ -40,6 +41,18 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		};
 		$scope.requisition.qualifications.push(addQualification);
 	};
+	$scope.checkDisability = function(qualification){
+				if(qualification){
+					$scope.disableUpdateBtn  =  false;
+					$scope.showApproveBtn = false;
+					return false;
+				}
+				else{
+					$scope.disableUpdateBtn  =  true;
+					$scope.showApproveBtn = true;
+					return true;
+				}
+			}
 	
 	$scope.deleteQualification = function(index){
 		if (!($scope.requisition.qualifications.length - 1 == 0)) {

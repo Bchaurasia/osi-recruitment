@@ -27,7 +27,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.clientList=[];
 	$scope.approvals = [];
 	$scope.hr = [];
-	//$scope.qualifications = [];
+	// $scope.qualifications = [];
 	$scope.requisition ={};
 	$scope.approver={};
 	$scope.approvalEmailId = "";
@@ -47,15 +47,15 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.reqId=0;
 	$scope.requisition.noOfPositions = "";
 	$scope.requisition.qualifications = [];
-	//$scope.requisition.qualifications.qualification = "";
-	//$scope.requisition.qualifications.percent = "";
+	// $scope.requisition.qualifications.qualification = "";
+	// $scope.requisition.qualifications.percent = "";
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.skill=[];
 	$scope.today = new Date();
-	//var ran = Math.floor((Math.random()*999)+1);
-	//$scope.requisition= {};
-	//$scope.requisition.qualifications = [];
+	// var ran = Math.floor((Math.random()*999)+1);
+	// $scope.requisition= {};
+	// $scope.requisition.qualifications = [];
 	$scope.qualification = $scope.info.qualification;
 	
 	$scope.lengthOfQualifications = function() {
@@ -80,6 +80,17 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$scope.requisition.qualifications.push(addQualification);
 		checkForEnableCreateButton();
 	};
+	
+	$scope.checkDisability = function(qualification){
+		if(qualification){
+			$scope.disableCreateBtn  =  false;
+			return false;
+		}
+		else{
+			$scope.disableCreateBtn  =  true;
+			return true;
+		}
+	}
 	
 	$scope.deleteQualification = function(index){
 		if (!($scope.requisition.qualifications.length - 1 == 0)) {
@@ -277,7 +288,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	
 	userService.getUsers()
 	.then(function(data){
-		//$scope.users = data;
+		// $scope.users = data;
 			var	approverUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
 			angular.forEach(approverUser,function(user){
 					var approval1={};
@@ -329,19 +340,20 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	}
 	
 	function checkForEnableCreateButton(){
-		if($scope.requisition.qualifications == "" || $scope.requisition.approval1.name == ""){
+		var length=$scope.requisition.qualifications.length;
+		if($scope.requisition.qualifications[length-1].qualification == "" || $scope.requisition.approval1.name == ""){
 			$scope.disableCreateBtn  =  true;
 		}else{
 			$scope.disableCreateBtn  =  false;
 		}
 	}
 	
-	$scope.checkForQualification = function(){
+	/*$scope.checkForQualification = function(){
 		if($scope.qualifications == ""){
 			return true;
 		}else{
 			return false;
 		}
-	}
+	}*/
 	
 }]);
