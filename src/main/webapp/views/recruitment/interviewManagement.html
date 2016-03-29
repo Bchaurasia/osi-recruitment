@@ -1,0 +1,105 @@
+
+<style>
+/* tbody {
+     height: 200px;
+    display: inline-block;
+    overflow: auto;
+} */
+th {
+    text-align: left;
+    background-color: rgba(51, 122, 183, 0.64);
+}
+</style>
+<h2 class="heading-name">Interview Management - Search</h2>
+<br>
+<div ng-class="cls" ng-show="message" align="center"
+	style="width: 850px; position: relative; top: -35px; height: 50">
+	<h5 style="margin-top: 2px;">{{message}}</h5>
+</div>
+
+<div>
+	<br>
+	<form action="#" name="createPosition" class="searchPosition" onvalidate>
+		<form id="integerForm" role="form" class="form-horizontal">
+			
+			<div class="row" style="margin-top: -55px;">
+				
+				<div class="col-md-1"></div>
+				<div class="col-md-4" style="margin-left: -27px;">
+					<div class="input-group">
+						<input class="form-control" ng-model="search"
+							ng-change="searchInterviewDetails(search)"
+							placeholder="Search By Name or Status" type="search"
+							style="width: 80%; border: 1px solid rgb(194, 191, 191);" "/> <span
+							class="input-group-addon" style="position: relative; left: -19%">
+							<span class="glyphicon glyphicon-search"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-1">
+				</div>
+			</div>
+			<br> <br> <br>
+			<table id="profile" class="table table-striped"
+				style="margin-top: -10px; width: 90%" frame="box">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email ID</th>
+						<th>Skills</th>
+						<th>Job Code</th>
+						<th>Schedule</th>
+						<th>Feedback</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr class="animate-repeat" ng-repeat="item in interviewDetails | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+					<td>{{item.candidateName}}</td>
+			<td>{{item.candidateEmail}}</td>
+			<td><i ng-repeat="skills in item.candidateSkills">{{skills}}{{$last
+					? '' : ', '}}</i></td>
+			<td ng-hide="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN')"><i
+				ng-repeat="jobcode in item.positionId">{{jobcode}}{{$last ? ''
+					: ', '}}</i></td>
+			<td ng-hide="!(hasRole('ROLE_INTERVIEWER,ROLE_ADMIN'))">{{item.currentPositionId}}</td>
+			<td><a href="" id="" class="interview-schedule"
+				ng-click="schedule(item.positionId,item.candidateEmail,item.currentPositionId)">
+					<span class="glyphicon glyphicon-plus"
+					style="position: relative; top: 1px;" />
+			</a></td>
+			<td>
+				<button style="background-color: #F8F8F8; border: 0px;" href=""
+					id="" class="interview-feedback"
+					ng-disabled="disableFeedback(item.rounds)"
+					ng-click="feedback(item.currentPositionId,item.candidateEmail)">
+					<span class="glyphicon glyphicon-envelope"
+						style="position: relative; top: 1px;"></span>
+				</button>
+			</td>
+			<td style="font-weight: bold">{{item.progress}}</td>
+				</tr>
+				</tbody>
+			</table>
+			<div class="row">
+						<div class="col-md-3">
+							<h5>Total Interview Details
+								: {{interviewDetails.length}}</h5>
+						</div>
+
+						<div class="col-md-9">
+								<ul class="pagination pull-right">
+									<li ng-class="{disabled: currentPage == 0}"><a href
+										ng-click="prevPage()">Prev</a></li>
+									<li ng-repeat="n in range(currentPage)"
+										ng-class="{active: n == currentPage}" ng-click="setPage()">
+										<a href ng-bind="n + 1"></a>
+									</li>
+									<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
+										href ng-click="nextPage()">Next</a></li>
+								</ul>
+						</div>
+			</div><br><br>
+		</form>
+	</form>
+</div>
