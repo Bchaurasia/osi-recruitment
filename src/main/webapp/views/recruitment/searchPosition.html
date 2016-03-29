@@ -32,6 +32,7 @@
 				<thead>
 					<tr>
 						<th>Job code</th>
+						<th>REQ Id</th>
 						<th>Designation</th>
 						<th>Min-Exp</th>
 						<th>Max-Exp</th>
@@ -45,6 +46,7 @@
 						ng-repeat="data in position | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
 						<td class="mdl-data-table__cell--non-numeric"><a
 							style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
+						<td class="mdl-data-table__cell--non-numeric">{{data.requisitionId}}</td>
 						<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
 						<td class="mdl-data-table__cell--non-numeric">{{data.minExpYear}}</td>
 						<td class="mdl-data-table__cell--non-numeric">{{data.maxExpYear}}</td>

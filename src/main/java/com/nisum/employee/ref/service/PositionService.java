@@ -77,6 +77,7 @@ public class PositionService implements IPositionService{
 		interviewRounds.add("Hr Round");
 		interviewRounds.add("Manager Round");
 		position.setClient(requisition.getClient());
+		position.setRequisitionId(requisition.getRequisitionId());
 		position.setDesignation(requisition.getPosition());
 		position.setLocation(requisition.getLocation());
 		position.setMinExpYear(requisition.getMinExpYear());

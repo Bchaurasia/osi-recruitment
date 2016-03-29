@@ -15,6 +15,7 @@ public class Position extends AuditEntity {
 
 	@Id
 	String jobcode;
+	String requisitionId;
 	String designation;
 	String minExpYear;
 	String maxExpYear;
