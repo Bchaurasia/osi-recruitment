@@ -17,12 +17,12 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 	$scope.maxExpYear=[];
 	$scope.interviewers=[];
 	
-	$scope.info = $rootScope.info.;
+	$scope.info = $rootScope.info;
 	$scope.interviewRounds=[];
 	$scope.pskills = [];
 	$scope.message = "";
 	$scope.client =[];
-	$scope.statuses = $rootScope.info.status;
+	$scope.statuses = ["Active", "Inactive", "Hired", "OnHold", "Rejected"];
 	$scope.hideStatuses = true;
 	$scope.init = function() {
 		if(jobCodeService1.getjobCode() == undefined) {
