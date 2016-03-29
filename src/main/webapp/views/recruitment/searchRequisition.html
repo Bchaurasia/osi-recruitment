@@ -27,7 +27,7 @@
 				<div class="col-md-1">
 					<a id="rsBtn1" href="#recruitment/createRequisition"
 						class="btn btn-info active"
-						ng-show="hasRole('ROLE_REQUISITION_MANAGER','ROLE_REQUISITION_APPROVER')">
+						ng-show="hasRole('ROLE_REQUISITION_APPROVER,ROLE_REQUISITION_MANAGER')">
 						<span class="glyphicon glyphicon-plus"></span>
 					</a>
 				</div>
@@ -43,8 +43,6 @@
 						<th>Max-Exp</th>
 						<th>Client</th>
 						<th ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" >Clone</th>
-						<!-- <th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">Approve</th> -->
-						<!-- <th>Share</th> -->
 					</tr>
 				</thead>
 				<tbody>
