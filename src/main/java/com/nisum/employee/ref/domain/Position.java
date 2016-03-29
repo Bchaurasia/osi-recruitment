@@ -31,4 +31,5 @@ public class Position extends AuditEntity {
 	String jobType;
 	String salary;
 	UserVO hiringManager;
+	String status;
 }

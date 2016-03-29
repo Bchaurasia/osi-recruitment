@@ -15,6 +15,8 @@ import com.nisum.employee.ref.repository.SequenceRepository;
 @Service
 public class PositionService implements IPositionService{
 
+	private static final String ACTIVE = "Active";
+
 	@Autowired
 	PositionRepository positionRepository;
 	
@@ -71,11 +73,8 @@ public class PositionService implements IPositionService{
 
 	private Position buildPosition(Requisition requisition, int sequence) {
 		Position position = new Position();
-		ArrayList<String> interviewRounds=new ArrayList<>();
-		interviewRounds.add("Technical Round 1");
-		interviewRounds.add("Technical Round 2");
-		interviewRounds.add("Hr Round");
-		interviewRounds.add("Manager Round");
+		ArrayList<String> interviewRounds = getInterviewRounds();
+		position.setStatus(ACTIVE);
 		position.setClient(requisition.getClient());
 		position.setRequisitionId(requisition.getRequisitionId());
 		position.setDesignation(requisition.getPosition());
@@ -87,5 +86,14 @@ public class PositionService implements IPositionService{
 		position.setHiringManager(requisition.getRequisitionManager());
         position.setJobcode("JOB_"+sequenceRepository.getNextSequenceId("JOB"));
 		return position;
+	}
+
+	private ArrayList<String> getInterviewRounds() {
+		ArrayList<String> interviewRounds=new ArrayList<>();
+		interviewRounds.add("Technical Round 1");
+		interviewRounds.add("Technical Round 2");
+		interviewRounds.add("Hr Round");
+		interviewRounds.add("Manager Round");
+		return interviewRounds;
 	}
 }

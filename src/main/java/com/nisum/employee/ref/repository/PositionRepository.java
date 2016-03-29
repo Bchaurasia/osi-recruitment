@@ -65,7 +65,7 @@ public class PositionRepository {
 		update.set("interviewer", position.getInterviewer());
 		update.set("jobType", position.getJobType());
 		update.set("salary", position.getSalary());
-		
+		update.set("status", position.getStatus());
 		mongoOperations.updateFirst(query, update, Position.class);
 	}
 

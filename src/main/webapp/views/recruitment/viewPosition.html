@@ -193,6 +193,20 @@
 			</div>
 		</div>
 	</div>
+	<div class="row" align="left">
+		<div class="col-md-1"></div>
+		<div class="control-group">
+			<div class="col-md-2">
+				<label class="lbl" for="Status"><i
+					class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Status*:</label>
+			</div>
+			<div class="col-md-3">
+				<a href="#" editable-select="position.status"
+					e-ng-options="o for o in statuses" e-required> {{
+					position.status || "--"}} </a>
+			</div>
+		</div>
+	</div>
 	<br>
 </accordion-group> </accordion>
 </div>

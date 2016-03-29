@@ -17,15 +17,13 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 	$scope.maxExpYear=[];
 	$scope.interviewers=[];
 	
-	
-	$scope.info = $rootScope.info;
+	$scope.info = $rootScope.info.;
 	$scope.interviewRounds=[];
 	$scope.pskills = [];
-	
 	$scope.message = "";
-		
 	$scope.client =[];
-	
+	$scope.statuses = $rootScope.info.status;
+	$scope.hideStatuses = true;
 	$scope.init = function() {
 		if(jobCodeService1.getjobCode() == undefined) {
 			$state.go("recruitment.searchPosition");
@@ -113,7 +111,8 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 		     position1.salary = $scope.position.salary;
 		     position1.minExpYear=$scope.position.minExpYear;
 		     position1.maxExpYear=$scope.position.maxExpYear;
-		     console.log(angular.toJson("data----"+position1));
+		     position1.status = $scope.position.status;
+//		     console.log(angular.toJson("data----"+position1));
 		     positionService.updatePosition(position1).then(
 			    function(msg){
 			    	$scope.sendNotification(msg,'recruitment/searchPosition');
