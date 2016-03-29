@@ -4255,14 +4255,15 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 .nav-tabs>li.active>a
 	{
-	color: #fff;
+	color: black;
 	cursor: default;
-	background-color: #6C7376;
+	background-color: #FFFFFF;
 	border-bottom-color: transparent
 }
 
 .nav-tabs.nav-justified {
-	width: 100%;
+	width: 90%;
+    margin-top: -36px;
 	border-bottom: 0
 }
 
