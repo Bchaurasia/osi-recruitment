@@ -42,7 +42,7 @@ public class RequisitionController {
 	@RequestMapping(value="/requisition",method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createRequisition(@RequestBody Requisition requisition)  throws Exception {
-		log.info("creating new requisition");
+		log.info("approveing requisition");
 		requisitionService.prepareRequisition(requisition);
 		setRequisitionApprovalDetails(requisitionApproverDetails,requisition.getApproval1(),requisition.getRequisitionId());
 		if(requisition.getApproval2() != null ) {

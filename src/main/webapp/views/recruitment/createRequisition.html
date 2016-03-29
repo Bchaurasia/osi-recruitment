@@ -183,7 +183,8 @@
 					<div class="col-md-1"></div>
 						 <b><a ng-show="JobDesBtn"
 							ng-click="JobDes()"><span
-							class="glyphicon glyphicon-pencil"></span> Job Description:
+							class="glyphicon glyphicon-pencil"></span> Job Description:<b
++								class="mandatory-field">*</b>
 						</a></b>
 						<div class="control-group" ng-show="JobDesBox">
 							<div class="col-md-2">
@@ -193,7 +194,7 @@
 								<textarea cols="50" rows="4" name="comment" id="comment"
 									ng-model="requisition.jobDescription"
 									placeholder="Enter any comments/notes..."
-									style="width: 100%; height: 100px;"></textarea>
+									style="width: 100%; height: 100px;" required></textarea>
 							</div>
 						</div>
 					</div>	

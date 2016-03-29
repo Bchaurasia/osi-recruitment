@@ -22,11 +22,11 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		.catch(approveRequisitionError);
 	}
 	function approveRequisitionSuccess(response){
-		return "Positions Created Successfully!";
+		return response.data.msg;
 	}
 	
 	function approveRequisitionError(response){
-		return "Failed To Create Positions! Response Status: " + response.status;
+		return "Failed To Approve Requisition! Response Status: " + response.status;
 	}
 	function createRequisitionSuccess(response){
 		return " Requisition Created Successfully!";

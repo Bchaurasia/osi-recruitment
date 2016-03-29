@@ -266,7 +266,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		.catch(errorMsg);
 			
 		function successMsg(msg){
-			$scope.sendNotification(msg,'recruitment/searchPosition');
+			$scope.sendNotification(msg,'recruitment/searchRequisition');
 		}
 		
 		function errorMsg(msg){

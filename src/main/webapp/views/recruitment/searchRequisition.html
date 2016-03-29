@@ -42,7 +42,7 @@
 						<th>Min-Exp</th>
 						<th>Max-Exp</th>
 						<th>Client</th>
-						<th>Clone</th>
+						<th ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" >Clone</th>
 						<!-- <th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">Approve</th> -->
 						<!-- <th>Share</th> -->
 					</tr>
@@ -55,8 +55,8 @@
 						<td>{{data.minExpYear}}</td>
 						<td>{{data.maxExpYear}}</td>
 						<td>{{data.client}}</td>
-						<td align="center"><a style="cursor: pointer;"
-							ng-click="cloneRequisition(data.requisitionId)"><span
+						<td align="center"><a style="cursor: pointer;" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+							ng-click="cloneRequisition(data.requisitionId)" ng-disabled="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><span
 								class="glyphicon glyphicon-copy"></span></a></td>
 						<!-- <td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a style="cursor:pointer;"><span class="glyphicon glyphicon-ok-circle"></span></a></td> -->
 						<!-- <td class="mdl-data-table__cell--non-numeric"><left>
