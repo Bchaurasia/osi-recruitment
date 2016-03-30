@@ -347,13 +347,4 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.disableCreateBtn  =  false;
 		}
 	}
-	
-	/*$scope.checkForQualification = function(){
-		if($scope.qualifications == ""){
-			return true;
-		}else{
-			return false;
-		}
-	}*/
-	
 }]);

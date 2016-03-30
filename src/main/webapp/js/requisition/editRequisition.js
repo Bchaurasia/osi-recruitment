@@ -271,10 +271,22 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		}else if($scope.user.emailId === $scope.requisition.approval2.emailId){
 			$scope.requisition.approval2.approved = true;
 		}else{}
-		
-		//$scope.updateRequisitionDetails();
-		
+
 		requisitionService.approveRequisition($scope.requisition)
+		.then(successMsg)
+		.catch(errorMsg);
+			
+		function successMsg(msg){
+			$scope.sendNotification(msg,'recruitment/searchRequisition');
+		}
+		
+		function errorMsg(msg){
+			$scope.message=msg;
+			$scope.cls=appConstants.ERROR_CLASS;
+		}
+	}
+		
+	requisitionService.approveRequisition($scope.requisition)
 		.then(successMsg)
 		.catch(errorMsg);
 			

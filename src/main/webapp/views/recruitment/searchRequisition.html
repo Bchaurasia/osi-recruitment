@@ -56,19 +56,13 @@
 						<td align="center"><a style="cursor: pointer;" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 							ng-click="cloneRequisition(data.requisitionId)" ng-disabled="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><span
 								class="glyphicon glyphicon-copy"></span></a></td>
-						<!-- <td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a style="cursor:pointer;"><span class="glyphicon glyphicon-ok-circle"></span></a></td> -->
-						<!-- <td class="mdl-data-table__cell--non-numeric"><left>
-								</left>&nbsp;&nbsp;&nbsp;
-								<right><a href="" style="cursor:pointer;" ng-click="shareContent(data.jobcode)">
-									<img src="https://simplesharebuttons.com/images/somacro/linkedin.png" width="20" height="20" title="Share on Linked In" /></a></right>
-								</td> -->
-
-					</tr>
+					 </tr>
 					<tr class="animate-repeat" ng-if="results.length == 0">
 						<td>No results found...</td>
 					</tr>
 				</tbody>
 			</table>
+			
 			<div class="row">
 				<div class="col-md-3">
 					<h5>Total Requisitions : {{allRequisitions.length }}</h5>

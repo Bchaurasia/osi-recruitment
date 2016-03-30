@@ -137,7 +137,7 @@
 				{{requisition.noOfPositions}} </a>
 		</div>
 	</div>
-	
+
 	<div class="control-group">
 		<div class="col-md-2">
 			<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
@@ -152,7 +152,7 @@
 	</div>
 </div>
 <div class="row" align="left">
-<div class="col-md-1"></div>
+	<div class="col-md-1"></div>
 	<div class="control-group">
 		<div class="col-md-2">
 			<label class="lbl" for="primarySkill"><i
@@ -235,14 +235,22 @@
 				class="mandatory">*</b></label>
 		</div>
 		<div class="col-md-2">
-			<input ng-model="requisition.percent" type="range" min="1" max="100" required>
-				<span> {{requisition.percent}}</span>
+			<input ng-model="requisition.percent" type="range" min="1" max="100"
+				required> <span> {{requisition.percent}}</span>
 		</div>
-		<div class="col-md-1"><div class="row">
-			&nbsp;&nbsp;<button class="glyphicon glyphicon-remove" ng-show="lengthOfQualifications()" style="cursor: pointer;"
-								ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>&nbsp;&nbsp;&nbsp;&nbsp;
-						<button id="addButtonColumn" ng-disabled="checkDisability(requisition.qualification)" ng-show="$last" class="glyphicon glyphicon-plus" ng-click="addColumnCriteria()"></button>
-		 </div>
+		<div class="col-md-1">
+			<div class="row">
+				&nbsp;&nbsp;
+				<button class="glyphicon glyphicon-remove"
+					ng-show="lengthOfQualifications()" style="cursor: pointer;"
+					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="addButtonColumn"
+					ng-disabled="checkDisability(requisition.qualification)"
+					ng-show="$last" class="glyphicon glyphicon-plus"
+					ng-click="addColumnCriteria()"></button>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="row" align="left">
@@ -279,7 +287,8 @@
 									ng-show="hasRole('ROLE_REQUISITION_MANAGER')"
 									e-ng-options="o.name for o in approvals"> {{
 									requisition.approval1.name || "--" }}</a> <span
-									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval1.name	|| "--" }}</span>
+									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval1.name
+									|| "--" }}</span>
 
 							</div>
 						</div>
@@ -288,55 +297,61 @@
 								<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Comment:</label>
 							</div>
 							<div class="col-md-8" align="left" style="float: left">
-									<a href="#" editable-textarea="requisition.approval1.comment"
-										style="width: 500px; height: auto;" ng-show="user.emailId === requisition.approval1.emailId">
-										{{requisition.approval1.comment || "Add Comment" }}</a>
-										<span ng-show="user.emailId !== requisition.approval1.emailId">{{requisition.approval1.comment || "Add Comment" }}</span>
+								<a href="#" editable-textarea="requisition.approval1.comment"
+									style="width: 500px; height: auto;"
+									ng-show="user.emailId === requisition.approval1.emailId">
+									{{requisition.approval1.comment || "Add Comment" }}</a> <span
+									ng-show="user.emailId !== requisition.approval1.emailId">{{requisition.approval1.comment
+									|| "Add Comment" }}</span>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
 
 	<div class="col-sm-5" ng-show="requisition.approval2 !== null">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Approval 2</div>
-			<div class="row">
-				<div class="col-md-3" align="right">
-					<button type="button" class="btn btn-success btn-sm btn-round"
-						ng-show="requisition.approval2.approved">
-						<span class="glyphicon glyphicon-thumbs-up"></span>
-					</button>
-					<button type="button" class="btn btn-danger btn-sm btn-round"
-						ng-show="!requisition.approval2.approved">
-						<span class="glyphicon glyphicon-thumbs-down"></span>
-					</button>
-				</div>
-				<div class="col-md-9">
-					<div class="row">
-						<div class="col-md-4" align="left">
-							<label class="lbl"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name:</label>
-						</div>
-						<div class="col-md-8" align="left">
-							<a href="#" editable-select="requisition.approval2"
-								ng-show="hasRole('ROLE_REQUISITION_MANAGER')"
-								e-ng-options="o.name for o in approvals" disabled> {{
-								requisition.approval2.name || "--" }}</a> <span
-								ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval2.name
-								|| "--" }}</span>
-						</div>
+		<div class="card card-block">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Approval 2</div>
+				<div class="row">
+					<div class="col-md-3" align="right">
+						<button type="button" class="btn btn-success btn-sm btn-round"
+							ng-show="requisition.approval2.approved">
+							<span class="glyphicon glyphicon-thumbs-up"></span>
+						</button>
+						<button type="button" class="btn btn-danger btn-sm btn-round"
+							ng-show="!requisition.approval2.approved">
+							<span class="glyphicon glyphicon-thumbs-down"></span>
+						</button>
 					</div>
-					<div class="row">
-						<div class="col-md-4" align="left">
-							<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Comment:</label>
+					<div class="col-md-9">
+						<div class="row">
+							<div class="col-md-4" align="left">
+								<label class="lbl"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name:</label>
+							</div>
+							<div class="col-md-8" align="left">
+								<a href="#" editable-select="requisition.approval2"
+									ng-show="hasRole('ROLE_REQUISITION_MANAGER')"
+									e-ng-options="o.name for o in approvals" disabled> {{
+									requisition.approval2.name || "--" }}</a> <span
+									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval2.name
+									|| "--" }}</span>
+							</div>
 						</div>
-						<div class="col-md-8" align="left" style="float: left">
-							<a href="#" editable-textarea="requisition.approval2.comment" style="width: 500px; height: auto;" ng-show="user.emailId === requisition.approval2.emailId">
-								{{requisition.approval2.comment || "Add Comment" }}</a>
-								<span ng-show="user.emailId !== requisition.approval2.emailId">{{requisition.approval2.comment || "Add Comment" }}</span>
+						<div class="row">
+							<div class="col-md-4" align="left">
+								<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Comment:</label>
+							</div>
+							<div class="col-md-8" align="left" style="float: left">
+								<a href="#" editable-textarea="requisition.approval2.comment"
+									style="width: 500px; height: auto;"
+									ng-show="user.emailId === requisition.approval2.emailId">
+									{{requisition.approval2.comment || "Add Comment" }}</a> <span
+									ng-show="user.emailId !== requisition.approval2.emailId">{{requisition.approval2.comment
+									|| "Add Comment" }}</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -345,7 +360,6 @@
 	</div>
 	<div class="col-sm-1"></div>
 </div>
-
 </accordion-group> </accordion>
 <div align="center">
 	<a class="btn btn-info active"
@@ -353,13 +367,17 @@
 		ng-disabled="showApprovedBtn" ng-click="approve()"> <span
 		class="glyphicon glyphicon-ok-circle"></span> Approve
 	</a>
-	<a class="btn btn-info active" ng-disabled="validateRequisition() || disableUpdateBtn"
+	<a class="btn btn-info active"
+		ng-show="showApprovalBtn || showApprovedBtn"
+		ng-disabled="showApprovedBtn" ng-click="approve()"> <span
+		class="glyphicon glyphicon-ok-circle"></span> Reject
+	</a>  
+	<a class="btn btn-info active"
+		ng-disabled="validateRequisition() || disableUpdateBtn"
 		ng-show="showUpdateBtn" ng-click="updateRequisitionDetails()"> <span
 		class="glyphicon glyphicon-ok" ng-disabled="disabled"></span> Update
-	</a>
-	<a ui-sref="recruitment.searchRequisition"
-		class="btn btn-info active"> <span
-		class="glyphicon glyphicon-remove"></span> Cancel
+	</a> <a ui-sref="recruitment.searchRequisition" class="btn btn-info active">
+		<span class="glyphicon glyphicon-remove"></span> Cancel
 	</a>
 </div>
 <br>

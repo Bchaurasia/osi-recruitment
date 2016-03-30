@@ -1,15 +1,14 @@
 app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','appConstants','$timeout','requisitionService',
                                      function($scope, $http, $q, $window,jobCodeService1,$filter, $log,appConstants,$timeout,requisitionService) {
 
-	$scope.showApprovalBtn = false;
-	$scope.allRequisitions={};
 	$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
-
-	$http.get('resources/requisition').success(function(data, status, headers, config) {
-		$scope.allRequisitions = data;
-	}).error(function(data, status, headers, config) {
-		$log.error(data);
-	})
+	requisitionService.getAllRequisitions().then(function(requisitions){
+															$scope.allRequisitions=requisitions;
+												}).catch(function(msg){
+															$scope.message=msg;
+															 $scope.cls=appConstants.ERROR_CLASS;
+															 $timeout( function(){ $scope.alHide(); }, 5000);
+	});
 	$scope.editRequisition = function(requisitionId) {
 		jobCodeService1.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
@@ -18,7 +17,6 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 	$scope.cloneRequisition = function(requisitionId) {
 		jobCodeService1.setRequisitionId(requisitionId);
 		location.href='#recruitment/cloneRequisition';
-		
 	};
 	
 }]);
