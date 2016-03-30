@@ -299,9 +299,36 @@ public class NotificationService implements INotificationService{
 		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Requisition "+requisitionApproverDetails.getJobRequisitionId());
 		
 		message1.setContent(writer.toString(), TEXT_HTML);
-
 		Transport.send(message1);
+	}
+	
+	@Override
+	public void sendRejectRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
+			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
+
+		String userId = requisitionApproverDetails.getApproverEmailId();
+		String message = "Rejected "+ requisitionApproverDetails.getJobRequisitionId() + " Requisition";
+		String readStatus="No";
+		updateUserNotification(userId, message,readStatus);
 		
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+		
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_JOB_REQUISITION_VM);
+		
+		VelocityContext context = new VelocityContext();
+		context.put("approverName", requisitionApproverDetails.getApproverName());
+		
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+		
+		Message message1 = getMessage();
+		message1.setFrom(new InternetAddress(from));
+		message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(userId));
+		message1.setSubject(requisitionApproverDetails.getApproverName() + " has Rejected The Requisition "+requisitionApproverDetails.getJobRequisitionId());
+		
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
 	}
 	
 	private void updateUserNotification(String userId, String message,String readStatus) {

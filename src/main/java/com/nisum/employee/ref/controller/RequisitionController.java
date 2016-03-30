@@ -84,6 +84,17 @@ public class RequisitionController {
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 	
+	@Secured({"ROLE_REQUISITION_APPROVER"})
+	@ResponseBody
+	@RequestMapping(value="/rejectRequisition",method = RequestMethod.POST)
+	public ResponseEntity<?> rejectRequisition(@RequestBody Requisition requisition) throws Exception{
+		log.info("creating new requisition");
+			requisitionService.updateRequisition(requisition);
+			requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
+			String jsonObj="{\"msg\":\""+ requisition.getRequisitionId()+" Requisition has been Rejected successfully\"}";
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+	}
+	
 	@Secured({"ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/requisition",method = RequestMethod.PUT)
 	@ResponseBody

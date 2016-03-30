@@ -31,4 +31,5 @@ public class Requisition {
 	String comment;
 	UserVO requisitionManager;
 	String createdBy;
+	String status;
 }
