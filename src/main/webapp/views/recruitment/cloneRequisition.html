@@ -126,8 +126,8 @@
 		</div>
 		<div class="col-md-3">
 			<a href="#" editable-text="requisition.noOfPositions"
-				onbeforesave="validateNoOfPosition($data)" e-required>
-				{{requisition.noOfPositions}} </a> &nbsp;&nbsp;&nbsp;&nbsp;<span
+				onaftersave="validateNoOfPosition($data)" e-required>
+				{{requisition.noOfPositions || "Enter no. of positions"}} </a> <br><span
 				class="validation-error" ng-show="positionErr">No. of
 				Positions should be between 1-99!</span>
 		</div>
@@ -172,8 +172,9 @@
 				class="mandatory">*</b></label>
 		</div>
 		<div class="col-md-8" align="left">
-			<a href="#" editable-textarea="requisition.jobDescription" cols="50"
-				rows="4"> {{requisition.jobDescription || "--" }}</a>
+			<a href="#" editable-textarea="requisition.jobDescription" cols="50" onaftersave="validateJobDesc()"
+				rows="4"> {{requisition.jobDescription || "Enter description" }}</a><br>
+				<span class="validation-error" ng-show="jobDescErr"> Job description is mandatory</span>
 		</div>
 	</div>
 </div>
@@ -186,7 +187,7 @@
 		</div>
 		<div class="col-md-8" align="left">
 			<a href="#" editable-textarea="requisition.comment" cols="50"
-				rows="4"> {{requisition.comment || "--" }}</a>
+				rows="4"> {{requisition.comment || "Enter comment" }}</a>
 		</div>
 	</div>
 </div>
@@ -253,7 +254,7 @@
 		<div class="col-md-3">
 			<a href="#" editable-select="requisition.approval1"
 				e-ng-options="o.name for o in approvals" e-required>
-				{{requisition.approval1.name || "--" }}</a>
+				{{requisition.approval1.name || "Select Approver1" }}</a>
 		</div>
 	</div>
 
@@ -265,7 +266,7 @@
 		<div class="col-md-3">
 			<a href="#" editable-select="requisition.approval2"
 				e-ng-options="o.name for o in approvals" e-required>
-				{{requisition.approval2.name || "--" }}</a>
+				{{requisition.approval2.name || "Select Approver2" }}</a>
 		</div>
 	</div>
 </div>
@@ -273,7 +274,7 @@
 
 <div align="center">
 	<button class="btn btn-info active"
-		ng-disabled="validateClone() || disableCloneBtn || disableCloneBtnMin || disableCloneBtnMax || disableCloneBtnPer || disableCloneBtnPosition"
+		ng-disabled="validateClone() || disableCloneBtn || disableCloneBtnMin || disableCloneBtnMax || disableCloneBtnPer"
 		ng-click="cloneRequisitionDetails()">
 		<span class="glyphicon glyphicon-ok"></span> Clone
 	</button>

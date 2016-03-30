@@ -127,19 +127,6 @@
 	<div class="control-group">
 		<div class="col-md-1"></div>
 		<div class="col-md-2">
-			<label class="lbl" for="experience"><i
-				class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Positions:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">
-			<a href="#" editable-number="requisition.noOfPositions"
-				onbeforesave="validateNoOfPosition($data)" e-required>
-				{{requisition.noOfPositions}} </a>
-		</div>
-	</div>
-
-	<div class="control-group">
-		<div class="col-md-2">
 			<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
 				HR :<b class="mandatory">*</b>
 			</label>
@@ -148,6 +135,20 @@
 			<a href="#" editable-select="requisition.requisitionManager"
 				e-ng-options="o.name for o in requisitionManager" e-required> {{
 				requisition.requisitionManager.name || "--" }}</a>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="col-md-2">
+			<label class="lbl" for="experience"><i
+				class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Positions:<b
+				class="mandatory">*</b></label>
+		</div>
+		<div class="col-md-3">
+			<a href="#" editable-text="requisition.noOfPositions"
+				onaftersave="validateNoOfPosition($data)" e-required>
+				{{requisition.noOfPositions || "Enter no. of positions"}} </a> <br><span
+				class="validation-error" ng-show="positionErr">No. of
+				Positions should be between 1-99!</span>
 		</div>
 	</div>
 </div>
@@ -188,10 +189,11 @@
 				Description <b class="mandatory">*</b>:</label>
 		</div>
 		<div class="col-md-8" align="left">
-			<a href="#" editable-textarea="requisition.jobDescription" cols="50"
-				rows="4"> {{requisition.jobDescription || "--" }}</a>
+			<a href="#" editable-textarea="requisition.jobDescription" cols="50" onaftersave="validateJobDesc()"
+				rows="4"> {{requisition.jobDescription || "Enter description" }}</a>
+				<br><span class="validation-error" ng-show="jobDescErr"> Job description is mandatory</span>
 		</div>
-	</div>
+	</div>	
 </div>
 <div class="row">
 	<div class="control-group">
@@ -202,7 +204,7 @@
 		</div>
 		<div class="col-md-8" align="left">
 			<a href="#" editable-textarea="requisition.comment" cols="50"
-				rows="4"> {{requisition.comment || "--" }}</a>
+				rows="4"> {{requisition.comment || "Enter comment" }}</a>
 		</div>
 	</div>
 </div>
@@ -286,7 +288,7 @@
 								<a href="#" editable-select="requisition.approval1"
 									ng-show="hasRole('ROLE_REQUISITION_MANAGER')"
 									e-ng-options="o.name for o in approvals"> {{
-									requisition.approval1.name || "--" }}</a> <span
+									requisition.approval1.name || "Select Approver1" }}</a> <span
 									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval1.name
 									|| "--" }}</span>
 
@@ -311,7 +313,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-5" ng-show="requisition.approval2 !== null">
+	<div class="col-sm-5">
 		<div class="card card-block">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Approval 2</div>
@@ -335,7 +337,7 @@
 								<a href="#" editable-select="requisition.approval2"
 									ng-show="hasRole('ROLE_REQUISITION_MANAGER')"
 									e-ng-options="o.name for o in approvals" disabled> {{
-									requisition.approval2.name || "--" }}</a> <span
+									requisition.approval2.name || "Select Approver2" }}</a> <span
 									ng-show="!hasRole('ROLE_REQUISITION_MANAGER')">{{requisition.approval2.name
 									|| "--" }}</span>
 							</div>

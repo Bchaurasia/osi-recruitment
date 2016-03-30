@@ -82,7 +82,8 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		$scope.skillErr = false;
 	}
 	$scope.validateRequisition = function() {
-		if($scope.requisition === undefined || $scope.requisition.skillType=== undefined){
+		if($scope.requisition === undefined || $scope.requisition.skillType=== undefined 
+		|| $scope.requisition.jobDescription==="" || $scope.requisition.noOfPositions===""){
 			return true;
 		}
 		else{
@@ -180,11 +181,24 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 		$scope.requisition.targetDate = targetDate.getDate()+'-' + (targetDate.getMonth()+1) + '-'+targetDate.getFullYear();
 	}
 	
-	$scope.validateNoOfPosition = function(data) {
+	/*$scope.validateNoOfPosition = function(data) {
 		if (data>0 && data<=99) {
 			return true;
-		} else
+		} else{
 			return "No. of Positions should be between 1-99!";
+		}
+	};*/
+	$scope.validateNoOfPosition = function(data) {
+		var data1 = parseInt(data);
+		if(data1<=0 || data1 > 99) {
+			$scope.requisition.noOfPositions="";
+			$scope.positionErr = true;
+			$scope.showApprovedBtn=true;
+		
+		}else{
+			$scope.positionErr = false;
+			$scope.showApprovedBtn=false;
+		}
 	};
 	
 	
@@ -285,19 +299,15 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 			$scope.cls=appConstants.ERROR_CLASS;
 		}
 	}
+   $scope.validateJobDesc = function(){
 		
-	requisitionService.approveRequisition($scope.requisition)
-		.then(successMsg)
-		.catch(errorMsg);
-			
-		function successMsg(msg){
-			$scope.sendNotification(msg,'recruitment/searchRequisition');
+		if($scope.requisition.jobDescription==="") {
+			$scope.jobDescErr = true;
+			$scope.showApprovedBtn=true;
+		}else{
+			$scope.jobDescErr = false;
+			$scope.showApprovedBtn=false;
 		}
-		
-		function errorMsg(msg){
-			$scope.message=msg;
-			$scope.cls=appConstants.ERROR_CLASS;
-		}
-	}
+	};
 	
 }]);
