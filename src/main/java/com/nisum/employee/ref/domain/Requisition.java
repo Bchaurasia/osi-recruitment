@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "Requisition")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Requisition {
 	@Id
 	String requisitionId;
@@ -24,12 +25,13 @@ public class Requisition {
 	String targetDate;
 	String location;
 	String jobDescription;
-	List<Qualification> qualifications;
-	ArrayList<String> skillType;
-	RequisitionUser approval1;
-	RequisitionUser approval2;
 	String comment;
-	UserVO requisitionManager;
+	String updatedBy;
 	String createdBy;
 	String status;
+	ArrayList<String> skillType;
+	List<Qualification> qualifications;
+	UserVO requisitionManager;
+	RequisitionUser approval1;
+	RequisitionUser approval2;
 }

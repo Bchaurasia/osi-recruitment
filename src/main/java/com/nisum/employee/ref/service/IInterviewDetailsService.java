@@ -7,7 +7,6 @@ import javax.mail.MessagingException;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
-import com.nisum.employee.ref.domain.Profile;
 
 public interface IInterviewDetailsService {
 	InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException;

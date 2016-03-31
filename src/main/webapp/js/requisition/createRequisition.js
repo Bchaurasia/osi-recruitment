@@ -117,7 +117,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$scope.JobDesBox = false;
 		$scope.JobDesBtn = true;
 	}
-	$scope.approverfield = function(){
+	$scope.approverfield = function(user){
 		$scope.disabled2 = false;
 		checkForEnableCreateButton();
 	}
@@ -318,9 +318,11 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	
 	$scope.submit = function(){
 		if ($scope.requisition !== undefined) {
-			
 			$scope.requisition.requisitionManager.name = $scope.role.name;
 			$scope.requisition.requisitionManager.emailId = $scope.role.emailId;
+			$scope.requisition.createdBy = $scope.user.emailId;
+			$scope.requisition.updatedBy = $scope.user.emailId;
+			
 			var date1 = new Date($scope.targetDate);
 			$scope.requisition.targetDate = date1.getDate()+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear();
 			

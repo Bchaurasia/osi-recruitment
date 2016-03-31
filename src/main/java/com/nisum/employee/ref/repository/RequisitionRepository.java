@@ -19,11 +19,11 @@ public class RequisitionRepository {
 	@Autowired
 	private MongoOperations mongoOperations;
 	
-	@Autowired
-	private SequenceRepository sequenceRepository;
-
 	public void prepareRequisition(Requisition requisition) {
-		requisition.setRequisitionId("REQ_"+sequenceRepository.getNextSequenceId("REQ"));
+		if(requisition.getApproval2().getName() == null && 
+				   requisition.getApproval2().getEmailId() == null){
+					requisition.setApproval2(null);
+		}
 		mongoOperations.save(requisition);
 	}
 
@@ -50,6 +50,8 @@ public class RequisitionRepository {
 			update.set("comment", requisition.getComment());
 			update.set("requisitionManager", requisition.getRequisitionManager());
 			update.set("createdBy", requisition.getCreatedBy());
+			update.set("updatedBy", requisition.getUpdatedBy());
+			update.set("status", requisition.getStatus());
 			mongoOperations.updateFirst(query, update, Requisition.class);
 		} else {
 			throw new DataIntegrityViolationException(

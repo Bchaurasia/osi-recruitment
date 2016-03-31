@@ -11,5 +11,5 @@ public class RequisitionApproverDetails {
 	private String jobRequisitionId;
 	private String approverName;
 	private String approverEmailId;
-
+	private String comments;
 }

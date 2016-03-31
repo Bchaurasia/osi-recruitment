@@ -46,7 +46,6 @@ public class NotificationService implements INotificationService{
 	private static final String DD_MMM_YYYY_HH_MM = "dd-MMM-yyyy HH:mm";
 	private static final String YYYY_MM_DD_T_HH_MM_SS_SSS_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 	private static final String FILE_RESOURCE_LOADER_PATH = "file.resource.loader.path";
-	private static final String WEB_INF_CLASSES_VM = "/WEB-INF/classes/vm";
 	private static final String YOUR_INTERVIEW_FOR = " - Your Interview For ";
 	private static final String YOU_NEED_TO_TAKE_INTERVIEW_OF = " - You Need To Take Interview Of ";
 	private static final String SKYPE_ID = "skypeId";
@@ -109,7 +108,6 @@ public class NotificationService implements INotificationService{
 	public String sendScheduleMail(InterviewSchedule interviewSchedule, String mobileNo, String altMobileNo, String skypeId) throws Exception{
 		
 		try{
-			//Update UserNotification
 			UserNotification userNotification = new UserNotification();
 			userNotification.setUserId(interviewSchedule.getEmailIdInterviewer());
 			userNotification.setMessage("Take interview of "+interviewSchedule.getCandidateName() + " for "+ interviewSchedule.getRoundName());
@@ -306,21 +304,21 @@ public class NotificationService implements INotificationService{
 	public void sendRejectRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
 			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
 
-		String userId = requisitionApproverDetails.getApproverEmailId();
-		String message = "Rejected "+ requisitionApproverDetails.getJobRequisitionId() + " Requisition";
+		String userId = requisitionApproverDetails.getRequisitionManagerEmail();
+		String message = requisitionApproverDetails.getApproverName() + " has Rejected The Requisition "+requisitionApproverDetails.getJobRequisitionId();
 		String readStatus="No";
 		updateUserNotification(userId, message,readStatus);
 		
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 		
-		Template jobRequisitionTemplate = getVelocityTemplate(SRC_JOB_REQUISITION_VM);
+		//Template jobRequisitionTemplate = getVelocityTemplate(SRC_JOB_REQUISITION_VM);
 		
 		VelocityContext context = new VelocityContext();
 		context.put("approverName", requisitionApproverDetails.getApproverName());
 		
 		StringWriter writer = new StringWriter();
-		jobRequisitionTemplate.merge(context, writer);
+//		jobRequisitionTemplate.merge(context, writer);
 		
 		Message message1 = getMessage();
 		message1.setFrom(new InternetAddress(from));

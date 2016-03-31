@@ -21,9 +21,6 @@ public class PositionService implements IPositionService{
 	PositionRepository positionRepository;
 	
 	@Autowired
-	RequisitionService requisitionService;
-	
-	@Autowired
 	SequenceRepository sequenceRepository;
 	
 	public void preparePosition(Position position) {
@@ -68,7 +65,6 @@ public class PositionService implements IPositionService{
 	               for (int i = 1; i <= Integer.valueOf(requisition.getNoOfPositions()); i++) {
 	               positionRepository.preparePosition(buildPosition(requisition, i));
 	               }
-	               requisitionService.updateRequisition(requisition);
 	}
 
 	private Position buildPosition(Requisition requisition, int sequence) {
