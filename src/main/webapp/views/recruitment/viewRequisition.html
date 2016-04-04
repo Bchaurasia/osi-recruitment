@@ -1,246 +1,134 @@
-<style>
-.btn-round {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-}
-
-.btn-round.btn-lg {
-	width: 48px;
-	height: 48px;
-	margin: 40%;
-}
-
-.btn-round.btn-sm {
-	width: 34px;
-	height: 34px;
-	margin: 40%;
-}
-
-.btn-round.btn-xs {
-	width: 24px;
-	height: 24px;
-	margin: 40%;
-}
-</style>
-<accordion close-others=false> <accordion-group
-	is-open="status.isFirstOpen"> <accordion-heading>
-<font style="color: white" align="center"> Job Requisition<i
-	class="pull-right glyphicon" ng-class="{}"></i></font> </accordion-heading>
-
-<div class="row" align="left">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2">
-			<label class="lbl" for="designation"><i
-				class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Position:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3" n>
-			<!-- 	<a href="#" editable-select="requisition.position" 
-					e-ng-options="o as o for o in designation1" e-required> -->
-			{{ requisition.position}}
-			<!-- </a> -->
-		</div>
-	</div>
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl" for="experience"><i
-				class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">
-			<div class="col-md-3">Min:</div>
-			<div class="col-md-3">
-				<!-- <a href="#" editable-select="requisition.minExpYear"
-					e-ng-options="o as o for o in info.expYears" e-required> -->
-				{{requisition.minExpYear}}
-				<!-- </a> -->
-			</div>
-			<div class="col-md-3">Max:</div>
-			<div class="col-md-3">
-				<!-- <a href="#" editable-select="requisition.maxExpYear"
-					e-ng-options="o as o for o in info.expYears" e-required> -->
-				{{requisition.maxExpYear}}
-				<!-- </a> -->
-
-			</div>
-		</div>
-	</div>
-
-</div>
-
-<div class="row" align="left">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2">
-			<label class="lbl" for="location"><i
-				class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Requisition
-				Date:<b class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3" ng-disabled="showApprovalBtn">
-			<!-- <a href="#" editable-date="requisition.requisitionDate" e-required>
-				{{requisition.requisitionDate}} </a> -->
-			{{requisition.requisitionDate}}
-		</div>
-	</div>
-
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Target
-				Date:<b class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">
-			<a href="#" editable-date="requisition.targetDate"
-				onaftersave="dateError(requisition.targetDate)" e-required>
-				{{requisition.targetDate}}</a> <span class="validation-error"
-				ng-show="dateErr"> Please enter future date.</span> <span
-				style="color: red" ng-show="false">{{requisition.targetDate}}</span>
-		</div>
-	</div>
-</div>
-<div class="row" align="left">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2">
-			<label class="lbl" for="jobProfile"><i
-				class="glyphicon glyphicon-usd"></i>&nbsp;&nbsp;Client:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">
-			<a href="#" editable-select="requisition.client"
-				e-ng-options="o as o for o in clients" e-required>
-				{{requisition.client}} </a>
-		</div>
-	</div>
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl" for="location"><i
-				class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">{{requisition.location}}</div>
-	</div>
-
-</div>
-<div class="row" align="left">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2">
-			<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
-				HR :<b class="mandatory">*</b>
-			</label>
-		</div>
-		<div class="col-md-3">
-			<a href="#" editable-select="requisition.requisitionManager"
-				e-ng-options="o.name for o in requisitionManager" e-required> {{
-				requisition.requisitionManager.name || "--" }}</a>
-		</div>
-	</div>
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl" for="experience"><i
-				class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. Of Positions:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-3">
-			<a href="#" editable-number="requisition.noOfPositions"
-				onaftersave="validateNoOfPosition($data)" e-required>
-				{{requisition.noOfPositions || "Enter no. of positions"}} </a> <br>
-			<span class="validation-error" ng-show="positionErr">No. of
-				Positions should be between 1-99!</span>
-		</div>
-	</div>
-</div>
-<div class="row" align="left">
-	<div class="col-md-1"></div>
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl" for="primarySkill"><i
-				class="glyphicon glyphicon-folder-close"></i>&nbsp;&nbsp;Skills:<b
-				class="mandatory">*</b></label>
-		</div>
-		<div class="col-md-2">
-			<a href="" ng-hide="dis2" ng-click="skills()" e-required><i
-				ng-repeat="skills in requisition.skillType">{{skills || "--"
-					}}{{$last ? '' : ', '}}</i></a>
-			<ui-select ng-hide="hideSkills" multiple
-				ng-model="requisition.skillType" ng-keypress="myFunct($event);"
-				name='sk.primarySkills' id="skills" ui-select-required
-				theme="select2" ng-change="validateSkills()" > <ui-select-match
-				placeholder="Select skill...">{{$item}}</ui-select-match> <ui-select-choices
-				repeat="skill in pskills | orderBy:'toString()' | filter:$select.search">
-			{{skill || "--" }} </ui-select-choices> </ui-select>
-		</div>
-		<span class="validation-error" ng-show="skillErr"> Select
-			atleast one Primary Skill.</span>
-	</div>
-
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
+		Requisition : {{requisition.requisitionId}}</h4>
 </div>
 <div class="row">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2" align="left">
-			<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Job
-				Description <b class="mandatory">*</b>:</label>
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="CreateRequisition" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Designation" ng-change="getData()"
+					ng-disabled="true" ng-model="requisition.position" required
+					ng-options="o as o for o in designation1 | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Designations</option>
+				</select> <label>Position<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<div class="row">
+					<div class="input-field col s6">
+						<input type="range" ng-model="requisition.minExpYear"
+							ng-disabled="true" ng-change="min(requisition.minExpYear)"
+							min="0" max="15" required /> <span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
+					</div>
+					<div class="input-field col s6">
+						<input type="range" ng-model="requisition.maxExpYear"
+							ng-disabled="true" ng-change="max(requisition.maxExpYear)"
+							min="0" max="15" required /> <span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
+					</div>
+				</div>
+				<label style="margin-top: 14px">Exp. Required<b
+					class="mandatory">*</b></label>
+			</div>
 		</div>
-		<div class="col-md-8" align="left">
-			<a href="#" editable-textarea="requisition.jobDescription" cols="50"
-				onaftersave="validateJobDesc()" rows="4">
-				{{requisition.jobDescription || "Enter description" }}</a> <br>
-			<span class="validation-error" ng-show="jobDescErr"> Job
-				description is mandatory</span>
+		<div class="row">
+			<div class="input-field col s6">
+				<input type="date" ng-model="requisition.requisitionDate"
+					ng-disabled="true" id="requisitionDate" required> <label>Requisition
+					Date<b class="mandatory">*</b>
+				</label> <span class="validation-error" ng-show="reqErr">Requistion
+					date should not be after Target Date.</span>
+			</div>
+			<div class="input-field col s6">
+				<input type="date" ng-model="requisition.targetDate"
+					ng-change="dateError(requisition.targetDate)" id="targetDate"
+					required> <label>Target Date<b class="mandatory">*</b></label>
+				<span class="validation-error" ng-show="dateErr">Please enter future date.</span>
+			</div>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2" align="left">
-			<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Requisition
-				Comment :</label>
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Client" ng-model="requisition.client"
+					ng-options="o as o for o in clients | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option>Select Client</option>
+				</select> <label>Client<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<select placeholder="Select Location"
+					ng-model="requisition.location"
+					ng-options="o as o for o in info.locations | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option>Select Location</option>
+				</select> <label>Location<b class="mandatory">*</b></label>
+			</div>
 		</div>
-		<div class="col-md-8" align="left">
-			<a href="#" editable-textarea="requisition.comment" cols="50"
-				rows="4"> {{requisition.comment || "Enter comment" }}</a>
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Hiring HR" ng-model="hrManager"
+					ng-options="o.name for o in hrManagers"
+					class="form-control input-sm" required>
+					<option>Select Hiring HR</option>
+				</select> <label>Hiring HR<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Enter number of Positions" type="text"
+					ng-bind="requisition.noOfPositions"
+					ng-model="requisition.noOfPositions" name="position"
+					ng-change="validateNoOfPosition(requisition.noOfPositions)"
+					class="active validate" ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/"
+					required> <label>No. of Positions<b
+					class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="(CreateRequisition.position.$dirty || invalidSubmitAttempt) && CreateRequisition.position.$error.pattern">
+					No. Positions should be between 1-99!</span>
+			</div>
 		</div>
-	</div>
-</div>
-
-<div class="row" align="left">
-	<div class="col-md-4 lbl">
-		&nbsp;&nbsp;<font style="font-style: italic;"><span
-			class="label label-primary lbl">Educational Details:</span></font>
-	</div>
-</div>
-<div class="row" align="left"
-	ng-repeat=" requisition in requisition.qualifications">
-	<div class="control-group">
-		<div class="col-md-1"></div>
-		<div class="col-md-2">
-			<label class="lbl" for="designation"><i
-				class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Qualification:<b
-				class="mandatory">*</b></label>
+		<div class="row" style="margin-bottom: 20px">
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="requisition.skillType"
+					ng-keypress="myFunct($event)" theme="select2" ui-select-required
+					ng-disabled="disabled"> <ui-select-match
+					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+				{{color}} </ui-select-choices> </ui-select>
+				<label>Skills<b class="mandatory">*</b></label>
+			</div>
 		</div>
-		<div class="col-md-3">
-			<a href="#" editable-select="requisition.qualification"
-				e-ng-options="o as o for o in qualification" e-required> {{
-				requisition.qualification||"--"}}</a>
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea id="textarea1" class="materialize-textarea" length="120"
+					ng-model="requisition.jobDescription"
+					placeholder="Enter any comments/notes..." required></textarea>
+				<label>Job Description<b class="mandatory">*</b></label>
+			</div>
 		</div>
-	</div>
-
-	<div class="control-group">
-		<div class="col-md-2">
-			<label class="lbl"><i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:<b
-				class="mandatory">*</b></label>
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea id="textarea1" class="materialize-textarea" length="120"
+					ng-model="requisition.comment"
+					placeholder="Enter any comments/notes..."></textarea>
+				<label>Requisition Comment</label>
+			</div>
 		</div>
-		<div class="col-md-2">
-			<input ng-model="requisition.percent" type="range" min="1" max="100"
-				required> <span> {{requisition.percent}}</span>
-		</div>
-		<div class="col-md-1">
-			<div class="row">
-				&nbsp;&nbsp;
+		<div class="row"
+			ng-repeat=" requisition in requisition.qualifications">
+			<div class="input-field col s6">
+				<select placeholder="Select Qualification"
+					ng-model="requisition.qualification" required
+					ng-options="o as o for o in qualification | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Qualification</option>
+				</select> <label>Qualification<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s5">
+				<input type="range" ng-model="requisition.percent" min="0" max="100" />
+				<label>Percentage<b class="mandatory">*</b></label> <span
+					class="range-slider__value">{{requisition.percent}}%</span>
+			</div>
+			<div class="input-field col s1">
 				<button class="glyphicon glyphicon-remove"
 					ng-show="lengthOfQualifications()" style="cursor: pointer;"
 					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
@@ -251,129 +139,44 @@
 					ng-click="addColumnCriteria()"></button>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="row" align="left">
-	<div class="col-md-4 lbl">
-		&nbsp;&nbsp;<font style="font-style: italic;"><span
-			class="label label-primary lbl">Approvers Details:</span></font>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-1"></div>
-	<div class="col-sm-5">
-		<div class="card card-block">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Approval 1</div>
-				<div class="row">
-					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-success btn-sm btn-round"
-							ng-show="requisition.approval1.approved">
-							<span class="glyphicon glyphicon-thumbs-up"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm btn-round"
-							ng-show="!requisition.approval1.approved">
-							<span class="glyphicon glyphicon-thumbs-down"></span>
-						</button>
-					</div>
-					<div class="col-md-9">
-						<div class="row">
-							<div class="col-md-4" align="left">
-								<label class="lbl"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name:</label>
-							</div>
-							<div class="col-md-8" align="left">
-
-								<a href="#" editable-select="requisition.approval1"
-									ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-									e-ng-options="o.name for o in approvals"> {{
-									requisition.approval1.name || "Select Approver1" }}</a> 
-
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4" align="left">
-								<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Comment:</label>
-							</div>
-							<div class="col-md-8" align="left" style="float: left">
-								<a href="#" editable-textarea="requisition.approval1.comment"
-									style="width: 500px; height: auto;"
-									ng-show="user.emailId === requisition.approval1.emailId">
-									{{requisition.approval1.comment || "Add Comment" }}</a> <span
-									ng-show="user.emailId !== requisition.approval1.emailId">{{requisition.approval1.comment
-									|| "Add Comment" }}</span>
-							</div>
-						</div>
-					</div>
-				</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Approver 1" ng-model="approval1"
+					ng-change="approverfield()"
+					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option>Select Approver 1</option>
+				</select> <label>Approver 1<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<select placeholder="Select Approver 2" ng-model="approval2"
+					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Approver 2</option>
+				</select> <label>Approver 2</label>
 			</div>
 		</div>
-	</div>
-
-	<div class="col-sm-5" ng-show="requisition.approval2 !== undefined">
-		<div class="card card-block">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Approval 2</div>
-				<div class="row">
-					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-success btn-sm btn-round"
-							ng-show="requisition.approval2.approved">
-							<span class="glyphicon glyphicon-thumbs-up"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm btn-round"
-							ng-show="!requisition.approval2.approved">
-							<span class="glyphicon glyphicon-thumbs-down"></span>
-						</button>
-					</div>
-					<div class="col-md-9">
-						<div class="row">
-							<div class="col-md-4" align="left">
-								<label class="lbl"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name:</label>
-							</div>
-							<div class="col-md-8" align="left">
-								<a href="#" editable-select="requisition.approval2"
-									ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-									e-ng-options="o.name for o in approvals" disabled> {{
-									requisition.approval2.name || "Select Approver2" }}</a> 
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4" align="left">
-								<label class="lbl"><i class="glyphicon glyphicon-pencil"></i>&nbsp;Comment:</label>
-							</div>
-							<div class="col-md-8" align="left" style="float: left">
-								<a href="#" editable-textarea="requisition.approval2.comment"
-									style="width: 500px; height: auto;"
-									ng-show="user.emailId === requisition.approval2.emailId">
-									{{requisition.approval2.comment || "Add Comment" }}</a> <span
-									ng-show="user.emailId !== requisition.approval2.emailId">{{requisition.approval2.comment
-									|| "Add Comment" }}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div align="center" class="row">
+			<button class="btn btn-info active"
+				ng-show="showApprovalBtn || showApprovedBtn"
+				ng-disabled="showApprovedBtn" ng-click="approve()"> <span
+				class="glyphicon glyphicon-ok-circle"></span> Approve
+			</button> 
+			<button class="btn btn-danger" ng-show="showRejectBtn"
+				ng-disabled="disableRejectBtn" ng-click="rejectRequisition()"> <span
+				class="glyphicon glyphicon-remove-circle"></span> Reject
+			</button> 
+			<button class="btn btn-info active"
+				ng-disabled="validateRequisition() || disableUpdateBtn"
+				ng-show="showUpdateBtn" ng-click="updateRequisitionDetails()"> <span
+				class="glyphicon glyphicon-ok" ng-disabled="disabled"></span> Update
+			</button> 
+			<button ui-sref="recruitment.searchRequisition"
+				class="btn btn-info active"> <span
+				class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
 		</div>
-	</div>
-	<div class="col-sm-1"></div>
+	</form>
 </div>
-</accordion-group> </accordion>
-<div align="center">
-	<a class="btn btn-info active"
-		ng-show="showApprovalBtn && hasRole('ROLE_REQUISITION_APPROVER')"
-		ng-disabled="disableApprovedBtn" ng-click="approve()"> <span
-		class="glyphicon glyphicon-ok-circle"></span> Approve
-	</a> <a class="btn btn-danger" ng-show="showRejectBtn && hasRole('ROLE_REQUISITION_APPROVER')"
-		ng-disabled="disableRejectBtn" ng-click="rejectRequisition()" > <span
-		class="glyphicon glyphicon-remove-circle"></span> Reject
-	</a> <a class="btn btn-info active"
-		ng-disabled="validateRequisition() || disableUpdateBtn"
-		ng-show="showUpdateBtn && hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" ng-click="updateRequisitionDetails()"> <span
-		class="glyphicon glyphicon-ok" ng-disabled="disabled"></span> Update
-	</a>
-	 <a ui-sref="recruitment.searchRequisition" class="btn btn-info active">
-		<span class="glyphicon glyphicon-remove"></span> Cancel
-	</a>
-</div>
-<br>
 <br>
 <br>

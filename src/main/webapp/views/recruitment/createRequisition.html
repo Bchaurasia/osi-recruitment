@@ -1,260 +1,137 @@
-<div style="width: 90%;">
-	<form name="CreateRequisition" onvalidate>
-		<div class="panel panel-default">
-			<div class="panel-heading"
-				style="height: 30px; vertical-align: middle">
-				<h4 style="color: white; margin-top: -4px">Job Requisition</h4>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Create Requisition</h4>
+</div>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="CreateRequisition" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Designation" ng-change="getData()"
+					ng-model="requisition.position" required
+					ng-options="o as o for o in designation1 | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Designations</option>
+				</select> <label>Position<b class="mandatory">*</b></label>
 			</div>
-			<div class="panel-body" align="left">
+			<div class="input-field col s6">
 				<div class="row">
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl"> <i
-								class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Position:<b
-								class="mandatory">*</b>
-							</label>
-						</div>
-						<div class="col-md-3">
-							<select name="designations" placeholder="Select Designations"
-								ng-change="getData()" required ng-model="requisition.position"
-								ng-options="o as o for o in designation1 | orderBy:'toString()'"
-								class="form-control input-sm" id="position">
-								<option value='' disabled="disabled">Select Position</option>
-							</select>
-						</div>
+					<div class="input-field col s6">
+						<input type="range" ng-model="requisition.minExpYear"
+							ng-change="min(requisition.minExpYear)" min="0" max="15" required />
+						<span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
 					</div>
-
-
-					<div class="control-group form-group">
-
-						<div class="col-md-2">
-							<label class="lbl" for="experience"> <i
-								class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Exp. Required:<b
-								class="mandatory">*</b>
-							</label>
-						</div>
-						<div class="col-md-1 col-xs-4">
-							<input id="minExpYear" type="range" name="minExpYear"
-								ng-model="requisition.minExpYear" min="1" max="15" required
-								ng-change="min(requisition.minExpYear)" /> <span class="value">Min:{{requisition.minExpYear}}</span>
-						</div>
-						<div class="col-md-1 col-xs-4">
-							<input id="maxExpYear" type="range" name="maxExpYear"
-								ng-model="requisition.maxExpYear" min="1" max="15" required
-								required ng-change="max(requisition.maxExpYear)" /> <span
-								class="value">Max:{{requisition.maxExpYear}}</span>
-						</div>
-						<!-- <div range-slider min="0" max="15" model-min="requisition.minExpYear" model-max="requisition.maxExpYear"></div> -->
-						<span class="validation-error" ng-show="minErr"> Min Exp
-							should not be greater than Max Exp.</span> <span
-							class="validation-error" ng-show="maxErr"> Max Exp should
-							not be less than Min Exp.</span>
-					</div>
-
-				</div>
-
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-2">
-						<label class="lbl"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Requisition
-							Date : <b class="mandatory">*</b> </label>
-					</div>
-
-					<div class="col-md-3">
-						<input type="date" ng-model="requisitionDate"
-							min="{{today | date : 'yyyy-MM-dd' }}"
-							ng-change="reqDate(requisitionDate,targetDate)"
-							id="requisitionDate" required> <span
-							class="validation-error" ng-show="reqErr">Requistion date
-							should not be after Target Date.</span>
-					</div>
-
-
-
-					<div class="control-group">
-						<div class="col-md-2">
-							<label class="lbl"><i
-								class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;Target Date
-								: <b class="mandatory">*</b></label>
-						</div>
-						<div class="col-md-3">
-							<input type="date" ng-model="targetDate"
-								min="{{today | date : 'yyyy-MM-dd' }}"
-								ng-change="validTargetDate(requisitionDate,targetDate)"
-								id="targetDate" required> <span class="validation-error"
-								ng-show="targetErr">Target date should not be before
-								Requsition Date.</span>
-						</div>
+					<div class="input-field col s6">
+						<input type="range" ng-model="requisition.maxExpYear"
+							ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
+						<span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl"> <i class="glyphicon glyphicon-usd"></i>&nbsp;&nbsp;Client:<b
-								class="mandatory">*</b>
-							</label>
-						</div>
-						<div class="col-md-3">
-							<select required ng-model="requisition.client" ng-change=""
-								ng-options="o as o for o in clientList | orderBy:'toString()'"
-								class="form-control input-sm" id="client">
-								<option value='' disabled="disabled">Select Client</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<div class="col-md-2">
-							<label class="lbl" for="location"> <i
-								class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location:<b
-								class="mandatory">*</b>
-							</label>
-						</div>
-						<div class="col-md-3">
-							<select name="location" placeholder="Select Location"
-								ng-disabled="disLocation" ng-model="requisition.location"
-								ng-options="o as o for o in info.locations | orderBy:'toString()'"
-								class="form-control input-sm" id="location" required>
-								<option value='' disabled="disabled">Select Location</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
-								HR :<b class="mandatory">*</b>
-							</label>
-						</div>
-						<div class="col-md-3">
-							<select ng-model="role" id="hr" ng-options="o.name for o in hr"
-								class="form-control input-sm">
-								<option value='' disabled="disabled">Hiring hr</option>
-							</select>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="col-md-2">
-							<label class="lbl"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. of
-								Positions:<b class="mandatory">*</b></label>
-						</div>
-						<div class="col-md-3">
-							<input id="position" class="form-control input-sm" type="number"
-								ng-model="requisition.noOfPositions" name="position"
-								id="position" placeholder="Enter Number Of Position"
-								ng-pattern="/(^[1-9]\d{0,1}$)/" required> <span
-								class="validation-error"
-								ng-show="(CreateRequisition.position.$dirty || invalidSubmitAttempt) && CreateRequisition.position.$error.pattern">
-								No. Positions should be between 1-99!</span>
-
-						</div>
-					</div>
-
-
-
-				</div>
-				<div class="row" align="left">
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl" for="notes"><i
-								class="glyphicon glyphicon-folder-close"></i>&nbsp;&nbsp;Skills:<b
-								class="mandatory-field">*</b></label>
-						</div>
-						<div class="col-md-3">
-							<ui-select multiple ng-model="requisition.skillType"
-								ng-keypress="myFunct($event)" name="Skills" theme="select2"
-								id="skills" ui-select-required ng-disabled="disabled">
-							<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
-							<ui-select-choices
-								repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
-							{{color}} </ui-select-choices> </ui-select>
-
-						</div>
-					</div>
-				</div>
-				<div class="row" align="left">
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl" for="notes"><i
-								class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Job Description:<b
-								class="mandatory-field">*</b></label>
-						</div>
-						<div class="col-md-8">
-							<textarea cols="50" rows="4" name="comment" id="comment"
-								ng-model="requisition.jobDescription"
-								placeholder="Enter any comments/notes..."
-								style="width: 100%; height: 100px;" required></textarea>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row" align="left">
-					<div class="col-md-1"></div>
-					<b><a ng-show="commentBtn" ng-click="comment()"><span
-							class="glyphicon glyphicon-pencil"></span> Requisition Comment </a></b>
-					<div class="control-group" ng-show="commentBox">
-						<div class="col-md-2">
-							<a ng-click="hideComment()"><label class="lbl"><i
-									class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Requisition
-									Comment :</label></a>
-						</div>
-						<div class="col-md-8">
-							<textarea cols="50" rows="4" name="comment" id="comment"
-								ng-model="requisition.comment"
-								placeholder="Enter any comments/notes..."
-								style="width: 100%; height: 100px;"></textarea>
-						</div>
-					</div>
-				</div>
-
-				<div class="row" align="left">
-					<div class="col-md-4 lbl">
-						&nbsp;&nbsp;<font style="font-style: italic;"><span
-							class="label label-primary lbl">Educational Details:</span></font>
-					</div>
-				</div>
-				<div class="row" align="left"
-					ng-repeat=" requisition in requisition.qualifications">
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl" for="designation"><i
-								class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Qualification:<b
-								class="mandatory">*</b></label>
-						</div>
-						<div class="col-md-3">
-							<select placeholder="Select Qualification"
-								ng-model="requisition.qualification" id="qualification"
-								ng-options="o as o for o in qualification | orderBy:'toString()'"
-								class="form-control input-sm">
-								<option value='' disabled="disabled">Select
-									Qualification</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<div class="col-md-2">
-							<label class="lbl"><i class="glyphicon glyphicon-flag"></i>&nbsp;&nbsp;Percentage:<b
-								class="mandatory">*</b></label>
-						</div>
-						<div class="col-md-2">
-							<input ng-model="requisition.percent" type="range" min="1"
-								max="100" required> <span>
-								{{requisition.percent}}</span>
-						</div>
-						<div class="col-md-1">
-							<div class="row">
-								&nbsp;&nbsp;
-								<button class="glyphicon glyphicon-remove"
+				<label style="margin-top: 14px">Exp. Required<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input type="date" ng-model="requisitionDate"
+					min="{{today | date : 'yyyy-MM-dd' }}"
+					ng-change="reqDate(requisitionDate,targetDate)"
+					id="requisitionDate" required> <label>Requisition
+					Date<b class="mandatory">*</b>
+				</label> <span class="validation-error" ng-show="reqErr">Requistion
+					date should not be after Target Date.</span>
+			</div>
+			<div class="input-field col s6">
+				<input type="date" ng-model="targetDate"
+					min="{{today | date : 'yyyy-MM-dd' }}"
+					ng-change="validTargetDate(requisitionDate,targetDate)"
+					id="targetDate" required> <label>Target Date<b
+					class="mandatory">*</b></label> <span class="validation-error"
+					ng-show="targetErr">Target date should not be before
+					Requsition Date.</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Client" ng-model="requisition.client"
+					required
+					ng-options="o as o for o in clientList | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Client</option>
+				</select> <label>Client<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<select placeholder="Select Location"
+					ng-model="requisition.location"
+					ng-options="o as o for o in info.locations | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option>Select Location</option>
+				</select> <label>Location<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Hiring HR" ng-model="role"
+					ng-options="o.name for o in hr | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option>Select Hiring HR</option>
+				</select> <label>Hiring HR<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Enter number of Positions" type="number"
+					ng-model="requisition.noOfPositions" name="position"
+					ng-change="validateNoOfPosition(requisition.noOfPositions)"
+					class="active validate" ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/"
+					required> <label>No. of Positions<b
+					class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="(CreateRequisition.position.$dirty || invalidSubmitAttempt) && CreateRequisition.position.$error.pattern">
+					No. Positions should be between 1-99!</span>
+			</div>
+		</div>
+		<div class="row" style="margin-bottom: 20px">
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="requisition.skillType"
+					ng-keypress="myFunct($event)" theme="select2" ui-select-required
+					ng-disabled="disabled"> <ui-select-match
+					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+				{{color}} </ui-select-choices> </ui-select>
+				<label>Skills<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea id="textarea1" class="materialize-textarea" length="120"
+					ng-model="requisition.jobDescription"
+					placeholder="Enter any comments/notes..." required></textarea>
+				<label>Job Description<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea id="textarea1" class="materialize-textarea" length="120"
+					ng-model="requisition.comment"
+					placeholder="Enter any comments/notes..."></textarea>
+				<label>Requisition Comment</label>
+			</div>
+		</div>
+		<div class="row" ng-repeat=" requisition in requisition.qualifications">
+			<div class="input-field col s6">
+				<select placeholder="Select Qualification"
+					ng-model="requisition.qualification" required
+					ng-options="o as o for o in qualification | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Qualification</option>
+				</select> <label>Qualification<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s5">
+				<input type="range" ng-model="requisition.percent" min="0" max="100" />
+				<label>Percentage<b class="mandatory">*</b></label> <span
+					class="range-slider__value">{{requisition.percent}}%</span>
+			</div>
+			<div class="input-field col s1">
+				<button class="glyphicon glyphicon-remove"
 									ng-show="lengthOfQualifications()" style="cursor: pointer;"
 									ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;
@@ -262,52 +139,27 @@
 									ng-disabled="checkDisability(requisition.qualification)"
 									ng-show="$last" class="glyphicon glyphicon-plus"
 									ng-click="addColumnCriteria()"></button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row" align="left">
-					<div class="col-md-4 lbl">
-						&nbsp;&nbsp;<font style="font-style: italic;"><span
-							class="label label-primary lbl">Approvers Details:</span></font>
-					</div>
-				</div>
-				<div class="row">
-					<div class="control-group">
-						<div class="col-md-1"></div>
-						<div class="col-md-2">
-							<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Approval
-								1 :<b class="mandatory">*</b>
-							</label>
-						</div>
-						<div class="col-md-3">
-							<select ng-model="requisition.approval1" id="approval1"
-								ng-options="o.name for o in approvals"
-								ng-change="approverfield()" class="form-control input-sm"
-								required>
-								<option value='' disabled="disabled">Select Approval 1</option>
-							</select>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="col-md-2">
-							<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Approval
-								2 :
-							</label>
-						</div>
-						<div class="col-md-3">
-							<select ng-model="requisition.approval2" id="approval2"
-								ng-options="o.name for o in approvals"
-								class="form-control input-sm">
-								<option value='' disabled="disabled">Select Approval 2</option>
-							</select>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
-
-		<div align="center">
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Approver 1"
+					ng-model="requisition.approval1" ng-change="approverfield()"
+					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option>Select Approver 1</option>
+				</select> <label>Approver 1<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<select placeholder="Select Approver 2"
+					ng-model="requisition.approval2"
+					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option>Select Approver 2</option>
+				</select> <label>Approver 2</label>
+			</div>
+		</div>
+		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
 				ng-disabled="CreateRequisition.$invalid || disabled || disabled1 || disabled2 || disableCreateBtn"
 				ng-click="submit()" ui-sref="recruitment.searchRequisition">
@@ -318,6 +170,7 @@
 				<span class="glyphicon glyphicon-remove"></span> Cancel
 			</button>
 		</div>
-		<br> <br>
 	</form>
 </div>
+<br>
+<br>

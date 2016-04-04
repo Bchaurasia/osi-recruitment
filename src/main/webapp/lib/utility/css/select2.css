@@ -6,6 +6,7 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
     position: relative;
     display: inline-block;
     /* inline-block for ie7 */
+    width: 100%;
     zoom: 1;
     *display: inline;
     vertical-align: middle;
@@ -166,9 +167,9 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
 }
 
 .select2-drop-active {
-    border: 1px solid #5897fb;
+    border: 2px solid #26a69a;
     border-top: none;
-    width:100%;
+    width: 81%;
 }
 
 .select2-drop.select2-drop-above.select2-drop-active {
@@ -430,11 +431,9 @@ disabled look for disabled choices in the results dropdown
     margin: 0;
     padding: 0;
     position: relative;
-
-    border: 1px solid #aaa;
+    border: 2px solid #9e9e9e;
     cursor: text;
     overflow: hidden;
-
     background-color: #fff;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eee), color-stop(15%, #fff));
     background-image: -webkit-linear-gradient(top, #eee 1%, #fff 15%);
@@ -448,11 +447,13 @@ disabled look for disabled choices in the results dropdown
 
 .select2-container-multi .select2-choices {
     min-height: 26px;
-    width: 100%;
+    width: 81%;
+    float: left;
+    border-radius: 5px;
 }
 
 .select2-container-multi.select2-container-active .select2-choices {
-    border: 1px solid #5897fb;
+    border: 2px solid #26a69a;
     outline: none;
 
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3);
@@ -464,7 +465,8 @@ disabled look for disabled choices in the results dropdown
 }
 .select2-container-multi .select2-choices .select2-search-field {
     margin: 0;
-    padding: 0;
+    height: 30px;
+    width : 100%;
     white-space: nowrap;
 }
 
@@ -491,16 +493,16 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-container-multi .select2-choices .select2-search-choice {
-    padding: 3px 5px 3px 18px;
+    padding: 5px 5px 5px 20px;
     margin: 3px 0 3px 5px;
     position: relative;
 
     line-height: 13px;
-    color: #333;
+    color: #fff;
     cursor: default;
-    border: 1px solid #aaaaaa;
+    /* border: 1px solid #034A85; */
 
-    border-radius: 3px;
+    border-radius: 15px;
 
     -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
             box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
@@ -513,18 +515,19 @@ disabled look for disabled choices in the results dropdown
           -ms-user-select: none;
               user-select: none;
 
-    background-color: #e4e4e4;
+    background-color: #034A85;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+/*     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
     background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
     background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
     background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
-}
+ */}
 .select2-container-multi .select2-choices .select2-search-choice .select2-chosen {
     cursor: default;
+    background: #034A85;
 }
 .select2-container-multi .select2-choices .select2-search-choice-focus {
-    background: #d4d4d4;
+    background: #034A85;
 }
 
 .select2-search-choice-close {
@@ -553,7 +556,7 @@ disabled look for disabled choices in the results dropdown
 
 /* disabled styles */
 .select2-container-multi.select2-container-disabled .select2-choices {
-    background-color: #f4f4f4;
+    background-color: #034A85;
     background-image: none;
     border: 1px solid #ddd;
     cursor: default;
@@ -563,7 +566,7 @@ disabled look for disabled choices in the results dropdown
     padding: 3px 5px 3px 5px;
     border: 1px solid #ddd;
     background-image: none;
-    background-color: #f4f4f4;
+    background-color: #034A85;
 }
 
 .select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close {    display: none;

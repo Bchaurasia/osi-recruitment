@@ -4,7 +4,7 @@ Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 	/*------------------------------------------------------------------
 [1. Global]
-*/        
+*/         
 html {
 	margin: 0;
 	padding: 0;
@@ -25,26 +25,42 @@ body {
 	width: 900px;
 	height: 250px;
 }
-.mandatory-field{
+
+.mandatory-field {
 	color: red;
 }
 
-#headerColor{
+#headerColor {
 	background: #004D87;
 	height: auto
 }
+
 #logostyle {
-	padding: 0px;
-	margin-left: 8%;
-	height: 80px;
-	width: 150px
+	width: 115px;
+	height: 94px;
+	margin-top: -15px;
 }
+.range-slider__value{
+    background-color: #26A69A;
+    padding: 4px;
+    color: white;
+    border-radius: 4px;
+}
+
+.ulwidth li{
+ width: 100%;
+ }
+ .ulwidth li a i{
+  font-size: 110%;
+ }
 p {
 	font: 13px/1.7em 'Open Sans';
 }
-input{
+
+input {
 	width: 100%;
 }
+
 input, button, select, textarea {
 	font-family: 'Open Sans';
 }
@@ -1158,6 +1174,7 @@ table.fc-border-separate {
 .fc .ui-draggable-dragging .fc-event-bg, .fc-select-helper .fc-event-bg
 	{
 	display: none\9
+
 }
 
 .fc-event-vert .ui-resizable-s {
@@ -1679,7 +1696,7 @@ input, button, select, textarea {
 .footer-inner {
 	padding: 6px 0;
 	font-size: 11px;
-	background: #004D87;
+	background: #034A85;
 	color: white;
 }
 
@@ -2521,6 +2538,7 @@ table.fc-border-separate {
 .fc .ui-draggable-dragging .fc-event-bg, .fc-select-helper .fc-event-bg
 	{
 	display: none\9
+
 }
 
 .fc-event-vert .ui-resizable-s {
@@ -2779,7 +2797,7 @@ table.fc-border-separate {
 	background: ;
 } */
 .nav-tabs>li>a {
-	color: #fff;
+	color: #024F87;
 }
 
 .nav-tabs>li>a:hover {
@@ -2850,6 +2868,7 @@ table.fc-border-separate {
 }
 .validation-error {
 	color: #FB5557;
+	float: left;
 }
 
 .lblColor {
@@ -2861,7 +2880,7 @@ table.fc-border-separate {
 	margin-bottom: 3%;
 }
 
-.add_btn{
+.add_btn {
 	width: 45px;
-  height: 33px;
+	height: 33px;
 }

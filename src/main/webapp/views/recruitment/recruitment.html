@@ -1,6 +1,28 @@
-<!------------------------------------------------------ SIDEBAR ---------------------------------------------->
-		<div ng-include="'views/recruitment/recruitment-sidebar.html'"></div>
-		
+<div class="row">
+	<div class="col s12" align="center">
+		<ul class="tabs">
+			<li class="tab"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				role="presentation"><a
+				ng-class="{active: isActive('recruitment.searchRequisition')}"
+				ui-sref="recruitment.searchRequisition">Requisition</a></li>
+			<li ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR')"
+				role="presentation" class="tab"><a
+				ng-class="{active: isActive('recruitment.searchPosition')}"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				ui-sref="recruitment.searchPosition">Position</a></li>
+			<li
+				ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				role="presentation" class="tab"><a
+				ng-class="{active: isActive('recruitment.searchProfile')}"
+				ui-sref="recruitment.searchProfile">Profile</a></li>
+			<li
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				class="tab" role="presentation"><a
+				ui-sref="recruitment.interviewManagement"
+				ng-class="{active: isActive('recruitment.interviewManagement')}">Interview</a></li>
+		</ul>
+	</div>
+</div>
 <!------------------------------------------------------ ------------------------------------------------------>
-
 <div ui-view></div>
