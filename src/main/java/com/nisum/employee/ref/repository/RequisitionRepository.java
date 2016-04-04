@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.nisum.employee.ref.domain.Requisition;
+import com.nisum.employee.ref.search.RequisitionSearchService;
 
 @Repository
 public class RequisitionRepository {
@@ -22,10 +23,14 @@ public class RequisitionRepository {
 	@Autowired
 	private SequenceRepository sequenceRepository;
 	
-	public void prepareRequisition(Requisition requisition) {
+	@Autowired
+	private RequisitionSearchService requisitionSearchService;
+	
+	public void prepareRequisition(Requisition requisition) throws Exception {
 		requisition.setRequisitionId("REQ_"+sequenceRepository.getNextSequenceId("REQ"));
 		requisition.setCreatedDate(new Date());
 		mongoOperations.save(requisition);
+		requisitionSearchService.addRequisitionIndex(requisition);
 	}
 
 	public void updateRequisition(Requisition requisition) {

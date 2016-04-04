@@ -30,13 +30,17 @@ public class RequisitionService implements IRequisitionService {
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
 
 	@Override
-	public void prepareRequisition(Requisition requisition) {
+	public void prepareRequisition(Requisition requisition)  {
 		if (requisition.getApproval2().getName() == null
 				&& requisition.getApproval2().getEmailId() == null) {
 			requisition.setApproval2(null);
 		}
 		requisition.setStatus(INITIATED);
-		requisitionRepository.prepareRequisition(requisition);
+		try {
+			requisitionRepository.prepareRequisition(requisition);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		try {
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (MessagingException e) {

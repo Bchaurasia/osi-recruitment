@@ -24,12 +24,12 @@ repositories {
 ext.springVersion = "3.2.2"
 ext.springSecurity = "3.0.5"
 ext.springExceptionHandlerVersion = "2.0.1"
-ext.springDataVersion = "1.7.2"
+ext.springDataVersion = "1.8.2"
 
 List SPRING = [
         "org.springframework.data:spring-data-mongodb:${springDataVersion}.RELEASE",
-         "org.springframework:spring-webmvc:${springVersion}.RELEASE",
-
+		 "org.springframework:spring-webmvc:${springVersion}.RELEASE",
+		"org.springframework:spring-context:${springVersion}.RELEASE",
         "org.springframework:spring-test:${springVersion}.RELEASE",
         "org.springframework:spring-context-support:${springVersion}.RELEASE",
         "org.springframework.security:spring-security-core:${springSecurity}.RELEASE",
@@ -44,8 +44,8 @@ List SPRING = [
 
 List SPRING_SOURCES = [
         "org.springframework:spring-webmvc:${springVersion}.RELEASE:sources",
-
-         "org.springframework.security:spring-security-core:${springSecurity}.RELEASE",
+        "org.springframework:spring-context:${springVersion}.RELEASE",
+        "org.springframework.security:spring-security-core:${springSecurity}.RELEASE",
         "org.springframework.security:spring-security-web:${springSecurity}.RELEASE",
         "org.springframework.security:spring-security-config:${springSecurity}.RELEASE",
         "org.springframework.security:spring-security-ldap:${springSecurity}.RELEASE",
@@ -91,6 +91,12 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
     compile group: 'net.sf.opencsv', name: 'opencsv', version: '2.+'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.+'
+    
+    compile('org.springframework.data:spring-data-elasticsearch:1.3.4.RELEASE'){
+    	exclude module: 'spring-tx'
+    	exclude module: 'commons-lang'
+    	exclude module: 'commons-collections'
+   }
 }
 
 test {
