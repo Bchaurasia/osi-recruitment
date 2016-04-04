@@ -169,18 +169,17 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	
 	
 	$scope.cloneRequisitionDetails = function(){
-		if ($scope.requisition !== undefined) {
+		if ($scope.requisition !== undefined && $scope.requisition.status !== "REJECTED") {
 			delete $scope.requisition.requisitionId;
 			delete $scope.requisition.createdDate;
 			delete $scope.requisition.createdBy;
 			delete $scope.requisition.lastModifiedDate;
 			delete $scope.requisition.lastModifiedBy;
 			delete $scope.requisition.version;
+			delete $scope.requisition.status;
 			$scope.requisition.requisitionDate.toString();
-			if(null==$scope.requisition.approval2){
-				$scope.requisition.approval2={};
-			}
-			 requisitionService.createRequisition($scope.requisition)
+			
+			 requisitionService.cloneRequisition($scope.requisition)
 				.then(successMsg)
 				.catch(errorMsg);
 				
@@ -193,6 +192,10 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 					$scope.cls=appConstants.ERROR_CLASS;
 				}
 			
+		}else{
+			cls=appConstants.ERROR_CLASS;
+			message="clone not supportet for REJECTED Requisition";
+			$scope.sendNotificationWithStyle(message,cls,'recruitment/searchRequisition');
 		}
 	}
 	

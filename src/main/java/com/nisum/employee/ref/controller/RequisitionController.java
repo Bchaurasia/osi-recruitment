@@ -17,7 +17,6 @@ import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.domain.RequisitionUser;
 import com.nisum.employee.ref.service.JobRequisitionNotificationService;
-import com.nisum.employee.ref.service.PositionService;
 import com.nisum.employee.ref.service.RequisitionService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,12 +26,15 @@ import lombok.extern.slf4j.Slf4j;
 public class RequisitionController {
 
 
+	private static final String REQUISITION_HAS_BEEN_REJECTED_SUCCESSFULLY = " Requisition has been Rejected successfully\"}";
+
+	private static final String MSG_START = "{\"msg\":\"";
+
+	private static final String MSG_END ="\"}";
+	
 	@Autowired
 	private RequisitionService requisitionService;
 
-	@Autowired
-	private PositionService positionService;
-	
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
 	
@@ -42,46 +44,58 @@ public class RequisitionController {
 	@RequestMapping(value="/requisition",method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createRequisition(@RequestBody Requisition requisition)  throws Exception {
-		log.info("approveing requisition");
+		log.info("creating requisition");
 		requisitionService.prepareRequisition(requisition);
-		setRequisitionApprovalDetails(requisitionApproverDetails,requisition.getApproval1(),requisition.getRequisitionId());
+		setRequisitionApprovalDetails(requisitionApproverDetails,requisition.getApproval1(),requisition);
 		if(requisition.getApproval2() != null ) {
-			setRequisitionApprovalDetails(requisitionApproverDetails, requisition.getApproval2(),requisition.getRequisitionId());
+			setRequisitionApprovalDetails(requisitionApproverDetails, requisition.getApproval2(),requisition);
 		}
 		
 		requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
 		String message="Requisition created successfully and notification sent to "+ requisitionApproverDetails.getApproverName()+".";
-		String jsonObj="{\"msg\":\""+ message+ "\"}";
+		String jsonObj=MSG_START+ message+ MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
-		
-	}
-
-	private void setRequisitionApprovalDetails(RequisitionApproverDetails requisitionApproverDetails, RequisitionUser re, String id) {
-		requisitionApproverDetails.setApproverEmailId(re.getEmailId());
-		requisitionApproverDetails.setApproverName(re.getName());
-		requisitionApproverDetails.setJobRequisitionId(id);
 		
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value="/cloneRequisition",method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<?> cloneRequisition(@RequestBody Requisition requisition)  throws Exception {
+
+		requisitionService.prepareRequisition(requisition);
+		requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
+		String message="Requisition Cloned successfully and sent notification to "+ requisitionApproverDetails.getApproverName()+".";
+		String jsonObj=MSG_START+ message+ MSG_END;
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+		
+	}
+	
+	
+	
+	private void setRequisitionApprovalDetails(RequisitionApproverDetails requisitionApproverDetails, RequisitionUser re, Requisition requisition) {
+		requisitionApproverDetails.setRequisitionManagerEmail(requisition.getRequisitionManager().getEmailId());
+		requisitionApproverDetails.setRequisitionManagerName(requisition.getRequisitionManager().getName());
+		requisitionApproverDetails.setJobRequisitionId(requisition.getRequisitionId());
+		requisitionApproverDetails.setApproverEmailId(re.getEmailId());
+		requisitionApproverDetails.setApproverName(re.getName());
+	}
+	
+	@Secured({"ROLE_REQUISITION_APPROVER"})
 	@ResponseBody
 	@RequestMapping(value="/approveRequisition",method = RequestMethod.POST)
 	public ResponseEntity<?> approveRequisition(@RequestBody Requisition requisition) throws Exception{
-		log.info("creating new requisition");
-		String jsonObj="";
-		if(requisition.getApproval2() != null && requisition.getApproval1().isApproved() && requisition.getApproval2().isApproved()){
-			positionService.createRequitionPosition(requisition);
-			jsonObj="{\"msg\":\""+ requisition.getRequisitionId()+" Requisition has been approved and "+requisition.getNoOfPositions()+" Number Positions created successfully\"}";
-		}else if(requisition.getApproval2() == null && requisition.getApproval1().isApproved() ){
-			positionService.createRequitionPosition(requisition);
-			jsonObj="{\"msg\":\""+ requisition.getRequisitionId()+" Requisition has been approved and "+requisition.getNoOfPositions()+" Number Positions created successfully\"}";
-		}
-		else{
-			requisitionService.updateRequisition(requisition);
-			requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
-			jsonObj="{\"msg\":\""+ requisition.getRequisitionId()+" Requisition has been approved successfully\"}";
-		}
+		log.info("approveing requisition");
+		String jsonObj = MSG_START+ requisitionService.approveRequisition(requisition) + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_REQUISITION_APPROVER"})
+	@ResponseBody
+	@RequestMapping(value="/rejectRequisition",method = RequestMethod.POST)
+	public ResponseEntity<?> rejectRequisition(@RequestBody Requisition requisition) throws Exception{
+				requisitionService.rejectRequisition(requisition);
+		return new ResponseEntity<String>(MSG_START+ requisition.getRequisitionId()+REQUISITION_HAS_BEEN_REJECTED_SUCCESSFULLY, HttpStatus.OK);
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
@@ -90,13 +104,13 @@ public class RequisitionController {
 	public ResponseEntity<String> updateRequisition(@RequestBody Requisition requisition) throws Exception{
 		log.info("Updating requisition");
 		requisitionService.updateRequisition(requisition);
-		setRequisitionApprovalDetails(requisitionApproverDetails,requisition.getApproval1(),requisition.getRequisitionId());
+		setRequisitionApprovalDetails(requisitionApproverDetails,requisition.getApproval1(),requisition);
 		if(requisition.getApproval2() != null) {
-			setRequisitionApprovalDetails(requisitionApproverDetails, requisition.getApproval2(),requisition.getRequisitionId());
+			setRequisitionApprovalDetails(requisitionApproverDetails, requisition.getApproval2(),requisition);
 		}
 		requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
 		String message="Requisition successfully Updated and notification sent to "+ requisitionApproverDetails.getApproverName()+".";
-		String jsonObj="{\"msg\":\""+ message+ "\"}";
+		String jsonObj=MSG_START+ message+ MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 

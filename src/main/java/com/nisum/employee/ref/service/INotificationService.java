@@ -13,7 +13,10 @@ import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 
 public interface INotificationService {
 	void sendFeedbackMail(InterviewFeedback interviewFeedback) throws MessagingException;
-	String sendScheduleMail(InterviewSchedule interviewSchedule, String mobileNo, String altMobileNo, String skypeId) throws Exception;
-	void sendJobRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
-    ResourceNotFoundException, ParseErrorException,MethodInvocationException;
+	String sendScheduleMail(InterviewSchedule interviewSchedule, String mobileNo, String altMobileNo, String skypeId)
+			throws Exception;
+	void sendJobRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails) throws AddressException,
+			MessagingException, ResourceNotFoundException, ParseErrorException, MethodInvocationException;
+	void sendRejectRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
+	ResourceNotFoundException, ParseErrorException,MethodInvocationException;
 }

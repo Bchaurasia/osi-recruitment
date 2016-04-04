@@ -4,10 +4,12 @@ angular.module('erApp')
 function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$log) {
 	return {
 		createRequisition : addRequisition,
+		cloneRequisition : cloneRequisition,
 		getRequisitionById : getRequisitionById,
 		updateRequisition : updateRequisition,
 		getAllRequisitions : getAllRequisitions,
-		approveRequisition: approveRequisition
+		approveRequisition : approveRequisition,
+		rejectRequisition : rejectRequisition
 		
 	};
 	
@@ -16,11 +18,24 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		.then(createRequisitionSuccess)
 		.catch(createRequisitionError);
 	}
+	function cloneRequisition(requisitionObj){
+		return $http.post('resources/cloneRequisition', requisitionObj)
+		.then(createRequisitionSuccess)
+		.catch(createRequisitionError);
+	}
+	
 	function approveRequisition(requisitionObj){
 		return $http.post('resources/approveRequisition', requisitionObj)
 		.then(approveRequisitionSuccess)
 		.catch(approveRequisitionError);
 	}
+	
+	function rejectRequisition(requisitionObj){
+		return $http.post('resources/rejectRequisition', requisitionObj)
+					.then(approveRequisitionSuccess)
+					.catch(createRequisitionError);
+	}
+	
 	function approveRequisitionSuccess(response){
 		return response.data.msg;
 	}

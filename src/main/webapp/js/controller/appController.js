@@ -55,6 +55,15 @@ angular.module('erApp')
 		}
 	}
 	
+	$scope.sendNotificationWithStyle = function(msg,cls,path){
+		$scope.message=msg;
+		$scope.cls=cls;
+		$timeout( function(){ $scope.alHide(); }, 5000);
+		if(path.length > 0){
+			$location.path(path);
+		}
+	}
+	
 	$scope.sendSharedMessage = function(msg,path){
 		sharedDataService.setClass(appConstants.SUCCESS_CLASS);
 		sharedDataService.setmessage(msg);

@@ -313,7 +313,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-5">
+	<div class="col-sm-5" ng-show="{{requisition.approval2 !== undefined}}">
 		<div class="card card-block">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Approval 2</div>
@@ -369,9 +369,8 @@
 		ng-disabled="showApprovedBtn" ng-click="approve()"> <span
 		class="glyphicon glyphicon-ok-circle"></span> Approve
 	</a>
-	<a class="btn btn-info active"
-		ng-show="showApprovalBtn || showApprovedBtn"
-		ng-disabled="showApprovedBtn" ng-click="approve()"> <span
+	<a class="btn btn-danger" ng-show="showRejectBtn" ng-disabled="disableRejectBtn"
+		ng-click="rejectRequisition()"> <span
 		class="glyphicon glyphicon-ok-circle"></span> Reject
 	</a>  
 	<a class="btn btn-info active"
