@@ -30,6 +30,13 @@ public class ProfileSearchService {
 		Profile profileData = profileIndexRepository.save(profile);
 		return profileData;
 	}
+
+	public void updateProfileIndex(Profile profile) throws Exception {
+		profileIndexRepository.exists(profile.getEmailId());
+		profileIndexRepository.delete(profile.getEmailId());
+		addProfileIndex(profile);
+	}
+	
 	
 	public List<Profile> getProfilesByEmailId(String emailId){
 	List<Profile> profilesList = profileIndexRepository.findProfilesByEmailIdStartingWithAllIgnoreCase(emailId);

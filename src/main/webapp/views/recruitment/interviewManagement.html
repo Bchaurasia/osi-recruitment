@@ -54,7 +54,7 @@ th {
 					</tr>
 				</thead>
 				<tbody>
-				<tr class="animate-repeat" ng-repeat="item in interviewDetails | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+				<tr class="animate-repeat" ng-repeat="item in interviewDetails | orderBy : sortComment : true  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
 					<td>{{item.candidateName}}</td>
 			<td>{{item.candidateEmail}}</td>
 			<td><i ng-repeat="skills in item.candidateSkills">{{skills}}{{$last

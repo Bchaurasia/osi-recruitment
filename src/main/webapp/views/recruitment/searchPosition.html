@@ -1,88 +1,60 @@
-<h2>
-	Position Management - <small>Search</small>
-</h2>
-<br>
-<div ng-class="cls" ng-show="message" align="center"
-	style="width: 850px; position: relative; top: -35px; height: 50">
-	<h5 style="margin-top: 2px;">{{message}}</h5>
-</div>
-<br>
-<div class="searchposition-container" style="">
-	<br>
-	<form action="#" name="createPosition" class="searchPosition"
-		onvalidate>
-		<form id="integerForm" role="form" class="form-horizontal">
-			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-4">
-					<div class="input-group">
-						<input class="form-control" ng-model="search"
-							ng-change="changePage()" placeholder="Enter Search String"
-							type="search"
-							style="width: 80%; border: 1px solid rgb(194, 191, 191);" /> <span
-							class="input-group-addon" style="position: relative; left: -19%">
-							<span class="glyphicon glyphicon-search"></span>
-						</span>
-					</div>
-				</div>
+<form action="#" name="createPosition" class="searchPosition" onvalidate>
+	<form id="integerForm" role="form" class="form-horizontal">
+		<div ng-class="cls" ng-show="message" align="center"
+			style="width: 850px; position: relative; top: -35px; height: 50">
+			<h5 style="margin-top: 2px;">{{message}}</h5>
+		</div>
+		<div class="row" style="width: 90%">
+		<div class="col-md-4"></div>
+			<div class="col-md-8" align="right">
+							<input type="text" class="form-control" ng-model="search" ng-change ="searchPosition(search)"
+						placeholder="Search By Designatin or Client">
 			</div>
-			<br>
-			<table ng-hide="tableHide" id="interview" class="table table-striped"
-				style="margin-left: 0px; width: 94%; top: -18px;">
-				<thead>
-					<tr>
-						<th>Job code</th>
-						<th>REQ Id</th>
+		</div>
+				<table class="bordered" style="width: 90%">
+			<thead>
+				<tr>
+					    <th>Job code</th>
+					    <th>REQ Id</th>
 						<th>Designation</th>
 						<th>Min-Exp</th>
 						<th>Max-Exp</th>
 						<th>Location</th>
 						<th>Client</th>
-						<!-- <th>Share</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="animate-repeat"
-						ng-repeat="data in position | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
-						<td class="mdl-data-table__cell--non-numeric"><a
-							style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
-						<td class="mdl-data-table__cell--non-numeric">{{data.requisitionId}}</td>
-						<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
-						<td class="mdl-data-table__cell--non-numeric">{{data.minExpYear}}</td>
-						<td class="mdl-data-table__cell--non-numeric">{{data.maxExpYear}}</td>
-						<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
-						<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>
-						<!-- <td class="mdl-data-table__cell--non-numeric"><left>
-								</left>&nbsp;&nbsp;&nbsp;
-								<right><a href="" style="cursor:pointer;" ng-click="shareContent(data.jobcode)">
-									<img src="https://simplesharebuttons.com/images/somacro/linkedin.png" width="20" height="20" title="Share on Linked In" /></a></right>
-								</td> -->
+				</tr>
+			</thead>
 
-					</tr>
-					<tr class="animate-repeat" ng-if="results.length == 0">
-						<td>No results found...</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="row">
-				<div class="col-md-3">
-					<h5>Total Positions : {{ position.length }}</h5>
-				</div>
+			<tbody>
+				<tr class="animate-repeat"
+					ng-repeat="data in position | orderBy : sortComment : true  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+						<td><a style="cursor: pointer;" 
+							ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
+						<td>{{data.requisitionId}}</td>
+						<td>{{data.designation}}</td>
+						<td>{{data.minExpYear}}</td>
+						<td>{{data.maxExpYear}}</td>
+						<td>{{data.location}}</td>
+						<td>{{data.client}}</td>
 
-				<div class="col-md-9">
-					<ul class="pagination pull-right">
-						<li ng-class="{disabled: currentPage == 0}"><a href
-							ng-click="prevPage()">Prev</a></li>
-						<li ng-repeat="n in range(currentPage)"
-							ng-class="{active: n == currentPage}" ng-click="setPage()">
-							<a href ng-bind="n + 1"></a>
-						</li>
-						<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
-							href ng-click="nextPage()">Next</a></li>
-					</ul>
-				</div>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<div class="row" style="width: 90%">
+			<div class="col-md-3" align="left">
+				<h5>
+				<small>	Total Positions : {{ position.length }}</small>
+				</h5>
 			</div>
-			<br>
-			<br>
-		</form>
+			
+			<div class="col-md-9">
+				 <ul class="pagination1 pull-right">
+				    <li ng-class="{disabled: currentPage == 0}"><a ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+				    <li  ng-repeat="n in range(currentPage)" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1"></a></li>
+				    <li class="waves-effect" ng-class="{disabled: currentPage == pageCount() - 1}"><a ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+				  </ul>
+			</div>
+		</div>
+		<br> <br>
 	</form>
+</form>

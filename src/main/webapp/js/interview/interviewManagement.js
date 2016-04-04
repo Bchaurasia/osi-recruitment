@@ -1,4 +1,4 @@
-	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$log', '$rootScope', function($scope, $http, $q, $window,jobCodeService1, $log, $rootScope) {
+	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$log', '$rootScope' , 'appConstants', function($scope, $http, $q, $window,jobCodeService1, $log, $rootScope, appConstants ) {
 		$scope.interview = {};
 		$scope.positionDisable = true;
 		$scope.searchDisable = true;
@@ -32,6 +32,18 @@
 		}).error(function(data, status, headers, config) {
 			$log.error(data);
 		})
+		
+		
+		
+		$scope.searchInterviewDetails = function(search){
+			$http.get('resources/interviewDetailsSearch?interviewDetails='+search)
+			.then(function(data){
+				$scope.interviewDetails = data.data;
+			})
+			.catch(function(data){
+				console.log("Failed to get data"+data);
+			});
+		}
 		
 		$scope.loadInterviews = function(){
 			$scope.interview.skill = "";
@@ -199,4 +211,60 @@
 				$scope.advancedHide = true;
 			}
 		}
+		$scope.sortComment = function(comment) {
+		    var date = new Date(comment.created);
+		    return date;
+		};
+		$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
+		$scope.currentPage = 0;
+		$scope.changePage = function(){
+			$scope.currentPage = 0;
+		}
+		
+		$scope.range = function (start) {
+			var pageCnt = $scope.pageCount();
+	        var ret = [];
+
+			if (start + 1 == pageCnt && pageCnt==1) {
+				ret.push(0);
+				return ret;
+			}
+			if ((start + 2 >= pageCnt)) {
+				while (start + 2 >= pageCnt)
+					start--;
+			}
+			if(start<0)
+				start=0;
+			for (var i = start; i < pageCnt; i++) {
+				ret.push(i);
+				if (i == start + 2)
+					break;
+			}
+			return ret;
+	    };
+
+			  $scope.prevPage = function() {
+			    if ($scope.currentPage > 0) {
+			      $scope.currentPage--;
+			    }
+			  };
+
+			  $scope.pageCount = function() {
+				if (!$scope.interviewDetails) { return; }
+			    return Math.ceil($scope.interviewDetails.length/$scope.itemsPerPage);
+			  };
+
+			  $scope.nextPage = function() {
+				  $scope.page = $scope.pageCount()-1;   
+			    if ($scope.currentPage < $scope.page) {
+			      $scope.currentPage++;
+			    }
+			  };
+
+			  $scope.setPage = function() {
+			    $scope.currentPage = this.n;
+			  };
+		
+		
+		
 	}]);

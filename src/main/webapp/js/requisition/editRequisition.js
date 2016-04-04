@@ -280,6 +280,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
+		console.debug("data is ------>  "+data);
 		$scope.reqId = $scope.allRequisitions.length;
 	}).error(function(data, status, headers, config) {
 		$log.error(data);
@@ -291,6 +292,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
     });
 	
 	$scope.approve = function(){
+		console.debug("data"+angular.toJson($scope.requisition));
 		if($scope.user.emailId === $scope.requisition.approval1.emailId){
 			$scope.requisition.approval1.approved = true;
 		}else if($scope.user.emailId === $scope.requisition.approval2.emailId){

@@ -16,7 +16,7 @@ public class PositionSearchService {
 	private PositionIndexRepository positionIndexRepository;
 	
 	
-	public List<Position> getAllPostions() throws Exception {
+	public List<Position> getAllPostions(){
 		Iterable<Position> position = positionIndexRepository.findAll();
 		List<Position> positionList = Lists.newArrayList(position);
 		return positionList;
@@ -32,6 +32,14 @@ public class PositionSearchService {
 		Position positionData = positionIndexRepository.save(position);
 		return positionData;
 	}
+	
+	
+	public void updatePositionIndex(Position position) throws Exception {
+			positionIndexRepository.exists(position.getJobcode());
+			positionIndexRepository.delete(position.getJobcode());
+			addPositionIndex(position);
+	}
+	
 	
 	public List<Position> getPostionByDesignation(String designation) throws Exception {
 		List<Position> positionList = positionIndexRepository.findPositionsByDesignationAllIgnoreCase(designation);

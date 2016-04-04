@@ -34,7 +34,7 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 	
 	function approveRequisition(requisitionObj){
 		return $http.post('resources/approveRequisition', requisitionObj)
-		.then(responseSuccess)
+		.then(approveRequisitionSuccess)
 		.catch(approveRequisitionError);
 	}
 	

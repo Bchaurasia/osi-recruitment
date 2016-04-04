@@ -11,6 +11,7 @@ import com.nisum.employee.ref.domain.PositionAggregate;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.repository.PositionRepository;
 import com.nisum.employee.ref.repository.SequenceRepository;
+import com.nisum.employee.ref.search.PositionSearchService;
 
 @Service
 public class PositionService implements IPositionService{
@@ -23,12 +24,20 @@ public class PositionService implements IPositionService{
 	@Autowired
 	SequenceRepository sequenceRepository;
 	
+	@Autowired
+	PositionSearchService positionSearchService;
+	
 	public void preparePosition(Position position) {
 		positionRepository.preparePosition(position);
 	}
 	
 	public void updatePosition(Position position) {
-		positionRepository.updatePosition(position);
+		try {
+			positionRepository.updatePosition(position);
+			positionSearchService.updatePositionIndex(position);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Position> retrievePositionByClient(String client) {

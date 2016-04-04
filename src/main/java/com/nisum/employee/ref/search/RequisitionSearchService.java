@@ -37,11 +37,9 @@ public class RequisitionSearchService {
 	}
 	
 	public void updateRequisitionIndex(Requisition requisition) throws Exception {
-		
-		if(requisitionIndexRepository.exists(requisition.getRequisitionId()) ){
-			requisitionIndexRepository.delete(requisition.getRequisitionId());
-			addRequisitionIndex(requisition);
-		}
+		requisitionIndexRepository.exists(requisition.getRequisitionId());
+		requisitionIndexRepository.delete(requisition.getRequisitionId());
+		addRequisitionIndex(requisition);
 	}
 	
 	

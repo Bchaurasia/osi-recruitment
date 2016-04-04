@@ -1,21 +1,69 @@
-<div class="container">
-<br>
-<h2>Profile Management - <small>Search</small></h2>
-<br>
-<div ng-class="cls" ng-show="message" align="center"
-	style="width: 850px; position: relative; top: -35px; height: 50">
-	<h5 style="margin-top: 2px;">{{message}}</h5>
-</div>
-
-<div class="searchprofile-container" style="">
-	<br>
-	<form action="#" name="searchProfile" onvalidate id="integerForm"
-		role="form" class="form-horizontal">
-		<div>
-			<datagrid column-header='col' attributes='att' obj='myData'
-				editfun='editProfile(val)' addlink='recruitment/createProfile'
-				search-enable='true' array-attributes='att1'></datagrid>
+ <form action="#" name="createProfile" class="searchProfile" onvalidate>
+	<form id="integerForm" role="form" class="form-horizontal">
+		<div ng-class="cls" ng-show="message" align="center"
+			style="width: 850px; position: relative; top: -35px; height: 50">
+			<h5 style="margin-top: 2px;">{{message}}</h5>
 		</div>
+		<div class="row" style="width: 90%">
+		<div class="col-md-3"></div>
+			<div class="col-md-6 ">
+					<input type="text" class="form-control" ng-model="search" ng-change ="searchProfile(search)"
+						placeholder="Search By Name or Email or Designation">
+			</div>
+			<div class="col-md-2" align="center">
+					
+					<a class="waves-effect waves-light btn"
+					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"
+					href="#recruitment/createProfile"><i class="material-icons left">add</i>create</a>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+
+		<table class="bordered" style="width: 90%">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email Id</th>
+					<th>Designation</th>
+					<th>Experience</th>
+					<th>Current Employer</th>
+					<th>Assigned Job Code</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="animate-repeat"
+					ng-repeat="data in profile | orderBy : sortComment : true  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+					<td class="mdl-data-table__cell--non-numeric"><a
+						style="cursor: pointer;" ng-click="editProfile(data)">{{data.candidateName}}</a></td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.emailId}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.expYear}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.currentEmployer}}</td>
+					<td class="mdl-data-table__cell--non-numeric" ng-repeat="i in data.jobcodeProfile">&nbsp;&nbsp;{{i}}{{$last	? '' : ', '}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<div class="row" style="width: 90%">
+			<div class="col-md-3" align="left">
+				<h5>
+					<small> Total Profiles : {{ myData.length }}</small>
+				</h5>
+			</div>
+
+			<div class="col-md-9">
+				<ul class="pagination1 pull-right">
+					<li ng-class="{disabled: currentPage == 0}"><a
+						ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+					<li ng-repeat="n in range(currentPage)"
+						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+						ng-bind="n + 1"></a></li>
+					<li class="waves-effect"
+						ng-class="{disabled: currentPage == pageCount() - 1}"><a
+						ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+				</ul>
+			</div>
+		</div>
+		<br> <br>
 	</form>
-</div>
-</div>
+</form>

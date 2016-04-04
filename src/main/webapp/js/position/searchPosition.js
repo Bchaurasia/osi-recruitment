@@ -1,5 +1,5 @@
-app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout) {
+app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout','positionSearchService',
+                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout,positionSearchService) {
 
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
@@ -7,7 +7,7 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 	$scope.message1="";	
 	$scope.title = "Search";
 	
-	positionService.getPosition().then(function(data){
+	positionSearchService.getPosition().then(function(data){
 		 $scope.position=data;
 		 console.log(angular.toJson($scope.position));
 	}).catch(function(msg){
@@ -22,6 +22,16 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 		$scope.currentPage = 0;
 	}
 	
+	$scope.searchPosition = function(searchVal){
+		positionSearchService.searchPosition(searchVal).then(function(data) {
+			$scope.position = data;
+		})
+	}
+	
+	$scope.sortComment = function(comment) {
+	    var date = new Date(comment.created);
+	    return date;
+	};
 	$scope.range = function (start) {
 		var pageCnt = $scope.pageCount();
         var ret = [];

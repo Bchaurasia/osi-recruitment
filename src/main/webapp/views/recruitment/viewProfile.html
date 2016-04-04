@@ -1,5 +1,5 @@
 
-<div ng-controller="editProfileCtrl">
+<div>
 	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
 	<div ng-class="cls" ng-show="message" align="center"
 		style="width: 850px; position: relative; left: -60; height: 50">
@@ -23,9 +23,9 @@
 					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Candidate Name*</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.candidateName"
+				<a href="#" editable-text="candidate[0].candidateName"
 					onbeforesave="validateChar($data)" e-required>{{
-					candidate.candidateName }} </a>
+					candidate[0].candidateName }} </a>
 			</div>
 		</div>
 
@@ -34,7 +34,7 @@
 				<label class="lbl" for="emailId"><i
 					class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Email Id*</label>
 			</div>
-			<div class="col-md-3">{{ candidate.emailId }}</div>
+			<div class="col-md-3">{{ candidate[0].emailId }}</div>
 		</div>
 	</div>
 
@@ -72,9 +72,9 @@
 					class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;MobileNo*</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.mobileNo"
+				<a href="#" editable-text="candidate[0].mobileNo"
 					onbeforesave="validatePhNo($data)" e-required>{{
-					candidate.mobileNo || "--" }}</a>
+					candidate[0].mobileNo || "--" }}</a>
 			</div>
 		</div>
 
@@ -84,8 +84,8 @@
 					class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Alt. MobileNo</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.altmobileNo"
-					onbeforesave="validatePhNo($data)">{{ candidate.altmobileNo ||
+				<a href="#" editable-text="candidate[0].altmobileNo"
+					onbeforesave="validatePhNo($data)">{{ candidate[0].altmobileNo ||
 					"--" }}</a>
 			</div>
 		</div>
@@ -100,9 +100,9 @@
 					class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Passport No.</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.passportNo"
+				<a href="#" editable-text="candidate[0].passportNo"
 					onbeforesave="validateAlphanumeric($data)">{{
-					candidate.passportNo || "--" }}</a>
+					candidate[0].passportNo || "--" }}</a>
 			</div>
 		</div>
 
@@ -112,8 +112,8 @@
 					class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Current Address*</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.address" e-required>{{
-					candidate.address || "--" }}</a>
+				<a href="#" editable-text="candidate[0].address" e-required>{{
+					candidate[0].address || "--" }}</a>
 			</div>
 		</div>
 	</div>
@@ -127,8 +127,8 @@
 					class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Skype Id.</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.skypeId"
-					onbeforesave="validateAlphanumeric($data)">{{ candidate.skypeId
+				<a href="#" editable-text="candidate[0].skypeId"
+					onbeforesave="validateAlphanumeric($data)">{{ candidate[0].skypeId
 					|| "--" }}</a>
 			</div>
 		</div>
@@ -152,9 +152,9 @@
 					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Qualification*</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="candidate.qualification"
+				<a href="#" editable-select="candidate[0].qualification"
 					e-ng-options="o as o for o in info.qualification" e-required>
-					{{ candidate.qualification }} </a>
+					{{ candidate[0].qualification }} </a>
 
 			</div>
 		</div>
@@ -165,8 +165,8 @@
 					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Specialisation</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.stream"
-					onbeforesave="validateChar($data)">{{ candidate.stream || "--"
+				<a href="#" editable-text="candidate[0].stream"
+					onbeforesave="validateChar($data)">{{ candidate[0].stream || "--"
 					}}</a>
 			</div>
 		</div>
@@ -182,16 +182,10 @@
 			</div>
 			<div class="col-md-3">
 				<div class="col-md-6">
-					Years <!-- <a href="#" editable-select="candidate.expYear" onaftersave="getDesignations()" 
-						e-ng-options="o as o for o in info.expYears">{{candidate.expYear
-						|| "--"}}</a> -->
-					{{candidate.expYear	|| "--"}}
+					Years: {{candidate[0].expYear	|| "--"}}
 				</div>
 				<div class="col-md-6">
-					Months: <!-- <a href="#" editable-select="candidate.expMonth"
-						e-ng-options="o as o for o in info.expMonths">{{candidate.expMonth
-						|| "--"}}</a> -->
-				    {{candidate.expMonth || "--"}}
+					Months:  {{candidate[0].expMonth || "--"}}
 					</td>
 				</div>
 			</div>
@@ -204,9 +198,9 @@
 			</div>
 			<div class="col-md-3">
 					<a herf="" ng-hide="dis1" ng-click="skillss()"><i
-						ng-repeat="skills in candidate.primarySkills">{{skills}}{{$last
+						ng-repeat="skills in candidate[0].primarySkills">{{skills}}{{$last
 							? '' : ', '}}</i></a>
-					<ui-select multiple ng-model="candidate.primarySkills"
+					<ui-select multiple ng-model="candidate[0].primarySkills"
 						ng-hide="hideSkillss" 
 						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 						id="skills" ui-select-required ng-disabled="disabled"
@@ -235,8 +229,8 @@
 			<div class="col-md-3">
 				<!-- <a href="#" editable-select="candidate.designation" onaftersave="setJobCodes()"
 					e-ng-options="o as o for o in profiledesignations" e-required>
-					{{ candidate.designation || "--" }} </a> -->
-					{{ candidate.designation || "--" }}
+					{{ candidate[0].designation || "--" }} </a> -->
+					{{ candidate[0].designation || "--" }}
 
 			</div>
 		</div>
@@ -248,8 +242,8 @@
 					Employer</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.currentEmployer">{{
-					candidate.currentEmployer || "--" }}</a>
+				<a href="#" editable-text="candidate[0].currentEmployer">{{
+					candidate[0].currentEmployer || "--" }}</a>
 			</div>
 		</div>
 	</div>
@@ -264,9 +258,9 @@
 					Team</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-select="candidate.hrAssigned"
+				<a href="#" editable-select="candidate[0].hrAssigned"
 					e-ng-options="o as o for o in recruitmentData">{{
-					candidate.hrAssigned || "--" }}</a>
+					candidate[0].hrAssigned || "--" }}</a>
 			</div>
 		</div>
 
@@ -277,7 +271,7 @@
 			</div>
 			<div class="col-md-3">
 				<a href="" ng-hide="hidejobcode" ng-click="jobcodes()"><i>
-						{{candidate.jobcodeProfile.join(', ') || "--"}}</i></a>
+						{{candidate[0].jobcodeProfile.join(', ') || "--"}}</i></a>
 				<ui-select ng-hide="hidejobcodemenu" multiple style="width:180px;"
 					ng-model="candidate.jobcodeProfile" theme="select2"
 					ng-disabled="disabled"> <ui-select-match
@@ -302,7 +296,7 @@
 					class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Additional Notes</label>
 			</div>
 			<div class="col-md-3">
-				<a href="#" editable-text="candidate.notes">{{ candidate.notes
+				<a href="#" editable-text="candidate[0].notes">{{ candidate[0].notes
 					|| "--" }}</a>
 			</div>
 		</div>

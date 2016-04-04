@@ -94,6 +94,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 				 skills.push(value.toString());
 				});
 			 $scope.position.primarySkills = skills;
+			 position1.requisitionId=$scope.position.requisitionId;
 		     position1.jobcode=$scope.position.jobcode;
 		     position1.designation=$scope.position.designation;
 		     position1.experienceRequired=$scope.position.experienceRequired;
