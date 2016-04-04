@@ -4,51 +4,31 @@ angular.module('erApp')
 function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$log) {
 	return {
 		createRequisition : addRequisition,
-		cloneRequisition : cloneRequisition,
 		getRequisitionById : getRequisitionById,
 		updateRequisition : updateRequisition,
 		getAllRequisitions : getAllRequisitions,
-		approveRequisition : approveRequisition,
-		rejectRequisition : rejectRequisition
+		approveRequisition: approveRequisition,
+		rejectRequisition : rejectRequisition,
+		cloneRequisition : cloneRequisition
 		
 	};
 	
 	function addRequisition(requisitionObj){
 		return $http.post('resources/requisition', requisitionObj)
-		.then(createRequisitionSuccess)
+		.then(responseSuccess)
 		.catch(createRequisitionError);
 	}
+	
 	function cloneRequisition(requisitionObj){
 		return $http.post('resources/cloneRequisition', requisitionObj)
-		.then(createRequisitionSuccess)
-		.catch(createRequisitionError);
+					.then(responseSuccess)
+					.catch(cloneReqError);
 	}
 	
 	function approveRequisition(requisitionObj){
 		return $http.post('resources/approveRequisition', requisitionObj)
-		.then(approveRequisitionSuccess)
+		.then(responseSuccess)
 		.catch(approveRequisitionError);
-	}
-	
-	function rejectRequisition(requisitionObj){
-		return $http.post('resources/rejectRequisition', requisitionObj)
-					.then(approveRequisitionSuccess)
-					.catch(createRequisitionError);
-	}
-	
-	function approveRequisitionSuccess(response){
-		return response.data.msg;
-	}
-	
-	function approveRequisitionError(response){
-		return "Failed To Approve Requisition! Response Status: " + response.status;
-	}
-	function createRequisitionSuccess(response){
-		return " Requisition Created Successfully!";
-	}
-	
-	function createRequisitionError(response){
-		return "Failed To Create Requisition! Response Status: " + response.status;
 	}
 	
 	function getRequisitionById(requisitionId){
@@ -57,39 +37,57 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		.catch(getRequisitionError);
 	}
 	
-	function getRequisitionSuccess(response){
-		return response.data;
-	}
-	
-	function getRequisitionError(response){
-		return "Failed To Get Requisition! Response";
-	}
 	
 	function updateRequisition(requisitionObj){
 		return $http.put('resources/requisition',requisitionObj)
-		.then(updateRequisitionSuccess)
+		.then(responseSuccess)
 		.catch(updateRequisitionError);
-	}
-	function updateRequisitionSuccess(response){
-		return " Requisition updated Successfully!";
-	}
-	
-	function updateRequisitionError(response){
-		return "Failed To update Requisition! Response Status: " + response.status;
 	}
 	
 	function getAllRequisitions(){
 		return $http.get('resources/requisition')
-		.then(getAllRequisitionsSuccess)
+		.then(getRequisitionSuccess)
 		.catch(getAllRequisitionsError);
 	}
 	
-	function getAllRequisitionsSuccess(response){
-		return response.data;
+	function rejectRequisition(requisitionObj){
+		return $http.post('resources/rejectRequisition', requisitionObj)
+		.then(responseSuccess)
+		.catch(getRequisitionRejectError);
+	}
+	function updateRequisitionError(response){
+		return "Failed To update Requisition";
 	}
 	
 	function getAllRequisitionsError(response){
 		return "Failed To Get Requisitions Response";
 	}
-		
+	
+	function getRequisitionSuccess(response){
+		return response.data;
+	}
+	
+	function getRequisitionError(response){
+		return "Failed To Get Requisition";
+	}
+	
+	function getRequisitionRejectError(response){
+		console.log(response.data.msg);
+		return "Failed To Reject Requisition!";
+	}
+	
+	function approveRequisitionError(response){
+		return "Failed To Approve Requisition";
+	}
+	
+	function createRequisitionError(response){
+		return "Failed To Create Requisition";
+	}
+
+	function responseSuccess(response){
+		return response.data.msg;
+	}
+	function cloneReqError(response){
+		return "Failed To Clone Requisition!";
+	}
 }

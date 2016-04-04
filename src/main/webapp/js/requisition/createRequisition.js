@@ -27,7 +27,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.clientList=[];
 	$scope.approvals = [];
 	$scope.hr = [];
-	// $scope.qualifications = [];
 	$scope.requisition ={};
 	$scope.approver={};
 	$scope.approvalEmailId = "";
@@ -47,15 +46,10 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.reqId=0;
 	$scope.requisition.noOfPositions = "";
 	$scope.requisition.qualifications = [];
-	// $scope.requisition.qualifications.qualification = "";
-	// $scope.requisition.qualifications.percent = "";
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.skill=[];
 	$scope.today = new Date();
-	// var ran = Math.floor((Math.random()*999)+1);
-	// $scope.requisition= {};
-	// $scope.requisition.qualifications = [];
 	$scope.qualification = $scope.info.qualification;
 	
 	$scope.lengthOfQualifications = function() {
@@ -117,7 +111,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$scope.JobDesBox = false;
 		$scope.JobDesBtn = true;
 	}
-	$scope.approverfield = function(user){
+	$scope.approverfield = function(){
 		$scope.disabled2 = false;
 		checkForEnableCreateButton();
 	}
@@ -147,7 +141,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		})
 	}
 	
-	$scope.validateNoOfPosition = function(data) {
+	/*$scope.validateNoOfPosition = function(data) {
 		var data1 = parseInt(data);
 		if(data1==0) {
 			$scope.positionErr = true;
@@ -157,7 +151,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.disabled = false;
 		}
 		checkForEnableCreateButton();
-	};
+	};*/
 	
 	$scope.validTargetDate = function(requisitionDate,targetDate){
 		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + (requisitionDate.getMonth()+1) + '-'+requisitionDate.getFullYear();
@@ -307,7 +301,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 				    
 	  });
 	
-		
 	// Gets no. of requisition entries.
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
@@ -318,6 +311,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	
 	$scope.submit = function(){
 		if ($scope.requisition !== undefined) {
+			
 			$scope.requisition.requisitionManager.name = $scope.role.name;
 			$scope.requisition.requisitionManager.emailId = $scope.role.emailId;
 			$scope.requisition.createdBy = $scope.user.emailId;
@@ -350,3 +344,4 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		}
 	}
 }]);
+Blog  Support  

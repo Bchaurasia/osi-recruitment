@@ -1,9 +1,12 @@
 package com.nisum.employee.ref.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -25,13 +28,17 @@ public class Requisition {
 	String targetDate;
 	String location;
 	String jobDescription;
-	String comment;
-	String updatedBy;
-	String createdBy;
-	String status;
-	ArrayList<String> skillType;
 	List<Qualification> qualifications;
-	UserVO requisitionManager;
+	ArrayList<String> skillType;
 	RequisitionUser approval1;
 	RequisitionUser approval2;
+	String comment;
+	UserVO requisitionManager;
+	String createdBy;
+	String updatedBy;
+	String status;
+	@CreatedDate
+	Date createdDate;
+	@LastModifiedDate
+	private Date updatedDate;
 }

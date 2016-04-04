@@ -6,10 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RequisitionApproverDetails {
-	private String requisitionManagerName;
-	private String requisitionManagerEmail;
+	
 	private String jobRequisitionId;
 	private String approverName;
 	private String approverEmailId;
-	private String comments;
+	private String requisitionManagerEmail;
+	private String comment;
+	
 }

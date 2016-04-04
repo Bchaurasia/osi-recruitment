@@ -9,9 +9,9 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.targetErr = false;
 	$scope.disableCloneBtn = true;
 	$scope.disableCloneBtnPosition = false;
-	$scope.disableCloneBtnPer = false;
-	$scope.disableCloneBtnMin = false;
-	$scope.disableCloneBtnMax = false;
+	//$scope.disableCloneBtnPer = false;
+	$scope.disableCloneBtnExp = false;
+	//$scope.disableCloneBtnMax = false;
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.qualification = $scope.info.qualification;
@@ -171,15 +171,15 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.cloneRequisitionDetails = function(){
 		if ($scope.requisition !== undefined && $scope.requisition.status !== "REJECTED") {
 			delete $scope.requisition.requisitionId;
-			delete $scope.requisition.createdDate;
-			delete $scope.requisition.createdBy;
-			delete $scope.requisition.lastModifiedDate;
-			delete $scope.requisition.lastModifiedBy;
-			delete $scope.requisition.version;
-			delete $scope.requisition.status;
+			$scope.requisition.createdBy = $scope.user.emailId;
+			$scope.requisition.updatedBy = $scope.user.emailId;
 			$scope.requisition.requisitionDate.toString();
 			
-			 requisitionService.cloneRequisition($scope.requisition)
+			/*if(null==$scope.requisition.approval2){
+				$scope.requisition.approval2={};
+			}*/
+			
+			requisitionService.cloneRequisition($scope.requisition)
 				.then(successMsg)
 				.catch(errorMsg);
 				
@@ -191,11 +191,10 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 					$scope.message=msg;
 					$scope.cls=appConstants.ERROR_CLASS;
 				}
-			
 		}else{
-			cls=appConstants.ERROR_CLASS;
-			message="clone not supportet for REJECTED Requisition";
-			$scope.sendNotificationWithStyle(message,cls,'recruitment/searchRequisition');
+					cls=appConstants.ERROR_CLASS;
+					message="clone not supported for REJECTED Requisition";
+					$scope.sendNotificationWithStyle(message,cls,'recruitment/searchRequisition');
 		}
 	}
 	
@@ -228,11 +227,11 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		var Value2 = parseInt($scope.requisition.maxExpYear);
 		if(Value1 > Value2){
 			$scope.minErr = true;
-			$scope.disableCloneBtnMin = true;
+			$scope.disableCloneBtnExp = true;
 		}
 		else{
 			$scope.minErr = false;
-			$scope.disableCloneBtnMin = false;
+			$scope.disableCloneBtnExp = false;
 		}
 	}
 	
@@ -244,16 +243,15 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 		
 		if(Value1 < Value2){
 			$scope.maxErr = true;
-			$scope.disableCloneBtnMax = true;
+			$scope.disableCloneBtnExp = true;
 		}
 		else{
 			$scope.maxErr = false;
-			$scope.disableCloneBtnMax = false;
+			$scope.disableCloneBtnExp = false;
 		}
 	}
 	
 	$scope.validateNoOfPosition = function(data) {
-		var data1 = parseInt(data);
 		if(data1<=0 || data1 > 99) {
 			$scope.requisition.noOfPositions="";
 			$scope.positionErr = true;
@@ -262,19 +260,6 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 			$scope.positionErr = false;
 		}
 	};
-	
-	
-	$scope.validatePercentage = function(data){
-		var data1 = parseInt(data);
-		if(data1===0 || data1 > 99) {
-			$scope.percentageErr = true;
-			$scope.disableCloneBtnPer = true;
-		}else{
-			$scope.percentageErr = false;
-			$scope.disableCloneBtnPer = false;
-		}
-	};
-	
 	
 	$scope.validateJobDesc = function(){
 		

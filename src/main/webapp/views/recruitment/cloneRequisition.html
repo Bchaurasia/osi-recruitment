@@ -125,7 +125,7 @@
 				class="mandatory">*</b></label>
 		</div>
 		<div class="col-md-3">
-			<a href="#" editable-text="requisition.noOfPositions"
+			<a href="#" editable-number="requisition.noOfPositions"
 				onaftersave="validateNoOfPosition($data)" e-required>
 				{{requisition.noOfPositions || "Enter no. of positions"}} </a> <br><span
 				class="validation-error" ng-show="positionErr">No. of
@@ -149,15 +149,11 @@
 			<ui-select ng-hide="hideSkills" multiple
 				ng-model="requisition.skillType" ng-keypress="myFunct($event)"
 				name='sk.primarySkills' id="skills" ui-select-required
-				theme="select2" ng-disabled="disabled" ng-change="validateSkills()">
+				theme="select2" ng-change="validateSkills()">
 			<ui-select-match placeholder="Select skill...">{{$item}}</ui-select-match>
 			<ui-select-choices
 				repeat="skill in pskills | orderBy:'toString()' | filter:$select.search">
 			{{skill || "--" }} </ui-select-choices> </ui-select>
-		</div>
-		<div class="col-md-1">
-			<button class="glyphicon glyphicon-ok btn btn-primary"
-				ng-hide="hideSkills" ng-click="skill()"></button>
 		</div>
 		<span class="validation-error" ng-show="skillErr"> Select
 			atleast one Primary Skill.</span>
@@ -274,7 +270,7 @@
 
 <div align="center">
 	<button class="btn btn-info active"
-		ng-disabled="validateClone() || disableCloneBtn || disableCloneBtnMin || disableCloneBtnMax || disableCloneBtnPer"
+		ng-disabled="validateClone() || disableCloneBtn || disableCloneBtnExp"
 		ng-click="cloneRequisitionDetails()">
 		<span class="glyphicon glyphicon-ok"></span> Clone
 	</button>

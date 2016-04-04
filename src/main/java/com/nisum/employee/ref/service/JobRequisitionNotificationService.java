@@ -11,19 +11,18 @@ import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 
 @Service 
 public class JobRequisitionNotificationService {
-
 	private static final String REJECTED = "REJECTED";
 	@Autowired
 	private INotificationService notificationService;
 	
 	public RequisitionApproverDetails sendNotification(Requisition details) throws AddressException, MessagingException {
 		RequisitionApproverDetails requisitionApproverDetails = new RequisitionApproverDetails();
-	
+		
 		requisitionApproverDetails.setRequisitionManagerEmail(details.getCreatedBy());
 		requisitionApproverDetails.setJobRequisitionId(details.getRequisitionId());
 		
 		if(details.getComment() != null){
-			requisitionApproverDetails.setComments(details.getComment());
+			requisitionApproverDetails.setComment(details.getComment());
 		}
 		
 		if(details.getApproval1().isApproved() && details.getApproval2() != null){

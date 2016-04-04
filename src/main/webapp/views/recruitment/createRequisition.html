@@ -141,15 +141,14 @@
 					</div>
 					<div class="control-group">
 						<div class="col-md-2">
-							<label class="lbl"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No.
+							<label class="lbl"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;No. of
 								Positions:<b class="mandatory">*</b></label>
 						</div>
 						<div class="col-md-3">
 							<input id="position" class="form-control input-sm" type="number"
 								ng-model="requisition.noOfPositions" name="position"
 								id="position" placeholder="Enter Number Of Position"
-								ng-change="validateNoOfPosition(requisition.noOfPositions)"
-								ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/" required> <span
+								ng-pattern="/(^[1-9]\d{0,1}$)/" required> <span
 								class="validation-error"
 								ng-show="(CreateRequisition.position.$dirty || invalidSubmitAttempt) && CreateRequisition.position.$error.pattern">
 								No. Positions should be between 1-99!</span>
@@ -181,15 +180,12 @@
 					</div>
 				</div>
 				<div class="row" align="left">
-					<div class="col-md-1"></div>
-					<b><a ng-show="JobDesBtn" ng-click="JobDes()"><span
-							class="glyphicon glyphicon-pencil"></span> Job Description:<b
-															class="mandatory-field">*</b> </a></b>
-					<div class="control-group" ng-show="JobDesBox">
+					<div class="control-group">
+						<div class="col-md-1"></div>
 						<div class="col-md-2">
-							<a ng-click="hideJobDes()"><label class="lbl"><i
-									class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Job
-									Description :</label></a>
+							<label class="lbl" for="notes"><i
+								class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Job Description:<b
+								class="mandatory-field">*</b></label>
 						</div>
 						<div class="col-md-8">
 							<textarea cols="50" rows="4" name="comment" id="comment"
@@ -199,6 +195,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="row" align="left">
 					<div class="col-md-1"></div>
 					<b><a ng-show="commentBtn" ng-click="comment()"><span
@@ -300,7 +297,7 @@
 						</div>
 						<div class="col-md-3">
 							<select ng-model="requisition.approval2" id="approval2"
-								ng-options="o.name for o in approvals | filter:{ co_state_id : filter.stateID }"
+								ng-options="o.name for o in approvals"
 								class="form-control input-sm">
 								<option value='' disabled="disabled">Select Approval 2</option>
 							</select>
