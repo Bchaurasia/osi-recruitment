@@ -9,9 +9,16 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		getAllRequisitions : getAllRequisitions,
 		approveRequisition: approveRequisition,
 		rejectRequisition : rejectRequisition,
-		cloneRequisition : cloneRequisition
+		cloneRequisition : cloneRequisition,
+		searchRequisition : searchRequisition
 		
 	};
+	
+	function searchRequisition(searchVal){
+		return $http.get('resources/searchRequisitionByText?searchRequisition='+searchVal)
+		.then(getRequisitionSuccess)
+		.catch(getRequisitionError);
+	}
 	
 	function addRequisition(requisitionObj){
 		return $http.post('resources/requisition', requisitionObj)

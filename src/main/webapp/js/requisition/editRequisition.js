@@ -120,8 +120,9 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 			$scope.approvals =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
 			$scope.approvals =_.sortBy($scope.approvals, 'name');	
 			$scope.approval1 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval1.emailId})[0];
-			$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
-			
+			if($scope.requisition.approval2 !== undefined){
+				$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
+			}
 			$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 			$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
 			$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
@@ -258,12 +259,6 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 			$scope.requisition.requisitionManager.name = $scope.hrManager.name;
 			$scope.requisition.requisitionManager.emailId = $scope.hrManager.emailId;
 			
-			$scope.requisition.approval1.name = $scope.approval1.name;
-			$scope.requisition.approval1.emailId = $scope.approval1.emailId;
-			
-			$scope.requisition.approval2.name = $scope.approval2.name;
-			$scope.requisition.approval2.emailId = $scope.approval2.emailId;
-				
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');
