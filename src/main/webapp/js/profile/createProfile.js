@@ -106,6 +106,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    		}
 		    	})
 		    	
+		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);
 		    		interviewService.createInterview($scope.InterviewDetails);
@@ -202,22 +203,19 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
         if (keyEvent.which === 13)
                 keyEvent.preventDefault();
 	}
+	
+	
 	designationService.getDesignation().then(function(data){
 		$scope.designations=data;
+		$scope.profiledesignations = [];
+ 		angular.forEach($scope.designations,function(obj){
+ 			$scope.profiledesignations.push(obj.designation);
+ 		});
 	}).catch(function(msg){
 		$scope.message=msg;
 		 $scope.cls=appConstants.ERROR_CLASS;
 		 $timeout( function(){ $scope.alHide(); }, 5000);
 	});
-	$scope.getDesignation = function() {  
-		$scope.profiledesignations=[];
- 		angular.forEach($scope.designations,function(obj){
-				if(parseInt(obj.minExpYear) <= parseInt($scope.candidate.expYear) && parseInt(obj.maxExpYear) >= parseInt($scope.candidate.expYear))
-				{
-				$scope.profiledesignations.push(obj.designation);
-				}
-			
-	});
-	
-	}
+ 		
+ 		
 }]);

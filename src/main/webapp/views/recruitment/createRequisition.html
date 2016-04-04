@@ -12,7 +12,7 @@
 					ng-model="requisition.position" required
 					ng-options="o as o for o in designation1 | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option>Select Designations</option>
+					<option value="" disabled="disabled">Select Designation</option>
 				</select> <label>Position<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
@@ -47,7 +47,7 @@
 			</div>
 			<div class="input-field col s6">
 				<input type="date" ng-model="targetDate"
-					min="{{today | date : 'yyyy-MM-dd' }}"
+					min="{{today | date : 'yyyy-mm-dd' }}"
 					ng-change="validTargetDate(requisitionDate,targetDate)"
 					id="targetDate" required> <label>Target Date<b
 					class="mandatory">*</b></label> <span class="validation-error"
@@ -61,7 +61,7 @@
 					required
 					ng-options="o as o for o in clientList | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option>Select Client</option>
+					<option value="" disabled="disabled">Select Client</option>
 				</select> <label>Client<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
@@ -69,7 +69,7 @@
 					ng-model="requisition.location"
 					ng-options="o as o for o in info.locations | orderBy:'toString()'"
 					class="form-control input-sm" required>
-					<option>Select Location</option>
+					<option value="" disabled="disabled">Select Location</option>
 				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
 		</div>
@@ -78,14 +78,14 @@
 				<select placeholder="Select Hiring HR" ng-model="role"
 					ng-options="o.name for o in hr | orderBy:'toString()'"
 					class="form-control input-sm" required>
-					<option>Select Hiring HR</option>
+					<option value="" disabled="disabled">Select Hiring HR</option>
 				</select> <label>Hiring HR<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter number of Positions" type="number"
 					ng-model="requisition.noOfPositions" name="position"
 					ng-change="validateNoOfPosition(requisition.noOfPositions)"
-					class="active validate" ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/"
+					class="form-control input-sm" ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/"
 					required> <label>No. of Positions<b
 					class="mandatory">*</b>
 				</label> <span class="validation-error"
@@ -101,7 +101,7 @@
 					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label>Skills<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px;">Skills<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -126,7 +126,7 @@
 					ng-model="requisition.qualification" required
 					ng-options="o as o for o in qualification | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option>Select Qualification</option>
+					<option value="" disabled="disabled">Select Qualification</option>
 				</select> <label>Qualification<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s5">
@@ -151,7 +151,7 @@
 					ng-model="requisition.approval1" ng-change="approverfield()"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm" required>
-					<option>Select Approver 1</option>
+					<option value="" disabled="disabled">Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
@@ -159,7 +159,7 @@
 					ng-model="requisition.approval2"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option>Select Approver 2</option>
+					<option value="" disabled="disabled">Select Approver 2</option>
 				</select> <label>Approver 2</label>
 			</div>
 		</div>
