@@ -3034,7 +3034,7 @@ fieldset[disabled] input[type=checkbox], fieldset[disabled] input[type=radio],
 select.input-sm {
 	background-color: transparent;
 	border: none;
-	border: 2px solid #9e9e9e;
+	border: 1px solid #9e9e9e;
 	border-radius: 5px;
 	outline: none;
 	height: 22px;
@@ -3049,7 +3049,7 @@ select.input-sm {
 }
 
 select.input-sm:not([type]):focus:not([readonly]){
-	border: 2px solid #26a69a;	
+	border: 1px solid #26a69a;	
 }
 
 select.input-sm:not([type]):focus:not([readonly])+ label{

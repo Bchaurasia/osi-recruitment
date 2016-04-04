@@ -12,15 +12,6 @@
 						placeholder="Requisition Search">
 			</div>
 			<div class="col-md-2" align="center">
-				<!-- <a id="" href="#recruitment/createRequisition"
-					class="btn btn-info active"
-					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')">
-					<span>Create   </span>
-				</a> -->
-				<!-- <a
-					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"
-					class="btn-floating waves-effect waves-light green"
-					href="#recruitment/createRequisition"><i class="material-icons">add</i></a> -->
 					<a class="waves-effect waves-light btn"
 					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"
 					href="#recruitment/createRequisition"><i class="material-icons left">add</i>create</a>
@@ -29,59 +20,7 @@
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<!-- <div class="row" ng-show="searchBox">
-			<div class="col-md-2"></div>
-			<div class="col-md-6">
-				<input type="text" class="form-control"
-					placeholder="Requisition Search">
-			</div>
-			<div class="col-md-3">
-				<button class="btn waves-effect waves-light">Search</button>
-
-				<a class="btn waves-effect waves-light" 	ng-click="!searchBoxFun()">Cancel</a>
-
-			</div>
-			<div class="col-md-1"></div>
-		</div> -->
-
-		<!-- <table ng-hide="tableHide" id="interview" class="table table-striped"
-			style="margin-left: 0px; width: 94%; top: -18px;">
-			<thead>
-				<tr>
-					<th>RequisitionId</th>
-					<th>Position</th>
-					<th>Min-Exp</th>
-					<th>Max-Exp</th>
-					<th>Client</th>
-					<th>Clone</th>
-					<th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">Approve</th>
-					<th>Share</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="animate-repeat" ng-repeat="data in allRequisitions">
-					<td><a style="cursor: pointer;"
-						ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
-					<td>{{data.position}}</td>
-					<td>{{data.minExpYear}}</td>
-					<td>{{data.maxExpYear}}</td>
-					<td>{{data.client}}</td>
-					<td align="center"><a style="cursor: pointer;"
-						ng-click="cloneRequisition(data.requisitionId)"><span
-							class="glyphicon glyphicon-copy"></span></a></td>
-					<td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a style="cursor:pointer;"><span class="glyphicon glyphicon-ok-circle"></span></a></td>
-					<td class="mdl-data-table__cell--non-numeric"><left>
-								</left>&nbsp;&nbsp;&nbsp;
-								<right><a href="" style="cursor:pointer;" ng-click="shareContent(data.jobcode)">
-									<img src="https://simplesharebuttons.com/images/somacro/linkedin.png" width="20" height="20" title="Share on Linked In" /></a></right>
-								</td>
-
-				</tr>
-				<tr class="animate-repeat" ng-if="results.length == 0">
-					<td>No results found...</td>
-				</tr>
-			</tbody>
-		</table> -->
+	
 		<table class="bordered" style="width: 90%">
 			<thead>
 				<tr>
@@ -100,7 +39,6 @@
 			<tbody>
 				<tr class="animate-repeat"
 					ng-repeat="data in allRequisitions | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
-					<!-- <td><span style="background-color: red;padding: 5px 12px;color: white;"><b>A</b></span></td> -->
 					<td><a style="cursor: pointer;"
 						ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
 					<td>{{data.position}}</td>
@@ -113,12 +51,6 @@
 					<td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a
 						style="cursor: pointer;"><span
 							class="glyphicon glyphicon-ok-circle"></span></a></td>
-					<!-- <td class="mdl-data-table__cell--non-numeric"><left> </left>&nbsp;&nbsp;&nbsp;
-						<right> <a href="" style="cursor: pointer;"
-							ng-click="shareContent(data.jobcode)"> <img
-							src="https://simplesharebuttons.com/images/somacro/linkedin.png"
-							width="20" height="20" title="Share on Linked In" /></a></right></td> -->
-
 				</tr>
 			</tbody>
 		</table>
@@ -136,16 +68,6 @@
 				    <li  ng-repeat="n in range(currentPage)" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1"></a></li>
 				    <li class="waves-effect" ng-class="{disabled: currentPage == pageCount() - 1}"><a ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
 				  </ul>
-				<!-- 
-				<ul class="pagination pull-right">
-					<li ng-class="{disabled: currentPage == 0}"><a href
-						ng-click="prevPage()">Prev</a></li>
-					<li ng-repeat="n in range(currentPage)"
-						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
-						href ng-bind="n + 1"></a></li>
-					<li ng-class="{disabled: currentPage == pageCount() - 1}"><a
-						href ng-click="nextPage()">Next</a></li>
-				</ul> -->
 			</div>
 		</div>
 	</form>

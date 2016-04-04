@@ -339,6 +339,9 @@ input, button, select, textarea {
 	color: #999;
 }
 
+.logoStyle{
+	height: 70%;	
+}
 .footer a {
 	color: #999;
 }
