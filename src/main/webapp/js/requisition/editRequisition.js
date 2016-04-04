@@ -212,8 +212,14 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	
 	
 	$scope.dateError = function(targetDate){
-				var dd = $scope.requisition.requisitionDate.getDate();
-				var mm = $scope.requisition.requisitionDate.getMonth();
+		
+			if(targetDate < $scope.requisition.requisitionDate){
+				$scope.dateErr = true;
+			}else{
+				$scope.dateErr = false;
+			}
+				/*var dd = $scope.requisition.requisitionDate.getDate();
+				var mm = $scope.requisition.requisitionDate.getMonth()+1;
 				var yy = $scope.requisition.requisitionDate.getYear();
 
 				var b = targetDate.getDate()+'-' + (targetDate.getMonth()+1) + '-'+targetDate.getFullYear();
@@ -249,7 +255,7 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 				 else{
 					 $scope.requisition.targetDate = b;
 						$scope.dateErr = false;
-				 }	
+				 }	*/
 	}
 
 	$scope.updateRequisitionDetails = function(){

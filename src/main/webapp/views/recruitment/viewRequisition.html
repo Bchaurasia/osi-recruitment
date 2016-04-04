@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
-		Requisition : {{requisition.requisitionId}}</h4>
+	<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
+		Requisition : {{requisition.requisitionId}}</h5>
 </div>
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
@@ -129,14 +129,14 @@
 					class="range-slider__value">{{requisition.percent}}%</span>
 			</div>
 			<div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove"
+				<a class="glyphicon glyphicon-remove"
 					ng-show="lengthOfQualifications()" style="cursor: pointer;"
-					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
+					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn"
+				<a id="addButtonColumn"
 					ng-disabled="checkDisability(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
-					ng-click="addColumnCriteria()"></button>
+					ng-click="addColumnCriteria()"></a>
 			</div>
 		</div>
 		<div class="row">

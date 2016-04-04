@@ -5,7 +5,7 @@ app.constant('appConstants',{
 			   APP_COMPANY:"OSI Technologies",
 			   APP_COPY_RIGHT:"2015 OSI Technologies.",
 			   APP_VERSION: "1.0",
-			   ITEMS_PER_PAGE:15,
+			   ITEMS_PER_PAGE:9,
 			   
 			   SUCCESS_CLASS: "alert  alert-success",
 			   ERROR_CLASS: "alert alert-danger alert-error"

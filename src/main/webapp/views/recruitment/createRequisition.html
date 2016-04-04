@@ -29,6 +29,10 @@
 					</div>
 				</div>
 				<label style="margin-top: 14px">Exp. Required<b class="mandatory">*</b></label>
+				<span class="validation-error" ng-show="minErr"> Min Exp
+							should not be greater than Max Exp.</span> <span
+							class="validation-error" ng-show="maxErr"> Max Exp should
+							not be less than Min Exp.</span>
 			</div>
 		</div>
 		<div class="row">
@@ -131,14 +135,14 @@
 					class="range-slider__value">{{requisition.percent}}%</span>
 			</div>
 			<div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove"
+				<a class="glyphicon glyphicon-remove"
 									ng-show="lengthOfQualifications()" style="cursor: pointer;"
-									ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
+									ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="addButtonColumn"
+								<a id="addButtonColumn"
 									ng-disabled="checkDisability(requisition.qualification)"
 									ng-show="$last" class="glyphicon glyphicon-plus"
-									ng-click="addColumnCriteria()"></button>
+									ng-click="addColumnCriteria()"></a>
 			</div>
 		</div>
 		<div class="row">

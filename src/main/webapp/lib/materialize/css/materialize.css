@@ -7406,6 +7406,11 @@ nav ul li.active {
   border-bottom: 2px solid #E04E27;
 }
 
+nav ul li.active a{
+	color: #fff;
+	text-decoration: none;
+}
+
 nav ul a {
   transition: background-color .3s;
   font-size: 1rem;
@@ -8008,6 +8013,7 @@ small {
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 115%;
+  font-weight: bold;
   text-decoration: none;
   transition: color .28s ease;
 }

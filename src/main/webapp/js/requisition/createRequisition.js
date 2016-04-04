@@ -154,7 +154,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	};*/
 	
 	$scope.validTargetDate = function(requisitionDate,targetDate){
-		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + (requisitionDate.getMonth()+1) + '-'+requisitionDate.getFullYear();
+		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
 		 if(requisitionDate.getFullYear() === targetDate.getFullYear()){
 			 if((requisitionDate.getMonth()+1) === (targetDate.getMonth()+1)){
 				 if(requisitionDate.getDate() === targetDate.getDate()){
@@ -225,7 +225,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	}
 	
 	$scope.reqDate = function(requisitionDate,targetDate){
-		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + (requisitionDate.getMonth()+1) + '-'+requisitionDate.getFullYear();
+		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
 		if(requisitionDate.getFullYear() === targetDate.getFullYear()){
 			 if((requisitionDate.getMonth()+1) === (targetDate.getMonth()+1)){
 				 if(requisitionDate.getDate() === targetDate.getDate()){
@@ -318,7 +318,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			
 			var date1 = new Date($scope.targetDate);
-			$scope.requisition.targetDate = date1.getDate()+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear();
+			$scope.requisition.targetDate = date1.getDate()+'-' + date1.getMonth() + '-'+date1.getFullYear();
 			
 			requisitionService.createRequisition($scope.requisition)
 			.then(successMsg)
