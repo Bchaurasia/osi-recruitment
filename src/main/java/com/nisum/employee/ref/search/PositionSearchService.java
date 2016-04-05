@@ -45,9 +45,12 @@ public class PositionSearchService {
 	
 	
 	public void updatePositionIndex(Position position) throws Exception {
-			positionIndexRepository.exists(position.getJobcode());
+			if(positionIndexRepository.exists(position.getJobcode())){
 			positionIndexRepository.delete(position.getJobcode());
 			addPositionIndex(position);
+			}else{
+				addPositionIndex(position);
+			}
 	}
 	
 	

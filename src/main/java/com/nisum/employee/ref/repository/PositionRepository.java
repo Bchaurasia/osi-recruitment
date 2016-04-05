@@ -41,7 +41,7 @@ public class PositionRepository {
 		
 	}
 	
-	public void updatePosition(Position position) {
+	public Position updatePosition(Position position) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("jobcode").is(position.getJobcode()));
 		query.fields().include("jobcode");
@@ -63,7 +63,10 @@ public class PositionRepository {
 		update.set("jobType", position.getJobType());
 		update.set("salary", position.getSalary());
 		update.set("status", position.getStatus());
+		update.set("updatedDate", new DateTime());
+		update.set("updatedBy", position.getUpdatedBy());
 		mongoOperations.updateFirst(query, update, Position.class);
+		return position;
 	}
 
 	public List<Position> retrievePositionByClient(String client) {

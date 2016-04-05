@@ -113,6 +113,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 		     position1.minExpYear=$scope.position.minExpYear;
 		     position1.maxExpYear=$scope.position.maxExpYear;
 		     position1.status = $scope.position.status;
+		     position1.updatedBy = $scope.user.emailId;
+		     position1.createdDate = $scope.position.createdDate;
+		     position1.createdBy = $scope.position.createdBy;
 //		     console.log(angular.toJson("data----"+position1));
 		     positionService.updatePosition(position1).then(
 			    function(msg){

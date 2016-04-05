@@ -34,8 +34,8 @@ public class PositionService implements IPositionService {
 
 	public void updatePosition(Position position) {
 		try {
-			positionSearchService.updatePositionIndex(position);
-			positionRepository.updatePosition(position);
+			Position updatedPosition = positionRepository.updatePosition(position);
+			positionSearchService.updatePositionIndex(updatedPosition);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,9 +97,9 @@ public class PositionService implements IPositionService {
 		position.setHiringManager(requisition.getRequisitionManager());
 		position.setJobcode("JOB_" + sequenceRepository.getNextSequenceId("JOB"));
 		position.setCreatedBy(requisition.getCreatedBy());
-		position.setLastModifiedBy(requisition.getCreatedBy());
+		position.setUpdatedBy(requisition.getCreatedBy());
 		position.setCreatedDate(new DateTime());
-		position.setLastModifiedDate(new DateTime());
+		position.setUpdatedDate(new DateTime());
 		return position;
 	}
 

@@ -2,17 +2,16 @@ package com.nisum.employee.ref.domain;
 
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 @Getter
 @Setter
-//@Document(collection = "Position")
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "position",type = "positions", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Position extends AuditEntity {
+public class Position  {
 
 	@Id
 	String jobcode;
@@ -33,4 +32,10 @@ public class Position extends AuditEntity {
 	String salary;
 	UserVO hiringManager;
 	String status;
+	DateTime createdDate;
+	String createdBy;
+	DateTime updatedDate;
+	String updatedBy;
+	
+	
 }

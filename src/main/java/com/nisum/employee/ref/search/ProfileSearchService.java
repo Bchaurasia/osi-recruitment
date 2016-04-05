@@ -32,9 +32,12 @@ public class ProfileSearchService {
 	}
 
 	public void updateProfileIndex(Profile profile) throws Exception {
-		profileIndexRepository.exists(profile.getEmailId());
+		if(profileIndexRepository.exists(profile.getEmailId())){
 		profileIndexRepository.delete(profile.getEmailId());
 		addProfileIndex(profile);
+		}else{
+			addProfileIndex(profile);
+		}
 	}
 	
 	
