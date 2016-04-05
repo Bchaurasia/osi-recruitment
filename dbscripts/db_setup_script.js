@@ -3,26 +3,26 @@ db = conn.getDB("osirpdb");
 
 db.dropDatabase();
 
-db.sequence.insert({"_id":"REQ","seq":0});
-db.sequence.insert({"_id":"JOB","seq":0});
-
 db.createCollection("position");
-print("Position Collection Created!");
+print("position Collection Created!");
 db.createCollection("info");
 print("info Collection Created!");
 db.createCollection("profile");
-print("Profile Collection Created!");
+print("profile Collection Created!");
 db.createCollection("userInfo");
 print("userInfo Collection Created!");
 db.createCollection("interviewDetails");
-print("Interview Collection Created!");
-db.createCollection("clientinfo");
-print("Clientinfo Collection Created!");
+print("interviewDetails Collection Created!");
+db.createCollection("clientInfo");
+print("clientInfo Collection Created!");
 db.createCollection("userNotification");
 db.createCollection("designation");
-print("Designation Collection Created!");
+print("designation Collection Created!");
 db.createCollection("sequence");
-print("Sequence Collection Created!");
+print("sequence Collection Created!");
+
+db.sequence.insert({"_id":"REQ","seq":0});
+db.sequence.insert({"_id":"JOB","seq":0});
 
 db.info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 
@@ -74,7 +74,7 @@ db.userInfo.insert({"_id":"osirecruitauser@gmail.com",'name':"Osi AdminUser","mo
 db.userInfo.insert({"_id":"osirecruithruser@gmail.com",'name':"Osi HRUser","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"osirecruitauser",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.userInfo.insert({"_id":"osirecruithiuser@gmail.com",'name':"Osi InterviewerUser","mobileNumber":"+919923838883","dob":"",location:"SF",skypeId:"osirecruitiuser",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 
-db.clientinfo.insert([{"_id":"GAPGID","clientName":"GAP GID","locations":"SF","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
+db.clientInfo.insert([{"_id":"GAPGID","clientName":"GAP GID","locations":"SF","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
                 	  {"_id":"GAPCORP","clientName":"GapCorp","locations":"Pune","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
                 	  {"_id":"GAPGORPOHIO","clientName":"Gap Corp Ohio","locations":"Mumbai","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
                 	  {"_id":"GAPCORPKENTUCKY","clientName":"Gap Corp Kentucky","locations":"Hyderabad","interviewers":{technicalRound1:[],technicalRound2:[],managerRound:[],hrRound:[]}},
