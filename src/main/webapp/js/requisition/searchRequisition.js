@@ -21,7 +21,13 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 		location.href='#recruitment/cloneRequisition';
 		
 	};
-	
+
+	$scope.searchRequisition = function(searchVal){
+		requisitionService.searchRequisition(searchVal).then(function(data) {
+			$scope.allRequisitions = data;
+		})
+	}
+
 	$scope.searchBoxFun = function(){
 		$scope.searchBox = true;	
 	};
@@ -54,25 +60,29 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 		return ret;
     };
 
-	  $scope.prevPage = function() {
-	    if ($scope.currentPage > 0) {
-	      $scope.currentPage--;
-	    }
-	  };
-	
-	  $scope.pageCount = function() {
-		if (!$scope.allRequisitions) { return; }
-	    return Math.ceil($scope.allRequisitions.length/$scope.itemsPerPage);
-	  };
-	
-	  $scope.nextPage = function() {
-		  $scope.page = $scope.pageCount()-1;   
-	    if ($scope.currentPage < $scope.page) {
-	      $scope.currentPage++;
-	    }
-	  };
-	
-	  $scope.setPage = function() {
-	    $scope.currentPage = this.n;
-	  };
+		  $scope.prevPage = function() {
+		    if ($scope.currentPage > 0) {
+		      $scope.currentPage--;
+		    }
+		  };
+
+		  $scope.pageCount = function() {
+			if (!$scope.profile) { return; }
+		    return Math.ceil($scope.profile.length/$scope.itemsPerPage);
+		  };
+
+		  $scope.nextPage = function() {
+			  $scope.page = $scope.pageCount()-1;   
+		    if ($scope.currentPage < $scope.page) {
+		      $scope.currentPage++;
+		    }
+		  };
+
+		  $scope.setPage = function() {
+		    $scope.currentPage = this.n;
+		  };	
+	$scope.sortComment = function(comment) {
+	    var date = new Date(comment.created);
+	    return date;
+	};
 }]);

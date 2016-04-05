@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "UserInfo")
+//@Document(collection = "UserInfo")
 public class UserInfo { 
 	@Id
 	String emailId;

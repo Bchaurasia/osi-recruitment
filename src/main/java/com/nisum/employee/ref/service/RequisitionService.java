@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.repository.RequisitionRepository;
+import com.nisum.employee.ref.search.RequisitionSearchService;
 
 @Service
 public class RequisitionService implements IRequisitionService {
@@ -25,18 +26,24 @@ public class RequisitionService implements IRequisitionService {
 
 	@Autowired
 	PositionService positionService;
-
+	
+	@Autowired
+	RequisitionSearchService requisitionSearchService;
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
 
 	@Override
-	public void prepareRequisition(Requisition requisition) {
+	public void prepareRequisition(Requisition requisition)  {
 		if (requisition.getApproval2().getName() == null
 				&& requisition.getApproval2().getEmailId() == null) {
 			requisition.setApproval2(null);
 		}
 		requisition.setStatus(INITIATED);
-		requisitionRepository.prepareRequisition(requisition);
+		try {
+			requisitionRepository.prepareRequisition(requisition);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		try {
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (MessagingException e) {
@@ -45,11 +52,17 @@ public class RequisitionService implements IRequisitionService {
 	}
 
 	@Override
-	public RequisitionApproverDetails updateRequisition(Requisition requisition)
-			throws AddressException, MessagingException {
-		requisitionRepository.updateRequisition(requisition);
-		return jobRequisitionNotificationService.sendNotification(requisition);
-	}
+	public RequisitionApproverDetails updateRequisition(Requisition requisition){
+		   RequisitionApproverDetails requisitionApproverDetails = null;
+			try {
+				requisitionRepository.updateRequisition(requisition);
+				requisitionSearchService.updateRequisitionIndex(requisition);
+				requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		 return requisitionApproverDetails;
+	 }
 
 	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has approved successfully ";
 

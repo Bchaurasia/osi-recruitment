@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "Info")
+@Document(collection = "info")
 public class InfoEntity {
 	
 	@Id

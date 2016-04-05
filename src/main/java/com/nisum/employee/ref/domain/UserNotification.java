@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "UserNotification")
+//@Document(collection = "UserNotification")
 public class UserNotification {
 	
 	@Id

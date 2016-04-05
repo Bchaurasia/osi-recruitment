@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = false)
 @Data()
-@Document(collection = "offer")
+//@Document(collection = "offer")
 public class Offer extends AuditEntity {
 
 	@Id

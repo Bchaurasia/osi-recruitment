@@ -41,7 +41,7 @@ import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.domain.UserNotification;
 @Service
-public class NotificationService implements INotificationService{
+public class NotificationService{
 
 	private static final String DD_MMM_YYYY_HH_MM = "dd-MMM-yyyy HH:mm";
 	private static final String YYYY_MM_DD_T_HH_MM_SS_SSS_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
@@ -271,7 +271,6 @@ public class NotificationService implements INotificationService{
 	}
 
 
-	@Override
 	public void sendJobRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
 			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
 
@@ -300,7 +299,6 @@ public class NotificationService implements INotificationService{
 		Transport.send(message1);
 	}
 	
-	@Override
 	public void sendRejectRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
 			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
 

@@ -4,4 +4,5 @@
 /.project
 /build/
 /.gradle/
-/.DS_Store
+
+/data/elasticsearch/nodes

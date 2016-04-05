@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
+import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.service.InterviewDetailsService;
 
 @Controller
@@ -26,6 +27,9 @@ public class InterviewController {
 	
 	@Autowired
 	private InterviewDetailsService interviewDetailsService;
+	
+	@Autowired
+	InterviewSearchService interviewSearchService;
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/interviewSchedule", method = RequestMethod.POST)
@@ -121,6 +125,18 @@ public class InterviewController {
 		String successmessage = "{\"msg\":\"Profile successfully Updated\"}";
 		return (null == successmessage) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
 				: new ResponseEntity<String>(successmessage, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@RequestMapping(value = "/interviewDetailsSearch", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveInterviewDetails(@RequestParam(value = "interviewDetails", required = false) String interviewDetails) throws Exception {
+		List<InterviewDetails> positionsDetails;
+		if(!StringUtils.isEmpty(interviewDetails)){
+			positionsDetails = interviewSearchService.getInterviewDetailsByName(interviewDetails,interviewDetails);
+		}else{
+			positionsDetails = interviewSearchService.getAllInterviewDetails();
+		}
+		return ((null == positionsDetails)) ? (new ResponseEntity<String>( "Positions not found", HttpStatus.NOT_FOUND)) : (new ResponseEntity<List<InterviewDetails>>(positionsDetails, HttpStatus.OK));
 	}
 
 }

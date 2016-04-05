@@ -17,7 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Document(collection = "Requisition")
+//@Document(collection = "Requisition")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "requisitions",type = "requisition", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Requisition {
 	@Id
 	String requisitionId;

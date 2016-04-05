@@ -1,8 +1,10 @@
 package com.nisum.employee.ref.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.Profile;
+import com.nisum.employee.ref.search.ProfileSearchService;
 import com.nisum.employee.ref.service.IProfileService;
+
 import gherkin.deps.net.iharder.Base64.InputStream;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,42 +35,47 @@ public class ProfileController {
 	@Autowired
 	private IProfileService profileService;
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ResponseEntity<?> retrieveProfile(@RequestParam(value = "emailId", required = false) String emailId,@RequestParam(value = "jobcodeProfile", required = false) String jobcodeProfile,@RequestParam(value = "profilecreatedBy", required = false) String profilecreatedBy) {
+	@Autowired
+	private ProfileSearchService profileSearchService;
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/profileSearch", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveProfile(@RequestParam(value = "emailId", required = false) String emailId,@RequestParam(value = "jobcodeProfile", required = false) String jobcodeProfile,@RequestParam(value = "profilecreatedBy", required = false) String profilecreatedBy) throws Exception {
 		List<Profile> positionsDetails = null;
 		if (emailId != null && !emailId.isEmpty()) {
-			positionsDetails = profileService.retrieveCandidateDetails(emailId);
+			positionsDetails = profileSearchService.getProfilesByEmailIdOrByName(emailId,emailId,emailId);
 		} else if (jobcodeProfile != null && !jobcodeProfile.isEmpty()) {
-			positionsDetails = profileService.retrieveProfileByJobCode(jobcodeProfile);
+			positionsDetails = profileSearchService.getProfilesByJobcodeProfile(jobcodeProfile);
 		}else if(profilecreatedBy != null && !profilecreatedBy.isEmpty()){
-			positionsDetails = profileService.retrieveProfileByProfileCreatedBy(profilecreatedBy);
+			positionsDetails = profileSearchService.getProfilesByProfilecreated(profilecreatedBy);
 		}else {
-			positionsDetails = profileService.retrieveAllProfiles();
+			positionsDetails = profileSearchService.getAllProfiles();
 		}
 		return (null == positionsDetails) ? new ResponseEntity<String>("Positions are not found", HttpStatus.NOT_FOUND)
 				: new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
 
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
-	@RequestMapping(value = "/profile", method = RequestMethod.POST)
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/profileSearch", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody Profile candidate) throws Exception{
+			profileSearchService.addProfileIndex(candidate);
 			profileService.prepareCandidate(candidate);
 			return new ResponseEntity<Profile>(candidate, HttpStatus.OK);
 	}
 
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
-	@RequestMapping(value = "/profile", method = RequestMethod.PUT)
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/profileSearch", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateUser(@RequestBody Profile candidate) {
 		profileService.updateCandidate(candidate);
+		
 		String jsonObj="{\"msg\":\"Profile successfully Updated\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadResume(HttpServletRequest request, Model model, @RequestParam(value = "file") MultipartFile multipartFile, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
 		profileService.saveResume(multipartFile, candidateId);
@@ -73,7 +83,7 @@ public class ProfileController {
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
-//	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/status", method = RequestMethod.POST)
 	public ResponseEntity<String> updateProfileStatus(@RequestParam(value = "emailId", required = true) String emailId,
 			@RequestParam(value = "status", required = true) String status) throws Exception {
@@ -83,7 +93,7 @@ public class ProfileController {
 	
 	@SuppressWarnings("null")
 	@ResponseStatus(HttpStatus.OK)
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	
 	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
 	public ResponseEntity<HttpServletResponse> downloadOndemandOrder(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {

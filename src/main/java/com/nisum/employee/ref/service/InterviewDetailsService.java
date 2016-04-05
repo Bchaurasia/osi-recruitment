@@ -19,6 +19,7 @@ import com.nisum.employee.ref.domain.InterviewSchedule;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.domain.Round;
 import com.nisum.employee.ref.repository.InterviewDetailsRepository;
+import com.nisum.employee.ref.search.InterviewSearchService;
 
 
 @Service
@@ -31,10 +32,13 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	private InterviewDetailsRepository interviewDetailsRepository;
 	
 	@Autowired
-	private INotificationService notificationService;
+	private NotificationService notificationService;
 	
 	@Autowired
 	private ProfileService profileService;
+	
+	@Autowired
+	private InterviewSearchService  interviewSearchService;
 	
 	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException{
 		InterviewDetails interviewDetails = null;
@@ -90,7 +94,13 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	}
 	
 	public InterviewDetails  createInterview(InterviewDetails interviewDetails){
-			interviewDetailsRepository.scheduleInterview(interviewDetails);
+			try {
+				interviewSearchService.addInterviewDetailsIndex(interviewDetails);
+				interviewDetailsRepository.scheduleInterview(interviewDetails);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		return interviewDetails;
 	}
 	

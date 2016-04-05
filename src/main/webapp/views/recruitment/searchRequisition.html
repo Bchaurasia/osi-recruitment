@@ -6,10 +6,10 @@
 			<h5 style="margin-top: 2px;">{{message}}</h5>
 		</div>
 		<div class="row" style="width: 90%">
-		<div class="col-md-5"></div>
-			<div class="col-md-4 ">
-					<input type="text" class="form-control"
-						placeholder="Requisition Search">
+		<div class="col-md-3"></div>
+			<div class="col-md-6 ">
+					<input type="text" class="form-control" ng-model="search" ng-change ="searchRequisition(search)"
+						placeholder="Search By Designatin or Client">
 			</div>
 			<div class="col-md-2" align="center">
 					<a class="waves-effect waves-light btn"
@@ -38,7 +38,8 @@
 
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="data in allRequisitions | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
+					ng-repeat="data in allRequisitions | orderBy : sortComment : true | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
+					<!-- <td><span style="background-color: red;padding: 5px 12px;color: white;"><b>A</b></span></td> -->
 					<td><a style="cursor: pointer;"
 						ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
 					<td>{{data.position}}</td>
@@ -64,7 +65,7 @@
 			
 			<div class="col-md-9">
 				 <ul class="pagination1 pull-right">
-				    <li ng-class="{disabled: currentPage == 0}"><a ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+				    <li e="{disabled: currentPage == 0}"><a ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
 				    <li  ng-repeat="n in range(currentPage)" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1"></a></li>
 				    <li class="waves-effect" ng-class="{disabled: currentPage == pageCount() - 1}"><a ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
 				  </ul>

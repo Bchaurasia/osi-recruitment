@@ -35,13 +35,10 @@ public class PositionRepository {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
-	
-	public void save(Position position) {
-		mongoOperations.save(position);
-	}
 
 	public void preparePosition(Position position) {
 		mongoOperations.save(position);
+		
 	}
 	
 	public void updatePosition(Position position) {

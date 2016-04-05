@@ -13,7 +13,7 @@ import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 public class JobRequisitionNotificationService {
 	private static final String REJECTED = "REJECTED";
 	@Autowired
-	private INotificationService notificationService;
+	private NotificationService notificationService;
 	
 	public RequisitionApproverDetails sendNotification(Requisition details) throws AddressException, MessagingException {
 		RequisitionApproverDetails requisitionApproverDetails = new RequisitionApproverDetails();

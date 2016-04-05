@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
+import com.nisum.employee.ref.search.RequisitionSearchService;
 import com.nisum.employee.ref.service.RequisitionService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,10 @@ public class RequisitionController {
 	
 	@Autowired
 	private RequisitionService requisitionService;
-
+	
+	@Autowired
+	private RequisitionSearchService requisitionSearchService;
+	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@ResponseBody
 	@RequestMapping(value="/requisition",method = RequestMethod.GET)
@@ -51,11 +55,27 @@ public class RequisitionController {
 	@ResponseBody
 	public ResponseEntity<String> updateRequisition(@RequestBody Requisition requisition) throws Exception{
 		log.info("Updating requisition");
-		RequisitionApproverDetails requisitionApproverDetails = requisitionService.updateRequisition(requisition);
+		
+		RequisitionApproverDetails requisitionApproverDetails = null;
+		requisitionApproverDetails = requisitionService.updateRequisition(requisition);
 		String message="Requisition successfully Updated and sent notification to "+ requisitionApproverDetails.getApproverName()+".";
 		String jsonObj="{\"msg\":\""+ message+ "\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+    @RequestMapping(value="/searchRequisitionByText" , method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> searchRequisitionBasedOnId(@RequestParam(value = "searchRequisition", required = true) String searchRequisition) throws Exception {
+            if(!searchRequisition.isEmpty()){
+                    List<Requisition> requisitionsDetails= requisitionSearchService.getRequisitionReqIdOrPositionOrClientByName(searchRequisition,searchRequisition,searchRequisition);
+                    return (null == requisitionsDetails) ? new ResponseEntity<String>("{\"msg\":\"No requisition found based on Search text\"}", HttpStatus.NOT_FOUND)
+                                    : new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
+            } else{
+            	List<Requisition> requisitionsDetails= requisitionSearchService.getAllRequisitionDetails();
+                return new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
+            }
+    }
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/requisitionById" , method = RequestMethod.GET)
@@ -65,7 +85,7 @@ public class RequisitionController {
 			return (null == requisitionsDetails) ? new ResponseEntity<String>("{\"msg\":\"No requisition found based on requested requisitionId\"}", HttpStatus.NOT_FOUND)
 					: new ResponseEntity<Requisition>(requisitionsDetails, HttpStatus.OK);
 	}
-	
+
 	@Secured({"ROLE_REQUISITION_APPROVER"})
 	@ResponseBody
 	@RequestMapping(value="/rejectRequisition",method = RequestMethod.POST)
@@ -94,4 +114,6 @@ public class RequisitionController {
 		String jsonObj=MSG_START+ message+ MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
+	
+	
 }

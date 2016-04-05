@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "Position")
+//@Document(collection = "Position")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "position",type = "positions", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Position extends AuditEntity {
 
 	@Id

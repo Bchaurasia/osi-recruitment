@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "Profile")
+//@Document(collection = "Profile")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "profiles",type = "profile", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Profile{
 	String candidateName ;
 	@Id
