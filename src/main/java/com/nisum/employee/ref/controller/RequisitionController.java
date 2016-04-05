@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
-import com.nisum.employee.ref.search.RequisitionIndexRepository;
 import com.nisum.employee.ref.search.RequisitionSearchService;
 import com.nisum.employee.ref.service.RequisitionService;
 
@@ -34,10 +33,6 @@ public class RequisitionController {
 	@Autowired
 	private RequisitionSearchService requisitionSearchService;
 	
-	@Autowired
-	private RequisitionIndexRepository requisitionIndexRepository;
-	
-
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@ResponseBody
 	@RequestMapping(value="/requisition",method = RequestMethod.GET)
@@ -73,8 +68,8 @@ public class RequisitionController {
     @ResponseBody
     public ResponseEntity<?> searchRequisitionBasedOnId(@RequestParam(value = "searchRequisition", required = true) String searchRequisition) throws Exception {
             if(!searchRequisition.isEmpty()){
-                    List<Requisition> requisitionsDetails= requisitionIndexRepository.findByPositionStartingWithOrClientStartingWithAllIgnoreCase(searchRequisition,searchRequisition);
-                    return (null == requisitionsDetails) ? new ResponseEntity<String>("{\"msg\":\"No requisition found based on requested requisitionId\"}", HttpStatus.NOT_FOUND)
+                    List<Requisition> requisitionsDetails= requisitionSearchService.getRequisitionReqIdOrPositionOrClientByName(searchRequisition,searchRequisition,searchRequisition);
+                    return (null == requisitionsDetails) ? new ResponseEntity<String>("{\"msg\":\"No requisition found based on Search text\"}", HttpStatus.NOT_FOUND)
                                     : new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
             } else{
             	List<Requisition> requisitionsDetails= requisitionSearchService.getAllRequisitionDetails();

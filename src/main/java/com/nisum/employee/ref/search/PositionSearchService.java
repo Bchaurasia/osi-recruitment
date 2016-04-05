@@ -28,7 +28,7 @@ public class PositionSearchService {
 		
 	}
 	
-	public Position addPositionIndex(Position position) throws Exception {
+	public Position addPositionIndex(Position position){
 		Position positionData = positionIndexRepository.save(position);
 		return positionData;
 	}

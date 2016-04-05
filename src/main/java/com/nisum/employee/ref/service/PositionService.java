@@ -14,66 +14,71 @@ import com.nisum.employee.ref.repository.SequenceRepository;
 import com.nisum.employee.ref.search.PositionSearchService;
 
 @Service
-public class PositionService implements IPositionService{
+public class PositionService implements IPositionService {
 
 	private static final String ACTIVE = "Active";
 
 	@Autowired
 	PositionRepository positionRepository;
-	
+
 	@Autowired
 	SequenceRepository sequenceRepository;
-	
+
 	@Autowired
 	PositionSearchService positionSearchService;
-	
+
 	public void preparePosition(Position position) {
 		positionRepository.preparePosition(position);
 	}
-	
+
 	public void updatePosition(Position position) {
 		try {
-			positionRepository.updatePosition(position);
 			positionSearchService.updatePositionIndex(position);
+			positionRepository.updatePosition(position);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<Position> retrievePositionByClient(String client) {
 		return positionRepository.retrievePositionByClient(client);
 	}
-	
+
 	public List<Position> retrieveAllPositions() {
 		return positionRepository.retrieveAllPositions();
 	}
-	
+
 	public List<Position> retrievePositionsbasedOnDesignation(String designation) {
 		return positionRepository.retrievePositionsbasedOnDesignation(designation);
 	}
-	
+
 	public Position retrievePositionsbasedOnJobCode(String jobcode) {
 		return positionRepository.retrievePositionsbasedOnJobCode(jobcode);
 	}
-	
+
 	public Position deletePositionBasedOnJC(String jobcode) {
 		return positionRepository.deletePositionBasedOnJC(jobcode);
 	}
-	
+
 	public List<Position> retrievePositionbasedOnLocation(String location) {
 		return positionRepository.retrievePositionbasedOnLocation(location);
 	}
-	
-	
+
 	public List<PositionAggregate> retrieveAllPositionsAggregate() {
 		return positionRepository.retrieveAllPositionsAggregate();
 	}
 
 	@Override
 	public void createRequitionPosition(Requisition requisition) {
-	               for (int i = 1; i <= Integer.valueOf(requisition.getNoOfPositions()); i++) {
-	               positionRepository.preparePosition(buildPosition(requisition, i));
-	               }
+		for (int i = 1; i <= Integer.valueOf(requisition.getNoOfPositions()); i++) {
+			try {
+				Position position = buildPosition(requisition, i);
+				positionRepository.preparePosition(position);
+				positionSearchService.addPositionIndex(position);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private Position buildPosition(Requisition requisition, int sequence) {
@@ -89,12 +94,12 @@ public class PositionService implements IPositionService{
 		position.setPrimarySkills(requisition.getSkillType());
 		position.setInterviewRounds(interviewRounds);
 		position.setHiringManager(requisition.getRequisitionManager());
-        position.setJobcode("JOB_"+sequenceRepository.getNextSequenceId("JOB"));
+		position.setJobcode("JOB_" + sequenceRepository.getNextSequenceId("JOB"));
 		return position;
 	}
 
 	private ArrayList<String> getInterviewRounds() {
-		ArrayList<String> interviewRounds=new ArrayList<>();
+		ArrayList<String> interviewRounds = new ArrayList<>();
 		interviewRounds.add("Technical Round 1");
 		interviewRounds.add("Technical Round 2");
 		interviewRounds.add("Hr Round");

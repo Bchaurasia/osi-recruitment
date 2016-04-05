@@ -1,8 +1,10 @@
 package com.nisum.employee.ref.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.Profile;
-import com.nisum.employee.ref.search.ProfileIndexRepository;
 import com.nisum.employee.ref.search.ProfileSearchService;
 import com.nisum.employee.ref.service.IProfileService;
+
 import gherkin.deps.net.iharder.Base64.InputStream;
 import lombok.extern.slf4j.Slf4j;
 
