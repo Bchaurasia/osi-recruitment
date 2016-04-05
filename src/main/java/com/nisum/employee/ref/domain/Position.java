@@ -2,7 +2,6 @@ package com.nisum.employee.ref.domain;
 
 import java.util.ArrayList;
 
-import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 
 import lombok.Getter;
@@ -32,10 +31,11 @@ public class Position  {
 	String salary;
 	UserVO hiringManager;
 	String status;
-	DateTime createdDate;
-	String createdBy;
-	DateTime updatedDate;
 	String updatedBy;
+	String createdBy;
+	//DateTime updatedDate;
+	//DateTime createdDate;
+	
 	
 	
 }

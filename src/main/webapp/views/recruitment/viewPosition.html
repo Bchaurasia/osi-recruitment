@@ -1,225 +1,135 @@
-<div >
-
-	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-	<div ng-class=" cls" ng-show="message" align="center"
-		style="width: 850px; position: relative; left: -60; height: 50">
-		<h5 style="margin-top: 2px;">{{message}}</h5>
-	</div>
-	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-	<accordion close-others=false> <accordion-group
-		is-open="status.isFirstOpen"> <accordion-heading>
-	<font style="color: white" align="center"> Position Details<i
-		class="pull-right glyphicon" ng-class="{}"></i></font> </accordion-heading>
-
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="designation"><i
-					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Designation*:</label>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
+		Position : {{position.jobcode}}</h4>
+</div>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="UpdatePosition" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Designation" ng-model="position.designation" 
+					ng-options="o as o for o in designation1 | orderBy:'toString()'" ng-disabled="true"
+					class="form-control input-sm" required>
+					<option value="">{{position.designation}}</option>
+				</select> <label>Position<b class="mandatory">*</b></label>
 			</div>
-			<div class="col-md-3">
-			{{ position.designation}}
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="location"><i
-					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location*:</label>
-			</div>
-			<div class="col-md-3">
-				{{position.location}}
+			
+			<div class="input-field col s6">
+				<select placeholder="Select Location"
+					ng-model="position.location" ng-options="o as o for o in info.locations | orderBy:'toString()'" ng-disabled="true"
+					class="form-control input-sm" required>
+					<option value="">{{position.location}}</option>
+				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
 		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="experience"><i
-					class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience*:</label>
-			</div>
-			<div class="col-md-3">
-				<div class="col-md-3">MIN:</div>
-				<div class="col-md-3">
-					<!-- <a href="#" editable-select="position.minExpYear"
-						e-ng-options="o as o for o in info.expYears" e-required> {{
-						position.minExpYear}} </a> -->
-					{{position.minExpYear}}
+		
+		
+		<div class="row">
+				<div class="input-field col s6">
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="range" ng-model="requisition.minExpYear" ng-disabled="true"
+									ng-change="min(requisition.minExpYear)" min="0" max="15" required />
+								<span class="range-slider__value">Min:{{position.minExpYear}}</span>
+							</div>
+							<div class="input-field col s6">
+								<input type="range" ng-model="requisition.maxExpYear" ng-disabled="true"
+									ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
+								<span class="range-slider__value">Max:{{position.maxExpYear}}</span>
+							</div>
+						</div>
+					<label style="margin-top: 14px">Exp. Required<b class="mandatory">*</b></label>
 				</div>
-				<div class="col-md-3">MAX:</div>
-				<div class="col-md-3">
-				<!-- 	<a href="#" editable-select="position.maxExpYear"
-						e-ng-options="o as o for o in info.expYears" e-required> {{
-						position.maxExpYear}} </a> -->
-						{{position.maxExpYear}}
-
-				</div>
+			<div class="input-field col s6">
+				<select placeholder="Select Client" ng-options="o as o for o in clients | orderBy:'toString()'"
+					ng-model="position.client" ng-disabled="true"
+					class="form-control input-sm" required>
+					<option value="">{{position.client}}</option>
+				</select> <label>Client<b class="mandatory">*</b></label>
 			</div>
 		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="client"><i
-					class="glyphicon glyphicon-grain"></i>&nbsp;&nbsp;Client:</label>
+		
+		<div class="row">
+			<div class="input-field col s6">
+					<ui-select multiple ng-model="position.primarySkills"
+						ng-keypress="myFunct($event)" theme="select2" ui-select-required
+						ng-disabled="disabled"> <ui-select-match
+						placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+					{{color}} </ui-select-choices> </ui-select>
+					<label>Primary Skills<b class="mandatory">*</b></label>
 			</div>
-			<div class="col-md-3">
-				<!-- <a href="#" editable-select="position.client"
-					e-ng-options="o as o for o in clients" e-required> {{
-					position.client }} </a> -->{{position.client}}
+			
+			<div class="input-field col s6">
+					<input type="text" ng-model="position.secondarySkills" 
+					id="secondarySkills"><label>Secondary Skills</label>
 			</div>
 		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="primarySkill"><i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;primary Skills.*:</label>
+		
+		<div class="row">
+			<div class="input-field col s6">
+				<textarea id="textarea1" class="materialize-textarea" length="120" ng-disabled="true"
+					ng-model="position.jobProfile"></textarea>
+				<label>Job Description<b class="mandatory">*</b></label>
 			</div>
-			<div class="col-md-2">
-				<a href="" ng-hide="dis2" ng-click="skills()" e-required><i
-					ng-repeat="skills in position.primarySkills">{{skills}}{{$last
-						? '' : ', '}}</i></a>
-				<ui-select ng-hide="hideSkills" multiple
-					ng-model="position.primarySkills" ng-keypress="myFunct($event)"
-					name='sk.primarySkills' id="skills" ui-select-required
+			
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="position.interviewRounds"
 					theme="select2" ng-disabled="disabled"> <ui-select-match
-					placeholder="Select skill...">{{$item}}</ui-select-match> <ui-select-choices
-					repeat="skill in pskills | orderBy:'toString()' | filter:$select.search">
-				{{skill}} </ui-select-choices> </ui-select>
-			</div>
-			<div class="col-md-1">
-				<button class="glyphicon glyphicon-ok btn btn-primary"
-					ng-hide="hideSkills" ng-click="skill()"></button>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="secondarySkill"><i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;secondarySkills:</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="position.secondarySkills">{{position.secondarySkills
-					|| "--" }}</a>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="jobProfile"><i
-					class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Job
-					Description.*:</label>
-			</div>
-			<div class="col-md-3">
-
-				<a href="#" editable-text="position.jobProfile" e-required>{{position.jobProfile}}</a>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="iRounds"><i
-					class="glyphicon glyphicon-home"></i>&nbsp;InterviewRounds:</label>
-			</div>
-			<div class="col-md-3">
-				<a herf="" ng-hide="dis" ng-click="irs()" e-required><i
-					ng-repeat="round in position.interviewRounds">{{round}}{{$last
-						? '' : ', '}}</i></a>
-				<ui-select ng-hide="hideRounds" multiple
-					ng-model="position.interviewRounds" theme="select2"
-					ng-disabled="disabled"> <ui-select-match
 					placeholder="Select Rounds..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in interviewRounds | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-			</div>
-			<div class="col-md-1">
-				<button class="glyphicon glyphicon-ok btn btn-primary"
-					ng-hide="hideRounds" ng-click="irs1()"></button>
+				<label>Interview Rounds<b class="mandatory">*</b></label>
 			</div>
 		</div>
-	</div>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Hiring
-					HR :<b class="mandatory">*</b>
-				</label>
+		<div class = "row">
+			<div class="input-field col s6">
+				<select placeholder="Select Hiring HR" ng-model="hrManager"
+					ng-options="o.name for o in hrManagers"
+					class="form-control input-sm" required>
+					<option>Select Hiring Managers</option>
+				</select> <label>Hiring HR<b class="mandatory">*</b></label>
 			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="position.hiringManager" 
-					e-ng-options="o.name for o in hiringManager" e-required>
-					{{ position.hiringManager.name	|| "--" }}</a>
-					
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="Priority"><i
-					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Priority:</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="position.priority"
-					e-ng-options="o as o for o in info.Priority" e-required> {{
-					position.priority}} </a>
-
+			<div class="input-field col s6"> 
+				<select placeholder="Select Priority"	
+					ng-model="position.priority"
+					ng-options="o as o for o in info.Priority"
+					class="form-control input-sm">
+					<option>Select Priority</option>
+				</select> <label>Priority</label>
 			</div>
 		</div>
-	</div>
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="interviewer"><i
-					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Point Of Contact:</label>
+		<div class = "row">
+			<div class="input-field col s6"> 
+				<select placeholder="Select Point Of Contact"	
+					ng-model="interviewer"
+					ng-options="o.name for o in interviewers"
+					class="form-control input-sm">
+					<option>Select Interviewers</option>
+				</select> <label>Point Of Contact</label>
 			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="position.interviewer"
-					e-ng-options="o as o for o in interviewers" e-required> {{
-					position.interviewer}} </a>
-
-			</div>
-		</div>
-	</div>
-	<div class="row" align="left">
-		<div class="col-md-1"></div>
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="Status"><i
-					class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Status*:</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="position.status"
-					e-ng-options="o for o in statuses" e-required> {{
-					position.status || "--"}} </a>
+			<div class="input-field col s6"> 
+				<select placeholder="Select Status"	
+					ng-model="position.status"
+					ng-options="o for o in statuses"
+					class="form-control input-sm">
+					<option>Select Statuses</option>
+				</select> <label>Status</label>
 			</div>
 		</div>
-	</div>
-	<br>
-</accordion-group> </accordion>
-</div>
-<div align="center">
-	<a class="btn btn-info active" ng-click="updatePositionDetails()"
-		ng-disabled="hasNotRole('ROLE_ADMIN,ROLE_HR')"> <span
-		class="glyphicon glyphicon-ok"></span> Update
-	</a>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.searchPosition"
-		class="btn btn-info active"> <span
-		class="glyphicon glyphicon-remove"></span> Cancel
-	</a>
-</div>
-<br>
-<br>
-<br>
+		
+		<div align="center" class="row">
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="hasNotRole('ROLE_ADMIN,ROLE_HR')"
+				ng-click="updatePositionDetails()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Save
+			</button>
+			<button class="btn btn-info active"
+				ui-sref="recruitment.searchPosition">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</div>
+		</form>
 </div>

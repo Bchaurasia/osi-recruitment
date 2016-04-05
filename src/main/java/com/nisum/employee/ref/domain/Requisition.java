@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -43,5 +42,5 @@ public class Requisition {
 	@CreatedDate
 	Date createdDate;
 	@LastModifiedDate
-	private Date updatedDate;
+	Date updatedDate;
 }
