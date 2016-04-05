@@ -141,55 +141,15 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		})
 	}
 	
-	/*$scope.validateNoOfPosition = function(data) {
-		var data1 = parseInt(data);
-		if(data1==0) {
-			$scope.positionErr = true;
-			$scope.disabled = true;
-		} else{
-			$scope.positionErr = false;
-			$scope.disabled = false;
-		}
-		checkForEnableCreateButton();
-	};*/
-	
 	$scope.validTargetDate = function(requisitionDate,targetDate){
 		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
-		 if(requisitionDate.getFullYear() === targetDate.getFullYear()){
-			 if((requisitionDate.getMonth()+1) === (targetDate.getMonth()+1)){
-				 if(requisitionDate.getDate() === targetDate.getDate()){
-					 $scope.targetErr = false;
-					 $scope.disabled = false;
-				 }
-				 else if(requisitionDate.getDate() > targetDate.getDate()){
-					 $scope.targetErr = true;
-					 $scope.disabled = true; 
-					 $scope.targetDate = "";
-				 }
-				 else{
-					 $scope.targetErr = false;
-					 $scope.disabled = false;
-				 }
-			 }
-			 else if((requisitionDate.getMonth()+1) > (targetDate.getMonth()+1)){
-				 $scope.targetErr = true;
-				 $scope.disabled = true; 
-				 $scope.targetDate = "";
-			 }
-			 else{
-				 $scope.targetErr = false;
-				 $scope.disabled = false;
-			 }
-		 }
-		 else if(requisitionDate.getFullYear() > targetDate.getFullYear()){
+		if(targetDate < requisitionDate){
 			 $scope.targetErr = true;
 			 $scope.disabled = true; 
-			 $scope.targetDate = "";
-		 }
-		 else{
-			 $scope.targetErr = false;
-			 $scope.disabled = false;
-		 }
+		}else{
+			$scope.targetErr = false;
+			 $scope.disabled = false; 
+		}
 		 checkForEnableCreateButton();
 	}
 	
@@ -225,43 +185,15 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	}
 	
 	$scope.reqDate = function(requisitionDate,targetDate){
-		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
-		if(requisitionDate.getFullYear() === targetDate.getFullYear()){
-			 if((requisitionDate.getMonth()+1) === (targetDate.getMonth()+1)){
-				 if(requisitionDate.getDate() === targetDate.getDate()){
-					 $scope.reqErr = false;
-					 $scope.disabled = false;
-				 }
-				 else if(requisitionDate.getDate() > targetDate.getDate()){
-					 $scope.reqErr = true;
-						$scope.disabled = true;
-						$scope.requisitionDate = "";
-				 }
-				 else{
-					 $scope.reqErr = false;
-					 $scope.disabled = false;
-				 }
-			 }
-			 else if((requisitionDate.getMonth()+1) > (targetDate.getMonth()+1)){
-				 $scope.reqErr = true;
-					$scope.disabled = true;
-					$scope.requisitionDate = "";
-			 }
-			 else{
-				 $scope.reqErr = false;
-				 $scope.disabled = false;
-			 }
-		 }
-		 else if(requisitionDate.getFullYear() > targetDate.getFullYear()){
-			 $scope.reqErr = true;
-				$scope.disabled = true;
-				$scope.requisitionDate = "";
-		 }
-		 else{
-			 $scope.reqErr = false;
+		if(targetDate < requisitionDate){
+			$scope.reqErr = true;
+			$scope.disabled = true;
+		}else{
+			$scope.reqErr = false;
 			 $scope.disabled = false;
-		 }
+		}
 		checkForEnableCreateButton();
+		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
 	}
 	
 
@@ -319,7 +251,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			
 			var date1 = new Date($scope.targetDate);
 			$scope.requisition.targetDate = date1.getDate()+'-' + date1.getMonth() + '-'+date1.getFullYear();
-			
+			//console.log(angular.toJson($scope.requisition));
 			requisitionService.createRequisition($scope.requisition)
 			.then(successMsg)
 			.catch(errorMsg);

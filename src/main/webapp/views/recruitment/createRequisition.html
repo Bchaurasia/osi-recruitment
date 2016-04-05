@@ -46,8 +46,8 @@
 					date should not be after Target Date.</span>
 			</div>
 			<div class="input-field col s6">
-				<input type="date" ng-model="targetDate"
-					min="{{today | date : 'yyyy-mm-dd' }}"
+				<input type="date" ng-model="targetDate" ng-change="validTargetDate(requisitionDate,targetDate)"
+					min="{{today | date : 'yyyy-MM-dd' }}"
 					ng-change="validTargetDate(requisitionDate,targetDate)"
 					id="targetDate" required> <label>Target Date<b
 					class="mandatory">*</b></label> <span class="validation-error"

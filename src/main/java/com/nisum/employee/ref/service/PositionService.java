@@ -3,6 +3,7 @@ package com.nisum.employee.ref.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +96,10 @@ public class PositionService implements IPositionService {
 		position.setInterviewRounds(interviewRounds);
 		position.setHiringManager(requisition.getRequisitionManager());
 		position.setJobcode("JOB_" + sequenceRepository.getNextSequenceId("JOB"));
+		position.setCreatedBy(requisition.getCreatedBy());
+		position.setLastModifiedBy(requisition.getCreatedBy());
+		position.setCreatedDate(new DateTime());
+		position.setLastModifiedDate(new DateTime());
 		return position;
 	}
 
