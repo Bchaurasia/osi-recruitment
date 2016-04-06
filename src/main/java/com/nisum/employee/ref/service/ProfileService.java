@@ -30,7 +30,6 @@ public class ProfileService implements IProfileService{
 		profileRepository.prepareCandidate(candidate);
 		return profileSearchService.addProfileIndex(candidate);
 	}
-
 	
 	public void updateCandidate(Profile candidate) {
 		try {
@@ -44,7 +43,7 @@ public class ProfileService implements IProfileService{
 		profileRepository.updateCandidateStatus(email, status);
 	}
 	
-	public List<Profile> retrieveCandidateDetails(String emailId) {
+	public List<Profile> getProfileByEmailId(String emailId) {
 		return profileRepository.retrieveCandidateDetails(emailId);
 	}
 	
@@ -52,7 +51,7 @@ public class ProfileService implements IProfileService{
 		return profileRepository.retrieveProfileByJobCode(jobcodeProfile);
 	}
 	
-	public List<Profile> retrieveProfileByProfileCreatedBy(String profilecreatedBy) {
+	public List<Profile> getProfileByProfileCreatedId(String profilecreatedBy) {
 		return profileRepository.retrieveProfileByProfileCreatedBy(profilecreatedBy);
 	}
 	

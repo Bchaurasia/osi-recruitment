@@ -13,13 +13,14 @@ public interface IProfileService {
 	Profile prepareCandidate(Profile candidate) throws Exception;
 
 	void updateCandidate(Profile candidate);
+	
 	void updateCandidateStatus(String email,String status);
 
-	List<Profile> retrieveCandidateDetails(String emailId);
+	List<Profile> getProfileByEmailId(String emailId);
 
 	List<Profile> retrieveProfileByJobCode(String jobcodeProfile);
 
-	List<Profile> retrieveProfileByProfileCreatedBy(String profilecreatedBy);
+	List<Profile> getProfileByProfileCreatedId(String profilecreatedBy);
 
 	List<Profile> retrieveAllProfiles();
 

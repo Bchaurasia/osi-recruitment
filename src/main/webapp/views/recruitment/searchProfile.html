@@ -29,11 +29,11 @@
 				<tr class="animate-repeat"
 					ng-repeat="profile in profiles | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
-						style="cursor: pointer;" ng-click="editProfile(data)">{{profile.candidateName}}</a></td>
+						style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.designation}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.expYear}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.jobcodeProfile}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.jobcodeProfile.join(',')}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
 					
 				</tr>

@@ -18,48 +18,43 @@ angular.module('components', [])
             scope.$watch(scope.dataModel,function(newVal,oldVal){
             	scope.isArray = angular.isArray;
             	var add ="#"+$attrs.addlink;
-            	var body = '<div class="animated fadeIn"><div class="row"><div class="col-md-1"></div><div class="col-md-4">';
+            	var body = '<div class="animated fadeIn"><div class="row" style="width: 90%"><div class="col-md-4"></div><div class="col-md-6">';
 
             	if($attrs.searchEnable != undefined && $attrs.searchEnable=='true'){
-					body = body.concat('<div class="input-group">'+
-						'<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="search"'+ 
-						'style="width: 80%;border: 1px solid rgb(194, 191, 191);"/>'+
-						'<span class="input-group-addon" style="position: relative;left: -19%;">'+
-							'<span class="glyphicon glyphicon-search"></span>'+
-						'</span>'+
+					body = body.concat('<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="text"'+ 
 						'</div>');
             	}
 
             	if($attrs.addlink!= undefined){
-					body = body.concat('</div><div class="col-md-1"><a id="rsBtn1" href="'+add+'"'+
-						'class="btn btn-info active" '+'> <span '+
-						'class="glyphicon glyphicon-plus"></span>'+
+					body = body.concat('</div><div class="col-md-2" align="center"><a href="'+add+'"'+
+						'class="waves-effect waves-light btn" '+'> <i '+
+						'class="material-icons left">add</i>create'+
 						'</a>');
             	}
             	            	
             	body = body.concat('</div></div><br><div>');
           	
-                body = body.concat('<table border="1" id="interview">'+
+                body = body.concat('<table class="bordered" style="width: 90%">'+
                           '<thead>'+
                            '<tr>');
 
-                body = body.concat("<th ng-repeat='col in columnHeader' style='text-align: center;' >{{col}}</th>");
+                body = body.concat("<th ng-repeat='col in columnHeader'>{{col | uppercase}}</th>");
 
                 body = body.concat("</tr></thead><tbody>");
                  
-                body = body.concat("<tr ng-repeat='data in filtereddataRepeat=(dataModel | filter: search)| offset: currentPage*itemsPerPage | limitTo: itemsPerPage'>");
+                body = body.concat("<tr class='animate-repeat' style='font-size: 80%' ng-repeat='data in filtereddataRepeat=(dataModel | filter: search)| offset: currentPage*itemsPerPage | limitTo: itemsPerPage'>");
 	       	                	
                 
                 var i=0;
                 angular.forEach(scope.dataAttribute,function(col){
                 	if(i==0 && $attrs.editfun != undefined){
-                			body = body.concat("<td><a style=\"cursor:pointer;\" ng-click='editfun({val:data})'>{{data."+col+"}}</a></td>");
+                			body = body.concat("<td class='mdl-data-table__cell--non-numeric'><a style=\"cursor:pointer;\" ng-click='editfun({val:data})'>{{data."+col+"}}</a></td>");
                 		}
                 	else if(_.contains(scope.dataArrayAttribute,col)){
-                		body = body.concat("<td>{{data."+col+".join(', ')}}</span></td>");
+                		body = body.concat("<td class='mdl-data-table__cell--non-numeric'>{{data."+col+".join(', ')}}</span></td>");
                 	}
                 	else{
-                		body = body.concat("<td>{{data."+col+"}}</span></td>");
+                		body = body.concat("<td class='mdl-data-table__cell--non-numeric'>{{data."+col+"}}</span></td>");
                 	}
                 	i++;
                  });                	
@@ -68,22 +63,22 @@ angular.module('components', [])
                 
                 body = body.concat('<div class="row">'+
 						'<div class="col-md-3">'+
-							'<h5>Total '+
-								': {{ filtereddataRepeat.length }}</h5>'+
+							'<h5><small>Total '+
+								': {{ filtereddataRepeat.length }}</small></h5>'+
 						'</div>');
                /* if(_.isEmpty(scope.dataArrayAttribute))*/
                 {	
 	                
                 	body = body.concat('<div class="col-md-9">'+
-									'<ul class="pagination pull-right">'+
+									'<ul class="pagination1 pull-right">'+
 										'<li ng-class="{disabled: currentPage == 0}"><a href '+
-											'ng-click="prevPage()">Prev</a></li>'+
+											'ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>'+
 										'<li ng-repeat="n in range(currentPage)"'+
 											'ng-class="{active: n == currentPage}" ng-click="setPage()">'+
 											'<a href ng-bind="n + 1"></a>'+
 										'</li>'+
 										'<li ng-class="{disabled: currentPage == page}"><a '+
-											'href ng-click="nextPage()">Next</a></li>'+
+											'href ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>'+
 									'</ul>'+
 							'</div></div>');
                 }

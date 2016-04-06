@@ -1,9 +1,6 @@
-<center>
-	<div class="ui-widget control-group">
-		<div style="width: 650px; position: relative; left: -60; height: 50"
-			ng-class="adminCls" ng-show="message" align="center">
-			{{message}}</div>
-		<table id="users" style="margin-left: -10%" class="usersTable">
+	<div>
+		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+		<table class="bordered" style="width: 80%;">
 			<tr>
 				<th>Name</th>
 				<th>Email ID</th>
@@ -12,16 +9,33 @@
 				<th>Edit</th>
 			</tr>
 
-			<tr ng-repeat="user in myData">
-				<td>{{user.name}}</td>
-				<td><a ng-click="editUser(user)" ui-sref="admin.users.edit">{{user.emailId}}</a></td>
-				<td><i>{{ user.roles.join(',')}}</i></td>
-				<td>{{user.clientName.join(',')}}</td>
-				<td align="center"><a ng-click="editUser(user)"
+			<tr class="animate-repeat" ng-repeat="user in users  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 90%">
+				<td class="mdl-data-table__cell--non-numeric" >{{user.name}}</td>
+				<td class="mdl-data-table__cell--non-numeric"><a ng-click="editUser(user)" ui-sref="admin.users.edit">{{user.emailId}}</a></td>
+				<td class="mdl-data-table__cell--non-numeric" style="font-size: 80%">{{ user.roles.join(',')}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{user.clientName.join(',')}}</td>
+				<td class="mdl-data-table__cell--non-numeric" align="center"><a ng-click="editUser(user)"
 					ui-sref="admin.users.edit" class="glyphicon glyphicon-edit"></a></td>
 			</tr>
 			<br>
 		</table>
-		<br> <br>
+		<div class="row" style="width: 90%">
+			<div class="col-md-3" align="left">
+				<h5>
+					<small> Total Positions : {{ users.length }}</small>
+				</h5>
+			</div>
+			<div class="col-md-9">
+				<ul class="pagination1 pull-right">
+					<li ng-class="{disabled: currentPage == 0}"><a
+						ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+					<li ng-repeat="n in range(currentPage)"
+						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+						ng-bind="n + 1"></a></li>
+					<li class="waves-effect"
+						ng-class="{disabled: currentPage == pageCount() - 1}"><a
+						ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
-</center>

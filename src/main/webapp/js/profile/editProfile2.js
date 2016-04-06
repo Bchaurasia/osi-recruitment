@@ -1,8 +1,8 @@
-app.run(['$anchorScroll', function($anchorScroll) {
-    $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
-}])
-app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$rootScope','$log','positionService','profileService','clientService','appConstants','infoService', 'interviewService','$location','$anchorScroll','designationService', 
-                                  		function($scope, $state, $http,$window, jobCodeService1, $timeout,$filter, $q, $rootScope, $log,positionService,profileService,clientService,appConstants,infoService, interviewService, $location, $anchorScroll,designationService) {
+//app.run(['$anchorScroll', function($anchorScroll) {
+//    $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
+//}])
+app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$rootScope','$log','positionService','profileService','clientService','appConstants','infoService', 'interviewService','$location','$anchorScroll','designationService','profileService',
+                                  		function($scope, $state, $http,$window, jobCodeService1, $timeout,$filter, $q, $rootScope, $log,positionService,profileService,clientService,appConstants,infoService, interviewService, $location, $anchorScroll,designationService,profileService) {
 	
 	$scope.candidate={};
 	$scope.positionData={};
@@ -14,7 +14,7 @@ app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','
 	$scope.user="";
 	$scope.updateInterview={};
 	$scope.init = function() {
-		$scope.user = jobCodeService1.getuserName();
+		$scope.user = jobCodeService1.getprofileUserId();
 	}
 	$scope.init();
 	
@@ -36,10 +36,10 @@ app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','
 	}).error(function(data, status, headers, config) {
 		$log.error(status)
 	});
-	$http.get('resources/profileSearch?emailId='+$scope.user)
-	.then(function(data){$scope.positionData
-		console.log(angular.toJson(data.data[0]));
-		$scope.candidate = data.data;
+//	$http.get('resources/profileSearch?emailId='+$scope.user)
+	profileService.getProfileById($scope.user).then(function(data){
+		console.log(angular.toJson(data));
+		$scope.candidate = data[0];
 		positionService.getPositionByDesignation($scope.candidate[0].designation).then(function(data){
 			$scope.positionData = data;
 			 angular.forEach($scope.positionData, function(jobcodeProfile){

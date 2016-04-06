@@ -57,7 +57,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewSchedule.getCandidateId());
 		interviewDetails = enrichInterviewDetails(interviewDetails2 ,interviewSchedule);
 		interviewDetailsRepository.scheduleInterview(interviewDetails);
-		List<Profile> pro = profileService.retrieveCandidateDetails(interviewSchedule.getCandidateId());
+		List<Profile> pro = profileService.getProfileByEmailId(interviewSchedule.getCandidateId());
 		String mobileNo = pro.get(0).getMobileNo();
 		String altMobileNo = pro.get(0).getAltmobileNo();
 		String skypeId = pro.get(0).getSkypeId();
@@ -70,7 +70,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewSchedule.getCandidateId());
 		interviewDetails = enrichInterviewDetailsUpdate(interviewDetails2 ,interviewSchedule);
 		interviewDetailsRepository.scheduleInterview(interviewDetails);
-		List<Profile> pro = profileService.retrieveCandidateDetails(interviewSchedule.getCandidateId());
+		List<Profile> pro = profileService.getProfileByEmailId(interviewSchedule.getCandidateId());
 		String mobileNo = pro.get(0).getMobileNo();
 		String altMobileNo = pro.get(0).getAltmobileNo();
 		String skypeId = pro.get(0).getSkypeId();

@@ -18,8 +18,6 @@
 					required name="interviewers">
 					<option value="" disabled="disabled">Select Jobcode</option>
 				</select> <label>Job Code<b class="mandatory">*</b></label>
-
-				<!-- <div class="col-md-3 lblColor" style="display: inline;" ng-hide="!(hasRole('ROLE_INTERVIEWER'))"> {{jobCodeSel}} </div>  -->
 			</div>
 
 			<div class="input-field col s6">
@@ -51,7 +49,7 @@
 					<!-- id="dLabel" ng-change="reqDate(requisitionDate,targetDate)" ng-model="requisitionDate"  DOES NOT DE_SELECT THE PREVIOUS DATES AND ERROR FOR PREVIOUS DATES-->
 					<input type="text" name="idate" data-ng-model="data.date"
 						ng-bind="data.date" data-toggle="dropdown" data-target="#"
-						class="dropdown-toggle form-control"  required />
+						class="dropdown-toggle form-control" required />
 
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 						<datetimepicker data-ng-model="data.date"
@@ -67,18 +65,21 @@
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6" style="position: relative;top: -20px">
-					<div align="left" style="position: relative;top: 20px"><b ng-repeat="day in interviewerData.timeSlots">{{day.day}}, </b></div>
+			<div class="input-field col s6"
+				style="position: relative; top: -20px">
+				<div align="left" style="position: relative; top: 20px">
+					<b ng-repeat="day in interviewerData.timeSlots">{{day.day}} </b>
+				</div>
 				<label for="Days">Available Days<b class="mandatory">*</b>
 			</div>
 
 			<div class="input-field col s6">
 				<!-- ng-disabled = "true"  -->
 				<input type="text" maxlength="15"
-					ng-model="interviewschedule.interviewerMobileNumber" ng-disabled = "true"
-					name="mobileNo" class="form-control" placeholder="Enter Cell# "
-					required /> <label for="Days">Interviewer Cell # <b
-					class="mandatory">*</b>
+					ng-model="interviewschedule.interviewerMobileNumber"
+					ng-disabled="true" name="mobileNo" class="form-control"
+					placeholder="Enter Cell# " required /> <label for="Days">Interviewer
+					Cell # <b class="mandatory">*</b>
 			</div>
 
 		</div>
@@ -86,14 +87,14 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input type="email" ng-change=""
-					ng-model="interviewschedule.emailIdInterviewer" ng-disabled = "true"
+					ng-model="interviewschedule.emailIdInterviewer" ng-disabled="true"
 					name="emailIdInterviewer" class="form-control"
 					placeholder="Enter Email Id" required /> <label for="Days">Interviewer
 					Email Id <b class="mandatory">*</b>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" ng-change="" ng-model="interviewschedule.skypeId" ng-disabled = "true"
-					name="skypeId" ngPattern="" class="form-control"
+				<input type="text" ng-change="" ng-model="interviewschedule.skypeId"
+					ng-disabled="true" name="skypeId" ngPattern="" class="form-control"
 					placeholder="Enter Skype Id" required /> <label for="Days">
 					Skype Id<b class="mandatory">*</b>
 			</div>
@@ -110,7 +111,7 @@
 			</div>
 
 			<div class="input-field col s6">
-				<select ng-model="sel.selectedLocation" ng-disabled = "true"
+				<select ng-model="sel.selectedLocation" ng-disabled="true"
 					ng-options="o as o for o in info.locations | orderBy:'toString()'"
 					class="form-control input-sm" required name="location">
 					<option value="" disabled="disabled">Select Location</option>
@@ -121,21 +122,20 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2" ng-change="changeEvent()"
-					name="intNotes" ng-model="interviewschedule.additionalNotes"
+				<textarea class="materialize-textarea" cols="50" rows="2"
+					ng-change="changeEvent()" name="intNotes"
+					ng-model="interviewschedule.additionalNotes"
 					placeholder="Enter any additional notes..."></textarea>
 				<label>Additional Notes</label>
 			</div>
 		</div>
 
 		<div align="center" class="row">
-			<!-- ng-click="submit()"  -->
-			
 			<button class="btn btn-info active"
 				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');!(scheduleButnHide)"
-				ng-disabled="scheduleButnDis" type="button" ng-click="reSchedule()"> Re-Schedule
-			</button>
-			
+				ng-disabled="scheduleButnDis" type="button" ng-click="reSchedule()">
+				Re-Schedule</button>
+
 			<button class="btn btn-info active" type="submit"
 				ng-disabled="scheduleButnDis"
 				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">

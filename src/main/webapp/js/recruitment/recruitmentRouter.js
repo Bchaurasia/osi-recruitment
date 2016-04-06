@@ -50,7 +50,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             }
     	}
     })
-    .state('recruitment.interviewManagement', {url:'/interviewManagement', views: {'': {templateUrl: 'views/recruitment/interviewManagement.html', controller: 'interviewManagementCtrl'}},
+    .state('recruitment.interviewManagement', {url:'/interviewManagement', views: {'': {templateUrl: 'views/recruitment/searchInterview.html', controller: 'interviewManagementCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);

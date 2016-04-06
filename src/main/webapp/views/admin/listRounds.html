@@ -1,7 +1,4 @@
-<div ng-class="cls" ng-show="message" align="center"
-	 style="width: 650px; position: relative; left: -60; height:50">
-		<h5>{{message}}</h5>
-</div>
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 
 <button ng-hide="dis" style="position:relative;left: 20%;  top: 30px;"" class="btn btn-info active" ng-click="alHide();Skills1()">
 				<span class="glyphicon glyphicon-plus"></span>
@@ -11,17 +8,16 @@
 	<div align="left" class="col-md-3"></div>
 	<div class="col-md-5">
 		<div ng-hide="dis">
-			<table id="users"
-				style="width: 350px;margin-left: -5%" id="InterviewRound">
+			<table class="bordered" style="width: 90%">
 				<tr>
 					<th width="20px">#</th>
 					<th width="80px">Interview Rounds</th>
 <!-- 					<th width="40px">Delete</th> -->
 				</tr>
 				<tr ng-repeat="interviewRound in interviewRounds">
-					<td>{{$index +1}}</td>
-					<td class="td-style" align="center">{{interviewRound}}</td>
-					<!-- <td align="center"><a class="glyphicon glyphicon-remove" ng-click="deleteInterviewRound($index,interviewRound)"></a></td> -->
+					<td class="mdl-data-table__cell--non-numeric" >{{$index +1}}</td>
+					<td class="mdl-data-table__cell--non-numeric" class="td-style" align="center">{{interviewRound}}</td>
+<!-- 					<td class="mdl-data-table__cell--non-numeric" align="center"><a class="glyphicon glyphicon-remove" ng-click="deleteInterviewRound($index,interviewRound)"></a></td> -->
 				</tr>
 			</table>
 		</div>
@@ -32,10 +28,10 @@
   			<div class="panel-body">
 			<table>
 		<tr>
-		<td style="padding-right:20px;"><label class="lbl" for="Designation"> <i
+		<td ><label class="lbl" for="Designation"> <i
 							class="glyphicon icon-filter"></i>&nbsp;&nbsp;Interview Round:
 						</label></td>
-		<td><input type="text" name="" class="form-control" ng-change="hideError=true"
+		<td ><input type="text" name="" class="form-control" ng-change="hideError=true"
 						ng-model="newInterviewRound" placeholder="Enter InterviewRound..."></td>
 						<td style="padding-left:20px;"><button class="btn btn-info active" ng-click="save();">Save</button></td>
 						<td style="padding-left: 20px;"><button class="btn btn-info active" ng-click="cancel();">Cancel</button></td>

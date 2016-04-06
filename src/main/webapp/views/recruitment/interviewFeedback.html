@@ -85,7 +85,7 @@
 			<div class="input-field col s12">
 				<textarea ng-model="interviewFeedback.additionalSkills"
 					class="materialize-textarea" length="120" required></textarea>
-				<label>Additional Skills </label>
+				<label>Additional Skills <b class="mandatory">*</b> </label>
 			</div>
 		</div>
 
@@ -93,7 +93,7 @@
 			<div class="input-field col s12">
 				<textarea ng-model="interviewFeedback.strengths"
 					class="materialize-textarea" length="120" required></textarea>
-				<label>Strengths </label>
+				<label>Strengths<b class="mandatory">*</b> </label>
 			</div>
 		</div>
 
@@ -101,18 +101,13 @@
 			<div class="input-field col s12">
 				<textarea ng-model="interviewFeedback.improvement"
 					class="materialize-textarea" length="120" required></textarea>
-				<label>Areas Of Improvement </label>
+				<label>Areas Of Improvement<b class="mandatory">*</b> </label>
 			</div>
 		</div>
-
-
 		<div align="center" class="row">
-			<!-- ng-click="submit()"  -->
-
-
 			<button class="btn btn-info active" type="submit"
 				ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow"
-				ng-disabled="feedback_form.$invalid">
+				ng-disabled="feedback_form.$invalid" >
 				<span class="glyphicon glyphicon-ok-circle"></span> Submit
 			</button>
 			<button class="btn btn-info active"

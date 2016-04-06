@@ -1,7 +1,4 @@
-<div ng-class="cls" ng-show="message" align="center"
-	style="width: 650px; position: relative; left: -60; height: 50">
-	<h5 style="margin-top: 2px;">{{message}}</h5>
-</div>
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 
 <div ng-hide="dis">
 	<div class="row">
@@ -25,11 +22,11 @@
 			</button>
 		</div>
 	</div>
-	<table id="users" style="width: 30%">
+	<table class="bordered" style="width: 50%">
 		<tr>
 			<th width="20px">#</th>
-			<th width="80px">Skills</th>
-			<th width="40px">Delete</th>
+			<th width="80px">SKILLS</th>
+			<th width="40px">DELETE</th>
 		</tr>
 		<tr class="animate-repeat"
 			ng-repeat="skill in skills | orderBy:'toString()' | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">

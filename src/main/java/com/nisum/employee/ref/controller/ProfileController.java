@@ -45,11 +45,11 @@ public class ProfileController {
 	public ResponseEntity<?> retrieveProfile(@RequestParam(value = "emailId", required = false) String emailId,@RequestParam(value = "jobcodeProfile", required = false) String jobcodeProfile,@RequestParam(value = "profilecreatedBy", required = false) String profilecreatedBy) throws Exception {
 		List<Profile> positionsDetails = null;
 		if (emailId != null && !emailId.isEmpty()) {
-			positionsDetails = profileSearchService.getProfilesByEmailIdOrByNameOrByDesignation(emailId,emailId,emailId);
+			positionsDetails = profileService.getProfileByEmailId(emailId);
 		} else if (jobcodeProfile != null && !jobcodeProfile.isEmpty()) {
-			positionsDetails = profileSearchService.getProfilesByJobcodeProfile(jobcodeProfile);
+			positionsDetails = profileService.retrieveProfileByJobCode(jobcodeProfile);
 		}else if(profilecreatedBy != null && !profilecreatedBy.isEmpty()){
-			positionsDetails = profileSearchService.getProfilesByProfilecreated(profilecreatedBy);
+			positionsDetails = profileService.getProfileByProfileCreatedId(profilecreatedBy);
 		}else {
 			positionsDetails = profileSearchService.getAllProfiles();
 		}

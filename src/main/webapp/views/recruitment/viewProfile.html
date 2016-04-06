@@ -1,371 +1,264 @@
-
-<div>
-	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-	<div ng-class="cls" ng-show="message" align="center"
-		style="width: 850px; position: relative; left: -60; height: 50">
-		<h5 style="margin-top: 2px;">{{message}}</h5>
-	</div>
-	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-
-
-	<accordion close-others=false> <accordion-group
-		is-open="status.isFirstOpen"> <accordion-heading>
-	<font style="color: white;"> Personal Details<i
-		class="pull-right glyphicon"
-		ng-class="{'glyphicon-minus': status.isFirstOpen, 'glyphicon-plus': !status.isFirstOpen}"></i></font>
-	</accordion-heading>
-
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="candidateName"><i
-					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Candidate Name*</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].candidateName"
-					onbeforesave="validateChar($data)" e-required>{{
-					candidate[0].candidateName }} </a>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="emailId"><i
-					class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Email Id*</label>
-			</div>
-			<div class="col-md-3">{{ candidate[0].emailId }}</div>
-		</div>
-	</div>
-
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2"></div>
-			<div class="col-md-3">
-				<span
-					ng-show="CreateCandidate.candidateName.$invalid  && !CreateCandidate.candidateName.$pristine"
-					class="help-block">Enter A Valid Name!</span>
-
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2"></div>
-			<div class="col-md-3">
-				<span
-					ng-show="CreateCandidate.emailId.$dirty && CreateCandidate.emailId.$invalid">
-					<span class="help-block" class="error"
-					ng-show="CreateCandidate.emailId.$error.email"> Valid
-						Email-id is required</span>
-				</span>
-			</div>
-		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="mobileNo"><i
-					class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;MobileNo*</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].mobileNo"
-					onbeforesave="validatePhNo($data)" e-required>{{
-					candidate[0].mobileNo || "--" }}</a>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="altmobileNo"><i
-					class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Alt. MobileNo</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].altmobileNo"
-					onbeforesave="validatePhNo($data)">{{ candidate[0].altmobileNo ||
-					"--" }}</a>
-			</div>
-		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="passportNo"><i
-					class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Passport No.</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].passportNo"
-					onbeforesave="validateAlphanumeric($data)">{{
-					candidate[0].passportNo || "--" }}</a>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="notes"><i
-					class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Current Address*</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].address" e-required>{{
-					candidate[0].address || "--" }}</a>
-			</div>
-		</div>
-	</div>
-	<br>
-
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="skypeId"><i
-					class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Skype Id.</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].skypeId"
-					onbeforesave="validateAlphanumeric($data)">{{ candidate[0].skypeId
-					|| "--" }}</a>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2"></div>
-			<div class="col-md-3"></div>
-		</div>
-	</div>
-	</accordion-group> <br>
-	<accordion-group is-open="status1.open"> <accordion-heading>
-	<font style="color: white;"> Professinal Details <i
-		class="pull-right glyphicon"
-		ng-class="{'glyphicon-minus': status1.open, 'glyphicon-plus': !status1.open}"></i></font>
-	</accordion-heading>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="qualification"><i
-					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Qualification*</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="candidate[0].qualification"
-					e-ng-options="o as o for o in info.qualification" e-required>
-					{{ candidate[0].qualification }} </a>
-
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="Specialisation"><i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Specialisation</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].stream"
-					onbeforesave="validateChar($data)">{{ candidate[0].stream || "--"
-					}}</a>
-			</div>
-		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="Experience"><i
-					class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience</label>
-			</div>
-			<div class="col-md-3">
-				<div class="col-md-6">
-					Years: {{candidate[0].expYear	|| "--"}}
-				</div>
-				<div class="col-md-6">
-					Months:  {{candidate[0].expMonth || "--"}}
-					</td>
-				</div>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="skills"><i
-					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills:*</label>
-			</div>
-			<div class="col-md-3">
-					<a herf="" ng-hide="dis1" ng-click="skillss()"><i
-						ng-repeat="skills in candidate[0].primarySkills">{{skills}}{{$last
-							? '' : ', '}}</i></a>
-					<ui-select multiple ng-model="candidate[0].primarySkills"
-						ng-hide="hideSkillss" 
-						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-						id="skills" ui-select-required ng-disabled="disabled"
-						on-remove="validateSkills()">
-					<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
-					<ui-select-choices
-						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
-					{{color}} </ui-select-choices> </ui-select>
-				</div>
-				<div class="col-md-1">
-					<button class="glyphicon glyphicon-ok btn btn-primary"
-						" ng-hide="hideSkillss" ng-click="skillss1()"></button>
-				</div>
-		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="Plocation"><i
-					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Designation*
-				</label>
-			</div>
-			<div class="col-md-3">
-				<!-- <a href="#" editable-select="candidate.designation" onaftersave="setJobCodes()"
-					e-ng-options="o as o for o in profiledesignations" e-required>
-					{{ candidate[0].designation || "--" }} </a> -->
-					{{ candidate[0].designation || "--" }}
-
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="CurrentEmp"><i
-					class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Current
-					Employer</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].currentEmployer">{{
-					candidate[0].currentEmployer || "--" }}</a>
-			</div>
-		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="ReferredBy"><i
-					class="glyphicon glyphicon-registration-mark"></i>&nbsp;&nbsp;Recruitment
-					Team</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-select="candidate[0].hrAssigned"
-					e-ng-options="o as o for o in recruitmentData">{{
-					candidate[0].hrAssigned || "--" }}</a>
-			</div>
-		</div>
-
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="jobcode"><i
-					class="glyphicon glyphicon-barcode"></i>&nbsp;&nbsp;Select Jobcode</label>
-			</div>
-			<div class="col-md-3">
-				<a href="" ng-hide="hidejobcode" ng-click="jobcodes()"><i>
-						{{candidate[0].jobcodeProfile.join(', ') || "--"}}</i></a>
-				<ui-select ng-hide="hidejobcodemenu" multiple style="width:180px;"
-					ng-model="candidate.jobcodeProfile" theme="select2"
-					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select JobCodes..">{{$item}}</ui-select-match> <ui-select-choices
-					repeat="color in jobcodelist | orderBy:'toString()' | filter:$select.search">
-				{{color}}</ui-select-choices> </ui-select>
-			</div>
-			<!-- {{jobcodelist}} -->
-			<div class="col-md-1">
-				<button class="glyphicon glyphicon-ok btn btn-primary"
-					" ng-hide="hidejobcodemenu" ng-click="jobcodesave()"></button>
-			</div>
-		</div>
-	</div>
-
-	<br>
-	<div class="row" align="left">
-		<div class="control-group">
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<label class="lbl" for="additionalNotes"><i
-					class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Additional Notes</label>
-			</div>
-			<div class="col-md-3">
-				<a href="#" editable-text="candidate[0].notes">{{ candidate[0].notes
-					|| "--" }}</a>
-			</div>
-		</div>
-		<div class="control-group">
-			<div class="col-md-2">
-				<label class="lbl" for="download"><i
-					class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Download*</label>
-			</div>
-			<div class="col-md-3">
-				<!-- 	 <a ng-href="{{download()}}" download>Download</a>  -->
-				<a href="" ng-click="download()">Download</a>
-			</div>
-		</div>
-	</div>
-	</accordion-group> <br>
-	<center>
-		<div ng-show="hasRole('ROLE_ADMIN,ROLE_HR')">
-			<table ng-hide="tableHide" id="interview" style="left: 0px;"
-				border="2">
-				<tr>
-					<th>Name</th>
-					<th>Email ID</th>
-					<th>Skills</th>
-					<th>Job Code</th>
-					<th>Schedule</th>
-					<th>Feedback</th>
-					<th>Status</th>
-				</tr>
-				<tr ng-repeat="item in interviewDetails">
-					<td>{{item.candidateName}}</td>
-					<td>{{item.candidateEmail}}</td>
-					<td><i ng-repeat="skills in item.candidateSkills">{{skills}}{{$last
-							? '' : ', '}}</i></td>
-					<td><i ng-repeat="jobcode in item.positionId">{{jobcode}}{{$last
-							? '' : ', '}}</i></td>
-					<td><a href="" id="" class="interview-schedule"
-						ng-click="schedule(item.positionId,item.candidateEmail)"> <span
-							class="glyphicon glyphicon-plus"
-							style="position: relative; top: 1px;" />
-					</a></td>
-					<td>
-						<button style="background-color: #F8F8F8; border: 0px;" href=""
-							id="" class="interview-feedback"
-							ng-disabled="disableFeedback(item.rounds)"
-							ng-click="feedback(item.currentPositionId,item.candidateEmail)">
-							<span class="glyphicon glyphicon-envelope"
-								style="position: relative; top: 1px;"></span>
-						</button>
-					</td>
-					<td style="font-weight: bold">{{item.progress}}</td>
-				</tr>
-			</table>
-		</div>
-	</center>
-	<br>
-	<div align="center">
-		<a href="" class="btn btn-primary" ng-disabled="validateProfile()" ng-click="updateProfileDetails()">
-			<span class="glyphicon glyphicon-ok"></span> Update
-		</a>&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="recruitment.searchProfile"
-			class="btn btn-primary"> <span class="glyphicon glyphicon-remove"></span>
-			Cancel
-		</a>
-	</div>
-
-	</accordion-group> </accordion>
-
-	<div></div>
-
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Update Profile</h4>
 </div>
-<br>
-<br>
-.
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="CreateCandidate" onvalidate>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter Candidate Name" ng-minlength="3"
+					ng-maxlength="30" name="candidateName" class="form-control"
+					ng-change="toggleProDisable()" type="text"
+					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/">
+				<label>Candidate Name<b class="mandatory">*</b></label> <span
+					class="validation-error"
+					ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
+					provide candidate name</span>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.required">
+					Candidate Name is required.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.pattern">
+					Candidate Name must be characters only.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
+					Candidate Name must be at least 3 characters .</div>
+			</div>
+			<div class="input-field col s6">
+				<input type="email" name="emailId" class="form-control"
+					ng-model="candidate.emailId"
+					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
+					placeholder="Enter Email Id." required> <label>Email
+					Id <b class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="submitted && CreateCandidate.emailId.$invalid">Please
+					provide a valid email address</span>
+
+				<div class="validation-error"
+					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.required">
+					Please specify the email ID.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.emailId.$touched || invalidSubmitAttempt) && CreateCandidate.emailId.$error.$pristine">
+					Please specify the email ID.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.pattern">
+					Please check the given Email Address.</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<input type="text" placeholder="Enter Mobile number" ng-model="candidate.mobileNo"
+					class="form-control" ng-pattern="/^[0-9]+$/" maxlength="10" required>
+				<label>Mobile Number <b class="mandatory">*</b>
+				
+				</label> <span class="validation-error"
+					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
+					provide a MobileNo</span>
+
+				<div class="validation-error"
+					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
+					Please specify your mobile number.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
+					Mobile number should be numeric and 10 digit number</div>
+			</div>
+
+			<div class="input-field col s6">
+				<input type="text"  placeholder="Enter alternate Mobile number"
+					name="altmobileNo" class="form-control"
+					ng-model="candidate.altmobileNo"
+					maxlength="10" ng-pattern="/^[0-9]+$/"> <label>Alternate
+					Mobile Number </label>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.altmobileNo.$error.pattern">
+					Mobile number should be numeric and 10 digit number</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter Passport number" name="passportNo"
+					class="form-control" type="text" ng-model="candidate.passportNo" ng-pattern="/^[a-zA-Z0-9]+$/">
+				<label>Passport No</label> <span class="validation-error"
+					ng-show="(CreateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && CreateCandidate.passportNo.$error.pattern">
+					Provide a valid passport number</span>
+			</div>
+
+			<div class="input-field col s6">
+				<input placeholder="Enter Skype Id" name="skypeId"
+					class="form-control" type="text" ng-model="candidate.skypeId"
+					ng-pattern="/^[a-z][a-z0-9\.,\-_]{5,31}$/" required><label>Skype
+					Id <b class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
+					Provide a valid Skype Id</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea class="materialize-textarea" cols="50" rows="2" ng-change="changeEvent()" name="notes"
+					ng-model="candidate.address" placeholder="Enter current address"></textarea>
+				<label>Address</label>
+
+			</div>
+		</div>
+		<div class="row" align="left">
+			<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Professional Details</h5>
+		</div>
+		<div class="row" align="left">
+			<div class="chip" align="left">Educational Details</div>
+			</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Qualification"
+					ng-model="candidate.qualification" name="pso"
+					ng-options="o as o for o in info.qualification | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="">Select Qualification</option>
+				</select> <label>Qualification<b class="mandatory">*</b></label> <span
+					class="validation-error"
+					ng-show="submitted && CreateCandidate.pso.$invalid">Please
+					provide Qualification</span>
+				<div class="validation-error"
+					ng-show="( CreateCandidate.pso.$dirty || invalidSubmitAttempt) && CreateCandidate.pso.$error.required">
+					qualification is required.</div>
+			</div>
+
+			<div class="input-field col s6">
+				<input placeholder="Enter Stream" name="stream" class="form-control"
+					type="text" ng-model="candidate.stream"
+					ng-pattern="/^[a-zA-Z _]*$/" required> <label>Specialization
+				</label>
+
+			</div>
+		</div>
+
+		<div class="row" align="left">
+					<div class="chip" align="left">Professional Details</div>
+				</div>
+
+		<div class="row">
+			<div class="input-field col s2">
+				<select ng-model="candidate.expYear" name="experience"
+					ng-options="o as o for o in info.expYears | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Years</option>
+				</select> <label>Experience<b class="mandatory">*</b></label> <span
+					class="validation-error"
+					ng-show="submitted && CreateCandidate.experience.$invalid">Please
+					specify your experience..</span>
+				<div class="validation-error"
+					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
+					Please select your total experience.</div>
+			</div>
+
+			<div class="input-field col s2">
+				<select ng-model="candidate.expMonth" name="expMonths"
+					ng-options="o as o for o in info.expMonths | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Months</option>
+				</select> <span class="validation-error"
+					ng-show="submitted && CreateCandidate.experience.$invalid">Please
+					specify your experience..</span>
+				<div class="validation-error"
+					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
+					Please select your total experience.</div>
+			</div>
+
+			
+			
+			<div class="input-field col s6">
+				<label>Skills Set</label>
+				<ui-select multiple ng-model="sk.primarySkills"
+					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+					ui-select-required ng-disabled="disabled"> <ui-select-match
+					placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
+					style="height: 45px;"
+					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+				{{color}} </ui-select-choices> </ui-select>
+				<span class="validation-error"
+					ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
+					enter your key skills.</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<select ng-model="candidate.designation" name="designation"
+					ng-change="jobCodeSl()"
+					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Designation</option>
+				</select> <label>Designation<b class="mandatory">*</b></label>
+
+			</div>
+
+			<div class="input-field col s6">
+				<input placeholder="Enter your current company"
+					name="currentEmployer" class="form-control" type="text"
+					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
+				<label>Current Employer</label>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<select ng-model="candidate.hrAssigned" name="referredBy"
+					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select</option>
+				</select> <label>Recruiter Assigned <b class="mandatory">*</b></label> <span
+					class="validation-error"
+					ng-show="submitted && CreateCandidate.referredBy.$invalid">Please
+					specify who is referred</span>
+				<div class="validation-error"
+					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
+					referred is required.kpl</div>
+			</div>
+
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="sk.jobcodeProfile"
+					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+					ng-disabled="disabled"> <ui-select-match
+					placeholder="Select JobCodes..">{{$item.jobcode}}</ui-select-match>
+				<ui-select-choices
+					repeat="position in positionData | orderBy:'toString()' | filter:$select.search">
+				{{position.jobcode}} </ui-select-choices> </ui-select>
+				<label>Job Code <b class="mandatory">*</b></label>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s10">
+				<textarea class="materialize-textarea" cols="50" rows="2" ng-change="changeEvent()" name="notes"
+					ng-model="candidate.notes"
+					placeholder="Enter any additional notes..."></textarea>
+				<label>Additional Notes</label>
+			</div>
+		</div>
+		<div class="row">
+		<div class="input-field col s4">
+			<button class="waves-effect waves-light btn" align="left" ng-click="download()" ><i class="material-icons left">file_download</i>Download Resume</button>
+		</div>
+		</div>
+		<div align="center" class="row">
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="validateProfile() || CreateCandidate.$invalid" ng-click="updateProfileDetails()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Update
+			</button>
+			<button class="btn btn-info active"
+				ui-sref="recruitment.searchProfile">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</div>
+		<br> <br> <br>
+	</form>
+</div>
