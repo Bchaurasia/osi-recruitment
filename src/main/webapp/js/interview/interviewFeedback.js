@@ -135,12 +135,13 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 			$scope.interviewSchedule = round.interviewSchedule;
 			$scope.interviewFeedback.roundName = round.interviewFeedback.roundName;
 		}else{
-			$scope.clearFields();
+			clearFields();
+			$scope.interviewSchedule = round.interviewSchedule;
 			$scope.disableFields = false;
 			$scope.submitShow = true;
 		}
 		}else if(round.interviewSchedule == null){
-			$scope.clearFields();
+			clearFields();
 			$scope.disableFields = false;
 			$scope.submitShow = true;
 		} 
@@ -151,15 +152,17 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','jobCo
 				$timeout( function(){ $scope.alHide1(); }, 3000);
 				$scope.disableFields = true;
 				$scope.submitShow = false;
-				$scope.clearFields();
+				$scope.interviewSchedule = round.interviewSchedule;
+				clearFields();
 			}
 		}else{
-			$scope.clearFields();
+			clearFields();
+			$scope.interviewSchedule = round.interviewSchedule;
 			$scope.disableFields = false;
 			$scope.submitShow = true;
 		}
 		
-		$scope.clearFields = function() {
+		function clearFields() {
 					$scope.interviewFeedback.rateSkills =[];
 					for(var i=0; i<$scope.position.primarySkills.length;i++){
 						$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0});

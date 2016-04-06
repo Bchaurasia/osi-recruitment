@@ -32,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class ProfileController {
 
+	private static final String MSG = "{\"msg\":\"";
+
 	@Autowired
 	private IProfileService profileService;
 	
@@ -39,11 +41,11 @@ public class ProfileController {
 	private ProfileSearchService profileSearchService;
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-	@RequestMapping(value = "/profileSearch", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveProfile(@RequestParam(value = "emailId", required = false) String emailId,@RequestParam(value = "jobcodeProfile", required = false) String jobcodeProfile,@RequestParam(value = "profilecreatedBy", required = false) String profilecreatedBy) throws Exception {
 		List<Profile> positionsDetails = null;
 		if (emailId != null && !emailId.isEmpty()) {
-			positionsDetails = profileSearchService.getProfilesByEmailIdOrByName(emailId,emailId,emailId);
+			positionsDetails = profileSearchService.getProfilesByEmailIdOrByNameOrByDesignation(emailId,emailId,emailId);
 		} else if (jobcodeProfile != null && !jobcodeProfile.isEmpty()) {
 			positionsDetails = profileSearchService.getProfilesByJobcodeProfile(jobcodeProfile);
 		}else if(profilecreatedBy != null && !profilecreatedBy.isEmpty()){
@@ -51,26 +53,45 @@ public class ProfileController {
 		}else {
 			positionsDetails = profileSearchService.getAllProfiles();
 		}
-		return (null == positionsDetails) ? new ResponseEntity<String>("Positions are not found", HttpStatus.NOT_FOUND)
-				: new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
+		return new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/searchProfileByEmail", method = RequestMethod.GET)
+	public ResponseEntity<?> searchProfileByEmailId(@RequestParam(value = "emailId", required = false) String emailId) throws Exception {
+		List<Profile> positionsDetails = profileSearchService.getProfilesByProfilecreated(emailId);
+		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/searchProfile", method = RequestMethod.GET)
+	public ResponseEntity<?> searchProfile(@RequestParam(value = "searchQuery", required = false) String searchText) throws Exception {
+		List<Profile> positionsDetails = null;
+		if (searchText != null && searchText.isEmpty()) {
+			positionsDetails = profileSearchService.getAllProfiles();
+		} else if (searchText != null && !searchText.isEmpty()) {
+			positionsDetails = profileSearchService.getProfilesByEmailIdOrByNameOrByDesignation(searchText,searchText,searchText);
+		} else if (searchText != null && !searchText.isEmpty() && positionsDetails != null && positionsDetails.isEmpty()) {
+			positionsDetails = profileSearchService.getProfilesByJobcodeProfile(searchText);
+		}
+		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
 
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-	@RequestMapping(value = "/profileSearch", method = RequestMethod.POST)
+	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody Profile candidate) throws Exception{
-			profileSearchService.addProfileIndex(candidate);
-			profileService.prepareCandidate(candidate);
-			return new ResponseEntity<Profile>(candidate, HttpStatus.OK);
+			Profile profile = profileService.prepareCandidate(candidate);
+			String jsonObj=MSG+ profile.getCandidateName() +" Profile successfully createded\"}";
+			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-	@RequestMapping(value = "/profileSearch", method = RequestMethod.PUT)
+	@RequestMapping(value = "/profile", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateUser(@RequestBody Profile candidate) {
 		profileService.updateCandidate(candidate);
-		
-		String jsonObj="{\"msg\":\"Profile successfully Updated\"}";
+		String jsonObj="{\"msg\":\"Profile uploaded successfully Updated\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 

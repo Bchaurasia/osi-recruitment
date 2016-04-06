@@ -1,5 +1,6 @@
 package com.nisum.employee.ref.search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,8 +33,13 @@ public class PositionSearchService {
 		return null;
 	}
 	
-	public List<Position> getPostionByName(String data) throws Exception {
+	public List<Position> getPostionByDesignationOrClient(String data) throws Exception {
 		List<Position> positionList = positionIndexRepository.findPositionsByDesignationStartingWithOrClientStartingWithAllIgnoreCase(data, data);
+		if(positionList.isEmpty()){
+			Position position = positionIndexRepository.findOne(data);
+			positionList = new ArrayList<Position>();
+			positionList.add(position);
+		}
 		return positionList;
 		
 	}
@@ -52,13 +58,5 @@ public class PositionSearchService {
 				addPositionIndex(position);
 			}
 	}
-	
-	
-	public List<Position> getPostionByDesignation(String designation) throws Exception {
-		List<Position> positionList = positionIndexRepository.findPositionsByDesignationAllIgnoreCase(designation);
-		return positionList;
-		
-	}
-	
 	
 }

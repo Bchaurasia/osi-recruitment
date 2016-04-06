@@ -21,7 +21,7 @@ public class ProfileSearchService {
 		return positionList;
 	}
 	
-	public List<Profile> getProfilesByEmailIdOrByName(String emailId, String name, String designation) throws Exception {
+	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String emailId, String name, String designation) throws Exception {
 		List<Profile> profilesList = profileIndexRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(emailId,name,designation);
 		return profilesList;
 	}

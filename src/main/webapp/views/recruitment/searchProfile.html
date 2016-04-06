@@ -7,7 +7,7 @@
 		<div class="row" style="width: 90%">
 		<div class="col-md-3"></div>
 			<div class="col-md-6 ">
-					<input type="text" class="form-control" placeholder="Profile Search">
+					<input type="text" class="form-control" ng-model="search" ng-keyup="searchProfileQuery()">
 			</div>
 			<div class="col-md-2" align="center">
 					<a class="waves-effect waves-light btn"
@@ -24,20 +24,21 @@
 					<th>Email Id</th>
 					<th>Designation</th>
 					<th>Experience</th>
-					<th>Current Employer</th>
-					<th>Assigned Job Code</th>
+					<th>Job Code</th>
+					<th>Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="data in myData | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
+					ng-repeat="profile in profiles | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
-						style="cursor: pointer;" ng-click="editProfile(data)">{{data.candidateName}}</a></td>
-					<td class="mdl-data-table__cell--non-numeric">{{data.emailId}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{data.expYear}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{data.currentEmployer}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{data.jobcodeProfile}}</td>
+						style="cursor: pointer;" ng-click="editProfile(data)">{{profile.candidateName}}</a></td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.designation}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.expYear}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.jobcodeProfile}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
+					
 				</tr>
 			</tbody>
 		</table>

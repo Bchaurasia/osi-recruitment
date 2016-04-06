@@ -20,7 +20,7 @@ public class ProfileService implements IProfileService{
 	@Autowired
 	ProfileSearchService profileSearchService;	
 	
-	public String prepareCandidate(Profile candidate) throws Exception {
+	public Profile prepareCandidate(Profile candidate) throws Exception {
 		List<Profile> profiles = profileRepository.retrieveAllProfiles();
 		for(Profile pro : profiles){
 			if(pro.getEmailId().equals(candidate.getEmailId())){
@@ -28,7 +28,7 @@ public class ProfileService implements IProfileService{
 			}
 		}
 		profileRepository.prepareCandidate(candidate);
-		return "Profile Successfully Created!";
+		return profileSearchService.addProfileIndex(candidate);
 	}
 
 	

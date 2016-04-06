@@ -10,7 +10,8 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		getProfiles : getProfiles,
 		addSearchProfiles:addSearchProfiles,
 		searchProfile:searchProfile,
-		addProfilesStatus : addProfilesStatus
+		addProfilesStatus : addProfilesStatus,
+		searchProfileById : searchProfileById
 	};
 	
 	function getProfileByCreateremailId(emailId){
@@ -18,25 +19,25 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		 .then(getProlilesData)
 		 .catch(sendErrorprofileMsg);
 	}
-	function searchProfile(searchVal){
-		return $http.get('resources/positionSearch?emailId='+searchVal)
+	function searchProfile(search){
+		return $http.get('resources/searchProfile?searchQuery='+search)
 		.then(getProlilesData)
 		.catch(sendErrorprofileMsg);
 	}
 	function getProfiles(){
-		return $http.get('resources/profileSearch')
+		return $http.get('resources/profile')
 			 .then(getProlilesData)
 			 .catch(sendErrorprofileMsg);
 	}
 	
 	function addProfiles(profile){
-		return $http.post('resources/profileSearch', profile)
+		return $http.post('resources/profile', profile)
 		.then(createProfileSuccess)
 		.catch(sendCreateErrorprofileMsg);
 	}
 	
 	function addSearchProfiles(profile){
-		return $http.post('resources/profileSearch', profile)
+		return $http.post('resources/profile', profile)
 		.then(createProfileSuccess)
 		.catch(sendCreateErrorprofileMsg);
 	}
@@ -47,7 +48,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 	}
 	
 	function updateProfiles(profile){
-		return $http.put('resources/profileSearch', profile)
+		return $http.put('resources/profileUpload', profile)
 		.then(updateProfileSuccess)
 		.catch(sendErrorprofileMsg);
 	}
@@ -57,6 +58,13 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 			 .then(getProlilesData)
 			 .catch(sendErrorprofileMsg);
 	}
+	
+	function searchProfileById(emailId){
+		return $http.get('resources/searchProfileByEmail?emailId='+emailId)
+			 .then(getProlilesData)
+			 .catch(sendErrorprofileMsg);
+	}
+	
 	
 	function getProlilesData(response){
 		return response.data;
@@ -71,7 +79,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 	}
 	
 	function createProfileSuccess(response){
-		return "Profile created successfully";
+		return response.data.msg;
 	}
 	
 	function updateProfileSuccess(response){

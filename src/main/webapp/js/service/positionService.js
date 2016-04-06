@@ -9,7 +9,8 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 		getPositionByDesignation : getPositionByDesignation,
 		getPositionByJobcode : getPositionByJobcode,
 		getPositionBylocation : getPositionBylocation,
-		getClients : getClients
+		getClients : getClients,
+		searchPositionsBySearchQuery : searchPositionsBySearchQuery
 	};
 	
 	function addPosition(positionObj){
@@ -50,6 +51,14 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 		.catch(getPositionError);
 	}
 	
+	
+	function searchPositionsBySearchQuery(searchQuery){
+		return $http.get('resources/searchPositionsBySearchQuery?searchQuery='+searchQuery)
+		.then(getPositionSuccess)
+		.catch(getPositionError);
+	}
+	
+	
 	function getPositionByJobcode(jobcode){
 		return $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+jobcode)
 		.then(getPositionSuccess)
@@ -57,7 +66,9 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 	}
 	function getPositionBylocation(location){
 		return $http.get('resources/searchPositionBasedOnLocation?location='+location)
-		.then(getPositionSuccess)
+		.then(function(response){
+			return response.data;
+		})
 		.catch(getPositionError);
 	}
 	

@@ -1,32 +1,33 @@
-app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout','positionSearchService',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout,positionSearchService) {
+app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout','positionService',
+                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout,positionService) {
 
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
 	$scope.data = {};
 	$scope.message1="";	
 	$scope.title = "Search";
+	$scope.searchQuery="";
 	
-	positionSearchService.getPosition().then(function(data){
-		 $scope.position=data;
-		 console.log(angular.toJson($scope.position));
-	}).catch(function(msg){
-   	  $log.error("Failed To Load Data! ---> "+msg);
-   	  $scope.errorHide = false;
-   	  $scope.errorMsg = msg;
-     })
+	$scope.searchPositionQuery = function(){
+		console.log("---------> ");
+		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
+			$scope.positions = data;
+		}).catch(function(msg){
+	   	  $log.error("Failed To Load Data! ---> "+msg);
+	   	  $scope.errorHide = false;
+	   	  $scope.errorMsg = msg;
+	     });
+	}
 	
+	$scope.searchPositionQuery(); //getting all data first time
 	$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
 	$scope.currentPage = 0;
 	$scope.changePage = function(){
 		$scope.currentPage = 0;
 	}
 	
-	$scope.searchPosition = function(searchVal){
-		positionSearchService.searchPosition(searchVal).then(function(data) {
-			$scope.position = data;
-		})
-	}
+	
+	
 	
 	$scope.sortComment = function(comment) {
 	    var date = new Date(comment.created);
@@ -61,8 +62,8 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 		  };
 
 		  $scope.pageCount = function() {
-			if (!$scope.position) { return; }
-		    return Math.ceil($scope.position.length/$scope.itemsPerPage);
+			if (!$scope.positions) { return; }
+		    return Math.ceil($scope.positions.length/$scope.itemsPerPage);
 		  };
 
 		  $scope.nextPage = function() {
@@ -81,38 +82,6 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 		jobCodeService1.setjobCode(jobcodeProfile);
 		location.href='#recruitment/viewPosition';
 	};
-	
-	$scope.shareContent = function(jobcodeProfile)  {
-		$scope.position
-		positionService.getPositionByJobcode(jobcodeProfile).then(function(data) {
-			$scope.position = data;
-		})
-		
-		    var payload = { 
-		      "comment": $scope.position[0].jobProfile, 
-		      "visibility": { 
-		        "code": "anyone"
-		      } 
-		    };
-		    
-		    IN.API.Raw("/people/~/shares?format=json")
-		      .method("POST")
-		      .body(JSON.stringify(payload))
-		      .result($scope.onSuccess)
-		      .error($scope.onError);
-	}
-	
-	
-	$scope.onSuccess = function(data) {
-		$scope.message1 = "shared successfully";
-	  }
-
-	  // Handle an error response from the API call
-	$scope.onError = function(error) {
-		$scope.message1 = error.message;
-	  }
-	
-	
 	
 }]);
 

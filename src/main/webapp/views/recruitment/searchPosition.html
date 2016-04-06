@@ -6,9 +6,8 @@
 		</div>
 		<div class="row" style="width: 90%">
 			<div class="col-md-4"></div>
-			<div class="col-md-8" align="right">
-				<input type="text" class="form-control"
-					placeholder="Position Search">
+			<div class="col-md-8" align="right">{{searchQuery}}
+				<input type="text" class="form-control" ng-model="searchQuery" ng-change="searchPositionQuery()">
 			</div>
 			<br>
 
@@ -27,7 +26,7 @@
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="data in position | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
+					ng-repeat="data in positions | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.requisitionId}}</td>
@@ -48,7 +47,7 @@
 		<div class="row" style="width: 90%">
 			<div class="col-md-3" align="left">
 				<h5>
-					<small> Total Positions : {{ position.length }}</small>
+					<small> Total Positions : {{ positions.length }}</small>
 				</h5>
 			</div>
 

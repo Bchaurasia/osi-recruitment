@@ -10,7 +10,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.Profile;
 
 public interface IProfileService {
-	String prepareCandidate(Profile candidate) throws Exception;
+	Profile prepareCandidate(Profile candidate) throws Exception;
 
 	void updateCandidate(Profile candidate);
 	void updateCandidateStatus(String email,String status);

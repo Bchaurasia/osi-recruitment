@@ -4,17 +4,16 @@
 </div>
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="CreateCandidate" onvalidate
-		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+	<form class="col s8" name="CreateCandidate" onvalidate>
 
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
-					ng-maxlength="30" name="candidateName"
-					class="form-control input-sm" ng-change="toggleProDisable()"
-					type="text" ng-model="candidate.candidateName"
-					ng-pattern="/^[a-zA-Z _]*$/"> <label>Candidate Name<b
-					class="mandatory">*</b></label> <span class="validation-error"
+					ng-maxlength="30" name="candidateName" class="form-control"
+					ng-change="toggleProDisable()" type="text"
+					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/">
+				<label>Candidate Name<b class="mandatory">*</b></label> <span
+					class="validation-error"
 					ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
 					provide candidate name</span>
 				<div class="validation-error"
@@ -28,7 +27,7 @@
 					Candidate Name must be at least 3 characters .</div>
 			</div>
 			<div class="input-field col s6">
-				<input type="email" name="emailId" class="form-control input-sm"
+				<input type="email" name="emailId" class="form-control"
 					ng-model="candidate.emailId"
 					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
 					placeholder="Enter Email Id." required> <label>Email
@@ -53,9 +52,9 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Mobile number" name="mobileNo"
-					class="form-control input-sm" ng-change="toggleProDisable()"
-					type="number" ng-model="candidate.mobileNo" ng-pattern="[0-9]{10}"
-					required> <label>Mobile Number <b class="mandatory">*</b>
+					class="form-control" ng-change="toggleProDisable()" type="number"
+					ng-model="candidate.mobileNo" ng-pattern="[0-9]{10}" required>
+				<label>Mobile Number <b class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
 					provide a MobileNo</span>
@@ -70,7 +69,7 @@
 
 			<div class="input-field col s6">
 				<input placeholder="Enter alternate Mobile number"
-					name="altmobileNo" class="form-control input-sm" type="number"
+					name="altmobileNo" class="form-control" type="number"
 					numbers-only="numbers-only" ng-model="candidate.altmobileNo"
 					maxlength="10" ng-pattern="[0-9]{10}"> <label>Alternate
 					Mobile Number </label>
@@ -83,18 +82,16 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Passport number" name="passportNo"
-					class="form-control input-sm" type="text"
-					ng-model="candidate.passportNo"> <label>Passport No</label>
-				<span class="validation-error"
+					class="form-control" type="text" ng-model="candidate.passportNo">
+				<label>Passport No</label> <span class="validation-error"
 					ng-show="(CreateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && CreateCandidate.passportNo.$error.pattern">
 					Provide a valid passport number</span>
 			</div>
 
 			<div class="input-field col s6">
 				<input placeholder="Enter Skype Id" name="skypeId"
-					class="form-control input-sm" type="text"
-					ng-model="candidate.skypeId"
-					ng-pattern="/^[a-z][a-z0-9\.,\-_]{5,31}$/" required><label>Skype
+					class="form-control" type="text" ng-model="candidate.skypeId"
+					ng-pattern="/^[A-Za-z][A-Za-z0-9-_]{5,31}$/" required><label>Skype
 					Id <b class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
@@ -105,32 +102,35 @@
 		<div class="row">
 			<div class="input-field col s12">
 				<!-- <input placeholder="Enter Current Address"
-					name="address" class="form-control input-sm" type="text" textarea cols="50"
+					name="address" class="form-control" type="text" textarea cols="50"
 					rows="10" ng-model="candidate.address"> <label>Current
 					Address</label> -->
 
-				<textarea cols="50" rows="2" ng-change="changeEvent()" name="notes"
-					ng-model="candidate.address" class="materialize-textarea"
-					placeholder="Enter current address"></textarea>
+				<textarea class="materialize-textarea" cols="50" rows="2" ng-change="changeEvent()" name="notes"
+					ng-model="candidate.address" placeholder="Enter current address"></textarea>
 				<label>Address</label>
 
 			</div>
 		</div>
 
+
+
 		<div class="row">
-			<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Professional
-				Details</h5>
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+			<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Professional
+				Details</h4>
 		</div>
-		<div class="row">
-			<h6 class="chip col-md-2 col-sm-2 col-xs-2" align="left">Educational Details
-				</h6>
-		</div>
+
+
+		<div class="chip" align="left">Educational Details</div>
+		<br>
+		<br>
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Qualification"
 					ng-model="candidate.qualification" name="pso"
 					ng-options="o as o for o in info.qualification | orderBy:'toString()'"
-					class="form-control input-sm input-sm" required>
+					class="form-control input-sm" required>
 					<option value="">Select Qualification</option>
 				</select> <label>Qualification<b class="mandatory">*</b></label> <span
 					class="validation-error"
@@ -142,25 +142,22 @@
 			</div>
 
 			<div class="input-field col s6">
-				<input placeholder="Enter Stream" name="stream"
-					class="form-control input-sm" type="text"
-					ng-model="candidate.stream" ng-pattern="/^[a-zA-Z _]*$/" required>
-				<label>Specialization <b class="mandatory">*</b>
+				<input placeholder="Enter Stream" name="stream" class="form-control"
+					type="text" ng-model="candidate.stream"
+					ng-pattern="/^[a-zA-Z _]*$/" required> <label>Specialization
+					<b class="mandatory">*</b>
 				</label>
 
 			</div>
 		</div>
 
-		<div class="row">
-			<h6 class="chip col-md-2 col-sm-2 col-xs-2" align="left">Professional Details
-				</h6>
-		</div>
-		
+		<div class="chip" align="left">Professional Details</div>
+
 		<div class="row">
 			<div class="input-field col s2">
 				<select ng-model="candidate.expYear" name="experience"
 					ng-options="o as o for o in info.expYears | orderBy:'toString()'"
-					class="form-control input-sm input-sm" required>
+					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Years</option>
 				</select> <label>Experience<b class="mandatory">*</b></label> <span
 					class="validation-error"
@@ -174,7 +171,7 @@
 			<div class="input-field col s2">
 				<select ng-model="candidate.expMonth" name="expMonths"
 					ng-options="o as o for o in info.expMonths | orderBy:'toString()'"
-					class="form-control input-sm input-sm" required>
+					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Months</option>
 				</select> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.experience.$invalid">Please
@@ -183,15 +180,14 @@
 					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
 					Please select your total experience.</div>
 			</div>
-			<div class="col-md-2"></div>
+
 			<div class="input-field col s6">
 
-				<label style="position: absolute; top: -22px;">Skills Set</label>
+				<label>Skills Set</label>
 				<ui-select multiple ng-model="sk.primarySkills"
-					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+					ng-keypress="myFunct($event)" name="pskilss" theme="select2" 
 					ui-select-required ng-disabled="disabled"> <ui-select-match
-					placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
-					style="height: 45px;"
+					placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices style="height: 45px;"
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
 				<span class="validation-error"
@@ -205,7 +201,7 @@
 				<select ng-model="candidate.designation" name="designation"
 					ng-change="jobCodeSl()"
 					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
-					class="form-control input-sm input-sm" required>
+					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select Designation</option>
 				</select> <label>Designation<b class="mandatory">*</b></label>
 
@@ -213,7 +209,7 @@
 
 			<div class="input-field col s6">
 				<input placeholder="Enter your current company"
-					name="currentEmployer" class="form-control input-sm" type="text"
+					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
 				<label>Current Employer</label>
 
@@ -224,7 +220,7 @@
 			<div class="input-field col s6">
 				<select ng-model="candidate.hrAssigned" name="referredBy"
 					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
-					class="form-control input-sm input-sm" required>
+					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select</option>
 				</select> <label>Recruiter Assigned <b class="mandatory">*</b></label> <span
 					class="validation-error"
@@ -243,16 +239,15 @@
 				<ui-select-choices
 					repeat="position in positionData | orderBy:'toString()' | filter:$select.search">
 				{{position.jobcode}} </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">Job Code <b
-					class="mandatory">*</b></label>
+				<label>Job Code <b class="mandatory">*</b></label>
 
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea cols="50" rows="2" ng-change="changeEvent()" name="notes"
-					ng-model="candidate.notes" class="materialize-textarea"
+				<textarea class="materialize-textarea" cols="50" rows="2" ng-change="changeEvent()" name="notes"
+					ng-model="candidate.notes"
 					placeholder="Enter any additional notes..."></textarea>
 				<label>Additional Notes</label>
 			</div>
@@ -260,12 +255,12 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="file" class="custom-file-input"
+				 <input
+					type="file" class="custom-file-input"
 					ng-file-select="upload($files)" valid-file required /> <small
 					ng-hide="fileError" class="mandatory-field">File
-					Externsions Accepted: [doc, docx, pdf]</small> <label
-					style="position: absolute; top: -27px;">Upload Resume<b
-					class="mandatory">*</b></label>
+					Externsions Accepted: [doc, docx, pdf]</small>
+					<label>Upload Resume<b class="mandatory">*</b></label>
 			</div>
 		</div>
 
@@ -283,7 +278,8 @@
 				<span class="glyphicon glyphicon-remove"></span> Cancel
 			</button>
 		</div>
+
+
+		<br> <br> <br>
 	</form>
 </div>
-<br>
-<br>

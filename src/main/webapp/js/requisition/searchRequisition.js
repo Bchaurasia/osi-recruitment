@@ -25,7 +25,7 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 	$scope.searchRequisition = function(searchVal){
 		requisitionService.searchRequisition(searchVal).then(function(data) {
 			$scope.allRequisitions = data;
-		})
+		});
 	}
 
 	$scope.searchBoxFun = function(){
