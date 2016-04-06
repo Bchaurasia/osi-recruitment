@@ -67,8 +67,8 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 		  };
 
 		  $scope.pageCount = function() {
-			if (!$scope.profile) { return; }
-		    return Math.ceil($scope.profile.length/$scope.itemsPerPage);
+			if (!$scope.allRequisitions) { return; }
+		    return Math.ceil($scope.allRequisitions.length/$scope.itemsPerPage);
 		  };
 
 		  $scope.nextPage = function() {

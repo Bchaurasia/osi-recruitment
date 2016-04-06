@@ -153,7 +153,7 @@ textarea {
 	#plocation, #currentEmployer, #profilecreatedBy, #referredBy, #uname,
 	#interviewerName, #duration, #intName, #emailId, #intName, #sround,
 	#fround, #categories, #interviewers, #progress, #skill {
-	width: 100%;
+	/* width: 100%; */
 }
 
 #experience {

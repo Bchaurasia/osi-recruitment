@@ -75,26 +75,26 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 	}
 	
 	function getRequisitionError(response){
-		return "Failed To Get Requisition";
+		return "Failed To Get Requisition - "/*+response.getMessage()*/;
 	}
 	
 	function getRequisitionRejectError(response){
-		console.log(response.data.msg);
-		return "Failed To Reject Requisition!";
+		return "Failed To Reject Requisition!"/*+response.getMessage()*/;
 	}
 	
 	function approveRequisitionError(response){
-		return "Failed To Approve Requisition";
+		return "Failed To Approve Requisition - "/*+response.getMessage()*/;
 	}
 	
 	function createRequisitionError(response){
-		return "Failed To Create Requisition";
+		return "Failed To Create Requisition - " /*+response.getMessage()*/;
 	}
 
 	function responseSuccess(response){
 		return response.data.msg;
 	}
+	
 	function cloneReqError(response){
-		return "Failed To Clone Requisition!";
+		return "Failed To Clone Requisition! - "/*+response.getMessage()*/;
 	}
 }

@@ -13,7 +13,7 @@
 					ng-disabled="true" ng-model="requisition.position" required
 					ng-options="o as o for o in designation1 | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option>Select Designations</option>
+					<option value="">{{requisition.position}}</option>
 				</select> <label>Position<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
@@ -167,7 +167,7 @@
 				class="glyphicon glyphicon-remove-circle"></span> Reject
 			</button> 
 			<button class="btn btn-info active"
-				ng-disabled="validateRequisition() || disableUpdateBtn"
+				ng-disabled="validateRequisition() || disableUpdateBtn || disableRejectBtn"
 				ng-show="showUpdateBtn" ng-click="updateRequisitionDetails()"> <span
 				class="glyphicon glyphicon-ok" ng-disabled="disabled"></span> Update
 			</button> 

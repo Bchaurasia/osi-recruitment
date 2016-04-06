@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.repository.RequisitionRepository;
-import com.nisum.employee.ref.search.RequisitionSearchService;
 
 @Service
 public class RequisitionService implements IRequisitionService {
@@ -26,24 +25,16 @@ public class RequisitionService implements IRequisitionService {
 
 	@Autowired
 	PositionService positionService;
-	
-	@Autowired
-	RequisitionSearchService requisitionSearchService;
+
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
+	
+	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has approved successfully ";
 
 	@Override
-	public void prepareRequisition(Requisition requisition)  {
-		if (requisition.getApproval2().getName() == null
-				&& requisition.getApproval2().getEmailId() == null) {
-			requisition.setApproval2(null);
-		}
+	public void prepareRequisition(Requisition requisition) {
 		requisition.setStatus(INITIATED);
-		try {
-			requisitionRepository.prepareRequisition(requisition);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+		requisitionRepository.prepareRequisition(requisition);
 		try {
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (MessagingException e) {
@@ -52,19 +43,11 @@ public class RequisitionService implements IRequisitionService {
 	}
 
 	@Override
-	public RequisitionApproverDetails updateRequisition(Requisition requisition){
-		   RequisitionApproverDetails requisitionApproverDetails = null;
-			try {
-				requisitionRepository.updateRequisition(requisition);
-				requisitionSearchService.updateRequisitionIndex(requisition);
-				requisitionApproverDetails = jobRequisitionNotificationService.sendNotification(requisition);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		 return requisitionApproverDetails;
-	 }
-
-	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has approved successfully ";
+	public RequisitionApproverDetails updateRequisition(Requisition requisition)
+			throws AddressException, MessagingException {
+		requisitionRepository.updateRequisition(requisition);
+		return jobRequisitionNotificationService.sendNotification(requisition);
+	}
 
 	@Override
 	public String approveRequisition(Requisition requisition)
@@ -75,7 +58,7 @@ public class RequisitionService implements IRequisitionService {
 			requisition.setStatus(APPROVED);
 			positionService.createRequitionPosition(requisition);
 			updateRequisition(requisition);
-			return requisition.getRequisitionId() + REQUISITION_HAS_APPROVED_SUCCESSFULLY
+			return requisition.getRequisitionId() + REQUISITION_HAS_APPROVED_SUCCESSFULLY+" and "
 					+ requisition.getNoOfPositions() + " Positions created successfully";
 		} else {
 			requisition.setStatus(PARTIALY_APPROVED);
@@ -86,7 +69,7 @@ public class RequisitionService implements IRequisitionService {
 				e.printStackTrace();
 			}
 			return requisition.getRequisitionId()+ REQUISITION_HAS_APPROVED_SUCCESSFULLY
-					+ ", sent approve request notification to" + requisition.getApproval2().getName();
+					+ ", sent approve request notification to " + requisition.getApproval2().getName();
 		}
 	}
 

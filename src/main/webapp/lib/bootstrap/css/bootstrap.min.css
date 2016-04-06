@@ -5638,9 +5638,9 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 }
 
 .alert-success {
-	color: #3c763d;
-	background-color: #dff0d8;
-	border-color: #d6e9c6
+	color: #fff;
+    background-color: #5EB95E;
+    border-color: #5EB95E;
 }
 
 .alert-success hr {
@@ -5680,9 +5680,9 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 }
 
 .alert-danger {
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1
+	color: #fff;
+    background-color: #DD514C;
+    border-color: #DD514C;
 }
 
 .alert-danger hr {

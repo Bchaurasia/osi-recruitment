@@ -23,6 +23,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 	$scope.message = "";
 	$scope.client =[];
 	$scope.statuses = ["Active", "Inactive", "Hired", "OnHold", "Rejected"];
+	$scope.priorities=["Low","Medium","High"];
 	$scope.hideStatuses = true;
 	$scope.init = function() {
 		if(jobCodeService1.getjobCode() == undefined) {

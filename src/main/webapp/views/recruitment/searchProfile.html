@@ -1,9 +1,6 @@
  <form action="#" name="searchProfile" class="searchProfile" onvalidate>
 	<form id="integerForm" role="form" class="form-horizontal">
-		<div ng-class="cls" ng-show="message" align="center"
-			style="width: 850px; position: relative; top: -35px; height: 50">
-			<h5 style="margin-top: 2px;">{{message}}</h5>
-		</div>
+		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
 		<div class="col-md-3"></div>
 			<div class="col-md-6 ">

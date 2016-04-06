@@ -34,8 +34,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.requisition.skillType = {};
 	$scope.requisition.position = "";
 	$scope.requisition.client = "";
-	$scope.requisition.approval1 = {};
-	$scope.requisition.approval2 = {};
 	$scope.requisition.requisitionManager= {};
 	$scope.requisition.minExpYear = "";
 	$scope.requisition.maxExpYear = "";
@@ -167,6 +165,16 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		checkForEnableCreateButton();
 	}
 	
+	$scope.validateNoOfPosition= function(noOfPositions){
+		var number = parseInt(noOfPositions);
+		if(number === 0){
+			$scope.positionErr = true;
+		}
+		else{
+			$scope.positionErr = false;
+		}
+	}
+	
 	$scope.max = function(maxValue){
 		var Value1 = parseInt(maxValue);
 		var Value2 = parseInt($scope.requisition.minExpYear);
@@ -251,7 +259,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			
 			var date1 = new Date($scope.targetDate);
 			$scope.requisition.targetDate = date1.getDate()+'-' + date1.getMonth() + '-'+date1.getFullYear();
-			//console.log(angular.toJson($scope.requisition));
+			console.log(angular.toJson($scope.requisition));
 			requisitionService.createRequisition($scope.requisition)
 			.then(successMsg)
 			.catch(errorMsg);

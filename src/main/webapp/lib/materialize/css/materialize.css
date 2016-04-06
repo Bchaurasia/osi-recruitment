@@ -8008,12 +8008,12 @@ small {
 .tabs .tab a {
   color: #ee6e73;
   display: block;
-  width:40%;
+  width:75%;
   height: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 115%;
-  font-weight: bold;
+  font-weight: lighter;
   text-decoration: none;
   transition: color .28s ease;
 }
@@ -8025,7 +8025,7 @@ border-bottom: 2px solid #ee6e73;
 .tabs .tab a.active {
   color: #ee6e73;
   display: block;
-  width: 40%;
+  width: 75%;
   height: 85%;
   text-overflow: ellipsis;
   overflow: hidden;
