@@ -1,4 +1,14 @@
 <!------------------------------------------------------ SIDEBAR ---------------------------------------------->
-	<div ng-include="'views/admin/admin-sidebar.html'"></div>
+<!-- <div ng-include="'views/admin/admin-sidebar.html'"></div> -->
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-11" align="center">
+		<ul class="tabs">
+			<li ng-repeat="t in tabs" class="tab" role="presentation"><a
+				ng-class="{active: isActive(t.route)}" ui-sref="{{t.route}}">{{t.heading}}
+			</a></li>
+		</ul>
+	</div>
+</div>
 <!------------------------------------------------------ ------------------------------------------------------>
-	<div ui-view></div>
+<div ui-view></div>
