@@ -3,8 +3,8 @@
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
 			<div class="col-md-4"></div>
-			<div class="col-md-8">{{searchQuery}}
-				<input type="text" class="form-control" ng-model="searchQuery" ng-change="searchPositionQuery()">
+			<div class="col-md-8">
+				<input type="text" class="form-control" ng-model="searchQuery" ng-enter="searchPositionQuery()"><a class="waves-effect waves-light btn" ng-click="searchPositionQuery()">Search</a>
 			</div>
 			<br>
 

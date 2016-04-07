@@ -7,14 +7,9 @@
 		<div class="row" style="width: 90%">
 		<div class="col-md-3"></div>
 			<div class="col-md-6 ">
-					<input type="text" class="form-control" placeholder="Sheduled Interview Search">
+					<input type="text" class="form-control" ng-model="searchQuery" placeholder="Sheduled Interview Search">
+					<a class="waves-effect waves-light btn" ng-click="searchInterview()">Search</a>
 			</div>
-			<!-- <div class="col-md-2" align="center">
-					
-					<a class="waves-effect waves-light btn"
-					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"
-					href="#recruitment/createProfile"><i class="material-icons left">add</i>create</a>
-			</div> -->
 			<div class="col-md-1"></div>
 		</div>
 		
@@ -37,11 +32,11 @@
 					<td class="mdl-data-table__cell--non-numeric">{{data.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.interviewerId}}</td>
 					<td class="mdl-data-table__cell--non-numeric"><i ng-repeat="skills in data.candidateSkills">{{skills}}{{$last ? '' : ', '}}</i></td>
-					<td class="mdl-data-table__cell--non-numeric" ng-hide="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN')"><i ng-repeat="jobcode in data.positionId">
+					<td class="mdl-data-table__cell--non-numeric" ><i ng-repeat="jobcode in data.positionId">
 							{{jobcode}}{{$last ? '' : ', '}}</i></td>
-					<td class="mdl-data-table__cell--non-numeric" ng-hide="!(hasRole('ROLE_INTERVIEWER,ROLE_ADMIN'))">{{data.currentPositionId}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.currentPositionId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">
-					       <a href="" id="" class="interview-schedule" ng-click="schedule(data.positionId,data.candidateEmail,data.currentPositionId)">
+					       <a href="" id="" class="interview-schedule"  ng-click="schedule(data.positionId,data.candidateEmail,data.currentPositionId)">
 					       <span class="glyphicon glyphicon-plus" style="position: relative; top: 1px;" />
 					         </a>
 					 </td>

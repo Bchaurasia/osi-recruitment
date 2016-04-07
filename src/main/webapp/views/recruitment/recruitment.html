@@ -5,20 +5,19 @@
 			<li ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR')"
 				role="presentation" class="tab"><a
 				ng-class="{active: isActive('recruitment.searchPosition')}"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 				ui-sref="recruitment.searchPosition">Position</a></li>
 			<li class="tab"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 				role="presentation"><a
 				ng-class="{active: isActive('recruitment.searchRequisition')}"
 				ui-sref="recruitment.searchRequisition">Requisition</a></li>
-			<li
-				ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
-				role="presentation" class="tab"><a
-				ng-class="{active: isActive('recruitment.searchProfile')}"
+			<li ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+				role="presentation" class="tab">
+				<a ng-class="{active: isActive('recruitment.searchProfile')}"
 				ui-sref="recruitment.searchProfile">Profile</a></li>
 			<li
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL')"
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 				class="tab" role="presentation"><a
 				ui-sref="recruitment.interviewManagement"
 				ng-class="{active: isActive('recruitment.interviewManagement')}">Interview</a></li>

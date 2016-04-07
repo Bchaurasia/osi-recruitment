@@ -3,14 +3,14 @@
 	<form id="integerForm" role="form" class="form-horizontal">
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
-		<div class="col-md-3"></div>
-			<div class="col-md-6 ">
-					<input type="text" class="form-control" ng-model="search" ng-change ="searchRequisition(search)"
-						placeholder="Search By Designatin or Client">
+		<div class="col-md-2"></div>
+			<div class="col-md-8 ">
+					<input type="text" class="form-control" ng-model="searchTxt" placeholder="Search By Designatin or Client">
+						<a class="waves-effect waves-light btn" ng-click="searchRequisition()">Search</a>
 			</div>
-			<div class="col-md-2" align="center">
+			<div class="col-md-2" align="left">
 					<a class="waves-effect waves-light btn"
-					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"
+					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
 					href="#recruitment/createRequisition"><i class="material-icons left">add</i>create</a>
 					
 

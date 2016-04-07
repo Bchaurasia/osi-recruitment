@@ -8,21 +8,34 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.nisum.employee.ref.domain.InterviewDetails;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class InterviewSearchService {
 	
-
 	@Autowired
 	private InterviewIndexRepository interviewIndexRepository;
 	
-	public List<InterviewDetails> getAllInterviewDetails() throws Exception {
+	public List<InterviewDetails> getAllInterviewDetails(){
+		List<InterviewDetails> interviewDetailsList = null;
+		try {
 		Iterable<InterviewDetails> interviewDetails = interviewIndexRepository.findAll();
-		List<InterviewDetails> interviewDetailsList = Lists.newArrayList(interviewDetails);
+		interviewDetailsList = Lists.newArrayList(interviewDetails);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 		return interviewDetailsList;
 	}
 	
-	public List<InterviewDetails> getInterviewDetailsByName(String candidateName, String progress) throws Exception {
-		List<InterviewDetails> interviewDetailsList = interviewIndexRepository.findByCandidateNameStartingWithOrProgressStartingWithAllIgnoreCase(candidateName, progress);
+	public List<InterviewDetails> getInterviewDetailsByNameAndStatus(String candidateName, String progress){
+		List<InterviewDetails> interviewDetailsList = null;
+		try {
+			interviewDetailsList = interviewIndexRepository.findByCandidateNameStartingWithOrProgressStartingWithAllIgnoreCase(candidateName, progress);	
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		
 		return interviewDetailsList;
 	}
 	

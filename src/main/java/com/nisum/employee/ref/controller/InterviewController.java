@@ -31,6 +31,40 @@ public class InterviewController {
 	@Autowired
 	InterviewSearchService interviewSearchService;
 	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/searchInterviewDetails", method = RequestMethod.GET)
+	public ResponseEntity<?> searchInterviews(@RequestParam(value = "interviewerQuery", required = false) String interviewerQuery) {
+		List<InterviewDetails> interviewDetails = null;
+		if(interviewerQuery != null && !interviewerQuery.isEmpty()){
+			interviewDetails =  interviewSearchService.getInterviewDetailsByNameAndStatus(interviewerQuery, interviewerQuery);
+		}else{
+			interviewDetails = interviewSearchService.getAllInterviewDetails();
+		}
+		return  new ResponseEntity<List<InterviewDetails>>(interviewDetails, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/getInterview", method = RequestMethod.GET)
+	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewerId", required = true) String interviewerId) {
+		List<InterviewDetails> checkDetails = interviewDetailsService.getInterview(interviewerId);
+		return (null == checkDetails) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
+				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
+	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail,@RequestParam(value = "jobCode", required = false) String jobCode) {
+		List<InterviewDetails> checkDetails = null;
+		if(!(StringUtils.isEmpty(interviewerEmail) || StringUtils.isEmpty(jobCode))){
+			checkDetails = interviewDetailsService.getInterviewByInterviewerAndJobCode(interviewerEmail,jobCode);
+		}
+		else if(!StringUtils.isEmpty(interviewerEmail)){
+			checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
+		}
+		return (null == checkDetails) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
+				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
+	}
+	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/interviewSchedule", method = RequestMethod.POST)
 	@ResponseBody
@@ -70,14 +104,6 @@ public class InterviewController {
 		return new ResponseEntity<InterviewDetails>(interviewDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-	@RequestMapping(value = "/getInterview", method = RequestMethod.GET)
-	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewerId", required = true) String interviewerId) {
-		List<InterviewDetails> checkDetails = interviewDetailsService.getInterview(interviewerId);
-		return (null == checkDetails) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
-				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
-	}
-	
 	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterviewByParam", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterview(@RequestParam(value = "jobCode", required = false) String jobCode,@RequestParam(value = "candiateId", required = false) String candiateId, @RequestParam(value = "client", required = false) String client, @RequestParam(value = "progress", required = false) String progress, @RequestParam(value = "skill", required = false) String skill, @RequestParam(value = "designation", required = false) String designation, @RequestParam(value = "interviewId", required = false) String interviewId) {
@@ -104,20 +130,6 @@ public class InterviewController {
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
-	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail,@RequestParam(value = "jobCode", required = false) String jobCode) {
-		List<InterviewDetails> checkDetails = null;
-		if(!(StringUtils.isEmpty(interviewerEmail) || StringUtils.isEmpty(jobCode))){
-			checkDetails = interviewDetailsService.getInterviewByInterviewerAndJobCode(interviewerEmail,jobCode);
-		}
-		else if(!StringUtils.isEmpty(interviewerEmail)){
-			checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
-		}
-		return (null == checkDetails) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
-				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
-	}
-	
-	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/interview", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateIntewrviewDetails(@RequestBody InterviewDetails interviewDetails) {
@@ -125,18 +137,6 @@ public class InterviewController {
 		String successmessage = "{\"msg\":\"Profile successfully Updated\"}";
 		return (null == successmessage) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
 				: new ResponseEntity<String>(successmessage, HttpStatus.OK);
-	}
-	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER"})
-	@RequestMapping(value = "/interviewDetailsSearch", method = RequestMethod.GET)
-	public ResponseEntity<?> retrieveInterviewDetails(@RequestParam(value = "interviewDetails", required = false) String interviewDetails) throws Exception {
-		List<InterviewDetails> positionsDetails;
-		if(!StringUtils.isEmpty(interviewDetails)){
-			positionsDetails = interviewSearchService.getInterviewDetailsByName(interviewDetails,interviewDetails);
-		}else{
-			positionsDetails = interviewSearchService.getAllInterviewDetails();
-		}
-		return ((null == positionsDetails)) ? (new ResponseEntity<String>( "Positions not found", HttpStatus.NOT_FOUND)) : (new ResponseEntity<List<InterviewDetails>>(positionsDetails, HttpStatus.OK));
 	}
 
 }

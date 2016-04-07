@@ -24,6 +24,7 @@ public class DesignationController {
 	@Autowired
 	private IDesignationService designationService;
 	
+	
 	@RequestMapping(value="/design",method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveDesignation() {
 		
@@ -32,7 +33,7 @@ public class DesignationController {
         return (null == designation) ? new ResponseEntity<String>("No Designation found for the value ", HttpStatus.NOT_FOUND) : new ResponseEntity <ArrayList<Designation>>(designation, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/design", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> saveDesignation(@RequestBody Designation designation) throws Exception {
@@ -42,7 +43,7 @@ public class DesignationController {
 				HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/design", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateDesignation(@RequestBody Designation designation) throws Exception {
@@ -52,7 +53,7 @@ public class DesignationController {
 				HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/design/{designation}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<?> deleteDesignation(@PathVariable("designation") String designation) throws Exception {

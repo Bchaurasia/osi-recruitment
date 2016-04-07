@@ -23,6 +23,7 @@ public class ClientInfoController {
 	@Autowired(required=false)
 	private ClientInfoService clientInfoService;
 	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/clientNames", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getClients() {
@@ -30,6 +31,7 @@ public class ClientInfoController {
 		return new ResponseEntity<List<String>>(clients, HttpStatus.OK);
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/clientInfo", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getClientInfo(@RequestParam(value = "clientName", required = false) String clientName) {
@@ -42,6 +44,7 @@ public class ClientInfoController {
 		return !clients.isEmpty() ? new ResponseEntity<List<ClientInfo>>(clients, HttpStatus.OK) : new ResponseEntity<String>("Client not found", HttpStatus.NOT_FOUND) ;
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/interviewerNames", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getInterviewerNames() {
@@ -56,7 +59,7 @@ public class ClientInfoController {
 		return new ResponseEntity<List<ClientInfo>>(client, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/clientInfo", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<?> deleteClient(@RequestParam(value = "clientId", required = true) String clientId) {
@@ -67,7 +70,7 @@ public class ClientInfoController {
 		return new ResponseEntity<ResponseVO<String>>(resononse, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/clientInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createClient(@RequestBody ClientInfo clientInfo) {
@@ -75,7 +78,7 @@ public class ClientInfoController {
 		return new ResponseEntity<ClientInfo>(clientInfo, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/clientInfo", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateClient(@RequestBody ClientInfo clientInfo) {

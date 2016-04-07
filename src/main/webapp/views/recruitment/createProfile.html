@@ -93,7 +93,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter Skype Id" name="skypeId"
 					class="form-control" type="text" ng-model="candidate.skypeId"
-					ng-pattern="/^[a-z][a-z0-9\.,\-_]{5,31}$/" required><label>Skype
+					ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required><label>Skype
 					Id <b class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
@@ -137,7 +137,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter Stream" name="stream" class="form-control"
 					type="text" ng-model="candidate.stream"
-					ng-pattern="/^[a-zA-Z _]*$/"> <label>Specialization
+					ng-pattern="/^[a-zA-Z.]*$/"> <label>Specialization
 				</label>
 
 			</div>

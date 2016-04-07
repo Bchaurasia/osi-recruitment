@@ -95,8 +95,8 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	
 	public InterviewDetails  createInterview(InterviewDetails interviewDetails){
 			try {
-				interviewSearchService.addInterviewDetailsIndex(interviewDetails);
 				interviewDetailsRepository.scheduleInterview(interviewDetails);
+				interviewSearchService.addInterviewDetailsIndex(interviewDetails);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -2,16 +2,17 @@
 	<form id="integerForm" role="form" class="form-horizontal">
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
-		<div class="col-md-3"></div>
-			<div class="col-md-6 ">
-					<input type="text" class="form-control" ng-model="search" ng-keyup="searchProfileQuery()">
+		<div class="col-md-2"></div>
+			<div class="col-md-9 ">
+					<input type="text" class="form-control" ng-model="search">
+					<div align="left">
+					&nbsp;&nbsp;
+						<a class="btn-floating" ng-click="searchProfileQuery()"><i class="material-icons">search</i></a>&nbsp;&nbsp;
+						<a class="btn-floating" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
+						href="#recruitment/createProfile"><i class="material-icons">add</i></a>
+					</div>
 			</div>
-			<div class="col-md-2" align="center">
-					<a class="waves-effect waves-light btn"
-					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')"
-					href="#recruitment/createProfile"><i class="material-icons left">add</i>create</a>
-			</div>
-			<div class="col-md-1"></div>
+	<div class="col-md-1" align="center"/>
 		</div>
 
 		<table class="bordered" style="width: 90%">

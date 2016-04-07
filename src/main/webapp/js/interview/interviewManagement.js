@@ -1,4 +1,4 @@
-	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$log', '$rootScope' , 'appConstants', function($scope, $http, $q, $window,jobCodeService1, $log, $rootScope, appConstants ) {
+	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$log', '$rootScope' , 'appConstants','interviewService', function($scope, $http, $q, $window,jobCodeService1, $log, $rootScope, appConstants,interviewService ) {
 		$scope.interview = {};
 		$scope.positionDisable = true;
 		$scope.searchDisable = true;
@@ -22,30 +22,42 @@
 		$scope.info = $rootScope.info;
 		$scope.advancedHide = true;
 		
+		$scope.searchQuery="";
+		
 		var User_URL = 'resources/user?emailId='+$scope.useremailId;
 		var position_URL = 'resources/position';
 		var clientNames_URL = 'resources/clientNames';
 		var InterviewDetailsURL = 'resources/getInterviewByParam';
 		
-		$http.get(InterviewDetailsURL).success(function(data, status, headers, config) {
+//		$http.get(InterviewDetailsURL).success(function(data, status, headers, config) {
+//			$scope.interviewDetails = data;
+//		}).error(function(data, status, headers, config) {
+//			$log.error(data);
+//		})
+		
+		$scope.searchInterview = function(){
+			interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
 			$scope.interviewDetails = data;
-		}).error(function(data, status, headers, config) {
-			$log.error(data);
-		})
+		}).catch({
+			function(response){
+				$log.error(response.data);
+			}
+		})}
 		
+		$scope.searchInterview();
 		
+//		$scope.searchInterviewDetails = function(search){
+//			$http.get('resources/interviewDetailsSearch?interviewDetails='+search)
+//			.then(function(data){
+//				$scope.interviewDetails = data.data;
+//			})
+//			.catch(function(data){
+//				console.log("Failed to get data"+data);
+//			});
+//		}
 		
-		$scope.searchInterviewDetails = function(search){
-			$http.get('resources/interviewDetailsSearch?interviewDetails='+search)
-			.then(function(data){
-				$scope.interviewDetails = data.data;
-			})
-			.catch(function(data){
-				console.log("Failed to get data"+data);
-			});
-		}
-		
-		$scope.loadInterviews = function(){
+		/*
+		 $scope.loadInterviews = function(){
 			$scope.interview.skill = "";
 			$scope.interview.progress = "";
 			$scope.interview.position = "";
@@ -84,7 +96,7 @@
 								$scope.interviewDetails = data;
 								//console.log(angular.toJson($scope.interviewDetails));
 								
-								/*angular.forEach($scope.interviewData, function(email){
+								angular.forEach($scope.interviewData, function(email){
 									$scope.interviewermail.push(email.interviewerEmail);
 								})
 								angular.forEach($scope.interviewermail, function(interviewerEmail){
@@ -98,7 +110,7 @@
 									$scope.interviewDetails = $scope.roleinterviewerDetails;
 								}else if($scope.roleinterviewerDetails == null){
 									$scope.interviewDetails = null;
-								}*/
+								}
 							}
 						}).error(function(data, status, headers, config) {
 							$log.error(data);
@@ -109,11 +121,11 @@
 			}).error(function(data, status, headers, config) {
 				$log.error(data);
 			})
-		}
+		}*/
 		
-		$scope.loadInterviews();
+		//$scope.loadInterviews();
 		
-		$http.get(clientNames_URL).success(function(data, status, headers, config) {
+	/*	$http.get(clientNames_URL).success(function(data, status, headers, config) {
 			$scope.clientNames = data;
 		}).error(function(data, status, headers, config) {
 			$log.error(data);
@@ -214,7 +226,7 @@
 		$scope.sortComment = function(comment) {
 		    var date = new Date(comment.created);
 		    return date;
-		};
+		};*/
 		$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
 		$scope.currentPage = 0;
 		$scope.changePage = function(){

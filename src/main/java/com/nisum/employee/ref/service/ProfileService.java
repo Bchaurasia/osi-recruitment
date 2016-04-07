@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.repository.ProfileRepository;
+import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
 
 @Service
@@ -18,15 +19,12 @@ public class ProfileService implements IProfileService{
 	ProfileRepository profileRepository;
 	
 	@Autowired
-	ProfileSearchService profileSearchService;	
+	ProfileSearchService profileSearchService;
+	
+	@Autowired
+	InterviewSearchService interviewSearchService;
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
-		List<Profile> profiles = profileRepository.retrieveAllProfiles();
-		for(Profile pro : profiles){
-			if(pro.getEmailId().equals(candidate.getEmailId())){
-				throw new Exception("Failed To Create Profile As Candidate Already Exists!");
-			}
-		}
 		profileRepository.prepareCandidate(candidate);
 		return profileSearchService.addProfileIndex(candidate);
 	}

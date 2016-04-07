@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.nisum.employee.ref.domain.Requisition;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class RequisitionSearchService {
 	
@@ -31,17 +34,27 @@ public class RequisitionSearchService {
 		return requisitionList;
 	}
 	
-	public Requisition addRequisitionIndex(Requisition requisition) throws Exception {
-		Requisition requisitionData = requisitionIndexRepository.save(requisition);
+	public Requisition addRequisitionIndex(Requisition requisition) {
+		Requisition requisitionData = null;
+		try {
+			requisitionData = requisitionIndexRepository.save(requisition);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		
 		return requisitionData;
 	}
 	
-	public void updateRequisitionIndex(Requisition requisition) throws Exception {
-		if(requisitionIndexRepository.exists(requisition.getRequisitionId())){
-		requisitionIndexRepository.delete(requisition.getRequisitionId());
-		addRequisitionIndex(requisition);
-		}else{
+	public void updateRequisitionIndex(Requisition requisition){
+		try{
+			if(requisitionIndexRepository.exists(requisition.getRequisitionId())){
+			requisitionIndexRepository.delete(requisition.getRequisitionId());
 			addRequisitionIndex(requisition);
+			}else{
+				addRequisitionIndex(requisition);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
 		}
 	}
 	

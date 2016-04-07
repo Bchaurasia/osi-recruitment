@@ -87,7 +87,7 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 	}
 	
 	function createRequisitionError(response){
-		return "Failed To Create Requisition - " /*+response.getMessage()*/;
+		return "Failed To Create Requisition - ";// +response.getMessage();
 	}
 
 	function responseSuccess(response){

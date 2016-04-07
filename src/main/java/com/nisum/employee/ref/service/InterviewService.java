@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.repository.InterviewRepository;
+import com.nisum.employee.ref.search.InterviewSearchService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class InterviewService implements IInterviewService{
 	
@@ -22,8 +26,15 @@ public class InterviewService implements IInterviewService{
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
+	@Autowired
+	private InterviewSearchService interviewSearchService;
 	
 	public void prepareInterview(InterviewDetails interview) {
+		try {
+			interviewSearchService.addInterviewDetailsIndex(interview);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 		interviewRepository.save(interview);
 	}
 	

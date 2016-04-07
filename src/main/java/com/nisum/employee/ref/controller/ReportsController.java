@@ -20,7 +20,7 @@ public class ReportsController {
 	@Autowired
 	private ReportsService reportsService;
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ResponseEntity<?> getData(@RequestParam(value = "jobcodeProfile", required = true) String jobcodeProfile) {
 		ReportsVO profileDetails = reportsService.getDataByJobCode(jobcodeProfile);

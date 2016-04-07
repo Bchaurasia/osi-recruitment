@@ -25,6 +25,7 @@ public class OfferController {
 	private OfferRepository offerRepository;
 	
 	@ResponseBody
+	@Secured({"ROLE_ADMIN","ROLE_HR"})
 	@RequestMapping(value="/save-offer", method=RequestMethod.POST)
 	public ResponseEntity<Offer> saveOfferDetails(@RequestBody Offer offer) {
 		offerRepository.saveOffer(offer);
@@ -33,7 +34,7 @@ public class OfferController {
 	
 	
 	@ResponseStatus(HttpStatus.OK)
-	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR"})
 	@RequestMapping(value = "/upload-offer-letter", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadOfferLetter	(HttpServletRequest request,@RequestParam(value = "file") MultipartFile multipartFile, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
 		offerRepository.saveResumeInBucket(multipartFile, candidateId);

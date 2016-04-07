@@ -1,14 +1,26 @@
 angular.module('erApp')
-		   .service('interviewService',['$http','$filter','$rootScope','appConstants','$q', '$timeout',	interviewService]);
+		   .service('interviewService',['$http','$filter','$rootScope','appConstants','$q', '$timeout','$log',	interviewService]);
 
-function interviewService($http,$filter,$rootScope,$timeout,$log,appConstants) {
+function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log) {
 	return {
 		getInterviewFeedback : getInterviewFeedback,
 		submitInterviewFeedback : submitInterviewFeedback,
 		getInterviewDetailsByCandidateId : getInterviewDetailsByCandidateId,
 		createInterview : createInterview,
-		updateInterview : updateInterview
+		updateInterview : updateInterview,
+		searchInterviewDetails : searchInterviewDetails
 	};
+	
+	
+	function searchInterviewDetails(queryText){
+		return $http.get('resources/searchInterviewDetails?interviewerQuery='+queryText)
+		     .then(function(response){
+		    	 return response.data;
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving interview Deatils status: ' + response.status );
+		     });
+	}
 	
 	function getInterviewFeedback(emailId,jobcode){
 		

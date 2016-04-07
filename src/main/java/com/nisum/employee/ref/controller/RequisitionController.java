@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
+import com.nisum.employee.ref.search.RequisitionSearchService;
 import com.nisum.employee.ref.service.RequisitionService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +26,27 @@ public class RequisitionController {
 	private static final String MSG_START = "{\"msg\":\"";
 	private static final String MSG_END = "\"}";
 	private static final String REQUISITION_HAS_BEEN_REJECTED_SUCCESSFULLY = " Requisition has been Rejected successfully";
+
 	@Autowired
-	private RequisitionService requisitionService;
+	RequisitionService requisitionService;
+
+	@Autowired
+	RequisitionSearchService requisitionSearchService;
+
+	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/searchRequisitionByText", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> searchRequisitionBasedOnId(
+			@RequestParam(value = "searchRequisition", required = true) String searchRequisition) throws Exception {
+		List<Requisition> requisitionsDetails = null;
+		if (!searchRequisition.isEmpty()) {
+			requisitionsDetails = requisitionSearchService.getRequisitionReqIdOrPositionOrClientByName(
+					searchRequisition, searchRequisition, searchRequisition);
+		} else {
+			requisitionsDetails = requisitionSearchService.getAllRequisitionDetails();
+		}
+		return new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
+	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.repository.RequisitionRepository;
+import com.nisum.employee.ref.search.RequisitionSearchService;
 
 @Service
 public class RequisitionService implements IRequisitionService {
@@ -22,7 +23,10 @@ public class RequisitionService implements IRequisitionService {
 
 	@Autowired
 	private RequisitionRepository requisitionRepository;
-
+	
+	@Autowired
+	RequisitionSearchService requisitionSearchService;
+	
 	@Autowired
 	PositionService positionService;
 
@@ -33,8 +37,9 @@ public class RequisitionService implements IRequisitionService {
 
 	@Override
 	public void prepareRequisition(Requisition requisition) {
-		requisition.setStatus(INITIATED);
-		requisitionRepository.prepareRequisition(requisition);
+			requisition.setStatus(INITIATED);
+			Requisition persistedRequisition = requisitionRepository.prepareRequisition(requisition);
+			requisitionSearchService.addRequisitionIndex(persistedRequisition);
 		try {
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (MessagingException e) {
@@ -46,6 +51,7 @@ public class RequisitionService implements IRequisitionService {
 	public RequisitionApproverDetails updateRequisition(Requisition requisition)
 			throws AddressException, MessagingException {
 		requisitionRepository.updateRequisition(requisition);
+		requisitionSearchService.updateRequisitionIndex(requisition);
 		return jobRequisitionNotificationService.sendNotification(requisition);
 	}
 
