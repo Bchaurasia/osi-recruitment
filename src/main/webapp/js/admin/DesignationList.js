@@ -1,8 +1,8 @@
 app.run(['$anchorScroll', function($anchorScroll) {
     $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
 }])
-app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$window', '$timeout','$filter','$log','appConstants','infoService','$location','$anchorScroll','designationService','jobCodeService1','sharedDataService',
-                                      function($scope,$rootScope, $http, $q, $window, $timeout,$filter,$log,appConstants,infoService,$location,$anchorScroll,designationService,jobCodeService1,sharedDataService ) {
+app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$window', '$timeout','$filter','$log','appConstants','infoService','$location','$anchorScroll','designationService','sharedService','sharedDataService',
+                                      function($scope,$rootScope, $http, $q, $window, $timeout,$filter,$log,appConstants,infoService,$location,$anchorScroll,designationService,sharedService,sharedDataService ) {
 	
 	$scope.designation1 = {};
 	$scope.hideSkills = true;
@@ -37,7 +37,7 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	$scope.init();
 	
 	$scope.editDesign = function(data) {
-		jobCodeService1.setDesignation(data.designation);
+		sharedService.setDesignation(data.designation);
 		location.href='#admin/designation/edit';
 	};
 

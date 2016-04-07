@@ -1,5 +1,5 @@
-app.controller("viewPositionCtrl",   ['$scope','$state', '$http','jobCodeService1','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService',
-                                      function($scope, $state, $http,jobCodeService1,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService) {
+app.controller("viewPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService',
+                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService) {
 		
 	$scope.hideRounds= true;
 	$scope.hideSkills = true;
@@ -26,10 +26,10 @@ app.controller("viewPositionCtrl",   ['$scope','$state', '$http','jobCodeService
 	$scope.client =[];
 	
 	$scope.init = function() {
-		if(jobCodeService1.getjobCode() == undefined) {
+		if(sharedService.getjobCode() == undefined) {
 			$state.go("recruitment.searchPosition");
 		}
-		$scope.jobcode =jobCodeService1.getjobCode();	
+		$scope.jobcode =sharedService.getjobCode();	
 	}
 	
 	$scope.init();

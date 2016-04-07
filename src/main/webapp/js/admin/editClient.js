@@ -1,8 +1,8 @@
-app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window', '$timeout', '$log','$location', 'jobCodeService1','clientService','sharedDataService', 
-                                 	function($scope, $http,$rootScope, $q, $window, $timeout, $log,$location, jobCodeService1, clientService,sharedDataService) {
+app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window', '$timeout', '$log','$location', 'sharedService','clientService','sharedDataService', 
+                                 	function($scope, $http,$rootScope, $q, $window, $timeout, $log,$location, sharedService, clientService,sharedDataService) {
 	
-	$scope.clientId = jobCodeService1.getclientId();
-	$scope.clientName = jobCodeService1.getclientName();
+	$scope.clientId = sharedService.getclientId();
+	$scope.clientName = sharedService.getclientName();
 	$scope.client = {};
 	$scope.hideCreate = true;
 	$scope.hideCreate2 = true;

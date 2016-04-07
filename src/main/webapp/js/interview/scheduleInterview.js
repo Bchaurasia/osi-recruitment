@@ -1,5 +1,5 @@
-app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService', 
-                                        function($scope, $http,$window, jobCodeService1, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService) {
+app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService', 
+                                        function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService) {
 	$scope.data = {};
 	$scope.sel = {};
 	$scope.candidate = {};
@@ -45,11 +45,11 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','jobCodeSer
 	$scope.profile = {};
 	
 	$scope.init = function() {
-		if(jobCodeService1.getjobCode() == undefined || jobCodeService1.getprofileUserId() == undefined) {
+		if(sharedService.getjobCode() == undefined || sharedService.getprofileUserId() == undefined) {
 			$state.go("recruitment.interviewManagement");
 		}
-		$scope.emailId = jobCodeService1.getprofileUserId();
-		$scope.jobcode = jobCodeService1.getjobCode();
+		$scope.emailId = sharedService.getprofileUserId();
+		$scope.jobcode = sharedService.getjobCode();
 	}
 	$scope.init();
 	

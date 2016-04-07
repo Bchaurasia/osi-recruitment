@@ -3,70 +3,76 @@
 	<form id="integerForm" role="form" class="form-horizontal">
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
-		<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
-					<input type="text" class="form-control" ng-model="searchTxt" placeholder="Search By Designatin or Client">
-						<a class="waves-effect waves-light btn" ng-click="searchRequisition()">Search</a>
+				<input type="text" class="form-control" ng-model="searchTxt"
+					placeholder="Search By Designatin or Client">
+				<div align="left">
+					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchRequisition()"><i
+						class="material-icons">search</i></a>&nbsp;&nbsp; <a
+						class="btn-floating"
+						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
+						href="#recruitment/createRequisition"><i
+						class="material-icons">add</i></a>
+				</div>
+				<div class="col-md-1"></div>
 			</div>
-			<div class="col-md-2" align="left">
-					<a class="waves-effect waves-light btn"
-					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
-					href="#recruitment/createRequisition"><i class="material-icons left">add</i>create</a>
-					
 
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-	
-		<table class="bordered" style="width: 90%">
-			<thead>
-				<tr>
-					<!-- <th>AAA</th> -->
-					<th>REQUISITION ID</th>
-					<th>POSITION</th>
-					<th>MIN-EXP</th>
-					<th>MAX-EXP</th>
-					<th>CLIENT</th>
-					<th>CLONE</th>
-					<th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">APPROVE</th>
-					<!-- <th>Share</th> -->
-				</tr>
-			</thead>
+			<table class="bordered" style="width: 90%">
+				<thead>
+					<tr>
+						<!-- <th>AAA</th> -->
+						<th>REQUISITION ID</th>
+						<th>POSITION</th>
+						<th>MIN-EXP</th>
+						<th>MAX-EXP</th>
+						<th>CLIENT</th>
+						<th>CLONE</th>
+						<th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">APPROVE</th>
+						<!-- <th>Share</th> -->
+					</tr>
+				</thead>
 
-			<tbody>
-				<tr class="animate-repeat"
-					ng-repeat="data in allRequisitions | orderBy : sortComment : true | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
-					<!-- <td><span style="background-color: red;padding: 5px 12px;color: white;"><b>A</b></span></td> -->
-					<td><a style="cursor: pointer;"
-						ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
-					<td>{{data.position}}</td>
-					<td>{{data.minExpYear}}</td>
-					<td>{{data.maxExpYear}}</td>
-					<td>{{data.client}}</td>
-					<td align="center"><a style="cursor: pointer;"
-						ng-click="cloneRequisition(data.requisitionId)"><span
-							class="glyphicon glyphicon-copy"></span></a></td>
-					<td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a
-						style="cursor: pointer;"><span
-							class="glyphicon glyphicon-ok-circle"></span></a></td>
-				</tr>
-			</tbody>
-		</table>
-		<br>
-		<div class="row" style="width: 90%">
-			<div class="col-md-3" align="left">
-				<h5>
-				<small>	Total Requisitions : {{allRequisitions.length }}</small>
-				</h5>
+				<tbody>
+					<tr class="animate-repeat"
+						ng-repeat="data in allRequisitions | orderBy : sortComment : true | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+						style="font-size: 80%">
+						<!-- <td><span style="background-color: red;padding: 5px 12px;color: white;"><b>A</b></span></td> -->
+						<td><a style="cursor: pointer;"
+							ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
+						<td>{{data.position}}</td>
+						<td>{{data.minExpYear}}</td>
+						<td>{{data.maxExpYear}}</td>
+						<td>{{data.client}}</td>
+						<td align="center"><a style="cursor: pointer;"
+							ng-click="cloneRequisition(data.requisitionId)"><span
+								class="glyphicon glyphicon-copy"></span></a></td>
+						<td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a
+							style="cursor: pointer;"><span
+								class="glyphicon glyphicon-ok-circle"></span></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<div class="row" style="width: 90%">
+				<div class="col-md-3" align="left">
+					<h5>
+						<small> Total Requisitions : {{allRequisitions.length }}</small>
+					</h5>
+				</div>
+
+				<div class="col-md-9">
+					<ul class="pagination1 pull-right">
+						<li e="{disabled: currentPage == 0}"><a ng-click="prevPage()"><i
+								class="material-icons">chevron_left</i></a></li>
+						<li ng-repeat="n in range(currentPage)"
+							ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+							ng-bind="n + 1"></a></li>
+						<li class="waves-effect"
+							ng-class="{disabled: currentPage == pageCount() - 1}"><a
+							ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+					</ul>
+				</div>
 			</div>
-			
-			<div class="col-md-9">
-				 <ul class="pagination1 pull-right">
-				    <li e="{disabled: currentPage == 0}"><a ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
-				    <li  ng-repeat="n in range(currentPage)" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1"></a></li>
-				    <li class="waves-effect" ng-class="{disabled: currentPage == pageCount() - 1}"><a ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
-				  </ul>
-			</div>
-		</div>
 	</form>
 </form>

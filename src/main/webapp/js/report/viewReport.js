@@ -1,4 +1,4 @@
- app.controller('reportManagementCtrl',['$scope', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','positionService','profileService','interviewService','reportService', function($scope, $http,$window, jobCodeService1, $timeout,$filter, $q, $log, $rootScope,blockUI,positionService,profileService,interviewService,reportService) {
+ app.controller('reportManagementCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','positionService','profileService','interviewService','reportService', function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope,blockUI,positionService,profileService,interviewService,reportService) {
 	$scope.data = {};
 	$scope.positions = {};
 	$scope.candidate = {};

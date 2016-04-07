@@ -1,5 +1,5 @@
-app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log','$location','appConstants','clientService','positionService','userService','designationService', 'jobCodeService1',
-                                      			function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log,$location,appConstants,clientService, positionService,userService,designationService,jobCodeService1) {
+app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log','$location','appConstants','clientService','positionService','userService','designationService', 'sharedService',
+                                      			function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log,$location,appConstants,clientService, positionService,userService,designationService,sharedService) {
 	$scope.jbDisabled = true;
     $scope.position ={};
     $scope.position.jobProfile="";

@@ -1,4 +1,4 @@
-app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'jobCodeService1', 'dashboardService','infoService', function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, jobCodeService1, dashboardService,infoService) {
+app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService', function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService) {
 	
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
@@ -31,8 +31,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	});
 	
 	$scope.showInterview = function(obj, obj2) {
-		jobCodeService1.setjobCode(obj);
-		jobCodeService1.setinterviewRound(obj2);
+		sharedService.setjobCode(obj);
+		sharedService.setinterviewRound(obj2);
 		location.href='#showInterview';
 	};
 	

@@ -1,4 +1,4 @@
-app.controller('highChatCtrl',['$scope', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$log', '$rootScope','blockUI', function($scope, $http,$window, jobCodeService1, $timeout,$filter, $q, $log, $rootScope,blockUI) {
+app.controller('highChatCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI', function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope,blockUI) {
 	$scope.data = {};
 	$scope.positions = {};
 	$scope.jobcode = $rootScope.jobcode;

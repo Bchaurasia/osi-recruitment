@@ -1,5 +1,5 @@
-app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','jobCodeService1','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService',
-                                     function($scope, $http, $q, $window,$location,jobCodeService1,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService) {
+app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService',
+                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService) {
 	
 	$scope.hideQualification = true;
 	$scope.calendar = true;

@@ -1,4 +1,4 @@
-app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$rootScope', '$filter', '$log','appConstants','profileService', function($scope, $http, $q, $window, jobCodeService1,$rootScope, $filter,$log,appConstants,profileService) {
+app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','sharedService','$rootScope', '$filter', '$log','appConstants','profileService', function($scope, $http, $q, $window, sharedService,$rootScope, $filter,$log,appConstants,profileService) {
 	$scope.search="";
 	
 //	_.contains($rootScope.user.roles, );
@@ -18,8 +18,8 @@ app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','jobCodeSe
 	}
 	$scope.title = "Search";
 		$scope.editProfile = function(data) {
-			jobCodeService1.setprofileUserId(data.emailId);
-			jobCodeService1.setjobCode(data.jobcodeProfile);
+			sharedService.setprofileUserId(data.emailId);
+			sharedService.setjobCode(data.jobcodeProfile);
 			location.href='#recruitment/viewProfile';
 		};
 		

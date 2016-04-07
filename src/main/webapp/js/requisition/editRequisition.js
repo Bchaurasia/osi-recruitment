@@ -1,5 +1,5 @@
-app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','blockUI','positionService',
-                                     function($scope, $http, $q, $window,jobCodeService1,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,blockUI,positionService) {
+app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window','sharedService','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','blockUI','positionService',
+                                     function($scope,$state, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,blockUI,positionService) {
 	$scope.hideSkills = true;
 	$scope.skillErr = false;
 	$scope.dateErr = false;
@@ -27,8 +27,17 @@ app.controller('editRequisitionCtrl',['$scope', '$http','$q', '$window','jobCode
 	$scope.hrManager={};
 	$scope.approval1={};
 	$scope.approval2={};
+	var id;
+	$scope.init = function() {
+		if(sharedService.getRequisitionId() == undefined) {
+			$state.go("recruitment.searchRequisition");
+		}
+		id = sharedService.getRequisitionId();
+	}
 	
-	var id = jobCodeService1.getRequisitionId();
+	$scope.init();
+	
+	//var id = sharedService.getRequisitionId();
 	$scope.requisition= {};
 	$scope.requisition.qualifications = [];
 	

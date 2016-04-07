@@ -1,5 +1,5 @@
-app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','appConstants','$timeout','requisitionService',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,appConstants,$timeout,requisitionService) {
+app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','sharedService','$filter', '$log','appConstants','$timeout','requisitionService',
+                                     function($scope, $http, $q, $window,sharedService,$filter, $log,appConstants,$timeout,requisitionService) {
 
 	$scope.showApprovalBtn = false;
 	$scope.searchBox = false;
@@ -13,12 +13,12 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','jobCo
 //		$log.error(data);
 //	})
 	$scope.editRequisition = function(requisitionId) {
-		jobCodeService1.setRequisitionId(requisitionId);
+		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
 	};
 	
 	$scope.cloneRequisition = function(requisitionId) {
-		jobCodeService1.setRequisitionId(requisitionId);
+		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/cloneRequisition';
 		
 	};

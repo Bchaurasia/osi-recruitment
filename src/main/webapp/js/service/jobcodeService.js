@@ -1,5 +1,5 @@
 angular.module('erApp')
-	   .service('jobCodeService1', function() {
+	   .service('sharedService', function() {
 		   var clientId;
 		   var clientName;
 		   var interviewRound;

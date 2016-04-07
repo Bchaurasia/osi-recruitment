@@ -1,8 +1,8 @@
 app.run(['$anchorScroll', function($anchorScroll) {
     $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
 }])
-app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$rootScope','$log','positionService','profileService','clientService','appConstants','infoService', 'interviewService','$location','$anchorScroll','designationService', 
-                                  		function($scope, $state, $http,$window, jobCodeService1, $timeout,$filter, $q, $rootScope, $log,positionService,profileService,clientService,appConstants,infoService, interviewService, $location, $anchorScroll,designationService) {
+app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','sharedService', '$timeout','$filter','$q', '$rootScope','$log','positionService','profileService','clientService','appConstants','infoService', 'interviewService','$location','$anchorScroll','designationService', 
+                                  		function($scope, $state, $http,$window, sharedService, $timeout,$filter, $q, $rootScope, $log,positionService,profileService,clientService,appConstants,infoService, interviewService, $location, $anchorScroll,designationService) {
 	
 	$scope.data = {};
 	$scope.sel = {};
@@ -53,11 +53,11 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
 	$scope.validate="";
 	
 	$scope.init = function() {
-		if(jobCodeService1.getjobCode() == undefined || jobCodeService1.getprofileUserId() == undefined) {
+		if(sharedService.getjobCode() == undefined || sharedService.getprofileUserId() == undefined) {
 			$state.go("recruitment.searchProfile");
 		}
-		$scope.jobcode =jobCodeService1.getjobCode();
-		$scope.emailId = jobCodeService1.getprofileUserId();
+		$scope.jobcode =sharedService.getjobCode();
+		$scope.emailId = sharedService.getprofileUserId();
 	}
 	
 	$scope.init();
@@ -301,13 +301,13 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','jobCod
         $scope.hidejobcode = false;
 	}
 	$scope.feedback = function(positionId, candidateEmail) {
-		jobCodeService1.setprofileUserId(candidateEmail);
-		jobCodeService1.setjobCode(positionId);
+		sharedService.setprofileUserId(candidateEmail);
+		sharedService.setjobCode(positionId);
 		location.href='#recruitment/interviewFeedback';
 	};
 	$scope.schedule = function(positionId, candidateEmail) {
-		jobCodeService1.setprofileUserId(candidateEmail);
-		jobCodeService1.setjobCode(positionId);
+		sharedService.setprofileUserId(candidateEmail);
+		sharedService.setjobCode(positionId);
 		location.href='#recruitment/scheduleInterview';
 	};
 	$scope.gotoAnchor = function() {

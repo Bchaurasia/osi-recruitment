@@ -1,5 +1,5 @@
-app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$filter', '$log','positionService','appConstants','$timeout','positionService',
-                                     function($scope, $http, $q, $window,jobCodeService1,$filter, $log,positionService,appConstants,$timeout,positionService) {
+app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','sharedService','$filter', '$log','positionService','appConstants','$timeout','positionService',
+                                     function($scope, $http, $q, $window,sharedService,$filter, $log,positionService,appConstants,$timeout,positionService) {
 
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
@@ -79,7 +79,7 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','jobCodeS
 	
 	
 	$scope.editPosition = function(jobcodeProfile) {
-		jobCodeService1.setjobCode(jobcodeProfile);
+		sharedService.setjobCode(jobcodeProfile);
 		location.href='#recruitment/viewPosition';
 	};
 	

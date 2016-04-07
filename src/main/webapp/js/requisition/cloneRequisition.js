@@ -1,5 +1,5 @@
-app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCodeService1','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','blockUI',
-                                     function($scope, $http, $q, $window,jobCodeService1,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,blockUI) {
+app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','sharedService','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','blockUI',
+                                     function($scope, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,blockUI) {
 	$scope.hideSkills = true;
 	$scope.skillErr = false;
 	$scope.minExpYearErr = false;
@@ -21,7 +21,7 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','jobCod
 	$scope.approvals=[];
 	$scope.requisitionManager=[];
 	$scope.client =[];
-	var id = jobCodeService1.getRequisitionId();
+	var id = sharedService.getRequisitionId();
 	$scope.today = new Date();
 	$scope.disabled = false;
 	$scope.requisition= {};

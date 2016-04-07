@@ -1,5 +1,6 @@
 package com.nisum.employee.ref.search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,13 @@ public class RequisitionSearchService {
 	}
 	
 	public List<Requisition> getRequisitionReqIdOrPositionOrClientByName(String requisitionId,String position, String client) throws Exception {
+		Requisition requisition;
 		List<Requisition> requisitionList = requisitionIndexRepository.findByPositionStartingWithOrClientStartingWithAllIgnoreCase(requisitionId, position, client);
+		if(requisitionList.isEmpty()){
+			requisition=requisitionIndexRepository.findOne(requisitionId);
+			requisitionList=new ArrayList<>();
+			requisitionList.add(requisition);
+		}
 		return requisitionList;
 	}
 	

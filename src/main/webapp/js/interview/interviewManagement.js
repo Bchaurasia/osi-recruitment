@@ -1,4 +1,4 @@
-	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','jobCodeService1', '$log', '$rootScope' , 'appConstants','interviewService', function($scope, $http, $q, $window,jobCodeService1, $log, $rootScope, appConstants,interviewService ) {
+	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','sharedService', '$log', '$rootScope' , 'appConstants','interviewService', function($scope, $http, $q, $window,sharedService, $log, $rootScope, appConstants,interviewService ) {
 		$scope.interview = {};
 		$scope.positionDisable = true;
 		$scope.searchDisable = true;
@@ -198,13 +198,13 @@
 		}
 		
 		$scope.feedback = function(positionId, candidateEmail) {
-			jobCodeService1.setprofileUserId(candidateEmail);
-			jobCodeService1.setjobCode(positionId);
+			sharedService.setprofileUserId(candidateEmail);
+			sharedService.setjobCode(positionId);
 			location.href='#recruitment/interviewFeedback';
 		};
 		$scope.schedule = function(positionId, candidateEmail) {
-			jobCodeService1.setprofileUserId(candidateEmail);
-			jobCodeService1.setjobCode(positionId);
+			sharedService.setprofileUserId(candidateEmail);
+			sharedService.setjobCode(positionId);
 			
 			location.href='#recruitment/scheduleInterview';
 		};
@@ -276,7 +276,5 @@
 			  $scope.setPage = function() {
 			    $scope.currentPage = this.n;
 			  };
-		
-		
-		
+	
 	}]);

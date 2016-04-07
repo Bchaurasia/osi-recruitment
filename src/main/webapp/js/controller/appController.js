@@ -73,8 +73,8 @@ angular.module('erApp')
 		}
 	}
 	$scope.positionMessage = function(msg,path){
-		$scope.message = jobCodeService1.getmessage();
-		$scope.cls = jobCodeService1.getclass();
+		$scope.message = sharedService.getmessage();
+		$scope.cls = sharedService.getclass();
 		$timeout( function(){ $scope.alHide(); }, 3000);
 	}
 	

@@ -1,10 +1,16 @@
-<form action="#" name="searchPosition" class="searchRequisition" onvalidate>
+<form action="#" name="searchPosition" class="searchRequisition"
+	onvalidate>
 	<form id="integerForm" role="form" class="form-horizontal">
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
 			<div class="col-md-4"></div>
 			<div class="col-md-8">
-				<input type="text" class="form-control" ng-model="searchQuery" ng-enter="searchPositionQuery()"><a class="waves-effect waves-light btn" ng-click="searchPositionQuery()">Search</a>
+				<input type="text" class="form-control" ng-model="searchQuery"
+					ng-enter="searchPositionQuery()">
+				<div align="left">
+					&nbsp;&nbsp; <a class="btn-floating"
+						ng-click="searchPositionQuery()"><i class="material-icons">search</i></a>
+				</div>
 			</div>
 			<br>
 
@@ -23,7 +29,8 @@
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="data in positions | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
+					ng-repeat="data in positions | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.requisitionId}}</td>

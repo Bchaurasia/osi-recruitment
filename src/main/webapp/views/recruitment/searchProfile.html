@@ -1,18 +1,20 @@
- <form action="#" name="searchProfile" class="searchProfile" onvalidate>
+
+<form action="#" name="searchProfile" class="searchProfile" onvalidate>
 	<form id="integerForm" role="form" class="form-horizontal">
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row" style="width: 90%">
-		<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-9 ">
-					<input type="text" class="form-control" ng-model="search">
-					<div align="left">
-					&nbsp;&nbsp;
-						<a class="btn-floating" ng-click="searchProfileQuery()"><i class="material-icons">search</i></a>&nbsp;&nbsp;
-						<a class="btn-floating" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
+				<input type="text" class="form-control" ng-model="search">
+				<div align="left">
+					&nbsp;&nbsp; <a class="btn-floating"
+						ng-click="searchProfileQuery()"><i class="material-icons">search</i></a>&nbsp;&nbsp;
+					<a class="btn-floating"
+						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
 						href="#recruitment/createProfile"><i class="material-icons">add</i></a>
-					</div>
+				</div>
 			</div>
-	<div class="col-md-1" align="center"/>
+			<div class="col-md-1" align="center" />
 		</div>
 
 		<table class="bordered" style="width: 90%">
@@ -28,7 +30,8 @@
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="profile in profiles | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%">
+					ng-repeat="profile in profiles | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
@@ -36,7 +39,7 @@
 					<td class="mdl-data-table__cell--non-numeric">{{profile.expYear}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.jobcodeProfile.join(',')}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
-					
+
 				</tr>
 			</tbody>
 		</table>

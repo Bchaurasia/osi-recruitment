@@ -1,5 +1,5 @@
-app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$timeout', '$log','$location', '$state', 'jobCodeService1','appConstants','sharedDataService','clientService','infoService',
-                             function($scope,$rootScope, $http, $q, $window, $timeout, $log, $location, $state, jobCodeService1,appConstants,sharedDataService,clientService,infoService) {
+app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$timeout', '$log','$location', '$state', 'sharedService','appConstants','sharedDataService','clientService','infoService',
+                             function($scope,$rootScope, $http, $q, $window, $timeout, $log, $location, $state, sharedService,appConstants,sharedDataService,clientService,infoService) {
 	
 	$scope.client = {};
 	$scope.clients = {};
@@ -78,8 +78,8 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	}
 	
 	$scope.editClient = function(data){
-		jobCodeService1.setclientId(data.clientId);
-		jobCodeService1.setclientName(data.clientName);
+		sharedService.setclientId(data.clientId);
+		sharedService.setclientName(data.clientName);
 		// location.href='#admin/client/editClient';
 		$state.go('admin.client.editClient');
 	}

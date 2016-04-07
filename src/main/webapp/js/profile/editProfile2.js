@@ -1,8 +1,8 @@
 //app.run(['$anchorScroll', function($anchorScroll) {
 //    $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
 //}])
-app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','jobCodeService1', '$timeout','$filter','$q', '$rootScope','$log','positionService','profileService','clientService','appConstants','infoService', 'interviewService','$location','$anchorScroll','designationService','profileService',
-                                  		function($scope, $state, $http,$window, jobCodeService1, $timeout,$filter, $q, $rootScope, $log,positionService,profileService,clientService,appConstants,infoService, interviewService, $location, $anchorScroll,designationService,profileService) {
+app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','sharedService', '$timeout','$filter','$q', '$rootScope','$log','positionService','profileService','clientService','appConstants','infoService', 'interviewService','$location','$anchorScroll','designationService','profileService',
+                                  		function($scope, $state, $http,$window, sharedService, $timeout,$filter, $q, $rootScope, $log,positionService,profileService,clientService,appConstants,infoService, interviewService, $location, $anchorScroll,designationService,profileService) {
 	
 	$scope.candidate={};
 	$scope.positionData={};
@@ -13,9 +13,17 @@ app.controller('editProfileSearchCtrl',['$scope', '$state', '$http', '$window','
 	$scope.hidejobcodemenu = true;
 	$scope.user="";
 	$scope.updateInterview={};
-	$scope.init = function() {
-		$scope.user = jobCodeService1.getprofileUserId();
+	/*$scope.init = function() {
+		$scope.user = sharedService.getprofileUserId();
 	}
+	$scope.init();*/
+	$scope.init = function() {
+		if(sharedService.getprofileUserId() == undefined) {
+			$state.go("recruitment.searchProfile");
+		}
+		$scope.user = sharedService.getprofileUserId();
+	}
+	
 	$scope.init();
 	
 	infoService.getInfo().then(function(info){$scope.info = info;
