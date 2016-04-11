@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" type="image/x-icon"
+	href="static/osi_images/osi_favicon.ico" />
+<title>Recruitment Portal</title>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="static/osi_css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="lib/bootstrap/css/bootstrap-responsive.min.css"
+	rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href="lib/bootstrap/font/font-awesome.css" rel="stylesheet">
+<link href="lib/bootstrap/font/google_font.css" rel="stylesheet">
+
+<link href="static/osi_css/style.css" rel="stylesheet" type="text/css">
+<link href="static/osi_css/signin.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="lib/angular/js/angular.min.js"></script>
+<script type="text/javascript" src="lib/angular/js/angular-route.min.js"></script>
+<script type="text/javascript"
+	src="lib/angular/js/angular-messages.min.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript"
+	src="lib/utility/js/google-plus-signin.js"></script>
+<script src="lib/utility/js/jquery-1.11.2.min.js"></script>
+
+<link href="lib/utility/css/bootstrap-social.css" rel="stylesheet"
+	type="text/css">
+<link href="lib/utility/css/font-awesome.css" rel="stylesheet"
+	type="text/css">
+<link href="lib/utility/css/docs.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Font+Name">
+<script type="text/javascript" src="lib/utility/js/docs.js"></script>
+<script type="text/javascript" src="js/linkedin_login.js"></script>
+
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+	//here goes the api key, and the callback function
+	api_key: 75bm8w66omcy7b
+	//onLoad: onLinkedInLoad
+	authorize: true
+</script>
+</head>
+
+<body ng-app="myApp">
+	<div ng-controller="myContoler">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="navbar navbar-fixed-top">
+					<div class="navbar-inner">
+						<div class="container" style="padding: 32px 0 34px 0;">
+							<div class="custom-header">
+								<a href="login.html" class="col-md-2"><img
+									class="navbar-brand" src="static/osi_images/logo.png"
+									alt="OSI Technologies" id="logostyle" /></a>
+								<h1 class="col-md-4" style="font-size: 300%; color: white;">Recruitment
+									Portal</h1>
+							</div>
+						</div>
+						<!-- /container -->
+					</div>
+					<!-- /navbar-inner -->
+				</div>
+			</div>
+		</div>
+		<!-- /navbar -->
+		<div style="padding-left: 15%; padding-right: 15%">
+			<div class="row well">
+            
+				<div class="col-md-1"></div>
+				<h4>Invalid Credentials !!!! please enter username or password correct</h4>
+				<div class="col-md-5">
+					<form class="form-horizontal" action="j_spring_security_check"
+						method="post" id="ldapUserlogin" autocomplete="off"
+						name="ldapUserlogin">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" class="form-control" name="username"
+								ng-model="login.username" id="custom-input-username"
+								placeholder="Email address" required>
+						</div>
+						<div ng-messages="ldapUserlogin.username.$error" role="alert">
+							<!-- ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/" -->
+							<!-- <div class="error-alert" ng-message="pattern">Enter valid
+									username</div> -->
+							<!-- <div class="error-alert" ng-message="minlength, maxlength">Your
+									email must be between 5 and 100 characters long</div>-->
+						</div>
+						<span class="help-block"></span>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" class="form-control" minlength="3"
+								maxlength="20" name="password" ng-model="login.password"
+								id="custom-input-password" placeholder="Password" required>
+						</div>
+						<div ng-messages="ldapUserlogin.password.$error" role="alert">
+							<!-- <div class="error-alert" ng-message="pattern">Enter valid
+								password</div> -->
+							<!-- <div class="error-alert" ng-message="minlength, maxlength">Your
+										password must be between 5 and 20 characters long</div> -->
+						</div>
+
+						<input type="hidden" ng-model="login.j_username" name="j_username"
+							value="{{login.username}}" /> <input type="hidden"
+							ng-model="login.j_password" name="j_password"
+							value="{{login.password}}" />
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="login-help">
+									<p>
+										<!-- Forgot your password? <a href="#">Click here to reset it</a>. -->
+									</p>
+								</div>
+								<!-- <div class="checkbox">
+										<label> <input type="checkbox"> Remember me
+										</label>
+									</div> -->
+							</div>
+						</div>
+						<div class="form-group">
+						
+						<div class="col-sm-6">
+							<h5>
+								<input type="checkbox" style="float: left; width: 24px;"><label
+									style="float: left;">Remember Me </label>
+							</h5>
+						</div>
+						
+							<div class=" col-sm-6">
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									ng-click="userLogin()" ng-disabled="ldapUserlogin.$invalid">Login</button>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-sm-6">
+								<h5>
+									<a style="color: red">Register Now</a>
+								</h5>
+							</div>
+							<div class="col-sm-6">
+								<h5>
+									<a>Forgot Password?</a>
+								</h5>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="col-md-1">
+					<div class="or-text-row">
+						<div class="or-text-line ">
+							<button type="button" class="btn btn-default btn-circle"
+								disabled="disabled">
+								<b>or</b>
+							</button>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-2">
+					<div class="row google-signin field">
+						<div style="display: none">
+							<form id="login-form" action="j_spring_security_check"
+								method="post">
+								<div class="center">
+									<input type="text" name="j_username" id="j_username"
+										maxlength="50" /> <input type="password" name="j_password"
+										id="j_password" maxlength="50" /> <input type="submit"
+										value="Login" id="login-submit" />
+								</div>
+							</form>
+						</div>
+						<div ng-app="directive.g+signin">
+							<google-plus-signin
+								clientid="982095460700-r2em1ubormovperomp1vlbm0r3m54rlt.apps.googleusercontent.com">
+							<div class=" btn-group">
+								<button type="button" id="signInG"
+									class="btn btn-block btn-social btn-google">
+									<i class="fa fa-google-plus"></i>Sign in with google
+								</button>
+							</google-plus-signin>
+						</div>
+						<!--  <script type="in/Login"></script> 
+									<input type="image" src="images/Signin_Linkedin_2.gif"
+									onclick="onLinkedInLoad()" alt="submit"
+									value="Sign in using LinkedIn account" />
+								<button id="linkedIn" onclick="onLinkedInLoad()"></button>  -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="btn-group">
+						<button type="button" class="btn btn-info" disabled="disabled">
+							<i class="fa fa-linkedin"></i>Sign in with Linkedin
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div center>
+		<div class="footer">
+			<div class="footer-inner">
+				<div class="container">
+					<div class="row">
+						<div align="center" class="span12">
+							&copy; 2015 <a href="http://www.nisum.com/">OSI Technologies</a>.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</center>
+	</div>
+
+	<script src="lib/bootstrap/js/bootstrap.js"></script>
+	<script src="js/signin.js"></script>
+</body>
+</html>

@@ -150,7 +150,7 @@
 		<div class="row">
 			<div class="input-field col s2">
 				<select ng-model="candidate.expYear" name="experience"
-					ng-options="o as o for o in info.expYears | orderBy:'toString()'"
+					ng-options="o as o for o in info.expYears"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Years</option>
 				</select> <label>Experience<b class="mandatory">*</b></label> <span
@@ -164,7 +164,7 @@
 
 			<div class="input-field col s2">
 				<select ng-model="candidate.expMonth" name="expMonths"
-					ng-options="o as o for o in info.expMonths | orderBy:'toString()'"
+					ng-options="o as o for o in info.expMonths"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Months</option>
 				</select> <span class="validation-error"
