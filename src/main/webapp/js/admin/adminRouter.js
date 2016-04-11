@@ -131,5 +131,30 @@ app.config(['$stateProvider', '$urlRouterProvider','$routeProvider', function($s
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
             }
+    	}})
+
+    	.state('admin.jobDescription', {url:'/jobDescription',abstract:true, views: {'': {templateUrl: 'views/admin/jobDescription.html', controller: 'jobDescriptionListCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
+    	.state('admin.jobDescription.list', {url:'', views: {'': {templateUrl: 'views/admin/listJobDescription.html', controller: 'jobDescriptionListCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
+    	.state('admin.jobDescription.create', {url:'/create', views: {'': {templateUrl: 'views/admin/createJobDescription.html', controller: 'createJobDescriptionCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
+    	.state('admin.jobDescription.edit', {url:'/edit', views: {'': {templateUrl: 'views/admin/editJobDescription.html', controller: 'editJobDescriptionCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
     	}});
 }]);

@@ -147,7 +147,9 @@
 				</div>
 			</div>
 		</div>
-		</accordion-group> <accordion-group ng-hide="hideDetails" is-open="status.open"
+		</accordion-group> 
+		<div ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+		<accordion-group ng-hide="hideDetails" is-open="status.open"
 			class="accordionBg"> <accordion-heading>
 		<font style="color: white">Available Time-Slots</font> <i
 			class="pull-right glyphicon accordionHeader"
@@ -199,7 +201,9 @@
 				</fieldset>
 			</div>
 		</div>
-		</accordion-group> <br>
+		</accordion-group> 
+		</div>
+		<br>
 		<center>
 			<button class="btn btn-primary" ng-click="update()" type="submit">
 				<span class="glyphicon glyphicon-ok-circle"></span> Save

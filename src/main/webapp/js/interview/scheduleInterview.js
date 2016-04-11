@@ -144,7 +144,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		$scope.interviewschedule.interviewDateTime = $scope.data.date;
 		$scope.interviewschedule.candidateId = $scope.candidate.emailId;
 		$scope.interviewschedule.candidateName = $scope.candidate.candidateName;
-		//$scope.interviewschedule.cureentPositinId = $scope.jobCodeSel;
 		$http.post('resources/interviewSchedule', $scope.interviewschedule).
 		  success(function(data, status, headers, config) {
 			  
@@ -355,9 +354,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		$scope.disableDate = true;
 		$scope.scheduleButnHide = true;
 		$scope.scheduleButnDis = true;
-		/*$scope.jobCodeSel="";
-		$scope.interviewschedule.roundName="";
-		$scope.data.date="";*/
 		$scope.interviewschedule.interviewerName="";
 		$scope.interviewschedule.interviewerMobileNumber ="";
 		$scope.interviewschedule.emailIdInterviewer = "";
@@ -397,6 +393,5 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		  });
 		blockUI.stop();
 		},3000);
-		//blockUI.stop();
 	}
 }]);

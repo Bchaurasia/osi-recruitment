@@ -1,48 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:context="http://www.springframework.org/schema/context"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
   	       					http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
-    <global-method-security secured-annotations="enabled"></global-method-security>
+	<global-method-security secured-annotations="enabled"></global-method-security>
 
-    <context:component-scan base-package="com.nisum.employee.ref"/>
-	 <context:component-scan base-package="com.nisum.employee.ref.util"/>
-    <http auto-config='true'>
-        <intercept-url pattern='/resources/api-docs/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
-       
-        <intercept-url pattern='/login.html' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/resources/log.html' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/index.html' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/resources/features' access='IS_AUTHENTICATED_ANONYMOUSLY'/>       
-        
-        <intercept-url pattern='/js/**' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/lib/**' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/static/**' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/views/**' access='IS_AUTHENTICATED_ANONYMOUSLY'/>
-        <intercept-url pattern='/**' access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER'/>
-        
+	<context:component-scan base-package="com.nisum.employee.ref" />
+	<context:component-scan base-package="com.nisum.employee.ref.util" />
+	<http auto-config='true'>
+		<intercept-url pattern='/resources/api-docs/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 
-        <form-login
-                login-page='/login.html'
-                default-target-url='/main.html'
-                always-use-default-target='true'
-                authentication-failure-handler-ref="exceptionStatusCodeMappingBean"/>
-                
-        <logout  logout-success-url="/login.html"/>
-    </http>
-	 <beans:bean id="SecurityProvider"
-                class="com.nisum.employee.ref.security.SecurityProvider">
-                </beans:bean> 
-     <authentication-manager>
-        <authentication-provider ref="SecurityProvider"/>
-    </authentication-manager> 
+		<intercept-url pattern='/login.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/resources/log.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/index.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/resources/features' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 
-	 <beans:bean id="exceptionStatusCodeMappingBean"
-                class="com.nisum.employee.ref.util.SecurityExceptionResponseErrorCodeMappingBean">
-    </beans:bean>
+		<intercept-url pattern='/js/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/lib/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/static/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/views/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/**'
+			access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER' />
 
+		<!-- <intercept-url pattern='/main.html' access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER'/> -->
+		<form-login login-page='/login.html' default-target-url='/main.html'
+			always-use-default-target='false' authentication-failure-handler-ref="exceptionStatusCodeMappingBean" />
+
+		<logout logout-success-url="/login.html" />
+	</http>
+	<beans:bean id="SecurityProvider"
+		class="com.nisum.employee.ref.security.SecurityProvider">
+	</beans:bean>
+	<authentication-manager>
+		<authentication-provider ref="customAuthenticationProvider" />
+		<authentication-provider ref="SecurityProvider"/>
+	</authentication-manager>
+
+	<beans:bean id="contextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<beans:constructor-arg value="ldap://localhost:10389" />
+		<beans:property name="userDn"
+			value="cn=najib,ou=users,dc=example,dc=com" />
+		<beans:property name="password" value="osius" />
+	</beans:bean>
+
+	<beans:bean id="ldapAuthProvider"
+		class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<beans:constructor-arg>
+			<beans:bean
+				class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<beans:constructor-arg ref="contextSource" />
+				<beans:property name="userDnPatterns">
+					<!-- <beans:list><beans:value>cn={0},ou=Test,DC=development,DC=co,DC=id</beans:value></beans:list> -->
+					<beans:list>
+						<beans:value>cn={0},ou=users,dc=example,dc=com</beans:value>
+					</beans:list>
+				</beans:property>
+			</beans:bean>
+		</beans:constructor-arg>
+		<beans:constructor-arg>
+			<beans:bean class="com.nisum.employee.ref.security.authorization.CustomAuthorization">
+				<!-- class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator"> -->
+				<beans:constructor-arg ref="contextSource" />
+				<!-- <beans:constructor-arg value="ou=groups,ou=Test,DC=development,DC=co,DC=id"/> -->
+				<beans:constructor-arg value="ou=Groups,dc=example,dc=com" />
+				<beans:property name="groupSearchFilter" value="(uniqueMember={0})" />
+				<!-- beans:property name="groupRoleAttribute" value="cn"/ -->
+				<beans:property name="groupRoleAttribute" value="cn" />
+				<!-- beans:property name="defaultRole" value="ROLE_USER"/ -->
+				<beans:property name="searchSubtree" value="false" />
+				<beans:property name="rolePrefix" value="ROLE_" />
+				<beans:property name="convertToUpperCase" value="true" />
+			</beans:bean>
+		</beans:constructor-arg>
+	</beans:bean>
+
+	<beans:bean id="exceptionStatusCodeMappingBean"
+		class="com.nisum.employee.ref.util.SecurityExceptionResponseErrorCodeMappingBean">
+	</beans:bean>
 </beans:beans>

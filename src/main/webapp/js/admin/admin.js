@@ -12,8 +12,9 @@ app.controller("adminCtrl", ['$scope', '$http', '$filter', '$timeout','$q','$sta
                    { heading: "Users", route:"admin.users.list"},
                    { heading: "Client", route:"admin.client.list"},
                    { heading: "Designation", route:"admin.designation.list"},
-                   { heading: "Skill-Set", route:"admin.skillSet"},
-                   { heading: "Interview Rounds", route:"admin.interviewRound.list"}
+                   { heading: "Skill", route:"admin.skillSet"},
+                   { heading: "Interview", route:"admin.interviewRound.list"},
+                   { heading: "Job Description", route:"admin.jobDescription.list"}
                ];
  
 	$scope.filterOptions = {
