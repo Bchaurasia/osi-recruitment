@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit Job
+		Description : {{deg.jobDescriptionName}}</h5>
+</div>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="CreateRequisition" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		<div class="row">
+			<div class="input-field col s6">
+				<input type="text" style="height: 33px; margin-left: 0%;"
+					ng-bind="deg.jobDescriptionName" ng-model="deg.jobDescriptionName"
+					name="jobDescription" disabled="disabled"> <label><b>Job
+						Description Name:</b></label>
+			</div>
+
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="deg.skills"
+					ng-keypress="myFunct($event)" theme="select2" ui-select-required
+					ng-change="validateSkills(deg.skills)" ng-disabled="disabled">
+				<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
+				<ui-select-choices
+					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+				{{color}} </ui-select-choices> </ui-select>
+				<label>Skills<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select placeholder="Select Client" ng-model="deg.client"
+					ng-options="o as o for o in clients" ng-disabled="true"
+					class="form-control input-sm" required>
+					<option>Select Client</option>
+				</select> <label>Client<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<label>Job Description Details<b class="mandatory">*</b></label>
+			</div>
+			<br>
+			<div class="input-field col s12">
+				<textarea id="textarea1" class="materialized-textarea" length="500"
+					ng-model="deg.jobDescriptionDetails"
+					ng-change="validateJDDetails(deg.jobDescriptionDetails)"
+					placeholder="Enter job description details..." required></textarea>
+			</div>
+			<div class="col-md-3" align="left">
+				<medium>Chars remaining : {{500 -
+				deg.jobDescriptionDetails.length }}</medium>
+			</div>
+		</div>
+
+		<br>
+		<div align="center">
+			<button class="btn btn-primary" type="submit"
+				ng-disabled="disableBtn" ng-click="submit()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Save
+			</button>
+			&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.jobDescription.list"
+				class="btn btn-info active"> <span
+				class="glyphicon glyphicon-remove"></span> Cancel
+			</a>
+		</div>
+		<br>
+	</form>
+</div>
