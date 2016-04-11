@@ -21,8 +21,8 @@ repositories {
     mavenCentral()
 }
 
-ext.springVersion = "3.2.2"
-ext.springSecurity = "3.0.5"
+ext.springVersion = "4.0.0"
+ext.springSecurity =   "3.2.0"
 ext.springExceptionHandlerVersion = "2.0.1"
 ext.springDataVersion = "1.7.2"
 

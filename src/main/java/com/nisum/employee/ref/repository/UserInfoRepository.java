@@ -15,16 +15,24 @@ import com.nisum.employee.ref.domain.UserInfo;
 
 @Repository
 public class UserInfoRepository{
-
+	
+	private static final String OSI = "OSI";
+	private static final String ROLE_USER = "ROLE_USER";
+	
 	@Autowired
 	private MongoOperations mongoOperations;
 
 	public void registerUserByEmailId(String emailId) {
-		mongoOperations.save(createUserInfo(emailId));
+		mongoOperations.save(createOSILdapUserInfo(emailId));
 	}
 	
 	public List<UserInfo> retrieveUser() {
 		return mongoOperations.findAll(UserInfo.class);
+	}
+	public boolean isUserExists(String userId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").exists(true).orOperator(Criteria.where("emailId").is(userId)));
+		return mongoOperations.exists(query, UserInfo.class);
 	}
 	public List<UserInfo> retrieveUserById(String userId) {
 		Query query = new Query();
@@ -40,9 +48,21 @@ public class UserInfoRepository{
 	
 	public UserInfo createUserInfo(String userName) {
 		List<String> defualtRoles = new ArrayList<String>();
-		defualtRoles.add("ROLE_USER");
+		defualtRoles.add(ROLE_USER);
 		UserInfo userInfo = new UserInfo();
 		userInfo.setEmailId(userName);
+		userInfo.setName(userName);
+		userInfo.setRoles(defualtRoles);
+		return userInfo;
+	}
+	
+	public UserInfo createOSILdapUserInfo(String userName) {
+		List<String> defualtRoles = new ArrayList<String>();
+		defualtRoles.add(ROLE_USER);
+		UserInfo userInfo = new UserInfo();
+		userInfo.setEmailId(userName);
+		userInfo.setName(userName);
+		userInfo.setCompany(OSI);
 		userInfo.setRoles(defualtRoles);
 		return userInfo;
 	}

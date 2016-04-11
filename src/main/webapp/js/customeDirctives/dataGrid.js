@@ -18,17 +18,17 @@ angular.module('components', [])
             scope.$watch(scope.dataModel,function(newVal,oldVal){
             	scope.isArray = angular.isArray;
             	var add ="#"+$attrs.addlink;
-            	var body = '<div class="animated fadeIn"><div class="row" style="width: 90%"><div class="col-md-4"></div><div class="col-md-6">';
+            	var body = '<div class="animated fadeIn"> <div class="row" style="width: 90%"><div class="col-md-2"></div><div class="col-md-8 ">';
 
             	if($attrs.searchEnable != undefined && $attrs.searchEnable=='true'){
-					body = body.concat('<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="text"'+ 
+					body = body.concat('<div align="left">&nbsp;&nbsp;<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="text"'+ 
 						'</div>');
             	}
 
             	if($attrs.addlink!= undefined){
-					body = body.concat('</div><div class="col-md-2" align="center"><a href="'+add+'"'+
-						'class="waves-effect waves-light btn" '+'> <i '+
-						'class="material-icons left">add</i>create'+
+					body = body.concat('<a href="'+add+'"'+
+						'class="btn-floating" '+'> <i '+
+						'class="material-icons left">add</i>'+ 
 						'</a>');
             	}
             	            	
@@ -66,7 +66,7 @@ angular.module('components', [])
 							'<h5><small>Total '+
 								': {{ filtereddataRepeat.length }}</small></h5>'+
 						'</div>');
-               /* if(_.isEmpty(scope.dataArrayAttribute))*/
+                if(_.isEmpty(scope.dataArrayAttribute))
                 {	
 	                
                 	body = body.concat('<div class="col-md-9">'+
@@ -94,7 +94,7 @@ angular.module('components', [])
 		},
 		controller: function($scope, $element, $attrs){
 			
-			$scope.itemsPerPage = 7;
+			$scope.itemsPerPage = 10;
 			$scope.currentPage = 0;
 			
 			$scope.changePage = function(){

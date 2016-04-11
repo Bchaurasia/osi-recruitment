@@ -5,24 +5,23 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
-import org.springframework.stereotype.Component;
+import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
- 
 	
+	@Setter
 	@Autowired
-	LdapAuthenticationProvider ldapAuthProvider;
+	ActiveDirectoryLdapAuthenticationProvider adAuthenticationProvider;
 	
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    	System.out.println("inside authentication ");
-    	log.info("Ldap authentication provider");
-    	authentication = ldapAuthProvider.authenticate(authentication);
+    	
+    	log.info("in Ldap authenticationProvider");
+    	authentication = adAuthenticationProvider.authenticate(authentication);
         return authentication;
     }
   

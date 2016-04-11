@@ -20,4 +20,6 @@ public interface IUserService {
 	List<UserInfo> retrieveUserByClient(String clientName);
 	
 	List<UserInfo> retrieveUserByRole(String role);
+	
+	boolean isUserAlradyExist(String emailId);
 }

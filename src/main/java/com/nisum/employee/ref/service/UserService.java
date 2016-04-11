@@ -19,6 +19,10 @@ public class UserService implements IUserService{
 		userInfoRepository.registerUserByEmailId(emailId);
 	}
 	
+	public boolean isUserAlradyExist(String emailId) {
+		return userInfoRepository.isUserExists(emailId);
+	}
+	
 	public List<UserInfo> retrieveUser() {
 		return userInfoRepository.retrieveUser();
 	}

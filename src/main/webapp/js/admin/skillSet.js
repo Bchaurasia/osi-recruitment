@@ -109,7 +109,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	
 	//--------------
 	
-	   $scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
+	   $scope.itemsPerPage = 10;
 	   $scope.currentPage = 0;
 	   
 		$scope.changePage = function(){

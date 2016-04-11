@@ -18,6 +18,7 @@ public class UserInfo {
 	String doj;
 	String skypeId;
 	String location;
+	String company;
 	String projectName;
 	String mobileNumber;
 	Boolean isNotAvailable;

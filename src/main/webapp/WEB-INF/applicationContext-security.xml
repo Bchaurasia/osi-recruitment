@@ -4,7 +4,7 @@
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-  	       					http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+  	       					http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<global-method-security secured-annotations="enabled"></global-method-security>
 
@@ -14,6 +14,8 @@
 		<intercept-url pattern='/resources/api-docs/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 
 		<intercept-url pattern='/login.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern="/loginfailure.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<access-denied-handler error-page="/accessdenied.html" />
 		<intercept-url pattern='/resources/log.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern='/index.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern='/resources/features' access='IS_AUTHENTICATED_ANONYMOUSLY' />
@@ -24,61 +26,42 @@
 		<intercept-url pattern='/views/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern='/**'
 			access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER' />
-
-		<!-- <intercept-url pattern='/main.html' access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER'/> -->
 		<form-login login-page='/login.html' default-target-url='/main.html'
-			always-use-default-target='false' authentication-failure-handler-ref="exceptionStatusCodeMappingBean" />
+			always-use-default-target='false' authentication-failure-url="/loginFailure.html"
+			authentication-failure-handler-ref="exceptionStatusCodeMappingBean" />
 
-		<logout logout-success-url="/login.html" />
+
+		<logout logout-success-url="/login.html" delete-cookies="JSESSIONID"
+			invalidate-session="true" />
 	</http>
 	<beans:bean id="SecurityProvider"
 		class="com.nisum.employee.ref.security.SecurityProvider">
 	</beans:bean>
+
 	<authentication-manager>
 		<authentication-provider ref="customAuthenticationProvider" />
-		<authentication-provider ref="SecurityProvider"/>
+		<authentication-provider ref="SecurityProvider" />
 	</authentication-manager>
 
-	<beans:bean id="contextSource"
-		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
-		<beans:constructor-arg value="ldap://localhost:10389" />
-		<beans:property name="userDn"
-			value="cn=najib,ou=users,dc=example,dc=com" />
-		<beans:property name="password" value="osius" />
+	<beans:bean id="adAuthenticationProvider"
+		class="org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider">
+		<beans:constructor-arg value="osius.com" />
+		<beans:constructor-arg value="ldap://192.168.32.22:389" />
+		<beans:property name="convertSubErrorCodesToExceptions"
+			value="true" />
+		<beans:property name="useAuthenticationRequestCredentials"
+			value="true" />
+		<beans:property name="userDetailsContextMapper" ref="userDetailsContextMapper" />
 	</beans:bean>
 
-	<beans:bean id="ldapAuthProvider"
-		class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
-		<beans:constructor-arg>
-			<beans:bean
-				class="org.springframework.security.ldap.authentication.BindAuthenticator">
-				<beans:constructor-arg ref="contextSource" />
-				<beans:property name="userDnPatterns">
-					<!-- <beans:list><beans:value>cn={0},ou=Test,DC=development,DC=co,DC=id</beans:value></beans:list> -->
-					<beans:list>
-						<beans:value>cn={0},ou=users,dc=example,dc=com</beans:value>
-					</beans:list>
-				</beans:property>
-			</beans:bean>
-		</beans:constructor-arg>
-		<beans:constructor-arg>
-			<beans:bean class="com.nisum.employee.ref.security.authorization.CustomAuthorization">
-				<!-- class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator"> -->
-				<beans:constructor-arg ref="contextSource" />
-				<!-- <beans:constructor-arg value="ou=groups,ou=Test,DC=development,DC=co,DC=id"/> -->
-				<beans:constructor-arg value="ou=Groups,dc=example,dc=com" />
-				<beans:property name="groupSearchFilter" value="(uniqueMember={0})" />
-				<!-- beans:property name="groupRoleAttribute" value="cn"/ -->
-				<beans:property name="groupRoleAttribute" value="cn" />
-				<!-- beans:property name="defaultRole" value="ROLE_USER"/ -->
-				<beans:property name="searchSubtree" value="false" />
-				<beans:property name="rolePrefix" value="ROLE_" />
-				<beans:property name="convertToUpperCase" value="true" />
-			</beans:bean>
-		</beans:constructor-arg>
-	</beans:bean>
+	<beans:bean id="userDetailsContextMapper"
+		class="com.nisum.employee.ref.security.authorization.UserDetailsContextMapperImpl" />
+		
+	<beans:bean id="customAuthenticationProvider"
+		class="com.nisum.employee.ref.security.authentication.CustomAuthenticationProvider" />
 
 	<beans:bean id="exceptionStatusCodeMappingBean"
 		class="com.nisum.employee.ref.util.SecurityExceptionResponseErrorCodeMappingBean">
 	</beans:bean>
+
 </beans:beans>
