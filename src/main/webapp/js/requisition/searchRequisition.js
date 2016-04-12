@@ -7,11 +7,7 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','share
 	$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
 	$scope.searchTxt="";
 	
-//	$http.get('resources/requisition').success(function(data, status, headers, config) {
-//		$scope.allRequisitions = data;
-//	}).error(function(data, status, headers, config) {
-//		$log.error(data);
-//	})
+
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
@@ -32,6 +28,20 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','share
 	$scope.searchBoxFun = function(){
 		$scope.searchBox = true;	
 	};
+	
+	
+	$scope.getStatusIcon = function(status){
+		icon ="play_for_work";
+		if(status === "APPROVED"){
+			icon ="done_all";
+		}else if (status === "PARTIALY APPROVED") {
+			icon ="done";
+		}else if (status === "REJECTED") {
+			icon ="not_interested";
+		}
+		return icon;
+	};
+	
 	
 	$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
 	$scope.currentPage = 0;

@@ -27,6 +27,12 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.hrManager={};
 	$scope.approval1={};
 	$scope.approval2={};
+	
+	$scope.hideApproval2=false;
+	$scope.disApproval1=true;
+	$scope.disApproval2=true;
+	
+	
 	var id;
 	$scope.init = function() {
 		if(sharedService.getRequisitionId() == undefined) {
@@ -114,11 +120,9 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	
 	requisitionService.getRequisitionById(id).then(function(data){
     	$scope.requisition = data;
-    	//console.log(angular.toJson($scope.requisition));
     	$scope.previousDate = $scope.requisition.targetDate;
     	$scope.rDate = $scope.requisition.requisitionDate;
-    	 
-    	approvalBtn();
+    	disableBtn();
     	formatedReqDate();
     	formatedTarDate();
 	}).catch(function(msg){
@@ -154,8 +158,15 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		$scope.requisition.targetDate = new Date(yy,mm,dd);
 	}
 	
-	var approvalBtn = function(){
-		
+	var disableBtn = function(){
+		if($scope.requisition.approval2 === undefined){
+			$scope.hideApproval2 = true;
+    	}
+		if($scope.requisition.createdBy === $scope.user.emailId)
+		{
+			$scope.disApproval1=false;
+			$scope.disApproval2=false;
+		}
 		if($scope.requisition.status === "REJECTED"){
 						$scope.showRejectBtn = true;
 						$scope.disableRejectBtn = true;

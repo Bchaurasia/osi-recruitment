@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
-		Requisition : {{requisition.requisitionId}}</h4>
+	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
+		Requisition : {{requisition.requisitionId}}</h6>
 </div>
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
@@ -142,14 +142,14 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Approver 1" ng-model="approval1"
-					ng-change="approverfield()"
+					ng-change="approverfield()" ng-disabled="disApproval1"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option>Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
 			</div>
-			<div class="input-field col s6">
-				<select placeholder="Select Approver 2" ng-model="approval2"
+			<div class="input-field col s6" ng-hide="hideApproval2">
+				<select placeholder="Select Approver 2" ng-model="approval2" ng-disabled="disApproval2"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm">
 					<option>Select Approver 2</option>

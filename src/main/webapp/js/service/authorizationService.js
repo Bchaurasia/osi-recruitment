@@ -15,8 +15,8 @@ angular.module('erApp')
 					var parentPointer = this;
 					var routeForUnauthorizedAccess = 'routeForUnauthorizedAccess';
 					var ifPermissionPassed = false;
-					permissionModel = $rootScope.user.roles;
-					permittedRole = _.intersection(permissionMode, roleCollection);
+					//permissionModel = $rootScope.user.roles;
+					permittedRole = _.intersection($rootScope.user.roles, roleCollection);
 					
 					if(_.isEmpty(permittedRole)){
 						$location.path(routeForUnauthorizedAccess);

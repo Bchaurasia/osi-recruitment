@@ -1,51 +1,5 @@
 <form name="" onvalidate>
 	<datagrid column-header='col' attributes='att' obj='jobDescriptionList'
 		editfun='editJobDescription(val)' addlink='admin/jobDescription/create'
-		search-enable='true' array-attributes='att1' ></datagrid>
+		search-enable='true' array-attributes='att1' width="80%"></datagrid>
 </form>
-
-<!-- <form id="jobDescriptionForm" role="form" class="form-horizontal"> -->
-<!-- 		<div class="row" style="width: 90%"> -->
-<!-- 			<div class="col-md-3"></div> -->
-<!-- 			<div class="col-md-6"> -->
-<!-- 				<input type="text" class="form-control" ng-model="search" -->
-<!-- 					placeholder="Job Description Search"> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-2" align="center"> -->
-<!-- 					<a class="waves-effect waves-light btn" -->
-<!-- 					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVAL,ROLE_ADMIN')" -->
-<!-- 					href="#admin/jobDescription/create"><i class="material-icons left">add</i>create</a> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 		<table class="bordered" style="width: 90%"> -->
-<!-- 			<tr> -->
-<!-- 				<th>Job Description Title</th> -->
-<!-- 				<th>Client</th> -->
-<!-- 				<th>Skills</th> -->
-<!-- 				<th>Job Description</th> -->
-<!-- 			</tr> -->
-
-<!-- 			<tr class="animate-repeat" ng-repeat="jd in jobDescriptionList | orderBy : sortComment : true | filter: search | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" style="font-size: 80%"> -->
-<!-- 				<td style="width: 25%"><a ng-click="editJobDescription(jd)" ui-sref="admin.jobDescription.edit">{{jd.jobDescriptionName}}</a></td> -->
-<!-- 				<td style="width: 12%">{{jd.client}}</td> -->
-<!-- 				<td style="width: 12%"><i>{{ jd.skills.join(', ')}}</i></td> -->
-<!-- 				<td style="width: 40%">{{jd.jobDescriptionDetails.length > 100 ? jd.jobDescriptionDetails.slice(0,100)+" ..." : jd.jobDescriptionDetails}}</td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 		<br> -->
-<!-- 		<div class="row" style="width: 90%"> -->
-<!-- 			<div class="col-md-3" align="left"> -->
-<!-- 				<h5> -->
-<!-- 				<small>	Total Requisitions : {{jobDescriptionList.length }}</small> -->
-<!-- 				</h5> -->
-<!-- 			</div> -->
-			
-<!-- 			<div class="col-md-9"> -->
-<!-- 				 <ul class="pagination1 pull-right"> -->
-<!-- 				    <li e="{disabled: currentPage == 0}"><a ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li> -->
-<!-- 				    <li  ng-repeat="n in range(currentPage)" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1"></a></li> -->
-<!-- 				    <li class="waves-effect" ng-class="{disabled: currentPage == pageCount() - 1}"><a ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li> -->
-<!-- 				  </ul> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- </form> -->

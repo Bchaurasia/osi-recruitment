@@ -11,7 +11,7 @@
 					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchRequisition()"><i
 						class="material-icons">search</i></a>&nbsp;&nbsp; <a
 						class="btn-floating"
-						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
+						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 						href="#recruitment/createRequisition"><i
 						class="material-icons">add</i></a>
 				</div>
@@ -21,13 +21,11 @@
 			<table class="bordered" style="width: 90%">
 				<thead>
 					<tr>
-						<!-- <th>AAA</th> -->
 						<th>REQUISITION ID</th>
 						<th>POSITION</th>
 						<th>CLIENT</th>
 						<th>CLONE</th>
-						<th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">APPROVE</th>
-						<!-- <th>Share</th> -->
+						<th>STATUS</th>
 					</tr>
 				</thead>
 
@@ -41,11 +39,10 @@
 						<td>{{data.position}}</td>
 						<td>{{data.client}}</td>
 						<td align="center"><a style="cursor: pointer;"
-							ng-click="cloneRequisition(data.requisitionId)"><span
-								class="glyphicon glyphicon-copy"></span></a></td>
-						<td align="center" ng-show="hasRole('ROLE_REQUISITION_MANAGER')"><a
-							style="cursor: pointer;"><span
-								class="glyphicon glyphicon-ok-circle"></span></a></td>
+							ng-click="cloneRequisition(data.requisitionId)"><i class="material-icons">repeat_one</a></td>
+						<td align="center">
+							<i class="material-icons" style="color:#2196F3 ;font-size: 25px; ">{{getStatusIcon(data.status)}}</i>
+						</td>
 					</tr>
 				</tbody>
 			</table>

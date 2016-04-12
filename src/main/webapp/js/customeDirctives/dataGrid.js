@@ -9,6 +9,7 @@ angular.module('components', [])
 			dataArrayAttribute : '=arrayAttributes',
 			columnHeader : '=columnHeader',
 			dataModel : '=obj',
+			gridWidth : '@width',
 			editfun : '&editfun',
 			addlink : '@addlink',
 			searchEnable :'@searchEnable'
@@ -18,7 +19,7 @@ angular.module('components', [])
             scope.$watch(scope.dataModel,function(newVal,oldVal){
             	scope.isArray = angular.isArray;
             	var add ="#"+$attrs.addlink;
-            	var body = '<div class="animated fadeIn"> <div class="row" style="width: 90%"><div class="col-md-2"></div><div class="col-md-8 ">';
+            	var body = '<div class="animated fadeIn"> <div class="row" style="width:90%"><div class="col-md-2"></div><div class="col-md-8 ">';
 
             	if($attrs.searchEnable != undefined && $attrs.searchEnable=='true'){
 					body = body.concat('<div align="left">&nbsp;&nbsp;<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="text"'+ 
@@ -34,7 +35,7 @@ angular.module('components', [])
             	            	
             	body = body.concat('</div></div><br><div>');
           	
-                body = body.concat('<table class="bordered" style="width: 90%">'+
+                body = body.concat('<table class="bordered" style="width: '+$attrs.width+'">'+
                           '<thead>'+
                            '<tr>');
 

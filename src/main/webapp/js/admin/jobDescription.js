@@ -1,9 +1,9 @@
 app.controller('jobDescriptionListCtrl',['$scope','$rootScope', '$http','$q', '$window', '$timeout','$state','$filter','$log','appConstants','infoService','$location','$anchorScroll','jobDescriptionService','clientService','sharedService',
                                       function($scope,$rootScope, $http, $q, $window, $timeout,$state,$filter,$log,appConstants,infoService,$location,$anchorScroll,jobDescriptionService,clientService,sharedService ) {
 
-	$scope.col=["JD Title","Client","Skills","Job Description Details"];
+	$scope.col=["Job Title","Client","Skills"];
 	
-	$scope.att=["jobDescriptionName","client","skills","jobDescriptionDetails"];
+	$scope.att=["jobDescriptionName","client","skills"];
 	$scope.att1=["skills"];
 	
 	$scope.init = function() {
