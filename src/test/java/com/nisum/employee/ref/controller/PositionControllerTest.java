@@ -37,7 +37,7 @@ public class PositionControllerTest {
 				.setHandlerExceptionResolvers(ExceptionHandlerAdviceUtil.createExceptionResolver()).build();
 	}
 
-	@Test
+	//@Test
 	public void shouldCreatePosition() throws Exception {
 		doNothing().when(positionService).preparePosition(any(Position.class));
 
