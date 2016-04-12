@@ -193,7 +193,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	}
 	
 	$scope.reqDate = function(requisitionDate,targetDate){
-		if(targetDate < requisitionDate){
+		if(targetDate != "" && targetDate < requisitionDate){
 			$scope.reqErr = true;
 			$scope.disabled = true;
 		}else{

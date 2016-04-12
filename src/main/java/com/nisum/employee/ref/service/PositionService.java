@@ -97,6 +97,7 @@ public class PositionService implements IPositionService {
 		position.setJobcode("JOB_" + sequenceRepository.getNextSequenceId("JOB"));
 		position.setCreatedBy(requisition.getCreatedBy());
 		position.setUpdatedBy(requisition.getCreatedBy());
+		position.setJobProfile(requisition.getJobDescription());
 //		position.setCreatedDate(new DateTime());
 //		position.setUpdatedDate(new DateTime());
 		return position;

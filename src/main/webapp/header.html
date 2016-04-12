@@ -3,19 +3,19 @@
       <div class="nav-wrapper">
         <span><img class="navbar-brand"
 				src="static/osi_images/logo.png" alt="OSI Technologies" id="logostyle"
-				title="Nisum Technologies" /></span>
+				title="OSI Technologies" /></span>
         <ul class="left hide-on-med-and-down" style="width: 87%">
           <li ui-sref-active="active"><a  ui-sref="main"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
+				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 				<span id="Dashboard">&nbsp;&nbsp;Dashboard</span></a></li>
 			<li ui-sref-active="active"><a  ui-sref="recruitment.searchPosition" data-target="#recruitment"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" ng-click="alHide()">
 				<span>&nbsp;&nbsp;Recruitment</span></a></li>		
 			<!-- <li ui-sref-active="active"><a  ui-sref="offer.list"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')">
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 				<span>&nbsp;&nbsp;Offer</span></a></li>
 			<li ui-sref-active="active"><a  ui-sref="report"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER')" ng-click="alHide()">
+				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" ng-click="alHide()">
 				<span>&nbsp;&nbsp;Reports</span></a></li> -->
 			<li ui-sref-active="active"><a  ui-sref="admin" data-target="#admin"
 				ng-show="hasRole('ROLE_ADMIN')" ng-click="alHide()">
