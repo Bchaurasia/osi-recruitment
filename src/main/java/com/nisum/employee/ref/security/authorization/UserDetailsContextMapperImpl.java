@@ -32,9 +32,9 @@ public class UserDetailsContextMapperImpl implements UserDetailsContextMapper, S
     }
 
 	@Override
-	public UserDetails mapUserFromContext(DirContextOperations ctx, String username,
-			Collection<GrantedAuthority> authority) {
-		  List<GrantedAuthority> mappedAuthorities = new ArrayList<GrantedAuthority>();
+	public UserDetails mapUserFromContext(DirContextOperations ctx,
+			String username, Collection<? extends GrantedAuthority> authorities) {
+		 List<GrantedAuthority> mappedAuthorities = new ArrayList<GrantedAuthority>();
 	        if(!userService.isUserAlradyExist(username)){
 	        	userService.createUserInfo(username);
 	        }
