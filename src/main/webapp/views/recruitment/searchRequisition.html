@@ -24,8 +24,6 @@
 						<!-- <th>AAA</th> -->
 						<th>REQUISITION ID</th>
 						<th>POSITION</th>
-						<th>MIN-EXP</th>
-						<th>MAX-EXP</th>
 						<th>CLIENT</th>
 						<th>CLONE</th>
 						<th ng-show="hasRole('ROLE_REQUISITION_MANAGER')">APPROVE</th>
@@ -41,8 +39,6 @@
 						<td><a style="cursor: pointer;"
 							ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
 						<td>{{data.position}}</td>
-						<td>{{data.minExpYear}}</td>
-						<td>{{data.maxExpYear}}</td>
 						<td>{{data.client}}</td>
 						<td align="center"><a style="cursor: pointer;"
 							ng-click="cloneRequisition(data.requisitionId)"><span
