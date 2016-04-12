@@ -16,15 +16,9 @@ angular.module('erApp')
 					var routeForUnauthorizedAccess = 'routeForUnauthorizedAccess';
 					var ifPermissionPassed = false;
 					permissionModel = $rootScope.user.roles;
-					for (i = 0; i< permissionModel.length;i++){
-						for(j=0;j< roleCollection.length; j++){
-							if(angular.equals(permissionModel[i],roleCollection[j])){
-								ifPermissionPassed = true;
-							}
-						}
-					}
+					permittedRole = _.intersection(permissionMode, roleCollection);
 					
-					if(!ifPermissionPassed){
+					if(_.isEmpty(permittedRole)){
 						$location.path(routeForUnauthorizedAccess);
 						$rootScope.$on('$locationChangeSuccess', function (next, current) {
 		                    deferred.resolve();
@@ -32,21 +26,13 @@ angular.module('erApp')
 					}else{
 						 deferred.resolve();
 					}
-					
-					
 					return deferred.promise;
 		        }).error(function (data, status, headers, config) {
 		        });
 			}
-			
-			
 		},
-		
 		getPermission: function (permissionModel, roleCollection, deferred) {
 			
-			
 		}
-		
 	}
-	
 }]);

@@ -43,7 +43,7 @@ public class InterviewController {
 		return  new ResponseEntity<List<InterviewDetails>>(interviewDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterview", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewerId", required = true) String interviewerId) {
 		List<InterviewDetails> checkDetails = interviewDetailsService.getInterview(interviewerId);
