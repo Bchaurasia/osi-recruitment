@@ -51,6 +51,7 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Client" ng-model="requisition.client"
+					ng-change="getJobDescriptionByClient(requisition.client)"
 					ng-options="o as o for o in clients | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option>Select Client</option>
@@ -87,6 +88,14 @@
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 20px">
+			<div class="input-field col s6">
+				<select ng-options="o.jobDescriptionName for o in JobDescriptionList"
+								ng-model="jobDescription" ng-change="setSkillsAndJDDetails()"
+								class="form-control input-sm" id="jobDescription" required>
+								<option value='' disabled="disabled">Select Job Description Title</option>
+							</select>
+				<label style="position: absolute; top: -22px;">Job Description Title</label>
+			</div>
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="requisition.skillType"
 					ng-keypress="myFunct($event)" theme="select2" ui-select-required

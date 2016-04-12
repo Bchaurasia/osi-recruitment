@@ -84,10 +84,7 @@ public class RequisitionController {
 	public ResponseEntity<?> retrieveRequisitionBasedOnId(
 			@RequestParam(value = "requisitionId", required = true) String requisitionId) {
 		Requisition requisitionsDetails = requisitionService.retrieveRequisitionBasedOnId(requisitionId);
-		return (null == requisitionsDetails)
-				? new ResponseEntity<String>("{\"msg\":\"No requisition found based on requested requisitionId\"}",
-						HttpStatus.NOT_FOUND)
-				: new ResponseEntity<Requisition>(requisitionsDetails, HttpStatus.OK);
+		return  new ResponseEntity<Requisition>(requisitionsDetails, HttpStatus.OK);
 	}
 
 	@Secured({ "ROLE_REQUISITION_APPROVER" })

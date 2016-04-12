@@ -8,7 +8,8 @@ function jobDescriptionService($http,$filter,$rootScope,$log,$q,$cacheFactory,ap
 		addJobDescription : addJobDescription,
 		updateJobDescription : updateJobDescription,
 		removeJobDescription : deleteJobDescription,
-		validateJDName : validateJDName
+		validateJDName : validateJDName,
+		getJobDescriptionByClient : getJobDescriptionByClient
 	};
 
 	function getJobDescription(){
@@ -16,6 +17,15 @@ function jobDescriptionService($http,$filter,$rootScope,$log,$q,$cacheFactory,ap
 			 .then(getJobDescriptionData)
 			 .catch(sendErrorJobDescriptionMsg);
 	}
+	
+	function getJobDescriptionByClient(client){
+		return $http.get('resources/jobDescription')
+			 .then(function(response){
+				 return _.filter(response.data, function(jd){ return jd.client === client });
+			 })
+			.catch(sendErrorJobDescriptionMsg);
+	}
+	
 	function getJobDescriptionId(id){
 		return $http.get('resources/jobDescription?id='+id)
 			 .then(function(response){

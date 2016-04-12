@@ -52,6 +52,7 @@ public class RequisitionRepository {
 			update.set("createdBy", requisition.getCreatedBy());
 			update.set("updatedBy", requisition.getUpdatedBy());
 			update.set("status", requisition.getStatus());
+			update.set("jobTitle", requisition.getJobTitle());
 			if (requisition.getApproval2() != null) {
 				update.set("approval2", requisition.getApproval2());
 			}

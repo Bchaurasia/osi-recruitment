@@ -1,5 +1,5 @@
-app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window','sharedService','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','blockUI','positionService',
-                                     function($scope,$state, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,blockUI,positionService) {
+app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window','sharedService','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','blockUI','positionService','jobDescriptionService',
+                                     function($scope,$state, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,blockUI,positionService,jobDescriptionService) {
 	$scope.hideSkills = true;
 	$scope.skillErr = false;
 	$scope.dateErr = false;
@@ -27,6 +27,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.hrManager={};
 	$scope.approval1={};
 	$scope.approval2={};
+	$scope.JobDescriptionList=[];
+	//$scope.jobDescription = {};
 	
 	$scope.hideApproval2=false;
 	$scope.disApproval1=true;
@@ -120,6 +122,12 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	
 	requisitionService.getRequisitionById(id).then(function(data){
     	$scope.requisition = data;
+    	jobDescriptionService.getJobDescriptionByClient($scope.requisition.client).then(function(data){
+			$scope.JobDescriptionList = data;
+			if($scope.requisition.jobTitle !== undefined && !_.isEmpty($scope.JobDescriptionList)){
+			$scope.jobDescription = _.find($scope.JobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.requisition.jobTitle });
+			}
+		});
     	$scope.previousDate = $scope.requisition.targetDate;
     	$scope.rDate = $scope.requisition.requisitionDate;
     	disableBtn();
@@ -351,6 +359,18 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.message=msg;
 			$scope.cls=appConstants.ERROR_CLASS;
 		}
+	}
+	
+	 $scope.setSkillsAndJDDetails = function(){
+		 	$scope.requisition.jobDescription = $scope.jobDescription.jobDescriptionDetails;
+			$scope.requisition.skillType = $scope.jobDescription.skills;
+			$scope.requisition.jobTitle = $scope.jobDescription.jobDescriptionName;
+	 }
+		
+	$scope.getJobDescriptionByClient = function(client){
+		jobDescriptionService.getJobDescriptionByClient(client).then(function(data){
+			$scope.JobDescriptionList = data;
+		});
 	}
 	
 }]);

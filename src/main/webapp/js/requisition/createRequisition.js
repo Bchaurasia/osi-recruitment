@@ -1,5 +1,5 @@
-app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService',
-                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService) {
+app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService','jobDescriptionService',
+                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService,jobDescriptionService) {
 	
 	$scope.hideQualification = true;
 	$scope.calendar = true;
@@ -214,7 +214,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		  angular.forEach($scope.deg.skills,function(deg){
 				$scope.skill.push(deg);
 			})
-			$scope.requisition.skillType=$scope.skill;
+			//$scope.requisition.skillType=$scope.skill;
 			$scope.requisition.minExpYear = $scope.deg.minExpYear;
 			$scope.requisition.maxExpYear = $scope.deg.maxExpYear;
 		}
@@ -274,6 +274,22 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			}
 		}
 	}
+	
+	$scope.JobDescriptionList=[];
+	$scope.jobDescription = {};
+	
+	$scope.getJobDescriptionByClient = function(client){
+		jobDescriptionService.getJobDescriptionByClient(client).then(function(data){
+			$scope.JobDescriptionList = data;
+		});
+	}
+	
+	 $scope.setSkillsAndJDDetails = function(){
+		 	$scope.requisition.jobDescription = $scope.jobDescription.jobDescriptionDetails;
+			$scope.requisition.skillType = $scope.jobDescription.skills;
+			$scope.requisition.jobTitle = $scope.jobDescription.jobDescriptionName;
+	 }
+	
 	
 	function checkForEnableCreateButton(){
 		var length=$scope.requisition.qualifications.length;
