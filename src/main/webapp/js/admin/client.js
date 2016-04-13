@@ -80,7 +80,6 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.editClient = function(data){
 		sharedService.setclientId(data.clientId);
 		sharedService.setclientName(data.clientName);
-		// location.href='#admin/client/editClient';
 		$state.go('admin.client.editClient');
 	}
 	

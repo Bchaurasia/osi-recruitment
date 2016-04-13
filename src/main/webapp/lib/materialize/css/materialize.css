@@ -1004,7 +1004,8 @@
 }
 
 .teal.lighten-2 {
-  background-color: #4db6ac !important;
+  background-color: #eee !important;
+  width: 187%;
 }
 
 .teal-text.text-lighten-2 {

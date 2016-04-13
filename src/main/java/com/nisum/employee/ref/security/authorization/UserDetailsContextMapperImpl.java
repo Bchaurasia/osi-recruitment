@@ -33,7 +33,7 @@ public class UserDetailsContextMapperImpl implements UserDetailsContextMapper, S
 
 	@Override
 	public UserDetails mapUserFromContext(DirContextOperations ctx, String username,
-			Collection<GrantedAuthority> authority) {
+			Collection<? extends GrantedAuthority> authorities) {
 		 List<GrantedAuthority> mappedAuthorities = new ArrayList<GrantedAuthority>();
 	        if(!userService.isUserAlradyExist(username)){
 	        	userService.createUserInfo(username);
@@ -41,4 +41,5 @@ public class UserDetailsContextMapperImpl implements UserDetailsContextMapper, S
 	        mappedAuthorities = authorization.authorize(username);
 	        return new User(username, "", true, true, true, true, mappedAuthorities);
 	}
+
 }

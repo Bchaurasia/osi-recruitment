@@ -1,4 +1,4 @@
-angular.module('components', []).directive('ngEnter', function () {
+angular.module('enterKey', []).directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if(event.which === 13) {
