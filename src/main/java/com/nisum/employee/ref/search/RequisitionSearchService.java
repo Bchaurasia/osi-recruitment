@@ -25,9 +25,9 @@ public class RequisitionSearchService {
 		return interviewDetailsList;
 	}
 	
-	public List<Requisition> getRequisitionReqIdOrPositionOrClientByName(String requisitionId,String position, String client) throws Exception {
+	public List<Requisition> getRequisitionReqIdOrPositionOrClientByNameOrStatus(String requisitionId,String position, String client) throws Exception {
 		Requisition requisition;
-		List<Requisition> requisitionList = requisitionIndexRepository.findByPositionStartingWithOrClientStartingWithAllIgnoreCase(requisitionId, position, client);
+		List<Requisition> requisitionList = requisitionIndexRepository.findByPositionStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWith(requisitionId, position, client,client.toUpperCase());
 		if(requisitionList.isEmpty()){
 			requisition=requisitionIndexRepository.findOne(requisitionId);
 			requisitionList=new ArrayList<>();

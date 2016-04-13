@@ -128,11 +128,9 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.jobDescription = _.find($scope.JobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.requisition.jobTitle });
 			}
 		});
-    	$scope.previousDate = $scope.requisition.targetDate;
-    	$scope.rDate = $scope.requisition.requisitionDate;
+    	$scope.targetDate = new Date($scope.requisition.targetDate);
+    	$scope.requisitionDate = new Date($scope.requisition.requisitionDate);
     	disableBtn();
-    	formatedReqDate();
-    	formatedTarDate();
 	}).catch(function(msg){
     	$log.error(msg); 
     })
@@ -149,21 +147,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
 			$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
 		});
-	var formatedReqDate = function(){
-		var value = $scope.requisition.requisitionDate;
-		var values = value.split("-");
-		var dd = parseInt(values[0]); 
-		var mm = parseInt(values[1]);
-		var yy = parseInt(values[2]);
-		$scope.requisition.requisitionDate = new Date(yy,mm,dd);
-	}
-	var formatedTarDate = function(){
-		var value = $scope.requisition.targetDate;
-		var values = value.split("-");
-		var dd = parseInt(values[0]); 
-		var mm = parseInt(values[1]);
-		var yy = parseInt(values[2]);
-		$scope.requisition.targetDate = new Date(yy,mm,dd);
+	var getDateObj = function(value){
+		return new Date(value);
 	}
 	
 	var disableBtn = function(){
@@ -248,10 +233,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			isFirstOpen: true,
 	};
 	
-	$scope.dateChange = function(targetDate){
-		$scope.requisition.targetDate = targetDate.getDate()+'-' + (targetDate.getMonth()+1) + '-'+targetDate.getFullYear();
-	}
-	
 	$scope.validateNoOfPosition = function(data) {
 		if (data>0 && data<=99 || data===0 ||data === 00) {
 			return true;
@@ -261,52 +242,58 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	
 	
 	$scope.dateError = function(targetDate){
-				var dd = $scope.requisition.requisitionDate.getDate();
-				var mm = $scope.requisition.requisitionDate.getMonth()+1;
-				var yy = $scope.requisition.requisitionDate.getYear();
-
-				var b = targetDate.getDate()+'-' + (targetDate.getMonth()+1) + '-'+targetDate.getFullYear();
+		teGDate = new Date($scope.targetDate);
+		reqDate = new Date($scope.requisitionDate);
 			
-				 if(yy === targetDate.getFullYear()){
-					 if(mm === (targetDate.getMonth()+1)){
-						 if(dd === targetDate.getDate()){
-							 $scope.requisition.targetDate = b;
-								$scope.dateErr = false;
-						 }
-						 else if(dd > targetDate.getDate()){
-							 $scope.requisition.targetDate = $scope.previousDate;
-								$scope.dateErr = true;
-						 }
-						 else{
-							 $scope.requisition.targetDate = b;
-								$scope.dateErr = false;
-						 }
-					 }
-					 else if(mm > (targetDate.getMonth()+1)){
-						 $scope.requisition.targetDate = $scope.previousDate;
-							$scope.dateErr = true;
-					 }
-					 else{
-						 $scope.requisition.targetDate = b;
-							$scope.dateErr = false;
-					 }
-				 }
-				 else if(yy > targetDate.getFullYear()){
-					 $scope.requisition.targetDate = $scope.previousDate;
-						$scope.dateErr = true;
-				 }
-				 else{
-					 $scope.requisition.targetDate = b;
-						$scope.dateErr = false;
-				 }	
+		if(reqDate.getTime()>teGDate.getTime()){
+			$scope.dateErr = true;
+		}else{
+			$scope.dateErr = false;
+		}
+		
+//				var dd = $scope.requisition.requisitionDate.getDate();
+//				var mm = $scope.requisition.requisitionDate.getMonth();
+//				var yy = $scope.requisition.requisitionDate.getYear();
+//
+//				var b = targetDate.getDate()+'-' + (targetDate.getMonth()) + '-'+targetDate.getFullYear();
+			
+//				 if(yy === targetDate.getFullYear()){
+//					 if(mm === (targetDate.getMonth())){
+//						 if(dd === targetDate.getDate()){
+//							 $scope.requisition.targetDate = b;
+//								$scope.dateErr = false;
+//						 }
+//						 else if(dd > targetDate.getDate()){
+//							 $scope.requisition.targetDate = $scope.previousDate;
+//								$scope.dateErr = true;
+//						 }
+//						 else{
+//							 $scope.requisition.targetDate = b;
+//								$scope.dateErr = false;
+//						 }
+//					 }
+//					 else if(mm > (targetDate.getMonth())){
+//						 $scope.requisition.targetDate = $scope.previousDate;
+//							$scope.dateErr = true;
+//					 }
+//					 else{
+//						 $scope.requisition.targetDate = b;
+//							$scope.dateErr = false;
+//					 }
+//				 }
+//				 else if(yy > targetDate.getFullYear()){
+//					 $scope.requisition.targetDate = $scope.previousDate;
+//						$scope.dateErr = true;
+//				 }
+//				 else{
+//					 $scope.requisition.targetDate = b;
+//						$scope.dateErr = false;
+//				 }	
 	}
 
 	$scope.updateRequisitionDetails = function(){
 		if ($scope.requisition !== undefined) {
-			
-			$scope.requisition.requisitionManager.name = $scope.hrManager.name;
-			$scope.requisition.requisitionManager.emailId = $scope.hrManager.emailId;
-			
+			setTargetDateNUpdatedBy();
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');
@@ -315,6 +302,18 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.cls=appConstants.ERROR_CLASS;
 				     });
 		}
+	}
+	
+	setTargetDateNUpdatedBy = function(){
+		$scope.requisition.updatedBy = $scope.user.emailId;
+		$scope.requisition.targetDate = getDDMMYYYFormatDate($scope.targetDate);
+		$scope.requisition.requisitionDate = getDDMMYYYFormatDate($scope.requisitionDate);
+	}
+	
+	function getDDMMYYYFormatDate(dateStr)
+	{
+		var format = { day : 'numeric', month : 'numeric', year :'numeric'  };
+		return new Date(dateStr).toLocaleDateString('en-US', format);
 	}
 	
 	$scope.getData = function() {
@@ -328,7 +327,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
-		console.debug("data is ------>  "+data);
 		$scope.reqId = $scope.allRequisitions.length;
 	}).error(function(data, status, headers, config) {
 		$log.error(data);
@@ -340,11 +338,12 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
     });
 	
 	$scope.approve = function(){
-		console.log(angular.toJson($scope.requisition));
 		if($scope.user.emailId === $scope.requisition.approval1.emailId){
 			$scope.requisition.approval1.approved = true;
+			setTargetDateNUpdatedBy();
 		}else if($scope.user.emailId === $scope.requisition.approval2.emailId){
 			$scope.requisition.approval2.approved = true;
+			setTargetDateNUpdatedBy();
 		}else{}
 		
 		requisitionService.approveRequisition($scope.requisition)

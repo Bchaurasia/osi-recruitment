@@ -35,14 +35,14 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="date" ng-model="requisition.requisitionDate"
+				<input type="date" ng-model="requisitionDate"
 					ng-disabled="true" id="requisitionDate" required> <label>Requisition
 					Date<b class="mandatory">*</b>
 				</label> <span class="validation-error" ng-show="reqErr">Requistion
 					date should not be after Target Date.</span>
 			</div>
 			<div class="input-field col s6">
-				<input type="date" ng-model="requisition.targetDate"
+				<input type="date" ng-model="targetDate"
 					ng-change="dateError(requisition.targetDate)" id="targetDate"
 					required> <label>Target Date<b class="mandatory">*</b></label>
 				<span class="validation-error" ng-show="dateErr">Please enter future date.</span>

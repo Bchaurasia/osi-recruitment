@@ -6,7 +6,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
 				<input type="text" class="form-control" ng-model="searchTxt"
-					placeholder="Search By Designatin or Client">
+					placeholder="Search By Designation or Client">
 				<div align="left">
 					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchRequisition()"><i
 						class="material-icons">search</i></a>&nbsp;&nbsp; <a
@@ -22,7 +22,7 @@
 				<thead>
 					<tr>
 						<th>REQUISITION ID</th>
-						<th>POSITION</th>
+						<th>DESIGNATION</th>
 						<th>CLIENT</th>
 						<th>CLONE</th>
 						<th>STATUS</th>
@@ -39,9 +39,9 @@
 						<td>{{data.position}}</td>
 						<td>{{data.client}}</td>
 						<td align="center"><a style="cursor: pointer;"
-							ng-click="cloneRequisition(data.requisitionId)"><i class="material-icons">repeat_one</a></td>
-						<td align="center">
-							<i class="material-icons" style="color:#2196F3 ;font-size: 25px; ">{{getStatusIcon(data.status)}}</i>
+							ng-click="cloneRequisition(data.requisitionId)" title="Clone"><i class="material-icons">repeat_one</a></td>
+						<td align="center" >
+							<i class="material-icons" style="color:#2196F3 ;font-size: 25px; " title="{{data.status}}">{{getStatusIcon(data.status)}}</i>
 						</td>
 					</tr>
 				</tbody>

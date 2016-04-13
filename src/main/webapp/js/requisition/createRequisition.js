@@ -139,8 +139,14 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		})
 	}
 	
+	function getDDMMYYYFormatDate(dateStr)
+	{
+		var format = { day : 'numeric', month : 'numeric', year :'numeric'  };
+		return new Date(dateStr).toLocaleDateString('en-US', format);
+	}
+	
+	
 	$scope.validTargetDate = function(requisitionDate,targetDate){
-		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
 		if(targetDate < requisitionDate){
 			 $scope.targetErr = true;
 			 $scope.disabled = true; 
@@ -201,7 +207,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			 $scope.disabled = false;
 		}
 		checkForEnableCreateButton();
-		$scope.requisition.requisitionDate = requisitionDate.getDate()+'-' + requisitionDate.getMonth() + '-'+requisitionDate.getFullYear();
 	}
 	
 
@@ -241,7 +246,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 				    
 	  });
 	
-	// Gets no. of requisition entries.
 	$http.get('resources/requisition').success(function(data, status, headers, config) {
 		$scope.allRequisitions = data;
 		$scope.reqId = $scope.allRequisitions.length;
@@ -257,8 +261,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.requisition.createdBy = $scope.user.emailId;
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			
-			var date1 = new Date($scope.targetDate);
-			$scope.requisition.targetDate = date1.getDate()+'-' + date1.getMonth() + '-'+date1.getFullYear();
+			$scope.requisition.targetDate = getDDMMYYYFormatDate($scope.targetDate);
+			$scope.requisition.requisitionDate = getDDMMYYYFormatDate($scope.requisitionDate);
 			console.log(angular.toJson($scope.requisition));
 			requisitionService.createRequisition($scope.requisition)
 			.then(successMsg)

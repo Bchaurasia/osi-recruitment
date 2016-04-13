@@ -1,3 +1,7 @@
+<div style="display: none">
+<form id="logout-form" action="j_spring_security_logout" method="post"></form>
+</div>
+
  <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
@@ -23,7 +27,7 @@
 							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
 					<li><a href="" data-toggle="modal" data-target="#myModal"><i
 							class="icon-bell"></i>&nbsp;&nbsp;Notification <span class="new badge">{{count}}</span> </a></li>
-					<li><a id="logout" href="logout.html" ng-click="alHide()"><i
+					<li><a id="logout" href="#" onClick="signOut()"><i
 							class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;Logout</a></li>
 					
 				</ul></li>

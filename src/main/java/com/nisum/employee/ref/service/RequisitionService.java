@@ -77,6 +77,7 @@ public class RequisitionService implements IRequisitionService {
 			return requisition.getRequisitionId()+ REQUISITION_HAS_APPROVED_SUCCESSFULLY
 					+ ", sent approve request notification to " + requisition.getApproval2().getName();
 		}
+		
 	}
 
 	@Override
@@ -88,8 +89,8 @@ public class RequisitionService implements IRequisitionService {
 	@Override
 	public void rejectRequisition(Requisition requisition) {
 		requisition.setStatus(REJECTED);
-		requisitionRepository.updateRequisition(requisition);
 		try {
+			updateRequisition(requisition);
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (AddressException e) {
 			e.printStackTrace();
