@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 
 import lombok.Setter;
@@ -13,16 +14,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
+	private static final String DOMAIN_NAME = "@osius.com";
 	@Setter
 	@Autowired
 	ActiveDirectoryLdapAuthenticationProvider adAuthenticationProvider;
 	
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    	
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException{
+    	try{
     	log.info("in Ldap authenticationProvider");
+    	String[] parts=authentication.getName().split("@");
+    	
+    	if(authentication.getName().equalsIgnoreCase(parts[0]+DOMAIN_NAME)){
     	authentication = adAuthenticationProvider.authenticate(authentication);
-        return authentication;
+    	return authentication;
+    	}else{
+    		throw new UsernameNotFoundException("User not found");
+    	}
+    	}catch(org.springframework.ldap.CommunicationException e){
+    		System.out.println("Error in Authenticating user");
+    		throw new UsernameNotFoundException("ldap communication exception. request time out.");
+    	}
     }
   
     @Override

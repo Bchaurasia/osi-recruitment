@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 
+import com.nisum.employee.ref.repository.UserInfoRepository;
 import com.nisum.employee.ref.service.UserService;
 
 import lombok.Setter;
@@ -22,6 +23,8 @@ public class UserDetailsContextMapperImpl implements UserDetailsContextMapper, S
     
     @Autowired
 	private UserService userService;
+    @Autowired
+	private UserInfoRepository infoRepository;
     
     @Setter
 	@Autowired
@@ -34,12 +37,12 @@ public class UserDetailsContextMapperImpl implements UserDetailsContextMapper, S
 	@Override
 	public UserDetails mapUserFromContext(DirContextOperations ctx, String username,
 			Collection<? extends GrantedAuthority> authorities) {
+		
 		 List<GrantedAuthority> mappedAuthorities = new ArrayList<GrantedAuthority>();
 	        if(!userService.isUserAlradyExist(username)){
-	        	userService.createUserInfo(username);
+	        	infoRepository.isUserExists(username);
 	        }
 	        mappedAuthorities = authorization.authorize(username);
 	        return new User(username, "", true, true, true, true, mappedAuthorities);
 	}
-
 }

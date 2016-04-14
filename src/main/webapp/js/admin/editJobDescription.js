@@ -33,6 +33,7 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 		}else{
 			$scope.deg  = $scope.jobDescript; 
 		}
+     	});
 	}
 	$scope.init();
 	

@@ -81,9 +81,9 @@
 		<!-- /navbar -->
 		<div style="padding-left: 15%; padding-right: 15%">
 			<div class="row well">
-            
+
 				<div class="col-md-1"></div>
-				<h4>Invalid Credentials !!!! please enter username or password correct</h4>
+				<h4>Invalid Credentials <b>or</b> No Internet Connection</h4>
 				<div class="col-md-5">
 					<form class="form-horizontal" action="j_spring_security_check"
 						method="post" id="ldapUserlogin" autocomplete="off"
@@ -92,14 +92,15 @@
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
 							<input type="text" class="form-control" name="username"
 								ng-model="login.username" id="custom-input-username"
-								placeholder="Email address" required>
+								placeholder="Email address" required
+								 ng-pattern="/^[a-zA-Z]+@osius\.com$/">
 						</div>
 						<div ng-messages="ldapUserlogin.username.$error" role="alert">
 							<!-- ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/" -->
-							<!-- <div class="error-alert" ng-message="pattern">Enter valid
-									username</div> -->
-							<!-- <div class="error-alert" ng-message="minlength, maxlength">Your
-									email must be between 5 and 100 characters long</div>-->
+							<div class="error-alert" ng-message="pattern">Enter valid
+									osi credentials </div>
+							<div class="error-alert" ng-message="minlength, maxlength">Your
+									email must be between 5 and 100 characters long</div>
 						</div>
 						<span class="help-block"></span>
 						<div class="input-group">
@@ -217,22 +218,23 @@
 
 	</div>
 
-	<div center>
-		<div class="footer">
-			<div class="footer-inner">
-				<div class="container">
-					<div class="row">
-						<div align="center" class="span12">
-							&copy; 2015 <a href="http://www.nisum.com/">OSI Technologies</a>.
+	<div>
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="container">
+						<div class="row">
+							<div align="center" class="span12">
+								&copy; 2015 <a href="http://www.nisum.com/">OSI Technologies</a>.
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</center>
 	</div>
 
 	<script src="lib/bootstrap/js/bootstrap.js"></script>
+
 	<script src="js/signin.js"></script>
 </body>
+
 </html>

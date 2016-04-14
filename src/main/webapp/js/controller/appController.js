@@ -85,7 +85,7 @@ angular.module('erApp')
 	    $scope.message = "";
 	    $scope.cls = '';
 	}
-}]);
+}}]);
 
 app.filter('offset', function() {
 	  return function(input, start) {

@@ -16,6 +16,7 @@
 		<intercept-url pattern='/login.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern="/loginfailure.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<access-denied-handler error-page="/accessdenied.html" />
+
 		<intercept-url pattern='/resources/log.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern='/index.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern='/resources/features' access='IS_AUTHENTICATED_ANONYMOUSLY' />
@@ -27,8 +28,7 @@
 		<intercept-url pattern='/**'
 			access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER' />
 		<form-login login-page='/login.html' default-target-url='/main.html'
-			always-use-default-target='false' authentication-failure-url="/loginFailure.html"
-			authentication-failure-handler-ref="exceptionStatusCodeMappingBean" />
+			always-use-default-target='false' authentication-failure-url="/loginFailure.html" />
 
 
 		<logout logout-success-url="/login.html" delete-cookies="JSESSIONID"
@@ -37,6 +37,11 @@
 	<beans:bean id="SecurityProvider"
 		class="com.nisum.employee.ref.security.SecurityProvider">
 	</beans:bean>
+	
+	<beans:bean id="customAuthenticationProvider"
+		class="com.nisum.employee.ref.security.authentication.CustomAuthenticationProvider">
+	</beans:bean>
+	
 
 	<authentication-manager>
 		<authentication-provider ref="customAuthenticationProvider" />
@@ -56,9 +61,7 @@
 
 	<beans:bean id="userDetailsContextMapper"
 		class="com.nisum.employee.ref.security.authorization.UserDetailsContextMapperImpl" />
-		
-	<beans:bean id="customAuthenticationProvider"
-		class="com.nisum.employee.ref.security.authentication.CustomAuthenticationProvider" />
+
 
 	<beans:bean id="exceptionStatusCodeMappingBean"
 		class="com.nisum.employee.ref.util.SecurityExceptionResponseErrorCodeMappingBean">
