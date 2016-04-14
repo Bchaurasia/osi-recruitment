@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Create Profile</h4>
+	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Create Profile</h6>
 </div>
-<div class="row">
+<div class="row" >
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="CreateCandidate" onvalidate>
+	<form class="col s8" name="CreateCandidate" onvalidate style="width: 90%; " >
 
 		<div class="row">
 			<div class="input-field col s6">
@@ -102,7 +102,7 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
+				<textarea class="materialize-textarea" cols="50" rows="2"  style="width: 88%"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.address"
 					placeholder="Enter current address"></textarea>
 				<label>Address</label>
@@ -225,7 +225,6 @@
 					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-			{{sk.jobcodeProfile}}
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="sk.jobcodeProfile"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
@@ -240,7 +239,7 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
+				<textarea class="materialize-textarea" cols="50" rows="2" style="width: 88%"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
 					placeholder="Enter any additional notes..."></textarea>
 				<label>Additional Notes</label>

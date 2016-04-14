@@ -27,11 +27,13 @@
 			</div>
 		</div>
 		<div class="row">
-			<select ng-options="o.clientName for o in clients" ng-disabled="true"
+			<div class="input-field col s6">
+				<select ng-options="o.clientName for o in clients" ng-disabled="true"
 								ng-model="client"
 								class="form-control input-sm" id="client" required>
 								<option value='' disabled="disabled"></option>
-			</select> <label>Client<b class="mandatory">*</b></label>
+					</select> <label>Client<b class="mandatory">*</b></label>
+			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
@@ -41,15 +43,13 @@
 			<div class="input-field col s12">
 				<textarea id="textarea1" class="materialized-textarea" 
 					ng-keyup="jdDetailsCharLimit(deg.jobDescriptionDetails)"
+					ng-model="deg.jobDescriptionDetails"
 					ng-change="validateJDDetails(deg.jobDescriptionDetails)"
 					placeholder="Enter job description details..." required></textarea>
-			</div>
-			<div class="col-md-3" align="left">
-				<medium>Chars remaining : {{500 -
-				deg.jobDescriptionDetails.length }}</medium>
-				<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>
+					<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>	
 			</div>
 		</div>
+
 		<br>
 		<div align="center">
 			<button class="btn btn-primary" type="submit"
