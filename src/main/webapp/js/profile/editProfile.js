@@ -46,6 +46,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		$scope.candidate = data;
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
+		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
 			 angular.forEach($scope.positionData, function(jobcodeProfile){
@@ -160,14 +161,13 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        $scope.candidate.profileModifiedBy = sessionStorage.userId;
 	        $scope.candidate.designation = $scope.designation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
-	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
+	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
 				 $scope.candidate.status = "Initialized";
 			}
-	        //console.log("in update-->: "+angular.toJson($scope.candidate))
 	        profileService.updateProfile($scope.candidate).then(function(msg){
 	        	$scope.sendNotification(msg,'recruitment/searchProfile');
 				$log.info(msg);
