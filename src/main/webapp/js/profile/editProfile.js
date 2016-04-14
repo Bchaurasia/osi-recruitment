@@ -210,4 +210,38 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		} else
 			return "Enter valid Passport number..";
 	};
+	
+	$scope.validateEmailId = function(emailId){
+		if(emailId != undefined){
+			profileService.getProfileById(emailId).then(function(data){
+				if(data.length != 0){
+					$scope.duplicateEmailIdError = true;
+				}else{
+					$scope.duplicateEmailIdError = false;
+				}
+			}).catch(function(msg){
+				console.log(msg);
+			})
+		}
+	};
+	
+	$scope.download = function(){
+		$http.get('resources/fileDownload?candidateId='+$scope.user, {responseType: 'arraybuffer'})
+	       .then(function (response) {
+	    	   var data = response.data;
+	    	    $scope.headers = response.headers();
+	    	   var contetType =  $scope.headers['content-type'];
+    	   var fileName = $scope.candidate.candidateName;
+	            var link = document.createElement("a");
+	            var file = new Blob([data], {type: contetType});
+	           var fileURL = window.URL.createObjectURL(file);
+	           link.href = fileURL;
+	           link.download = fileName;
+	           link.click();
+		
+		}).error(function(data, status, headers, config) {
+			$log.error("Failed!! ---> "+data);
+		});	
+			
+	};
 }]);

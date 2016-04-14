@@ -14,6 +14,8 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.userData = {};
 	$scope.recruitmentData = [];
 	$scope.fileError = true;
+	$scope.mobileNoError = false;
+	$scope.duplicateEmailIdError = false;
 	$scope.countryCode = "+91";
 	$scope.showErrorMsg=false;
     $scope.showSuccessMsg= false;
@@ -226,7 +228,27 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		$scope.message=msg;
 		 $scope.cls=appConstants.ERROR_CLASS;
 		 $timeout( function(){ $scope.alHide(); }, 5000);
-	});
+	})
+	
+	$scope.validateMobileNo = function(mobileNo){
+		if(mobileNo.length<10 || mobileNo.length>10){
+			$scope.mobileNoError = true;
+		}else{
+			$scope.mobileNoError = false;
+		}
+	};
  		
- 		
+	$scope.validateEmailId = function(emailId){
+		if(emailId != undefined){
+			profileService.getProfileById(emailId).then(function(data){
+				if(data.length != 0){
+					$scope.duplicateEmailIdError = true;
+				}else{
+					$scope.duplicateEmailIdError = false;
+				}
+			}).catch(function(msg){
+				console.log(msg);
+			})
+		}
+	};	
 }]);

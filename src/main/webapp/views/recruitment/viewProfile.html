@@ -11,7 +11,7 @@
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
 					ng-maxlength="30" name="candidateName" class="form-control" type="text"
 					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/" required>
-				<label>Candidate Name<b class="mandatory">*</b></label> <span
+				<label style="position: absolute; top: -22px;">Candidate Name<b class="mandatory">*</b></label> <span
 					class="validation-error"
 					ng-show="submitted && UpdateCandidate.candidateName.$invalid">Please
 					provide candidate name</span>
@@ -28,12 +28,15 @@
 			<div class="input-field col s6">
 				<input type="email" name="emailId" class="form-control"
 					ng-model="candidate.emailId"
+					ng-blur="validateEmailId(candidate.emailId)"
 					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
-					placeholder="Enter Email Id." required> <label>Email
+					placeholder="Enter Email Id." required> <label style="position: absolute; top: -22px;">Email
 					Id <b class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="submitted && UpdateCandidate.emailId.$invalid">Please
 					provide a valid email address</span>
+				<span class="validation-error" ng-show="duplicateEmailIdError">User with this email id already exists.
+					</span>	
 
 				<div class="validation-error"
 					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.required">
@@ -53,7 +56,7 @@
 				<input type="text" placeholder="Enter Mobile number" name="mobileNo"
 					class="form-control" ng-change="toggleProDisable()"
 					ng-model="candidate.mobileNo" ng-pattern="/^\+?\d{12}$/"
-					maxlength="13" required> <label>Mobile Number <b
+					maxlength="13" required> <label style="position: absolute; top: -22px;">Mobile Number <b
 					class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="submitted && UpdateCandidate.mobileNo.$invalid">Please
@@ -71,7 +74,7 @@
 				<input placeholder="Enter alternate Mobile number"
 					name="altmobileNo" class="form-control" type="text"
 					numbers-only="numbers-only" ng-model="candidate.altmobileNo"
-					maxlength="10" ng-pattern="/^[0-9]+$/"> <label>Alternate
+					maxlength="10" ng-pattern="/^[0-9]+$/"> <label style="position: absolute; top: -22px;">Alternate
 					Mobile Number </label>
 				<div class="validation-error"
 					ng-show="(UpdateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.altmobileNo.$error.pattern">
@@ -83,7 +86,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter Passport number" name="passportNo"
 					class="form-control" type="text" ng-model="candidate.passportNo"
-					ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/"> <label>Passport
+					ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/"> <label style="position: absolute; top: -22px;">Passport
 					No</label> <span class="validation-error"
 					ng-show="(UpdateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && UpdateCandidate.passportNo.$error.pattern">
 					Provide a valid passport number</span>
@@ -92,7 +95,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter Skype Id" name="skypeId"
 					class="form-control" type="text" ng-model="candidate.skypeId"
-					ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required><label>Skype
+					ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required><label style="position: absolute; top: -22px;">Skype
 					Id <b class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="(UpdateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && UpdateCandidate.skypeId.$error.pattern">
@@ -104,7 +107,7 @@
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.address"
 					placeholder="Enter current address"></textarea>
-				<label>Address</label>
+				<label style="position: absolute; top: -22px;">Address</label>
 			</div>
 		</div>
 	<div class="row" align="left">
@@ -124,7 +127,7 @@
 					ng-options="o as o for o in info.qualification | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="">Select Qualification</option>
-				</select> <label>Qualification<b class="mandatory">*</b></label> <span
+				</select> <label style="position: absolute; top: -22px;">Qualification<b class="mandatory">*</b></label> <span
 					class="validation-error"
 					ng-show="submitted && UpdateCandidate.pso.$invalid">Please
 					provide Qualification</span>
@@ -136,7 +139,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter Stream" name="stream" class="form-control"
 					type="text" ng-model="candidate.stream"
-					ng-pattern="/^[a-zA-Z.]*$/"> <label>Specialization
+					ng-pattern="/^[a-zA-Z.]*$/"> <label style="position: absolute; top: -22px;">Specialization
 				</label>
 
 			</div>
@@ -152,7 +155,7 @@
 					ng-options="o as o for o in info.expYears"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Years</option>
-				</select> <label>Experience<b class="mandatory">*</b></label> <span
+				</select> <label style="position: absolute; top: -22px;">Experience<b class="mandatory">*</b></label> <span
 					class="validation-error"
 					ng-show="submitted && UpdateCandidate.experience.$invalid">Please
 					specify your experience..</span>
@@ -176,12 +179,11 @@
 			<div class="col-md-2"></div>
 			<div class="input-field col s6">
 
-				<label>Skills Set<b class="mandatory">*</b>:</label>
+				<label style="position: absolute; top: -22px;">Skills Set<b class="mandatory">*</b>:</label>
 				<ui-select multiple ng-model="sk.primarySkills"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ui-select-required ng-disabled="disabled"> <ui-select-match
 					placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
-					style="height: 45px;"
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
 				<span class="validation-error"
@@ -197,7 +199,7 @@
 					ng-options="d.designation for d in designations"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select Designation</option>
-				</select> <label>Designation<b class="mandatory">*</b></label>
+				</select> <label style="position: absolute; top: -22px;">Designation<b class="mandatory">*</b></label>
 
 			</div>
 
@@ -205,7 +207,7 @@
 				<input placeholder="Enter your current company"
 					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
-				<label>Current Employer</label>
+				<label style="position: absolute; top: -22px;">Current Employer</label>
 
 			</div>
 		</div>
@@ -216,7 +218,7 @@
 					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select</option>
-				</select> <label>Recruiter Assigned <b class="mandatory">*</b></label> <span
+				</select> <label style="position: absolute; top: -22px;">Recruiter Assigned <b class="mandatory">*</b></label> <span
 					class="validation-error"
 					ng-show="submitted && UpdateCandidate.referredBy.$invalid">Please
 					specify who is referred</span>
@@ -231,8 +233,8 @@
 					placeholder="Select JobCodes..">{{$item}}</ui-select-match>
 				<ui-select-choices
 					repeat="jobcode in jobcodelist | orderBy:'toString()' | filter:$select.search">
-				{{jobcode}} </ui-select-choices> </ui-select>
-				<label>Job Code <b class="mandatory">*</b></label>
+				{{jobcode}} </ui-select-choices> </ui-select>&nbsp;&nbsp;&nbsp;
+				<label style="position: absolute; top: -22px;">Job Code</label>
 
 			</div>
 		</div>
@@ -242,7 +244,7 @@
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
 					placeholder="Enter any additional notes..."></textarea>
-				<label>Additional Notes</label>
+				<label style="position: absolute; top: -22px;">Additional Notes</label>
 			</div>
 		</div>
 
@@ -256,7 +258,7 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="UpdateCandidate.$invalid"
+				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
 				ng-click="updateProfileDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>
