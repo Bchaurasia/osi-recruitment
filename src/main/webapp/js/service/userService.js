@@ -85,9 +85,11 @@ function userService($http,$rootScope,appConstants,$q) {
 		user.roles[0] = "ROLE_USER";
 
 		user.name = "Profile";
-
+		user.name = sessionStorage.name;
 		$rootScope.user = user;
+		
 
+		
 		addUserDetails(user);
 
 		}else{
@@ -112,9 +114,7 @@ function userService($http,$rootScope,appConstants,$q) {
 		user = data[0];
 
 		}
-
-		return data;
-
+		return user;
 	}
 	function userUpdateSuccessMsg(response){
 		return response.data.message;

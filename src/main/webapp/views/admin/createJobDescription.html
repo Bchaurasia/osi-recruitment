@@ -20,12 +20,12 @@
 				<div class="input-field col s6">
 						<input style="width: 245px; margin-left: 0%;" type="text"
 							id="jobDescription" ng-maxlength="30"
-							ng-keyup="charLimit($event,30)"
+							ng-keyup="jdNameCharLimit(jobDescription.jobDescriptionName)"
 							name="jobDescription" class="form-control"
 							ng-model="jobDescription.jobDescriptionName" 
 							ng-blur="validateJDName(jobDescription.jobDescriptionName)"
 							placeholder="Enter Title" required>
-						<label class="lbl" for="jobDescription">Job Description Title<b
+						<label class="lbl" for="jobDescription" style="position: absolute; top: -22px;">Job Description Title<b
 								style="color: red;">*</b></label>	 
 							<span class="validation-error"									
 								ng-show="submitted && CreateJobDescription.name.$invalid">Please
@@ -33,8 +33,9 @@
 						<div class="validation-error"
 							ng-show="(CreateJobDescription.name.$dirty || invalidSubmitAttempt) && CreateJobDescription.name.$error.required">
 							Job Description Title is required.</div>
-						<span class="validation-error" ng-show="jdNameErr">Job Description Title already exists.</span>	
-						<span class="validation-error" ng-show="jdNameLengthErr">Title Name should be atleast 5 chars.</span>	
+						<span class="validation-error" ng-show="jdNameLengthErr">Title Name should be atleast 5 chars.</span>
+						<span class="validation-error" ng-show="jdNameMaxLengthErr">Job Description Title exceeded 30 chars.</span>	
+
 												
 					</div>
 				
@@ -65,27 +66,26 @@
 
 				<div class="row">
 					<div class="input-field col s6">
-						<label>Job Description Details<b class="mandatory">*</b></label>
+						<label>Job Description Details<b class="mandatory">*</b> &nbsp;&nbsp;&nbsp;<small>(500 chars)</small></label>
 					</div>	
 					<br>
 					<div class="input-field col s12">
-						<textarea id="textarea1" class="materialized-textarea" ng-maxlength="500"
-							ng-keyup="charLimit($event,500)"
+						<textarea id="textarea1" class="materialized-textarea" 
+							ng-keyup="jdDetailsCharLimit(jobDescription.jobDescriptionDetails)"
 							ng-model="jobDescription.jobDescriptionDetails"
 							placeholder="Enter job description details..." required></textarea>
 					</div>
 					<div class="col-md-3" align="left">
-						<medium>{{500 - jobDescription.jobDescriptionDetails.length}} remaining</medium>
+						<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>
 					</div>
 				</div>
 			<div align="center">
-				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid"
-				ng-click="save()">
-					<span class="glyphicon glyphicon-ok-circle"></span> Save
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdDescritptionErr"
+						ng-click="save()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Save 
 				</button>
 				&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.jobDescription.list"
-					class="btn btn-info active"> <span
-					class="glyphicon glyphicon-remove"></span> Cancel
+					class="btn btn-info active"> <span class="glyphicon glyphicon-remove"></span> Cancel
 				</a>
 			</div>
 		<br> 

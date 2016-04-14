@@ -15,8 +15,8 @@ angular.module('erApp')
 	infoService.getInfo();
 	
 	function setUser(data){
-		$scope.user = data[0];
-		$rootScope.user = data[0];
+		$scope.user = data;
+		$rootScope.user = data;
 	}
 	
 	function errorMsg(message){
@@ -24,22 +24,25 @@ angular.module('erApp')
 	}
 	$scope.hasRole = function(role) {
 	var roleArray = role.split(',');
-	for (i = 0; i< $scope.user.roles.length;i++){
-			for(j=0;j< roleArray.length; j++){
-				if($rootScope.user.roles[i] == roleArray[j]){
-					return true;
-				}
-			}
+	if($scope.user.roles!= undefined){
+		for (i = 0; i< $scope.user.roles.length;i++){
+				for(j=0;j< roleArray.length; j++){
+					if($rootScope.user.roles[i] == roleArray[j]){
+						return true;
+					}
 		}
+	}
 		return false;
 	};
 	
 	$scope.hasNotRole = function(role) {
 		var roleArray = role.split(','); 
-		for (i = 0; i< $scope.user.roles.length;i++){
-			for(j=0;j< roleArray.length; j++){
-				if($rootScope.user.roles[i] == roleArray[j]){
-					return false;
+		if($scope.user.roles!= undefined){
+			for (i = 0; i< $scope.user.roles.length;i++){
+				for(j=0;j< roleArray.length; j++){
+					if($rootScope.user.roles[i] == roleArray[j]){
+						return false;
+					}
 				}
 			}
 		}

@@ -5,7 +5,7 @@ import java.util.List;
 import com.nisum.employee.ref.domain.UserInfo;
 
 public interface IUserService {
-	void registerUserByEmailId(String emailId);
+	void registerUserByEmailId(UserInfo userInfo);
 
 	List<UserInfo> retrieveUser();
 

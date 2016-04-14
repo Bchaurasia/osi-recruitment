@@ -19,6 +19,7 @@ angular.module('myApp', ['directive.g+signin','ngMessages'])
 	          $('#j_username').val(primaryEmail);
 	          $('#j_password').val('referral');
 	          sessionStorage.userId = primaryEmail;
+	          sessionStorage.name = data.name;
 	          document.getElementById('login-form').submit();
         });
         

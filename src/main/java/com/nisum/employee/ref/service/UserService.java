@@ -14,9 +14,8 @@ public class UserService implements IUserService{
 	@Autowired
 	private UserInfoRepository userInfoRepository;
 
-	
-	public void registerUserByEmailId(String emailId) {
-		userInfoRepository.registerUserByEmailId(emailId);
+	public void registerUserByEmailId(UserInfo userInfo) {
+		userInfoRepository.registerUserByEmailId(userInfo);
 	}
 	
 	public boolean isUserAlradyExist(String emailId) {
@@ -51,4 +50,5 @@ public class UserService implements IUserService{
 	public List<UserInfo> retrieveUserByRole(String role) {
 		return userInfoRepository.retrieveUserByRole(role);
 	}
+	
 }

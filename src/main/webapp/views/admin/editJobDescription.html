@@ -11,8 +11,8 @@
 			<div class="input-field col s6">
 				<input type="text" style="height: 33px; margin-left: 0%;"
 					ng-bind="deg.jobDescriptionName" ng-model="deg.jobDescriptionName"
-					name="jobDescription" disabled="disabled"> <label><b>Job
-						Description Name:</b></label>
+					name="jobDescription" disabled="true"> 
+					<label>Job Description Name<b class="mandatory">*</b></label>
 			</div>
 
 			<div class="input-field col s6">
@@ -23,39 +23,37 @@
 				<ui-select-choices
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label>Skills<b class="mandatory">*</b></label>
+				<label  style="position: absolute; top: -22px;">Skills<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s6">
-				<select placeholder="Select Client" ng-model="deg.client"
-					ng-options="o as o for o in clients" ng-disabled="true"
-					class="form-control input-sm" required>
-					<option>Select Client</option>
-				</select> <label>Client<b class="mandatory">*</b></label>
-			</div>
+			<select ng-options="o.clientName for o in clients" ng-disabled="true"
+								ng-model="client"
+								class="form-control input-sm" id="client" required>
+								<option value='' disabled="disabled"></option>
+			</select> <label>Client<b class="mandatory">*</b></label>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<label>Job Description Details<b class="mandatory">*</b></label>
+				<label>Job Description Details<b class="mandatory">*</b>&nbsp;&nbsp;&nbsp;<small>(500 chars)</small></label>
 			</div>
 			<br>
 			<div class="input-field col s12">
-				<textarea id="textarea1" class="materialized-textarea" length="500"
-					ng-model="deg.jobDescriptionDetails"
+				<textarea id="textarea1" class="materialized-textarea" 
+					ng-keyup="jdDetailsCharLimit(deg.jobDescriptionDetails)"
 					ng-change="validateJDDetails(deg.jobDescriptionDetails)"
 					placeholder="Enter job description details..." required></textarea>
 			</div>
 			<div class="col-md-3" align="left">
 				<medium>Chars remaining : {{500 -
 				deg.jobDescriptionDetails.length }}</medium>
+				<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>
 			</div>
 		</div>
-
 		<br>
 		<div align="center">
 			<button class="btn btn-primary" type="submit"
-				ng-disabled="disableBtn" ng-click="submit()">
+				ng-disabled="disableBtn || jdDescritptionErr" ng-click="submit()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Save
 			</button>
 			&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.jobDescription.list"

@@ -10,6 +10,7 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 	$scope.pskills=$rootScope.info.skills;
 	$scope.expYear=$rootScope.info.expYears;
 	
+	$scope.jdDescritptionErr = false;
 	$scope.hideSkills = true;
 	$scope.skillsErr = false;
 	$scope.jdDetailsErr = false;
@@ -18,7 +19,11 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 	$scope.init = function() {
 		$scope.jobDescript =sharedService.getJobDescription();
 		clientService.getClientName().then(function(response){
-			$scope.clients = response;
+			$scope.jobDescriptionList = jobDescriptionService.getJobDescription();
+			$scope.client = _.find($scope.jobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.jobDescript.jobDescriptionName });
+			clientService.getClientInfo().then(function(response){
+				$scope.clients = response;
+				$scope.client = _.find($scope.clients, function(clnt){ return clnt.clientName === $scope.jobDescript.client });
 			 }).catch(function(msg){
 				 $log.error(msg);
 		});
@@ -98,5 +103,11 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 			$scope.disableBtn = false;
 		}
 	};
-	
+	 $scope.jdDetailsCharLimit = function(jdDescription) {
+		    if (jdDescription.length > 500) {
+		 	   $scope.jdDescritptionErr = true;
+	        }else{
+			   $scope.jdDescritptionErr = false;
+		   }
+	 };
 }]);

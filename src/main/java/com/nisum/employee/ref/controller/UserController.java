@@ -28,7 +28,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody UserInfo userInfo) {
-		userService.registerUserByEmailId(userInfo.getEmailId());
+		userService.registerUserByEmailId(userInfo);
 		return new ResponseEntity<String>("User registered Successfully", HttpStatus.OK);
 	}
 

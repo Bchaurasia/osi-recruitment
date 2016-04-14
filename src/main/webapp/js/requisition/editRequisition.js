@@ -7,7 +7,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.showApprovedBtn = false;
 	$scope.showApproveBtn = false;
 	$scope.showUpdateBtn = true;
-	$scope.disableUpdateBtn = false;
+	$scope.disableUpdateBtn = true;
 	$scope.showRejectBtn = true;
 	$scope.disableRejectBtn = false;
 	$scope.info = $rootScope.info;
@@ -33,7 +33,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.hideApproval2=false;
 	$scope.disApproval1=true;
 	$scope.disApproval2=true;
-	
+	$scope.updateVal=false;
 	
 	var id;
 	$scope.init = function() {
@@ -160,6 +160,11 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.disApproval1=false;
 			$scope.disApproval2=false;
 		}
+		
+		if($scope.requisition.approval1.approved && $scope.requisition.approval1.approved){
+					$scope.updateVal=true;
+		}
+		
 		if($scope.requisition.status === "REJECTED"){
 						$scope.showRejectBtn = true;
 						$scope.disableRejectBtn = true;
@@ -167,7 +172,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.showApprovedBtn = true;
 						$scope.disableUpdateBtn = true;
 						$scope.showUpdateBtn = true;
-					}else if($scope.user.emailId === $scope.requisition.approval1.emailId){
+					}
+					else if($scope.user.emailId === $scope.requisition.approval1.emailId){
 						$scope.showApprovalBtn = !$scope.requisition.approval1.approved;
 			 			$scope.showApprovedBtn = $scope.requisition.approval1.approved;
 			 			$scope.showRejectBtn = true;
@@ -183,6 +189,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			 			 						$scope.disableUpdateBtn = $scope.requisition.approval2.approved;
  					}else{
  						$scope.showRejectBtn = false;
+ 						$scope.updateVal=true;
  					}
 	}
 	
