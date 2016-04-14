@@ -4,26 +4,25 @@
 </div>
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="CreateCandidate" onvalidate>
+	<form class="col s8" name="UpdateCandidate" onvalidate>
 
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
-					ng-maxlength="30" name="candidateName" class="form-control"
-					ng-change="toggleProDisable()" type="text"
-					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/">
+					ng-maxlength="30" name="candidateName" class="form-control" type="text"
+					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/" required>
 				<label>Candidate Name<b class="mandatory">*</b></label> <span
 					class="validation-error"
-					ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
+					ng-show="submitted && UpdateCandidate.candidateName.$invalid">Please
 					provide candidate name</span>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.required">
+					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.required">
 					Candidate Name is required.</div>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.pattern">
+					ng-show="(UpdateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.pattern">
 					Candidate Name must be characters only.</div>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
+					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.minlength">
 					Candidate Name must be at least 3 characters .</div>
 			</div>
 			<div class="input-field col s6">
@@ -33,17 +32,17 @@
 					placeholder="Enter Email Id." required> <label>Email
 					Id <b class="mandatory">*</b>
 				</label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.emailId.$invalid">Please
+					ng-show="submitted && UpdateCandidate.emailId.$invalid">Please
 					provide a valid email address</span>
 
 				<div class="validation-error"
-					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.required">
+					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.required">
 					Please specify the email ID.</div>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.emailId.$touched || invalidSubmitAttempt) && CreateCandidate.emailId.$error.$pristine">
+					ng-show="(UpdateCandidate.emailId.$touched || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.$pristine">
 					Please specify the email ID.</div>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.pattern">
+					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.pattern">
 					Please check the given Email Address.</div>
 			</div>
 
@@ -51,31 +50,31 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="text" placeholder="Enter Mobile number"
-					ng-model="candidate.mobileNo" class="form-control"
-					ng-pattern="/^[0-9]+$/" maxlength="10" required> <label>Mobile
-					Number <b class="mandatory">*</b>
-
+				<input type="text" placeholder="Enter Mobile number" name="mobileNo"
+					class="form-control" ng-change="toggleProDisable()"
+					ng-model="candidate.mobileNo" ng-pattern="/^\+?\d{12}$/"
+					maxlength="13" required> <label>Mobile Number <b
+					class="mandatory">*</b>
 				</label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
+					ng-show="submitted && UpdateCandidate.mobileNo.$invalid">Please
 					provide a MobileNo</span>
 
 				<div class="validation-error"
-					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
+					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.required">
 					Please specify your mobile number.</div>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
+					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 
 			<div class="input-field col s6">
-				<input type="text" placeholder="Enter alternate Mobile number"
-					name="altmobileNo" class="form-control"
-					ng-model="candidate.altmobileNo" maxlength="10"
-					ng-pattern="/^[0-9]+$/"> <label>Alternate Mobile
-					Number </label>
+				<input placeholder="Enter alternate Mobile number"
+					name="altmobileNo" class="form-control" type="text"
+					numbers-only="numbers-only" ng-model="candidate.altmobileNo"
+					maxlength="10" ng-pattern="/^[0-9]+$/"> <label>Alternate
+					Mobile Number </label>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.altmobileNo.$error.pattern">
+					ng-show="(UpdateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.altmobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 		</div>
@@ -84,38 +83,38 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter Passport number" name="passportNo"
 					class="form-control" type="text" ng-model="candidate.passportNo"
-					ng-pattern="/^[a-zA-Z0-9]+$/"> <label>Passport No</label> <span
-					class="validation-error"
-					ng-show="(CreateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && CreateCandidate.passportNo.$error.pattern">
+					ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/"> <label>Passport
+					No</label> <span class="validation-error"
+					ng-show="(UpdateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && UpdateCandidate.passportNo.$error.pattern">
 					Provide a valid passport number</span>
 			</div>
 
 			<div class="input-field col s6">
 				<input placeholder="Enter Skype Id" name="skypeId"
 					class="form-control" type="text" ng-model="candidate.skypeId"
-					ng-pattern="/^[a-z][a-z0-9\.,\-_]{5,31}$/" required><label>Skype
+					ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required><label>Skype
 					Id <b class="mandatory">*</b>
 				</label> <span class="validation-error"
-					ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
+					ng-show="(UpdateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && UpdateCandidate.skypeId.$error.pattern">
 					Provide a valid Skype Id</span>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.address"
 					placeholder="Enter current address"></textarea>
 				<label>Address</label>
-
 			</div>
 		</div>
-		<div class="row" align="left">
-			<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Professional
-				Details</h5>
+	<div class="row" align="left">
+<!-- 			<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Professional -->
+<!-- 				Details</h5> -->
 		</div>
+
 		<div class="row" align="left">
-			<div class="chip" align="left">Educational Details</div>
+			<div class="chip" style="padding-left: 20px">Educational
+				Details</div>
 		</div>
 
 		<div class="row">
@@ -127,17 +126,17 @@
 					<option value="">Select Qualification</option>
 				</select> <label>Qualification<b class="mandatory">*</b></label> <span
 					class="validation-error"
-					ng-show="submitted && CreateCandidate.pso.$invalid">Please
+					ng-show="submitted && UpdateCandidate.pso.$invalid">Please
 					provide Qualification</span>
 				<div class="validation-error"
-					ng-show="( CreateCandidate.pso.$dirty || invalidSubmitAttempt) && CreateCandidate.pso.$error.required">
+					ng-show="( UpdateCandidate.pso.$dirty || invalidSubmitAttempt) && UpdateCandidate.pso.$error.required">
 					qualification is required.</div>
 			</div>
 
 			<div class="input-field col s6">
 				<input placeholder="Enter Stream" name="stream" class="form-control"
 					type="text" ng-model="candidate.stream"
-					ng-pattern="/^[a-zA-Z _]*$/" required> <label>Specialization
+					ng-pattern="/^[a-zA-Z.]*$/"> <label>Specialization
 				</label>
 
 			</div>
@@ -150,37 +149,35 @@
 		<div class="row">
 			<div class="input-field col s2">
 				<select ng-model="candidate.expYear" name="experience"
-					ng-options="o as o for o in info.expYears | orderBy:'toString()'"
+					ng-options="o as o for o in info.expYears"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Years</option>
 				</select> <label>Experience<b class="mandatory">*</b></label> <span
 					class="validation-error"
-					ng-show="submitted && CreateCandidate.experience.$invalid">Please
+					ng-show="submitted && UpdateCandidate.experience.$invalid">Please
 					specify your experience..</span>
 				<div class="validation-error"
-					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
+					ng-show="( UpdateCandidate.experience.$dirty || invalidSubmitAttempt) && UpdateCandidate.experience.$error.required">
 					Please select your total experience.</div>
 			</div>
 
 			<div class="input-field col s2">
 				<select ng-model="candidate.expMonth" name="expMonths"
-					ng-options="o as o for o in info.expMonths | orderBy:'toString()'"
+					ng-options="o as o for o in info.expMonths"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Months</option>
 				</select> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.experience.$invalid">Please
+					ng-show="submitted && UpdateCandidate.experience.$invalid">Please
 					specify your experience..</span>
 				<div class="validation-error"
-					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
+					ng-show="( UpdateCandidate.experience.$dirty || invalidSubmitAttempt) && UpdateCandidate.experience.$error.required">
 					Please select your total experience.</div>
 			</div>
-
-
-
+			<div class="col-md-2"></div>
 			<div class="input-field col s6">
-				<label>Skills Set<b class="mandatory">*</b>:
-				</label>
-				<ui-select multiple ng-model="sk.primarySkills" 
+
+				<label>Skills Set<b class="mandatory">*</b>:</label>
+				<ui-select multiple ng-model="sk.primarySkills"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ui-select-required ng-disabled="disabled"> <ui-select-match
 					placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
@@ -188,7 +185,7 @@
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
 				<span class="validation-error"
-					ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
+					ng-show="submitted && UpdateCandidate.pskilss.$invalid">Please
 					enter your key skills.</span>
 			</div>
 		</div>
@@ -214,20 +211,20 @@
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="candidate.hrAssigned" name="referredBy"
+				<div class="input-field col s6">
+				<select ng-model="candidate.hrAssigned"
 					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select</option>
 				</select> <label>Recruiter Assigned <b class="mandatory">*</b></label> <span
 					class="validation-error"
-					ng-show="submitted && CreateCandidate.referredBy.$invalid">Please
+					ng-show="submitted && UpdateCandidate.referredBy.$invalid">Please
 					specify who is referred</span>
 				<div class="validation-error"
-					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
+					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-			<div class="input-field col s6">
+		<div class="input-field col s6">
 				<ui-select multiple ng-model="sk.jobcodeProfiles"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ng-disabled="disabled"> <ui-select-match
@@ -241,13 +238,14 @@
 		</div>
 
 		<div class="row">
-			<div class="input-field col s10">
+			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
 					placeholder="Enter any additional notes..."></textarea>
 				<label>Additional Notes</label>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="input-field col s4">
 				<button class="waves-effect waves-light btn" align="left"
@@ -256,11 +254,10 @@
 				</button>
 			</div>
 		</div>
-<!-- 			ng-disabled="validateProfile() || CreateCandidate.$invalid" -->
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-			
-					ng-click="updateProfileDetails()">
+				ng-disabled="UpdateCandidate.$invalid"
+				ng-click="updateProfileDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>
 			<button class="btn btn-info active"
