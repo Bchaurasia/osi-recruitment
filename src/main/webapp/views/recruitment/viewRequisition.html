@@ -2,37 +2,14 @@
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
 	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
 		Requisition : {{requisition.requisitionId}}</h6>
+	<div class="input-field col s4">
+		<h6>Position -{{requisition.position}}</h6>
+	</div>
 </div>
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="CreateRequisition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
-		<div class="row">
-			<div class="input-field col s6">
-				<select placeholder="Select Designation" ng-change="getData()"
-					ng-disabled="true" ng-model="requisition.position" required
-					ng-options="o as o for o in designation1 | orderBy:'toString()'"
-					class="form-control input-sm">
-					<option>{{requisition.position}}</option>
-				</select> <label>Position<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<div class="row">
-					<div class="input-field col s6">
-						<input type="range" ng-model="requisition.minExpYear"
-							ng-disabled="true" ng-change="min(requisition.minExpYear)"
-							min="0" max="15" required /> <span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
-					</div>
-					<div class="input-field col s6">
-						<input type="range" ng-model="requisition.maxExpYear"
-							ng-disabled="true" ng-change="max(requisition.maxExpYear)"
-							min="0" max="15" required /> <span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
-					</div>
-				</div>
-				<label style="margin-top: 14px">Exp. Required<b
-					class="mandatory">*</b></label>
-			</div>
-		</div>
 		<div class="row">
 			<div class="input-field col s6">
 				<input type="date" ng-model="requisitionDate" ng-disabled="true"
@@ -51,9 +28,9 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select ng-model="requisition.client"
+				<select ng-model="client"
 					ng-change="getJobDescriptionByClient(requisition.client)"
-					ng-options="o as o for o in clients | orderBy:'toString()'"
+					ng-options="o.clientName for o in clients | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="requisition.client">{{requisition.client}}</option>
 				</select> <label>Client<b class="mandatory">*</b></label>
@@ -91,12 +68,33 @@
 		</div>
 		<div class="row" style="margin-bottom: 20px">
 			<div class="input-field col s6">
-				<select ng-options="o.jobDescriptionName for o in JobDescriptionList"
-						ng-model="jobDescription" ng-change="setSkillsAndJDDetails()" 
-						class="form-control input-sm" id="jobDescription" >
-					<option value='' >Select Job Description Title</option>
+				<select
+					ng-options="o.jobDescriptionName for o in JobDescriptionList"
+					ng-model="jobDescription" ng-change="setSkillsAndJDDetails()"
+					class="form-control input-sm" id="jobDescription">
+					<option value=''>Select Job Description Title</option>
 				</select> <label style="position: absolute; top: -22px;">Job
 					Description Title</label>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<div class="row">
+					<div class="input-field col s6">
+						<input type="range" ng-model="requisition.minExpYear"
+							ng-disabled="true" ng-change="min(requisition.minExpYear)"
+							min="0" max="15" required /> <span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
+					</div>
+					<div class="input-field col s6">
+						<input type="range" ng-model="requisition.maxExpYear"
+							ng-disabled="true" ng-change="max(requisition.maxExpYear)"
+							min="0" max="15" required /> <span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
+					</div>
+				</div>
+				<label style="margin-top: 14px">Exp. Required<b
+					class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="requisition.skillType"
@@ -124,6 +122,7 @@
 				<label>Requisition Comment</label>
 			</div>
 		</div>
+
 		<div class="row"
 			ng-repeat=" requisition in requisition.qualifications">
 			<div class="input-field col s6">
@@ -169,8 +168,7 @@
 			</div>
 		</div>
 		<div align="center" class="row">
-			<button class="btn btn-info active"
-				ng-show="showApprovalBtn"
+			<button class="btn btn-info active" ng-show="showApprovalBtn"
 				ng-disabled="showApprovedBtn" ng-click="approve()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Approve
 			</button>
