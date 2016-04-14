@@ -35,6 +35,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		  };
 	
 	clientService.getClientInfo().then(setClientList);
+	
 	$scope.birthDate = new Date($scope.userToEdit.dob);
 	
 	function setClientList(data){
@@ -45,6 +46,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 	
 	$scope.update = function(){
 		var validate=$scope.validateSave($scope.userToEdit);
+		$scope.userToEdit.dob = $scope.birthDate;
 		if(validate){
 		userService.updateUser($scope.userToEdit)
 			.then(function(msg){

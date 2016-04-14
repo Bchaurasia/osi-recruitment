@@ -13,7 +13,6 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 	   	$scope.hours = [
 	   	   			"1", "1.5", "2", "2.5", "3"
 	   	   	];
-	   	$scope.birthDate = new Date($scope.user.dob);
 	$scope.status = {
 		    isFirstOpen: true,
 		    open: true
@@ -22,9 +21,11 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 	
 	$scope.successHide = true;
 	
+	$scope.birthDate = new Date($scope.user.dob);
 	$scope.update = function(){
+		$scope.user.dob = $scope.birthDate;
 		data = userService.updateUser($scope.user).then(function(msg){
-			$scope.sendNotification(msg,'/viewUser');
+			$scope.sendNotification(msg,'#/viewUser');
 		}).catch(function(msg){
 			$scope.message=msg;
 			$scope.cls=appConstants.ERROR_CLASS;
