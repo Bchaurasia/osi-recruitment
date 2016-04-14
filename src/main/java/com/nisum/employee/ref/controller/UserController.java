@@ -28,8 +28,8 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody UserInfo userInfo) {
-		userService.registerUserByEmailId(userInfo);
-		return new ResponseEntity<String>("User registered Successfully", HttpStatus.OK);
+		UserInfo registerUser = userService.registerUserByEmailId(userInfo);
+		return new ResponseEntity<UserInfo>(registerUser, HttpStatus.OK);
 	}
 
 	@Secured({"ROLE_USER","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})

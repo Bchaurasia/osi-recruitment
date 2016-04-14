@@ -12,7 +12,6 @@ function userService($http,$rootScope,appConstants,$q) {
 	};
 	
 	function getCurrentUserDetails(){
-		console.log('getCurrentUserDetails sessionStorage.userId--->'+angular.toJson(sessionStorage.userId));
 		return getUserDetailsById(sessionStorage.userId);
 	}
 	
@@ -48,8 +47,7 @@ function userService($http,$rootScope,appConstants,$q) {
 	function addUserDetails(user){
 		return $http.post('resources/user',user)
 			        .then(function(response){
-			        	console.log("User successfully add"+angular.toJson(response.config.data));
-			        	return "User successfully add";
+			        	return response.data;
 			        })
 			        .catch(function(response){ console.log("Error while adding User"); return "Error while adding User";});
 	}
@@ -61,60 +59,19 @@ function userService($http,$rootScope,appConstants,$q) {
 	function sendGetUserError(response) {
 	     return $q.reject('Error retrieving user. status: ' + response.status );
 	}
-	
-	/*
-	 * function getUserData(response) { var user = {}; data = response.data;
-	 * if(data.length == 0){ user.emailId = sessionStorage.userId; user.roles =
-	 * []; user.roles[0] = "ROLE_USER"; $rootScope.user = user;
-	 * addUserDetails(user); }else{ user = data[0]; if(user.name== ''){
-	 * user.name = "Profile"; } } return data; }
-	 */
-	function getUserData(response) {
 
+	function getUserData(response) {
 		var user = {};
 		data = response.data;
-
 		if(data.length == 0){
-
-		if( sessionStorage.userId.includes("@")){
-
-		user.emailId = sessionStorage.userId;
-
-		user.roles = [];
-
-		user.roles[0] = "ROLE_USER";
-
-		user.name = "Profile";
-		user.name = sessionStorage.name;
-		$rootScope.user = user;
-		
-
-		
-		addUserDetails(user);
-
+			if( sessionStorage.userId.includes("@")){
+				user.emailId = sessionStorage.userId;
+				user.name = sessionStorage.name;
+				return addUserDetails(user);
+			}
 		}else{
-
-		//console.log("loged out becuase seesion expired------------------>"+sessionStorage.userId);
-
-		//console.log("sessionStorage------------------>"+angular.toJson(sessionStorage));
-
-		var url=window.location.href;
-		
-
-		var navigate=url.substring(0,url.lastIndexOf("/"));
-
-		window.location="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue="+navigate+"/login.html";  
-
-		sessionStorage.clear();
-
+			return data[0];
 		}
-
-		}else{
-
-		user = data[0];
-
-		}
-		return user;
 	}
 	function userUpdateSuccessMsg(response){
 		return response.data.message;
@@ -125,10 +82,7 @@ function userService($http,$rootScope,appConstants,$q) {
 			        .then(userUpdateSuccessMsg)
 			        .catch(sendUpdateUserError);
 	}
-	
 	function sendUpdateUserError(response) {
 	     return $q.reject('Error updating user. status: ' + response.status );
 	}
-	
-	
 }

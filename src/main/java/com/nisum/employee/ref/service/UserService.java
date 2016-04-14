@@ -14,8 +14,9 @@ public class UserService implements IUserService{
 	@Autowired
 	private UserInfoRepository userInfoRepository;
 
-	public void registerUserByEmailId(UserInfo userInfo) {
+	public UserInfo registerUserByEmailId(UserInfo userInfo) {
 		userInfoRepository.registerUserByEmailId(userInfo);
+		return userInfo;
 	}
 	
 	public boolean isUserAlradyExist(String emailId) {
