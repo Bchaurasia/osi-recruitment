@@ -42,9 +42,12 @@ body {
 }
 .range-slider__value{
     background-color: #034A85;
-    padding: 4px;
+    padding: 2px;
     color: white;
     border-radius: 4px;
+    position: absolute;
+    top: 26px;
+    right: 90px;
 }
 
 .ulwidth li{

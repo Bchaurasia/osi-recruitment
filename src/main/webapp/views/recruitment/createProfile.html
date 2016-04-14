@@ -4,7 +4,8 @@
 </div>
 <div class="row" >
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="CreateCandidate" onvalidate style="width: 90%; " >
+	<form class="col s8" name="CreateCandidate" onvalidate
+	style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
 
 		<div class="row">
 			<div class="input-field col s6">
@@ -176,8 +177,6 @@
 			</div>
 			<div class="col-md-2"></div>
 			<div class="input-field col s6">
-
-				<label>Skills Set<b class="mandatory">*</b>:</label>
 				<ui-select multiple ng-model="sk.primarySkills"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ui-select-required ng-disabled="disabled"> <ui-select-match
@@ -188,6 +187,7 @@
 				<span class="validation-error"
 					ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
 					enter your key skills.</span>
+					<label style="position: absolute;top: -22px">Skills Set<b class="mandatory">*</b>:</label>
 			</div>
 		</div>
 
@@ -233,7 +233,7 @@
 				<ui-select-choices
 					repeat="jobcode in jobcodelist | orderBy:'toString()' | filter:$select.search">
 				{{jobcode}} </ui-select-choices> </ui-select>
-				<label>Job Code </label>
+				<label style="position: absolute;top: -22px">Job Code </label>
 			</div>
 		</div>
 
@@ -242,7 +242,8 @@
 				<textarea class="materialize-textarea" cols="50" rows="2" style="width: 88%"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
 					placeholder="Enter any additional notes..."></textarea>
-				<label>Additional Notes</label>
+				<label style="position: absolute;top: -22px">Additional Notes</label>
+			</div>
 			</div>
 		</div>
 
@@ -268,7 +269,6 @@
 			</button>
 		</div>
 
-
-		<br> <br> <br>
 	</form>
 </div>
+<br> <br>

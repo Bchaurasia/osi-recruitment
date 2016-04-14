@@ -62,20 +62,21 @@
 					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label>Primary Skills<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px;">Primary Skills<b class="mandatory">*</b></label>
 			</div>
 
 			<div class="input-field col s6">
-				<textarea ng-model="position.secondarySkills" class="materialize-textarea"
-					id="secondarySkills"></textarea><label>Secondary Skills</label>
+				<textarea ng-model="position.secondarySkills" class="materialize-textarea" style="width: 77%"
+					id="secondarySkills"></textarea>
+					<label style="position: absolute; top: -22px;">Secondary Skills</label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s6">
-				<textarea id="textarea1" class="materialize-textarea" length="120"
+				<textarea id="textarea1" class="materialize-textarea" length="120" style="width: 77%"
 					ng-disabled="true" ng-model="position.jobProfile"></textarea>
-				<label>Job Description<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px;">Job Description<b class="mandatory">*</b></label>
 			</div>
 
 			<div class="input-field col s6">

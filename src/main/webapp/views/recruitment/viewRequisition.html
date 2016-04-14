@@ -54,7 +54,7 @@
 				</select> <label>Hiring HR<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Enter number of Positions" type="text"
+				<input placeholder="Enter number of Positions"
 					ng-bind="requisition.noOfPositions"
 					ng-model="requisition.noOfPositions" name="position"
 					ng-change="validateNoOfPosition(requisition.noOfPositions)"
@@ -73,7 +73,7 @@
 					ng-model="jobDescription" ng-change="setSkillsAndJDDetails()"
 					class="form-control input-sm" id="jobDescription">
 					<option value=''>Select Job Description Title</option>
-				</select> <label style="position: absolute; top: -22px;">Job
+				</select> <label class="label-alignment">Job
 					Description Title</label>
 			</div>
 
@@ -103,7 +103,7 @@
 					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label>Skills<b class="mandatory">*</b></label>
+				<label style="position: absolute;top: -22px">Skills<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -116,10 +116,10 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea id="textarea1" class="materialize-textarea" length="120"
+				<textarea class="materialize-textarea" length="120"
 					ng-model="requisition.comment"
 					placeholder="Enter any comments/notes..."></textarea>
-				<label>Requisition Comment</label>
+				<label class="label-alignment">Requisition Comment</label>
 			</div>
 		</div>
 
@@ -139,14 +139,14 @@
 					class="range-slider__value">{{requisition.percent}}%</span>
 			</div>
 			<div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove"
+				<a class="glyphicon glyphicon-remove"
 					ng-show="lengthOfQualifications()" style="cursor: pointer;"
-					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
+					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn"
+				<a id="addButtonColumn"
 					ng-disabled="checkDisability(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
-					ng-click="addColumnCriteria()"></button>
+					ng-click="addColumnCriteria()"></a>
 			</div>
 		</div>
 		<div class="row">

@@ -35,7 +35,8 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		  };
 	
 	clientService.getClientInfo().then(setClientList);
-
+	$scope.birthDate = new Date($scope.userToEdit.dob);
+	
 	function setClientList(data){
 		angular.forEach(data, function(client){
 			$scope.clientList.push(client.clientName);

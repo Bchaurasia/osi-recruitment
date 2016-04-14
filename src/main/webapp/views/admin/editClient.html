@@ -1,10 +1,12 @@
 <br>
 <div class="row" align="center">
+<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="UpdatePosition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%;">
 		<div class="row">
 			<div class="input-field col s6" align="center">
-				<label class="lbl">&nbsp;&nbsp;Client Name: </label> <input
+				<label class="lbl">&nbsp;&nbsp;Client Name: </label> 
+				<input
 					placeholder="Enter Client Name" ng-maxlength="30"
 					name="candidateName" class="form-control" type="text"
 					ng-model="client.clientName" ng-pattern="/^[a-zA-Z _]*$/">
@@ -49,7 +51,7 @@
 							
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t1user.emailId" ng-disabled="true" />
+								</label> <input  ng-model="t1user.emailId" ng-disabled="true" />
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveRoundOneUser($index);"></span>
 							</div>
@@ -90,7 +92,7 @@
 
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t2user.emailId" ng-disabled="true" />
+								</label> <input  ng-model="t2user.emailId" ng-disabled="true" />
 
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveRoundTwoUser($index);"></span>
@@ -136,7 +138,7 @@
 
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t3user.emailId" ng-disabled="true" />
+								</label> <input  ng-model="t3user.emailId" ng-disabled="true" />
 
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveManagerRoundUser($index);"></span>
@@ -180,7 +182,7 @@
 
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t4user.emailId" ng-disabled="true" />
+								</label> <input  ng-model="t4user.emailId" ng-disabled="true" />
 
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveHrRoundUser($index);"></span>

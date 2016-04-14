@@ -1,46 +1,41 @@
-<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-<div ng-class="adminCls" ng-show="message" align="center"
-	style="width: 650px; position: relative; left: -60; height: 50">
-	<h5 style="margin-top: 2px;">{{message}}</h5>
-</div>
-<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 <div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit User
+		Profile : {{userToEdit.name}}</h6>
+</div>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="input-field col s9" name="UpdatePosition" onvalidate
-		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%; left: 200;">
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
 		<div class="row">
 			<div class="input-field col s6">
-				<div class="card teal lighten-2">
-					<span style="color: grey; font-size: x-large;">Edit User</span>
-					<div class="card-action" style="background-color: white;">
-						<div class="row">
-							<div class="input-field col s6">
-								<input class="form-control" ng-change="validateChar($data)"
-									type="text" ng-model="userToEdit.name"> <label>Full
-									Name<b class="mandatory">*</b>
-								</label>
-							</div>
-							<div class="input-field col s6">
-								<input class="form-control" ng-disabled=true type="text"
-									ng-model="userToEdit.emailId"> <label>Email </label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<input class="form-control" ng-change="validatePhNo($data)"
-									type="text" ng-model="userToEdit.mobileNumber"> <label>Mobile<b
-									class="mandatory">*</b></label>
-							</div>
-							<div class="input-field col s6">
-								<input class="form-control" ng-change="validateSkypeId($data)"
-									type="text" ng-model="userToEdit.skypeId"> <label>Skype
-									ID<b class="mandatory">*</b>
-								</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<!-- <a href="" ng-click="openCal()" ng-hide="calendar">{{
+				<input class="form-control" ng-change="validateChar($data)"
+					type="text" ng-model="userToEdit.name"> <label>Full
+					Name<b class="mandatory">*</b>
+				</label>
+			</div>
+			<div class="input-field col s6">
+				<input class="form-control" ng-disabled=true type="text"
+					ng-model="userToEdit.emailId"> <label>Email </label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input class="form-control" ng-change="validatePhNo($data)"
+					type="text" ng-model="userToEdit.mobileNumber"> <label>Mobile<b
+					class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<input class="form-control" ng-change="validateSkypeId($data)"
+					type="text" ng-model="userToEdit.skypeId"> <label>Skype
+					ID<b class="mandatory">*</b>
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<!-- <a href="" ng-click="openCal()" ng-hide="calendar">{{
 									userToEdit.dob || "click here to edit..." | date:'dd/MM/yyyy'}}</a><input
 									ng-hide="hideCal" type="text" datepicker-popup="dd-MMMM-yyyy"
 									ng-model="userToEdit.dob" is-open="isOpen"
@@ -49,123 +44,61 @@
 									placeholder="Select Date of Birth" ng-required="true"
 									close-text="Close" class="input-md" /><span
 									class="input-group-btn" style="width: 75%"> </span> -->
-									<input type="date" datepicker-options="dateOptions" datepicker-popup="dd-MMMM-yyyy" ng-model="userToEdit.dob" max-date="maxDate"
-									placeholder="Select Date of Birth" ng-required="true"/> 
-									<label>DOB </label>
-								</div>
-								<div class="input-field col s6">
-									<input class="form-control" type="text"
-										ng-model="userToEdit.location"> <label>Location<b
-										class="mandatory">*</b></label>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="input-field col s6">
-									<ui-select multiple ng-model="userToEdit.roles" theme="select2"
-										ui-select-required> <ui-select-match
-										placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
-										repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
-									{{allRoles}} </ui-select-choices> </ui-select>
-									<label>Roles<b class="mandatory">*</b></label>
-								</div>
-								<div class="input-field col s6">
-									<ui-select multiple ng-model="userToEdit.skills"
-										theme="select2" ng-keypress="myFunct($event)" name='sk.skills'
-										theme="select2"> <ui-select-match
-										placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
-										repeat="skill in info.skills | orderBy:'toString()' | filter:$select.search">
-									{{skill}} </ui-select-choices> </ui-select>
-									<label>Skills<b class="mandatory">*</b></label>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="input-field col s6">
-									<ui-select multiple ng-model="userToEdit.clientName"
-										theme="select2" ng-keypress="myFunct($event)"
-										ui-select-required> <ui-select-match
-										placeholder="Select Clients..">{{$item}}</ui-select-match> <ui-select-choices
-										repeat="client in clientList | orderBy:'toString()' | filter:$select.search">
-									{{client}}</ui-select-choices> </ui-select>
-									<label>Clients<b class="mandatory">*</b></label>
-								</div>
-							</div>
-
-							<!-- <div class="card teal lighten-2" ng-init="isCollapsed = !isCollapsed">
-							<span style="color: grey; font-size: large;">Time Slots</span>
-							<div class="card-action">
-								<div class="row" align="left" style="padding-bottom: 1%;">
-									<div align="center" class="control-group"">
-										<label class="lbl">Not Available : <input
-											type="checkbox" ng-model="userToEdit.isNotAvailable">
-										</label><br />
-										<fieldset ng-disabled="userToEdit.isNotAvailable">
-											<table id="timeSLots" ng-disabled="userToEdit.isNotAvailable">
-												<tr>
-													<th>Day</th>
-													<th>Time</th>
-													<th>Hour</th>
-													<th><button class="btn btn-primary"
-															ng-click="addSlot()">
-															<span class="glyphicon glyphicon-plus"></span>
-														</button></th>
-												</tr>
-												<tr ng-repeat="slot in userToEdit.timeSlots">
-													<td><div>
-															<select ng-model='slot.day'
-																ng-options='day for day in days'>
-																<option value="">Select Day</option>
-															</select>
-														</div></td>
-													<td><div>
-															<timepicker ng-model="slot.time" ng-change="changed()"
-																hour-step="1" minute-step="10" show-meridian="true"
-																arrowkeys="false"></timepicker>
-														</div></td>
-													<td>
-														<div>
-															<selectng-model
-																='slot.hour'
-														ng-options='hour for hour in hours'>
-															<option value="">Select Hour</option>
-															</select>
-														</div>
-													</td>
-													<td>
-														<button class="btn btn-primary"
-															ng-click="removeSlot($index)">
-															<span class="glyphicon glyphicon-remove"></span>
-														</button>
-													</td>
-												</tr>
-											</table>
-										</fieldset>
-									</div>
-								</div>
-							</div>
-						</div> -->
-							<div class="row">
-								<div class="input-field col s11">
-									<button class="btn btn-info active"
-										ng-disabled="validateUser()" ng-click="update()" type="submit">
-										<span class="glyphicon glyphicon-ok-circle"></span> Save
-									</button>
-									&nbsp;
-									<button class="btn btn-info active" ui-sref="admin.users.list">
-										<span class="glyphicon glyphicon-remove"></span> Cancel
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<input type="date" datepicker-options="dateOptions"
+					datepicker-popup="dd-MMMM-yyyy" ng-model="userToEdit.dob"
+					max-date="maxDate" placeholder="Select Date of Birth"
+					ng-required="true" /> <label>DOB </label>
 			</div>
+			<div class="input-field col s6">
+				<input class="form-control" type="text"
+					ng-model="userToEdit.location"> <label>Location<b
+					class="mandatory">*</b></label>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="userToEdit.roles" theme="select2"
+					ui-select-required> <ui-select-match
+					placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
+				{{allRoles}} </ui-select-choices> </ui-select>
+				<label style="position: absolute;top: -22px">Roles<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="userToEdit.skills" theme="select2"
+					ng-keypress="myFunct($event)" name='sk.skills' theme="select2">
+				<ui-select-match placeholder="Select Skills...">{{$item}}</ui-select-match>
+				<ui-select-choices
+					repeat="skill in info.skills | orderBy:'toString()' | filter:$select.search">
+				{{skill}} </ui-select-choices> </ui-select>
+				<label style="position: absolute;top: -22px">Skills<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="input-field col s6">
+				<ui-select multiple ng-model="userToEdit.clientName" theme="select2"
+					ng-keypress="myFunct($event)" ui-select-required> <ui-select-match
+					placeholder="Select Clients..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="client in clientList | orderBy:'toString()' | filter:$select.search">
+				{{client}}</ui-select-choices> </ui-select>
+				<label style="position: absolute;top: -22px">Clients<b class="mandatory">*</b></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s11">
+				<button class="btn btn-info active" ng-disabled="validateUser()"
+					ng-click="update()" type="submit">
+					<span class="glyphicon glyphicon-ok-circle"></span> Save
+				</button>
+				&nbsp;
+				<button class="btn btn-info active" ui-sref="admin.users.list">
+					<span class="glyphicon glyphicon-remove"></span> Cancel
+				</button>
+			</div>
+		</div>
 	</form>
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 </div>
-<style>
-.form-group {
-	text-align: left;
-	padding-bottom: 2%;
-}
-</style>
+<br><br>

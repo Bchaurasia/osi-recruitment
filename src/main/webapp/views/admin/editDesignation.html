@@ -1,72 +1,61 @@
-<div ng-class="cls" ng-show="message" align="center"
-	style="width: 650px; height: 50px; margin-top: 10px; margin-left: -10%">
-	<h5 style="margin-top: 2px;">{{message}}</h5>
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
+		Designation : {{deg.designation}}</h6>
 </div>
-
 <div class="row">
 	<form class="input-field col s9" name="UpdatePosition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%; left: 200;">
 		<div class="row">
 			<div class="input-field col s6">
-				<div class="card teal lighten-2">
-					<span style="color: grey; font-size: x-large;">Edit
-						Designation</span> <br>
-					<div class="card-action" style="background-color: white;">
-						<br>
-						<div class="row">
-							<div class="input-field col s6">
-								<input class="form-control" type="text"
-									ng-model="deg.designation" ng-disabled=true> <label>Designation<b
-									class="mandatory">*</b></label>
-							</div>
+				<input class="form-control" type="text" ng-model="deg.designation"
+					ng-disabled=true> <label>Designation<b
+					class="mandatory">*</b></label>
+			</div>
 
-							<div class="input-field col s6">
-								<label class="lbl" for="notes"><i
-									class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills<b
-									class="mandatory">*</b></label>
+			<div class="input-field col s6">
+				<label style="position: absolute;top: -22px"><i
+					class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills<b
+					class="mandatory">*</b></label>
 
-								<ui-select multiple ng-model="deg.skills"
-									ng-keypress="myFunct($event)" name="pskills" theme="select2"
-									id="skills" ui-select-required ng-disabled="disabled">
-								<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
-								<ui-select-choices
-									repeat="skill in pskills | filter:$select.search">
-								{{skill}} </ui-select-choices> </ui-select>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="input-field col s6">
-								<label class="lbl" for="Experience"><i
-									class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience</label>
+				<ui-select multiple ng-model="deg.skills"
+					ng-keypress="myFunct($event)" name="pskills" theme="select2"
+					id="skills" ui-select-required ng-disabled="disabled">
+				<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
+				<ui-select-choices repeat="skill in pskills | filter:$select.search">
+				{{skill}} </ui-select-choices> </ui-select>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="input-field col s6">
+				<label class="lbl" for="Experience"><i
+					class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience</label>
 
-								<div class="input-field col s6">
-									<input type="range" ng-model="deg.minExpYear"
-										ng-change="validate1($data)" min="0" max="15" required /> <span
-										class="range-slider__value">Min:{{deg.minExpYear}}</span>
-								</div>
-								<div class="input-field col s6">
-									<input type="range" ng-model="deg.maxExpYear"
-										ng-change="validate($data)" min="0" max="15" required /> <span
-										class="range-slider__value">Max:{{deg.maxExpYear}}</span>
-								</div>
-							</div>
-						</div>
-						<br>
-						<div class="row" align="center">
-							<div class="input-field col s12">
-								<button class="btn btn-primary" type="submit"
-									ng-click="submit()">
-									<span class="glyphicon glyphicon-ok-circle"></span> Save
-								</button>
-								<button class="btn btn-primary" ui-sref="admin.designation.list">
-									<span class="glyphicon glyphicon-remove"></span> Cancel
-								</button>
-							</div>
-						</div>
-					</div>
+				<div class="input-field col s6">
+					<input type="range" ng-model="deg.minExpYear"
+						ng-change="validate1($data)" min="0" max="15" required /> <span
+						class="range-slider__value">Min:{{deg.minExpYear}}</span>
+				</div>
+				<div class="input-field col s6">
+					<input type="range" ng-model="deg.maxExpYear"
+						ng-change="validate($data)" min="0" max="15" required /> <span
+						class="range-slider__value">Max:{{deg.maxExpYear}}</span>
 				</div>
 			</div>
+		</div>
+		<br>
+		<div class="row" align="center">
+			<div class="input-field col s12">
+				<button class="btn btn-primary" type="submit" ng-click="submit()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Save
+				</button>
+				<button class="btn btn-primary" ui-sref="admin.designation.list">
+					<span class="glyphicon glyphicon-remove"></span> Cancel
+				</button>
+			</div>
+
 		</div>
 	</form>
 </div>

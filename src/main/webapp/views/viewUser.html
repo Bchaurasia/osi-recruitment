@@ -1,4 +1,4 @@
-<div class="container" ng-controller="editUserCtrl">
+<div ng-controller="editUserCtrl">
 
 	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
 	<div ng-class="cls" ng-show="message" align="center"
@@ -6,6 +6,104 @@
 		<h5 style="margin-top: 2px;">{{message}}</h5>
 	</div>
 	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
+
+	<div class="row">
+		<form class="input-field col s9" name="UpdatePosition" onvalidate
+			style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%; left: 200;">
+			<div class="row">
+				<div class="input-field col s11">
+					<span style="color: grey; font-size: x-large;">User
+						Information</span>
+					<div class="card-action" style="background-color: white;">
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<label><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Full
+									Name<b style="color: red;">*</b></label> <input class="form-control"
+									ng-change="validateChar($data)" type="text"
+									ng-model="user.name">
+							</div>
+							<div class="input-field col s6">
+								<input class="form-control" ng-disabled=true type="text"
+									ng-model="user.emailId"> <label class="lbl" for="date"><i
+									class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Your Email<b
+									style="color: red;">*</b> : </label>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<input class="form-control" ng-change="validatePhNo($data)"
+									maxlength="15" type="text" ng-model="user.mobileNumber">
+								<label class="lbl"><i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;
+									Mobile<b style="color: red;">*</b>: </label>
+							</div>
+							<div class="input-field col s6">
+								<input class="form-control" ng-change="validateSkypeId($data)"
+									type="text" ng-model="user.skypeId"> <label class="lbl"
+									for="skypeId"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Skype
+									ID:</label>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="date" ng-model="birthDate" id="birthDate" required>
+								<label class="lbl"><i
+									class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;DOB <b
+									style="color: red;">*</b> : </label>
+							</div>
+							<div class="input-field col s6">
+								<label class="lbl" for="skypeId"><i
+									class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Location
+									: </label> <input class="form-control" type="text"
+									ng-model="user.location">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<ui-select multiple ng-model="user.roles" theme="select2"
+									ng-disabled=true ui-select-required> <ui-select-match
+									placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
+									repeat="role in user.roles | orderBy:'toString()' | filter:$select.search">
+								{{role}} </ui-select-choices> </ui-select>
+								<label class="lbl" for="primarySkill"><i
+									class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Roles :</label>
+							</div>
+							<div class="input-field col s6">
+								<ui-select multiple ng-model="user.skills"
+									ng-keypress="myFunct($event)" name='sk.skills' ng-disabled=true
+									theme="select2"> <ui-select-match
+									placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
+									repeat="skill in user.skills | orderBy:'toString()' | filter:$select.search">
+								{{skill}} </ui-select-choices> </ui-select>
+								<label class="lbl" for="user.skills"> <i
+									class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills :
+								</label>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="input-field col s11">
+								<button class="btn btn-info active" ng-click="update()"
+									type="submit">
+									<span class="glyphicon glyphicon-ok-circle"></span> Save
+								</button>
+								&nbsp;
+								<button class="btn btn-info active" ui-sref="main">
+									<span class="glyphicon glyphicon-remove"></span> Cancel
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<!-- 
 	<div align="center">
 		<accordion close-others=false> <accordion-group
 			is-open="status.isFirstOpen"> <accordion-heading>
@@ -44,7 +142,7 @@
 			</div>
 		</div>
 		<br>
-		
+
 		<div class="row" align="left">
 			<div>
 				<div class="col-md-1"></div>
@@ -53,8 +151,8 @@
 						Mobile<b style="color: red;">*</b>: </label>
 				</div>
 				<div class="col-md-3">
-					<a href="#" maxlength="15" editable-text="user.mobileNumber" 
-					onbeforesave="validatePhNo($data)" e-required>{{
+					<a href="#" maxlength="15" editable-text="user.mobileNumber"
+						onbeforesave="validatePhNo($data)" e-required>{{
 						user.mobileNumber || "click Here To Edit" }}</a>
 
 				</div>
@@ -66,13 +164,13 @@
 				</div>
 				<div class="col-md-3">
 					<a href="#" maxlength="15" editable-text="user.skypeId"
-					onbeforesave="validateSkypeId($data)" e-required>{{
+						onbeforesave="validateSkypeId($data)" e-required>{{
 						user.skypeId || "click Here To Edit" }}</a>
 				</div>
 			</div>
 		</div>
 		<br>
-		
+
 		<div class="row" align="left">
 			<div>
 				<div class="col-md-1"></div>
@@ -81,12 +179,11 @@
 						<b style="color: red;">*</b> : </label>
 				</div>
 				<div class="col-md-3">
-					<a href="" ng-click="openCal()" ng-hide="calendar">{{
-						user.dob || "click here to edit..." | date:'dd/MM/yyyy'}}</a><input
+					<a href="" ng-click="openCal()" ng-hide="calendar">{{ user.dob
+						|| "click here to edit..." | date:'dd/MM/yyyy'}}</a><input
 						ng-hide="hideCal" type="text" datepicker-popup="dd-MMMM-yyyy"
-						ng-model="user.dob" is-open="isOpen"
-						ng-click="isOpen = true" max-date="maxDate"
-						datepicker-options="dateOptions"
+						ng-model="user.dob" is-open="isOpen" ng-click="isOpen = true"
+						max-date="maxDate" datepicker-options="dateOptions"
 						placeholder="Select Date of Birth"
 						date-disabled="disabled(date, mode)" ng-required="true"
 						close-text="Close" class="input-md" /><span
@@ -147,61 +244,62 @@
 				</div>
 			</div>
 		</div>
-		</accordion-group> 
-		<div ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
-		<accordion-group ng-hide="hideDetails" is-open="status.open"
-			class="accordionBg"> <accordion-heading>
-		<font style="color: white">Available Time-Slots</font> <i
-			class="pull-right glyphicon accordionHeader"
-			ng-class="{'glyphicon-minus': status.open, 'glyphicon-plus': !status.open}"></i>
-		</accordion-heading>
+		</accordion-group>
+		<div
+			ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+			<accordion-group ng-hide="hideDetails" is-open="status.open"
+				class="accordionBg"> <accordion-heading>
+			<font style="color: white">Available Time-Slots</font> <i
+				class="pull-right glyphicon accordionHeader"
+				ng-class="{'glyphicon-minus': status.open, 'glyphicon-plus': !status.open}"></i>
+			</accordion-heading>
 
-		<div class="row" align="left" style="padding-bottom: 10px;">
-			<div align="center" class="control-group"">
-				<label class="lbl">Not Available : <input type="checkbox"
-					ng-model="user.isNotAvailable">
-				</label><br />
-				<fieldset ng-disabled="user.isNotAvailable">
-					<table id="timeSLots" ng-disabled="user.isNotAvailable">
-						<tr>
-							<th>Day</th>
-							<th>Time</th>
-							<th>Hour</th>
-							<th><button class="btn btn-primary" ng-click="addSlot()">
-									<span class="glyphicon glyphicon-plus"></span>
-								</button></th>
-						</tr>
-						<tr ng-repeat="slot in user.timeSlots">
-							<td><div>
-									<select style="line-height: 20px;" ng-model='slot.day'
-										ng-options='day for day in days'>
-										<option value="">Select Day</option>
-									</select>
-								</div></td>
-							<td><div>
-									<timepicker ng-model="slot.time" ng-change="changed()"
-										hour-step="1" minute-step="10" show-meridian="true"
-										arrowkeys="false"></timepicker>
-								</div></td>
-							<td>
-								<div>
-									<select style="line-height: 20px;" ng-model='slot.hour'
-										ng-options='hour for hour in hours'>
-										<option value="">Select Hour</option>
-									</select>
-								</div>
-							</td>
-							<td>
-								<button class="btn btn-primary" ng-click="removeSlot($index)">
-									<span class="glyphicon glyphicon-remove"></span>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</fieldset>
+			<div class="row" align="left" style="padding-bottom: 10px;">
+				<div align="center" class="control-group"">
+					<label class="lbl">Not Available : <input type="checkbox"
+						ng-model="user.isNotAvailable">
+					</label><br />
+					<fieldset ng-disabled="user.isNotAvailable">
+						<table id="timeSLots" ng-disabled="user.isNotAvailable">
+							<tr>
+								<th>Day</th>
+								<th>Time</th>
+								<th>Hour</th>
+								<th><button class="btn btn-primary" ng-click="addSlot()">
+										<span class="glyphicon glyphicon-plus"></span>
+									</button></th>
+							</tr>
+							<tr ng-repeat="slot in user.timeSlots">
+								<td><div>
+										<select style="line-height: 20px;" ng-model='slot.day'
+											ng-options='day for day in days'>
+											<option value="">Select Day</option>
+										</select>
+									</div></td>
+								<td><div>
+										<timepicker ng-model="slot.time" ng-change="changed()"
+											hour-step="1" minute-step="10" show-meridian="true"
+											arrowkeys="false"></timepicker>
+									</div></td>
+								<td>
+									<div>
+										<select style="line-height: 20px;" ng-model='slot.hour'
+											ng-options='hour for hour in hours'>
+											<option value="">Select Hour</option>
+										</select>
+									</div>
+								</td>
+								<td>
+									<button class="btn btn-primary" ng-click="removeSlot($index)">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</fieldset>
+				</div>
 			</div>
-		</div>
-		</accordion-group> 
+			</accordion-group>
 		</div>
 		<br>
 		<center>
@@ -215,5 +313,6 @@
 
 		</accordion>
 		<br>
-	</div>
+	</div> -->
+
 </div>

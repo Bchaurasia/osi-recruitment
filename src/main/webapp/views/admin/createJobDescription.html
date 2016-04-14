@@ -2,7 +2,7 @@
 <!-- ----------------------------------alert Message--------------------------------------------------------- -->
 	<div ng-class="cls" ng-show="message" align="center"
 		style="width: 850px; position: relative; left: -60; height: 50">
-		<h5 style="margin-top: 2px;">{{message}}</h5>
+		<h6 style="margin-top: 2px;">{{message}}</h6>
 	</div>
 </div>
 
@@ -18,7 +18,7 @@
 
 			<div class="row">
 				<div class="input-field col s6">
-						<input style="width: 245px; margin-left: 0%;" type="text"
+						<input  type="text"
 							id="jobDescription"
 							name="jobDescription" class="form-control"
 							ng-model="jobDescription.jobDescriptionName" 
@@ -63,12 +63,9 @@
 				</div>						
 
 				<div class="row">
-					<div class="input-field col s6">
-						<label>Job Description Details<b class="mandatory">*</b> &nbsp;&nbsp;&nbsp;<small>(500 chars)</small></label>
-					</div>	
-					<br>
 					<div class="input-field col s12">
-						<textarea id="textarea1" class="materialized-textarea" 
+						<label>Job Description Details<b class="mandatory">*</b> &nbsp;&nbsp;&nbsp;<small>(500 chars)</small></label>
+						<textarea  class="materialize-textarea" 
 							ng-keyup="jdDetailsCharLimit(jobDescription.jobDescriptionDetails)"
 							ng-model="jobDescription.jobDescriptionDetails"
 							placeholder="Enter job description details..." required></textarea>

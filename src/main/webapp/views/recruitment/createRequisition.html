@@ -2,10 +2,10 @@
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
 	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Create Requisition</h6>
 </div>
-<div class="row" style="">
+<div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="CreateRequisition" onvalidate
-		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 80%">
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Designation" ng-change="getData()"
@@ -100,7 +100,7 @@
 								class="form-control input-sm" id="jobDescription">
 								<option value='' disabled="disabled">Select Job Description Title</option>
 							</select>
-				<label style="position: absolute; top: -22px;">Job Description Title</label>
+				<label class="label-alignment">Job Description Title</label>
 			</div>
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="requisition.skillType"
@@ -117,7 +117,7 @@
 				<textarea id="textarea1" class="materialize-textarea" length="120"
 					ng-model="requisition.jobDescription"
 					placeholder="Enter any comments/notes..." required></textarea>
-				<label>Job Description<b class="mandatory">*</b></label>
+				<label class="label-alignment">Job Description<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -125,7 +125,7 @@
 				<textarea id="textarea1" class="materialize-textarea" length="120"
 					ng-model="requisition.comment"
 					placeholder="Enter any comments/notes..."></textarea>
-				<label>Requisition Comment</label>
+				<label class="label-alignment">Requisition Comment</label>
 			</div>
 		</div>
 		<div class="row" ng-repeat=" requisition in requisition.qualifications">
@@ -183,6 +183,7 @@
 			</button>
 		</div>
 	</form>
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
 </div>
 <br>
 <br>

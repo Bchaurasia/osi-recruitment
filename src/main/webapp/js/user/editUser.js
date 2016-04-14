@@ -13,6 +13,7 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 	   	$scope.hours = [
 	   	   			"1", "1.5", "2", "2.5", "3"
 	   	   	];
+	   	$scope.birthDate = new Date($scope.user.dob);
 	$scope.status = {
 		    isFirstOpen: true,
 		    open: true

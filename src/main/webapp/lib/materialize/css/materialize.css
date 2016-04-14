@@ -9078,6 +9078,7 @@ textarea.materialize-textarea {
   /* prevents text jump on Enter keypress */
   resize: none;
   min-height: 3rem;
+  width: 88%;
 }
 
 .hiddendiv {
