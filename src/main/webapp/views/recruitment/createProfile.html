@@ -194,7 +194,7 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="candidate.designation" name="designation"
-					ng-change="jobCodeSl()"
+					ng-change="setJobCodes()"
 					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select Designation</option>
@@ -225,17 +225,16 @@
 					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
+			{{sk.jobcodeProfile}}
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="sk.jobcodeProfile"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select JobCodes..">{{$item.jobcode}}</ui-select-match>
+					placeholder="Select JobCodes..">{{$item}}</ui-select-match>
 				<ui-select-choices
-					repeat="position in positionData | orderBy:'toString()' | filter:$select.search">
-				{{position.jobcode}} </ui-select-choices> </ui-select>
-
-				<label>Job Code <b class="mandatory">*</b></label>
-
+					repeat="jobcode in jobcodelist | orderBy:'toString()' | filter:$select.search">
+				{{jobcode}} </ui-select-choices> </ui-select>
+				<label>Job Code </label>
 			</div>
 		</div>
 

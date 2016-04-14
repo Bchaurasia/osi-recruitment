@@ -4,6 +4,7 @@ angular.module('erApp')
 function profileService($http,$filter,$rootScope,appConstants,$q) {
 	return {
 		getProfileByCreateremailId : getProfileByCreateremailId,
+		updateProfile : updateProfile,
 		addProfiles : addProfiles,
 		updateProfiles : updateProfiles,
 		getProfileById : getProfileById,
@@ -47,6 +48,12 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		
 	}
 	
+	function updateProfile(profile){
+		return $http.put('resources//profile', profile)
+		.then(updateProfileSuccess)
+		.catch(sendErrorprofileMsg);
+	}
+	
 	function updateProfiles(profile){
 		return $http.put('resources/profileUpload', profile)
 		.then(updateProfileSuccess)
@@ -55,7 +62,9 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 	
 	function getProfileById(emailId){
 		return $http.get('resources/profile?emailId='+emailId)
-			 .then(getProlilesData)
+			 .then(function(response){
+					return response.data[0];
+				})
 			 .catch(sendErrorprofileMsg);
 	}
 	

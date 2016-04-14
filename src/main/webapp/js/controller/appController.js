@@ -1,8 +1,5 @@
 angular.module('erApp')
-.run(['$anchorScroll', function($anchorScroll) {
-    $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
-}])
-	.controller('appCtrl',['$scope','$http','$anchorScroll','$rootScope','$filter','$location','$timeout','appConstants','infoService','userService','sharedDataService',
+.controller('appCtrl',['$scope','$http','$anchorScroll','$rootScope','$filter','$location','$timeout','appConstants','infoService','userService','sharedDataService',
 	                       function($scope, $http,$anchorScroll,$rootScope,$filter,$location,$timeout,appConstants,infoService,userService,sharedDataService) {
 	$scope.user = {};
 	$scope.info ={};
@@ -34,6 +31,7 @@ angular.module('erApp')
 	}
 		return false;
 	};
+	}
 	
 	$scope.hasNotRole = function(role) {
 		var roleArray = role.split(','); 
@@ -56,7 +54,7 @@ angular.module('erApp')
 		if(path.length > 0){
 			$location.path(path);
 		}
-	}
+	};
 	
 	$scope.sendNotificationWithStyle = function(msg,cls,path){
 		$scope.message=msg;
@@ -85,7 +83,7 @@ angular.module('erApp')
 	    $scope.message = "";
 	    $scope.cls = '';
 	}
-}}]);
+}]);
 
 app.filter('offset', function() {
 	  return function(input, start) {

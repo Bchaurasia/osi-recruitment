@@ -88,6 +88,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    	$scope.candidate.plocation = $scope.selection.pLocation;
 		    	$scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
+		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.profileTimeStamp = timeStamp;
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
@@ -203,7 +204,17 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
         if (keyEvent.which === 13)
                 keyEvent.preventDefault();
 	}
-	
+	$scope.setJobCodes = function(){
+		$scope.sk.jobcodeProfiles=[];
+		$scope.jobcodelist=[];
+		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
+			angular.forEach(data, function(job){
+		        	$scope.jobcodelist.push(job.jobcode);
+			});
+		}).catch(function(msg){
+			$log.error(msg);
+		})
+	}
 	
 	designationService.getDesignation().then(function(data){
 		$scope.designations=data;

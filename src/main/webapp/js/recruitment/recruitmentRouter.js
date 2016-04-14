@@ -22,7 +22,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                }
         }
     })
-    .state('recruitment.viewProfile', {url:'/viewProfile', views: {'': {templateUrl: 'views/recruitment/viewProfile.html', controller: 'editProfileSearchCtrl'}},
+    .state('recruitment.viewProfile', {url:'/viewProfile', views: {'': {templateUrl: 'views/recruitment/viewProfile.html', controller: 'editProfileCtrl'}},
     	resolve : {
         	permission: function(authorizationService,$route) {
         		return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN","ROLE_USER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
