@@ -41,13 +41,10 @@ body {
 	margin-top: -15px;
 }
 .range-slider__value{
-    background-color: #034A85;
-    padding: 2px;
+    background-color: #26A69A;
+    padding: 4px;
     color: white;
     border-radius: 4px;
-    position: absolute;
-    top: 26px;
-    right: 90px;
 }
 
 .ulwidth li{
@@ -342,9 +339,6 @@ input, button, select, textarea {
 	color: #999;
 }
 
-.logoStyle{
-	height: 70%;	
-}
 .footer a {
 	color: #999;
 }
@@ -1693,7 +1687,7 @@ input, button, select, textarea {
 	margin-top: 0;
 	height: 35px;
 	border-top: 1px solid #6FA4CB;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	left: 0;
 	width: 100%;

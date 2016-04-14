@@ -26,6 +26,14 @@
 <link href="lib/bootstrap/font/font-awesome.css" rel="stylesheet">
 <link href="lib/bootstrap/font/google_font.css" rel="stylesheet">
 
+<!-- material design css and js -->
+
+<link rel="stylesheet"
+	href="lib/materialize/css/loginmaterialize.min.css" type="text/css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"
+	type="text/javascript"></script>
+
 <link href="static/osi_css/style.css" rel="stylesheet" type="text/css">
 <link href="static/osi_css/signin.css" rel="stylesheet" type="text/css">
 
@@ -79,43 +87,39 @@
 			</div>
 		</div>
 		<!-- /navbar -->
-		<div style="padding-left: 15%; padding-right: 15%">
+		<div
+			style="padding-left: 20%; padding-right: 25%; padding-top: -2%; padding-bottom: -1%">
 			<div class="row well">
-
+            <!-- <h6>Sign in with OSI Credential</h6> -->
 				<div class="col-md-1"></div>
-				<h4>Invalid Credentials <b>or</b> No Internet Connection</h4>
-				<div class="col-md-5">
-					<form class="form-horizontal" action="j_spring_security_check"
-						method="post" id="ldapUserlogin" autocomplete="off"
-						name="ldapUserlogin">
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input type="text" class="form-control" name="username"
-								ng-model="login.username" id="custom-input-username"
-								placeholder="Email address" required
-								 ng-pattern="/^[a-zA-Z]+@osius\.com$/">
+				<div class="col-md-5" style="border-right: 1px solid black;">
+				<h6 style="color: black;" >Signin with your OSI account</h6>
+				<h7 style="color: red;">Invaild credential/ Check Connectivity</h7>
+					<form class="form-horizontal login-form"
+						action="j_spring_security_check" method="post" id="ldapUserlogin"
+						autocomplete="off" name="ldapUserlogin">
+						<div class="row margin">
+							<div class="input-field col s12">
+								<i class="mdi-social-person-outline prefix"></i> <input
+									type="email" class="validate" name="username"
+									ng-model="login.username" id="custom-input-username"
+									ng-pattern="/^[a-zA-Z]+@osius\.com$/" required> <label
+									for="custom-input-username" class="center-align">Email</label>
+							</div>
+							<div ng-messages="ldapUserlogin.username.$error" role="alert">
+								<div class="error-alert" ng-message="pattern">Enter
+									OSI credential</div>
+							</div>
+							<span class="help-block"></span>
+							<div class="input-field col s12">
+								<i class="mdi-action-lock-outline prefix"></i> <input
+									type="password" name="password"
+									ng-model="login.password" id="custom-input-password" required> <label
+									for="custom-input-password">Password</label>
+							</div>
+							<div ng-messages="ldapUserlogin.password.$error" role="alert">
+							</div>
 						</div>
-						<div ng-messages="ldapUserlogin.username.$error" role="alert">
-							<!-- ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/" -->
-							<div class="error-alert" ng-message="pattern">Enter valid
-									osi credentials </div>
-							<div class="error-alert" ng-message="minlength, maxlength">Your
-									email must be between 5 and 100 characters long</div>
-						</div>
-						<span class="help-block"></span>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input type="password" class="form-control" minlength="3"
-								maxlength="20" name="password" ng-model="login.password"
-								id="custom-input-password" placeholder="Password" required>
-						</div>
-						<div ng-messages="ldapUserlogin.password.$error" role="alert">
-							<!-- <div class="error-alert" ng-message="pattern">Enter valid
-								password</div> -->
-							<!-- <div class="error-alert" ng-message="minlength, maxlength">Your
-										password must be between 5 and 20 characters long</div> -->
-						</div>
-
 						<input type="hidden" ng-model="login.j_username" name="j_username"
 							value="{{login.username}}" /> <input type="hidden"
 							ng-model="login.j_password" name="j_password"
@@ -123,59 +127,40 @@
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="login-help">
-									<p>
-										<!-- Forgot your password? <a href="#">Click here to reset it</a>. -->
-									</p>
+									<p></p>
 								</div>
-								<!-- <div class="checkbox">
-										<label> <input type="checkbox"> Remember me
-										</label>
-									</div> -->
 							</div>
 						</div>
+						<!-- 	<div class="row">
+							<div>
+								<input type="checkbox" id="remember-me" /> <label
+									for="remember-me">Remember Me </label>
+							</div>
+						</div> -->
 						<div class="form-group">
-						
-						<div class="col-sm-6">
-							<h5>
-								<input type="checkbox" style="float: left; width: 24px;"><label
-									style="float: left;">Remember Me </label>
-							</h5>
-						</div>
-						
-							<div class=" col-sm-6">
-								<button class="btn btn-lg btn-primary btn-block" type="submit"
-									ng-click="userLogin()" ng-disabled="ldapUserlogin.$invalid">Login</button>
+						<div class="row">
+							<div class="input-field col s12">
+								<button class="btn waves-effect waves-light col s10"
+									type="submit" ng-click="userLogin()"
+									ng-disabled="ldapUserlogin.$invalid">Login</button>
 							</div>
 						</div>
-						
-						<div class="form-group">
-							<div class="col-sm-6">
-								<h5>
-									<a style="color: red">Register Now</a>
-								</h5>
+						</div>
+						<div class="row">
+							<div class="input-field col s6 m6 l6">
+								<p class="margin medium-small">
+									<a href="register.html">Register Now!</a>
+								</p>
 							</div>
-							<div class="col-sm-6">
-								<h5>
-									<a>Forgot Password?</a>
-								</h5>
+							<div class="input-field col s6 m6 l6">
+								<p class="margin right-align medium-small">
+									<a href="https://login.osius.com/showLogin.cc" target="_blank">Forgot password?</a>
+								</p>
 							</div>
 						</div>
 
 					</form>
 				</div>
-
-				<div class="col-md-1">
-					<div class="or-text-row">
-						<div class="or-text-line ">
-							<button type="button" class="btn btn-default btn-circle"
-								disabled="disabled">
-								<b>or</b>
-							</button>
-						</div>
-					</div>
-				</div>
-
-
 				<div class="col-md-2">
 					<div class="row google-signin field">
 						<div style="display: none">
@@ -195,41 +180,46 @@
 							<div class=" btn-group">
 								<button type="button" id="signInG"
 									class="btn btn-block btn-social btn-google">
-									<i class="fa fa-google-plus"></i>Sign in with google
+									<i class="fa fa-google-plus"></i>Sign in with google+
 								</button>
+							</div>
 							</google-plus-signin>
 						</div>
-						<!--  <script type="in/Login"></script> 
-									<input type="image" src="images/Signin_Linkedin_2.gif"
-									onclick="onLinkedInLoad()" alt="submit"
-									value="Sign in using LinkedIn account" />
-								<button id="linkedIn" onclick="onLinkedInLoad()"></button>  -->
 					</div>
 				</div>
-				<div class="row">
-					<div class="btn-group">
-						<button type="button" class="btn btn-info" disabled="disabled">
-							<i class="fa fa-linkedin"></i>Sign in with Linkedin
-						</button>
-					</div>
-				</div>
+
+
+				<!-- <div class="btn-group" style="padding-left: 35px">
+					<button type="button" id="linkedIn"
+						class="btn btn-block btn-social btn-linkedIn" disabled="true">
+						<i class="fa fa-linkedin"></i> Sign in with Linkedin
+					</button>
+				</div> -->
+
+				<div id="profiles"></div>
 			</div>
 		</div>
-
 	</div>
 
+	<!-- /account-container -->
+
 	<div>
-			<div class="footer">
-				<div class="footer-inner">
-					<div class="container">
-						<div class="row">
-							<div align="center" class="span12">
-								&copy; 2015 <a href="http://www.nisum.com/">OSI Technologies</a>.
-							</div>
+		<div class="footer">
+			<div class="footer-inner">
+				<div class="container"  align="center" style="margin-left: 20px">
+					<div class="row">
+						<div align="center" class="span12">
+							&copy; 2015 <a href="http://www.osius.com/" style="margin-left: 3px;">OSI Technologies</a>.
 						</div>
+						<!-- /span12 -->
 					</div>
+					<!-- /row -->
 				</div>
+				<!-- /container -->
 			</div>
+			<!-- /footer-inner -->
+		</div>
+		<!-- /footer -->
 	</div>
 
 	<script src="lib/bootstrap/js/bootstrap.js"></script>
