@@ -1,5 +1,5 @@
-app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService', 
-                                        function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService) {
+app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService','sharedService','positionService', 
+                                        function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService,sharedService,positionService) {
 	$scope.data = {};
 	$scope.sel = {};
 	$scope.candidate = {};
@@ -43,19 +43,46 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.skills = [];
 	$scope.skillset = [];
 	$scope.profile = {};
-	
+	$scope.jobcodelist=[];
+	$scope.interviewerName={};
 	$scope.init = function() {
 		if(sharedService.getjobCode() == undefined || sharedService.getprofileUserId() == undefined) {
 			$state.go("recruitment.interviewManagement");
 		}
+		$scope.jobcodelist=[];
+		positionService.getPosition().then(function(data){
+			$scope.jobcodelist=data;
+		}).catch(function(msg){
+			$log.error(msg);
+		});
+		
+		positionService.getPosition().then(function(data){
+			$scope.jobcodelist=data;
+		}).catch(function(msg){
+			$log.error(msg);
+		});
+		
+		userService.getInterviewUsers().then(function(userData){
+			 $scope.interviewerNames = userData;
+		});
+		
 		$scope.emailId = sharedService.getprofileUserId();
-		$scope.jobcode = sharedService.getjobCode();
+		//$scope.jobcode = sharedService.getjobCode();
 	}
 	$scope.init();
 	
 	var URL = $http.get('resources/profile?emailId='+$scope.emailId);
 	var URL1 = 'resources/profile?emailId='+$scope.emailId;
 	
+	
+	setJobCodes = function(){
+		$scope.jobcodelist=[];
+		positionService.getPosition().then(function(data){
+			$scope.jobcodelist=data;
+		}).catch(function(msg){
+			$log.error(msg);
+		});
+	}
 	
 	profileService.getProfileById($scope.emailId).then(
 		function(response){
@@ -136,7 +163,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.schedule = function(){
-		blockUI.start("Scheduling..");
 		setTimeout(function () {
 		$scope.interviewschedule.jobcode = $scope.jobCodeSel;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;

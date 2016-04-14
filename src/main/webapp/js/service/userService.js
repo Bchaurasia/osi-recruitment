@@ -4,6 +4,7 @@ angular.module('erApp')
 function userService($http,$rootScope,appConstants,$q) {
 	return {
 		getUsers : getUserDetails,
+		getInterviewUsers : getInterviewUserDetails,
 		getCurrentUser : getCurrentUserDetails,
 		getUserById : getUserDetailsById,
 		getUserDetailsByName : getUserDetailsByName,
@@ -43,6 +44,15 @@ function userService($http,$rootScope,appConstants,$q) {
 			        })
 			         .catch(sendGetUserError);
 	}
+	
+	function getInterviewUserDetails(){
+		return $http.get('resources/user')
+			        .then(function(response){
+			        	return data = _.filter(response.data, function(user){ return _.contains(user.roles, 'ROLE_INTERVIEWER'); });
+			        })
+			         .catch(sendGetUserError);
+	}
+	
 	
 	function addUserDetails(user){
 		return $http.post('resources/user',user)
