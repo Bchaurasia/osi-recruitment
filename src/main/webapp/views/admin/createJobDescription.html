@@ -20,10 +20,9 @@
 				<div class="input-field col s6">
 						<input style="width: 245px; margin-left: 0%;" type="text"
 							id="jobDescription"
-							ng-keyup="jdNameCharLimit(jobDescription.jobDescriptionName)"
 							name="jobDescription" class="form-control"
 							ng-model="jobDescription.jobDescriptionName" 
-							ng-blur="validateJDName(jobDescription.jobDescriptionName)"
+							ng-change="validateJDName(jobDescription.jobDescriptionName)"
 							placeholder="Enter Title" required>
 						<label class="lbl" for="jobDescription" style="position: absolute; top: -22px;">Job Description Title<b
 								style="color: red;">*</b></label>	 
@@ -35,6 +34,7 @@
 							Job Description Title is required.</div>
 						<span class="validation-error" ng-show="jdNameLengthErr">Title Name should be atleast 5 chars.</span>
 						<span class="validation-error" ng-show="jdNameMaxLengthErr">Job Description Title exceeded 30 chars.</span>	
+						<span class="validation-error" ng-show="jdNameErr">Job Title already exists.&nbsp;&nbsp;&nbsp;&nbsp;</span>	
 
 												
 					</div>
@@ -80,8 +80,8 @@
 					</div>
 				</div>
 			<div align="center">
-				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdDescritptionErr"
-						ng-click="save()">
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdNameErr || jdDescritptionErr 
+						|| jdNameMaxLengthErr || jdNameLengthErr" ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save 
 				</button>
 				&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.jobDescription.list"

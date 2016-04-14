@@ -58,20 +58,29 @@ app.controller('createJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', 
 	$scope.validateJDName= function(jdName) {
         if(jdName.length < 5){
                 $scope.jdNameLengthErr = true;
-        }else{ 
-        	            $scope.jdNameLengthErr = false;
-        	            jobDescriptionService.validateJDName(jdName).then(function(data){
-        	                    if(data.length !== 0){
-        	                            $scope.jdNameErr = true;
-        	                    }else{
-        	                            $scope.jdNameErr = false;
-        	                    }
-        	            }).catch(function(msg){
-        	                    $scope.message=msg;
-        	                     $scope.cls=appConstants.ERROR_CLASS;
-        	                     $scope.gotoAnchor();
-        	                     $timeout( function(){ $scope.alHide(); }, 5000);
-        	            });
+                $scope.jdNameErr = false;
+                $scope.jdNameMaxLengthErr = false;
+        }else{
+        	if (jdName.length > 30) {
+     	  	   $scope.jdNameMaxLengthErr = true;
+     	  	   $scope.jdNameLengthErr = false;
+     	  	   $scope.jdNameErr = false;
+     		}else{
+	        	$scope.jdNameLengthErr = false;
+	        	$scope.jdNameMaxLengthErr = false;
+	            jobDescriptionService.validateJDName(jdName).then(function(data){
+	                    if(data.length !== 0){
+	                            $scope.jdNameErr = true;
+	                    }else{
+	                            $scope.jdNameErr = false;
+	                    }
+	            }).catch(function(msg){
+	                    $scope.message=msg;
+	                     $scope.cls=appConstants.ERROR_CLASS;
+	                     $scope.gotoAnchor();
+	                     $timeout( function(){ $scope.alHide(); }, 5000);
+	            });
+     		}   
         }        
 	}
 
@@ -82,14 +91,6 @@ app.controller('createJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', 
 	       }
 	};
 	
-	$scope.jdNameCharLimit = function(jdDescription) {
-	   if (jdDescription.length > 30) {
-	  	   $scope.jdNameMaxLengthErr = true;
-		}else{
-		 $scope.jdNameMaxLengthErr = false;
-		}
-	};
-
 	$scope.jdDetailsCharLimit = function(jdDescription) {
 		if (jdDescription.length > 500) {
 		  $scope.jdDescritptionErr = true;
