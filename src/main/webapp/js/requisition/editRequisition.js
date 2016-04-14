@@ -330,7 +330,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	 }
 		
 	$scope.getJobDescriptionByClient = function(client){
-		jobDescriptionService.getJobDescriptionByClient(client).then(function(data){
+		jobDescriptionService.getJobDescriptionByClient(client.clientName).then(function(data){
 			$scope.JobDescriptionList = data;
 		});
 	}
