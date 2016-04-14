@@ -13,6 +13,7 @@ app.controller('createJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', 
 	$scope.jdDescritptionErr = false;
 	
 	clientService.getClientInfo().then(setClientList);
+	
 	function setClientList(data){
 		angular.forEach(data, function(client){
 			$scope.clientList.push(client.clientName);
