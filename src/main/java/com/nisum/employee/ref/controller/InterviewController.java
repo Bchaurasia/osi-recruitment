@@ -47,22 +47,23 @@ public class InterviewController {
 	@RequestMapping(value = "/getInterview", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewerId", required = true) String interviewerId) {
 		List<InterviewDetails> checkDetails = interviewDetailsService.getInterview(interviewerId);
-		return (null == checkDetails) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
-				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
+		return new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
-	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail,@RequestParam(value = "jobCode", required = false) String jobCode) {
+	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail) {
 		List<InterviewDetails> checkDetails = null;
-		if(!(StringUtils.isEmpty(interviewerEmail) || StringUtils.isEmpty(jobCode))){
-			checkDetails = interviewDetailsService.getInterviewByInterviewerAndJobCode(interviewerEmail,jobCode);
-		}
-		else if(!StringUtils.isEmpty(interviewerEmail)){
-			checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
-		}
-		return (null == checkDetails) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
-				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
+		checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
+		return new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/getInterviewByJobCode", method = RequestMethod.GET)
+	public ResponseEntity<?> getInterviewByJobCode(@RequestParam(value = "jobCode", required = false) String jobCode) {
+		List<InterviewDetails> checkDetails = null;
+			checkDetails = interviewDetailsService.getInterviewByInterviewerAndJobCode(jobCode);
+		return  new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})

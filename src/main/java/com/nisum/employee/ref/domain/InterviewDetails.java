@@ -25,6 +25,7 @@ public class InterviewDetails  {
 	String progress;
 	String designation;
 	String hrAssigned;
+	String jobCode;
 	List <Round> rounds;
 
 }

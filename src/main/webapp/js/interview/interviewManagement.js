@@ -23,7 +23,14 @@
 		$scope.advancedHide = true;
 		
 		$scope.searchQuery="";
+		$scope.interviewCandidates=[];
 		
+		interviewService.getInterviewDetailsByCandidateId().then(
+				function(data){
+					$scope.interviewCandidates = data;
+				}).catch(function(response){
+					
+				});
 		$scope.feedback = function(positionId, candidateEmail) {
 			sharedService.setprofileUserId(candidateEmail);
 			sharedService.setjobCode(positionId);

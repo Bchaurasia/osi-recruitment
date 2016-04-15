@@ -1,5 +1,5 @@
-app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService',
-                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService) {
+app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService','interviewService',
+                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService,interviewService) {
 		
 	$scope.hideRounds= true;
 	$scope.hideSkills = true;
@@ -25,22 +25,32 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.statuses = ["Active", "Inactive", "Hired", "OnHold", "Rejected"];
 	$scope.priorities=["Low","Medium","High"];
 	$scope.hideStatuses = true;
+	
+	$scope.interviewCandidates=[];
+	
 	$scope.init = function() {
 		if(sharedService.getjobCode() == undefined) {
 			$state.go("recruitment.searchPosition");
 		}
 		$scope.jobcode =sharedService.getjobCode();	
+		/*
+		interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
+				function(data){
+					$scope.interviewCandidates = data;
+				}).catch(function(response){
+		}); 
+		*/
 	}
 	
 	$scope.init();
 	
-	positionService.getPositionByJobcode($scope.jobcode).then(function(data){
-	    	$scope.position =data;
-			$scope.enableDisableButton = false;
-	    }).catch(function(msg){
-	    	$log.error(msg); 
-	});
-	
+	$scope.getInterviewers = function(){
+		interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
+				function(data){
+					$scope.interviewCandidates = data;
+				}).catch(function(response){
+		});
+	}
 	clientService.getClientName()
 					.then(function(response){
 							$scope.pskills=$scope.info.skills;

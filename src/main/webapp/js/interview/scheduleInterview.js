@@ -278,7 +278,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.onLoad = function(){
 		var User_URL='resources/user?emailId='+sessionStorage.userId;
-		var interviewSchDetails_URL= 'resources/getInterviewByInterviewer?interviewerEmail='+sessionStorage.userId+'&jobCode='+$scope.jobcode;
+		var interviewSchDetails_URL= 'resources/getInterviewByInterviewer?interviewerEmail='+sessionStorage.userId;
 		
 		$http.get(User_URL).success(function(data, status, headers, config) {
 			$scope.getInterviewerInfo();

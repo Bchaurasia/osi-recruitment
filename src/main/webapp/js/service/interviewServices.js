@@ -6,6 +6,7 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 		getInterviewFeedback : getInterviewFeedback,
 		submitInterviewFeedback : submitInterviewFeedback,
 		getInterviewDetailsByCandidateId : getInterviewDetailsByCandidateId,
+		getInterviewDetailsByJobCode : getInterviewDetailsByJobCode,
 		createInterview : createInterview,
 		updateInterview : updateInterview,
 		searchInterviewDetails : searchInterviewDetails
@@ -45,6 +46,16 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 		return $http.get('resources/getInterviewByParam?candiateId='+candidateId)
 		     .then(function(response){
 		    	 return response.data[0];
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving candidate Deatils status: ' + response.status );
+		     });
+	}
+	
+	function getInterviewDetailsByJobCode(jobCode){
+		return $http.get('resources/getInterviewByJobCode?jobCode='+jobCode)
+		     .then(function(response){
+		    	 return response.data;
 		     })
 		     .catch(function(response){
 		    	 return $q.reject('Error while retrieving candidate Deatils status: ' + response.status );

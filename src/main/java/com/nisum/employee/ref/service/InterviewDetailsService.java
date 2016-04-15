@@ -121,10 +121,10 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	}
 	
 	
-	public List<InterviewDetails> getInterviewByInterviewerAndJobCode(String interviewerEmail,String jobCode) {
+	public List<InterviewDetails> getInterviewByInterviewerAndJobCode(String jobCode) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
-		query.addCriteria(Criteria.where("interviewerEmail").regex(Pattern.compile(interviewerEmail, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)).and("currentPositionId").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+		query.addCriteria(Criteria.where("jobCode").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
