@@ -12,14 +12,14 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	$scope.skills = [];
 	$scope.dis2 = true;
 	$scope.dis = false;
-	$scope.skills1={};
+	$scope.skills1=[];
 	$scope.newSkill="";
 	$scope.message="";
 	$scope.hideError = true;
 		
 		infoService.getInfoById('skills').then(function(skills){
 		$scope.skills1 = skills;
-		$scope.skills=skills.value;
+		$scope.skills=skills.value.sort();
 		}).catch(function(data, status, headers, config) {
 			 
 		})
@@ -64,6 +64,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
      $scope.deleteSkill = function(index,skill){
 	 var deleteUser = $window.confirm('Are you absolutely sure you want to delete?');
 	 if(deleteUser){
+		$scope.skills1.value.sort();
 		$scope.skills1.value.splice(index,1);
 			
 		infoService.updateInformation($scope.skills1).then(function(msg){
