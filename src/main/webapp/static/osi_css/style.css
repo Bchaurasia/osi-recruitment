@@ -40,6 +40,15 @@ body {
 	height: 94px;
 	margin-top: -15px;
 }
+.bannerleft{
+	position: absolute;
+	left: 24%;
+}
+
+.bannerright{
+	position: absolute;
+	left: 19%;
+}
 .range-slider__value{
     background-color: #26A69A;
     padding: 4px;
