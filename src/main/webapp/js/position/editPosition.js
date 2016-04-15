@@ -25,8 +25,16 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.statuses = ["Active", "Inactive", "Hired", "OnHold", "Rejected"];
 	$scope.priorities=["Low","Medium","High"];
 	$scope.hideStatuses = true;
+	$scope.userRole = $rootScope.user.roles;
+	$scope.flagDisabled=true;
 	
 	$scope.interviewCandidates=[];
+	
+	(function(){
+		if(_.contains($scope.userRole, 'ROLE_ADMIN','ROLE_HR','ROLE_REQUISITION_MANAGER','ROLE_REQUISITION_APPROVER')){
+			$scope.flagDisabled = false;
+		}
+	}());
 	
 	$scope.init = function() {
 		if(sharedService.getjobCode() == undefined) {
@@ -34,15 +42,21 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		}
 		$scope.jobcode =sharedService.getjobCode();	
 		/*
-		interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
-				function(data){
-					$scope.interviewCandidates = data;
-				}).catch(function(response){
-		}); 
-		*/
+		 * interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
+		 * function(data){ $scope.interviewCandidates = data;
+		 * }).catch(function(response){ });
+		 */
 	}
 	
 	$scope.init();
+	
+	positionService.getPositionByJobcode($scope.jobcode).then(function(data){
+		        $scope.position =data;
+		        console.log(angular.toJson($scope.position));
+		         $scope.enableDisableButton = false;
+		}).catch(function(msg){
+		        $log.error(msg); 
+		});
 	
 	$scope.getInterviewers = function(){
 		interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
@@ -51,6 +65,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 				}).catch(function(response){
 		});
 	}
+	
 	clientService.getClientName()
 					.then(function(response){
 							$scope.pskills=$scope.info.skills;
@@ -59,7 +74,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 							angular.forEach($scope.clients,function(cl){
 								$scope.client.push(cl.clientName);
 							}
-					 )}).catch(function(msg){
+			 )}).catch(function(msg){
 						 $log.error(msg);
 	});
 	
@@ -84,7 +99,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
 		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
-		//$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
+		// $scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
 		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
 		})
 		

@@ -1,23 +1,22 @@
 <div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h5 class="col-md-8 col-sm-8 col-xs-8" align="left"><b>Edit Requisition: {{requisition.requisitionId}}</b></h5>
+</div>
+
+<div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="CreateRequisition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
 
 		<div class="row">
 			<div class="input-field col s6">
-				<b class="bannerleft">{{requisition.requisitionId}}</b> <label>Requisition:</label>
+				<b class="bannerleft">{{requisition.position}}</b> <label>Designation:</label>
 			</div>
 			<div class="input-field col s6">
 				<b class="bannerright">{{creator.name}}</b> <label>Creator:</label>
 			</div>
 		</div>
-		<br>
-		<div class="row">
-			<div class="input-field col s6">
-				<b class="bannerleft">{{requisition.position}}</b> <label>Designation:</label>
-			</div>
-		</div>
-		<br>
+		<br> <br>
 		<div class="row">
 			<div class="input-field col s6">
 				<input type="date" ng-model="requisitionDate" ng-disabled="true"
@@ -119,7 +118,7 @@
 				<textarea id="textarea1" class="materialize-textarea" length="120"
 					ng-model="requisition.jobDescription"
 					placeholder="Enter any comments/notes..." required></textarea>
-				<label>Job Description<b class="mandatory">*</b></label>
+				<label style="top:-34%">Job Description<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -127,7 +126,7 @@
 				<textarea class="materialize-textarea" length="120"
 					ng-model="requisition.comment"
 					placeholder="Enter any comments/notes..."></textarea>
-				<label class="label-alignment">Requisition Comment</label>
+				<label class="label-alignment" style="top: -34%">Requisition Comment</label>
 			</div>
 		</div>
 

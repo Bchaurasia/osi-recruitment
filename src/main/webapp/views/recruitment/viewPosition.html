@@ -1,26 +1,29 @@
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit Position
-		: {{position.jobcode}}</h6>
+	<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">
+		<b>Edit Position: {{jobcode}}</b>
+	</h5>
 </div>
+
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="UpdatePosition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Designation"
 					ng-model="position.designation"
 					ng-options="o as o for o in designation1 | orderBy:'toString()'"
-					ng-disabled="true" class="form-control input-sm" required>
+					class="form-control input-sm" ng-disabled="flagDisabled" required>
 					<option value="">{{position.designation}}</option>
-				</select> <label>Position<b class="mandatory">*</b></label>
+				</select> <label>Designation<b class="mandatory">*</b></label>
 			</div>
 
 			<div class="input-field col s6">
 				<select placeholder="Select Location" ng-model="position.location"
 					ng-options="o as o for o in info.locations | orderBy:'toString()'"
-					ng-disabled="true" class="form-control input-sm" required>
+					class="form-control input-sm" ng-disabled="flagDisabled" required>
 					<option value="">{{position.location}}</option>
 				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
@@ -31,25 +34,25 @@
 			<div class="input-field col s6">
 				<div class="row">
 					<div class="input-field col s6">
-						<input type="range" ng-model="requisition.minExpYear"
-							ng-disabled="true" ng-change="min(requisition.minExpYear)"
+						<input type="range" ng-model="position.minExpYear"
+							ng-disabled="flagDisabled" ng-change="min(requisition.minExpYear)"
 							min="0" max="15" required /> <span class="range-slider__value">Min:{{position.minExpYear}}</span>
 					</div>
 					<div class="input-field col s6">
-						<input type="range" ng-model="requisition.maxExpYear"
-							ng-disabled="true" ng-change="max(requisition.maxExpYear)"
+						<input type="range" ng-model="position.maxExpYear"
+							ng-disabled="flagDisabled" ng-change="max(requisition.maxExpYear)"
 							min="0" max="15" required /> <span class="range-slider__value">Max:{{position.maxExpYear}}</span>
 					</div>
 				</div>
-				<label style="margin-top: 14px">Exp. Required<b
+				<label style="margin-top: 14px" >Experience Required<b
 					class="mandatory">*</b></label>
 			</div>
+
 			<div class="input-field col s6">
-				<select placeholder="Select Client"
+				<select placeholder="Select Client" ng-model="position.client"
 					ng-options="o as o for o in clients | orderBy:'toString()'"
-					ng-model="position.client" ng-disabled="true"
-					class="form-control input-sm" required>
-					<option value="">{{position.client}}</option>
+					class="form-control input-sm" ng-disabled="flagDisabled" required>
+					<option value="position.client"></option>
 				</select> <label>Client<b class="mandatory">*</b></label>
 			</div>
 		</div>
@@ -62,30 +65,39 @@
 					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">Primary Skills<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px;">Primary
+					Skills<b class="mandatory">*</b>
+				</label>
 			</div>
 
 			<div class="input-field col s6">
-				<textarea ng-model="position.secondarySkills" class="materialize-textarea" style="width: 77%"
+				<textarea ng-model="position.secondarySkills"
+					class="materialize-textarea" style="width: 77%"
 					id="secondarySkills"></textarea>
-					<label style="position: absolute; top: -22px;">Secondary Skills</label>
+				<label style="position: absolute; top: -22px;">Secondary
+					Skills</label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s6">
-				<textarea id="textarea1" class="materialize-textarea" length="120" style="width: 77%"
-					ng-disabled="true" ng-model="position.jobProfile"></textarea>
-				<label style="position: absolute; top: -22px;">Job Description<b class="mandatory">*</b></label>
+				<textarea id="textarea1" class="materialize-textarea" length="120"
+					style="width: 77%" ng-disabled="flagDisabled"
+					ng-model="position.jobProfile" required></textarea>
+				<label style="position: absolute; top: -22px;">Job
+					Description<b class="mandatory">*</b>
+				</label>
 			</div>
 
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="position.interviewRounds"
-					theme="select2" ng-disabled="disabled"> <ui-select-match
-					placeholder="Select Rounds..">{{$item}}</ui-select-match> <ui-select-choices
+					ui-select-required theme="select2" ng-disabled="flagDisabled">
+				<ui-select-match placeholder="Select Rounds..">{{$item}}</ui-select-match>
+				<ui-select-choices
 					repeat="color in interviewRounds | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label style="position: relative;top: -26px;">Interview Rounds<b class="mandatory">*</b></label>
+				<label style="top: -23px">Interview Rounds<b
+					class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -122,7 +134,7 @@
 
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="hasNotRole('ROLE_ADMIN,ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+			ng-disabled="UpdatePosition.$invalid"
 				ng-click="updatePositionDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Save
 			</button>
