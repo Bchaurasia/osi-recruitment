@@ -8,10 +8,10 @@
 				<input type="text" class="form-control" ng-model="search"  ng-enter="searchProfileQuery()"data-tooltip="Search By Name,Email Id or Designation">
 				<div align="left">
 					&nbsp;&nbsp; <a class="btn-floating"
-						ng-click="searchProfileQuery()"><i class="material-icons">search</i></a>&nbsp;&nbsp;
+						ng-click="searchProfileQuery()"data-tooltip="Search Profile"><i class="material-icons">search</i></a>&nbsp;&nbsp;
 					<a class="btn-floating"
 						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
-						href="#recruitment/createProfile"><i class="material-icons">add</i></a>
+						href="#recruitment/createProfile"data-tooltip="Create Profile"><i class="material-icons">add</i></a>
 				</div>
 			</div>
 			<div class="col-md-1" align="center" />
