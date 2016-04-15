@@ -26,7 +26,7 @@ public class Position  {
 	String client;
 	String priority;
 	Integer noOfPositions;
-	String interviewer;
+	//String interviewer;
 	String jobType;
 	String salary;
 	UserVO hiringManager;

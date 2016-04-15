@@ -46,6 +46,19 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		 * function(data){ $scope.interviewCandidates = data;
 		 * }).catch(function(response){ });
 		 */
+		userService.getUsers()
+		.then(function(data){
+			$scope.users = data;
+			
+			$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
+			$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+			$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
+			console.log(user.emailId);
+			console.log(angulartoJson());
+			// $scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
+			$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
+			});
+		
 	}
 	
 	$scope.init();
@@ -92,18 +105,6 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		$scope.hrManager = $scope.position.hiringManager;
 	};
 	
-	userService.getUsers()
-	.then(function(data){
-		$scope.users = data;
-		
-		$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
-		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
-		$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
-		// $scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
-		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
-		})
-		
-	  
 		
 	    ngNotify.config({
 		    theme: 'pure',
@@ -115,14 +116,13 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		});
 		
 	    $scope.updatePositionDetails = function() {
-	    	
 		var position1={};
 		var skills =[];
 		if ($scope.position !== undefined) {
 			 $scope.position.updatedBy = $scope.user.emailId;
 			 $scope.position.hiringManager.name  = $scope.hrManager.name;
 			 $scope.position.hiringManager.emailId  = $scope.hrManager.emailId;
-			 $scope.position.interviewer = $scope.interviewer.emailId;
+			// $scope.position.interviewer = $scope.interviewer.emailId;
 		     positionService.updatePosition($scope.position).then(
 			    function(msg){
 			    	$scope.sendNotification(msg,'recruitment/searchPosition');
