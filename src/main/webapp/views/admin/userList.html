@@ -1,42 +1,58 @@
-<!-- <div ng-show="message" ng-include="'notificationTemplate.html'"></div> -->
-<table class="bordered" style="width: 80%;">
-	<tr>
-		<th>Name</th>
-		<th>Email ID</th>
-		<th>Roles</th>
-		<th>Edit</th>
-	</tr>
+<form action="#" class="searchRequisition" onvalidate>
+	<form role="form" class="form-horizontal">
+		<div class="row" style="width: 90%">
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+				<input type="text" class="form-control" ng-model="searchQuery"
+					ng-enter="">
+				<div align="left">
+					&nbsp;&nbsp; <a class="btn-floating" ng-click=""><i
+						class="material-icons">search</i></a>
+				</div>
+			</div>
+			<br>
 
-	<tr class="animate-repeat"
-		ng-repeat="user in users  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
-		style="font-size: 80%">
-		<td class="mdl-data-table__cell--non-numeric">{{user.name}}</td>
-		<td class="mdl-data-table__cell--non-numeric"><a
-			ng-click="editUser(user)" ui-sref="admin.users.edit">{{user.emailId}}</a></td>
-		<td class="mdl-data-table__cell--non-numeric" style="font-size: 90%">{{
-			user.roles.join(',')}}</td>
-		<td class="mdl-data-table__cell--non-numeric" align="center"><a
-			ng-click="editUser(user)" ui-sref="admin.users.edit"
-			class="glyphicon glyphicon-edit"></a></td>
-	</tr>
-	<br>
-</table>
-<div class="row" style="width: 90%">
-	<div class="col-md-3" align="left">
-		<h5>
-			<small> Total Positions : {{ users.length }}</small>
-		</h5>
-	</div>
-	<div class="col-md-9">
-		<ul class="pagination1 pull-right">
-			<li ng-class="{disabled: currentPage == 0}"><a
-				ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
-			<li ng-repeat="n in range(currentPage)"
-				ng-class="{active: n == currentPage}" ng-click="setPage()"><a
-				ng-bind="n + 1"></a></li>
-			<li class="waves-effect"
-				ng-class="{disabled: currentPage == pageCount() - 1}"><a
-				ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
-		</ul>
-	</div>
-</div>
+		</div>
+		<table class="bordered" style="width: 80%;">
+			<tr>
+				<th>Name</th>
+				<th>Email ID</th>
+				<th>Roles</th>
+				<th>Edit</th>
+			</tr>
+
+			<tr class="animate-repeat"
+				ng-repeat="user in users  | filter: searchQuery| offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+				style="font-size: 80%">
+				<td class="mdl-data-table__cell--non-numeric">{{user.name}}</td>
+				<td class="mdl-data-table__cell--non-numeric"><a
+					ng-click="editUser(user)" ui-sref="admin.users.edit">{{user.emailId}}</a></td>
+				<td class="mdl-data-table__cell--non-numeric" style="font-size: 90%">{{
+					user.roles.join(',')}}</td>
+				<td class="mdl-data-table__cell--non-numeric" align="center"><a
+					ng-click="editUser(user)" ui-sref="admin.users.edit"
+					class="glyphicon glyphicon-edit"></a></td>
+			</tr>
+			<br>
+		</table>
+		<div class="row" style="width: 90%">
+			<div class="col-md-3" align="left">
+				<h5>
+					<small> Total Positions : {{ users.length }}</small>
+				</h5>
+			</div>
+			<div class="col-md-9">
+				<ul class="pagination1 pull-right">
+					<li ng-class="{disabled: currentPage == 0}"><a
+						ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+					<li ng-repeat="n in range(currentPage)"
+						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+						ng-bind="n + 1"></a></li>
+					<li class="waves-effect"
+						ng-class="{disabled: currentPage == pageCount() - 1}"><a
+						ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</form>
