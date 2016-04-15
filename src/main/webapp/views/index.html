@@ -36,29 +36,22 @@
 					<div class="widget widget-nopad">
 
 
-						<div class="widget-header">
-							<i class="icon-bookmark"></i>
-							<h3>Important Shortcuts</h3>
-						</div>
-						<!-- /widget-header -->
-						<div class="widget-content">
-							<div class="shortcuts">
-								<a href="#admin/users" class="shortcut"><i
-									class="shortcut-icon icon-user"></i><span
-									class="shortcut-label">Users</span> </a> <a
-									href="#recruitment/searchPosition" class="shortcut"><i
-									class="shortcut-icon icon-picture"></i><span
-									class="shortcut-label">Positions</span> </a> <a href="#report"
-									class="shortcut"><i class="shortcut-icon icon-signal"></i>
-									<span class="shortcut-label">Reports</span> </a> <a
-									href="javascript:;" class="shortcut"><i
-									class="shortcut-icon icon-file"></i><span
-									class="shortcut-label">Notes</span> </a>
-							</div>
-							<!-- /shortcuts -->
-						</div>
-						<!-- /widget-content -->
-
+						<div class="widget-header"> <i class="icon-bookmark"></i>
+              <h3>Important Shortcuts</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <div class="shortcuts"> 
+	              <a href="#admin/users" class="shortcut" ng-show="hasRole('ROLE_ADMIN')"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Admin</span> </a>
+	              <a href="#recruitment/searchPosition" class="shortcut" ng-show="hasRole('ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="shortcut-icon icon-picture"></i><span class="shortcut-label">Positions</span> </a>
+	              <a href="#recruitment/searchRequisition" class="shortcut" ng-show="hasRole('ROLE_ADMIN,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Requisition</span> </a>
+	              <a href="#recruitment/searchProfile" class="shortcut" ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Profile</span> </a>
+	              <a href="#recruitment/interviewManagement" class="shortcut" ng-show="hasRole('ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="shortcut-icon icon-picture"></i><span class="shortcut-label">Interview</span> </a>
+	              
+             </div>
+              <!-- /shortcuts --> 
+            </div>
+            <!-- /widget-content -->
 
 					</div>
 				</div>
