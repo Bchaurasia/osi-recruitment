@@ -9,6 +9,11 @@
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="UpdatePosition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Edit Position : {{position.jobcode}}</b>
+			</h5>
+		</div>
 		
 		<div class="row">
 			<div class="input-field col s6">
@@ -131,13 +136,28 @@
 				</select> <label>Status</label>
 			</div>
 		</div>
-
+		
+		<ul class="collapsible collapsible-accordion"
+			data-collapsible="accordion" ng-show="accordian"
+			style="margin-left: 10px; margin-right: 90px;">
+			<li ng-repeat="interviewCandidate in interviewCandidates">
+				<div class="collapsible-header" style="text-align: left;">
+					<span> <label style="font-size: 17px;"><i
+							class="material-icons">person</i>{{interviewCandidate.candidateName}}
+							: </label> <label style="font-size: 14px;">&nbsp;{{interviewCandidate.candidateEmail}},
+							&nbsp;{{interviewCandidate.progress}}</label>
+					</span>
+				</div>
+			</li>
+		</ul>
+		
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-			ng-disabled="UpdatePosition.$invalid"
+				ng-disabled="UpdatePosition.$invalid"
 				ng-click="updatePositionDetails()">
-				<span class="glyphicon glyphicon-ok-circle"></span> Save
+				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>
+			
 			<button class="btn btn-info active"
 				ui-sref="recruitment.searchPosition">
 				<span class="glyphicon glyphicon-remove"></span> Cancel
