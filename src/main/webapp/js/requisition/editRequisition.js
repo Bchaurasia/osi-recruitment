@@ -145,6 +145,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 			$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
 			$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
+			$scope.creator = _.find(data, function(user){ return user.emailId === $scope.requisition.createdBy});
 		});
 	var getDateObj = function(value){
 		return new Date(value);

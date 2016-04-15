@@ -1,15 +1,23 @@
 <div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Edit
-		Requisition : {{requisition.requisitionId}}</h6>
-	<div class="input-field col s4">
-		<h6>Position -{{requisition.position}}</h6>
-	</div>
-</div>
-<div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="CreateRequisition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+
+		<div class="row">
+			<div class="input-field col s6">
+				<b class="bannerleft">{{requisition.requisitionId}}</b> <label>Requisition:</label>
+			</div>
+			<div class="input-field col s6">
+				<b class="bannerright">{{creator.name}}</b> <label>Creator:</label>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="input-field col s6">
+				<b class="bannerleft">{{requisition.position}}</b> <label>Designation:</label>
+			</div>
+		</div>
+		<br>
 		<div class="row">
 			<div class="input-field col s6">
 				<input type="date" ng-model="requisitionDate" ng-disabled="true"
@@ -73,8 +81,7 @@
 					ng-model="jobDescription" ng-change="setSkillsAndJDDetails()"
 					class="form-control input-sm" id="jobDescription">
 					<option value=''>Select Job Description Title</option>
-				</select> <label class="label-alignment">Job
-					Description Title</label>
+				</select> <label class="label-alignment">Job Description Title</label>
 			</div>
 
 		</div>
@@ -103,7 +110,8 @@
 					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
 					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 				{{color}} </ui-select-choices> </ui-select>
-				<label style="position: absolute;top: -22px">Skills<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px">Skills<b
+					class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -142,8 +150,7 @@
 				<a class="glyphicon glyphicon-remove"
 					ng-show="lengthOfQualifications()" style="cursor: pointer;"
 					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a id="addButtonColumn"
+				&nbsp;&nbsp;&nbsp;&nbsp; <a id="addButtonColumn"
 					ng-disabled="checkDisability(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
 					ng-click="addColumnCriteria()"></a>
