@@ -7642,7 +7642,7 @@ small {
 
 .btn, .btn-large, .btn-flat {
 	border: none;
-	border-radius: 9px;
+	border-radius: 0px;
 	display: inline-block;
 	height: 36px;
 	line-height: 36px;
@@ -8223,7 +8223,7 @@ button:focus {
 
 label {
 	font-size: 0.8rem;
-	color: #9e9e9e
+	color: #004D87
 }
 
 ::-webkit-input-placeholder {
