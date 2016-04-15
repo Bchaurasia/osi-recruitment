@@ -23,7 +23,7 @@ public class UserInfoRepository{
 	private MongoOperations mongoOperations;
 
 	public void registerUserByEmailId(UserInfo userInfo) {
-		mongoOperations.save(createOSILdapUserInfo(userInfo));
+		mongoOperations.save(createOsiUserInfo(userInfo));
 	}
 	
 	public List<UserInfo> retrieveUser() {
@@ -56,12 +56,15 @@ public class UserInfoRepository{
 		return userInfo;
 	}
 	
-	public UserInfo createOSILdapUserInfo(UserInfo userInfo) {
+	public UserInfo createOsiUserInfo(UserInfo userInfo) {
 		List<String> defualtRoles = new ArrayList<String>();
 		defualtRoles.add(ROLE_USER);
-		//UserInfo userInfo = new UserInfo();
 		userInfo.setEmailId(userInfo.getEmailId());
+		if(null!=userInfo.getName()){
 		userInfo.setName(userInfo.getName());
+		}else{
+		userInfo.setName(userInfo.getEmailId());	
+		}
 		userInfo.setCompany(OSI);
 		userInfo.setRoles(defualtRoles);
 		return userInfo;
