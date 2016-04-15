@@ -90,13 +90,13 @@
 		<div
 			style="padding-left: 20%; padding-right: 25%; padding-top: -2%; padding-bottom: -1%">
 			<div class="row well">
-                 
+
 				<div class="col-md-1"></div>
 				<div class="col-md-5" style="border-right: 1px solid black;">
 					<form class="form-horizontal login-form"
 						action="j_spring_security_check" method="post" id="ldapUserlogin"
 						autocomplete="off" name="ldapUserlogin">
-						<h6 style="color: black;" >Signin with your OSI account</h6>
+						<h6 style="color: black;">Signin with your OSI account</h6>
 						<div class="row margin">
 							<div class="input-field col s12">
 								<i class="mdi-social-person-outline prefix"></i> <input
@@ -106,14 +106,16 @@
 									for="custom-input-username" class="center-align">Email</label>
 							</div>
 							<div ng-messages="ldapUserlogin.username.$error" role="alert">
-								<div class="error-alert" ng-message="pattern">Enter
-									OSI credential</div>
+								<div class="error-alert" ng-message="pattern" style="margin-left: -40px">Enter OSI
+									credentials<br>(Example: username@osius.com)</div>
+									
 							</div>
+							
 							<span class="help-block"></span>
 							<div class="input-field col s12">
 								<i class="mdi-action-lock-outline prefix"></i> <input
-									type="password" name="password"
-									ng-model="login.password" id="custom-input-password" required> <label
+									type="password" name="password" ng-model="login.password"
+									id="custom-input-password" required> <label
 									for="custom-input-password">Password</label>
 							</div>
 							<div ng-messages="ldapUserlogin.password.$error" role="alert">
@@ -130,20 +132,33 @@
 								</div>
 							</div>
 						</div>
-						<!-- 	<div class="row">
-							<div>
-								<input type="checkbox" id="remember-me" /> <label
-									for="remember-me">Remember Me </label>
-							</div>
-						</div> -->
-						<div class="form-group">
-						<div class="row">
-							<div class="input-field col s12">
-								<button class="btn waves-effect waves-light col s10"
-									type="submit" ng-click="userLogin()"
-									ng-disabled="ldapUserlogin.$invalid">Login</button>
+						<!-- <div class="form-group">
+								<div class="row">
+								
+									<label><input type="checkbox"> Remember me</label>
+									<input type="checkbox" id="remember-me" /> <label
+										for="remember-me">Remember Me </label>
+								</div>
+						
+						</div>
+ -->
+						<!-- <div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox"> Remember me</label>
+								</div>
 							</div>
 						</div>
+ -->
+
+						 <div class="form-group">
+							<div class="row">
+								<div class="input-field col s12">
+									<button class="waves-effect waves-light btn col s10"
+										type="submit" ng-click="userLogin()"
+										ng-disabled="ldapUserlogin.$invalid">Login</button>
+								</div>
+							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6 m6 l6">
@@ -153,7 +168,8 @@
 							</div>
 							<div class="input-field col s6 m6 l6">
 								<p class="margin right-align medium-small">
-									<a href="https://login.osius.com/showLogin.cc" target="_blank">Forgot password?</a>
+									<a href="https://login.osius.com/showLogin.cc" target="_blank">Forgot
+										password?</a>
 								</p>
 							</div>
 						</div>
@@ -205,8 +221,9 @@
 			<div class="footer-inner">
 				<div class="container" align="center" style="margin-left: 20px">
 					<div class="row">
-						<div  class="span12">
-							&copy; 2015 <a href="http://www.osius.com/" style="margin-left: 3px;">OSI Technologies.</a>
+						<div class="span12">
+							&copy; 2015 <a href="http://www.osius.com/"
+								style="margin-left: 3px;">OSI Technologies.</a>
 						</div>
 						<!-- /span12 -->
 					</div>
@@ -217,7 +234,7 @@
 			<!-- /footer-inner -->
 		</div>
 		<!-- /footer -->
-		
+
 	</div>
 
 	<script src="lib/bootstrap/js/bootstrap.js"></script>
