@@ -8,11 +8,11 @@
 				<input type="text" class="form-control" ng-model="searchTxt"
 					placeholder="" ng-enter="searchRequisition()"data-tooltip="Search By Requisition Id,Designation,Client or Status">
 				<div align="left">
-					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchRequisition()"><i
+					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchRequisition()"data-tooltip="Search Requisition"><i
 						class="material-icons">search</i></a>&nbsp;&nbsp; <a
 						class="btn-floating"
 						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-						href="#recruitment/createRequisition"><i
+						href="#recruitment/createRequisition"data-tooltip="Create Requisition"><i
 						class="material-icons">add</i></a>
 				</div>
 				<div class="col-md-1"></div>
