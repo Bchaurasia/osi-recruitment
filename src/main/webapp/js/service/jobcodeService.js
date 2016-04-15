@@ -3,6 +3,7 @@ angular.module('erApp').service('sharedService', function() {
 	var clientName;
 	var interviewRound;
 	var profileUserId;
+	var interviewId;
 	var jobCode;
 	var designation;
 	var message;
@@ -17,7 +18,13 @@ angular.module('erApp').service('sharedService', function() {
 		getjobCode : function() {
 			return jobCode;
 		},
-
+		setInterviewId : function(code) {
+			interviewId = code;
+		},
+		getInterviewId : function() {
+			return interviewId;
+		},
+		
 		setprofileUserId : function(code) {
 			profileUserId = code;
 		},

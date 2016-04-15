@@ -27,7 +27,7 @@
 			</div>
 			<div class="input-field col s6">
 				<input type="email" name="emailId" class="form-control"
-					ng-model="candidate.emailId"
+					ng-model="candidate.emailId" disabled="true"
 					ng-blur="validateEmailId(candidate.emailId)"
 					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
 					placeholder="Enter Email Id." required> <label style="position: absolute; top: -22px;">Email
@@ -226,7 +226,7 @@
 					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-		<div class="input-field col s6">
+		<!-- <div class="input-field col s6">
 				<ui-select multiple ng-model="sk.jobcodeProfiles"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ng-disabled="disabled"> <ui-select-match
@@ -237,7 +237,7 @@
 				<label style="position: absolute; top: -22px;">Job Code</label>
 
 			</div>
-		</div>
+		</div> -->
 
 		<div class="row">
 			<div class="input-field col s12">

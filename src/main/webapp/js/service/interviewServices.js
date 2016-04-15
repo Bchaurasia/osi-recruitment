@@ -9,9 +9,19 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 		getInterviewDetailsByJobCode : getInterviewDetailsByJobCode,
 		createInterview : createInterview,
 		updateInterview : updateInterview,
-		searchInterviewDetails : searchInterviewDetails
+		searchInterviewDetails : searchInterviewDetails,
+		getInterviewDetailsById : getInterviewDetailsById
 	};
 	
+	function getInterviewDetailsById(interviewId){
+		return $http.get('resources/getInterview?interviewId='+interviewId)
+		     .then(function(response){
+		    	 return response;
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving candidate Deatils status: ' + response.status );
+		     });
+	}
 	
 	function searchInterviewDetails(queryText){
 		return $http.get('resources/searchInterviewDetails?interviewerQuery='+queryText)

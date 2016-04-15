@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
+import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.repository.ProfileRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
@@ -24,9 +25,26 @@ public class ProfileService implements IProfileService{
 	@Autowired
 	InterviewSearchService interviewSearchService;
 	
+	@Autowired
+	InterviewService interviewService;
+	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		profileRepository.prepareCandidate(candidate);
+		InterviewDetails interview = prepareInterviewDetails(candidate);
+		interviewService.prepareInterview(interview);
 		return profileSearchService.addProfileIndex(candidate);
+	}
+
+	private InterviewDetails prepareInterviewDetails(Profile candidate) {
+		InterviewDetails interview = new InterviewDetails();
+		interview.setCandidateName(candidate.getCandidateName());
+		interview.setCandidateEmail(candidate.getEmailId());
+		interview.setCandidateSkills(candidate.getPrimarySkills());
+		interview.setDesignation(candidate.getDesignation());
+		interview.setHrAssigned(candidate.getHrAssigned());
+		interview.setProgress("Not Initialized");
+		interview.setInterviewerId(candidate.getEmailId()+"_"+(int)(Math.random() * 5000 + 1));
+		return interview;
 	}
 	
 	public void updateCandidate(Profile candidate) {

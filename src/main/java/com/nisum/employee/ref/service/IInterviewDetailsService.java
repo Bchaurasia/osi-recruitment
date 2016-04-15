@@ -13,7 +13,7 @@ public interface IInterviewDetailsService {
 	
 	InterviewDetails  scheduleInterview(InterviewSchedule interviewSchedule) throws Exception;
 	
-	List<InterviewDetails> getInterview(String interviewerId);
+	InterviewDetails getInterview(String interviewerId);
 	
 	List<InterviewDetails> getInterviewByInterviewer(String interviewerEmail) ;
 		

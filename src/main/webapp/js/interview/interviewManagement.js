@@ -36,9 +36,8 @@
 			sharedService.setjobCode(positionId);
 			location.href='#recruitment/interviewFeedback';
 		};
-		$scope.schedule = function(positionId, candidateEmail) {
-			sharedService.setprofileUserId(candidateEmail);
-			sharedService.setjobCode(positionId);
+		$scope.schedule = function(interviewId) {
+			sharedService.setInterviewId(interviewId);
 			location.href='#recruitment/scheduleInterview';
 		};
 		$scope.disableFeedback = function(rounds) {

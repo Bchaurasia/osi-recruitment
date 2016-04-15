@@ -95,24 +95,9 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
 		    	
-		    	$scope.InterviewDetails.candidateName = $scope.candidate.candidateName;
-		    	$scope.InterviewDetails.candidateEmail = $scope.candidate.emailId;
-		    	$scope.InterviewDetails.candidateSkills = $scope.candidate.primarySkills;
-		    	$scope.InterviewDetails.positionId = $scope.candidate.jobcodeProfile;
-		    	$scope.InterviewDetails.designation = $scope.candidate.designation;
-		    	$scope.InterviewDetails.hrAssigned	=	 $scope.candidate.hrAssigned;
-		    	$scope.InterviewDetails.progress = "Not Initialized";
-		    	$scope.InterviewDetails.interviewerId = $scope.candidate.emailId + "_" + ran;
-		    	angular.forEach($scope.positionData, function(pos){
-		    		if($scope.candidate.jobcodeProfile == pos.jobcode){
-		    			$scope.InterviewDetails.clientName = pos.client;
-		    		}
-		    	})
-		    	
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
-		    		$scope.uploadFileIntoDB($scope.uploadedFile);
-		    		interviewService.createInterview($scope.InterviewDetails);
+		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
 				    $scope.CreateCandidate.$setPristine();
 				    $scope.candidate={};
 				    $scope.selection.pLocation="";

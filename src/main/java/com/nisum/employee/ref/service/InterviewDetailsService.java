@@ -104,12 +104,9 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		return interviewDetails;
 	}
 	
-	public List<InterviewDetails> getInterview(String interviewerId) {
+	public InterviewDetails getInterview(String interviewerId) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
-		Query query = new Query();
-		query.addCriteria(Criteria.where("interviewerId").regex(Pattern.compile(interviewerId, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
-		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
-		return checkDetails;
+		return mongoOperations.findById(interviewerId, InterviewDetails.class);
 	}
 	
 	public List<InterviewDetails> getInterviewByInterviewer(String interviewerEmail) {
