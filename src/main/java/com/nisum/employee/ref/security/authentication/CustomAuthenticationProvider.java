@@ -32,7 +32,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     		throw new UsernameNotFoundException("User not found");
     	}
     	}catch(org.springframework.ldap.CommunicationException e){
-    		System.out.println("Error in Authenticating user");
+    		System.out.println("Error in Authenticating user, communication time out error");
+    		log.info("error in communicating to ldap server");
     		throw new UsernameNotFoundException("ldap communication exception. request time out.");
     	}
     }
