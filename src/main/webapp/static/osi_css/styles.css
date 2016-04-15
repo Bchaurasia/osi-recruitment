@@ -20,7 +20,9 @@ a {
 	position: absolute;
 	top: -22px;
 }
-
+.logoStyle{
+	width: 12%;
+}
 .navbar {
 	border: 0;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
