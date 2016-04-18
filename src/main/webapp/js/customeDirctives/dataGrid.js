@@ -22,13 +22,13 @@ angular.module('components', [])
             	var body = '<div class="animated fadeIn"> <div class="row" style="width:90%"><div class="col-md-2"></div><div class="col-md-8 ">';
 
             	if($attrs.searchEnable != undefined && $attrs.searchEnable=='true'){
-					body = body.concat('<div align="left">&nbsp;&nbsp;<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="Enter Search String" type="text"'+ 
+					body = body.concat('<div align="left">&nbsp;&nbsp;<input class="form-control" ng-model="search" ng-change="changePage()" placeholder="" type="text" data-tooltip="Enter Search String"'+ 
 						'</div>');
             	}
 
             	if($attrs.addlink!= undefined){
 					body = body.concat('<a href="'+add+'"'+
-						'class="btn-floating" '+'> <i '+
+						'class="btn-floating" data-tooltip="Add"'+'> <i '+
 						'class="material-icons left">add</i>'+ 
 						'</a>');
             	}
