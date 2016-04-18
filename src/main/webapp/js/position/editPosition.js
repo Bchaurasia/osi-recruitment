@@ -11,8 +11,6 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.primarySkills =[];
 	$scope.managers = [];
 	$scope.hrManagers = [];
-	//$scope.designation1=[];
-	//$scope.designations={};
 	$scope.designation={};
 	$scope.selClient={};
 	$scope.minExpYear=[];
