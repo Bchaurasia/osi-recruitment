@@ -1,13 +1,14 @@
 <br>
 <div class="row" align="center">
-	<form class="col s12" name="UpdatePosition" onvalidate
-		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%; lef">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="UpdatePosition" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%;">
 		<div class="row">
-			<div class="input-field col s6" align="center">
-				<label class="lbl">&nbsp;&nbsp;Client Name: </label> <input
-					placeholder="Enter Client Name" ng-maxlength="30"
-					name="candidateName" class="form-control" type="text"
+			<div class="input-field col s6">
+				 <input placeholder="Enter Client Name" ng-maxlength="30"
+				    class="form-control" type="text"
 					ng-model="client.clientName" ng-pattern="/^[a-zA-Z _]*$/">
+					<label class="lbl">Client Name: </label>
 			</div>
 			<div class="input-field col s6" align="center">
 				<select placeholder="Select Location" ng-model="client.locations"
@@ -21,35 +22,43 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<div class="card teal lighten-2">
-					<span style="color: grey;" >Technical Round One </span>
+					<span style="color: grey;">Technical Round One </span>
 					<div class="card-action">
-						<div class="row" ng-repeat="round in client.interviewers.technicalRound1">
+						<div class="row"
+							ng-repeat="round in client.interviewers.technicalRound1">
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name :&nbsp;&nbsp;{{client.interviewers.technicalRound1[$index].name}} </label> 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name
+									:&nbsp;&nbsp;{{client.interviewers.technicalRound1[$index].name}}
+								</label>
 							</div>
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Email Id :&nbsp;&nbsp;{{client.interviewers.technicalRound1[$index].emailId}}</label> 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Email
+									Id
+									:&nbsp;&nbsp;{{client.interviewers.technicalRound1[$index].emailId}}
+								</label>
 							</div>
-							<span class="glyphicon glyphicon-remove" style="cursor: pointer; width: 187%;"
-									ng-click="deleteRoundOneUser($index);"></span>
+							<span class="glyphicon glyphicon-remove"
+								style="cursor: pointer; width: 187%;"
+								ng-click="deleteRoundOneUser($index);"></span>
 						</div>
 						<span style="cursor: pointer;" ng-click="addRoundOneUser()"
 							ng-hide="hideAddOne" class="glyphicon glyphicon-plus"></span> <br>
 
 						<div class="row" ng-hide="hideCreate">
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name </label>
-								<select placeholder="Select Name"
-									ng-model="t1user.name" ng-change="setRoundOneUserEmailId()" 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name
+								</label> <select placeholder="Select Name" ng-model="t1user.name"
+									ng-change="setRoundOneUserEmailId()"
 									ng-options="o as o for o in dropdownUsers | orderBy:'toString()'"
 									class="form-control input-sm" required>
 									<option value="">Select Name</option>
-								</select> 
+								</select>
 							</div>
-							
+
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t1user.emailId" ng-disabled="true" />
+								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email
+									Id
+								</label> <input ng-model="t1user.emailId" ng-disabled="true">
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveRoundOneUser($index);"></span>
 							</div>
@@ -62,35 +71,43 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<div class="card teal lighten-2">
-					<span style="color: grey;" >Technical Round Two </span>
+					<span style="color: grey;">Technical Round Two </span>
 					<div class="card-action">
-						<div class="row" ng-repeat="round in client.interviewers.technicalRound2">
+						<div class="row"
+							ng-repeat="round in client.interviewers.technicalRound2">
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name :&nbsp;&nbsp;{{client.interviewers.technicalRound2[$index].name}}</label> 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name
+									:&nbsp;&nbsp;{{client.interviewers.technicalRound2[$index].name}}
+								</label>
 							</div>
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Email Id :&nbsp;&nbsp;{{client.interviewers.technicalRound2[$index].emailId}}</label> 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Email
+									Id
+									:&nbsp;&nbsp;{{client.interviewers.technicalRound2[$index].emailId}}
+								</label>
 							</div>
-							<span class="glyphicon glyphicon-remove" style="cursor: pointer; width: 187%;"
-									ng-click="deleteRoundTwoUser($index);"></span>
+							<span class="glyphicon glyphicon-remove"
+								style="cursor: pointer; width: 187%;"
+								ng-click="deleteRoundTwoUser($index);"></span>
 						</div>
 						<span style="cursor: pointer;" ng-click="addRoundTwoUser()"
 							ng-hide="hideAddBtn" class="glyphicon glyphicon-plus"></span> <br>
 
 						<div class="row" ng-hide="hideCreate2">
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name </label>
-								<select placeholder="Select Name"
-									ng-model="t2user.name" ng-change="setRoundTwoUserEmailId()" 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name
+								</label> <select placeholder="Select Name" ng-model="t2user.name"
+									ng-change="setRoundTwoUserEmailId()"
 									ng-options="o as o for o in dropdownUsers2 | orderBy:'toString()'"
 									class="form-control input-sm" required>
 									<option value="">Select Name</option>
-								</select> 
+								</select>
 							</div>
 
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t2user.emailId" ng-disabled="true" />
+								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email
+									Id
+								</label> <input ng-model="t2user.emailId" ng-disabled="true">
 
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveRoundTwoUser($index);"></span>
@@ -101,42 +118,49 @@
 			</div>
 		</div>
 		<br>
-		
+
 		<div class="row">
 			<div class="input-field col s6">
 				<div class="card teal lighten-2">
-					<span style="color: grey;" >Manager Round </span>
+					<span style="color: grey;">Manager Round </span>
 					<div class="card-action">
-						<div class="row" ng-repeat="round in client.interviewers.managerRound">
+						<div class="row"
+							ng-repeat="round in client.interviewers.managerRound">
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>
-								&nbsp;&nbsp;Name :&nbsp;&nbsp;{{client.interviewers.managerRound[$index].name}}</label> 
+									&nbsp;&nbsp;Name
+									:&nbsp;&nbsp;{{client.interviewers.managerRound[$index].name}}
+								</label>
 							</div>
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>
-								&nbsp;&nbsp;Email Id :&nbsp;&nbsp;{{client.interviewers.managerRound[$index].emailId}}</label> 
+									&nbsp;&nbsp;Email Id
+									:&nbsp;&nbsp;{{client.interviewers.managerRound[$index].emailId}}
+								</label>
 							</div>
-							<span class="glyphicon glyphicon-remove" style="cursor: pointer; width: 187%;"
-									ng-click="deleteManagerRound($index);"></span>
+							<span class="glyphicon glyphicon-remove"
+								style="cursor: pointer; width: 187%;"
+								ng-click="deleteManagerRound($index);"></span>
 						</div>
 						<span style="cursor: pointer;" ng-click="addManagerRound()"
 							ng-hide="hideAddBtn3" class="glyphicon glyphicon-plus"></span> <br>
 
 						<div class="row" ng-hide="hideCreate3">
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name </label>
-								<select placeholder="Select Name"
-									ng-model="t3user.name" ng-change="setManagerRoundEmailId()" 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name
+								</label> <select placeholder="Select Name" ng-model="t3user.name"
+									ng-change="setManagerRoundEmailId()"
 									ng-options="o as o for o in dropdownUsers3 | orderBy:'toString()'"
 									class="form-control input-sm" required>
 									<!-- <option value="">{{client.interviewers.technicalRound2.name}}</option> -->
 									<option value="" disabled="disabled">Select Name</option>
-								</select> 
+								</select>
 							</div>
 
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t3user.emailId" ng-disabled="true" />
+								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email
+									Id
+								</label> <input ng-model="t3user.emailId" ng-disabled="true">
 
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveManagerRoundUser($index);"></span>
@@ -150,37 +174,43 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<div class="card teal lighten-2">
-					<span style="color: grey;" >HR Round </span>
+					<span style="color: grey;">HR Round </span>
 					<div class="card-action">
 						<div class="row" ng-repeat="round in client.interviewers.hrRound">
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>
-								&nbsp;&nbsp;Name :&nbsp;&nbsp;{{client.interviewers.hrRound[$index].name}}</label> 
+									&nbsp;&nbsp;Name
+									:&nbsp;&nbsp;{{client.interviewers.hrRound[$index].name}}
+								</label>
 							</div>
 							<div class="input-field col s6">
 								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>
-								&nbsp;&nbsp;Email Id :&nbsp;&nbsp;{{client.interviewers.hrRound[$index].emailId}}</label> 
+									&nbsp;&nbsp;Email Id
+									:&nbsp;&nbsp;{{client.interviewers.hrRound[$index].emailId}}
+								</label>
 							</div>
-							<span class="glyphicon glyphicon-remove" style="cursor: pointer; width: 187%;"
-									ng-click="deleteHrRound($index);"></span>
+							<span class="glyphicon glyphicon-remove"
+								style="cursor: pointer; width: 187%;"
+								ng-click="deleteHrRound($index);"></span>
 						</div>
 						<span style="cursor: pointer;" ng-click="addHrRound()"
 							ng-hide="hideAddBtn4" class="glyphicon glyphicon-plus"></span> <br>
 
 						<div class="row" ng-hide="hideCreate4">
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name </label>
-								<select placeholder="Select Name"
-									ng-model="t4user.name" ng-change="setHrRoundEmailId()" 
+								<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Name
+								</label> <select placeholder="Select Name" ng-model="t4user.name"
+									ng-change="setHrRoundEmailId()"
 									ng-options="o as o for o in dropdownUsers4 | orderBy:'toString()'"
 									class="form-control input-sm" required>
 									<option value="" disabled="disabled">Select Name</option>
-								</select> 
+								</select>
 							</div>
 
 							<div class="input-field col s6">
-								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email Id
-								</label> <input type="text" ng-model="t4user.emailId" ng-disabled="true" />
+								<label class="lbl"> <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Email
+									Id
+								</label> <input ng-model="t4user.emailId" ng-disabled="true">
 
 								<span class="glyphicon glyphicon-ok" style="cursor: pointer;"
 									ng-click="saveHrRoundUser($index);"></span>
@@ -202,4 +232,6 @@
 			</div>
 		</div>
 	</form>
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 </div>
+<br><br>

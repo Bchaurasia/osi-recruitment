@@ -1,116 +1,97 @@
-<div ng-controller="editUserCtrl">
-
-	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-	<div ng-class="cls" ng-show="message" align="center"
-		style="width: 850px; position: relative; left: -60; height: 50">
-		<h5 style="margin-top: 2px;">{{message}}</h5>
-	</div>
-	<!-- ----------------------------------alert Message--------------------------------------------------------- -->
-
-	<div class="row">
-		<form class="input-field col s9" name="UserInformation" onvalidate
-			style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%; left: 200;">
+<br><br>
+<div class="row" ng-controller="editUserCtrl">
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="UserInformation" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>User Details</b>
+			</h5>
+		</div>
+		<div class="row">
 			<div class="row">
-				<div class="input-field col s11">
-					<span style="color: grey; font-size: x-large;">User
-						Information</span>
-					<div class="card-action" style="background-color: white;">
-						<br>
-						<div class="row">
-							<div class="input-field col s6">
-								<label><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Full
-									Name<b style="color: red;">*</b></label> <input class="form-control"
-									name=userName ng-pattern="/^[a-zA-Z _]*$/" type="text" ng-minlength="3" ng-maxlength="30"
-									ng-model="user.name" required> <span
-									class="validation-error"
-									ng-show="UserInformation.userName.$invalid"></span>
-								<div class="validation-error"
-									ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.required">
-									User Name is required.</div>
-								<div class="validation-error"
-									ng-show="(UserInformation.userName.$dirty  || invalidSubmitAttempt) && UserInformation.userName.$error.pattern">
-									User Name must be characters only.</div>
-								<div class="validation-error"
-									ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.minlength">
-									User Name must be at least 3 characters .</div>
-							</div>
-							<div class="input-field col s6">
-								<input class="form-control" ng-disabled=true type="email"
-									ng-model="user.emailId" required> <label class="lbl"
-									for="date"><i class="glyphicon glyphicon-plane"></i>&nbsp;&nbsp;Your
-									Email<b style="color: red;">*</b> : </label>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="input-field col s6">
-								<input class="form-control" maxlength="13" type="text"
-									ng-pattern="/^[0-9]+$/" ng-model="user.mobileNumber"
-									required> <label class="lbl"><i
-									class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp; Mobile<b
-									style="color: red;">*</b>: </label>
-							</div>
-							<div class="input-field col s6">
-								<input class="form-control" ng-change="validateSkypeId($data)"
-									type="text" ng-model="user.skypeId"> <label class="lbl"
-									for="skypeId"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Skype
-									ID:</label>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="input-field col s6">
-								<input type="date" ng-model="birthDate" id="birthDate" required>
-								<label class="lbl"><i
-									class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;DOB <b
-									style="color: red;">*</b> : </label>
-							</div>
-							<div class="input-field col s6">
-								<label class="lbl" for="skypeId"><i
-									class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Location
-									: </label> <input class="form-control" type="text"
-									ng-model="user.location">
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="input-field col s6">
-								<ui-select multiple ng-model="user.roles" theme="select2"
-									ng-disabled=true ui-select-required> <ui-select-match
-									placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
-									repeat="role in user.roles | orderBy:'toString()' | filter:$select.search">
-								{{role}} </ui-select-choices> </ui-select>
-								<label class="lbl" for="primarySkill"><i
-									class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Roles :</label>
-							</div>
-							<div class="input-field col s6">
-								<ui-select multiple ng-model="user.skills"
-									ng-keypress="myFunct($event)" name='sk.skills' ng-disabled=true
-									theme="select2"> <ui-select-match
-									placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
-									repeat="skill in user.skills | orderBy:'toString()' | filter:$select.search">
-								{{skill}} </ui-select-choices> </ui-select>
-								<label class="lbl" for="user.skills"> <i
-									class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills :
-								</label>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="input-field col s11">
-								<button class="btn btn-info active" ng-click="update()"
-									type="submit" ng-disabled="UserInformation.$invalid">
-									<span class="glyphicon glyphicon-ok-circle"></span> Save
-								</button>
-								&nbsp;
-								<button class="btn btn-info active" ui-sref="main">
-									<span class="glyphicon glyphicon-remove"></span> Cancel
-								</button>
-							</div>
-						</div>
-					</div>
+				<div class="input-field col s6">
+					<label>Full
+						Name<b class="mandatory">*</b></label> <input class="form-control"
+						name=userName ng-pattern="/^[a-zA-Z _]*$/" type="text"
+						ng-minlength="3" ng-maxlength="30" ng-model="user.name" required>
+					<span class="validation-error"
+						ng-show="UserInformation.userName.$invalid"></span>
+					<div class="validation-error"
+						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.required">
+						User Name is required.</div>
+					<div class="validation-error"
+						ng-show="(UserInformation.userName.$dirty  || invalidSubmitAttempt) && UserInformation.userName.$error.pattern">
+						User Name must be characters only.</div>
+					<div class="validation-error"
+						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.minlength">
+						User Name must be at least 3 characters .</div>
+				</div>
+				<div class="input-field col s6">
+					<input class="form-control" ng-disabled=true type="email"
+						ng-model="user.emailId" required> <label>Your
+						Email<b class="mandatory">*</b>  </label>
 				</div>
 			</div>
-		</form>
-	</div>
+			
+			<div class="row">
+				<div class="input-field col s6">
+					<input class="form-control" maxlength="13" type="text"
+						ng-pattern="/^[0-9]+$/" ng-model="user.mobileNumber" required>
+					<label>
+						Mobile<b class="mandatory">*</b> </label>
+				</div>
+				<div class="input-field col s6">
+					<input class="form-control" ng-change="validateSkypeId($data)"
+						type="text" ng-model="user.skypeId"> <label>Skype
+						ID</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s6">
+					<input type="date" ng-model="birthDate" id="birthDate" required>
+					<label>Date Of Birth
+						<b class="mandatory">*</b>  </label>
+				</div>
+				<div class="input-field col s6">
+					<label>Location  </label>
+					<input class="form-control" type="text" ng-model="user.location">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<ui-select multiple ng-model="user.roles" theme="select2"
+						ng-disabled=true ui-select-required> <ui-select-match
+						placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="role in user.roles | orderBy:'toString()' | filter:$select.search">
+					{{role}} </ui-select-choices> </ui-select>
+					<label style="position: absolute; top: -22px;">Roles </label>
+				</div>
+				<div class="input-field col s6">
+					<ui-select multiple ng-model="user.skills"
+						ng-keypress="myFunct($event)" name='sk.skills' ng-disabled=true
+						theme="select2"> <ui-select-match
+						placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="skill in user.skills | orderBy:'toString()' | filter:$select.search">
+					{{skill}} </ui-select-choices> </ui-select>
+					<label style="position: absolute; top: -22px;">Skills 
+					</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s11">
+					<button class="btn btn-info active" ng-click="update()"
+						type="submit" ng-disabled="UserInformation.$invalid">
+						<span class="glyphicon glyphicon-ok-circle"></span> Save
+					</button>
+					&nbsp;
+					<button class="btn btn-info active" ui-sref="main">
+						<span class="glyphicon glyphicon-remove"></span> Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>

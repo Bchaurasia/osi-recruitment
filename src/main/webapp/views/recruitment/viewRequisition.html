@@ -1,13 +1,12 @@
 <div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h5 class="col-md-8 col-sm-8 col-xs-8" align="left"><b>Edit Requisition: {{requisition.requisitionId}}</b></h5>
-</div>
-
-<div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="updateRequisition" onvalidate
-		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
-
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="updateRequisition" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Edit Requisition: {{requisition.requisitionId}}</b>
+			</h5>
+		</div>
 		<div class="row">
 			<div class="input-field col s6">
 				<b class="bannerleft">{{requisition.position}}</b> <label>Designation:</label>
@@ -39,7 +38,7 @@
 					ng-change="getJobDescriptionByClient(client)"
 					ng-options="o.clientName for o in clients | orderBy:'toString()'"
 					class="form-control input-sm" required>
-<!-- 					<option value="requisition.client">{{requisition.client}}</option> -->
+					<!-- 					<option value="requisition.client">{{requisition.client}}</option> -->
 				</select> <label>Client<b class="mandatory">*</b></label>
 
 			</div>
@@ -116,7 +115,7 @@
 				<textarea id="textarea1" class="materialize-textarea" length="120"
 					ng-model="requisition.jobDescription"
 					placeholder="Enter any comments/notes..." required></textarea>
-				<label style="top:-34%">Job Description<b class="mandatory">*</b></label>
+				<label style="top: -34%">Job Description<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -124,7 +123,8 @@
 				<textarea class="materialize-textarea" length="120"
 					ng-model="requisition.comment"
 					placeholder="Enter any comments/notes..."></textarea>
-				<label class="label-alignment" style="top: -34%">Requisition Comment</label>
+				<label class="label-alignment" style="top: -34%">Requisition
+					Comment</label>
 			</div>
 		</div>
 
@@ -173,11 +173,13 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-show="showApprovalBtn"
-				ng-disabled="updateRequisition.$invalid || disableApprovalBtn" ng-click="approve()">
+				ng-disabled="updateRequisition.$invalid || disableApprovalBtn"
+				ng-click="approve()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Approve
 			</button>
 			<button class="btn btn-danger" ng-show="showRejectBtn"
-				ng-disabled="updateRequisition.$invalid || disableRejectBtn" ng-click="rejectRequisition()">
+				ng-disabled="updateRequisition.$invalid || disableRejectBtn"
+				ng-click="rejectRequisition()">
 				<span class="glyphicon glyphicon-remove-circle"></span> Reject
 			</button>
 			<button class="btn btn-info active"
