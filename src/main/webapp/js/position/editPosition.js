@@ -11,8 +11,10 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.primarySkills =[];
 	$scope.managers = [];
 	$scope.hrManagers = [];
-	$scope.designation1=[];
-	$scope.designations={};
+	//$scope.designation1=[];
+	//$scope.designations={};
+	$scope.designation={};
+	$scope.selClient={};
 	$scope.minExpYear=[];
 	$scope.maxExpYear=[];
 	$scope.interviewers=[];
@@ -40,58 +42,57 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		if(sharedService.getjobCode() == undefined) {
 			$state.go("recruitment.searchPosition");
 		}
-		$scope.jobcode =sharedService.getjobCode();	
-		/*
-		 * interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
-		 * function(data){ $scope.interviewCandidates = data;
-		 * }).catch(function(response){ });
-		 */
-		userService.getUsers()
-		.then(function(data){
-			$scope.users = data;
-			
-			$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
-			$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
-			$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
-			console.log(user.emailId);
-			console.log(angulartoJson());
-			// $scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
-			$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
+		$scope.jobcode =sharedService.getjobCode();
+		
+		positionService.getPositionByJobcode($scope.jobcode).then(function(data){
+	        $scope.position =data;
+	         $scope.enableDisableButton = false;
+			}).catch(function(msg){
+	        $log.error(msg); 
 			});
+		
+		var getDesignation = $http.get('resources/design');
+		var getClients = $http.get('resources/clientNames');
+		var getJds = $http.get('resources/jobDescription');
+		var getusers = $http.get('resources/user');
+		var getInterviewDetailsByJobCode = $http.get('resources/getInterviewByJobCode?jobCode='+$scope.jobcode);
+		
+		$q.all([getusers,getInterviewDetailsByJobCode,getClients,getDesignation]).then(
+				function(response){
+					$scope.users = response[0].data;
+					$scope.interviewCandidates = response[1].data;
+					$scope.clients = response[2].data;
+					$scope.designations = response[3].data;
+					$scope.designationList = _.pluck($scope.designations, 'designation');
+					
+					setUsers(response[0].data);
+					$scope.designation = $scope.position.designation;
+					$scope.selClient = $scope.position.client;
+					$scope.pskills=$scope.info.skills;
+					$scope.interviewRounds=$scope.info.interviewRounds;
+				},
+				function(errorMsg) {
+					//$log.error("Failed! ---> "+errorMsg);
+					$scope.message="error while getting requised data ";
+					 $scope.cls=appConstants.ERROR_CLASS;
+					 $timeout( function(){ $scope.alHide(); }, 5000);
+				}
+			);
+		
+		
 		
 	}
 	
 	$scope.init();
 	
-	positionService.getPositionByJobcode($scope.jobcode).then(function(data){
-		        $scope.position =data;
-		        console.log(angular.toJson($scope.position));
-		         $scope.enableDisableButton = false;
-		}).catch(function(msg){
-		        $log.error(msg); 
-		});
-	
-	$scope.getInterviewers = function(){
-		interviewService.getInterviewDetailsByJobCode($scope.jobcode).then(
-				function(data){
-					$scope.interviewCandidates = data;
-				}).catch(function(response){
-		});
+	function setUsers(data){
+		$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
+		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+		$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
+		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
 	}
 	
-	clientService.getClientName()
-					.then(function(response){
-							$scope.pskills=$scope.info.skills;
-							$scope.interviewRounds=$scope.info.interviewRounds;
-							$scope.clients = response;
-							angular.forEach($scope.clients,function(cl){
-								$scope.client.push(cl.clientName);
-							}
-			 )}).catch(function(msg){
-						 $log.error(msg);
-	});
-	
-	$scope.getData = function() {
+	$scope.setData = function() {
 	    $scope.deg  =_.find($scope.designations,function(obj){
 			return obj.designation == $scope.position.designation; 
 		});
@@ -103,17 +104,21 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		$scope.position.minExpYear = $scope.deg.minExpYear;
 		$scope.position.maxExpYear = $scope.deg.maxExpYear;
 		$scope.hrManager = $scope.position.hiringManager;
-	};
-	
 		
-	    ngNotify.config({
-		    theme: 'pure',
-		    position: 'top',
-		    duration: 3000,
-		    type: 'info',
-		    sticky: false,
-		    html: false
+		angular.forEach($scope.designations,function(deg){
+			$scope.designation1.push(deg.designation);
+		})
+		angular.forEach($scope.designations,function(deg){
+			$scope.minExpYear.push(deg.minExpYear);
+		})
+		angular.forEach($scope.designations,function(deg){
+			$scope.maxExpYear.push(deg.maxExpYear);
 		});
+		
+		angular.forEach($scope.clients,function(cl){
+			$scope.client.push(cl.clientName);
+		});
+}
 		
 	    $scope.updatePositionDetails = function() {
 		var position1={};
@@ -122,7 +127,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			 $scope.position.updatedBy = $scope.user.emailId;
 			 $scope.position.hiringManager.name  = $scope.hrManager.name;
 			 $scope.position.hiringManager.emailId  = $scope.hrManager.emailId;
-			// $scope.position.interviewer = $scope.interviewer.emailId;
+			 $scope.position.designation =  $scope.designation;
+			 $scope.position.client = $scope.selClient;
+			 $scope.position.interviewer = $scope.interviewer.emailId;
 		     positionService.updatePosition($scope.position).then(
 			    function(msg){
 			    	$scope.sendNotification(msg,'recruitment/searchPosition');
@@ -135,7 +142,6 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.status = {
 			isFirstOpen: true,
 	};
-	
 	
 	$scope.irsTemp={};
 	$scope.skillTemp={};
@@ -184,21 +190,4 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		} else
 			return "Number of Positions should be Atleast One!..";
 	};
-
-	designationService.getDesignation().then(function(data){
-	$scope.designations=data;
-	angular.forEach($scope.designations,function(deg){
-		$scope.designation1.push(deg.designation);
-	})
-	angular.forEach($scope.designations,function(deg){
-		$scope.minExpYear.push(deg.minExpYear);
-	})
-	angular.forEach($scope.designations,function(deg){
-		$scope.maxExpYear.push(deg.maxExpYear);
-	})
-	}).catch(function(msg){
-	$scope.message=msg;
-	 $scope.cls=appConstants.ERROR_CLASS;
-	 $timeout( function(){ $scope.alHide(); }, 5000);
-	});
 }]);

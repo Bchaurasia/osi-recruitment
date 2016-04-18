@@ -18,10 +18,9 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Designation"
-					ng-model="position.designation"
-					ng-options="o as o for o in designation1 | orderBy:'toString()'"
+					ng-model="designation"
+					ng-options="o as o for o in designationList | orderBy:'toString()'"
 					class="form-control input-sm" ng-disabled="flagDisabled" required>
-					<option value="">{{position.designation}}</option>
 				</select> <label>Designation<b class="mandatory">*</b></label>
 			</div>
 
@@ -29,8 +28,8 @@
 				<select placeholder="Select Location" ng-model="position.location"
 					ng-options="o as o for o in info.locations | orderBy:'toString()'"
 					class="form-control input-sm" ng-disabled="flagDisabled" required>
-					<option value="">{{position.location}}</option>
-				</select> <label>Location<b class="mandatory">*</b></label>
+				</select>
+				<label>Location<b class="mandatory">*</b></label>
 			</div>
 		</div>
 
@@ -54,11 +53,11 @@
 			</div>
 
 			<div class="input-field col s6">
-				<select placeholder="Select Client" ng-model="position.client"
+				<select placeholder="Select Client" ng-model="selClient"
 					ng-options="o as o for o in clients | orderBy:'toString()'"
 					class="form-control input-sm" ng-disabled="flagDisabled" required>
-					<option value="position.client"></option>
-				</select> <label>Client<b class="mandatory">*</b></label>
+				</select> 
+				<label>Client<b class="mandatory">*</b></label>
 			</div>
 		</div>
 

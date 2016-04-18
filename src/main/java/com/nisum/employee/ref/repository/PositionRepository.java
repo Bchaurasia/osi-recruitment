@@ -59,7 +59,7 @@ public class PositionRepository {
 		update.set("lastModifiedDate",new DateTime());
 		update.set("hiringManager", position.getHiringManager());
 		update.set("priority", position.getPriority());
-		//update.set("interviewer", position.getInterviewer());
+		update.set("interviewer", position.getInterviewer());
 		update.set("jobType", position.getJobType());
 		update.set("salary", position.getSalary());
 		update.set("status", position.getStatus());
