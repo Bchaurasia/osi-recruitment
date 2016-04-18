@@ -168,8 +168,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    isFirstOpen: true,
 		    isFirstDisabled: false,
 		    open:true
-	};
-	 
+	};	 
 	
 	$scope.$on('$stateChangeStart', function( event ) {
 		if ($scope.CreateCandidate.$dirty) {
