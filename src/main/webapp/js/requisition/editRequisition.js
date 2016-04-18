@@ -5,11 +5,12 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.dateErr = false;
 	$scope.showApprovalBtn = false;
 	$scope.showApproveBtn = false;
-	$scope.showUpdateBtn = true;
+	$scope.showUpdateBtn = false;
+	$scope.showRejectBtn = false;
 	$scope.disableUpdateBtn = true;
 	$scope.disableApprovalBtn = true;
 	$scope.disableRejectBtn = false;
-	$scope.showRejectBtn = true;
+	
 	
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
@@ -171,26 +172,31 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		if($scope.requisition.approval2 === undefined){
 			$scope.hideApproval2 = true;
     	}
-					if($scope.requisition.status === "REJECTED" && $scope.requisition.createdBy !== $scope.user.emailId){
-						$scope.showRejectBtn = true;
-						$scope.showApprovalBtn = true;
+					if($scope.requisition.status === "REJECTED"){
+						if($scope.user.emailId !== $scope.requisition.createdBy && _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER")){
+							$scope.showRejectBtn = true;
+							$scope.showApprovalBtn = true;
+						}
 						$scope.disableRejectBtn = true;
 						$scope.disableApprovalBtn = true;
-						$scope.showApprovedBtn = true;
 						$scope.disableUpdateBtn = true;
 						$scope.showUpdateBtn = true;
 						$scope.disApproval1=true;
 						$scope.disApproval2=true;
-					}else if($scope.user.emailId === $scope.requisition.createdBy && _.contains($scope.user.roles, "ROLE_REQUISITION_MANAGER") && !_.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER")){
+					}else if($scope.user.emailId === $scope.requisition.createdBy && (_.contains($scope.user.roles, "ROLE_REQUISITION_MANAGER") || _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER"))){
 						$scope.showApprovalBtn = false;
 						$scope.showRejectBtn = false;
 						$scope.showUpdateBtn = true;
 						$scope.disableUpdateBtn = false;
 						$scope.disableApprovalBtn = true;
+						$scope.disApproval1= false;
+						$scope.disApproval2= false;
 							
 						if($scope.requisition.approval1.approved){
-							$scope.disApproval1= $scope.requisition.approval1.approved
-							$scope.disApproval2= $scope.requisition.approval1.approved
+							$scope.disApproval1= $scope.requisition.approval1.approved;
+							$scope.disApproval2= $scope.requisition.approval1.approved;
+							$scope.disableUpdateBtn = true;
+							$scope.showUpdateBtn = true;
 						}
 						
 					}else if($scope.user.emailId === $scope.requisition.approval1.emailId){
