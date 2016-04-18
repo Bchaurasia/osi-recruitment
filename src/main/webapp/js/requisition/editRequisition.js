@@ -44,6 +44,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		
 		requisitionService.getRequisitionById(id).then(function(data){
 			$scope.requisition = data;
+			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
 		}).catch(function(msg){
 	    	$log.error(msg); 
 	    });
@@ -246,14 +247,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.status = {
 			isFirstOpen: true,
 	};
-	
-	$scope.validateNoOfPosition = function(data) {
-		if (data>0 && data<=99 || data===0 ||data === 00) {
-			return true;
-		} else
-			return "No. of Positions should be between 1-99!";
-	};
-	
 	
 	$scope.dateError = function(targetDate){
 		teGDate = new Date($scope.targetDate);

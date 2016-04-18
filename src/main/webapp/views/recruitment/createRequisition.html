@@ -86,13 +86,12 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter number of Positions" type="number"
 					ng-model="requisition.noOfPositions" name="position"
-					ng-change="validateNoOfPosition(requisition.noOfPositions)"
-					class="form-control input-sm" ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/"
+					class="form-control input-sm" ng-pattern="/(^[1-9]\d{0,1}$)/"
 					required> <label>No. of Positions<b
 					class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="(CreateRequisition.position.$dirty || invalidSubmitAttempt) && CreateRequisition.position.$error.pattern">
-					No. Positions should be between 1-99!</span>
+					No. of positions should be in between 1-99</span>
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 20px">
