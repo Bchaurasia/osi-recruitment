@@ -1,5 +1,5 @@
-app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','requisitionService',
-                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,requisitionService) {
+app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter','blockUI','$log','appConstants','$timeout','requisitionService',
+                                     function($scope, $http, $q, $window,$location,sharedService,$filter,blockUI,$log,appConstants,$timeout,requisitionService) {
 
 	$scope.showApprovalBtn = false;
 	$scope.searchBox = false;
@@ -19,14 +19,12 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		
 	};
 	
-	 $scope.searchProfileQuery = function(){
-		   	profileService.searchProfile($scope.search).then(setProfiles);
-	   }
-
 	 $scope.searchRequisition = function(){
+		 blockUI.start("loading Requisition data...");
 		 $timeout(function() {
 			 requisitionService.searchRequisition($scope.searchTxt).then(setRequisition);
-		 }, 3000);
+			 blockUI.stop();
+		 }, 1000);
 	 }
 	 
 	 function setRequisition(data){
