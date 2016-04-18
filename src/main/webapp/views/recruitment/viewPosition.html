@@ -9,25 +9,20 @@
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="UpdatePosition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
-		<div class="row collapsible-header">
-			<h5 align="left">
-				<b>Edit Position : {{position.jobcode}}</b>
-			</h5>
-		</div>
 		
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Designation"
 					ng-model="designation"
 					ng-options="o as o for o in designationList | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="flagDisabled" required>
+					class="form-control input-sm" ng-disabled="true" required>
 				</select> <label>Designation<b class="mandatory">*</b></label>
 			</div>
 
 			<div class="input-field col s6">
 				<select placeholder="Select Location" ng-model="position.location"
 					ng-options="o as o for o in info.locations | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="flagDisabled" required>
+					class="form-control input-sm" ng-disabled="true" required>
 				</select>
 				<label>Location<b class="mandatory">*</b></label>
 			</div>
@@ -55,7 +50,7 @@
 			<div class="input-field col s6">
 				<select placeholder="Select Client" ng-model="selClient"
 					ng-options="o as o for o in clients | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="flagDisabled" required>
+					class="form-control input-sm" ng-disabled="true" required>
 				</select> 
 				<label>Client<b class="mandatory">*</b></label>
 			</div>
@@ -135,9 +130,8 @@
 				</select> <label>Status</label>
 			</div>
 		</div>
-		
 		<ul class="collapsible collapsible-accordion"
-			data-collapsible="accordion" ng-show="accordian"
+			data-collapsible="interviewCandidates" ng-show="interviewCandidates"
 			style="margin-left: 10px; margin-right: 90px;">
 			<li ng-repeat="interviewCandidate in interviewCandidates">
 				<div class="collapsible-header" style="text-align: left;">
