@@ -10,7 +10,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.disableUpdateBtn = true;
 	$scope.disableApprovalBtn = true;
 	$scope.disableRejectBtn = false;
-	
+	//$scope.disableQualAdd=false;
 	
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
@@ -116,18 +116,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		};
 		$scope.requisition.qualifications.push(addQualification);
 	};
-	$scope.checkDisability = function(qualification){
-				if(qualification){
-					$scope.disableUpdateBtn  =  false;
-					$scope.showApproveBtn = false;
-					return false;
-				}
-				else{
-					$scope.disableUpdateBtn  =  true;
-					$scope.showApproveBtn = true;
-					return true;
-				}
-			}
 	
 	$scope.deleteQualification = function(index){
 		if (!($scope.requisition.qualifications.length - 1 == 0)) {
@@ -184,25 +172,10 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.showUpdateBtn = true;
 						$scope.disApproval1=true;
 						$scope.disApproval2=true;
-					}else if($scope.user.emailId === $scope.requisition.createdBy && (_.contains($scope.user.roles, "ROLE_REQUISITION_MANAGER") || _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER"))){
-						$scope.showApprovalBtn = false;
-						$scope.showRejectBtn = false;
-						$scope.showUpdateBtn = true;
-						$scope.disableUpdateBtn = false;
-						$scope.disableApprovalBtn = true;
-						$scope.disApproval1= false;
-						$scope.disApproval2= false;
-							
-						if($scope.requisition.approval1.approved){
-							$scope.disApproval1= $scope.requisition.approval1.approved;
-							$scope.disApproval2= $scope.requisition.approval1.approved;
-							$scope.disableUpdateBtn = true;
-							$scope.showUpdateBtn = true;
-						}
-						
 					}else if($scope.user.emailId === $scope.requisition.approval1.emailId){
 						$scope.showApprovalBtn = true;
 			 			$scope.showRejectBtn = true;
+			 			$scope.showUpdateBtn = true;
 			 			$scope.disableRejectBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableApprovalBtn = $scope.requisition.approval1.approved;
@@ -213,16 +186,33 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			 						   && $scope.user.emailId === $scope.requisition.approval2.emailId){
 			 			$scope.showApprovalBtn = true;
 			 			$scope.showRejectBtn = true;
+			 			$scope.showUpdateBtn = true;
 			 			$scope.updateVal=true;
 			 			$scope.disableRejectBtn = $scope.requisition.approval2.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval2.approved;
 			 			$scope.disableApprovalBtn = $scope.requisition.approval2.approved;
-			 			$scope.disApproval1= $scope.requisition.approval2.approved
-						$scope.disApproval2= $scope.requisition.approval2.approved
+			 			$scope.disApproval1= true;
+						$scope.disApproval2= true;
 						
- 					}else{
+ 					}else if($scope.user.emailId === $scope.requisition.createdBy && (_.contains($scope.user.roles, "ROLE_REQUISITION_MANAGER") || _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER"))){
+						$scope.showApprovalBtn = false;
+						$scope.showRejectBtn = false;
+						$scope.showUpdateBtn = true;
+						$scope.disableUpdateBtn = $scope.requisition.approval1.approved || ($scope.requisition.approval2 !== undefined && $scope.requisition.approval2.approved);
+						$scope.disApproval1= $scope.requisition.approval1.approved;;
+						$scope.disApproval2= $scope.requisition.approval1.approved;
+						/*	
+						if($scope.requisition.approval1.approved){
+							$scope.disApproval1= $scope.requisition.approval1.approved;
+							$scope.disApproval2= $scope.requisition.approval1.approved;
+							$scope.disableUpdateBtn = true;
+							$scope.showUpdateBtn = true;
+						}*/
+						
+					}else{
  						$scope.showRejectBtn = false;
  						$scope.showApprovalBtn = false;
+ 						$scope.showUpdateBtn = false;
  						$scope.updateVal=true;
  						$scope.disApproval1=true;
 						$scope.disApproval2=true;

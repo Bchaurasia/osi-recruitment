@@ -131,12 +131,13 @@
 		<div class="row"
 			ng-repeat=" requisition in requisition.qualifications">
 			<div class="input-field col s6">
-				<select placeholder="Select Qualification"
+				<select placeholder="Select Qualification" id="qualification"
 					ng-model="requisition.qualification" required
 					ng-options="o as o for o in qualification | orderBy:'toString()'"
 					class="form-control input-sm">
 					<option>Select Qualification</option>
-				</select> <label>Qualification<b class="mandatory">*</b></label>
+				</select> <label>Qualification<b class="mandatory">*</b></label><span class="validation-error"
+					ng-show="updateRequisition.qualification.$dirty || invalidSubmitAttempt"></span>
 			</div>
 			<div class="input-field col s5">
 				<input type="range" ng-model="requisition.percent" min="0" max="100" />
@@ -146,17 +147,18 @@
 			<div class="input-field col s1">
 				<a class="glyphicon glyphicon-remove"
 					ng-show="lengthOfQualifications()" style="cursor: pointer;"
-					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</a>
-				&nbsp;&nbsp;&nbsp;&nbsp; <a id="addButtonColumn"
-					ng-disabled="checkDisability(requisition.qualification)"
+					ng-click="deleteQualification($index)"></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+				
+				<a id="addButtonColumn"
 					ng-show="$last" class="glyphicon glyphicon-plus"
-					ng-click="addColumnCriteria()"></a>
+					ng-click="addColumnCriteria()" ng-disabled=""></a>
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Approver 1" ng-model="approval1"
-					ng-change="approverfield()" ng-disabled="disApproval1"
+					ng-disabled="disApproval1"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option>Select Approver 1</option>
