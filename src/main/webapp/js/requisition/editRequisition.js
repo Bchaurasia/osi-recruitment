@@ -7,8 +7,10 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.showApproveBtn = false;
 	$scope.showUpdateBtn = true;
 	$scope.disableUpdateBtn = true;
-	$scope.showRejectBtn = true;
+	$scope.disableApprovalBtn = true;
 	$scope.disableRejectBtn = false;
+	$scope.showRejectBtn = true;
+	
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.qualification = $scope.info.qualification;
@@ -38,6 +40,38 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$state.go("recruitment.searchRequisition");
 		}
 		id = sharedService.getRequisitionId();
+		
+		requisitionService.getRequisitionById(id).then(function(data){
+			$scope.requisition = data;
+		}).catch(function(msg){
+	    	$log.error(msg); 
+	    });
+		var getDesignation = $http.get('resources/design');
+		var getClients = $http.get('resources/clientInfo');
+		var getJds = $http.get('resources/jobDescription');
+		var getusers = $http.get('resources/user');
+		
+		$q.all([getDesignation,getClients,getJds,getusers]).then(
+				function(response){
+					$scope.designations = response[0].data;
+					$scope.clients = response[1].data;
+					$scope.JobDescriptionList = response[2].data;
+					setUsers(response[3].data);
+					disableBtn();
+					$scope.client = _.find($scope.clients, function(clnt){ return clnt.clientName === $scope.requisition.client });
+					
+					if($scope.requisition.jobTitle !== undefined && !_.isEmpty($scope.JobDescriptionList)){
+						$scope.jobDescription = _.find($scope.JobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.requisition.jobTitle });
+					}
+					
+					$scope.targetDate = new Date($scope.requisition.targetDate);
+			    	$scope.requisitionDate = new Date($scope.requisition.requisitionDate);
+			    	
+				},
+				function(errorMsg) {
+					$log.error("Failed! ---> "+errorMsg);
+				}
+			);
 	}
 	
 	$scope.init();
@@ -45,23 +79,18 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.requisition.qualifications = [];
 	
 	
-	requisitionService.getRequisitionById(id).then(function(data){
-    	$scope.requisition = data;
-    	jobDescriptionService.getJobDescriptionByClient($scope.requisition.client).then(function(data){
-			$scope.JobDescriptionList = data;
-			if($scope.requisition.jobTitle !== undefined && !_.isEmpty($scope.JobDescriptionList)){
-			$scope.jobDescription = _.find($scope.JobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.requisition.jobTitle });
-			}
-		});
-    	$scope.targetDate = new Date($scope.requisition.targetDate);
-    	$scope.requisitionDate = new Date($scope.requisition.requisitionDate);
-    	getDesginationList();
-    	getClients();
-    	disableBtn();
-	}).catch(function(msg){
-    	$log.error(msg); 
-    })
-	
+	function setUsers(data){
+		$scope.approvals =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
+		$scope.approvals =_.sortBy($scope.approvals, 'name');	
+		$scope.approval1 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval1.emailId})[0];
+		if($scope.requisition.approval2 !== undefined){
+			$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
+		}
+		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
+		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
+		$scope.creator = _.find(data, function(user){ return user.emailId === $scope.requisition.createdBy});
+	}
 	
 	$scope.editPage = function(){
 		$scope.edit = true;
@@ -134,31 +163,20 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		}
 	}
 	
-	userService.getUsers()
-	.then(function(data){
-			$scope.approvals =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
-			$scope.approvals =_.sortBy($scope.approvals, 'name');	
-			$scope.approval1 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval1.emailId})[0];
-			if($scope.requisition.approval2 !== undefined){
-				$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
-			}
-			$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
-			$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
-			$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
-			$scope.creator = _.find(data, function(user){ return user.emailId === $scope.requisition.createdBy});
-		});
 	var getDateObj = function(value){
 		return new Date(value);
 	}
 	
-	var disableBtn = function(){
+	function disableBtn(){
 		if($scope.requisition.approval2 === undefined){
 			$scope.hideApproval2 = true;
     	}
 					if($scope.requisition.status === "REJECTED" && $scope.requisition.createdBy !== $scope.user.emailId){
 						$scope.showRejectBtn = true;
+						$scope.showApprovalBtn = true;
 						$scope.disableRejectBtn = true;
-						$scope.showApprovalBtn = false;
+						$scope.disableApprovalBtn = true;
+						$scope.showApprovedBtn = true;
 						$scope.disableUpdateBtn = true;
 						$scope.showUpdateBtn = true;
 						$scope.disApproval1=true;
@@ -168,6 +186,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.showRejectBtn = false;
 						$scope.showUpdateBtn = true;
 						$scope.disableUpdateBtn = false;
+						$scope.disableApprovalBtn = true;
 							
 						if($scope.requisition.approval1.approved){
 							$scope.disApproval1= $scope.requisition.approval1.approved
@@ -175,44 +194,35 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						}
 						
 					}else if($scope.user.emailId === $scope.requisition.approval1.emailId){
-						$scope.showApprovalBtn = !$scope.requisition.approval1.approved;
+						$scope.showApprovalBtn = true;
 			 			$scope.showRejectBtn = true;
 			 			$scope.disableRejectBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval1.approved;
+			 			$scope.disableApprovalBtn = $scope.requisition.approval1.approved;
 			 			$scope.disApproval1=true;
 						$scope.disApproval2=true;
 			 		}else if( $scope.requisition.approval2 !== undefined
 			 						   && $scope.requisition.approval1.approved
 			 						   && $scope.user.emailId === $scope.requisition.approval2.emailId){
-			 			$scope.showApprovalBtn = !$scope.requisition.approval2.approved;
+			 			$scope.showApprovalBtn = true;
 			 			$scope.showRejectBtn = true;
 			 			$scope.updateVal=true;
 			 			$scope.disableRejectBtn = $scope.requisition.approval2.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval2.approved;
+			 			$scope.disableApprovalBtn = $scope.requisition.approval2.approved;
 			 			$scope.disApproval1= $scope.requisition.approval2.approved
 						$scope.disApproval2= $scope.requisition.approval2.approved
 						
  					}else{
  						$scope.showRejectBtn = false;
+ 						$scope.showApprovalBtn = false;
  						$scope.updateVal=true;
  						$scope.disApproval1=true;
 						$scope.disApproval2=true;
  					}
 	}
 	
-	function getClients(){
-		clientService.getClientName()
-		.then(function(response){
-			clientService.getClientInfo().then(function(response){
-				$scope.clients = response;
-				$scope.client = _.find($scope.clients, function(clnt){ return clnt.clientName === $scope.requisition.client });
-			 }).catch(function(msg){
-				 $log.error(msg);
-		});
-			}).catch(function(msg){
-			 $log.error(msg);
-		 });
-	}
+	
 	$scope.rejectRequisition = function(){
 				$scope.requisition.updatedBy = $scope.user.emailId;
 				requisitionService.rejectRequisition($scope.requisition)
@@ -226,21 +236,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 					$scope.cls=appConstants.ERROR_CLASS;
 				}
 			}
-	
-	function getDesginationList(){
-		designationService.getDesignation().then(function(data){
-			$scope.designations=data;
-			angular.forEach($scope.designations,function(deg){
-				$scope.designation1.push(deg.designation);
-				//$scope.minExpYear.push(deg.minExpYear);
-				//$scope.maxExpYear.push(deg.maxExpYear);
-		 });
-		}).catch(function(msg){
-			$scope.message=msg;
-			 $scope.cls=appConstants.ERROR_CLASS;
-			 $timeout( function(){ $scope.alHide(); }, 5000);
-		});
-	}
 	
 	$scope.status = {
 			isFirstOpen: true,
@@ -291,27 +286,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		return new Date(dateStr).toLocaleDateString('en-US', format);
 	}
 	
-	$scope.getData = function() {
-        $scope.deg  =_.find($scope.designations,function(obj){
-              return obj.designation == $scope.requisition.position; 
-          });
-
-          $scope.requisition.minExpYear = $scope.deg.minExpYear;
-          $scope.requisition.maxExpYear = $scope.deg.maxExpYear;
-      }
-	
-	$http.get('resources/requisition').success(function(data, status, headers, config) {
-		$scope.allRequisitions = data;
-		$scope.reqId = $scope.allRequisitions.length;
-	}).error(function(data, status, headers, config) {
-		$log.error(data);
-	});
-	positionService.getPosition().then(function(data){
-		 $scope.position=data;
-		 $scope.posId = $scope.position.length;
-	}).catch(function(msg){
-    });
-	
 	$scope.approve = function(){
 		if($scope.user.emailId === $scope.requisition.approval1.emailId){
 			$scope.requisition.approval1.approved = true;
@@ -340,11 +314,4 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.requisition.skillType = $scope.jobDescription.skills;
 			$scope.requisition.jobTitle = $scope.jobDescription.jobDescriptionName;
 	 }
-		
-	$scope.getJobDescriptionByClient = function(client){
-		jobDescriptionService.getJobDescriptionByClient(client.clientName).then(function(data){
-			$scope.JobDescriptionList = data;
-		});
-	}
-	
 }]);

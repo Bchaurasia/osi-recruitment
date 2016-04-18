@@ -39,7 +39,7 @@
 					ng-change="getJobDescriptionByClient(client)"
 					ng-options="o.clientName for o in clients | orderBy:'toString()'"
 					class="form-control input-sm" required>
-					<option value="requisition.client">{{requisition.client}}</option>
+<!-- 					<option value="requisition.client">{{requisition.client}}</option> -->
 				</select> <label>Client<b class="mandatory">*</b></label>
 
 			</div>
@@ -175,7 +175,7 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-show="showApprovalBtn"
-				ng-disabled="showApprovedBtn" ng-click="approve()">
+				ng-disabled="disableApprovalBtn" ng-click="approve()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Approve
 			</button>
 			<button class="btn btn-danger" ng-show="showRejectBtn"
