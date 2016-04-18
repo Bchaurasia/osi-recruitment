@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RequisitionController {
 	private static final String MSG_START = "{\"msg\":\"";
 	private static final String MSG_END = "\"}";
-	private static final String REQUISITION_HAS_BEEN_REJECTED_SUCCESSFULLY = " Requisition has been Rejected successfully";
+	private static final String REQUISITION_HAS_BEEN_REJECTED_SUCCESSFULLY = " Requisition has been rejected successfully";
 
 	@Autowired
 	RequisitionService requisitionService;
@@ -72,7 +72,7 @@ public class RequisitionController {
 	public ResponseEntity<String> updateRequisition(@RequestBody Requisition requisition) throws Exception {
 		log.info("Updating requisition");
 		RequisitionApproverDetails requisitionApproverDetails = requisitionService.updateRequisition(requisition);
-		String message = "Requisition successfully Updated and sent notification to "
+		String message = "Requisition successfully updated and sent notification to "
 				+ requisitionApproverDetails.getApproverName() + ".";
 		String jsonObj = "{\"msg\":\"" + message + "\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
@@ -102,7 +102,7 @@ public class RequisitionController {
 	@ResponseBody
 	public ResponseEntity<?> cloneRequisition(@RequestBody Requisition requisition) throws Exception {
 		requisitionService.cloneRequisition(requisition);
-		String message = "Requisition Cloned successfully and sent notification to "
+		String message = "Requisition cloned successfully and sent notification to "
 				+ requisition.getApproval1().getName() + ".";
 		String jsonObj = MSG_START + message + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);

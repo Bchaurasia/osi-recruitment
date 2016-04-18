@@ -17,6 +17,7 @@ import com.nisum.employee.ref.search.PositionSearchService;
 public class PositionService implements IPositionService {
 
 	private static final String ACTIVE = "Active";
+	private static final String PRIORITY_LOW = "Low";
 
 	@Autowired
 	PositionRepository positionRepository;
@@ -85,6 +86,7 @@ public class PositionService implements IPositionService {
 		Position position = new Position();
 		ArrayList<String> interviewRounds = getInterviewRounds();
 		position.setStatus(ACTIVE);
+		position.setPriority(PRIORITY_LOW);
 		position.setClient(requisition.getClient());
 		position.setRequisitionId(requisition.getRequisitionId());
 		position.setDesignation(requisition.getPosition());

@@ -5,8 +5,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.calendar = true;
 	$scope.hideCal = false;
 	$scope.hideCal1 = false;
-	$scope.positionErr = false;
-	$scope.minErr = false;
 	$scope.maxErr = false;
 	$scope.targetErr = false;
 	$scope.reqErr = false;
@@ -18,7 +16,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.commentBtn = true;
 	$scope.JobDesBtn = true;
 	$scope.JobDesBox = false;
-	$scope.regex= "/^\d{1,2}$/";
 	$scope.dropdownQualification = [];
 	$scope.qualification = {};
 	$scope.designation1=[];
@@ -42,7 +39,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.qualification.percent = "70";
 	$scope.targetDate = "";
 	$scope.reqId=0;
-	$scope.requisition.noOfPositions = "";
 	$scope.requisition.qualifications = [];
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
@@ -171,16 +167,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		checkForEnableCreateButton();
 	}
 	
-	$scope.validateNoOfPosition= function(noOfPositions){
-		var number = parseInt(noOfPositions);
-		if(number === 0){
-			$scope.positionErr = true;
-		}
-		else{
-			$scope.positionErr = false;
-		}
-	}
-	
 	$scope.max = function(maxValue){
 		var Value1 = parseInt(maxValue);
 		var Value2 = parseInt($scope.requisition.minExpYear);
@@ -272,6 +258,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			
 			function successMsg(data){
 				$scope.sendNotification(data,'recruitment/searchRequisition');
+				$window.location.reload();
 			}
 			
 			function errorMsg(data){

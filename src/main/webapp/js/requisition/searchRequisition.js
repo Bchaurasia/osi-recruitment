@@ -1,5 +1,5 @@
-app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','sharedService','$filter', '$log','appConstants','$timeout','requisitionService',
-                                     function($scope, $http, $q, $window,sharedService,$filter, $log,appConstants,$timeout,requisitionService) {
+app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter','blockUI','$log','appConstants','$timeout','requisitionService',
+                                     function($scope, $http, $q, $window,$location,sharedService,$filter,blockUI,$log,appConstants,$timeout,requisitionService) {
 
 	$scope.showApprovalBtn = false;
 	$scope.searchBox = false;
@@ -18,12 +18,19 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','share
 		location.href='#recruitment/cloneRequisition';
 		
 	};
-
-	$scope.searchRequisition = function(){
-		requisitionService.searchRequisition($scope.searchTxt).then(function(data) {
-			$scope.allRequisitions = data;
-		});
-	}
+	
+	 $scope.searchRequisition = function(){
+		 blockUI.start("loading Requisition data...");
+		 $timeout(function() {
+			 requisitionService.searchRequisition($scope.searchTxt).then(setRequisition);
+			 blockUI.stop();
+		 }, 1000);
+	 }
+	 
+	 function setRequisition(data){
+		 $scope.allRequisitions = data;
+	 }
+	
 	$scope.searchRequisition();
 	$scope.searchBoxFun = function(){
 		$scope.searchBox = true;	

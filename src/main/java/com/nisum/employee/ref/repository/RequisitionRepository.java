@@ -51,6 +51,7 @@ public class RequisitionRepository {
 			update.set("requisitionManager", requisition.getRequisitionManager());
 			update.set("createdBy", requisition.getCreatedBy());
 			update.set("updatedBy", requisition.getUpdatedBy());
+			update.set("updatedDate", new Date());
 			update.set("status", requisition.getStatus());
 			update.set("jobTitle", requisition.getJobTitle());
 			if (requisition.getApproval2() != null) {
