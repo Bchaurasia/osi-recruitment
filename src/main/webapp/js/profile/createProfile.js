@@ -70,22 +70,15 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 					 $scope.candidate.primarySkills = skills;
 				}
 				if ($scope.candidate !== undefined) {
-					angular.forEach($scope.sk.jobcodeProfile, function(jc) {
-						 jobcodes.push(jc.jobcode);
-						});
-					 $scope.candidate.jobcodeProfile = jobcodes;
-					  if($scope.candidate.jobcodeProfile=="")
-						 $scope.candidate.status = "Not Initialized";
-					 else
-						 $scope.candidate.status = "Initialized";
+					 $scope.candidate.status = "Not Initialized";
 				}
 				if($scope.candidate.altmobileNo !== undefined){
 					$scope.candidate.altmobileNo = $scope.countryCode+$scope.candidate.altmobileNo;
 				}
 				else
-					{
+				{
 					$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
-					}
+				}
 		    	$scope.candidate.profilecreatedBy = sessionStorage.userId;
 		    	$scope.candidate.plocation = $scope.selection.pLocation;
 		    	$scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
@@ -226,7 +219,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.validateEmailId = function(emailId){
 		if(emailId != undefined){
 			profileService.getProfileById(emailId).then(function(data){
-				if(data.length != 0){
+				if(data != undefined && data.length != 0){
 					$scope.duplicateEmailIdError = true;
 				}else{
 					$scope.duplicateEmailIdError = false;
