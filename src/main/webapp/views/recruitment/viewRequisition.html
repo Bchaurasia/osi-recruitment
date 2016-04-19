@@ -146,13 +146,13 @@
 					class="range-slider__value">{{requisition.percent}}%</span>
 			</div>
 			<div class="input-field col s1">
-				<a class="glyphicon glyphicon-remove"
-					ng-show="lengthOfQualifications()" style="cursor: pointer;"
-					ng-click="deleteQualification($index)"></a>&nbsp;&nbsp;&nbsp;&nbsp; 
-				
-				<a id="addButtonColumn"
+				<button class="glyphicon glyphicon-remove"
+					ng-show="lengthOfQualifications()" style="cursor: pointer;color:#26a69a;border:none;"
+					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
+				<button id="addButtonColumn" style="cursor:pointer;color:#26a69a;border:none;"
+				    ng-disabled="check(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
-					ng-click="addColumnCriteria()" ng-disabled=""></a>
+					ng-click="addColumnCriteria()"></button>
 			</div>
 		</div>
 		

@@ -116,6 +116,13 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		$scope.requisition.qualifications.push(addQualification);
 	};
 	
+	$scope.check = function(qualification){
+		if(qualification){
+			return false;
+		}else
+			return true;
+	}
+	
 	$scope.deleteQualification = function(index){
 		if (!($scope.requisition.qualifications.length - 1 == 0)) {
 			$scope.requisition.qualifications.splice(index,1);

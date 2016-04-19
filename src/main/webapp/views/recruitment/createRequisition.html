@@ -96,7 +96,7 @@
 		</div>
 		<div class="row" style="margin-bottom: 20px">
 			<div class="input-field col s6">
-				<select required ng-model="jobDescription"
+				<select ng-model="jobDescription"
 					ng-change="setSkillsAndJDDetails()"
 					ng-options="o.jobDescriptionName for o in JobDescriptionList"
 					class="form-control input-sm" id="jobDescription">
@@ -135,7 +135,7 @@
 		<div class="row"
 			ng-repeat=" requisition in requisition.qualifications">
 			<div class="input-field col s6">
-				<select placeholder="Select Qualification"
+				<select placeholder="Select Qualification" id="qualification"
 					ng-model="requisition.qualification" required
 					ng-options="o as o for o in qualification | orderBy:'toString()'"
 					class="form-control input-sm">
@@ -148,13 +148,13 @@
 					class="range-slider__value">{{requisition.percent}}%</span>
 			</div>
 			<div class="input-field col s1">
-				<a class="glyphicon glyphicon-remove"
-					ng-show="lengthOfQualifications()" style="cursor: pointer;"
-					ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</a>
-				&nbsp;&nbsp;&nbsp;&nbsp; <a id="addButtonColumn"
-					ng-disabled="checkDisability(requisition.qualification)"
+				<button class="glyphicon glyphicon-remove"
+					ng-show="lengthOfQualifications()" style="cursor: pointer;color:#26a69a;border:none;"
+					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
+				<button id="addButtonColumn" style="cursor:pointer;color:#26a69a;border:none;"
+				    ng-disabled="checkDisability(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
-					ng-click="addColumnCriteria()"></a>
+					ng-click="addColumnCriteria()"></button>
 			</div>
 		</div>
 		<div class="row">
