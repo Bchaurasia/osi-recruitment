@@ -25,8 +25,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.position = {};
 	$scope.reqId = 0;
 	$scope.hrManager={};
-	$scope.approval1={};
-	$scope.approval2={};
+	//$scope.approval1={};
+	//$scope.approval2={};
 	$scope.JobDescriptionList=[];
 	$scope.today = new Date();
 	$scope.hideApproval2=false;
@@ -261,10 +261,11 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		$scope.requisition.approval1.name = $scope.approval1.name;
 		$scope.requisition.approval1.emailId = $scope.approval1.emailId;
 		$scope.requisition.approval1.approved = false;
-		
-		$scope.requisition.approval2.name = $scope.approval2.name;
-		$scope.requisition.approval2.emailId = $scope.approval2.emailId;
-		$scope.requisition.approval2.approved = false;
+		if($scope.approval2 !== undefined){
+			$scope.requisition.approval2.name = $scope.approval2.name;
+			$scope.requisition.approval2.emailId = $scope.approval2.emailId;
+			$scope.requisition.approval2.approved = false;
+		}
 	}
 	
 	setTargetDateNUpdatedBy = function(){
