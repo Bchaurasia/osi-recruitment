@@ -1,17 +1,17 @@
-<div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Clone
-		Requisition : {{requisition.requisitionId}}</h6>
-</div>
 
 <div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="cloneRequisition" onvalidate
-		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="cloneRequisition" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Requisition : {{requisition.requisitionId}}</b>
+			</h5>
+		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select name="designations" placeholder="Select Designation" ng-change="getData()"
-					ng-model="requisition.position" required
+				<select name="designations" placeholder="Select Designation"
+					ng-change="getData()" ng-model="requisition.position" required
 					ng-options="o as o for o in designation1 | orderBy:'toString()'"
 					class="form-control input-sm" id="designation">
 					<option>Select Designation</option>
@@ -33,16 +33,15 @@
 					</div>
 				</div>
 				<label style="margin-top: 14px">Exp. Required<b
-					class="mandatory">*</b></label>
-					<span class="validation-error" ng-show="minErr"> Min Exp
-							should not be greater than Max Exp.</span> <span
-							class="validation-error" ng-show="maxErr"> Max Exp should
-							not be less than Min Exp.</span>
+					class="mandatory">*</b></label> <span class="validation-error"
+					ng-show="minErr"> Min Exp should not be greater than Max
+					Exp.</span> <span class="validation-error" ng-show="maxErr"> Max
+					Exp should not be less than Min Exp.</span>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
-					<input type="date" ng-model="requisitionDate" 
+					<input type="date" ng-model="requisitionDate"
 						min="{{today | date : 'yyyy-MM-dd' }}"
 						ng-change="reqDate(requisitionDate,targetDate)"
 						id="requisitionDate" required name="requisitionDate"> <label>Requisition
@@ -51,28 +50,27 @@
 						date should not be after Target Date.</span>
 				</div>
 				<div class="input-field col s6">
-					<input type="date" ng-model="targetDate" 
-					ng-change="validTargetDate(requisitionDate,targetDate)"
-					min="{{today | date : 'yyyy-MM-dd' }}"
-					ng-change="validTargetDate(requisitionDate,targetDate)"
-					id="targetDate" required>
-					<label>Target Date<b class="mandatory">*</b></label>
-					<span class="validation-error"
+					<input type="date" ng-model="targetDate"
+						ng-change="validTargetDate(requisitionDate,targetDate)"
+						min="{{today | date : 'yyyy-MM-dd' }}"
+						ng-change="validTargetDate(requisitionDate,targetDate)"
+						id="targetDate" required> <label>Target Date<b
+						class="mandatory">*</b></label> <span class="validation-error"
 						ng-show="cloneRequisition.targetDate.$dirty || invalidSubmitAttempt ">
 						Target date should not be before Requsition Date</span>
 				</div>
 			</div>
-		
+
 			<div class="row">
 				<div class="input-field col s6">
 					<select ng-model="client"
 						ng-options="o.clientName for o in clients | orderBy:'toString()'"
-						ng-change="getJDByClient(client)"
-						class="form-control input-sm" required>
+						ng-change="getJDByClient(client)" class="form-control input-sm"
+						required>
 						<option value="requisition.client">{{requisition.client}}</option>
 					</select> <label>Client<b class="mandatory">*</b></label>
 				</div>
-			
+
 				<div class="input-field col s6">
 					<select placeholder="Select Location"
 						ng-model="requisition.location"
@@ -114,8 +112,9 @@
 				</div>
 				<div class="input-field col s6">
 					<ui-select multiple ng-model="requisition.skillType"
-						ng-keypress="myFunct($event)" theme="select2" ui-select-required> <ui-select-match
-						placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+						ng-keypress="myFunct($event)" theme="select2" ui-select-required>
+					<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
+					<ui-select-choices
 						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 					{{color}} </ui-select-choices> </ui-select>
 					<label>Skills<b class="mandatory">*</b></label>
@@ -200,3 +199,4 @@
 		</div>
 	</form>
 </div>
+<br><br>
