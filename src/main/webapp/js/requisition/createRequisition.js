@@ -143,12 +143,19 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	
 	
 	$scope.validTargetDate = function(requisitionDate,targetDate){
-		if(targetDate < requisitionDate){
+		
+		var reqDate = new Date(requisitionDate);
+		reqDate.setHours(0,0,0,0);
+		var targDate = new Date(targetDate);
+		targDate.setHours(0,0,0,0);
+		if(targDate < reqDate){
 			 $scope.targetErr = true;
 			 $scope.disabled = true; 
+			 $scope.reqErr = false;
 		}else{
 			$scope.targetErr = false;
-			 $scope.disabled = false; 
+			 $scope.disabled = false;
+			 $scope.reqErr = false;
 		}
 		 checkForEnableCreateButton();
 	}
@@ -185,12 +192,20 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	}
 	
 	$scope.reqDate = function(requisitionDate,targetDate){
-		if(targetDate != "" && targetDate < requisitionDate){
+		var reqDate = new Date(requisitionDate);
+		reqDate.setHours(0,0,0,0);
+		if(targetDate != ""){
+			var targDate = new Date(targetDate);
+			targDate.setHours(0,0,0,0);
+		}
+		if(targetDate != "" && targDate < reqDate){
 			$scope.reqErr = true;
 			$scope.disabled = true;
+			$scope.targetErr = false;
 		}else{
 			$scope.reqErr = false;
 			 $scope.disabled = false;
+			 $scope.targetErr = false;
 		}
 		checkForEnableCreateButton();
 	}
