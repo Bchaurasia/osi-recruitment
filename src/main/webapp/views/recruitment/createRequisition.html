@@ -135,7 +135,7 @@
 		<div class="row"
 			ng-repeat=" requisition in requisition.qualifications">
 			<div class="input-field col s6">
-				<select placeholder="Select Qualification" id="qualification"
+				<select placeholder="Select Qualification"
 					ng-model="requisition.qualification" required
 					ng-options="o as o for o in qualification | orderBy:'toString()'"
 					class="form-control input-sm">
