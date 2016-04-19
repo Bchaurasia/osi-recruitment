@@ -14,6 +14,9 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.sk={};
 	$scope.sk.jobcodeProfiles = [];
 	$scope.sk.primarySkills = [];
+	$scope.countryCode = "+91";
+	$scope.mobileNoError = false;
+	$scope.altMobileNoError = false;
 	
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
@@ -44,6 +47,8 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	});
 	profileService.getProfileById($scope.user).then(function(data){
 		$scope.candidate = data;
+		$scope.candidate.mobileNo = $scope.candidate.mobileNo === null ? "" : $scope.candidate.mobileNo.substring(3, 13);
+		$scope.candidate.altmobileNo = $scope.candidate.altmobileNo === null ? "" : $scope.candidate.altmobileNo.substring(3, 13);
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
@@ -162,11 +167,19 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        $scope.candidate.designation = $scope.designation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
-
+	        $scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
+	        
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
 				 $scope.candidate.status = "Initialized";
+			}
+			if($scope.candidate.altmobileNo !== undefined){
+				$scope.candidate.altmobileNo = $scope.countryCode+$scope.candidate.altmobileNo;
+			}
+			else
+			{
+				$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
 			}
 	        profileService.updateProfile($scope.candidate).then(function(msg){
 	        	$scope.sendNotification(msg,'recruitment/searchProfile');
@@ -222,6 +235,22 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			}).catch(function(msg){
 				console.log(msg);
 			})
+		}
+	};
+	
+	$scope.validateMobileNo = function(mobileNo){
+		if(mobileNo.length<10 || mobileNo.length>10){
+			$scope.mobileNoError = true;
+		}else{
+			$scope.mobileNoError = false;
+		}
+	};
+	
+	$scope.validateAltMobileNo = function(mobileNo){
+		if(mobileNo.length<10 || mobileNo.length>10){
+			$scope.altMobileNoError = true;
+		}else{
+			$scope.altMobileNoError = false;
 		}
 	};
 	
