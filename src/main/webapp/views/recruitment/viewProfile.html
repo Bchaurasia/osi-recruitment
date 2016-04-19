@@ -55,8 +55,9 @@
 			<div class="input-field col s6">
 				<input type="text" placeholder="Enter Mobile number" name="mobileNo"
 					class="form-control" ng-change="toggleProDisable()"
-					ng-model="candidate.mobileNo" ng-pattern="/^\+?\d{12}$/"
-					maxlength="13" required> <label style="position: absolute; top: -22px;">Mobile Number <b
+					ng-blur="validateMobileNo(candidate.mobileNo)"
+					ng-model="candidate.mobileNo" ng-pattern="/^[0-9]+$/"
+					maxlength="10" required> <label style="position: absolute; top: -22px;">Mobile Number <b
 					class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="submitted && UpdateCandidate.mobileNo.$invalid">Please
@@ -66,7 +67,7 @@
 					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.required">
 					Please specify your mobile number.</div>
 				<div class="validation-error"
-					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.pattern">
+					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.pattern || mobileNoError">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 
@@ -74,11 +75,12 @@
 				<input placeholder="Enter alternate Mobile number"
 					name="altmobileNo" class="form-control" type="text"
 					numbers-only="numbers-only" ng-model="candidate.altmobileNo"
-					maxlength="13" ng-pattern="/^\+?\d{12}$/"> 					
+					ng-blur="validateAltMobileNo(candidate.altmobileNo)"
+					maxlength="10" ng-pattern="/^[0-9]+$/"> 					
 					<label style="position: absolute; top: -22px;">Alternate
 					Mobile Number </label>
 				<div class="validation-error"
-					ng-show="(UpdateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.altmobileNo.$error.pattern">
+					ng-show="(UpdateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.altmobileNo.$error.pattern || altMobileNoError">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 		</div>
@@ -139,8 +141,8 @@
 
 			<div class="input-field col s6">
 				<input placeholder="Enter Stream" name="stream" class="form-control"
-					type="text" ng-model="candidate.stream"
-					ng-pattern="/^[a-zA-Z.]*$/"> <label style="position: absolute; top: -22px;">Specialization
+					type="text" ng-model="candidate.stream" ng-maxlength="35"
+					ng-pattern="/^[a-zA-Z _]*$/"> <label style="position: absolute; top: -22px;">Specialization
 				</label>
 
 			</div>
@@ -259,7 +261,7 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
+				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || mobileNoError || altMobileNoError"
 				ng-click="updateProfileDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>
