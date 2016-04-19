@@ -27,6 +27,7 @@
 			<div class="input-field col s6">
 				<input type="date" ng-model="targetDate"
 					ng-change="dateError(requisition.targetDate)" id="targetDate"
+					min="{{today | date : 'yyyy-MM-dd' }}"
 					required> <label>Target Date<b class="mandatory">*</b></label>
 				<span class="validation-error" ng-show="dateErr">Please enter
 					future date.</span>

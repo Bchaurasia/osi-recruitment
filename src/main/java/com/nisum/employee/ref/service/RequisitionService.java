@@ -33,7 +33,7 @@ public class RequisitionService implements IRequisitionService {
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
 	
-	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has approved successfully ";
+	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has been approved successfully ";
 
 	@Override
 	public void prepareRequisition(Requisition requisition) {
@@ -65,7 +65,7 @@ public class RequisitionService implements IRequisitionService {
 			positionService.createRequitionPosition(requisition);
 			updateRequisition(requisition);
 			return requisition.getRequisitionId() + REQUISITION_HAS_APPROVED_SUCCESSFULLY+" and "
-					+ requisition.getNoOfPositions() + " Positions created successfully";
+					+ requisition.getNoOfPositions() + " positions created successfully";
 		} else {
 			requisition.setStatus(PARTIALY_APPROVED);
 			updateRequisition(requisition);

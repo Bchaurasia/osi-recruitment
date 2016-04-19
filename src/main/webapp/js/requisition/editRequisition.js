@@ -28,7 +28,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.approval1={};
 	$scope.approval2={};
 	$scope.JobDescriptionList=[];
-	
+	$scope.today = new Date();
 	$scope.hideApproval2=false;
 	$scope.disApproval1=true;
 	$scope.disApproval2=true;
@@ -86,6 +86,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		if($scope.requisition.approval2 !== undefined){
 			$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
 		}
+		
 		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
 		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
@@ -245,8 +246,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 
 	$scope.updateRequisitionDetails = function(){
 		if ($scope.requisition !== undefined) {
-			//$scope.requisition.approval1=$scope.approval1;
-			//$scope.requisition.approval2=$scope.approval2;
+			setApprovers();
 			setTargetDateNUpdatedBy();
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
@@ -256,6 +256,15 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.cls=appConstants.ERROR_CLASS;
 				     });
 		}
+	}
+	setApprovers = function(){
+		$scope.requisition.approval1.name = $scope.approval1.name;
+		$scope.requisition.approval1.emailId = $scope.approval1.emailId;
+		$scope.requisition.approval1.approved = false;
+		
+		$scope.requisition.approval2.name = $scope.approval2.name;
+		$scope.requisition.approval2.emailId = $scope.approval2.emailId;
+		$scope.requisition.approval2.approved = false;
 	}
 	
 	setTargetDateNUpdatedBy = function(){
