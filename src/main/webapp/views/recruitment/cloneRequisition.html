@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="CreateRequisition" onvalidate
+	<form class="col s8" name="cloneRequisition" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
 		<div class="row">
 			<div class="input-field col s6">
@@ -34,23 +34,35 @@
 				</div>
 				<label style="margin-top: 14px">Exp. Required<b
 					class="mandatory">*</b></label>
+					<span class="validation-error" ng-show="minErr"> Min Exp
+							should not be greater than Max Exp.</span> <span
+							class="validation-error" ng-show="maxErr"> Max Exp should
+							not be less than Min Exp.</span>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
-					<input type="date" ng-model="requisitionDate" ng-disabled="true"
-						id="requisitionDate" required> <label>Requisition
+					<input type="date" ng-model="requisitionDate" 
+						min="{{today | date : 'yyyy-MM-dd' }}"
+						ng-change="reqDate(requisitionDate,targetDate)"
+						id="requisitionDate" required name="requisitionDate"> <label>Requisition
 						Date<b class="mandatory">*</b>
 					</label> <span class="validation-error" ng-show="reqErr">Requistion
 						date should not be after Target Date.</span>
 				</div>
 				<div class="input-field col s6">
-					<input type="date" ng-model="targetDate" id="targetDate" required>
-					<label>Target Date<b class="mandatory">*</b></label> <span
-						class="validation-error" ng-show="dateErr">Please enter
-						future date.</span>
+					<input type="date" ng-model="targetDate" 
+					ng-change="validTargetDate(requisitionDate,targetDate)"
+					min="{{today | date : 'yyyy-MM-dd' }}"
+					ng-change="validTargetDate(requisitionDate,targetDate)"
+					id="targetDate" required>
+					<label>Target Date<b class="mandatory">*</b></label>
+					<span class="validation-error"
+						ng-show="cloneRequisition.targetDate.$dirty || invalidSubmitAttempt ">
+						Target date should not be before Requsition Date</span>
 				</div>
 			</div>
+		
 			<div class="row">
 				<div class="input-field col s6">
 					<select ng-model="client"
@@ -60,7 +72,7 @@
 						<option value="requisition.client">{{requisition.client}}</option>
 					</select> <label>Client<b class="mandatory">*</b></label>
 				</div>
-
+			
 				<div class="input-field col s6">
 					<select placeholder="Select Location"
 						ng-model="requisition.location"
@@ -81,15 +93,13 @@
 				</div>
 
 				<div class="input-field col s6">
-					<input placeholder="Enter number of Positions" type="text"
-						ng-bind="requisition.noOfPositions"
+					<input placeholder="Enter number of Positions" type="number"
 						ng-model="requisition.noOfPositions" name="position"
-						ng-change="validateNoOfPosition(requisition.noOfPositions)"
-						class="active validate" ng-pattern="/(^0$)|(^[1-9]\d{0,1}$)/"
+						class="form-control input-sm" ng-pattern="/(^[1-9]\d{0,1}$)/"
 						required> <label>No. of Positions<b
 						class="mandatory">*</b>
 					</label> <span class="validation-error"
-						ng-show="(CreateRequisition.position.$dirty || invalidSubmitAttempt) && CreateRequisition.position.$error.pattern">
+						ng-show="(cloneRequisition.position.$dirty || invalidSubmitAttempt) && cloneRequisition.position.$error.pattern">
 						No. Positions should be between 1-99!</span>
 				</div>
 			</div>
@@ -104,8 +114,7 @@
 				</div>
 				<div class="input-field col s6">
 					<ui-select multiple ng-model="requisition.skillType"
-						ng-keypress="myFunct($event)" theme="select2" ui-select-required
-						ng-disabled="disabled"> <ui-select-match
+						ng-keypress="myFunct($event)" theme="select2" ui-select-required> <ui-select-match
 						placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
 						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 					{{color}} </ui-select-choices> </ui-select>
@@ -156,8 +165,6 @@
 						ng-click="addColumnCriteria()"></button>
 				</div>
 			</div>
-
-
 			<div class="row">
 				<div class="input-field col s6">
 					<select placeholder="Select Approver 1" ng-model="approval1"
@@ -179,7 +186,7 @@
 
 			<div align="center" class="row">
 				<button class="btn btn-info active" type="submit"
-					ng-disabled="validateClone() || disableCloneBtn || disableCloneBtnExp"
+					ng-disabled="cloneRequisition.$invalid || validateClone() || disabled1 || disableCloneBtn"
 					ng-click="cloneRequisitionDetails()"
 					ui-sref="recruitment.searchRequisition">
 					<span class="glyphicon glyphicon-ok-circle"></span> Clone

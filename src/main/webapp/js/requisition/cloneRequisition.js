@@ -2,31 +2,34 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
                                      function($scope, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,jobDescriptionService,positionService,blockUI) {
 	$scope.hideSkills = true;
 	$scope.skillErr = false;
-	$scope.minExpYearErr = false;
-	$scope.positionErr = false;
-	$scope.percentageErr = false;
-	$scope.reqErr=false;
-	$scope.targetErr = false;
-	$scope.disableCloneBtn = true;
-	$scope.disableCloneBtnPosition = false;
-	$scope.disableCloneBtnExp = false;
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.qualification = $scope.info.qualification;
 	$scope.designation1=[];
-	$scope.minExpYear=[];
-	$scope.maxExpYear=[];
 	$scope.approvals=[];
 	$scope.requisitionManager=[];
 	$scope.client =[];
 	var id = sharedService.getRequisitionId();
-	$scope.today = new Date();
-	$scope.disabled = false;
 	$scope.requisition= {};
 	$scope.requisition.qualifications = [];
 	$scope.position = {};
 	$scope.hrManager={};
 	$scope.jobDescriptionList = {};
+	$scope.requisitionDate = new Date();
+	$scope.requisition.targetDate = "";
+	$scope.targetErr = false;
+	$scope.reqErr = false;
+	$scope.disabled = false;
+	$scope.disableCloneBtn = false;
+	$scope.today = new Date();
+	$scope.requisition.minExpYear = "";
+	$scope.requisition.maxExpYear = "";
+	$scope.minExpYear=[];
+	$scope.maxExpYear=[];
+	$scope.disabled1 = false;
+	$scope.maxErr = false;
+	$scope.minErr = false;
+
 	
 	$scope.lengthOfQualifications = function() {
 		if($scope.requisition.qualifications.length == 1){
@@ -42,6 +45,7 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 				percent:'70'
 		};
 		$scope.requisition.qualifications.push(addQualification);
+		checkForEnableCloneButton();
 	};
 	
 	$scope.deleteQualification = function(index){
@@ -79,15 +83,16 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 					return true;
 				}
 	}
-	
+
 	requisitionService.getRequisitionById(id).then(function(data){
     	$scope.requisition =data;
+    	$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
     	$scope.requisition.approval1.comment="";
        	$scope.requisition.approval1.approved=false;
        	$scope.targetDate = new Date();
-       	//$scope.requisitionDate = new Date($scope.requisition.requisitionDate);
+       	
        	$scope.requisitionDate = new Date();
-       	$scope.targetDate =""; // new Date($scope.requisition.targetDate);
+       	$scope.targetDate =""; 
        	
        	jobDescriptionService.getJobDescriptionByClient($scope.requisition.client).then(function(data){
 			$scope.jobDescriptionList = data;
@@ -152,6 +157,13 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 		angular.forEach($scope.designations,function(deg){
 			$scope.designation1.push(deg.designation);
 		})
+		angular.forEach($scope.designations,function(deg){
+			$scope.minExpYear.push(deg.minExpYear);
+		})
+		angular.forEach($scope.designations,function(deg){
+			$scope.maxExpYear.push(deg.maxExpYear);
+		})
+		
 	}).catch(function(msg){
 		$scope.message=msg;
 		 $scope.cls=appConstants.ERROR_CLASS;
@@ -162,32 +174,6 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 			isFirstOpen: true,
 	};
 	
-	$scope.validateTargetDate = function(targetDate){
-		$scope.targetDate = angular.copy(targetDate);
-		if($scope.targetDate < $scope.requisitionDate)
-			{
-			$scope.targetErr = true;
-			 $scope.requisition.targetDate = "";
-			}
-		else{
-			$scope.reqErr = false;
-		//	formatedTarDate();
-		}
-	}
-		
-	$scope.validateRequisitionDate = function(requisitionDate){
-			$scope.requisitionDate = angular.copy(requisitionDate);
-			if($scope.requisitionDate > $scope.targetDate)
-				{
-				$scope.reqErr = true;
-				$scope.requisition.requisitionDate = "";
-				}
-			else{
-				$scope.reqErr = false;
-				}
-	}	
-	
-	
 	$scope.cloneRequisitionDetails = function(){
 		if ($scope.requisition !== undefined && $scope.requisition.status !== "REJECTED") {
 			delete $scope.requisition.requisitionId;
@@ -195,9 +181,9 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			$scope.requisition.requisitionDate.toString();
 			
-			/*if(null==$scope.requisition.approval2){
+			if(null==$scope.requisition.approval2){
 				$scope.requisition.approval2={};
-			}*/
+			}
 			
 			requisitionService.cloneRequisition($scope.requisition)
 				.then(successMsg)
@@ -220,9 +206,13 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 	
 	$scope.getData = function() {
 		$scope.primarySkills = [];
+		$scope.minErr = false;
+	    $scope.maxErr = false;
+	    
         $scope.deg  =_.find($scope.designations,function(obj){
-              return obj.position == $scope.requisition.position; 
+              return obj.designation == $scope.requisition.position; 
           });
+        $scope.skill.length = 0;
          angular.forEach($scope.deg.skills,function(deg){
             $scope.primarySkills.push(deg);
           })
@@ -247,12 +237,13 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 		var Value2 = parseInt($scope.requisition.maxExpYear);
 		if(Value1 > Value2){
 			$scope.minErr = true;
-			$scope.disableCloneBtnExp = true;
+			$scope.disabled1 = true;
 		}
 		else{
 			$scope.minErr = false;
-			$scope.disableCloneBtnExp = false;
+			$scope.disabled1 = false;
 		}
+		checkForEnableCloneButton();
 	}
 	
 	$scope.max = function(maxValue){
@@ -263,35 +254,28 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 		
 		if(Value1 < Value2){
 			$scope.maxErr = true;
-			$scope.disableCloneBtnExp = true;
+			$scope.disabled = true;
 		}
 		else{
 			$scope.maxErr = false;
-			$scope.disableCloneBtnExp = false;
+			$scope.disabled = false;
 		}
+		checkForEnableCloneButton();
 	}
 	
-	$scope.validateNoOfPosition = function(data) {
-		if(data1<=0 || data1 > 99) {
-			$scope.requisition.noOfPositions="";
-			$scope.positionErr = true;
-		
-		}else{
-			$scope.positionErr = false;
-		}
-	};
-
 	$scope.validateClone = function(data) {
-			if($scope.requisition.requisitionDate==="" || $scope.requisition.targetDate==="" || $scope.requisition.noOfPositions===""){
+			if($scope.requisition.requisitionDate==="" || $scope.requisition.targetDate===""){
 					return true;
 				}
 				else{
 					return false;
 				}
 	}
-
+	 
 	 $scope.setSkillsAndJDDetails = function(){
+		 	$scope.requisition.jobDescription = $scope.jobDescription.jobDescriptionDetails;
 			$scope.requisition.skillType = $scope.jobDescription.skills;
+			$scope.requisition.jobTitle = $scope.jobDescription.jobDescriptionName;
 	 }
 	 
 	 $scope.getJDByClient = function(client){
@@ -299,4 +283,36 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 			$scope.jobDescriptionList = data;
 		});
 	}
+	
+	 $scope.reqDate = function(requisitionDate,targetDate){
+			if(targetDate != "" && targetDate < requisitionDate){
+				$scope.reqErr = true;
+				$scope.disabled = true;
+			}else{
+				$scope.reqErr = false;
+				 $scope.disabled = false;
+			}
+			checkForEnableCloneButton();
+		}
+	 
+	 function checkForEnableCloneButton(){
+			var length=$scope.requisition.qualifications.length;
+			if($scope.requisition.qualifications[length-1].qualification == "" || $scope.requisition.approval1.name == ""){
+				$scope.disableCloneBtn  =  true;
+			}else{
+				$scope.disableCloneBtn  =  false;
+			}
+		}
+	 
+	 $scope.validTargetDate = function(requisitionDate,targetDate){
+			if(targetDate < requisitionDate){
+				 $scope.targetErr = true;
+				 $scope.disabled = true; 
+			}else{
+				$scope.targetErr = false;
+				 $scope.disabled = false; 
+			}
+			 checkForEnableCreateButton();
+		}
+		
 }]);
