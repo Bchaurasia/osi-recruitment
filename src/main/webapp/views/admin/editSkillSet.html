@@ -28,7 +28,7 @@
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
-			<h5>Total Skills : {{ skills.length }}</h5>
+			<h5><small>Total Skills : {{ skills.length }}</small></h5>
 		</div>
 
 		<div class="col-md-4">
@@ -48,28 +48,37 @@
 <br>
 
 <div class="row" ng-hide="dis2">
-	<div class="input-field col s4" style="left: 200;">
-		<div class="card teal lighten-2">
-			<span style="color: grey; font-size: large;">Add Skills</span>
-			<div class="card-action" style="background-color: white;">
-				<div class="row">
-					<div class="input-field col s6" align="center">
-						<input class="form-control"	type="text" ng-model="newSkill" placeholder="Enter Skill...">
-						<label class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skill
-						</label>
-					</div>
-					<div class="input-field col s6" align="center">
-						<button class="btn btn-info active" ng-click="save();" type="submit">
-							<span class="glyphicon glyphicon-ok-circle"></span> Save
-						</button>
-						&nbsp;
-						<button class="btn btn-info active" ng-click="cancel();">
-							<span class="glyphicon glyphicon-remove"></span> Cancel
-						</button>
+<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+<form class="col s8" name="AddSkills" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		<div class="row">
+			<div class="input-field col s6" style="left:40">
+				<div class="card teal lighten-2">
+					<span style="color: grey; font-size: large;">Add Skills</span>
+					<div class="card-action" style="background-color: white;">
+						<div class="row">
+							<div class="input-field col s6" align="center">
+								<input class="form-control" type="text" ng-model="newSkill"
+									placeholder="Enter Skill..." required> <label
+									class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skill*
+								</label>
+							</div>
+							<div class="input-field col s6" align="center">
+								<button class="btn btn-info active"
+									ng-disabled="AddSkills.$invalid" ng-click="save();"
+									type="submit">
+									<span class="glyphicon glyphicon-ok-circle"></span> Save
+								</button>
+								&nbsp;
+								<button class="btn btn-info active" ng-click="cancel();">
+									<span class="glyphicon glyphicon-remove"></span> Cancel
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </div>
 <br>

@@ -19,7 +19,7 @@ app.controller('interviewRoundController',['$scope', '$http','$q', '$window', '$
 
 	infoService.getInfoById('interviewRounds')
 			   .then(function(data){
-				   	$log.info("interviewRounds---------"+angular.toJson(data))
+				   	$log.info("interview Rounds---------"+angular.toJson(data))
 				   $scope.interviewRounds2 = data;
 				   $scope.interviewRounds=$scope.interviewRounds2.value;
 			   }).catch(

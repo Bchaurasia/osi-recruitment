@@ -27,9 +27,8 @@
 			</div>
 		</div>
 		<div class="input-field col s6">
-				<label class="lbl" for="notes"><i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skills<b
-					class="mandatory">*</b></label>
-					
+				<label style="position: absolute; top: -22px;">Skills Set<b class="mandatory">*</b>:</label>
+			
 				<ui-select multiple ng-model="designation.skills" 
 							ng-keypress="myFunct($event)" name="pskills" theme="select2"
 							id="skills" ui-select-required ng-disabled="disabled">
@@ -67,7 +66,7 @@
 					Please select maxExpYear.</div>
 			</div>
 		</div>
-		
+		<br>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid"
 				ng-click="save()">

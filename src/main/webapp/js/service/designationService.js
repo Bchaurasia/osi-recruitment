@@ -31,7 +31,7 @@ function designationService($http,$filter,$rootScope,$log,$q,$cacheFactory,appCo
 	}
 	
 	function updateDesignationSuccess(response){
-		return  response.config.data.designation +"Designation Updated successfully";
+		return  response.config.data.designation +" Designation Updated successfully";
 	}
 	
 	function createDesignationSuccess(response){

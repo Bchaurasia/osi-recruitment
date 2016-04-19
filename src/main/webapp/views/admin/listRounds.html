@@ -14,7 +14,7 @@
 			<table class="bordered" style="width: 90%">
 				<tr>
 					<th width="20px">#</th>
-					<th width="80px">Interview Rounds</th>
+					<th width="80px">INTERVIEW ROUNDS</th>
 					<!-- 					<th width="40px">Delete</th> -->
 				</tr>
 				<tr ng-repeat="interviewRound in interviewRounds">
@@ -25,34 +25,45 @@
 				</tr>
 			</table>
 		</div>
-		
-	<div class="row">
-	<div class="input-field col s12" style="left: -200;" ng-hide="dis2">
-		<div class="card teal lighten-2">
-			<span style="color: grey; font-size: large;">Add Interview Rounds</span>
-			<div class="card-action" style="background-color: white;">
+	<br><br>
+	<div class="row"  ng-hide="dis2">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+			<form class="col s12" name="ListRounds" onvalidate
+				style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 140%">
 				<div class="row">
-					<div class="input-field col s6" align="center">
-						<input class="form-control" type="text" ng-model="newInterviewRound" placeholder="Enter InterviewRound...">
-						<label class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Interview Round
-						</label>
-					</div>
-					<div class="input-field col s6" align="center">
-						<button class="btn btn-info active" ng-click="save();" type="submit">
-							<span class="glyphicon glyphicon-ok-circle"></span> Save
-						</button>
-						&nbsp;
-						<button class="btn btn-info active" ng-click="cancel();">
-							<span class="glyphicon glyphicon-remove"></span> Cancel
-						</button>
-						<!-- <medium ng-hide="hideError" style="color:red;">can't leave
+					<div class="input-field col s6" style="left:40">
+						<div class="card teal lighten-2">
+							<span style="color: grey; font-size: large;">Add Interview
+								Rounds</span>
+							<div class="card-action" style="background-color: white;">
+								<div class="row">
+									<div class="input-field col s6" align="center">
+										<input class="form-control" type="text"
+											ng-model="newInterviewRound"
+											placeholder="Enter InterviewRound..." required> <label
+											class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Interview
+											Round*
+										</label>
+									</div>
+									<div class="input-field col s6" align="center">
+										<button class="btn btn-info active" ng-disabled="ListRounds.$invalid" ng-click="save();"
+											type="submit">
+											<span class="glyphicon glyphicon-ok-circle"></span> Save
+										</button>
+										&nbsp;
+										<button class="btn btn-info active" ng-click="cancel();">
+											<span class="glyphicon glyphicon-remove"></span> Cancel
+										</button>
+										<!-- <medium ng-hide="hideError" style="color:red;">can't leave
 							the text field blank</medium> -->
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
-	</div>
-</div>
 <br>
 </div>
 </div>
