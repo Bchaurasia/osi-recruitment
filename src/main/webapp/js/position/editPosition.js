@@ -3,6 +3,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		
 	$scope.hideRounds= true;
 	$scope.hideSkills = true;
+	$scope.accordianFlag = false;
 	$scope.page = "Edit Position";
 	$scope.enableDisableButton = true;
 	$scope.data = {};
@@ -68,6 +69,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 					$scope.selClient = $scope.position.client;
 					$scope.pskills=$scope.info.skills;
 					$scope.interviewRounds=$scope.info.interviewRounds;
+					if($scope.interviewCandidates.length < 0){
+						$scope.accordianFlag = true;
+					}
 				},
 				function(errorMsg) {
 					//$log.error("Failed! ---> "+errorMsg);

@@ -4,7 +4,7 @@ Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 	/*------------------------------------------------------------------
 [1. Global]
-*/         
+*/          
 html {
 	margin: 0;
 	padding: 0;
@@ -34,7 +34,8 @@ body {
 	background: #004D87;
 	height: auto
 }
-.logoStyle{
+
+.logoStyle {
 	width: 12%;
 }
 
@@ -43,28 +44,35 @@ body {
 	height: 94px;
 	margin-top: -15px;
 }
-.bannerleft{
+
+.bannerleft {
 	position: absolute;
 	left: 24%;
 }
 
-.bannerright{
+.bannerright {
 	position: absolute;
 	left: 19%;
 }
-.range-slider__value{
-    background-color: #26A69A;
-    padding: 4px;
-    color: white;
-    border-radius: 4px;
+
+.range-slider__value {
+	background-color: #26A69A;
+	padding: 4px;
+	color: white;
+	border-radius: 4px;
+	position: absolute;
+	top: 23px;
+	right: 22%;
 }
 
-.ulwidth li{
- width: 100%;
- }
- .ulwidth li a i{
-  font-size: 110%;
- }
+.ulwidth li {
+	width: 100%;
+}
+
+.ulwidth li a i {
+	font-size: 110%;
+}
+
 p {
 	font: 13px/1.7em 'Open Sans';
 }
