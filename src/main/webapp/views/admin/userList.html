@@ -1,3 +1,8 @@
+<div ng-class="adminCls" ng-show="message" align="center"
+	style="width: 650px; position: relative; left: -60; height: 50">
+	<h5 style="margin-top: 2px;">{{message}}</h5>
+</div>
+
 <form action="#" class="searchRequisition" onvalidate>
 	<form role="form" class="form-horizontal">
 		<div class="row" style="width: 90%">
@@ -11,7 +16,6 @@
 				</div>
 			</div>
 			<br>
-
 		</div>
 		<table class="bordered" style="width: 80%;">
 			<tr>
@@ -22,7 +26,7 @@
 			</tr>
 
 			<tr class="animate-repeat"
-				ng-repeat="user in users  | filter: searchQuery| offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+				ng-repeat="user in filtered = (users | filter:searchQuery) |  offset: (currentPage)*itemsPerPage | limitTo: itemsPerPage"
 				style="font-size: 80%">
 				<td class="mdl-data-table__cell--non-numeric">{{user.name}}</td>
 				<td class="mdl-data-table__cell--non-numeric"><a
@@ -38,7 +42,7 @@
 		<div class="row" style="width: 90%">
 			<div class="col-md-3" align="left">
 				<h5>
-					<small> Total Positions : {{ users.length }}</small>
+					<small> Total Positions : {{filtered.length}}</small>
 				</h5>
 			</div>
 			<div class="col-md-9">
@@ -49,7 +53,7 @@
 						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
 						ng-bind="n + 1"></a></li>
 					<li class="waves-effect"
-						ng-class="{disabled: currentPage == pageCount() - 1}"><a
+						ng-class="{disabled: currentPage == pageCount()}"><a
 						ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
 				</ul>
 			</div>
