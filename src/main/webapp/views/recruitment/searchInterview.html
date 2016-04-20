@@ -36,8 +36,7 @@
 						ng-repeat="skills in data.candidateSkills">{{skills}}{{$last ?
 							'' : ', '}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
-						ng-repeat="jobcode in data.positionId"> {{jobcode}}{{$last ?
-							'' : ', '}}</i></td>
+						ng-repeat="jobcode in data.currentPositionId"> {{jobcode}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric"><a href="" id=""
 						class="interview-schedule"
 						ng-click="schedule(data.interviewerId)">
