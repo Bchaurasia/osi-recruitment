@@ -10,13 +10,21 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 		createInterview : createInterview,
 		updateInterview : updateInterview,
 		searchInterviewDetails : searchInterviewDetails,
-		getInterviewDetailsById : getInterviewDetailsById
+		getInterviewDetailsById : getInterviewDetailsById,
+		scheduleInterview:scheduleInterview
 	};
-	
+	function scheduleInterview(interviewDetails){
+		return $http.post('resources/interviewSchedule',interviewDetails).then(function(response){
+	    	 return response.data;
+	     })
+	     .catch(function(response){
+	    	 return $q.reject('Error while Scheduling interview: ' + response.status );
+	     });;
+	}
 	function getInterviewDetailsById(interviewId){
-		return $http.get('resources/getInterview?interviewId='+interviewId)
+		return $http.get('resources/getInterviewDetailsById?interviewId='+interviewId)
 		     .then(function(response){
-		    	 return response;
+		    	 return response.data;
 		     })
 		     .catch(function(response){
 		    	 return $q.reject('Error while retrieving candidate Deatils status: ' + response.status );

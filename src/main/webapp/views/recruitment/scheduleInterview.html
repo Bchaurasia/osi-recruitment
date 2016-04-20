@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
 	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Interview
-		Schedule Form - {{profile.candidateName}}</h6>
+		Schedule Form - {{interviewscheduleDetails.candidateName}}</h6>
 </div>
 
 <div class="row">
@@ -9,89 +9,80 @@
 	<form class="col s8" name="schedule_form" ng-submit="schedule()"
 		onvalidate>
 
+		<div ng-class="cls" ng-show="message" align="center"
+			style="width: 850px; position: relative; left: 90; height: 50">
+			<h5 style="margin-top: 2px;">{{message}}</h5>
+		</div>
+
 		<div class="row">
 			<div class="input-field col s6">
-				<select ng-model="jobCodeSel" ng-change="getJobCodeRound()"
-					class="form-control input-sm"
-					ng-options="o.jobcode for o in jobcodelist | orderBy:'toString()'"
-					required name="interviewers">
-					<option value="" disabled="disabled">Select Jobcode</option>
-				</select> <label>Job Code<b class="mandatory">*</b></label>
+				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
+					ng-disabled="ctrl.disabled" style="left: -40px; width: 335px;"
+					title="Choose a country"> <ui-select-match
+					placeholder="Select or search a country in the list...">{{$select.selected.jobcode}}</ui-select-match>
+				<ui-select-choices
+					repeat="position in jobcodelistObj | filter: $select.search">
+				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>
+				</ui-select-choices> </ui-select>
+				<label>Interview Jobcode<b class="mandatory">*</b></label>
+
 			</div>
 
 			<div class="input-field col s6">
-				<!-- ng-hide="hasRole('ROLE_INTERVIEWER')" -->
 				<select ng-model="interviewschedule.roundName"
-					ng-change="setRounds(interviewschedule.roundName);roundInfo()"
 					class="form-control input-sm"
-					ng-options="o as o for o in position.interviewRounds | orderBy:'toString()'"
+					ng-change="setInterviewData(interviewschedule.roundName)"
+					ng-options="o as o for o in interviewschedule.jobcode.interviewRounds | orderBy:'toString()'"
 					required>
 					<option value="" disabled="disabled">Select Round</option>
 				</select> <label>Interview Round<b class="mandatory">*</b></label>
 
 			</div>
 		</div>
+		<!-- {{interviewerName}} -->
 		<div class="row">
 			<div class="input-field col s6">
-				<select name="interviewerName" ng-change="setvalues(interviewerName)"
+				<select name="interviewerName"
+					ng-change="setvalues(interviewschedule.interviewerName)"
 					placeholder="Select InterviewerName"
-					ng-model="interviewerName"
+					ng-model="interviewschedule.interviewerName"
 					ng-options="o.name for o in interviewerNames"
-					class="form-control input-sm" required>
+					class="form-control input-sm" ng-disabled="disabled" required>
 					<option value='' disabled="disabled">Select Interviewer</option>
 				</select> <label>Interviewer Name<b class="mandatory">*</b></label>
 
 			</div>
 			<div class="input-field col s6">
-				<div class="dropdown">
-					<!-- id="dLabel" ng-change="reqDate(requisitionDate,targetDate)" ng-model="requisitionDate"  DOES NOT DE_SELECT THE PREVIOUS DATES AND ERROR FOR PREVIOUS DATES-->
-					<input type="text" name="idate" data-ng-model="data.date"
-						ng-bind="data.date" data-toggle="dropdown" data-target="#"
-						class="dropdown-toggle form-control" required />
-
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						<datetimepicker data-ng-model="data.date"
-							data-on-set-time="onTimeSet(newDate, oldDate)"
-							data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }">
-						</datetimepicker>
-					</ul>
+				<div class="demo-section k-content" align="left">
+					<input kendo-date-time-picker ng-model="data.date"
+						k-ng-model="kdate" style="width: 81%;" />
 				</div>
-				<label>Interview Date<b class="mandatory">*</b> <span
-					class="validation-error" ng-show="reqErr">Please select a
-						future date!</span>
+				<label  style="position: absolute; top: -22px;">Interview Date and Time<b
+					class="mandatory">*</b></label> 
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6"
-				style="position: relative; top: -20px">
-				<div align="left" style="position: relative; top: 20px">
-					<b ng-repeat="day in interviewerData.timeSlots">{{day.day}} </b>
-				</div>
-				<label for="Days">Available Days<b class="mandatory">*</b>
-			</div>
-
 			<div class="input-field col s6">
 				<!-- ng-disabled = "true"  -->
 				<input type="text" maxlength="15"
-					ng-model="interviewerName.interviewerMobileNumber"
-					ng-disabled="true" name="mobileNo" class="form-control"
-					placeholder="Enter Cell# " required /> <label for="Days">Interviewer
-					Cell # <b class="mandatory">*</b>
+					ng-model="interviewerData.mobileNumber" ng-disabled="true"
+					name="mobileNo" class="form-control" placeholder="Enter Cell# "
+					required /> <label for="Days">Interviewer Cell # <b
+					class="mandatory">*</b>
 			</div>
 
 		</div>
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="email" ng-change=""
-					ng-model="interviewerName.emailIdInterviewer" ng-disabled="true"
-					name="emailIdInterviewer" class="form-control"
+				<input type="email" ng-change="" ng-model="interviewerData.emailId"
+					ng-disabled="true" name="emailIdInterviewer" class="form-control"
 					placeholder="Enter Email Id" required /> <label for="Days">Interviewer
 					Email Id <b class="mandatory">*</b>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" ng-change="" ng-model="interviewschedule.skypeId"
+				<input type="text" ng-change="" ng-model="interviewerData.skypeId"
 					ng-disabled="true" name="skypeId" ngPattern="" class="form-control"
 					placeholder="Enter Skype Id" required /> <label for="Days">
 					Skype Id<b class="mandatory">*</b>
@@ -102,17 +93,19 @@
 			<div class="input-field col s6">
 				<select ng-model="sel.selectedtypeOfInterview"
 					ng-options="o as o for o in info.typeOfInterview | orderBy:'toString()'"
-					class="form-control input-sm" required name="typeOfInterview">
+					class="form-control input-sm" required name="typeOfInterview"
+					ng-disabled="disabled">
 					<option value="" disabled="disabled">Select Interview
 						Format</option>
 				</select> <label>Type Of Interview<b class="mandatory">*</b></label>
 			</div>
 
 			<div class="input-field col s6">
-				<select ng-model="sel.selectedLocation" ng-disabled="true"
+				<select ng-model="interviewerData.location" ng-disabled="true"
 					ng-options="o as o for o in info.locations | orderBy:'toString()'"
-					class="form-control input-sm" required name="location">
-					<option value="" disabled="disabled">Select Location</option>
+					class="form-control input-sm" required name="location"
+					ng-disabled="disabled">
+					<option value="" ng-disabled="disabled">Select Location</option>
 				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
 
@@ -122,20 +115,15 @@
 			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="intNotes"
-					ng-model="interviewschedule.additionalNotes"
+					ng-model="interviewschedule.additionalNotes" ng-disabled="disabled"
 					placeholder="Enter any additional notes..."></textarea>
 				<label>Additional Notes</label>
 			</div>
 		</div>
 
 		<div align="center" class="row">
-			<button class="btn btn-info active"
-				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');!(scheduleButnHide)"
-				ng-disabled="scheduleButnDis" type="button" ng-click="reSchedule()">
-				Re-Schedule</button>
-
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="scheduleButnDis"
+				ng-click="schedule()"
 				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">
 				<span class="glyphicon glyphicon-ok-circle"></span> Schedule
 			</button>

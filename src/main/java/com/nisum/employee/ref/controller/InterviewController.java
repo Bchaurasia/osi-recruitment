@@ -36,16 +36,16 @@ public class InterviewController {
 	public ResponseEntity<?> searchInterviews(@RequestParam(value = "interviewerQuery", required = false) String interviewerQuery) {
 		List<InterviewDetails> interviewDetails = null;
 		if(interviewerQuery != null && !interviewerQuery.isEmpty()){
-			interviewDetails =  interviewSearchService.getInterviewDetailsByNameAndStatus(interviewerQuery, interviewerQuery);
+			interviewDetails =interviewDetailsService.getInterviewByCandidateId(interviewerQuery);
 		}else{
-			interviewDetails = interviewSearchService.getAllInterviewDetails();
+			interviewDetails =interviewDetailsService.getAll();
 		}
 		return  new ResponseEntity<List<InterviewDetails>>(interviewDetails, HttpStatus.OK);
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
-	@RequestMapping(value = "/getInterview", method = RequestMethod.GET)
-	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewerId", required = true) String interviewerId) {
+	@RequestMapping(value = "/getInterviewDetailsById", method = RequestMethod.GET)
+	public ResponseEntity<?> getInterview(@RequestParam(value = "interviewId", required = true) String interviewerId) {
 		InterviewDetails checkDetails = interviewDetailsService.getInterview(interviewerId);
 		return new ResponseEntity<InterviewDetails>(checkDetails, HttpStatus.OK);
 	}

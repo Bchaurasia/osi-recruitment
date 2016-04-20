@@ -129,7 +129,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	
 	public List<InterviewDetails> getAll() {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
-		List<InterviewDetails> checkDetails = mongoOperations.findAll(InterviewDetails.class, "InterviewDetails");
+		List<InterviewDetails> checkDetails = mongoOperations.findAll(InterviewDetails.class);
 		return checkDetails;
 	}
 	
@@ -203,6 +203,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setInterviewerEmail(interviewDetails2.getInterviewerEmail());
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
+			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
 		}
 		}else{
 			int i=0;
@@ -213,6 +214,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setProgress(interviewSchedule.getRoundName() + " Scheduled");
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
+			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
 		}
 		return interviewDetails2;
 	}

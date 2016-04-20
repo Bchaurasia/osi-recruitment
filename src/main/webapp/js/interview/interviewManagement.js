@@ -31,26 +31,20 @@
 				}).catch(function(response){
 					
 				});
-		$scope.feedback = function(positionId, candidateEmail) {
+		
+		$scope.feedback = function(positionId,candidateEmail) {
 			sharedService.setprofileUserId(candidateEmail);
-			sharedService.setjobCode(positionId);
 			location.href='#recruitment/interviewFeedback';
 		};
+		
 		$scope.schedule = function(interviewId) {
 			sharedService.setInterviewId(interviewId);
 			location.href='#recruitment/scheduleInterview';
 		};
-		$scope.disableFeedback = function(rounds) {
-			if(rounds == null){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
 		$scope.searchInterview = function(){
 			interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
 			$scope.interviewDetails = data;
+			console.log("interviewDetails ->"+angular.toJson($scope.interviewDetails));
 		}).catch({
 			function(response){
 				$log.error(response.data);
