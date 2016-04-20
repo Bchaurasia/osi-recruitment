@@ -3,6 +3,7 @@ package com.nisum.employee.ref.repository;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -31,6 +32,7 @@ public class ProfileRepository {
 	private MongoDbFactory dbFactory;
 
 	public void prepareCandidate(Profile candidate) {
+		candidate.setCreatedDate(new Date());
 		mongoOperations.save(candidate);
 	}
 

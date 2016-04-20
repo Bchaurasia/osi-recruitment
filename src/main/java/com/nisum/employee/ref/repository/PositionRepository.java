@@ -57,7 +57,6 @@ public class PositionRepository {
 		update.set("location",position.getLocation());
 		update.set("noOfPositions",position.getNoOfPositions());
 		update.set("client",position.getClient());
-		update.set("lastModifiedDate",new DateTime());
 		update.set("hiringManager", position.getHiringManager());
 		update.set("priority", position.getPriority());
 		update.set("interviewer", position.getInterviewer());

@@ -215,6 +215,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.getData = function() {
  	     $scope.minErr = false;
     	 $scope.maxErr = false;
+    	 $scope.disabled1 = false;
 		  $scope.deg  =_.find($scope.designations,function(obj){
 				return obj.designation == $scope.requisition.position; 
 			});

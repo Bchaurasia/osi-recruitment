@@ -183,10 +183,12 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 					}else if($scope.user.emailId === $scope.requisition.approval1.emailId){
 						$scope.showApprovalBtn = true;
 			 			$scope.showRejectBtn = true;
-			 			$scope.showUpdateBtn = true;
+			 			$scope.showUpdateBtn = true; 			
 			 			$scope.disableRejectBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableApprovalBtn = $scope.requisition.approval1.approved;
+			 			$scope.disApproval1=$scope.requisition.approval1.approved;
+			 			$scope.disApproval2=$scope.requisition.approval1.approved;
 			 		}else if( $scope.requisition.approval2 !== undefined
 			 						   && $scope.requisition.approval1.approved
 			 						   && $scope.user.emailId === $scope.requisition.approval2.emailId){

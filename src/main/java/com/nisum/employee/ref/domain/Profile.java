@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 //@Document(collection = "Profile")
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "profiles",type = "profile", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Profile extends AuditEntity{
-	String candidateName ;
+	String candidateName;
 	@Id
 	String emailId;
 	String qualification;

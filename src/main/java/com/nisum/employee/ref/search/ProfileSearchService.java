@@ -19,20 +19,24 @@ public class ProfileSearchService {
 	
 	public List<Profile> getAllProfiles() throws Exception {
 		Iterable<Profile> profile = profileIndexRepository.findAll();
-		List<Profile> positionList = Lists.newArrayList(profile);
-		Collections.sort(positionList,new Comparator<Profile>(){
+		List<Profile> porofileList = Lists.newArrayList(profile);
+		try{
+		Collections.sort(porofileList,new Comparator<Profile>(){
             public int compare(Profile o1, Profile o2){
-            	return o2.getLastModifiedDate().compareTo(o1.getLastModifiedDate());
+            	return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
             }});
-		return positionList;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return porofileList;
 	}
 	
 	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String emailId, String name, String designation) throws Exception {
 		List<Profile> profilesList = profileIndexRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(emailId,name,designation);
-		Collections.sort(profilesList,new Comparator<Profile>(){
-            public int compare(Profile o1, Profile o2){
-            	return o2.getLastModifiedDate().compareTo(o1.getLastModifiedDate());
-            }});
+//		Collections.sort(profilesList,new Comparator<Profile>(){
+//            public int compare(Profile o1, Profile o2){
+//            	return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
+//            }});
 		return profilesList;
 	}
 	

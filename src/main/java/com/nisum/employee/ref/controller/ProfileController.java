@@ -1,4 +1,4 @@
-package com.nisum.employee.ref.controller;
+ package com.nisum.employee.ref.controller;
 
 import java.util.List;
 
@@ -71,9 +71,9 @@ public class ProfileController {
 			positionsDetails = profileSearchService.getAllProfiles();
 		} else if (searchText != null && !searchText.isEmpty()) {
 			positionsDetails = profileSearchService.getProfilesByEmailIdOrByNameOrByDesignation(searchText,searchText,searchText);
-		} else if (searchText != null && !searchText.isEmpty() && positionsDetails != null && positionsDetails.isEmpty()) {
+		} /*else if (searchText != null && !searchText.isEmpty() && positionsDetails != null && positionsDetails.isEmpty()) {
 			positionsDetails = profileSearchService.getProfilesByJobcodeProfile(searchText);
-		}
+		}*/
 		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
 

@@ -59,11 +59,11 @@ public class RequisitionRepository {
 				update.set("approval2", requisition.getApproval2());
 			}
 			mongoOperations.updateFirst(query, update, Requisition.class);
-		} else {
+		} /*else {
 			throw new DataIntegrityViolationException("requisitionId doesn't exists.");
-		}
+		}*/
 		
-		return req;
+		return requisition;
 	}
 
 	public List<Requisition> retrieveAllRequisitions() {

@@ -14,14 +14,14 @@ import lombok.Setter;
 @Setter
 public  class AuditEntity {
 	
-	@CreatedDate
+	@CreatedDate	
 	private Date createdDate;
 	
 	@CreatedBy
 	private String createdBy;
 	
-	@LastModifiedDate
-	private Date lastModifiedDate;
+	//@LastModifiedDate
+	//private Date lastModifiedDate;
 	
 	@LastModifiedDate
 	private Date updatedDate;
