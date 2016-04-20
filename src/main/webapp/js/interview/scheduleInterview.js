@@ -74,16 +74,30 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		}
 		
 		_.find($scope.interviewscheduleDetails.rounds,function(Obj){
-			if(Obj.roundName == round){
-				$scope.disabled=true;
-				$scope.cls = 'alert alert-danger alert-error';
-				$scope.message = round +" is scheduled, need to be feedback submitted.";
-				$timeout( function(){ $scope.alHide(); }, 2500);	
+			if(Obj.roundName !== round){
+				$scope.disabled=false;
 				}
 			else{
-				$scope.disabled=false;
+				$scope.disabled=true;
+				$scope.cls = 'alert alert-danger alert-error';
+				$scope.message = round +" is already done.";
+				$timeout( function(){ $scope.alHide(); }, 2500);	
 			}
 		})
+		var index =$scope.interviewscheduleDetails.progress.indexOf('Scheduled');
+		var round =$filter('limitTo')($scope.interviewscheduleDetails.progress, index-1, 0);
+		if(index !== -1 && (round !== $scope.interviewschedule.roundName)){
+			  $scope.disabled=true;
+			  $scope.cls = 'alert alert-danger alert-error';
+			  $scope.message = round +" is scheduled, need to be feedback submitted.";
+			  $timeout( function(){ $scope.alHide(); }, 5000);
+			  return;
+		}else if(round === $scope.interviewschedule.roundName){
+			  $scope.disabled=true;
+			  $scope.cls = 'alert alert-danger alert-error';
+			  $scope.message = round +" is already done.";
+			  $timeout( function(){ $scope.alHide(); }, 5000);		
+		}
 		
 	}
 	
@@ -113,63 +127,5 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		})
 	}
 	
-	/*
-	
-
-	
-	
-	$scope.alHide =  function(){
-	    $scope.message = "";
-	}
-	$scope.schedule = function(){
-		blockUI.start("Scheduling..")
-		setTimeout(function () {
-			DateTime = new Date($scope.data.date);
-		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
-		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
-		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
-		$scope.interviewschedule.interviewDateTime = DateTime;
-		$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
-		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
-		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
-		$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
-		console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
-		
-		$http.post('resources/interviewSchedule', $scope.interviewschedule).
-		  success(function(data, status, headers, config) {
-			  $scope.jobCodeSel="";
-			  $scope.data.date="";
-			  $scope.cls = 'alert alert-success;
-			  $scope.message = "Scheduled successfully";
-			  $location.path("recruitment/interviewManagement");
-			  $timeout( function(){ $scope.alHide(); }, 5000);
-			  $log.info("Interview Scheduled!!");
-		  }).
-		  error(function(data, status, headers, config) {
-			  $scope.cls = 'alert alert-danger alert-error';
-			  $scope.message = "Something wrong, try again";
-			 $log.error("failed=="+data);
-		  });
-		
-		blockUI.stop();
-		},3000);	
-	}
-	
-	$scope.onTimeSet = function (newDate, oldDate) {
-		day = $filter('date')(newDate, 'dd/MM/yy');
-	       var toDay = new Date(); 
-	       var scheduleDate = newDate; 
-	       if(toDay>=scheduleDate){
-	               $scope.hidePrvDateMsg = false;
-	               $scope.data.date = "";
-	               return;
-	               }
-	       else{
-	               $scope.hidePrvDateMsg = true;
-	               
-	       }
-	
-	}
-	*/
 	
 }]);

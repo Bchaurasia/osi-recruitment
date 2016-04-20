@@ -33,6 +33,7 @@
 				});
 		
 		$scope.feedback = function(positionId,candidateEmail) {
+			sharedService.setjobCode(positionId);
 			sharedService.setprofileUserId(candidateEmail);
 			location.href='#recruitment/interviewFeedback';
 		};

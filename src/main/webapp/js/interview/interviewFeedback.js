@@ -89,6 +89,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$http.post('resources/interviewFeedback', $scope.interviewFeedback).
 			  success(function(data) {
 					$scope.sendNotification("Feedback Submitted Successfully!",'recruitment/interviewManagement');
+					$location.path("recruitment/interviewManagement");
 				  $scope.cls = 'alert  alert-success';
 				  $scope.message = "Feedback Submitted Successfully!";
 				  $timeout( function(){ $scope.alHide(); }, 5000);
@@ -97,7 +98,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 				  $log.info("Feedback Submitted Successfully!");
 			  }).
 			  error(function(data) {
-				  $scope.sendNotification("Feedback Submitted Successfully!",'recruitment/interviewManagement');
 				  $timeout( function(){ $scope.alHide(); }, 5000);
 				  $log.error("Feedback Submission Failed! --->"+data);
 			  });

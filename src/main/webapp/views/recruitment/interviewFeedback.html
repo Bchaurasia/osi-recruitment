@@ -61,7 +61,7 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select name="duration" placeholder="Select Duration"
-					ng-model="interviewFeedback.duration"
+					ng-model="interviewFeedback.duration" ng-disabled="disableFields"
 					ng-options="o as o for o in info.interviewDuration "
 					class="form-control input-sm" name="duration" required>
 					<option value='' disabled="disabled">
@@ -83,7 +83,7 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.additionalSkills"
+				<textarea ng-model="interviewFeedback.additionalSkills" ng-disabled="disableFields"
 					class="materialize-textarea" length="120" required></textarea>
 				<label>Additional Skills <b class="mandatory">*</b> </label>
 			</div>
@@ -91,7 +91,7 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.strengths"
+				<textarea ng-model="interviewFeedback.strengths" ng-disabled="disableFields"
 					class="materialize-textarea" length="120" required></textarea>
 				<label>Strengths<b class="mandatory">*</b> </label>
 			</div>
@@ -99,7 +99,7 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.improvement"
+				<textarea ng-model="interviewFeedback.improvement" ng-disabled="disableFields"
 					class="materialize-textarea" length="120" required></textarea>
 				<label>Areas Of Improvement<b class="mandatory">*</b> </label>
 			</div>
