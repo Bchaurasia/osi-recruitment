@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "position",type = "positions", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Position  {
+public class Position  extends AuditEntity{
 
 	@Id
 	String jobcode;
@@ -31,11 +31,4 @@ public class Position  {
 	String salary;
 	UserVO hiringManager;
 	String status;
-	String updatedBy;
-	String createdBy;
-	//DateTime updatedDate;
-	//DateTime createdDate;
-	
-	
-	
 }

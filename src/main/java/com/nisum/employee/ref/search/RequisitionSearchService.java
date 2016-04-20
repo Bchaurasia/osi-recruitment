@@ -1,6 +1,11 @@
 package com.nisum.employee.ref.search;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +27,10 @@ public class RequisitionSearchService {
 	public List<Requisition> getAllRequisitionDetails() throws Exception {
 		Iterable<Requisition> requisition = requisitionIndexRepository.findAll();
 		List<Requisition> interviewDetailsList = Lists.newArrayList(requisition);
+		Collections.sort(interviewDetailsList,new Comparator<Requisition>(){
+         public int compare(Requisition o1, Requisition o2){
+            	return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
+            }});
 		return interviewDetailsList;
 	}
 	

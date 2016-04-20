@@ -62,7 +62,7 @@ public class ProfileRepository {
 
 	public List<Profile> retrieveProfileByProfileCreatedBy(String profilecreatedBy) {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("profilecreatedBy").regex(
+		query.addCriteria(Criteria.where("createdBy").regex(
 				Pattern.compile(profilecreatedBy, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
 		List<Profile> candidateDetails = mongoOperations.find(query, Profile.class);
 		return candidateDetails;

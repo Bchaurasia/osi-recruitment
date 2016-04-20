@@ -1,32 +1,35 @@
 package com.nisum.employee.ref.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Date;
 
-import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 public  class AuditEntity {
 	
 	@CreatedDate
-	private DateTime createdDate;
+	private Date createdDate;
 	
 	@CreatedBy
 	private String createdBy;
 	
 	@LastModifiedDate
-	private DateTime lastModifiedDate;
+	private Date lastModifiedDate;
+	
+	@LastModifiedDate
+	private Date updatedDate;
 	
 	@LastModifiedBy
-	private String lastModifiedBy;
+	private String updatedBy;
 	
-	@Version
-	private Long version;
+	/*@Version
+	private Long version;*/
 
 }

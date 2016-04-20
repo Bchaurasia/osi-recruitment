@@ -79,14 +79,16 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				{
 					$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
 				}
-		    	$scope.candidate.profilecreatedBy = sessionStorage.userId;
+		    	//$scope.candidate.profilecreatedBy = sessionStorage.userId;
 		    	$scope.candidate.plocation = $scope.selection.pLocation;
 		    	$scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
-		    	$scope.candidate.profileTimeStamp = timeStamp;
+		    	//$scope.candidate.profileTimeStamp = timeStamp;
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
+		    	$scope.candidate.createdBy = $scope.user.emailId;
+		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){

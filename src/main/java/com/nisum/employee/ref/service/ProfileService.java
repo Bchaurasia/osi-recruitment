@@ -1,5 +1,6 @@
 package com.nisum.employee.ref.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class ProfileService implements IProfileService{
 	
 	public void updateCandidate(Profile candidate) {
 		try {
+			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
 		} catch (Exception e) {

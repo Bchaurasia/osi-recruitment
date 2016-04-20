@@ -273,7 +273,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			
 			function successMsg(data){
 				$scope.sendNotification(data,'recruitment/searchRequisition');
-				$window.location.reload();
 			}
 			
 			function errorMsg(data){

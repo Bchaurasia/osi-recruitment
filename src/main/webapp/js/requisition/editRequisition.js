@@ -255,6 +255,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		if ($scope.requisition !== undefined) {
 			setApprovers();
 			setTargetDateNUpdatedBy();
+			$scope.requisition.updatedBy = $scope.user.emailId;
 			requisitionService.updateRequisition($scope.requisition).then(
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');
@@ -296,7 +297,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.requisition.approval2.approved = true;
 			setTargetDateNUpdatedBy();
 		}else{}
-		
+		$scope.requisition.updatedBy = $scope.user.emailId;
 		requisitionService.approveRequisition($scope.requisition)
 		.then(successMsg)
 		.catch(errorMsg);

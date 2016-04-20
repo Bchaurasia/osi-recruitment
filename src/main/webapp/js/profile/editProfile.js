@@ -162,13 +162,13 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        var curr_month = dt.getMonth();
 	        var curr_year = dt.getFullYear();
 	        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
-	        $scope.candidate.profileModifiedTimeStamp = timeStamp;
-	        $scope.candidate.profileModifiedBy = sessionStorage.userId;
+	        //$scope.candidate.profileModifiedTimeStamp = timeStamp;
+	        //$scope.candidate.profileModifiedBy = sessionStorage.userId;
 	        $scope.candidate.designation = $scope.designation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
-	        
+	        $scope.candidate.updatedBy  = $scope.user.emailId;
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else

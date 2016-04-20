@@ -50,9 +50,9 @@ public class RequisitionService implements IRequisitionService {
 	@Override
 	public RequisitionApproverDetails updateRequisition(Requisition requisition)
 			throws AddressException, MessagingException {
-		requisitionRepository.updateRequisition(requisition);
-		requisitionSearchService.updateRequisitionIndex(requisition);
-		return jobRequisitionNotificationService.sendNotification(requisition);
+		Requisition updatereq =requisitionRepository.updateRequisition(requisition);
+		requisitionSearchService.updateRequisitionIndex(updatereq);
+		return jobRequisitionNotificationService.sendNotification(updatereq);
 	}
 
 	@Override

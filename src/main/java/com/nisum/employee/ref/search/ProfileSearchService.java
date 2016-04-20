@@ -1,5 +1,7 @@
 package com.nisum.employee.ref.search;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,19 @@ public class ProfileSearchService {
 	public List<Profile> getAllProfiles() throws Exception {
 		Iterable<Profile> profile = profileIndexRepository.findAll();
 		List<Profile> positionList = Lists.newArrayList(profile);
+		Collections.sort(positionList,new Comparator<Profile>(){
+            public int compare(Profile o1, Profile o2){
+            	return o2.getLastModifiedDate().compareTo(o1.getLastModifiedDate());
+            }});
 		return positionList;
 	}
 	
 	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String emailId, String name, String designation) throws Exception {
 		List<Profile> profilesList = profileIndexRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(emailId,name,designation);
+		Collections.sort(profilesList,new Comparator<Profile>(){
+            public int compare(Profile o1, Profile o2){
+            	return o2.getLastModifiedDate().compareTo(o1.getLastModifiedDate());
+            }});
 		return profilesList;
 	}
 	

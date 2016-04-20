@@ -1,6 +1,7 @@
 package com.nisum.employee.ref.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class PositionService implements IPositionService {
 
 	public void updatePosition(Position position) {
 		try {
+			position.setUpdatedDate(new Date());
 			Position updatedPosition = positionRepository.updatePosition(position);
 			positionSearchService.updatePositionIndex(updatedPosition);
 		} catch (Exception e) {

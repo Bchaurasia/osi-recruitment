@@ -1,12 +1,9 @@
 package com.nisum.employee.ref.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -17,7 +14,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "requisitions",type = "requisition", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Requisition {
+public class Requisition extends AuditEntity{
 	@Id
 	String requisitionId;
 	String position;
@@ -36,11 +33,5 @@ public class Requisition {
 	RequisitionUser approval2;
 	String comment;
 	UserVO requisitionManager;
-	String createdBy;
-	String updatedBy;
 	String status;
-	@CreatedDate
-	Date createdDate;
-	@LastModifiedDate
-	Date updatedDate;
 }

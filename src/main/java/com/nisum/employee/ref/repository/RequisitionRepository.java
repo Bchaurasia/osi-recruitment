@@ -28,10 +28,11 @@ public class RequisitionRepository {
 		return requisition;
 	}
 
-	public void updateRequisition(Requisition requisition) {
+	public Requisition updateRequisition(Requisition requisition) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("requisitionId").is(requisition.getRequisitionId()));
 		Requisition req = mongoOperations.findOne(query, Requisition.class);
+		req.setUpdatedDate(new Date());
 		if (req != null) {
 			query.fields().include("requisitionId");
 			Update update = new Update();
@@ -51,7 +52,7 @@ public class RequisitionRepository {
 			update.set("requisitionManager", requisition.getRequisitionManager());
 			update.set("createdBy", requisition.getCreatedBy());
 			update.set("updatedBy", requisition.getUpdatedBy());
-			update.set("updatedDate", new Date());
+			update.set("updatedDate", req.getUpdatedDate());
 			update.set("status", requisition.getStatus());
 			update.set("jobTitle", requisition.getJobTitle());
 			if (requisition.getApproval2() != null) {
@@ -61,7 +62,8 @@ public class RequisitionRepository {
 		} else {
 			throw new DataIntegrityViolationException("requisitionId doesn't exists.");
 		}
-
+		
+		return req;
 	}
 
 	public List<Requisition> retrieveAllRequisitions() {
