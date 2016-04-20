@@ -50,7 +50,7 @@
 			
 			<div class="row">
 				<div class="input-field col s6">
-					<input type="date" ng-model="birthDate" id="birthDate" required>
+					<input type="date" ng-model="birthDate" max="{{todayDate | date : 'yyyy-MM-dd' }}" id="birthDate" required>
 					<label>Date Of Birth
 						<b class="mandatory">*</b>  </label>
 				</div>

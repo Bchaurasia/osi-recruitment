@@ -7,6 +7,7 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 	$scope.calendar = false;
 	$scope.hideCal = true;
 	$scope.hideDetails = true;
+	$scope.todayDate = new Date();
 	$scope.days = [
 	   			"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
 	   	];

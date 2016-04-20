@@ -10,6 +10,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 	$scope.hideRoles = true;
 	$scope.clients=[];
 	$scope.hideClient = true;
+	$scope.todayDate = new Date();
 	
 	$scope.col=["Name","Email Id","Roles","Client"];
 	

@@ -17,6 +17,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.countryCode = "+91";
 	$scope.mobileNoError = false;
 	$scope.altMobileNoError = false;
+	$scope.todayDate = new Date();
 	
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {

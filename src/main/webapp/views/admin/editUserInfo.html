@@ -15,13 +15,12 @@
 					<div class="card-action" style="background-color: white;">
 						<div class="row">
 							<div class="input-field col s6">
-								<input class="form-control" ng-change="validateChar($data)" name="userNameValid" ng-pattern="/^[a-zA-Z _]*$/"
-									ng-minlength="3" ng-maxlength="30"
-									type="text" ng-model="userToEdit.name" required> <label>Full
+								<input class="form-control" ng-change="validateChar($data)"
+									name="userNameValid" ng-pattern="/^[a-zA-Z _]*$/"
+									ng-minlength="3" ng-maxlength="30" type="text"
+									ng-model="userToEdit.name" required> <label>Full
 									Name<b class="mandatory">*</b>
-								</label>
-								<span
-									class="validation-error"
+								</label> <span class="validation-error"
 									ng-show="EditUserInfo.userNameValid.$invalid"></span>
 								<div class="validation-error"
 									ng-show="(EditUserInfo.userNameValid.$dirty || invalidSubmitAttempt) && EditUserInfo.userNameValid.$error.required">
@@ -40,8 +39,9 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input class="form-control" ng-change="validatePhNo($data)" ng-pattern="/^[0-9]+$/" maxlength="13"
-									type="text" ng-model="userToEdit.mobileNumber" required> <label>Mobile<b
+								<input class="form-control" ng-change="validatePhNo($data)"
+									ng-pattern="/^[0-9]+$/" maxlength="13" type="text"
+									ng-model="userToEdit.mobileNumber" required> <label>Mobile<b
 									class="mandatory">*</b></label>
 							</div>
 							<div class="input-field col s6">
@@ -53,48 +53,50 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input type="date" ng-model="birthDate" id="birthDate">
-								<label>DOB </label>
+								
+								<input type="date" ng-model="birthDate"
+									max="{{todayDate | date : 'yyyy-MM-dd' }}"
+									id="birthDate" required name="birthDate"> 
+									<label>DOB</b></label> 
 							</div>
 							<div class="input-field col s6">
-								<input class="form-control" type="text" ng-pattern="/^[a-zA-Z _]*$/"
-									ng-model="userToEdit.location" required> <label>Location<b
-									class="mandatory">*</b></label>
+								<input class="form-control" type="text"
+									ng-pattern="/^[a-zA-Z _]*$/" ng-model="userToEdit.location"
+									required> <label>Location<b class="mandatory">*</b></label>
 							</div>
 						</div>
-							<br>
-							<div class="row">
-								<div class="input-field col s6">
-									<ui-select multiple ng-model="userToEdit.roles" theme="select2"
-										ui-select-required> <ui-select-match
-										placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
-										repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
-									{{allRoles}} </ui-select-choices> </ui-select>
-									<label>Roles<b class="mandatory">*</b></label>
-								</div>
-								<div class="input-field col s6">
-									<ui-select multiple ng-model="userToEdit.skills"
-										theme="select2" ng-keypress="myFunct($event)" name='sk.skills'
-										theme="select2"> <ui-select-match
-										placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
-										repeat="skill in info.skills | orderBy:'toString()' | filter:$select.search">
-									{{skill}} </ui-select-choices> </ui-select>
-									<label>Skills</label>
-								</div>
+						<div class="row">
+							<div class="input-field col s6"> 
+								<ui-select multiple ng-model="userToEdit.roles" theme="select2"
+									ui-select-required> <ui-select-match
+									placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
+									repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
+								{{allRoles}} </ui-select-choices> </ui-select>
+								<label style="position: absolute; top: -22px;">Roles<b class="mandatory">*</b></label>
 							</div>
-							<br>
-							<div class="row">
-								<div class="input-field col s6">
-									<ui-select multiple ng-model="userToEdit.clientName"
-										theme="select2" ng-keypress="myFunct($event)"> <ui-select-match
-										placeholder="Select Clients..">{{$item}}</ui-select-match> <ui-select-choices
-										repeat="client in clientList | orderBy:'toString()' | filter:$select.search">
-									{{client}}</ui-select-choices> </ui-select>
-									<label>Clients</label>
-								</div>
+							<div class="input-field col s6">
+								<ui-select multiple ng-model="userToEdit.skills" theme="select2"
+									ng-keypress="myFunct($event)" name='sk.skills' theme="select2">
+								<ui-select-match placeholder="Select Skills...">{{$item}}</ui-select-match>
+								<ui-select-choices
+									repeat="skill in info.skills | orderBy:'toString()' | filter:$select.search">
+								{{skill}} </ui-select-choices> </ui-select>
+								<label style="position: absolute; top: -22px;">Skills</label>
 							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<ui-select multiple ng-model="userToEdit.clientName"
+									theme="select2" ng-keypress="myFunct($event)"> <ui-select-match
+									placeholder="Select Clients..">{{$item}}</ui-select-match> <ui-select-choices
+									repeat="client in clientList | orderBy:'toString()' | filter:$select.search">
+								{{client}}</ui-select-choices> </ui-select>
+								<label style="position: absolute; top: -22px;">Clients</label>
+							</div>
+						</div>
 
-							<!-- <div class="card teal lighten-2" ng-init="isCollapsed = !isCollapsed">
+						<!-- <div class="card teal lighten-2" ng-init="isCollapsed = !isCollapsed">
 							<span style="color: grey; font-size: large;">Time Slots</span>
 							<div class="card-action">
 								<div class="row" align="left" style="padding-bottom: 1%;">
@@ -147,22 +149,23 @@
 								</div>
 							</div>
 						</div> -->
-							<div class="row">
-								<div class="input-field col s11">
-									<button class="btn btn-info active"
-										ng-disabled="EditUserInfo.$invalid" ng-click="update()" type="submit">
-										<span class="glyphicon glyphicon-ok-circle"></span> Save
-									</button>
-									&nbsp;
-									<button class="btn btn-info active" ui-sref="admin.users.list">
-										<span class="glyphicon glyphicon-remove"></span> Cancel
-									</button>
-								</div>
+						<div class="row">
+							<div class="input-field col s11">
+								<button class="btn btn-info active"
+									ng-disabled="EditUserInfo.$invalid" ng-click="update()"
+									type="submit">
+									<span class="glyphicon glyphicon-ok-circle"></span> Save
+								</button>
+								&nbsp;
+								<button class="btn btn-info active" ui-sref="admin.users.list">
+									<span class="glyphicon glyphicon-remove"></span> Cancel
+								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</form>
 </div>
 <style>
