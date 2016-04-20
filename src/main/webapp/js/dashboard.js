@@ -1,10 +1,29 @@
-app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService', function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService) {
+app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService', 
+                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService) {
 	
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
 	$scope.showScheduleData = [];
 	$scope.hideNoPositionsMsg = true;
 	$scope.hideNoInterviewMsg = true;
+	$scope.hideNoStatusMsg = true;
+	$scope.prolilesData={};
+	
+	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
+	{
+		$log.error("b4 in profile");
+		$scope.prolilesData = data;
+		$log.error("in profile"+prolilesData);
+		if(data == "" || data == null || data == undefined){
+			$scope.hideNoStatusMsg = false;
+		}else{
+			$scope.hideNoStatusMsg = true;
+		}
+	}).catch(
+	function(msg){
+		$log.error(msg);
+	});
+	
 	
 	dashboardService.getPositionData()
 	.then(function(data){
