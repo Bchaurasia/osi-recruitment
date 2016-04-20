@@ -29,10 +29,6 @@ public class Profile extends AuditEntity{
 	String notes;
 	String altmobileNo;
 	String currentEmployer;
-	//String profilecreatedBy;
-	//String profileTimeStamp;
-	//String profileModifiedTimeStamp;
-	//String profileModifiedBy;
 	String referredBy;
 	String hrAssigned;
 	ArrayList<String> jobcodeProfile;

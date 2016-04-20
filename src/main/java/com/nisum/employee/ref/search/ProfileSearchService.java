@@ -64,7 +64,7 @@ public class ProfileSearchService {
 	
 	
 	public List<Profile> getProfilesByProfilecreated(String profilecreatedBy){
-		List<Profile> profilesList = profileIndexRepository.findProfilesByProfilecreatedByStartingWithAllIgnoreCase(profilecreatedBy);
+		List<Profile> profilesList = profileIndexRepository.findProfilesByCreatedByStartingWithAllIgnoreCase(profilecreatedBy);
 		return profilesList;
 		}
 	

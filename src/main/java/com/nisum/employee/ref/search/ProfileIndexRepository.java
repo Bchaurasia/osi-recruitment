@@ -11,6 +11,6 @@ public interface ProfileIndexRepository extends ElasticsearchRepository<Profile,
 	List<Profile> findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(String emailId, String name, String designation);
 	List<Profile> findProfilesByEmailIdStartingWithAllIgnoreCase(String emailId);
 	List<Profile> findProfilesByJobcodeProfileStartingWithAllIgnoreCase(String jobcodeProfile);
-	List<Profile> findProfilesByProfilecreatedByStartingWithAllIgnoreCase(String profilecreatedBy);
+	List<Profile> findProfilesByCreatedByStartingWithAllIgnoreCase(String profilecreatedBy);
 	
 }
