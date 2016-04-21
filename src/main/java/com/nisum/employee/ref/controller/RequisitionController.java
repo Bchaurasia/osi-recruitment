@@ -126,4 +126,14 @@ public class RequisitionController {
 		String jsonObj = MSG_START + message + " " + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
+	
+	@Secured({ "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/getRequisitionBasedOnApproverId", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> getRequisitionBasedOnApproverId(
+			@RequestParam(value = "emailId", required = true) String emailId) throws Exception {
+		List<Requisition> requisitionsDetails = null;
+			requisitionsDetails = requisitionSearchService.getRequisitionByApprover(emailId);
+		return new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
+	}
 }

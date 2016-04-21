@@ -19,6 +19,14 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		.catch(getScheduleDataError);
 	}
 	
+	function getRequisitionBasedOnApproverId(obj){
+		return $http.get('resources/getRequisitionBasedOnApproverId')
+		.then(function(response){
+				data = response.data;
+		})
+		.catch(getScheduleDataError);
+	}
+	
 	function getPositionDataSuccess(response){
 		return response.data;
 	}

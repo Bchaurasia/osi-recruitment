@@ -10,6 +10,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.hideNoRequisitionMsg = true;
 	$scope.prolilesData={};
 	$scope.allRequisitions=[];
+	$scope.requisitionsDetails=[];
 	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
@@ -39,6 +40,16 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$log.error(msg);
 		});	
 	}		
+	
+	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
+		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
+			.then(function(data){
+				$scope.requisitionsDetails = data;
+			})
+			.catch(function(msg){
+				$log.error(msg);
+			});
+	}
 	
 	dashboardService.getPositionData()
 	.then(function(data){

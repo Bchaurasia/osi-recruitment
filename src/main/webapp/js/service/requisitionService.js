@@ -11,10 +11,17 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		rejectRequisition : rejectRequisition,
 		cloneRequisition : cloneRequisition,
 		searchRequisition : searchRequisition,
-		getRequisitionBycreatedId : getRequisitionBycreatedId
+		getRequisitionBycreatedId : getRequisitionBycreatedId,
+		getRequisitionBasedOnApproverId : getRequisitionBasedOnApproverId
 		
 	};
 	
+	
+	function getRequisitionBasedOnApproverId(emailId){
+		return $http.get('resources/getRequisitionBasedOnApproverId?emailId='+$rootScope.user.emailId)
+		.then(getRequisitionSuccess)
+		.catch(getRequisitionError);
+	}
 	
 	function getRequisitionBycreatedId(emailId){
 		return $http.get('resources/requisitionByCreatedById?createdById='+emailId)

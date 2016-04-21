@@ -3,15 +3,16 @@ package com.nisum.employee.ref.search;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
-
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.nisum.employee.ref.domain.Requisition;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -78,5 +79,19 @@ public class RequisitionSearchService {
 	public List<Requisition> getRequisitionsBrcreatedById(String createdById){
 		List<Requisition> requisitionList = requisitionIndexRepository.findByCreatedBy(createdById);
 		return requisitionList;
+	}
+	
+	public List<Requisition> getRequisitionByApprover(String emailId) throws Exception {
+		Iterable<Requisition> requisitions = requisitionIndexRepository.findAll();
+		ArrayList<Requisition> requisitionsByApprover = new ArrayList<Requisition>();
+		for (Iterator<Requisition> iterator = requisitions.iterator(); iterator.hasNext();) {
+			 Requisition requisition = (Requisition) iterator.next();
+		     	if (requisition.getApproval1()!= null && emailId.equals(requisition.getApproval1().getEmailId())) {
+		     		requisitionsByApprover.add(requisition);
+				}else if (requisition.getApproval2()!= null && requisition.getApproval1().isApproved() && emailId.equals(requisition.getApproval2().getEmailId())) {
+					requisitionsByApprover.add(requisition);
+				}
+		    }
+		return requisitionsByApprover;
 	}
 }
