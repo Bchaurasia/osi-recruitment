@@ -276,9 +276,9 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 				$scope.sendNotification(data,'recruitment/searchRequisition');
 			}
 			
-			function errorMsg(data){
-				$scope.message=data;
-				$scope.cls=appConstants.ERROR_CLASS;
+			function errorMsg(msg){
+				var cls=appConstants.ERROR_CLASS;
+				$scope.sendNotificationWithStyle(msg,cls,'recruitment/searchRequisition');
 			}
 		}
 	}

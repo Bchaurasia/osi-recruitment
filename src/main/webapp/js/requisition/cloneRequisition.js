@@ -87,7 +87,7 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 	requisitionService.getRequisitionById(id).then(function(data){
     	$scope.requisition =data;
     	$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
-    	$scope.requisition.approval1.comment="";
+    	//$scope.requisition.approval1.comment="";
        	$scope.requisition.approval1.approved=false;
        	$scope.targetDate = new Date();
        	
@@ -180,10 +180,10 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 			$scope.requisition.createdBy = $scope.user.emailId;
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			$scope.requisition.requisitionDate.toString();
-			
+			/*
 			if(null==$scope.requisition.approval2){
 				$scope.requisition.approval2={};
-			}
+			}*/
 			
 			requisitionService.cloneRequisition($scope.requisition)
 				.then(successMsg)
@@ -194,8 +194,8 @@ app.controller('cloneRequisitionCtrl',['$scope', '$http','$q', '$window','shared
 				}
 				
 				function errorMsg(msg){
-					$scope.message=msg;
-					$scope.cls=appConstants.ERROR_CLASS;
+					var cls=appConstants.ERROR_CLASS;
+					$scope.sendNotificationWithStyle(msg,cls,'recruitment/searchRequisition');
 				}
 		}else{
 					cls=appConstants.ERROR_CLASS;

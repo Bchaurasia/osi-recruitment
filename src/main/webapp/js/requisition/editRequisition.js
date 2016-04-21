@@ -25,8 +25,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.position = {};
 	$scope.reqId = 0;
 	$scope.hrManager={};
-	//$scope.approval1={};
-	//$scope.approval2={};
+	// $scope.approval1={};
+	// $scope.approval2={};
 	$scope.JobDescriptionList=[];
 	$scope.today = new Date();
 	$scope.hideApproval2=false;
@@ -209,13 +209,15 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.disableUpdateBtn = $scope.requisition.approval1.approved || ($scope.requisition.approval2 !== undefined && $scope.requisition.approval2.approved);
 						$scope.disApproval1= $scope.requisition.approval1.approved;;
 						$scope.disApproval2= $scope.requisition.approval1.approved;
-						/*	
-						if($scope.requisition.approval1.approved){
-							$scope.disApproval1= $scope.requisition.approval1.approved;
-							$scope.disApproval2= $scope.requisition.approval1.approved;
-							$scope.disableUpdateBtn = true;
-							$scope.showUpdateBtn = true;
-						}*/
+						/*
+						 * if($scope.requisition.approval1.approved){
+						 * $scope.disApproval1=
+						 * $scope.requisition.approval1.approved;
+						 * $scope.disApproval2=
+						 * $scope.requisition.approval1.approved;
+						 * $scope.disableUpdateBtn = true; $scope.showUpdateBtn =
+						 * true; }
+						 */
 						
 					}else{
  						$scope.showRejectBtn = false;
@@ -235,8 +237,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 					$scope.sendNotification(msg,'recruitment/searchRequisition');
 				}
 				function errorMsg(msg){
-					$scope.message=msg;
-					$scope.cls=appConstants.ERROR_CLASS;
+					var cls=appConstants.ERROR_CLASS;
+					$scope.sendNotificationWithStyle(msg,cls,'recruitment/searchRequisition');
 				}
 			}
 	
@@ -264,8 +266,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 				    function(msg){
 				    	$scope.sendNotification(msg,'recruitment/searchRequisition');
 				    }).catch(function(errorMsg){
-				    	$scope.message=errorMsg;
-						$scope.cls=appConstants.ERROR_CLASS;
+				    	var cls=appConstants.ERROR_CLASS;
+						$scope.sendNotificationWithStyle(errorMsg,cls,'recruitment/searchRequisition');
 				     });
 		}
 	}
@@ -311,8 +313,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		}
 		
 		function errorMsg(msg){
-			$scope.message=msg;
-			$scope.cls=appConstants.ERROR_CLASS;
+			var cls=appConstants.ERROR_CLASS;
+			$scope.sendNotificationWithStyle(msg,cls,'recruitment/searchRequisition');
 		}
 	}
 	

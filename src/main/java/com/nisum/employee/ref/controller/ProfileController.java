@@ -82,7 +82,7 @@ public class ProfileController {
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody Profile candidate) throws Exception{
 			Profile profile = profileService.prepareCandidate(candidate);
-			String jsonObj=MSG+ profile.getCandidateName() +" Profile successfully createded\"}";
+			String jsonObj=MSG+ profile.getCandidateName() +"'s profile successfully created\"}";
 			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 
@@ -91,7 +91,7 @@ public class ProfileController {
 	@ResponseBody
 	public ResponseEntity<?> updateUser(@RequestBody Profile candidate) {
 		profileService.updateCandidate(candidate);
-		String jsonObj="{\"msg\":\"Profile uploaded successfully Updated\"}";
+		String jsonObj="{\"msg\":\"Uploaded profile successfully updated\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 
@@ -100,7 +100,7 @@ public class ProfileController {
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadResume(HttpServletRequest request, Model model, @RequestParam(value = "file") MultipartFile multipartFile, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
 		profileService.saveResume(multipartFile, candidateId);
-		return new ResponseEntity<String>("Resume Uploaded Successfully", HttpStatus.OK);
+		return new ResponseEntity<String>("Resume uploaded successfully", HttpStatus.OK);
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
@@ -109,7 +109,7 @@ public class ProfileController {
 	public ResponseEntity<String> updateProfileStatus(@RequestParam(value = "emailId", required = true) String emailId,
 			@RequestParam(value = "status", required = true) String status) throws Exception {
 		profileService.updateCandidateStatus(emailId, status);
-		return new ResponseEntity<String>("Status Updated Successfully", HttpStatus.OK);
+		return new ResponseEntity<String>("Status updated successfully", HttpStatus.OK);
 	}
 	
 	@SuppressWarnings("null")
