@@ -104,7 +104,7 @@
 			<div class="row" style="margin-bottom: 20px">
 				<div class="input-field col s6">
 					<select
-						ng-options="o.jobDescriptionName for o in jobDescriptionList"
+						ng-options="o.jobDescriptionName for o in JobDescriptionList"
 						ng-model="jobDescription" ng-change="setSkillsAndJDDetails()"
 						class="form-control input-sm" id="jobDescription">
 						<option value=''>Select Job Description Title</option>
@@ -155,14 +155,15 @@
 				</div>
 				<div class="input-field col s1">
 					<button class="glyphicon glyphicon-remove"
-						ng-show="lengthOfQualifications()" style="cursor: pointer;"
+						ng-show="lengthOfQualifications()" style="cursor: pointer;color:#26a69a;border:none;"
 						ng-click="deleteQualification($index)">{{requisition.qualifications.length}}</button>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="addButtonColumn"
+					<button id="addButtonColumn" style="cursor:pointer;color:#26a69a;border:none;
 						ng-disabled="checkDisability(requisition.qualification)"
 						ng-show="$last" class="glyphicon glyphicon-plus"
 						ng-click="addColumnCriteria()"></button>
 				</div>
+				
 			</div>
 			<div class="row">
 				<div class="input-field col s6">

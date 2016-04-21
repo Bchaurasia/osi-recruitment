@@ -58,7 +58,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 					$scope.JobDescriptionList = response[2].data;
 					setUsers(response[3].data);
 					$scope.client = _.find($scope.clients, function(clnt){ return clnt.clientName === $scope.requisition.client });
-					
 					if($scope.requisition.jobTitle !== undefined && !_.isEmpty($scope.JobDescriptionList)){
 						$scope.jobDescription = _.find($scope.JobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.requisition.jobTitle });
 					}
