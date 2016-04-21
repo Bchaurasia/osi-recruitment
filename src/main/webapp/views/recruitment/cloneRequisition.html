@@ -10,10 +10,10 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select name="designations" placeholder="Select Designation"
-					ng-change="getData()" ng-model="requisition.position" required
-					ng-options="o as o for o in designation1 | orderBy:'toString()'"
-					class="form-control input-sm" id="designation">
+				<select  placeholder="Select Designation"
+					ng-change="getData()" ng-model="position" required
+					ng-options="o.designation for o in designations | orderBy:'toString()'"
+					class="form-control input-sm">
 					<option>Select Designation</option>
 				</select> <label>Position<b class="mandatory">*</b></label>
 			</div>
@@ -92,7 +92,7 @@
 
 				<div class="input-field col s6">
 					<input placeholder="Enter number of Positions" type="number"
-						ng-model="requisition.noOfPositions" name="position"
+						ng-model="requisition.noOfPositions" name="noOfPosition"
 						class="form-control input-sm" ng-pattern="/(^[1-9]\d{0,1}$)/"
 						required> <label>No. of Positions<b
 						class="mandatory">*</b>
