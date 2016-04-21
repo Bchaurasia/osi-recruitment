@@ -16,7 +16,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.disabled=false;
 	$scope.interviewscheduleDetails={};
 	$scope.interviewscheduleDetails.rounds=[];
-	
+	$scope.today = new Date();
 	
 	$scope.init = function() {
 	$scope.jobcodelistObj={};	
@@ -89,7 +89,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		if(index !== -1 && (round !== $scope.interviewschedule.roundName)){
 			  $scope.disabled=true;
 			  $scope.cls = 'alert alert-danger alert-error';
-			  $scope.message = round +" is scheduled, need to be feedback submitted.";
+			  $scope.message = round +" is scheduled,You need to be submit feedback.";
 			  $timeout( function(){ $scope.alHide(); }, 5000);
 			  return;
 		}else if(round === $scope.interviewschedule.roundName){

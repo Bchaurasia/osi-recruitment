@@ -54,8 +54,8 @@
 			</div>
 			<div class="input-field col s6">
 				<div class="demo-section k-content" align="left">
-					<input kendo-date-time-picker ng-model="data.date"
-						k-ng-model="kdate" style="width: 81%;" />
+					<input kendo-date-time-picker ng-model="data.date" ng-disabled="disabled"
+						min="{{today}}" k-ng-model="kdate" style="width: 81%;" />
 				</div>
 				<label  style="position: absolute; top: -22px;">Interview Date and Time<b
 					class="mandatory">*</b></label> 
@@ -123,7 +123,7 @@
 
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-click="schedule()"
+				ng-click="schedule()" ng-disabled="schedule_form.$invalid"
 				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">
 				<span class="glyphicon glyphicon-ok-circle"></span> Schedule
 			</button>
