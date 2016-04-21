@@ -9,10 +9,11 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
 				<input type="text" class="form-control" ng-model="searchQuery"
-					placeholder="" ng-enter="searchInterview()"data-tooltip="Search By Name or Status">
+					placeholder="" ng-enter="searchInterview()"
+					data-tooltip="Search By Name or Status">
 				<div align="left">
-					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchInterview()"data-tooltip="Search Interview"><i
-						class="material-icons">search</i></a>
+					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchInterview()"
+						data-tooltip="Search Interview"><i class="material-icons">search</i></a>
 				</div>
 			</div>
 			<div class="col-md-1"></div>
@@ -30,26 +31,32 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="animate-repeat" ng-repeat="data in interviewDetails" style="font-size: 80%">
+				<tr class="animate-repeat" ng-repeat="data in interviewDetails"
+					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric">{{data.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="skills in data.candidateSkills">{{skills}}{{$last ?
 							'' : ', '}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="jobcode in data.currentPositionId"> {{jobcode}}</i></td>
-					<td class="mdl-data-table__cell--non-numeric"><a href="" id=""
-						class="interview-schedule"
-						ng-click="schedule(data.interviewerId)">
+					<td class="mdl-data-table__cell--non-numeric">
+						<button style="background-color: #F8F8F8; border: 0px;" href=""
+							id="" class="interview-schedule"
+							ng-disabled="disableSchedule(data.status)"
+							ng-click="schedule(data.interviewerId)">
 							<span class="glyphicon glyphicon-plus"
-							style="position: relative; top: 1px;"></span>
-					</a></td>
-					<td class="mdl-data-table__cell--non-numeric"><a href="" id=""
-						class="interview-feedback"
-						ng-disabled="disableFeedback(data.rounds)"
+								style="position: relative; top: 1px;color:#034A85""></span>
+						</button>
+					</td>
+					<td class="mdl-data-table__cell--non-numeric">
+						<button style="background-color: #F8F8F8; border: 0px;" href=""
+							id="" class="interview-feedback"
+							ng-disabled="disableFeedback(data.rounds)"
 							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
 							<span class="glyphicon glyphicon-envelope"
-							style="position: relative; top: 1px;"></span>
-					</a></td>
+								style="position: relative; top: 1px;color:#034A85"></span>
+						</button>
+					</td>
 					<td class="mdl-data-table__cell--non-numeric"
 						style="font-weight: bold">{{data.progress}}</td>
 				</tr>

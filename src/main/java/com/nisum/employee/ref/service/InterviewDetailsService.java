@@ -227,9 +227,9 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		rounds.add(i,new Round(interviewFeedback.getRoundName(), is, interviewFeedback));
 		interviewDetails2.setCandidateEmail(interviewFeedback.getCandidateId());
 		interviewDetails2.setInterviewerEmail(interviewFeedback.getInterviewerEmail());
-		//interviewDetails2.setInterviewerId(interviewFeedback.getCandidateId()+"_"+interviewFeedback.getJobcode());
 		interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
 		interviewDetails2.setRounds(rounds);
+		interviewDetails2.setStatus(interviewFeedback.getStatus());
 		}else{
 			int size = interviewDetails2.getRounds().size();
 			size--;
@@ -238,9 +238,9 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			rounds.set(size,new Round(interviewFeedback.getRoundName(), is, interviewFeedback));
 			interviewDetails2.setCandidateEmail(interviewFeedback.getCandidateId());
 			interviewDetails2.setInterviewerEmail(interviewFeedback.getInterviewerEmail());
-			//interviewDetails2.setInterviewerId(interviewFeedback.getCandidateId()+"_"+interviewFeedback.getJobcode());
 			interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
 			interviewDetails2.setRounds(rounds);
+			interviewDetails2.setStatus(interviewFeedback.getStatus());
 		}
 		return interviewDetails2;
 	}

@@ -38,6 +38,21 @@
 			location.href='#recruitment/interviewFeedback';
 		};
 		
+		$scope.disableFeedback = function(rounds) {
+			if(rounds == null){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		$scope.disableSchedule = function(status) {
+			if(status == "Rejected"){
+				return true;
+			}else{
+				return false;
+			}	
+		}
 		$scope.schedule = function(interviewId) {
 			sharedService.setInterviewId(interviewId);
 			location.href='#recruitment/scheduleInterview';
@@ -45,7 +60,6 @@
 		$scope.searchInterview = function(){
 			interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
 			$scope.interviewDetails = data;
-			console.log("interviewDetails ->"+angular.toJson($scope.interviewDetails));
 		}).catch({
 			function(response){
 				$log.error(response.data);
