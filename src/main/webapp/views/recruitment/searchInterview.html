@@ -33,7 +33,8 @@
 			<tbody>
 				<tr class="animate-repeat" ng-repeat="data in interviewDetails"
 					style="font-size: 80%">
-					<td class="mdl-data-table__cell--non-numeric">{{data.candidateName}}</a></td>
+					<td class="mdl-data-table__cell--non-numeric"><a style="cursor: pointer;"
+							ng-click="showInterviewDetails(data.interviewerId)">{{data.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="skills in data.candidateSkills">{{skills}}{{$last ?
 							'' : ', '}}</i></td>

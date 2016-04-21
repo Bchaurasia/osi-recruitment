@@ -14,7 +14,7 @@
 				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
 					ng-disabled="ctrl.disabled" style="width: 80%"
 					title="Choose a country"> <ui-select-match
-					placeholder="Select or search a country in the list...">{{$select.selected.jobcode}}</ui-select-match>
+					placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
 					repeat="position in jobcodelistObj | filter: $select.search">
 				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>

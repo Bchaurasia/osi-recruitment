@@ -23,10 +23,10 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.interviewschedule.interviewDateTime="";
 	
 	$scope.interviewerId = sharedService.getInterviewId();
-		
 		interviewService.getInterviewDetailsById($scope.interviewerId).then(
 		function(data){
 			$scope.interviewscheduleDetails=data;
+
 			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
 			$scope.interviewId=$scope.interviewscheduleDetails.candidateId;
 			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;

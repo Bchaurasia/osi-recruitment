@@ -1,0 +1,147 @@
+<div class="row" style="width: 86%" align="left">
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10"
+		name="schedule_form" ng-submit="schedule()" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Interview Details of -
+					{{interviewscheduleDetails.candidateName}}</b>
+			</h5>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<h6>
+					<b class="viewInterviewDetails">{{interviewscheduleDetails.currentPositionId}}
+					</b>
+				</h6>
+				<label>Interview Jobcode : </label>
+
+			</div>
+			<div class="input-field col s6">
+				<h6>
+					<b class="viewInterviewDetails">{{interviewscheduleDetails.designation}}
+					</b>
+				</h6>
+				<label>Designation : </label>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<h6>
+					<b class="viewInterviewDetails">{{interviewscheduleDetails.hrAssigned}}
+					</b>
+				</h6>
+				<label>HR Assigned : </label>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<h6>
+					<b class="viewInterviewDetails">{{interviewscheduleDetails.progress}}
+					</b>
+				</h6>
+				<label>Status : </label>
+
+			</div>
+		</div>
+		<div ng-repeat="data in interviewscheduleDetails.rounds" class="collapsible collapsible-accordion">
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Interview Details for {{data.roundName}}</b>
+			</h5>
+		</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.roundName}}</p>
+					<label>Interview Round :</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.interviewerName}}
+					</p>
+					<label>Interviewer Name :</label>
+				</div>
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.interviewDateTime}}</p>
+					<label>Interview Date and Time : </label>
+				</div>
+			</div>
+
+			<!-- <div class="row">
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.interviewerMobileNumber}}</p>
+					<label>Interviewer Cell # :</label>
+				</div>
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.interviewLocation}}</p>
+					<label>Location :</label>
+				</div>
+			</div> -->
+
+			<div class="row">
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.emailIdInterviewer}}
+					</p>
+					<label>Interviewer Email Id :</label>
+				</div>
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.skypeId}}</p>
+					<label> Skype Id :</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewSchedule.typeOfInterview}}
+					</p>
+					<label>Type Of Interview :</label>
+				</div>
+			</div><div class="row">
+				<div class="input-field col s12">
+					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewSchedule.additionalNotes || "--"}}</p>
+					<label>Additional Notes :</label>
+				</div>
+			</div>
+			<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Feedback Details for {{data.roundName}}</b>
+			</h5>
+		</div>
+			<div class="row" ng-repeat="skill in data.interviewFeedback.rateSkills">
+				<div class="input-field col s6">
+					<p class="viewInterview" >{{skill.skill}}
+					</p>
+					<label>Skill :</label>
+				</div>
+				<div class="input-field col s6">
+					<p class="viewInterview" >{{skill.rating}}/10
+					</p>
+					<label>Rating :</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.additionalSkills || "--"}}</p>
+					<label>Additional Skills :</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.strengths || "--"}}</p>
+					<label>Strengths :</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.improvement || "--"}}</p>
+					<label>Improvement :</label>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<br>
+<br>

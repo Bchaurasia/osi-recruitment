@@ -4,7 +4,7 @@ Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 	/*------------------------------------------------------------------
 [1. Global]
-*/          
+*/            
 html {
 	margin: 0;
 	padding: 0;
@@ -37,6 +37,18 @@ body {
 
 .logoStyle {
 	width: 12%;
+}
+
+.viewInterview {
+	position: relative;
+	top: -15px;
+	left: 47%;
+}
+
+.viewInterviewDetails {
+	position: relative;
+	top: -18px;
+	left: 35%;
 }
 
 #logostyle {
