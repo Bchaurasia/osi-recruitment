@@ -63,15 +63,33 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	    $scope.message = "";
 	    $scope.cls = '';
 	}
-	$scope.validate =  function(){
-		$scope.alHide();
-	    if($scope.designation.maxExpYear<$scope.designation.minExpYear){
+	
+	$scope.validate =  function(data){
+	    if(data<$scope.designation.minExpYear){
 	    	$scope.message="maxExpYear should be gretter than minExpYear";
 		    $scope.cls=appConstants.ERROR_CLASS;
-		    $scope.designation.maxExpYear="";
+		    data="";
 		    $timeout( function(){ $scope.alHide(); }, 5000);
+		    return false;
 	    }
 	}
+	$scope.validate1 =  function(data){
+		if(data>$scope.designation.maxExpYear){
+	    	$scope.message="maxExpYear should be gretter than minExpYear";
+		    $scope.cls=appConstants.ERROR_CLASS;
+		    data="";
+		    $timeout( function(){ $scope.alHide(); }, 5000);
+		    return false;
+	    }
+	}
+	
+	$scope.invalidExperience = function(){
+		if($scope.designation.minExpYear>$scope.designation.maxExpYear){
+			return true;
+		}
+		return false;
+	}
+	
 	$scope.myFunct = function(keyEvent) {
         if (keyEvent.which === 13)
                 keyEvent.preventDefault();

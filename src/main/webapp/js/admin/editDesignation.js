@@ -71,12 +71,19 @@ app.controller('editDesignationCtrl',['$scope','$rootScope', '$http','$q', '$win
 	    }
 	}
 	$scope.validate1 =  function(data){
-	    if(data>$scope.deg.maxExpYear){
+		if(data>$scope.deg.maxExpYear){
 	    	$scope.message="maxExpYear should be gretter than minExpYear";
 		    $scope.cls=appConstants.ERROR_CLASS;
 		    data="";
 		    $timeout( function(){ $scope.alHide(); }, 5000);
 		    return false;
 	    }
+	}
+	
+	$scope.invalidExperience = function(){
+		if($scope.deg.minExpYear>$scope.deg.maxExpYear){
+			return true;
+		}
+		return false;
 	}
 }]);

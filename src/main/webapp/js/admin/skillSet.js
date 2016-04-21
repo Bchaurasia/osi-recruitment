@@ -61,18 +61,19 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 		return flag;
 	}
 	
-     $scope.deleteSkill = function(index,skill){
-	 var deleteUser = $window.confirm('Are you absolutely sure you want to delete?');
-	 if(deleteUser){
-		$scope.skills1.value.sort();
-		$scope.skills1.value.splice(index,1);
+     $scope.deleteSkill = function(skill){
+    	 var index = $scope.skills.indexOf(skill);
+    	 var deleteUser = $window.confirm('Are you absolutely sure you want to delete?');
+    	 if(deleteUser){
+    		 $scope.skills1.value.sort();
+    		 $scope.skills1.value.splice(index,1);
 			
-		infoService.updateInformation($scope.skills1).then(function(msg){
-			 sendSharedMessage(msg,appConstants.SUCCESS_CLASS);
-			  $timeout( function(){ $scope.alHide(); }, 5000);
-		}).catch(function(msg){
-			sendSharedMessage(msg,appConstants.ERROR_CLASS);
-			$timeout( function(){ $scope.alHide(); }, 5000);
+    		 infoService.updateInformation($scope.skills1).then(function(msg){
+    			 sendSharedMessage(msg,appConstants.SUCCESS_CLASS);
+    			 $timeout( function(){ $scope.alHide(); }, 5000);
+    		 }).catch(function(msg){
+    		 sendSharedMessage(msg,appConstants.ERROR_CLASS);
+    		$timeout( function(){ $scope.alHide(); }, 5000);
 		})
 		
 		$scope.dis = false;

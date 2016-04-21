@@ -35,12 +35,12 @@
 
 				<div class="input-field col s6">
 					<input type="range" ng-model="deg.minExpYear"
-						ng-change="validate1($data)" min="0" max="15" required /> <span
+						ng-change="validate1(deg.minExpYear)" min="0" max="15" required /> <span
 						class="range-slider__value">Min:{{deg.minExpYear}}</span>
 				</div>
 				<div class="input-field col s6">
 					<input type="range" ng-model="deg.maxExpYear"
-						ng-change="validate($data)" min="0" max="15" required /> <span
+						ng-change="validate(deg.maxExpYear)" min="0" max="15" required /> <span
 						class="range-slider__value">Max:{{deg.maxExpYear}}</span>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 		<br>
 		<div class="row" align="center">
 			<div class="input-field col s12">
-				<button class="btn btn-primary" type="submit" ng-click="submit()">
+				<button class="btn btn-primary" type="submit"  ng-disabled= "invalidExperience()" ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>
 				<button class="btn btn-primary" ui-sref="admin.designation.list">

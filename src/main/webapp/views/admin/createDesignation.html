@@ -1,3 +1,4 @@
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 <div class="row">
 	<div class="col-md-2 col-sm-2 col-xs-2"></div>
 	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Create Designation</h4>
@@ -46,10 +47,10 @@
 			<label class="lbl" for="Experience"><i
 							class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;Experience<b
 							style="color: red;">*</b></label>
-
+				{{$scope.designation}}
 				<div class="input-field col s6">
 					<input type="range" ng-model="designation.minExpYear"  
-						ng-change="min(requisition.minExpYear)" min="0" max="15" required />
+						ng-change="validate1(designation.minExpYear)" min="0" max="15" required />
 					<span class="range-slider__value">Min:{{designation.minExpYear}}</span>
 				</div>
 				<div class="validation-error"
@@ -58,7 +59,7 @@
 
 				<div class="input-field col s6">
 						<input type="range" ng-model="designation.maxExpYear"
-							ng-change="toggleProDisable();validate()" min="0" max="15" required />
+							ng-change="validate(designation.maxExpYear)" min="0" max="15" required />
 						<span class="range-slider__value">Max:{{designation.maxExpYear}}</span>
 				</div>
 				<div class="validation-error"
@@ -68,7 +69,7 @@
 		</div>
 		<br>
 		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid"
+			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience()"
 				ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>
