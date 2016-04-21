@@ -55,6 +55,11 @@ body {
 	left: 19%;
 }
 
+.bannerClient {
+	position: absolute;
+	left: 17%;
+}
+
 .range-slider__value {
 	background-color: #26A69A;
 	padding: 4px;

@@ -1,4 +1,5 @@
-<br><br>
+<br>
+<br>
 <div class="row" ng-controller="editUserCtrl">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion"
@@ -11,11 +12,11 @@
 		<div class="row">
 			<div class="row">
 				<div class="input-field col s6">
-					<label>Full
-						Name<b class="mandatory">*</b></label> <input class="form-control"
-						name=userName ng-pattern="/^[a-zA-Z _]*$/" type="text"
-						ng-minlength="3" ng-maxlength="30" ng-model="user.name" required>
-					<span class="validation-error"
+					<label>Name<b class="mandatory">*</b></label> <input
+						class="form-control" name=userName ng-pattern="/^[a-zA-Z _]*$/"
+						type="text" ng-minlength="3" ng-maxlength="30"
+						ng-model="user.name" required> <span
+						class="validation-error"
 						ng-show="UserInformation.userName.$invalid"></span>
 					<div class="validation-error"
 						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.required">
@@ -28,18 +29,17 @@
 						User Name must be at least 3 characters .</div>
 				</div>
 				<div class="input-field col s6">
-					<input class="form-control" ng-disabled=true type="email"
-						ng-model="user.emailId" required> <label>Your
-						Email<b class="mandatory">*</b>  </label>
+					<b class="bannerRight">{{user.emailId}}</b> <label>Email</label>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="input-field col s6">
 					<input class="form-control" maxlength="13" type="text"
-						ng-pattern="/^((0091)|(\+91)|0?)[789]{1}\d{9}$/" ng-model="user.mobileNumber" required>
-					<label>
-						Mobile<b class="mandatory">*</b> </label>
+						ng-pattern="/^((0091)|(\+91)|0?)[789]{1}\d{9}$/"
+						ng-model="user.mobileNumber" required> <label>
+						Mobile<b class="mandatory">*</b>
+					</label>
 				</div>
 				<div class="input-field col s6">
 					<input class="form-control" ng-change="validateSkypeId($data)"
@@ -47,39 +47,45 @@
 						ID</label>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="input-field col s6">
-					<input type="date" ng-model="birthDate" max="{{todayDate | date : 'yyyy-MM-dd' }}" id="birthDate" required>
-					<label>Date Of Birth
-						<b class="mandatory">*</b>  </label>
+					<input type="date" ng-model="birthDate"
+						max="{{todayDate | date : 'yyyy-MM-dd' }}" id="birthDate" required>
+					<label>Date Of Birth <b class="mandatory">*</b>
+					</label>
 				</div>
 				<div class="input-field col s6">
-					<label>Location  </label>
-					<input class="form-control" type="text" ng-model="user.location">
+					<label>Location </label> <input class="form-control" type="text"
+						ng-model="user.location">
 				</div>
 			</div>
+
 			<div class="row">
-				<div class="input-field col s6">
-					<ui-select multiple ng-model="user.roles" theme="select2"
-						ng-disabled=true ui-select-required> <ui-select-match
-						placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
-						repeat="role in user.roles | orderBy:'toString()' | filter:$select.search">
-					{{role}} </ui-select-choices> </ui-select>
-					<label style="position: absolute; top: -22px;">Roles </label>
-				</div>
-				<div class="input-field col s6">
-					<ui-select multiple ng-model="user.skills"
-						ng-keypress="myFunct($event)" name='sk.skills' ng-disabled=true
-						theme="select2"> <ui-select-match
-						placeholder="Select Skills...">{{$item}}</ui-select-match> <ui-select-choices
-						repeat="skill in user.skills | orderBy:'toString()' | filter:$select.search">
-					{{skill}} </ui-select-choices> </ui-select>
-					<label style="position: absolute; top: -22px;">Skills 
+				<div class="input-field col s12">
+					<span style="position: absolute; left: 7%;"> <b class="chip"
+						ng-repeat="role in user.roles"> {{role}}{{$last ? '' : ''}} </b></span> <label>Roles
 					</label>
 				</div>
 			</div>
-			
+			<br>
+			<div class="row">
+				<div class="input-field col s12">
+					<span style="position: absolute; left: 7%;"> <b class="chip"
+						ng-repeat="skill in user.skills"> {{skill}}{{$last ? '' : ''}}
+					</b></span> <label>Skills </label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="input-field col s5">
+					<span class="bannerClient"> <b class="chip"
+						ng-repeat="client in user.clientName"> {{client}}{{$last ? ''
+							: ''}} </b></span> <label>Clients </label>
+				</div>
+			</div>
+			<br>
+			<br>
 			<div class="row">
 				<div class="input-field col s11">
 					<button class="btn btn-info active" ng-click="update()"
