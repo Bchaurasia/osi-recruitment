@@ -32,7 +32,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
 			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
 			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
-			
 			positionService.getPosition().then(function(positions){
 				$scope.jobcodelistObj=positions;
 				$scope.interviewschedule.jobcode =_.find( $scope.jobcodelistObj,function(position){
@@ -106,11 +105,10 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.schedule =  function(){
-		DateTime = new Date($scope.data.date);
 		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
 		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
-		$scope.interviewschedule.interviewDateTime = DateTime;
+		$scope.interviewschedule.interviewDateTime = $scope.data.date;
 		$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
 		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
 		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
