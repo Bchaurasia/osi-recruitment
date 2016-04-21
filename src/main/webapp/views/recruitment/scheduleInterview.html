@@ -1,30 +1,27 @@
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 <div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h6 class="col-md-8 col-sm-8 col-xs-8" align="left">Interview
-		Schedule Form - {{interviewscheduleDetails.candidateName}}</h6>
-</div>
-
-<div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="schedule_form" ng-submit="schedule()"
-		onvalidate>
-
-		<div ng-class="cls" ng-show="message" align="center"
-			style="width: 850px; position: relative; left: 90; height: 50">
-			<h5 style="margin-top: 2px;">{{message}}</h5>
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="schedule_form" ng-submit="schedule()" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Interview Schedule Form -
+					{{interviewscheduleDetails.candidateName}}</b>
+			</h5>
 		</div>
-
 		<div class="row">
-			<div class="input-field col s6">
+			<div class="input-field col s6" align="left">
 				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
-					ng-disabled="ctrl.disabled" style="left: -40px; width: 335px;"
+					ng-disabled="ctrl.disabled" style="width: 80%"
 					title="Choose a country"> <ui-select-match
 					placeholder="Select or search a country in the list...">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
 					repeat="position in jobcodelistObj | filter: $select.search">
 				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>
 				</ui-select-choices> </ui-select>
-				<label>Interview Jobcode<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px;">Interview
+					Jobcode<b class="mandatory">*</b>
+				</label>
 
 			</div>
 
@@ -39,11 +36,9 @@
 
 			</div>
 		</div>
-		<!-- {{interviewerName}} -->
 		<div class="row">
 			<div class="input-field col s6">
-				<select name="interviewerName"
-					ng-change="setvalues(interviewschedule.interviewerName)"
+				<select ng-change="setvalues(interviewschedule.interviewerName)"
 					placeholder="Select InterviewerName"
 					ng-model="interviewschedule.interviewerName"
 					ng-options="o.name for o in interviewerNames"
@@ -54,11 +49,13 @@
 			</div>
 			<div class="input-field col s6">
 				<div class="demo-section k-content" align="left">
-					<input kendo-date-time-picker ng-model="data.date" ng-disabled="disabled"
-						min="{{today}}" k-ng-model="kdate" style="width: 81%;" />
+					<input kendo-date-time-picker ng-model="data.date"
+						ng-disabled="disabled" min="{{today}}" k-ng-model="kdate"
+						style="width: 81%;Additional Notes" />
 				</div>
-				<label  style="position: absolute; top: -22px;">Interview Date and Time<b
-					class="mandatory">*</b></label> 
+				<label style="position: absolute; top: -22px;">Interview
+					Date and Time<b class="mandatory">*</b>
+				</label>
 			</div>
 		</div>
 
@@ -117,7 +114,8 @@
 					ng-change="changeEvent()" name="intNotes"
 					ng-model="interviewschedule.additionalNotes" ng-disabled="disabled"
 					placeholder="Enter any additional notes..."></textarea>
-				<label>Additional Notes</label>
+				<label style="position: absolute; top: -22px;">Additional
+					Notes</label>
 			</div>
 		</div>
 
@@ -134,3 +132,5 @@
 		</div>
 	</form>
 </div>
+<br>
+<br>

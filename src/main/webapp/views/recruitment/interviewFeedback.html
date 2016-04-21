@@ -1,18 +1,17 @@
 <div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2"></div>
-	<h4 class="col-md-8 col-sm-8 col-xs-8" align="left">Interview
-		Feedback Form - {{profile.candidateName}}</h4>
-</div>
-
-<div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="feedback_form" onvalidate>
-
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="feedback_form" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Interview Feedback Form - {{profile.candidateName}}</b>
+			</h5>
+		</div>
 		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="interviewFeedback.roundName"
 					ng-change="setfeedbackData(interviewFeedback.roundName)"
-					class="form-control input-sm" 	
+					class="form-control input-sm"
 					ng-options="o as o for o in position.interviewRounds | orderBy:'toString()'"
 					required><option value="">Select Round</option>
 				</select> <label>Interview Round<b class="mandatory">*</b></label>
@@ -31,14 +30,14 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="text" ng-model = "interviewSchedule.interviewerName" ng-disabled="true"/>
-				<label for="Days">Interviewer </label>
+				<input ng-model="interviewSchedule.interviewerName"
+					ng-disabled="true" /> <label for="Days">Interviewer </label>
 
 			</div>
 
 			<div class="input-field col s6">
-			<input type="text" ng-model = "interviewSchedule.jobcode" ng-disabled="true"/>
-				<label>Job Code </label>
+				<input ng-model="interviewSchedule.jobcode"
+					ng-disabled="true" /> <label>Job Code </label>
 
 			</div>
 		</div>
@@ -46,14 +45,14 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-			<input type="text" ng-model = "interviewSchedule.interviewDateTime" ng-disabled="true"/>
-				 <label for="Days">Interview Date </label>
+				<input ng-model="interviewSchedule.interviewDateTime"
+					ng-disabled="true" /> <label for="Days">Interview Date </label>
 
 			</div>
 
 			<div class="input-field col s6">
-				<input type="text" ng-model = "interviewSchedule.typeOfInterview" ng-disabled = "true"/>
-				<label for="Days">Type </label>
+				<input ng-model="interviewSchedule.typeOfInterview"
+					ng-disabled="true" /> <label for="Days">Type </label>
 
 			</div>
 		</div>
@@ -64,7 +63,7 @@
 					ng-model="interviewFeedback.duration" ng-disabled="disableFields"
 					ng-options="o as o for o in info.interviewDuration "
 					class="form-control input-sm" name="duration" required>
-					<option value='' disabled="disabled">
+					<option value='' disabled="disabled">	
 					<option value="">Select Duration</option>
 				</select> <label>Interview Duration<b class="mandatory">*</b></label>
 			</div>
@@ -83,31 +82,37 @@
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.additionalSkills" ng-disabled="disableFields"
-					class="materialize-textarea" length="120" required></textarea>
-				<label>Additional Skills <b class="mandatory">*</b> </label>
+				<textarea ng-model="interviewFeedback.additionalSkills"
+					ng-disabled="disableFields" class="materialize-textarea"
+					length="120" required></textarea>
+				<label>Additional Skills <b class="mandatory">*</b>
+				</label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.strengths" ng-disabled="disableFields"
-					class="materialize-textarea" length="120" required></textarea>
-				<label>Strengths<b class="mandatory">*</b> </label>
+				<textarea ng-model="interviewFeedback.strengths"
+					ng-disabled="disableFields" class="materialize-textarea"
+					length="120" required></textarea>
+				<label>Strengths<b class="mandatory">*</b>
+				</label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.improvement" ng-disabled="disableFields"
-					class="materialize-textarea" length="120" required></textarea>
-				<label>Areas Of Improvement<b class="mandatory">*</b> </label>
+				<textarea ng-model="interviewFeedback.improvement"
+					ng-disabled="disableFields" class="materialize-textarea"
+					length="120" required></textarea>
+				<label>Areas Of Improvement<b class="mandatory">*</b>
+				</label>
 			</div>
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
 				ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow"
-				ng-disabled="feedback_form.$invalid" >
+				ng-disabled="feedback_form.$invalid">
 				<span class="glyphicon glyphicon-ok-circle"></span> Submit
 			</button>
 			<button class="btn btn-info active"
@@ -118,3 +123,4 @@
 
 	</form>
 </div>
+<br><br>

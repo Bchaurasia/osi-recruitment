@@ -498,7 +498,7 @@ disabled look for disabled choices in the results dropdown
     position: relative;
 
     line-height: 13px;
-    color: #fff;
+    color:  black;
     cursor: default;
     /* border: 1px solid #034A85; */
 
@@ -515,7 +515,7 @@ disabled look for disabled choices in the results dropdown
           -ms-user-select: none;
               user-select: none;
 
-    background-color: #034A85;
+    background-color: #E4E4E4;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
 /*     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
     background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
