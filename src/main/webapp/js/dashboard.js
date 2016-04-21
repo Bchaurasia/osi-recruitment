@@ -1,5 +1,5 @@
-app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService', 
-                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService) {
+app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService',
+                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService) {
 	
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
@@ -7,7 +7,9 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.hideNoPositionsMsg = true;
 	$scope.hideNoInterviewMsg = true;
 	$scope.hideNoStatusMsg = true;
+	$scope.hideNoRequisitionMsg = true;
 	$scope.prolilesData={};
+	$scope.allRequisitions=[];
 	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
@@ -24,6 +26,19 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$log.error(msg);
 	});
 	
+	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
+			|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
+	requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
+		 $scope.allRequisitions=data;
+		if(_.isEmpty(data) ){
+			$scope.hideNoRequisitionMsg = false;
+		}else{
+			$scope.hideNoRequisitionMsg = true;
+		}
+		}).catch(function(msg){
+		$log.error(msg);
+		});	
+	}		
 	
 	dashboardService.getPositionData()
 	.then(function(data){
@@ -54,5 +69,4 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		sharedService.setinterviewRound(obj2);
 		location.href='#showInterview';
 	};
-	
 }]);

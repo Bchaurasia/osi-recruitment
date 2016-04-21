@@ -1,20 +1,17 @@
 package com.nisum.employee.ref.search;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.nisum.employee.ref.domain.Requisition;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -78,5 +75,8 @@ public class RequisitionSearchService {
 		}
 	}
 	
-	
+	public List<Requisition> getRequisitionsBrcreatedById(String createdById){
+		List<Requisition> requisitionList = requisitionIndexRepository.findByCreatedBy(createdById);
+		return requisitionList;
+	}
 }

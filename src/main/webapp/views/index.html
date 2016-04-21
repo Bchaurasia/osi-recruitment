@@ -1,4 +1,4 @@
-<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+
 <div class="row" style="margin-top: 20px">
 	<table>
 		<tr>
@@ -85,8 +85,10 @@
 									</tr>
 								</tbody>
 							</table>
-								<p align="center" ng-hide="hideNoInterviewMsg" style="color: red;">No
+							<center>
+								<p ng-hide="hideNoInterviewMsg" style="color: red;">No
 									Upcoming Interviews</p>
+							</center>
 						</div>
 						</div>
 						<!-- /widget-content -->
@@ -124,7 +126,37 @@
 
 					</div>				
 					<!-- /widget -->
+<!-- 					 -->
+<div class="widget widget-nopad" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+	<div class="widget-header"> 
+						<i class="icon-list-alt"></i>
+              <h3>Requisition Status</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+            
+             <table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Requisition id</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="requisition in allRequisitions | orderBy : sortComment : true">
+										<td>{{requisition.requisitionId}}</td>
+										<td>{{requisition.status}}</td>
+									</tr>
+								</tbody>
+							</table>
+							<center>
+								<p ng-hide="hideNoPositionsMsg" style="color: red;">No Requisition Available</p>
+							</center>
+              <!-- /shortcuts --> 
+            </div>
+            <!-- /widget-content -->
 
+			</div>			
 				</div>
 			</td>
 			<!-- /span6 -->

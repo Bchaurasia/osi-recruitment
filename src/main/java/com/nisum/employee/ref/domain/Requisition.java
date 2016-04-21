@@ -3,12 +3,12 @@ package com.nisum.employee.ref.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.data.annotation.Id;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter

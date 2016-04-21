@@ -86,6 +86,15 @@ public class RequisitionController {
 		Requisition requisitionsDetails = requisitionService.retrieveRequisitionBasedOnId(requisitionId);
 		return  new ResponseEntity<Requisition>(requisitionsDetails, HttpStatus.OK);
 	}
+	
+	@Secured({"ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/requisitionByCreatedById", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> requisitionByCreatedById(
+			@RequestParam(value = "createdById", required = true) String createdById) {
+		List<Requisition> requisitionsDetails = requisitionSearchService.getRequisitionsBrcreatedById(createdById);
+		return  new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
+	}
 
 	@Secured({ "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody
