@@ -169,7 +169,7 @@ public class NotificationService{
 		// --- Set Candidate Content ---
 		Message message = getMessage();
 		message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
-		message.setSubject(OSI_TECHNOLOGIES + YOUR_INTERVIEW_FOR+interviewSchedule.getRoundName()+" Is Sheduled.");
+		message.setSubject(OSI_TECHNOLOGIES + YOUR_INTERVIEW_FOR+interviewSchedule.getRoundName()+" Is Scheduled.");
 		message.setContent(writer.toString(), TEXT_HTML);
 
 		// --- Send Mails ---
