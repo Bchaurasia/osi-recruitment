@@ -50,12 +50,11 @@
 				</div>
 				<div class="input-field col s6">
 					<input type="date" ng-model="targetDate"
-						ng-change="validTargetDate(requisitionDate,targetDate)"
 						min="{{today | date : 'yyyy-MM-dd' }}"
 						ng-change="validTargetDate(requisitionDate,targetDate)"
 						id="targetDate" required> <label>Target Date<b
 						class="mandatory">*</b></label> <span class="validation-error"
-						ng-show="cloneRequisition.targetDate.$dirty || invalidSubmitAttempt ">
+						ng-show="targetErr || cloneRequisition.targetDate.$dirty || invalidSubmitAttempt">
 						Target date should not be before Requsition Date</span>
 				</div>
 			</div>

@@ -197,6 +197,7 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.minErr = false;
 			$scope.disabled1 = false;
 		}
+		$scope.maxErr = false;
 	}
 	
 	$scope.max = function(maxValue){
@@ -213,17 +214,9 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.maxErr = false;
 			$scope.disabled1 = false;
 		}
+		$scope.minErr = false;
 	}
 	
-	/*$scope.validateClone = function(data) {
-			if($scope.requisition.requisitionDate==="" || $scope.requisition.targetDate===""){
-					return true;
-				}
-				else{
-					return false;
-				}
-	}
-	 */
 	 $scope.setSkillsAndJDDetails = function(){
 		 	$scope.requisition.jobDescription = $scope.jobDescription.jobDescriptionDetails;
 			$scope.requisition.skillType = $scope.jobDescription.skills;
