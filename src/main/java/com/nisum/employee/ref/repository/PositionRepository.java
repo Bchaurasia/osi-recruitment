@@ -118,7 +118,7 @@ public class PositionRepository {
 		AggregationResults<PositionAggregate> groupResults = mongoTemplate.aggregate(agg, Position.class, PositionAggregate.class);
 		List<PositionAggregate> result = groupResults.getMappedResults();
 		
-		for (PositionAggregate positionAggregate : result) {
+		/*for (PositionAggregate positionAggregate : result) {
 			int noOfRequiredPositions = 0;
 			Query query = new Query();
 			query.addCriteria(Criteria.where("designation").regex(positionAggregate.getDesignation()));
@@ -127,7 +127,7 @@ public class PositionRepository {
 				noOfRequiredPositions += position.getNoOfPositions();
 			}
 			positionAggregate.setTotal(noOfRequiredPositions);
-		}
+		}*/
 		
 		return result;
 	}
