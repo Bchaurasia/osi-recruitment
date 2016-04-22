@@ -12,8 +12,15 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		addSearchProfiles:addSearchProfiles,
 		searchProfile:searchProfile,
 		addProfilesStatus : addProfilesStatus,
-		searchProfileById : searchProfileById
+		searchProfileById : searchProfileById,
+		searchProfileByReferralEmail : getProfileByReferralEmail
 	};
+	
+	function getProfileByReferralEmail(emailId){
+		return $http.get('resources/getProfileByReferralEmail?emailId='+emailId)
+		 .then(getProlilesData)
+		 .catch(sendErrorprofileMsg);
+	}
 	
 	function getProfileByCreateremailId(emailId){
 		return $http.get('resources/profileSearch?profilecreatedBy='+emailId)

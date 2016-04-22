@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-8" align="center">
+		<ul class="tabs">
+			<li ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+				role="presentation" class="tab">
+				<a ng-class="{active: isActive('referral.searchProfile')}"
+				ui-sref="recruitment.searchProfile">Profile</a></li>
+		</ul>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+<!------------------------------------------------------ ------------------------------------------------------>
+<div ui-view></div>

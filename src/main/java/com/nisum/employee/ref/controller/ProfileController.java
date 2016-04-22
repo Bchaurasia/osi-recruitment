@@ -130,7 +130,13 @@ public class ProfileController {
 			log.info("file does not exist");
 		}
 		return new ResponseEntity<HttpServletResponse>(response, HttpStatus.OK);
+	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/getProfileByReferralEmail", method = RequestMethod.GET)
+	public ResponseEntity<?> getProfileByReferralEmail(@RequestParam(value = "emailId", required = false) String emailId) throws Exception {
+		List<Profile> positionsDetails = profileSearchService.getProfilesByRefreedBy(emailId);
+		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
 }
 

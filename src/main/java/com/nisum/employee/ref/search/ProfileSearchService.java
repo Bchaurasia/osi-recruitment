@@ -70,6 +70,10 @@ public class ProfileSearchService {
 	public List<Profile> getProfilesByProfilecreated(String profilecreatedBy){
 		List<Profile> profilesList = profileIndexRepository.findProfilesByCreatedByStartingWithAllIgnoreCase(profilecreatedBy);
 		return profilesList;
-		}
+	}
 	
+	public List<Profile> getProfilesByRefreedBy(String profilecreatedBy){
+		List<Profile> profilesList = profileIndexRepository.findProfilesByReferredBy(profilecreatedBy);
+		return profilesList;
+	}
 }
