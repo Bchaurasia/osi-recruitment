@@ -105,10 +105,11 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.schedule =  function(){
+		DateTime=new Date($scope.data.date);
 		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
 		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
-		$scope.interviewschedule.interviewDateTime = $scope.data.date;
+		$scope.interviewschedule.interviewDateTime = DateTime;
 		$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
 		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
 		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
