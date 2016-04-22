@@ -5,26 +5,29 @@
 		<div class="col s1 m1 ">
 			<div class="shortcuts">
 				<a href="#admin/users" class="shortcutstyle"
-					ng-show="hasRole('ROLE_ADMIN')"><i
-					class="shortcut-icon icon-user"></i><span class="shortcut-label">Admin</span>
-				</a> <a href="#recruitment/searchPosition" class="shortcutstyle"
+					ng-show="hasRole('ROLE_ADMIN')"><i class="material-icons">face</i><span
+					class="shortcut-label">Admin</span> </a> <a
+					href="#recruitment/searchPosition" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-					class="shortcut-icon icon-picture"></i><span class="shortcut-label">Positions</span>
+					class="material-icons">list</i><span class="shortcut-label">Positions</span>
 				</a> <a href="#recruitment/searchRequisition" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-					class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Requisition</span>
+					class="material-icons">description</i> <span class="shortcut-label">Requisition</span>
 				</a> <a href="#recruitment/searchProfile" class="shortcutstyle"
 					ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-					class="shortcut-icon icon-user"></i><span class="shortcut-label">Profile</span>
+					class="material-icons"></i><span class="shortcut-label">Profile</span>
 				</a> <a href="#recruitment/interviewManagement" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-					class="shortcut-icon icon-picture"></i><span class="shortcut-label">Interview</span>
+					class="material-icons"></i><span class="shortcut-label">Interview</span>
 				</a>
 
 			</div>
 		</div>
 
 		<div class="col s12 m5 ">
+			<h6 align="left">
+				<b>Positions</b>
+			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
 					<div class="collapsible-header">
@@ -41,6 +44,9 @@
 					<p style="color: red;">No Positions Available</p>
 				</li>
 			</ul>
+			<h6 align="left">
+				<b>Requisitions</b>
+			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
 					<div class="collapsible-header">
@@ -54,10 +60,13 @@
 							class="col s6">{{requisition.status}}</span>
 					</div>
 				</li>
-				<li ng-hide="hideNoPositionsMsg">
+				<li ng-hide="hideNoRequisitionMsg">
 					<p style="color: red;">No Requisition Available.</p>
 				</li>
 			</ul>
+			<h6 align="left">
+				<b>Profiles</b>
+			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
 					<div class="collapsible-header">
@@ -70,12 +79,15 @@
 							class="col s6">{{profile.status}}</span>
 					</div>
 				</li>
-				<li ng-hide="hideNoPositionsMsg">
+				<li ng-hide="hideNoStatusMsg">
 					<p style="color: red;">No Profile Available.</p>
 				</li>
 			</ul>
 		</div>
 		<div class="col s12 m6 ">
+			<h6 align="left">
+				<b>Schedule Interviews</b>
+			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
 					<div class="collapsible-header">
@@ -89,9 +101,10 @@
 						<i class="material-icons col s1">alarm on</i><span class="col s3">{{schedule.cname}}</span>
 						<span class="col s3">{{schedule.round}}</span> <span
 							class="col s4">{{schedule.date | date:'medium'}}</span>
-					</div> <!-- <div class="collapsible-body">
-							<p>Lorem ipsum dolor sit amet.</p>
-						</div> -->
+					</div>
+				</li>
+				<li ng-hide="hideNoPositionsMsg">
+					<p style="color: red;">No Upcoming Interviews.</p>
 				</li>
 			</ul>
 			<!-- <div class="shortcuts">
