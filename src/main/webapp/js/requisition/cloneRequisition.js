@@ -103,7 +103,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 				percent:'70'
 		};
 		$scope.requisition.qualifications.push(addQualification);
-		checkForEnableCloneButton();
 	};
 	
 	$scope.deleteQualification = function(index){
@@ -133,11 +132,9 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	
 	$scope.checkDisability = function(qualification){
 				if(qualification){
-					$scope.disableCloneBtn  =  false;
 					return false;
 				}
 				else{
-					$scope.disableCloneBtn  =  true;
 					return true;
 				}
 	}
@@ -178,6 +175,7 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
       }
 	
 	$scope.validateSkills = function(){
+		alert("inside validate skill");
 		if($scope.requisition.skillType=== undefined)
 		{
 			$scope.skillErr = true;
@@ -199,7 +197,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.minErr = false;
 			$scope.disabled1 = false;
 		}
-		checkForEnableCloneButton();
 	}
 	
 	$scope.max = function(maxValue){
@@ -210,16 +207,15 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		
 		if(Value1 < Value2){
 			$scope.maxErr = true;
-			$scope.disabled = true;
+			$scope.disabled1 = true;
 		}
 		else{
 			$scope.maxErr = false;
-			$scope.disabled = false;
+			$scope.disabled1 = false;
 		}
-		checkForEnableCloneButton();
 	}
 	
-	$scope.validateClone = function(data) {
+	/*$scope.validateClone = function(data) {
 			if($scope.requisition.requisitionDate==="" || $scope.requisition.targetDate===""){
 					return true;
 				}
@@ -227,7 +223,7 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 					return false;
 				}
 	}
-	 
+	 */
 	 $scope.setSkillsAndJDDetails = function(){
 		 	$scope.requisition.jobDescription = $scope.jobDescription.jobDescriptionDetails;
 			$scope.requisition.skillType = $scope.jobDescription.skills;
@@ -243,32 +239,22 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	 $scope.reqDate = function(requisitionDate,targetDate){
 			if(targetDate != "" && targetDate < requisitionDate){
 				$scope.reqErr = true;
-				$scope.disabled = true;
+				$scope.disableCloneBtn = true;
 			}else{
 				$scope.reqErr = false;
-				 $scope.disabled = false;
+				$scope.disableCloneBtn = false;
 			}
-			checkForEnableCloneButton();
+			$scope.targetErr = false;
 		}
-	 
-	 function checkForEnableCloneButton(){
-			var length=$scope.requisition.qualifications.length;
-			if($scope.requisition.qualifications[length-1].qualification == "" || $scope.requisition.approval1.name == ""){
-				$scope.disableCloneBtn  =  true;
-			}else{
-				$scope.disableCloneBtn  =  false;
-			}
-		}
-	 
 	 $scope.validTargetDate = function(requisitionDate,targetDate){
 			if(targetDate < requisitionDate){
 				 $scope.targetErr = true;
-				 $scope.disabled = true; 
+				 $scope.disableCloneBtn = true; 
 			}else{
 				$scope.targetErr = false;
-				 $scope.disabled = false; 
+				$scope.disableCloneBtn = false; 
 			}
-			 checkForEnableCreateButton();
+			 $scope.reqErr = false;
 		}
 		
 }]);
