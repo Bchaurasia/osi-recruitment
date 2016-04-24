@@ -200,7 +200,8 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			List<Round> rounds = interviewDetails2.getRounds();
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
-			interviewDetails2.setInterviewerEmail(interviewDetails2.getInterviewerEmail());
+			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
+			//interviewDetails2.setInterviewerEmail(interviewDetails2.getInterviewerEmail());
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());

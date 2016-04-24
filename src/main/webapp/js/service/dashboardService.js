@@ -4,7 +4,8 @@ angular.module('erApp')
 function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	return {
 		getPositionData : getPositionData,
-		getScheduleData : getScheduleData
+		getScheduleData : getScheduleData,
+		getScheduleDataInterview : getScheduleDataInterview
 	};
 	
 	function getPositionData(obj){
@@ -16,6 +17,12 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	function getScheduleData(obj){
 		return $http.get('resources/getInterviewByParam')
 		.then(getScheduleDataSuccess)
+		.catch(getScheduleDataError);
+	}
+	
+	function getScheduleDataInterview(obj){
+		return $http.get('resources/getInterviewByInterviewer?interviewerEmail='+sessionStorage.userId)
+		.then(getScheduleDataInterviewSuccess)
 		.catch(getScheduleDataError);
 	}
 	
@@ -49,6 +56,22 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 				}
 			})
 		});
+		return showScheduleData;
+	}
+	
+	function getScheduleDataInterviewSuccess(response){
+		data = response.data;
+		var showScheduleData = [];
+		
+		angular.forEach(data, function(obj){
+			angular.forEach(obj.rounds, function(obj2){
+				var dbDate = new Date(obj2.interviewSchedule.interviewDateTime);
+				if(obj2.interviewSchedule.emailIdInterviewer == obj.interviewerEmail)
+					showScheduleData.push({"cname":obj.candidateName, "round":obj2.interviewSchedule.roundName, "date":dbDate, "interviewId":obj.interviewerId, "status":obj2.interviewFeedback});
+				
+			})
+		});
+		
 		return showScheduleData;
 	}
 	

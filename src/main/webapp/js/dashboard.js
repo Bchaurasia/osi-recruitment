@@ -75,6 +75,43 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.hideNoInterviewMsg = false;
 	});
 	
+	dashboardService.getScheduleDataInterview()
+	.then(function (data){
+		$scope.showScheduleDataInterview = data;
+		if(data == "" || data == null || data == undefined){
+			$scope.showNoInterviewMsg = true;
+		}
+	}).catch(function(msg){
+		$log.error(msg);
+		$scope.hideNoInterviewMsg = false;
+	});
+	
+	$scope.interviewDateTimeFuture = function(date) {
+		var today = new Date();
+		if(today < date)
+			return true;
+		else
+			return false;
+	}
+	
+	$scope.interviewDateTimePastFeedbackPending = function(date,progressStr) {
+		var today = new Date();
+		if(today > date && progressStr==null)
+			return true;
+		else
+			return false;
+	}
+	
+	$scope.interviewDateTimePastFeedback = function(date,progressStr) {
+		var today = new Date();
+		if(today > date && progressStr!=null)
+			return true;
+		else
+			return false;
+	}
+	
+	
+	
 	$scope.showInterview = function(obj, obj2) {
 		sharedService.setjobCode(obj);
 		sharedService.setinterviewRound(obj2);

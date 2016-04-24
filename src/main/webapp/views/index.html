@@ -103,34 +103,42 @@
 							class="col s4">{{schedule.date | date:'medium'}}</span>
 					</div>
 				</li>
-				<li ng-hide="hideNoPositionsMsg">
+				<li ng-hide="hideNoInterviewMsg">
+					<p style="color: red;">No Upcoming Interviews.</p>
+				</li>
+			</ul>			
+		</div>
+		
+		
+		
+	</div>
+	<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER')">
+			<h6 align="left">
+				<b>Schedule Interviews</b>
+			</h6>
+			<ul class="collapsible" data-collapsible="accordion">
+				<li style="background-color: #7EA7C7">
+					<div class="collapsible-header row">
+						<span class="col s3"><b>Name</b></span>
+						<span class="col s3"><b>Round</b></span> <span class="col s3"><b>Schedule
+								Time</b></span><span class="col s3"><b>Status</b></span>
+					</div>
+				</li>
+				<li ng-repeat="schedule in showScheduleDataInterview">
+					<div class="collapsible-header row">
+						<span class="col s3">{{schedule.cname}}</span>
+						<span class="col s3">{{schedule.round}}</span> <span
+							class="col s3">{{schedule.date | date:'medium'}}</span>
+						<span class="col s3" ng-show="interviewDateTimeFuture(schedule.date)">Interview Pending</span>
+						<span class="col s3" ng-show="interviewDateTimePastFeedbackPending(schedule.date,schedule.status)">Feedback Pending</span>
+						<span class="col s3" ng-show="interviewDateTimePastFeedback(schedule.date,schedule.status)">Feedback Submitted</span>
+					</div>
+				</li>
+				<li ng-show="showNoInterviewMsg">
 					<p style="color: red;">No Upcoming Interviews.</p>
 				</li>
 			</ul>
-			<!-- <div class="shortcuts">
-								<a href="#admin/users" class="shortcut"
-									ng-show="hasRole('ROLE_ADMIN')"><i
-									class="shortcut-icon icon-user"></i><span
-									class="shortcut-label">Admin</span> </a> <a
-									href="#recruitment/searchPosition" class="shortcut"
-									ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-									class="shortcut-icon icon-picture"></i><span
-									class="shortcut-label">Positions</span> </a> <a
-									href="#recruitment/searchRequisition" class="shortcut"
-									ng-show="hasRole('ROLE_ADMIN,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-									class="shortcut-icon icon-signal"></i> <span
-									class="shortcut-label">Requisition</span> </a> <a
-									href="#recruitment/searchProfile" class="shortcut"
-									ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-									class="shortcut-icon icon-user"></i><span
-									class="shortcut-label">Profile</span> </a> <a
-									href="#recruitment/interviewManagement" class="shortcut"
-									ng-show="hasRole('ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-									class="shortcut-icon icon-picture"></i><span
-									class="shortcut-label">Interview</span> </a>
-
-							</div> -->
+			
 		</div>
-	</div>
 </div>
 

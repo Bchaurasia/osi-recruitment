@@ -45,6 +45,7 @@ public class InterviewDetailsRepository{
 		update.set("clientName",interview.getClientName());
 		update.set("designation",interviewDetails.getDesignation());
 		update.set("hrAssigned",interviewDetails.getHrAssigned());
+		update.set("interviewerEmail", interviewDetails.getInterviewerEmail());
 		mongoOperation.updateFirst(query, update, InterviewDetails.class);
 	}
 
