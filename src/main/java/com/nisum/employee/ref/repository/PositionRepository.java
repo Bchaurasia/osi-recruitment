@@ -55,13 +55,10 @@ public class PositionRepository {
 		update.set("interviewRounds",position.getInterviewRounds());
 		update.set("jobProfile",position.getJobProfile());
 		update.set("location",position.getLocation());
-		update.set("noOfPositions",position.getNoOfPositions());
 		update.set("client",position.getClient());
 		update.set("hiringManager", position.getHiringManager());
 		update.set("priority", position.getPriority());
 		update.set("interviewer", position.getInterviewer());
-		update.set("jobType", position.getJobType());
-		update.set("salary", position.getSalary());
 		update.set("status", position.getStatus());
 		update.set("updatedDate", position.getUpdatedDate());
 		update.set("createdDate", position.getCreatedDate());

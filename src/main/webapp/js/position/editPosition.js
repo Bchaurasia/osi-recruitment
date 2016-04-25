@@ -131,7 +131,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			 $scope.position.hiringManager.emailId  = $scope.hrManager.emailId;
 			 $scope.position.designation =  $scope.designation;
 			 $scope.position.client = $scope.selClient;
-			 $scope.position.interviewer = $scope.interviewer.emailId;
+			 if($scope.interviewer != undefined){
+				 $scope.position.interviewer = $scope.interviewer.emailId;
+			 }
 		     positionService.updatePosition($scope.position).then(
 			    function(msg){
 			    	$scope.sendNotification(msg,'recruitment/searchPosition');
