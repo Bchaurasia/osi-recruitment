@@ -76,7 +76,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 	}
 	
 	function searchProfileById(emailId){
-		return $http.get('resources/searchProfileByEmail?emailId='+emailId)
+		return $http.get('resources/getProfileByReferralEmail?emailId='+emailId)
 			 .then(getProlilesData)
 			 .catch(sendErrorprofileMsg);
 	}
