@@ -85,7 +85,7 @@
 
 			<div class="input-field col s6">
 				<ui-select multiple ng-model="position.interviewRounds"
-					ui-select-required theme="select2" ng-disabled="flagDisabled">
+					ui-select-required theme="select2">
 				<ui-select-match placeholder="Select Rounds..">{{$item}}</ui-select-match>
 				<ui-select-choices
 					repeat="color in interviewRounds | orderBy:'toString()' | filter:$select.search">
