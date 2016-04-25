@@ -87,6 +87,12 @@ public class PositionRepository {
 		return positionDatails;
 	}
 	
+	public List<Position> retrievePositionsbasedOnrequisitionId(String requisitionId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("requisitionId").regex(requisitionId));
+		List<Position> positionDetail = mongoOperations.find(query, Position.class);
+		return positionDetail;
+	}
 	public Position retrievePositionsbasedOnJobCode(String jobcode) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where(_ID).regex(jobcode));
