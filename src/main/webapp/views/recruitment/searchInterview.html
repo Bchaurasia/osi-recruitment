@@ -23,7 +23,6 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Skills</th>
 					<th>Job Code</th>
 					<th>Schedule</th>
 					<th>Feedback</th>
@@ -35,9 +34,6 @@
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a style="cursor: pointer;"
 							ng-click="showInterviewDetails(data.interviewerId)">{{data.candidateName}}</a></td>
-					<td class="mdl-data-table__cell--non-numeric"><i
-						ng-repeat="skills in data.candidateSkills">{{skills}}{{$last ?
-							'' : ', '}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="jobcode in data.currentPositionId"> {{jobcode}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric">

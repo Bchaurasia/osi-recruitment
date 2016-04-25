@@ -17,9 +17,9 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	
 	$scope.newDesig="";
 	
-	$scope.col=["Designations","Skills","Min Exp","Max Exp"];
+	$scope.col=["Designations","Min Exp","Max Exp"];
 	
-	$scope.att=["designation","skills","minExpYear","maxExpYear"];
+	$scope.att=["designation","minExpYear","maxExpYear"];
 	$scope.att1=["skills"];
 	
 	$scope.init = function() {
