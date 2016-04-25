@@ -8,15 +8,14 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.hideNoInterviewMsg = true;
 	$scope.hideNoStatusMsg = true;
 	$scope.hideNoRequisitionMsg = true;
-	$scope.prolilesData={};
+	$scope.prolilesData=[];
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
+	$scope.showNoAppRequisitionMsg = false;
 	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
-		$log.error("b4 in profile");
 		$scope.prolilesData = data;
-		$log.error("in profile"+prolilesData);
 		if(data == "" || data == null || data == undefined){
 			$scope.hideNoStatusMsg = false;
 		}else{
@@ -27,18 +26,86 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$log.error(msg);
 	});
 	
-	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
-			|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
-	requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
-		 $scope.allRequisitions=data;
-		if(_.isEmpty(data) ){
-			$scope.hideNoRequisitionMsg = false;
-		}else{
-			$scope.hideNoRequisitionMsg = true;
-		}
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_ADMIN") || _.contains($rootScope.user.roles,"ROLE_INTERVIEWER") || _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") ||
+			_.contains($rootScope.user.roles,"ROLE_MANAGER") ||  _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") )){
+		dashboardService.getPositionData()
+		.then(function(data){
+			$scope.positionData = data;
+			if(data == "" || data == null || data == undefined){
+				$scope.hideNoPositionsMsg = false;
+			}else{
+				$scope.hideNoPositionsMsg = true;
+			}
+		}).catch(
+		function(msg){
+			$log.error(msg);
+		});
+		
+		dashboardService.getScheduleData()
+		.then(function (data){
+			$scope.showScheduleData = data;
+			if(data == "" || data == null || data == undefined){
+				$scope.hideNoInterviewMsg = false;
+			}
 		}).catch(function(msg){
-		$log.error(msg);
-		});	
+			$log.error(msg);
+			$scope.hideNoInterviewMsg = false;
+		});
+	}
+	
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
+			|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") )){
+		requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
+			 $scope.allRequisitions=data;
+			if(_.isEmpty(data) ){
+				$scope.hideNoRequisitionMsg = false;
+			}else{
+				$scope.hideNoRequisitionMsg = true;
+			}
+			}).catch(function(msg){
+			$log.error(msg);
+			});	
+	}		
+	
+	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
+		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
+			.then(function(data){
+				$scope.requisitionsDetails = data;
+				if(_.isEmpty($scope.requisitionsDetails) ){
+					$scope.showNoAppRequisitionMsg = true;
+				}
+			})
+			.catch(function(msg){
+				$log.error(msg);
+			});
+	}
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
+			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") )){
+		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
+		.then(function (data){
+			$scope.showScheduleDataInterview = data;
+			if(data == "" || data == null || data == undefined){
+				$scope.showNoInterviewMsg = true;
+			}
+		}).catch(function(msg){
+			$log.error(msg);
+			$scope.hideNoInterviewMsg = false;
+		});
+	}
+	
+	/*
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
+			|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER"))){
+		requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
+			 $scope.allRequisitions=data;
+			if(_.isEmpty(data) ){
+				$scope.hideNoRequisitionMsg = false;
+			}else{
+				$scope.hideNoRequisitionMsg = true;
+			}
+			}).catch(function(msg){
+			$log.error(msg);
+			});	
 	}		
 	
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
@@ -51,41 +118,20 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			});
 	}
 	
-	dashboardService.getPositionData()
-	.then(function(data){
-		$scope.positionData = data;
-		if(data == "" || data == null || data == undefined){
-			$scope.hideNoPositionsMsg = false;
-		}else{
-			$scope.hideNoPositionsMsg = true;
-		}
-	}).catch(
-	function(msg){
-		$log.error(msg);
-	});
-	
-	dashboardService.getScheduleData()
-	.then(function (data){
-		$scope.showScheduleData = data;
-		if(data == "" || data == null || data == undefined){
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
+			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER")))){
+		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
+		.then(function (data){
+			$scope.showScheduleDataInterview = data;
+			if(data == "" || data == null || data == undefined){
+				$scope.showNoInterviewMsg = true;
+			}
+		}).catch(function(msg){
+			$log.error(msg);
 			$scope.hideNoInterviewMsg = false;
-		}
-	}).catch(function(msg){
-		$log.error(msg);
-		$scope.hideNoInterviewMsg = false;
-	});
-	
-	dashboardService.getScheduleDataInterview()
-	.then(function (data){
-		$scope.showScheduleDataInterview = data;
-		if(data == "" || data == null || data == undefined){
-			$scope.showNoInterviewMsg = true;
-		}
-	}).catch(function(msg){
-		$log.error(msg);
-		$scope.hideNoInterviewMsg = false;
-	});
-	
+		});
+	}
+	*/
 	$scope.interviewDateTimeFuture = function(date) {
 		var today = new Date();
 		if(today < date)
@@ -109,8 +155,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		else
 			return false;
 	}
-	
-	
 	
 	$scope.showInterview = function(obj, obj2) {
 		sharedService.setjobCode(obj);

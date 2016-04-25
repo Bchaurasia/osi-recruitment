@@ -20,8 +20,8 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		.catch(getScheduleDataError);
 	}
 	
-	function getScheduleDataInterview(obj){
-		return $http.get('resources/getInterviewByInterviewer?interviewerEmail='+sessionStorage.userId)
+	function getScheduleDataInterview(email){
+		return $http.get('resources/getInterviewByInterviewer?interviewerEmail='+email)
 		.then(getScheduleDataInterviewSuccess)
 		.catch(getScheduleDataError);
 	}

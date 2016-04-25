@@ -1,9 +1,10 @@
 <br>
 <div style="width: 90%" align="center">
 	<div class="row"
-		ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+		ng-show="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 		<div class="col s1 m1 ">
 			<div class="shortcuts">
+			
 				<a href="#admin/users" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN')"><i class="material-icons">face</i><span
 					class="shortcut-label">Admin</span> </a> <a
@@ -11,80 +12,100 @@
 					ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
 					class="material-icons">list</i><span class="shortcut-label">Positions</span>
 				</a> <a href="#recruitment/searchRequisition" class="shortcutstyle"
-					ng-show="hasRole('ROLE_ADMIN,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
+					ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
 					class="material-icons">description</i> <span class="shortcut-label">Requisition</span>
 				</a> <a href="#recruitment/searchProfile" class="shortcutstyle"
-					ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
+					ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
 					class="material-icons"></i><span class="shortcut-label">Profile</span>
 				</a> <a href="#recruitment/interviewManagement" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
 					class="material-icons"></i><span class="shortcut-label">Interview</span>
 				</a>
-
+			<!-- 	
+			<ul>
+			<li><a class="btn-floating btn-large Red darken-1" href="#admin/users" ng-show="hasRole('ROLE_ADMIN')"><i
+					class="material-icons">face</i></a></li>
+			<li><a class="btn-floating btn-large yellow darken-1" href="#recruitment/searchPosition" ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
+					class="material-icons">star</i></a></li>
+			<li><a class="btn-floating btn-large green" href="#recruitment/searchRequisition" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="material-icons">business center</i></a></li>
+			<li><a class="btn-floating btn-large blue" href="#recruitment/searchProfile" ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="material-icons">group</i></a></li>
+			<li><a class="btn-floating btn-large pink" href="#recruitment/interviewManagement" ng-show="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="material-icons">reply</i></a></li>
+			</ul>
+		 -->
 			</div>
-		</div>
 
-		<div class="col s12 m5 ">
-			<h6 align="left">
-				<b>Positions</b>
-			</h6>
-			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #7EA7C7">
-					<div class="collapsible-header">
-						<span class="col s6"><b>Position</b></span> <span class="col s6"><b>Required</b></span>
-					</div>
-				</li>
-				<li ng-repeat="position in positionData">
-					<div class="collapsible-header row">
-						<span class="col s6">{{position.designation}}</span> <span
-							class="col s6">{{position.total}}</span>
-					</div>
-				</li>
-				<li ng-hide="hideNoPositionsMsg">
-					<p style="color: red;">No Positions Available</p>
-				</li>
-			</ul>
-			<h6 align="left">
-				<b>Requisitions</b>
-			</h6>
-			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #7EA7C7">
-					<div class="collapsible-header">
-						<span class="col s6"><b>Requisition Id</b></span> <span
-							class="col s6"><b>Status</b></span>
-					</div>
-				</li>
-				<li ng-repeat="requisition in requisitionsDetails">
-					<div class="collapsible-header row">
-						<span class="col s6">{{requisition.requisitionId}}</span> <span
-							class="col s6">{{requisition.status}}</span>
-					</div>
-				</li>
-				<li ng-hide="hideNoRequisitionMsg">
-					<p style="color: red;">No Requisition Available.</p>
-				</li>
-			</ul>
-			<h6 align="left">
-				<b>Profiles</b>
-			</h6>
-			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #7EA7C7">
-					<div class="collapsible-header">
-						<span class="col s6"><b>Name</b></span> <span class="col s6"><b>Status</b></span>
-					</div>
-				</li>
-				<li ng-repeat="profile in prolilesData">
-					<div class="collapsible-header row">
-						<span class="col s6">{{profile.candidateName}}</span> <span
-							class="col s6">{{profile.status}}</span>
-					</div>
-				</li>
-				<li ng-hide="hideNoStatusMsg">
-					<p style="color: red;">No Profile Available.</p>
-				</li>
-			</ul>
+		
 		</div>
-		<div class="col s12 m6 ">
+		
+		<div class="col s12 m5 " ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+				<h6 align="left">
+					<b>Positions</b>
+				</h6>
+				<div>
+				<ul class="collapsible" data-collapsible="accordion">
+					<li style="background-color: #7EA7C7">
+						<div class="collapsible-header">
+							<span class="col s6"><b>Position</b></span> <span class="col s6"><b>Required</b></span>
+						</div>
+					</li>
+					<li ng-repeat="position in positionData">
+						<div class="collapsible-header row">
+							<span class="col s6">{{position.designation}}</span> <span
+								class="col s6">{{position.total}}</span>
+						</div>
+					</li>
+					<li ng-hide="hideNoPositionsMsg">
+						<p style="color: red;">No Positions Available</p>
+					</li>
+				</ul>
+				</div>
+				<div ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+						<h6 align="left">
+							<b>Requisitions </b>
+						</h6>
+						<ul class="collapsible" data-collapsible="accordion">
+							<li style="background-color: #7EA7C7">
+								<div class="collapsible-header">
+									<span class="col s6"><b>Requisition Id</b></span> <span
+										class="col s6"><b>Status</b></span>
+								</div>
+							</li>
+							<li ng-repeat="requisition in allRequisitions">
+								<div class="collapsible-header row">
+									<span class="col s6">{{requisition.requisitionId}}</span> <span
+										class="col s6">{{requisition.status}}</span>
+								</div>
+							</li>
+							<li ng-hide="hideNoRequisitionMsg">
+								<p style="color: red;">No Requisition Available.</p>
+							</li>
+						</ul>
+				</div>
+				<div ng-show="hasRole('ROLE_REQUISITION_APPROVER')">
+						<h6 align="left">
+							<b>Requisitions to Approve</b>
+						</h6>
+						<ul class="collapsible" data-collapsible="accordion">
+							<li style="background-color: #7EA7C7">
+								<div class="collapsible-header">
+									<span class="col s6"><b>Requisition Id</b></span> <span
+										class="col s6"><b>Status</b></span>
+								</div>
+							</li>
+							<li ng-repeat="requisition in requisitionsDetails">
+								<div class="collapsible-header row">
+									<span class="col s6">{{requisition.requisitionId}}</span> <span
+										class="col s6">{{requisition.status}}</span>
+								</div>
+							</li>
+							<li ng-show="showNoAppRequisitionMsg">
+								<p style="color: red;">No Requisition Available.</p>
+							</li>
+						</ul>
+				</div>
+				
+		</div>
+		<div class="col s12 m6 " ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 			<h6 align="left">
 				<b>Schedule Interviews</b>
 			</h6>
@@ -108,13 +129,9 @@
 				</li>
 			</ul>			
 		</div>
-		
-		
-		
-	</div>
-	<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER')">
+		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
 			<h6 align="left">
-				<b>Schedule Interviews</b>
+				<b>Your have Schedule Interviews</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
@@ -138,7 +155,36 @@
 					<p style="color: red;">No Upcoming Interviews.</p>
 				</li>
 			</ul>
-			
 		</div>
-</div>
+	</div>
+		<div>
+					<h6 align="left">
+						<b>You Referred Profiles</b>
+					</h6>
+					<ul class="collapsible" data-collapsible="accordion">
+						<li style="background-color: #7EA7C7">
+							<div class="collapsible-header">
+								<span class="col s6"><b>Name</b></span> <span class="col s6"><b>Status</b></span>
+							</div>
+						</li>
+						<li ng-repeat="profile in prolilesData">
+							<div class="collapsible-header row"><b>
+								<span class="col s6">{{profile.candidateName}}</span> <span
+									class="col s6">{{profile.status}}</span></b>
+							</div>
+						</li>
+						<li ng-hide="hideNoStatusMsg">
+							<p style="color: red;">No Profile uploaded.</p>
+						</li>
+					</ul>
+				</div>
+	
+<!-- 	<div class="btn-floating horizontal" -->
+<!-- 		style="bottom: 45px; right: 24px;"> -->
+<!-- 		<a class="btn-floating btn-large red"> <i -->
+<!-- 			class="large material-icons">mode_edit</i> -->
+<!-- 		</a> -->
+		
+<!-- 	</div> -->
 
+</div>
