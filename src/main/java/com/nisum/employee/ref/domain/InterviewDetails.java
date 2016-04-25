@@ -26,6 +26,7 @@ public class InterviewDetails  {
 	String designation;
 	String hrAssigned;
 	String jobCode;
+	String requisitionId;
 	String status;
 	List <Round> rounds;
 

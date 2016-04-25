@@ -205,6 +205,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
+			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 		}
 		}else{
 			int i=0;
@@ -216,6 +217,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
+			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 		}
 		return interviewDetails2;
 	}
