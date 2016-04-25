@@ -51,7 +51,7 @@ db.info.insert({"_id":"progress",value:["15", "30", "45", "60"]});
 db.info.insert({"_id":"Priority",value:["Low", "Medium", "High"]});
 db.info.insert({"_id":"salary",value:[ "$6000 - $7000", "$7000 - $9000","$9000 - $10000", "$10000- $12000"]});
 db.info.insert({"_id":"jobType",value:["Full Time", "Part Time"]});
-db.info.insert({"_id":"status",value:[ "Active", "Inactive", "Hired", "OnHold", "Rejected"]});
+db.info.insert({"_id":"status",value:["Selected","Hired", "OnHold", "Rejected"]});
 // DEVELOPER User data
 db.userInfo.insert({"_id":"prawate@nisum.com",'name':"Pradeep Rawate","mobileNumber":"+918087810808","dob":"",location:"Pune",skypeId:"prawate",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"2"},{day:"Friday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.userInfo.insert({"_id":"dmishra@nisum.com",'name':"Deepanker Mishra","mobileNumber":"+919282828388","dob":"",location:"SF",skypeId:"dmishra",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"2"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
