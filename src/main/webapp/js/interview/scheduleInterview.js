@@ -18,36 +18,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.interviewscheduleDetails.rounds=[];
 	$scope.today = new Date();
 	$scope.requisitionIdlist=[];
-	$scope.init = function() {
-	$scope.jobcodelistObj={};	
-	$scope.interviewschedule.interviewDateTime="";
-	
-	$scope.interviewerId = sharedService.getInterviewId();
-		interviewService.getInterviewDetailsById($scope.interviewerId).then(
-		function(data){
-			$scope.interviewscheduleDetails=data;
-
-			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
-			$scope.interviewId=$scope.interviewscheduleDetails.candidateId;
-			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
-			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
-			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
-			
-			}		
-		)
-		requisitionService.getAllRequisitions().then(function(requisitions){
-			$scope.requisitionObj=requisitions;
-			_.find( $scope.requisitionObj,function(requisition){
-				$scope.requisitionIdlist.push(requisition.requisitionId); 
-			 });
-			console.debug("requisition detail object :"+angular.toJson($scope.requisitionIdlist));
-		}).catch(function(msg){
-			$log.error(msg);
-		});
-	
-	}
-	$scope.init();
-	
+	$scope.disabled=false;
 	$scope.setJobcode= function(requisitionId) {
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
 			$scope.jobcodelistObj=positions;
@@ -59,6 +30,39 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		});
 
 	}
+	
+	$scope.init = function() {
+	$scope.jobcodelistObj={};	
+	$scope.interviewschedule.interviewDateTime="";
+	
+	$scope.interviewerId = sharedService.getInterviewId();
+		interviewService.getInterviewDetailsById($scope.interviewerId).then(
+		function(data){
+			
+			$scope.interviewscheduleDetails=data;
+
+			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
+			$scope.interviewId=$scope.interviewscheduleDetails.candidateId;
+			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
+			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
+			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
+			$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
+			$scope.setJobcode($scope.interviewschedule.requisitionId);
+			}		
+		)
+		requisitionService.getAllRequisitions().then(function(requisitions){
+			$scope.requisitionObj=requisitions;
+			_.find( $scope.requisitionObj,function(requisition){
+				$scope.requisitionIdlist.push(requisition.requisitionId); 
+			 });
+			console.debug("requisition detail object :"+angular.toJson($scope.requisitionIdlist));
+		}).catch(function(msg){
+			$log.error(msg);
+		});
+		
+	}
+	$scope.init();
+	
 	$scope.setvalues= function(InterviewerName) {
 		$scope.interviewerData  =_.find( $scope.interviewerNames,function(interviewerObj){
 			if(interviewerObj.emailId == InterviewerName.emailId){
