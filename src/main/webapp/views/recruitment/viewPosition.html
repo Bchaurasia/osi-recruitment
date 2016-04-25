@@ -125,20 +125,21 @@
 				</select> <label>Status</label>
 			</div>
 		</div>
-		<ul class="collapsible collapsible-accordion"
-			data-collapsible="interviewCandidates" ng-show="accordianFlag"
-			style="margin-left: 10px; margin-right: 90px;">
-			<li ng-repeat="interviewCandidate in interviewCandidates">
-				<div class="collapsible-header" style="text-align: left;">
-					<span> <label style="font-size: 17px;"><i
-							class="material-icons">person</i>{{interviewCandidate.candidateName}}
-							: </label> <label style="font-size: 14px;">&nbsp;{{interviewCandidate.candidateEmail}},
-							&nbsp;{{interviewCandidate.progress}}</label>
-					</span>
-				</div>
-			</li>
-		</ul>
-
+		<br />
+		<div ng-show="accordianFlag" class="input-field col s12">
+			<label><b>Shortlisted Candidates for this position:</b></label>
+			<div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
+				<span class="col s4"><b>Person</b></span>
+				<span class="col s4"><b>Email Id</b></span>
+				<span class="col s4"><b>Progress</b></span>
+			</div>
+			<div class="collapsible-header row" style="text-align: left;" ng-repeat="interviewCandidate in interviewCandidates">
+				<span class="col s4"><b>{{interviewCandidate.candidateName}}</b></span>
+				<span class="col s4"><b>{{interviewCandidate.candidateEmail}}</b></span>
+				<span class="col s4"><b>{{interviewCandidate.progress}}</b></span>
+			</div>
+		</div>
+		
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
 				ng-disabled="UpdatePosition.$invalid"
