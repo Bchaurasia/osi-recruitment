@@ -40,6 +40,8 @@ public class ProfileService implements IProfileService{
 		InterviewDetails interview = new InterviewDetails();
 		interview.setCandidateName(candidate.getCandidateName());
 		interview.setCandidateEmail(candidate.getEmailId());
+		interview.setCandidateMobileNumber(candidate.getMobileNo());
+		interview.setCandidateSkypeId(candidate.getSkypeId());
 		interview.setCandidateSkills(candidate.getPrimarySkills());
 		interview.setDesignation(candidate.getDesignation());
 		interview.setHrAssigned(candidate.getHrAssigned());
