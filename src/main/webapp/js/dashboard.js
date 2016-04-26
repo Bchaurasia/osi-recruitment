@@ -23,6 +23,11 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		location.href='#recruitment/showInterview';
 	};
 	
+	$scope.editPosition = function(jobcodeProfile) {
+		sharedService.setjobCode(jobcodeProfile);
+		location.href='#recruitment/viewPosition';
+	};
+	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
 		$scope.prolilesData = data;

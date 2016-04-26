@@ -50,7 +50,9 @@
 					</li>
 					<li ng-repeat="position in positionData">
 						<div class="collapsible-header row">
-							<span class="col s6">{{position.designation}}</span> <span
+							<span class="col s6">
+								<a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.designation}}</a>
+							</span> <span
 								class="col s6">{{position.total}}</span>
 						</div>
 					</li>
