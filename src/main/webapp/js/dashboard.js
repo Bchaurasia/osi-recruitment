@@ -13,6 +13,11 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.requisitionsDetails=[];
 	$scope.showNoAppRequisitionMsg = false;
 	
+	$scope.editRequisition = function(requisitionId) {
+		sharedService.setRequisitionId(requisitionId);
+		location.href='#recruitment/editRequisition';
+	};
+	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
 		$scope.prolilesData = data;

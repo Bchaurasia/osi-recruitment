@@ -72,8 +72,12 @@
 							</li>
 							<li ng-repeat="requisition in allRequisitions">
 								<div class="collapsible-header row">
-									<span class="col s6">{{requisition.requisitionId}}</span> <span
-										class="col s6">{{requisition.status}}</span>
+									<span class="col s6">
+										<a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
+											{{requisition.requisitionId}}
+										</a>
+									</span> 
+									<span class="col s6">{{requisition.status}}</span>
 								</div>
 							</li>
 							<li ng-hide="hideNoRequisitionMsg">
@@ -94,7 +98,11 @@
 							</li>
 							<li ng-repeat="requisition in requisitionsDetails">
 								<div class="collapsible-header row">
-									<span class="col s6">{{requisition.requisitionId}}</span> <span
+									<span class="col s6">
+										<a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
+											{{requisition.requisitionId}}
+										</a>
+									</span> <span
 										class="col s6">{{requisition.status}}</span>
 								</div>
 							</li>
@@ -131,7 +139,7 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
 			<h6 align="left">
-				<b>Your have Schedule Interviews</b>
+				<b>You have Schedule Interviews</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
