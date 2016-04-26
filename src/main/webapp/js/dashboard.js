@@ -13,6 +13,21 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.requisitionsDetails=[];
 	$scope.showNoAppRequisitionMsg = false;
 	
+	$scope.editRequisition = function(requisitionId) {
+		sharedService.setRequisitionId(requisitionId);
+		location.href='#recruitment/editRequisition';
+	};
+	
+	$scope.showInterviewDetails = function(interviewId) {
+		sharedService.setInterviewId(interviewId);
+		location.href='#recruitment/showInterview';
+	};
+	
+	$scope.editPosition = function(jobcodeProfile) {
+		sharedService.setjobCode(jobcodeProfile);
+		location.href='#recruitment/viewPosition';
+	};
+	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
 		$scope.prolilesData = data;

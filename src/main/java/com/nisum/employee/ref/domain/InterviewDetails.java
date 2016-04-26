@@ -20,6 +20,8 @@ public class InterviewDetails  {
 	String currentPositionId;
 	ArrayList<String> candidateSkills;
 	String candidateEmail;
+	String candidateSkypeId;
+	String candidateMobileNumber;
 	String interviewerEmail;
 	String clientName;
 	String progress;

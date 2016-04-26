@@ -72,14 +72,10 @@
 					class="mandatory">*</b>
 			</div>
 			<div class="input-field col s6">
-				<div class="demo-section k-content" align="left">
-					<input kendo-date-time-picker ng-model="data.date"
-						ng-disabled="disabled" min="{{today}}" k-ng-model="kdate"
-						style="width: 81%;Additional Notes" />
-				</div>
-				<label style="position: absolute; top: -22px;">Interview
-					Date and Time<b class="mandatory">*</b>
-				</label>
+				<input type="text" ng-change="" ng-model="interviewerData.skypeId"
+					ng-disabled="true" name="skypeId" ngPattern="" class="form-control"
+					placeholder="Enter Skype Id" required /> <label for="Days">
+					Skype Id<b class="mandatory">*</b>
 			</div>
 		</div>
 
@@ -91,11 +87,14 @@
 					Email Id <b class="mandatory">*</b>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" ng-change="" ng-model="interviewerData.skypeId"
-					ng-disabled="true" name="skypeId" ngPattern="" class="form-control"
-					placeholder="Enter Skype Id" required /> <label for="Days">
-					Skype Id<b class="mandatory">*</b>
+				<select ng-model="interviewerData.location" ng-disabled="true"
+					ng-options="o as o for o in info.locations | orderBy:'toString()'"
+					class="form-control input-sm" required name="location"
+					ng-disabled="disabled">
+					<option value="" ng-disabled="disabled">Select Location</option>
+				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
+			
 		</div>
 
 		<div class="row">
@@ -108,18 +107,33 @@
 						Format</option>
 				</select> <label>Type Of Interview<b class="mandatory">*</b></label>
 			</div>
-
-			<div class="input-field col s6">
-				<select ng-model="interviewerData.location" ng-disabled="true"
-					ng-options="o as o for o in info.locations | orderBy:'toString()'"
-					class="form-control input-sm" required name="location"
-					ng-disabled="disabled">
-					<option value="" ng-disabled="disabled">Select Location</option>
-				</select> <label>Location<b class="mandatory">*</b></label>
+           <div class="input-field col s6">
+				<div class="demo-section k-content" align="left">
+					<input kendo-date-time-picker ng-model="data.date"
+						ng-disabled="disabled" min="{{today}}" k-ng-model="kdate"
+						style="width: 81%;Additional Notes" />
+				</div>
+				<label style="position: absolute; top: -22px;">Interview
+					Date and Time<b class="mandatory">*</b>
+				</label>
 			</div>
-
 		</div>
-
+		
+       <div class="row">
+		<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Skype'">
+				<input type="text" ng-model="interviewschedule.candidateSkypeId"
+					ng-disabled="true" name="candidateSkypeId" class="form-control"
+					placeholder="Enter Skype Id" required /> <label>
+					Candidate Skype Id<b class="mandatory">*</b>
+			</div>
+			<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
+				<input type="text" ng-model="interviewschedule.candidateMobileNumber"
+					ng-disabled="true" name="candidateMobileNumber" class="form-control"
+					placeholder="Enter Mobile Number" required /> <label>
+					Candidate Mobile Number<b class="mandatory">*</b>
+			</div>
+		</div>
+		
 		<div class="row">
 			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"

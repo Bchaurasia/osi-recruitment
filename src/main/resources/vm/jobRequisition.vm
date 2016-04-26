@@ -6,8 +6,8 @@
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Hi $approverName,<br><br>
  Please approve the Requisition .
-<form action="http://localhost:8080/osi-recruitment-portal/main.html#"><input type="submit" name= "Approve" value = "Approve"/></form>
-
+ <br>Click here
+<a href="http://localhost:8080/osi-recruitment-portal/main.html">"http://localhost:8080/osi-recruitment-portal/main.html#"</a>
 <br><br>
  <span style="font-size:15px">Regards,</span><br>
  <span style="font-size:15px">Recruitment Team,</span><br>
