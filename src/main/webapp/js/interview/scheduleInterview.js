@@ -52,6 +52,13 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
 			$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
 			$scope.setJobcode($scope.interviewschedule.requisitionId);
+			profileService.getProfileById($scope.interviewschedule.candidateId).then(function(data){
+				$scope.interviewschedule.candidateSkypeId=data.skypeId;
+				$scope.interviewschedule.candidateMobileNumber=data.mobileNo;
+			}).catch(function(){
+				
+			});
+			
 			}		
 		)
 		requisitionService.getAllRequisitions().then(function(requisitions){

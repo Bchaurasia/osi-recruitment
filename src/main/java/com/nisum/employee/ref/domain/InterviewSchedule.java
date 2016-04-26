@@ -14,6 +14,8 @@ public class InterviewSchedule extends AuditEntity{
 	String requisitionId;
 	String interviewerMobileNumber;
 	String skypeId;
+	String candidateSkypeId;
+	String candidateMobileNumber;
 	String interviewDateTime;
 	String typeOfInterview;
 	String interviewLocation;
