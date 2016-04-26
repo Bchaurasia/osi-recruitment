@@ -158,12 +158,15 @@
 		
 		<div class="row">
 			<div class="input-field col s6">
+				
 				<select placeholder="Select Approver 1" ng-model="approval1"
 					ng-disabled="disApproval1"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option>Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
+				<a href="#" ng-click="showApprover1Comments = !showApprover1Comments" data-tooltip="add/view comment"><i class="material-icons prefix small" ng-click="">mode_edit</i></a>
+				
 			</div>
 			<div class="input-field col s6" ng-hide="hideApproval2">
 				<select placeholder="Select Approver 2" ng-model="approval2"
@@ -172,6 +175,21 @@
 					class="form-control input-sm">
 					<option>Select Approver 2</option>
 				</select> <label>Approver 2</label>
+				<a href="#" ng-click="showApprover2Comments = !showApprover2Comments" data-tooltip="add/view comment"><i class="material-icons prefix small" ng-click="">mode_edit</i></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s6" ng-show="showApprover1Comments">
+					<div class="input-field col s10">
+				   		<textarea id="icon_prefix2" class="materialize-textarea" ng-model="requisition.approval1.comment"></textarea>
+				   		<label for="textarea1">Comment</label>
+				   </div>
+			</div>
+			<div class="input-field col s6" ng-show="showApprover2Comments">
+				    <div class="input-field col s10">
+				   		<textarea id="icon_prefix2" class="materialize-textarea" ng-model="requisition.approval2.comment"></textarea>
+				   		<label for="textarea1">Comment</label>
+				   </div>
 			</div>
 		</div>
 		<div align="center" class="row">
