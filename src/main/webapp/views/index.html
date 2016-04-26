@@ -5,7 +5,7 @@
 		<div class="col s1 m1 ">
 			<div class="shortcuts">
 			
-				<a href="#admin/users" class="shortcutstyle"
+				<!-- <a href="#admin/users" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN')"><i class="material-icons">face</i><span
 					class="shortcut-label">Admin</span> </a> <a
 					href="#recruitment/searchPosition" class="shortcutstyle"
@@ -20,18 +20,20 @@
 				</a> <a href="#recruitment/interviewManagement" class="shortcutstyle"
 					ng-show="hasRole('ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
 					class="material-icons"></i><span class="shortcut-label">Interview</span>
-				</a>
-			<!-- 	
+				</a> -->
+				
 			<ul>
-			<li><a class="btn-floating btn-large Red darken-1" href="#admin/users" ng-show="hasRole('ROLE_ADMIN')"><i
-					class="material-icons">face</i></a></li>
-			<li><a class="btn-floating btn-large yellow darken-1" href="#recruitment/searchPosition" ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i
-					class="material-icons">star</i></a></li>
-			<li><a class="btn-floating btn-large green" href="#recruitment/searchRequisition" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="material-icons">business center</i></a></li>
-			<li><a class="btn-floating btn-large blue" href="#recruitment/searchProfile" ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="material-icons">group</i></a></li>
-			<li><a class="btn-floating btn-large pink" href="#recruitment/interviewManagement" ng-show="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"><i class="material-icons">reply</i></a></li>
+			<li><a class="btn-floating btn-large Red darken-1" href="#admin/users" ng-show="hasRole('ROLE_ADMIN')" data-tooltip="Search Users"><i
+					class="material-icons">face</i></a></li><br>
+			<li><a class="btn-floating btn-large yellow darken-1" href="#recruitment/searchPosition" ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"  data-tooltip="Search Positions"><i
+					class="material-icons">star</i></a></li><br>
+			<li><a class="btn-floating btn-large green" href="#recruitment/searchRequisition" ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" data-tooltip="Search Requisitions"><i class="material-icons">business</i></a></li>
+			<br>
+			<li><a class="btn-floating btn-large blue" href="#recruitment/searchProfile" ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" data-tooltip="Search Profiles"><i class="material-icons">group</i></a></li>
+			<br>
+			<li><a class="btn-floating btn-large pink" href="#recruitment/interviewManagement" ng-show="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" data-tooltip="Search Interviews"><i class="material-icons">reply</i></a></li>
 			</ul>
-		 -->
+		
 			</div>
 
 		
@@ -43,16 +45,14 @@
 				</h6>
 				<div>
 				<ul class="collapsible" data-collapsible="accordion">
-					<li style="background-color: #7EA7C7">
-						<div class="collapsible-header">
+					<li style="background-color: #035396">
+						<div class="collapsible-header white-field" >
 							<span class="col s6"><b>Position</b></span> <span class="col s6"><b>Required</b></span>
 						</div>
 					</li>
 					<li ng-repeat="position in positionData">
 						<div class="collapsible-header row">
-							<span class="col s6">
-								<a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.designation}}</a>
-							</span> <span
+							<span class="col s6"><a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.designation}}</a></span> <span
 								class="col s6">{{position.total}}</span>
 						</div>
 					</li>
@@ -66,20 +66,18 @@
 							<b>Requisitions </b>
 						</h6>
 						<ul class="collapsible" data-collapsible="accordion">
-							<li style="background-color: #7EA7C7">
-								<div class="collapsible-header">
+							<li style="background-color: #035396">
+								<div class="collapsible-header white-field">
 									<span class="col s6"><b>Requisition Id</b></span> <span
 										class="col s6"><b>Status</b></span>
 								</div>
 							</li>
 							<li ng-repeat="requisition in allRequisitions">
 								<div class="collapsible-header row">
-									<span class="col s6">
-										<a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
+									<span class="col s6"><a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
 											{{requisition.requisitionId}}
-										</a>
-									</span> 
-									<span class="col s6">{{requisition.status}}</span>
+										</a></span> <span
+										class="col s6">{{requisition.status}}</span>
 								</div>
 							</li>
 							<li ng-hide="hideNoRequisitionMsg">
@@ -92,19 +90,17 @@
 							<b>Requisitions to Approve</b>
 						</h6>
 						<ul class="collapsible" data-collapsible="accordion">
-							<li style="background-color: #7EA7C7">
-								<div class="collapsible-header">
+							<li style="background-color: #035396">
+								<div class="collapsible-header white-field">
 									<span class="col s6"><b>Requisition Id</b></span> <span
 										class="col s6"><b>Status</b></span>
 								</div>
 							</li>
-							<li ng-repeat="requisition in requisitionsDetails">
+							<li ng-repeat="requisition in requisitionsDetails ">
 								<div class="collapsible-header row">
-									<span class="col s6">
-										<a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
+									<span class="col s6"><a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
 											{{requisition.requisitionId}}
-										</a>
-									</span> <span
+										</a></span> <span
 										class="col s6">{{requisition.status}}</span>
 								</div>
 							</li>
@@ -117,11 +113,11 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 			<h6 align="left">
-				<b>Upcoming Interviews</b>
+				<b>Schedule Interviews for {{user.name}}</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #7EA7C7">
-					<div class="collapsible-header">
+				<li style="background-color: #035396">
+					<div class="collapsible-header white-field">
 						<span class="col-md-1"></span><span class="col s3"><b>Name</b></span>
 						<span class="col s3"><b>Round</b></span> <span class="col s4"><b>Schedule
 								Time</b></span>
@@ -129,10 +125,7 @@
 				</li>
 				<li ng-repeat="schedule in showScheduleData">
 					<div class="collapsible-header row">
-						<i class="material-icons col s1">alarm on</i>
-						<span class="col s3">
-							<a style="cursor: pointer;"	ng-click="showInterviewDetails(schedule.interviewerId)">{{schedule.cname}}</a>
-						</span>
+						<i class="material-icons col s1">alarm on</i><span class="col s3"><a style="cursor: pointer;"	ng-click="showInterviewDetails(schedule.interviewerId)">{{schedule.cname}}</a></span>
 						<span class="col s3">{{schedule.round}}</span> <span
 							class="col s4">{{schedule.date | date:'medium'}}</span>
 					</div>
@@ -144,11 +137,11 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
 			<h6 align="left">
-				<b>Schedule Interviews for {{user.name}}</b>
+				<b>Upcoming Interviews</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #7EA7C7">
-					<div class="collapsible-header row">
+				<li style="background-color: #035396">
+					<div class="collapsible-header row white-field">
 						<span class="col s3"><b>Name</b></span>
 						<span class="col s3"><b>Round</b></span> <span class="col s3"><b>Schedule
 								Time</b></span><span class="col s3"><b>Status</b></span>
@@ -172,11 +165,11 @@
 	</div>
 		<div>
 					<h6 align="left">
-						<b>Your Referrals</b>
+						<b>You Referred Profiles</b>
 					</h6>
 					<ul class="collapsible" data-collapsible="accordion">
-						<li style="background-color: #7EA7C7">
-							<div class="collapsible-header">
+						<li style="background-color: #035396">
+							<div class="collapsible-header white-field ">
 								<span class="col s6"><b>Name</b></span> <span class="col s6"><b>Status</b></span>
 							</div>
 						</li>

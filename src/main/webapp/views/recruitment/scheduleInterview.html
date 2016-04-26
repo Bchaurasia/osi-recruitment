@@ -5,8 +5,8 @@
 		name="schedule_form" ng-submit="schedule()" onvalidate>
 		<div class="row collapsible-header">
 			<h5 align="left">
-				<b>Interview Schedule Form -
-					{{interviewscheduleDetails.candidateName}}</b>
+				<b>Schedule Interview for -
+					{{interviewscheduleDetails.candidateName}}</b> <small>({{interviewscheduleDetails.candidateEmail}})</small>
 			</h5>
 		</div>
 		<div class="row">
@@ -26,10 +26,10 @@
 
 			</div>
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
+				<ui-select ng-model="jobcode.jobcode" theme="selectize"
 					ng-disabled="disabled" style="width: 80%"
 					title="Choose a country"> <ui-select-match
-					placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
+					placeholder="Select or search Job code.">{{$select.selected}}</ui-select-match>
 				<ui-select-choices
 					repeat="position in jobcodelistObj | filter: $select.search">
 				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>
@@ -52,9 +52,9 @@
 				</select> <label>Interview Round<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
-				<select ng-change="setvalues(interviewschedule.interviewerName)"
+				<select ng-change="setvalues(interviewerName)"
 					placeholder="Select InterviewerName"
-					ng-model="interviewschedule.interviewerName"
+					ng-model="interviewerName"
 					ng-options="o.name for o in interviewerNames"
 					class="form-control input-sm" required>
 					<option value='' disabled="disabled">Select Interviewer</option>
@@ -123,13 +123,13 @@
 		<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Skype'">
 				<input type="text" ng-model="interviewschedule.candidateSkypeId"
 					ng-disabled="true" name="candidateSkypeId" class="form-control"
-					placeholder="Enter Skype Id" required /> <label>
+					placeholder="Enter Skype Id"  /> <label>
 					Candidate Skype Id<b class="mandatory">*</b>
 			</div>
 			<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
 				<input type="text" ng-model="interviewschedule.candidateMobileNumber"
 					ng-disabled="true" name="candidateMobileNumber" class="form-control"
-					placeholder="Enter Mobile Number" required /> <label>
+					placeholder="Enter Mobile Number"  /> <label>
 					Candidate Mobile Number<b class="mandatory">*</b>
 			</div>
 		</div>

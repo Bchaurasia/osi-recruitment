@@ -37,6 +37,12 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		requisitionService.getRequisitionById(id).then(function(data){
 			$scope.requisition = data;
 			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
+			$scope.requisition.approval1.approved=false;
+			delete $scope.requisition.approval1.comment;
+	       	if(undefined !=$scope.requisition.approval2){
+	       		       delete $scope.requisition.approval2.comment;
+	    	        	$scope.requisition.approval2.approved=false;
+	    	    	}
 		}).catch(function(msg){
 	    	$log.error(msg); 
 	    });
@@ -48,12 +54,9 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		$q.all([getDesignation,getClients,getJds,getusers]).then(
 				function(response){
 					$scope.designations = response[0].data;
-				
 					if($scope.requisition.position !== undefined && !_.isEmpty($scope.designations)){
 						$scope.position = _.find($scope.designations, function(deg){ return deg.designation === $scope.requisition.position });
 					}
-		
-					
 					$scope.clients = response[1].data;
 					$scope.JobDescriptionList = response[2].data;
 					setUsers(response[3].data);
@@ -76,12 +79,14 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	$scope.init();
 	
 	function setUsers(data){
-		$scope.approvals =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
-		$scope.approvals =_.sortBy($scope.approvals, 'name');	
-		$scope.approval1 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval1.emailId})[0];
-		if($scope.requisition.approval2 !== undefined){
-			$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
-		}
+		var	approverUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
+		angular.forEach(approverUser,function(user){
+				var approver={};
+				approver.emailId = user.emailId;
+				approver.name = user.name;
+				$scope.approvals.push(approver);
+			});
+		$scope.approvals =_.sortBy($scope.approvals, 'name');
 		
 		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
@@ -127,7 +132,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.hideSkills = true;
 			$scope.dis2 = false;	
 		}
-		
 	}
 	
 	$scope.checkDisability = function(qualification){
@@ -249,5 +253,4 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			}
 			 $scope.reqErr = false;
 		}
-		
 }]);

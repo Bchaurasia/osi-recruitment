@@ -2,7 +2,9 @@
 	width: 100%;
 	/* margin-left: 47%; */
 }
-
+.white-field {
+	color: white;
+}
 .field-control {
 	width: 250px;
 }
