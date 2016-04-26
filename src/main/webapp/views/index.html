@@ -52,7 +52,7 @@
 					</li>
 					<li ng-repeat="position in positionData">
 						<div class="collapsible-header row">
-							<span class="col s6">{{position.designation}}</span> <span
+							<span class="col s6"><a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.designation}}</a></span> <span
 								class="col s6">{{position.total}}</span>
 						</div>
 					</li>
@@ -74,7 +74,9 @@
 							</li>
 							<li ng-repeat="requisition in allRequisitions">
 								<div class="collapsible-header row">
-									<span class="col s6">{{requisition.requisitionId}}</span> <span
+									<span class="col s6"><a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
+											{{requisition.requisitionId}}
+										</a></span> <span
 										class="col s6">{{requisition.status}}</span>
 								</div>
 							</li>
@@ -96,7 +98,9 @@
 							</li>
 							<li ng-repeat="requisition in requisitionsDetails ">
 								<div class="collapsible-header row">
-									<span class="col s6">{{requisition.requisitionId}}</span> <span
+									<span class="col s6"><a style="cursor: pointer;"	ng-click="editRequisition(requisition.requisitionId)">
+											{{requisition.requisitionId}}
+										</a></span> <span
 										class="col s6">{{requisition.status}}</span>
 								</div>
 							</li>
@@ -109,7 +113,7 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 			<h6 align="left">
-				<b>Schedule Interviews</b>
+				<b>Schedule Interviews for {{user.name}}</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #035396">
@@ -121,7 +125,7 @@
 				</li>
 				<li ng-repeat="schedule in showScheduleData">
 					<div class="collapsible-header row">
-						<i class="material-icons col s1">alarm on</i><span class="col s3">{{schedule.cname}}</span>
+						<i class="material-icons col s1">alarm on</i><span class="col s3"><a style="cursor: pointer;"	ng-click="showInterviewDetails(schedule.interviewerId)">{{schedule.cname}}</a></span>
 						<span class="col s3">{{schedule.round}}</span> <span
 							class="col s4">{{schedule.date | date:'medium'}}</span>
 					</div>
@@ -133,7 +137,7 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
 			<h6 align="left">
-				<b>Your have Schedule Interviews</b>
+				<b>Upcoming Interviews</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #035396">
