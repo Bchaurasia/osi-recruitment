@@ -34,7 +34,9 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.init = function() {
 	$scope.jobcodelistObj={};	
 	$scope.interviewschedule.interviewDateTime="";
-	
+	if(sharedService.getInterviewId() == undefined) {
+		$state.go("recruitment.interviewManagement");
+	}
 	$scope.interviewerId = sharedService.getInterviewId();
 		interviewService.getInterviewDetailsById($scope.interviewerId).then(
 		function(data){
