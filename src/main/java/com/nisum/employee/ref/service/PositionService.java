@@ -59,6 +59,10 @@ public class PositionService implements IPositionService {
 		return positionRepository.retrievePositionsbasedOnJobCode(jobcode);
 	}
 
+	public List<Position> retrievePositionsbasedOnRequisitionId(String requisitionId) {
+		return positionRepository.retrievePositionsbasedOnrequisitionId(requisitionId);
+	}
+	
 	public Position deletePositionBasedOnJC(String jobcode) {
 		return positionRepository.deletePositionBasedOnJC(jobcode);
 	}

@@ -8,6 +8,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 		getPosition: getPosition,
 		getPositionByDesignation : getPositionByDesignation,
 		getPositionByJobcode : getPositionByJobcode,
+		getPositionByRequisitionId : getPositionByRequisitionId,
 		getPositionBylocation : getPositionBylocation,
 		getClients : getClients,
 		searchPositionsBySearchQuery : searchPositionsBySearchQuery
@@ -61,6 +62,12 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 	
 	function getPositionByJobcode(jobcode){
 		return $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+jobcode)
+		.then(getPositionSuccess)
+		.catch(getPositionError);
+	}
+
+	function getPositionByRequisitionId(requisitionId){
+		return $http.get('resources/searchPositionsBasedOnRequisitionId?requisitionId='+requisitionId)
 		.then(getPositionSuccess)
 		.catch(getPositionError);
 	}

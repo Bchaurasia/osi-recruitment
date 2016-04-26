@@ -1,5 +1,5 @@
-app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService','sharedService','positionService', 
-                                        function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService,sharedService,positionService) {
+app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService','sharedService','positionService','requisitionService', 
+                                        function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService,sharedService,positionService,requisitionService) {
 	$scope.interviewerNames = [];
 	$scope.info = $rootScope.info;
 	$scope.pskills = [];
@@ -17,6 +17,19 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.interviewscheduleDetails={};
 	$scope.interviewscheduleDetails.rounds=[];
 	$scope.today = new Date();
+	$scope.requisitionIdlist=[];
+	$scope.disabled=false;
+	$scope.setJobcode= function(requisitionId) {
+		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
+			$scope.jobcodelistObj=positions;
+			$scope.interviewschedule.jobcode =_.find( $scope.jobcodelistObj,function(positionObj){
+             return positionObj.jobcode === $scope.interviewscheduleDetails.jobCode; 
+			});
+		}).catch(function(msg){
+			$log.error(msg);
+		});
+
+	}
 	
 	$scope.init = function() {
 	$scope.jobcodelistObj={};	
@@ -25,6 +38,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.interviewerId = sharedService.getInterviewId();
 		interviewService.getInterviewDetailsById($scope.interviewerId).then(
 		function(data){
+			
 			$scope.interviewscheduleDetails=data;
 
 			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
@@ -32,19 +46,20 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
 			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
 			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
-			positionService.getPosition().then(function(positions){
-				$scope.jobcodelistObj=positions;
-				$scope.interviewschedule.jobcode =_.find( $scope.jobcodelistObj,function(position){
-		             return position.jobcode === $scope.interviewscheduleDetails.jobCode; 
-				 });
-			}).catch(function(msg){
-				$log.error(msg);
-			});
-		
+			$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
+			$scope.setJobcode($scope.interviewschedule.requisitionId);
 			}		
 		)
+		requisitionService.getAllRequisitions().then(function(requisitions){
+			$scope.requisitionObj=requisitions;
+			_.find( $scope.requisitionObj,function(requisition){
+				$scope.requisitionIdlist.push(requisition.requisitionId); 
+			 });
+			console.debug("requisition detail object :"+angular.toJson($scope.requisitionIdlist));
+		}).catch(function(msg){
+			$log.error(msg);
+		});
 		
-	
 	}
 	$scope.init();
 	
@@ -105,6 +120,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.schedule =  function(){
+		
 		DateTime=new Date($scope.data.date);
 		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;

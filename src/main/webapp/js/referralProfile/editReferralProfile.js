@@ -182,7 +182,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 				$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
 			}
 	        profileService.updateProfile($scope.candidate).then(function(msg){
-	        	$scope.sendNotification(msg,'referral/searchProfile');
+	        	$scope.sendNotification(msg,'referral/searchReferralProfile');
 				$log.info(msg);
 	        }).catch(function(msg){
 	        	$scope.cls=appConstants.ERROR_CLASS;

@@ -13,7 +13,7 @@ app.controller("adminCtrl", ['$scope', '$http', '$filter', '$timeout','$q','$sta
                    { heading: "Client", route:"admin.client.list"},
                    { heading: "Designation", route:"admin.designation.list"},
                    { heading: "Skill", route:"admin.skillSet"},
-                   { heading: "Interview", route:"admin.interviewRound.list"},
+                   { heading: "ROUNDS", route:"admin.interviewRound.list"},
                    { heading: "Job Description", route:"admin.jobDescription.list"}
                ];
  

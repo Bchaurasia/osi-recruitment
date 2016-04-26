@@ -11,8 +11,23 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6" align="left">
+				<ui-select ng-model="interviewschedule.requisitionId" theme="selectize"
+					ng-disabled="disabled" style="width: 80%"
+					on-select="setJobcode(interviewschedule.requisitionId)"
+					title="Choose a requisitionId"> <ui-select-match
+					placeholder="Select or search Requisition Id.">{{$select.selected}}</ui-select-match>
+				<ui-select-choices
+					repeat="requisition in requisitionIdlist | filter: $select.search">
+				<span ng-bind-html="requisition | highlight: $select.search"></span>
+				</ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">
+					RequisitionId<b class="mandatory">*</b>
+				</label>
+
+			</div>
+			<div class="input-field col s6" align="left">
 				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
-					ng-disabled="ctrl.disabled" style="width: 80%"
+					ng-disabled="disabled" style="width: 80%"
 					title="Choose a country"> <ui-select-match
 					placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
@@ -24,7 +39,9 @@
 				</label>
 
 			</div>
-
+		</div>
+		<br>
+		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="interviewschedule.roundName"
 					class="form-control input-sm"
@@ -33,29 +50,15 @@
 					required>
 					<option value="" disabled="disabled">Select Round</option>
 				</select> <label>Interview Round<b class="mandatory">*</b></label>
-
 			</div>
-		</div>
-		<div class="row">
 			<div class="input-field col s6">
 				<select ng-change="setvalues(interviewschedule.interviewerName)"
 					placeholder="Select InterviewerName"
 					ng-model="interviewschedule.interviewerName"
 					ng-options="o.name for o in interviewerNames"
-					class="form-control input-sm" ng-disabled="disabled" required>
+					class="form-control input-sm" required>
 					<option value='' disabled="disabled">Select Interviewer</option>
 				</select> <label>Interviewer Name<b class="mandatory">*</b></label>
-
-			</div>
-			<div class="input-field col s6">
-				<div class="demo-section k-content" align="left">
-					<input kendo-date-time-picker ng-model="data.date"
-						ng-disabled="disabled" min="{{today}}" k-ng-model="kdate"
-						style="width: 81%;Additional Notes" />
-				</div>
-				<label style="position: absolute; top: -22px;">Interview
-					Date and Time<b class="mandatory">*</b>
-				</label>
 			</div>
 		</div>
 
@@ -68,7 +71,16 @@
 					required /> <label for="Days">Interviewer Cell # <b
 					class="mandatory">*</b>
 			</div>
-
+			<div class="input-field col s6">
+				<div class="demo-section k-content" align="left">
+					<input kendo-date-time-picker ng-model="data.date"
+						ng-disabled="disabled" min="{{today}}" k-ng-model="kdate"
+						style="width: 81%;Additional Notes" />
+				</div>
+				<label style="position: absolute; top: -22px;">Interview
+					Date and Time<b class="mandatory">*</b>
+				</label>
+			</div>
 		</div>
 
 		<div class="row">

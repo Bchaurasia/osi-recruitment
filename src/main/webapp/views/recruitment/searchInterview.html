@@ -23,6 +23,7 @@
 			<thead>
 				<tr>
 					<th>Name</th>
+					<th>Requisition Id</th>
 					<th>Job Code</th>
 					<th>Schedule</th>
 					<th>Feedback</th>
@@ -34,12 +35,14 @@
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a style="cursor: pointer;"
 							ng-click="showInterviewDetails(data.interviewerId)">{{data.candidateName}}</a></td>
+								<td class="mdl-data-table__cell--non-numeric"><i
+						ng-repeat="jobcode in data.currentPositionId"> {{}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="jobcode in data.currentPositionId"> {{jobcode}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric">
 						<button style="background-color: #F8F8F8; border: 0px;" href=""
-							id="" class="interview-schedule"
-							ng-disabled="disableSchedule(data.status)"
+							id="" class="interview-schedule" data-tooltip="Schedule interview"
+							ng-disabled="disableSchedule(data.status) || hasRole('ROLE_INTERVIEWER')"
 							ng-click="schedule(data.interviewerId)">
 							<span class="glyphicon glyphicon-plus"
 								style="position: relative; top: 1px;color:#034A85""></span>
@@ -47,7 +50,7 @@
 					</td>
 					<td class="mdl-data-table__cell--non-numeric">
 						<button style="background-color: #F8F8F8; border: 0px;" href=""
-							id="" class="interview-feedback"
+							id="" class="interview-feedback" data-tooltip="Submit feedback"
 							ng-disabled="disableFeedback(data.rounds)"
 							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
 							<span class="glyphicon glyphicon-envelope"

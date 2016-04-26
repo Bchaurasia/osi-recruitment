@@ -201,21 +201,23 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
-			//interviewDetails2.setInterviewerEmail(interviewDetails2.getInterviewerEmail());
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
+			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
+			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
 		}
 		}else{
 			int i=0;
 			List<Round> rounds = new ArrayList<Round>();
 			rounds.add(i,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
-			//interviewDetails2.setInterviewerId(interviewSchedule.getCandidateId()+"_"+interviewSchedule.getJobcode());
 			interviewDetails2.setProgress(interviewSchedule.getRoundName() + " Scheduled");
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
+			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
+			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
 		}
 		return interviewDetails2;
 	}

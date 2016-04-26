@@ -18,6 +18,8 @@ public interface IPositionService {
 	public List<Position> retrievePositionsbasedOnDesignation(String designation);
 
 	public Position retrievePositionsbasedOnJobCode(String jobcode);
+	
+	public List<Position> retrievePositionsbasedOnRequisitionId(String requisitionId);
 
 	public Position deletePositionBasedOnJC(String jobcode);
 
