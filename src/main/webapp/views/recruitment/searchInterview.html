@@ -37,8 +37,7 @@
 					<a style="cursor: pointer;"
 					   ng-click="showInterviewDetails(data.interviewerId)" data-tooltip={{data.candidateEmail}}>{{data.candidateName}}</a>
 					</td>
-								<td class="mdl-data-table__cell--non-numeric"><i
-						ng-repeat="jobcode in data.currentPositionId"> {{}}</i></td>
+								<td class="mdl-data-table__cell--non-numeric"> {{data.requisitionId}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="jobcode in data.currentPositionId"> {{jobcode}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric">
