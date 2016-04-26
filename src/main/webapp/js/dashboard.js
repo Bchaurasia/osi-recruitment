@@ -85,7 +85,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
 			.then(function(data){
-				$scope.requisitionsDetails = data;
+				//$scope.requisitionsDetails = data;
+				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;
 				}
