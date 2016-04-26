@@ -127,7 +127,10 @@
 				</li>
 				<li ng-repeat="schedule in showScheduleData">
 					<div class="collapsible-header row">
-						<i class="material-icons col s1">alarm on</i><span class="col s3">{{schedule.cname}}</span>
+						<i class="material-icons col s1">alarm on</i>
+						<span class="col s3">
+							<a style="cursor: pointer;"	ng-click="showInterviewDetails(schedule.interviewerId)">{{schedule.cname}}</a>
+						</span>
 						<span class="col s3">{{schedule.round}}</span> <span
 							class="col s4">{{schedule.date | date:'medium'}}</span>
 					</div>

@@ -18,6 +18,11 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		location.href='#recruitment/editRequisition';
 	};
 	
+	$scope.showInterviewDetails = function(interviewId) {
+		sharedService.setInterviewId(interviewId);
+		location.href='#recruitment/showInterview';
+	};
+	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
 		$scope.prolilesData = data;
