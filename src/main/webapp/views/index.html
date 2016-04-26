@@ -117,7 +117,7 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 			<h6 align="left">
-				<b>Schedule Interviews</b>
+				<b>Upcoming Interviews</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
@@ -144,7 +144,7 @@
 		</div>
 		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
 			<h6 align="left">
-				<b>You have Schedule Interviews</b>
+				<b>Schedule Interviews for {{user.name}}</b>
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #7EA7C7">
