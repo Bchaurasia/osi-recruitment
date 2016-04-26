@@ -91,6 +91,14 @@ public class PositionController {
 	} 
 	
 	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/searchPositionsBasedOnRequisitionId", method = RequestMethod.GET)
+	public ResponseEntity<?> retrievePositionsBasedOnRequisitionId(@RequestParam(value = "requisitionId", required = true) String requisitionId) {
+		List<Position> positionsDetail = positionService.retrievePositionsbasedOnRequisitionId(requisitionId);
+		return (null == positionsDetail) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
+				: new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
+	} 
+	
+	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchPositionBasedOnLocation", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievesearchPositionbasedOnLocation(@RequestParam(value = "location", required = true) String location,@RequestParam(value = "expYear", required = false) String expYear,@RequestParam(value = "primarySkills", required = false) String primarySkills) {
 		List<Position> positionsDetail = positionService.retrievePositionbasedOnLocation(location);

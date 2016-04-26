@@ -9,12 +9,14 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select ng-model="interviewFeedback.roundName"
+				<!-- <select ng-model="interviewFeedback.roundName"
 					ng-change="setfeedbackData(interviewFeedback.roundName)"
 					class="form-control input-sm"
 					ng-options="o as o for o in position.interviewRounds | orderBy:'toString()'"
 					required><option value="">Select Round</option>
-				</select> <label>Interview Round<b class="mandatory">*</b></label>
+				</select> <label>Interview Round<b class="mandatory">*</b></label> -->
+				<input ng-model="interviewFeedback.roundName"
+					ng-disabled="true" /> <label for="Days">Interview Round</label>
 			</div>
 
 			<div class="input-field col s6">
@@ -45,7 +47,7 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input ng-model="interviewSchedule.interviewDateTime"
+				<input ng-model="interviewSchedule.interviewDateTime | date:'medium'"
 					ng-disabled="true" /> <label for="Days">Interview Date </label>
 
 			</div>

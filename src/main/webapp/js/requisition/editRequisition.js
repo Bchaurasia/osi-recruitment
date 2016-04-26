@@ -33,6 +33,9 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.disApproval1=true;
 	$scope.disApproval2=true;
 	$scope.updateVal=false;
+	$scope.showApprover1Comments=false;
+	$scope.showApprover2Comments=false;
+	
 	var id;
 	$scope.init = function() {
 		if(sharedService.getRequisitionId() == undefined) {
@@ -209,15 +212,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 						$scope.disableUpdateBtn = $scope.requisition.approval1.approved || ($scope.requisition.approval2 !== undefined && $scope.requisition.approval2.approved);
 						$scope.disApproval1= $scope.requisition.approval1.approved;;
 						$scope.disApproval2= $scope.requisition.approval1.approved;
-						/*
-						 * if($scope.requisition.approval1.approved){
-						 * $scope.disApproval1=
-						 * $scope.requisition.approval1.approved;
-						 * $scope.disApproval2=
-						 * $scope.requisition.approval1.approved;
-						 * $scope.disableUpdateBtn = true; $scope.showUpdateBtn =
-						 * true; }
-						 */
 						
 					}else{
  						$scope.showRejectBtn = false;
