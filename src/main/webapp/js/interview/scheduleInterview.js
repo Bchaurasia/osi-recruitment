@@ -19,12 +19,14 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.today = new Date();
 	$scope.requisitionIdlist=[];
 	$scope.disabled=false;
+	$scope.jobcode={};
 	$scope.setJobcode= function(requisitionId) {
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
 			$scope.jobcodelistObj=positions;
-			$scope.interviewschedule.jobcode =_.find( $scope.jobcodelistObj,function(positionObj){
+			$scope.jobcode =_.find( $scope.jobcodelistObj,function(positionObj){
              return positionObj.jobcode === $scope.interviewscheduleDetails.jobCode; 
 			});
+			$scope.interviewschedule.jobcode=$scope.jobcode;
 		}).catch(function(msg){
 			$log.error(msg);
 		});
@@ -133,7 +135,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.schedule =  function(){
 		
 		DateTime=new Date($scope.data.date);
-		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
+		$scope.interviewschedule.jobcode = $scope.jobcode.jobcode;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
 		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
 		$scope.interviewschedule.interviewDateTime = DateTime;
