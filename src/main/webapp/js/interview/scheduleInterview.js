@@ -20,6 +20,8 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.requisitionIdlist=[];
 	$scope.disabled=false;
 	$scope.jobcode={};
+	$scope.disableSchedueBtn= true;
+	
 	$scope.setJobcode= function(requisitionId) {
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
 			$scope.jobcodelistObj=positions;
@@ -135,7 +137,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.schedule =  function(){
 		
 		DateTime=new Date($scope.data.date);
-		$scope.interviewschedule.jobcode = $scope.jobcode.jobcode;
+		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
 		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
 		$scope.interviewschedule.interviewDateTime = DateTime;
@@ -153,6 +155,13 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			  $scope.message = "Something wrong, try again";
 			 $log.error("failed=="+data);
 		})
+	}
+	
+	$scope.disableSchedue =  function(){
+	    if($scope.data.date !== undefined){
+	    	$scope.disableSchedueBtn= false;
+	    }else
+	    	$scope.disableSchedueBtn= true;
 	}
 	
 	
