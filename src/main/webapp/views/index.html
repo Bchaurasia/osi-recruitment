@@ -113,20 +113,20 @@
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #035396">
 					<div class="collapsible-header white-field">
-						<span class="col-md-1"></span><span class="col s2"><b>Name</b></span>
-						<span class="col-md-1"></span><span class="col s3"><b>Interviewer Name</b></span> 
-						<span class="col s2"><b>Round</b></span>
-						<span class="col s2"><b>Schedule Time</b></span>
+						<span class="col s3"><b>Name</b></span>
+						<span class="col s3"><b>Interviewer Name</b></span> 
+						<span class="col s3"><b>Round</b></span>
+						<span class="col s3"><b>Schedule Time</b></span>
 					</div>
 				</li>
 				<li ng-repeat="schedule in showScheduleData">
 					<div class="collapsible-header row">
-						<span class="col s2"><a
+						<span class="col s3"><a
 							style="cursor: pointer;"
 							ng-click="showInterviewDetails(schedule.interviewId,schedule.round)">{{schedule.cname}}</a></span>
 						<span  class="col s3">{{schedule.interviewerName}} </span>	
-						<span class="col s4">{{schedule.round}}</span>
-						<span class="col s4">{{schedule.date | date:'medium'}}</span>
+						<span class="col s3">{{schedule.round}}</span>
+						<span class="col s3">{{schedule.date | date:'medium'}}</span>
 					</div>
 				</li>
 				<li ng-hide="hideNoInterviewMsg">
