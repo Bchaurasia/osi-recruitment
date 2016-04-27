@@ -181,6 +181,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 							$scope.disableRejectBtn = true;
 							$scope.disableApprovedBtn = true;
 							$scope.disableUpdateBtn = true;
+							$scope.showApprover1CommentsIcon = true;
+							$scope.showApprover2CommentsIcon = true;
 							}else if($scope.user.emailId === $scope.requisition.createdBy){
 								$scope.showUpdateBtn = true;
 								$scope.disableUpdateBtn = true;
