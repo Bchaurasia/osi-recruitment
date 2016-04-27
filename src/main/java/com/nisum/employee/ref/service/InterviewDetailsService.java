@@ -89,6 +89,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		rounds1.remove(i);
 		rounds1.add(i,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 		interviewDetails2.setRounds(rounds1);
+		interviewDetails2.setInterviewerName(interviewSchedule.getInterviewerName());
 		interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 		return interviewDetails2;
 	}

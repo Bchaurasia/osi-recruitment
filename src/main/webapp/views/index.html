@@ -113,21 +113,20 @@
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #035396">
 					<div class="collapsible-header white-field">
-						<span class="col s3"><b>Name</b></span>
-						<span class="col s3"><b>Interviewer Name</b></span> 
-						<span class="col s3"><b>Round</b></span> 
-						<span class="col s3"><b>Schedule
-								Time</b></span>
+						<span class="col-md-1"></span><span class="col s2"><b>Name</b></span>
+						<span class="col-md-1"></span><span class="col s3"><b>Interviewer Name</b></span> 
+						<span class="col s2"><b>Round</b></span>
+						<span class="col s2"><b>Schedule Time</b></span>
 					</div>
 				</li>
 				<li ng-repeat="schedule in showScheduleData">
 					<div class="collapsible-header row">
-						<span class="col s3"><a
+						<span class="col s2"><a
 							style="cursor: pointer;"
 							ng-click="showInterviewDetails(schedule.interviewId,schedule.round)">{{schedule.cname}}</a></span>
-						<span class="col s3">{{schedule.interviewerName}}</span>	
-						<span class="col s3">{{schedule.round}}</span> <span
-							class="col s3">{{schedule.date | date:'medium'}}</span>
+						<span  class="col s3">{{schedule.interviewerName}} </span>	
+						<span class="col s4">{{schedule.round}}</span>
+						<span class="col s4">{{schedule.date | date:'medium'}}</span>
 					</div>
 				</li>
 				<li ng-hide="hideNoInterviewMsg">
@@ -166,7 +165,8 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col s12 m6 ">
+	</div>
+	<div>
 		<h6 align="left">
 			<b>You Referred Profiles</b>
 		</h6>
@@ -178,9 +178,7 @@
 			</li>
 			<li ng-repeat="profile in prolilesData">
 				<div class="collapsible-header row">
-					<b> <span class="col s6">
-					<a style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a>
-					</span> <span
+					<b> <span class="col s6">{{profile.candidateName}}</span> <span
 						class="col s6">{{profile.status}}</span></b>
 				</div>
 			</li>
@@ -189,8 +187,6 @@
 			</li>
 		</ul>
 	</div>
-	</div>
-	
 
 	<!-- 	<div class="btn-floating horizontal" -->
 	<!-- 		style="bottom: 45px; right: 24px;"> -->
