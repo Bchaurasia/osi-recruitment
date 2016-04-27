@@ -78,11 +78,11 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 		.catch(getRequisitionRejectError);
 	}
 	function updateRequisitionError(response){
-		return "Failed To update Requisition";
+		return $q.reject("Failed to update Requisition");
 	}
 	
 	function getAllRequisitionsError(response){
-		return "Failed To Get Requisitions Response";
+		return $q.reject("Failed to get Requisitions response");
 	}
 	
 	function getRequisitionSuccess(response){
@@ -90,19 +90,19 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 	}
 	
 	function getRequisitionError(response){
-		return "Failed To Get Requisition - "/*+response.getMessage()*/;
+		return $q.reject("Failed to get requisition");
 	}
 	
 	function getRequisitionRejectError(response){
-		return "Failed To Reject Requisition!"/*+response.getMessage()*/;
+		return $q.reject("Failed to reject Requisition");
 	}
 	
 	function approveRequisitionError(response){
-		return "Failed To Approve Requisition - "/*+response.getMessage()*/;
+		return $q.reject("Failed to approve Requisition");
 	}
 	
 	function createRequisitionError(response){
-		return "Failed To Create Requisition - ";// +response.getMessage();
+		return $q.reject("Failed to create Requisition");
 	}
 
 	function responseSuccess(response){
@@ -110,6 +110,6 @@ function requisitionService($http,$filter,$rootScope,appConstants,$q, $timeout,$
 	}
 	
 	function cloneReqError(response){
-		return "Failed To Clone Requisition! - "/*+response.getMessage()*/;
+		return $q.reject("Failed to clone Requisition");
 	}
 }

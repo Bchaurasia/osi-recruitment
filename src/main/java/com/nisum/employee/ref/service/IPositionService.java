@@ -28,4 +28,5 @@ public interface IPositionService {
 	public List<PositionAggregate> retrieveAllPositionsAggregate();
 	
 	public void createRequitionPosition(Requisition requisition);
+	public List<Position> retrievePositionsbasedOnPositionType(String positionType);
 }

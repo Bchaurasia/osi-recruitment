@@ -1,11 +1,17 @@
 <div class="row">
 	<div class="col-md-1"></div>
-	<div class="col-md-2" align="center">
+	<div class="col-md-4" align="center">
 		<ul class="tabs">
 			<li ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 				role="presentation" class="tab">
-				<a ng-class="{active: isActive('referral.searchReferralProfile')}"
-				ui-sref="referral.searchReferralProfile">Profile</a></li>
+				<a ng-class="{active: isActive('referral.searchReferralProfile')}" ui-sref="referral.searchReferralProfile">Profile</a>
+			</li>
+			
+			<li ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+				role="presentation" class="tab">
+				<a ng-class="{active: isActive('referral.searchReferralPosition')}" ui-sref="referral.searchReferralPosition">Position</a>
+			</li>
+				
 		</ul>
 	</div>
 	<div class="col-md-2"></div>
