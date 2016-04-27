@@ -33,13 +33,13 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
 		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
 		$scope.newSkill ="";
-	  };
+	 };
 	  
-	  $scope.addFunctionSkill = function(newSkill) {
+	$scope.addFunctionSkill = function(newSkill) {
 			var newItemNo = $scope.interviewFeedback.domainSkills.length+1;
 			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
 			$scope.newSkill ="";
-		  };  
+	};  
 	  
 	$scope.profile = {};
 	$scope.interview = {};
@@ -77,12 +77,14 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			function(response){
 			$scope.profile = response[0].data[0];
 			$scope.interview = response[1].data[0];
-			if($scope.interview.rounds[0].interviewFeedback!==null){
-				$scope.interviewFeedback=$scope.interview.rounds[0].interviewFeedback;
+			var i=$scope.interview.rounds.length;
+			if($scope.interview.rounds[i-1].interviewFeedback!==null){
+				$scope.interviewFeedback=$scope.interview.rounds[i-1].interviewFeedback;
 				$scope.interviewFeedback.status=$scope.interview.status;
+				console.debug("interview feedback  :"+angular.toJson($scope.interviewFeedback.rateSkills));
 				$scope.hideSubmit = true;
 			}
-			$scope.interviewSchedule = $scope.interview.rounds[0].interviewSchedule;
+			$scope.interviewSchedule = $scope.interview.rounds[i-1].interviewSchedule;
 			$scope.interviewFeedback.roundName=$scope.interview.roundName;
 			$scope.position = response[2].data;
 			$scope.interviewFeedback.rateSkills =[];
@@ -117,7 +119,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.interviewDateTime = $scope.interviewSchedule.interviewDateTime;
 			$scope.interviewFeedback.typeOfInterview = $scope.interviewSchedule.typeOfInterview;
 			$scope.interviewFeedback.candidateId = $scope.emailId;
-			
 			profileService.addProfilesStatus($scope.emailId,$scope.interviewFeedback.status);
 			$http.post('resources/interviewFeedback', $scope.interviewFeedback).
 			  success(function(data) {

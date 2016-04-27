@@ -5,12 +5,12 @@
 			<b>Communication Skills</b>
 		</div>
 		<div class="col s3">
-			<rating ng-model="" max="10" readonly="false"
+			<rating ng-model="interviewFeedback.communicationSkills" max="10" readonly="false"
 				on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 		</div>
 		<div class="col s5">
 			<div class="input-field">
-				<textarea class="materialize-textarea" length="120" ng-model=""
+				<textarea class="materialize-textarea" length="120" ng-model="interviewFeedback.communicationSkillComment"
 					placeholder="Enter any comments/notes..."></textarea>
 				<label style="position: absolute; top: -22px;">Comment</label>
 			</div>
@@ -21,12 +21,12 @@
 			<b>Consulting and articulation skills</b>
 		</div>
 		<div class="col s3">
-			<rating ng-model="" max="10" readonly="false"
+			<rating ng-model="interviewFeedback.consultingAndArticulationSkills" max="10" readonly="false"
 				on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 		</div>
 		<div class="col s5">
 			<div class="input-field">
-				<textarea class="materialize-textarea" length="120" ng-model=""
+				<textarea class="materialize-textarea" length="120" ng-model="interviewFeedback.consultingAndArticulationSkillsComment"
 					placeholder="Enter any comments/notes..."></textarea>
 				<label style="position: absolute; top: -22px;">Comment</label>
 			</div>
