@@ -1,0 +1,26 @@
+<br>
+<div align="center">
+	<table style="width: 90%; font-size: 95%">
+		<tbody>
+			<tr>
+				<td>
+					<div class="row" ng-repeat="round in interviewFeedback.domainSkills">
+						<div class="col s6">{{ round.skill }}</div>
+						<div class="col s6">
+							<rating ng-model="round.rating" max="10" readonly="false"
+								on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+						</div>
+					</div>
+					<input type="text" ng-model="newSkill" maxlength="40" name="" placeholder="Enter Domain." style="width: 31%;height: auto;">
+					<a ng-click="addFunctionSkill(newSkill)" data-tooltip="Add Domain"><i
+						class="material-icons">add</i></a>
+				</td>
+				<td><div class="input-field">
+						<textarea class="materialize-textarea" length="120" ng-model=""
+							placeholder="Enter any comments/notes..."></textarea>
+							<label style="position: absolute; top: -22px;">Comment</label>
+					</div></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

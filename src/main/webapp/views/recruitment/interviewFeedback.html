@@ -76,35 +76,12 @@
 				</select> <label>Select status<b class="mandatory">*</b></label>
 			</div>
 		</div>
-
+		<br>
 		<div class="row">
-			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.additionalSkills"
-					ng-disabled="disableFields" class="materialize-textarea"
-					length="120" required></textarea>
-				<label>Additional Skills <b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.strengths"
-					ng-disabled="disableFields" class="materialize-textarea"
-					length="120" required></textarea>
-				<label>Strengths<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea ng-model="interviewFeedback.improvement"
-					ng-disabled="disableFields" class="materialize-textarea"
-					length="120" required></textarea>
-				<label>Areas Of Improvement<b class="mandatory">*</b>
-				</label>
-			</div>
+			<tabset justified="true"> <tab ng-repeat="tab in tabs"
+				heading="{{ tab.heading }}" active="tab.active">
+			<div ng-include="tab.template"></div>
+			</tab> </tabset>
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"

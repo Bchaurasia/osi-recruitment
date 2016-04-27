@@ -17,6 +17,9 @@ public class InterviewFeedback {
 	String interviewDateTime;
 	String typeOfInterview;
 	List<Rating> rateSkills;
+	List<Rating> domainSkills;
+	List<Rating> softSkills;
+	List<Rating> managementSkillset;
 	String additionalSkills;
 	String strengths;
 	String improvement;
@@ -24,4 +27,7 @@ public class InterviewFeedback {
 	String candidateId;
 	String candidateName;
 	String status;
+	String technicalComment;
+	String functionalComment;
+	String softSkillComment;
 }

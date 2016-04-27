@@ -1,6 +1,46 @@
 app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','sharedService', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI','interviewService','appConstants', 
                                         function($scope, $http, $q, $window, sharedService, $timeout, $rootScope, $log, $state, $location,profileService, blockUI,interviewService,appConstants) {
+	$scope.tabs = [
+	   			{
+	   				"heading": "Technical",
+	   				"active": true,
+	   				"template":"technicalFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Functional",
+	   				"active": false,
+	   				"template":"functionalFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Soft Skills",
+	   				"active": false,
+	   				"template":"softSkillsFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Comment",
+	   				"active": false,
+	   				"template":"commentFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Management Skills",
+	   				"active": false,
+	   				"template":"mangementSkillset.html"
+	   			},
+	   			
+	   		];
 	
+	$scope.addNewSkill = function(newSkill) {
+		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
+		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
+		$scope.newSkill ="";
+	  };
+	  
+	  $scope.addFunctionSkill = function(newSkill) {
+			var newItemNo = $scope.interviewFeedback.domainSkills.length+1;
+			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
+			$scope.newSkill ="";
+		  };  
+	  
 	$scope.profile = {};
 	$scope.interview = {};
 	$scope.position = {};
@@ -46,6 +86,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.roundName=$scope.interview.roundName;
 			$scope.position = response[2].data;
 			$scope.interviewFeedback.rateSkills =[];
+			$scope.interviewFeedback.domainSkills=[];
 			for(var i=0; i<$scope.position.primarySkills.length;i++){
 					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
 			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
