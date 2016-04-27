@@ -52,7 +52,7 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 			angular.forEach(obj.rounds, function(obj2){
 				var dbDate = new Date(obj2.interviewSchedule.interviewDateTime);
 				if(dbDate >= today && tomorrow >= dbDate){
-					showScheduleData.push({"cname":obj.candidateName, "round":obj2.interviewSchedule.roundName, "date":dbDate, "interviewId":obj.interviewerId});
+					showScheduleData.push({"cname":obj.candidateName, "round":obj2.interviewSchedule.roundName,"interviewerName":obj2.interviewerName,"interviewerEmailId":obj.interviewerEmail ,"date":dbDate, "interviewId":obj.interviewerId});
 				}
 			})
 		});

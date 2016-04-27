@@ -18,7 +18,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		location.href='#recruitment/editRequisition';
 	};
 	
-	$scope.showInterviewDetails = function(interviewId) {
+	$scope.showInterviewDetails = function(interviewId,interviewRound) {
 		sharedService.setInterviewId(interviewId);
 		location.href='#recruitment/showInterview';
 	};

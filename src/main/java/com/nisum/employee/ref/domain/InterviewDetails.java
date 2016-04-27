@@ -21,6 +21,7 @@ public class InterviewDetails  {
 	ArrayList<String> candidateSkills;
 	String candidateEmail;
 	String interviewerEmail;
+	String interviewerName;
 	String clientName;
 	String progress;
 	String designation;

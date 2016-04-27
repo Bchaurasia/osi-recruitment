@@ -201,6 +201,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
+			interviewDetails2.setInterviewerName(interviewSchedule.getInterviewerName());
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
@@ -212,6 +213,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			List<Round> rounds = new ArrayList<Round>();
 			rounds.add(i,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
+			interviewDetails2.setInterviewerName(interviewSchedule.getInterviewerName());
 			interviewDetails2.setProgress(interviewSchedule.getRoundName() + " Scheduled");
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
@@ -230,6 +232,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		rounds.add(i,new Round(interviewFeedback.getRoundName(), is, interviewFeedback));
 		interviewDetails2.setCandidateEmail(interviewFeedback.getCandidateId());
 		interviewDetails2.setInterviewerEmail(interviewFeedback.getInterviewerEmail());
+		interviewDetails2.setInterviewerName(interviewFeedback.getInterviewerName());
 		interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
 		interviewDetails2.setRounds(rounds);
 		interviewDetails2.setStatus(interviewFeedback.getStatus());
@@ -241,6 +244,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			rounds.set(size,new Round(interviewFeedback.getRoundName(), is, interviewFeedback));
 			interviewDetails2.setCandidateEmail(interviewFeedback.getCandidateId());
 			interviewDetails2.setInterviewerEmail(interviewFeedback.getInterviewerEmail());
+			interviewDetails2.setInterviewerName(interviewFeedback.getInterviewerName());
 			interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setStatus(interviewFeedback.getStatus());

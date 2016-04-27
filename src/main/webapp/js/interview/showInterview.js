@@ -1,7 +1,7 @@
 app.controller("showInterviewCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService) {
 	
 	$scope.info = $rootScope.info;
-	$scope.interviewId =sharedService.getjobCode();
+	$scope.interviewId =sharedService.getInterviewId();
 	$scope.roundName = sharedService.getinterviewRound();
 	$scope.interviewData = {};
 	$scope.interviewSetData = [];
