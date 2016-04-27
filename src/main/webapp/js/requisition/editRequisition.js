@@ -35,8 +35,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.updateVal=false;
 	$scope.showApprover1Comments=false;
 	$scope.showApprover2Comments=false;
-	$scope.showApprover1CommentsIcon=false;
-	$scope.showApprover2CommentsIcon=false;
+	$scope.disableApprover1CommentBox=true;
+	$scope.disableApprover2CommentBox =true;
 	
 	var id;
 	$scope.init = function() {
@@ -181,8 +181,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 							$scope.disableRejectBtn = true;
 							$scope.disableApprovedBtn = true;
 							$scope.disableUpdateBtn = true;
-							$scope.showApprover1CommentsIcon = true;
-							$scope.showApprover2CommentsIcon = true;
+							
 							}else if($scope.user.emailId === $scope.requisition.createdBy){
 								$scope.showUpdateBtn = true;
 								$scope.disableUpdateBtn = true;
@@ -194,7 +193,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			 			$scope.disableRejectBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval1.approved;
 			 			$scope.disableApprovalBtn = $scope.requisition.approval1.approved;
-			 			$scope.showApprover1CommentsIcon = true;
+			 			$scope.disableApprover1CommentBox=false;
 			 			if($scope.requisition.approval1.emailId === $scope.requisition.createdBy){
 			 				$scope.disApproval1=$scope.requisition.approval1.approved;
 			 				$scope.disApproval2=$scope.requisition.approval1.approved;
@@ -209,8 +208,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			 			$scope.disableRejectBtn = $scope.requisition.approval2.approved;
 			 			$scope.disableUpdateBtn = $scope.requisition.approval2.approved;
 			 			$scope.disableApprovalBtn = $scope.requisition.approval2.approved;
-			 			$scope.showApprover1CommentsIcon = true;
-			 			$scope.showApprover2CommentsIcon = true;
+			 			$scope.disableApprover2CommentBox=false;
 						
  					}else if($scope.user.emailId === $scope.requisition.createdBy && (_.contains($scope.user.roles, "ROLE_REQUISITION_MANAGER") || _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER"))){
  						$scope.showApprovalBtn = false;
