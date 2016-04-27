@@ -18,8 +18,15 @@ public class InterviewFeedback {
 	String typeOfInterview;
 	List<Rating> rateSkills;
 	List<Rating> domainSkills;
-	List<Rating> softSkills;
-	List<Rating> managementSkillset;
+	int communicationSkills;
+	int consultingAndArticulationSkills;
+	int managementSkillset;
+	int selfLearningAndInitiative;
+	int customerOrientation;
+	int businessAttitude;
+	int flexibility;
+	int teamWork;
+	int onsiteSuitability;
 	String additionalSkills;
 	String strengths;
 	String improvement;
@@ -30,4 +37,7 @@ public class InterviewFeedback {
 	String technicalComment;
 	String functionalComment;
 	String softSkillComment;
+	String managementSkillComment;
+	String communicationSkillComment;
+	String consultingAndArticulationSkillsComment;
 }
