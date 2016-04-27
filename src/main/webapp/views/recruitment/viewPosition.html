@@ -112,17 +112,26 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select placeholder="Select Point Of Contact" ng-model="interviewer"
+				<select ng-model="interviewer"
 					ng-options="o.name for o in interviewers"
 					class="form-control input-sm">
-					<option>Select Interviewers</option>
+					<option value="" disabled="disabled">Select Point Of Contact</option>
 				</select> <label>Point Of Contact</label>
 			</div>
 			<div class="input-field col s6">
 				<select placeholder="Select Status" ng-model="position.status"
 					ng-options="o for o in statuses" class="form-control input-sm">
-					<option>Select Statuses</option>
+					<option>Select Status</option>
 				</select> <label>Status</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select ng-model="position.positionType"
+					ng-options="o for o in positionTypes | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option  value="" disabled="disabled">Select Position Type</option>
+				</select> <label>Position Type<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		<br />

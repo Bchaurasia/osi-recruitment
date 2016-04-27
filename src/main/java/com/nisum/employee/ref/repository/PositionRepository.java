@@ -5,11 +5,9 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.newA
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -64,6 +62,7 @@ public class PositionRepository {
 		update.set("createdDate", position.getCreatedDate());
 		update.set("createdBy", position.getCreatedBy());
 		update.set("updatedBy", position.getUpdatedBy());
+		update.set("positionType",position.getPositionType());
 		mongoOperations.updateFirst(query, update, Position.class);
 		return position;
 	}

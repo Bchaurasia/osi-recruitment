@@ -28,6 +28,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.hideStatuses = true;
 	$scope.userRole = $rootScope.user.roles;
 	$scope.flagDisabled=true;
+	$scope.positionTypes =["Walkin","Referral"];
 	
 	$scope.interviewCandidates=[];
 	
