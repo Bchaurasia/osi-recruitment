@@ -77,6 +77,12 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			function(response){
 			$scope.profile = response[0].data[0];
 			$scope.interview = response[1].data[0];
+			$scope.interviewFeedback.rateSkills =[];
+			$scope.interviewFeedback.domainSkills=[];
+			for(var i=0; i<$scope.position.primarySkills.length;i++){
+					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
+			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
+			}
 			var i=$scope.interview.rounds.length;
 			if($scope.interview.rounds[i-1].interviewFeedback!==null){
 				$scope.interviewFeedback=$scope.interview.rounds[i-1].interviewFeedback;
@@ -87,12 +93,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewSchedule = $scope.interview.rounds[i-1].interviewSchedule;
 			$scope.interviewFeedback.roundName=$scope.interview.roundName;
 			$scope.position = response[2].data;
-			$scope.interviewFeedback.rateSkills =[];
-			$scope.interviewFeedback.domainSkills=[];
-			for(var i=0; i<$scope.position.primarySkills.length;i++){
-					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
-			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
-			}
 			},
 			function(errorMsg) {
 				$log.error("-------"+errorMsg);
