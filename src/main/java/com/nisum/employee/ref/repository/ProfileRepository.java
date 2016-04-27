@@ -43,7 +43,7 @@ public class ProfileRepository {
 	public void updateCandidateStatus(String email,String status) {
 		Query query = new Query(Criteria.where("_id").is(email));
 		Update update = new Update().set("status", status);
-		mongoOperations.upsert(query, update, "Profile");
+		mongoOperations.upsert(query, update, "profile");
 	}
 
 	public List<Profile> retrieveCandidateDetails(String emailId) {

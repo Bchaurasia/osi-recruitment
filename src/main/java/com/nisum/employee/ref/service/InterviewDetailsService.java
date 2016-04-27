@@ -20,6 +20,7 @@ import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.domain.Round;
 import com.nisum.employee.ref.repository.InterviewDetailsRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
+import com.nisum.employee.ref.search.ProfileSearchService;
 
 
 @Service
@@ -39,6 +40,9 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	
 	@Autowired
 	private InterviewSearchService  interviewSearchService;
+	
+	@Autowired
+	private ProfileSearchService profileSearchService;
 	
 	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException{
 		InterviewDetails interviewDetails = null;
@@ -61,6 +65,9 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		String mobileNo = pro.get(0).getMobileNo();
 		String altMobileNo = pro.get(0).getAltmobileNo();
 		String skypeId = pro.get(0).getSkypeId();
+		pro.get(0).setStatus(interviewDetails.getProgress());
+		profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails.getProgress());
+		profileSearchService.updateProfileIndex(pro.get(0));
 		notificationService.sendScheduleMail(interviewSchedule, mobileNo, altMobileNo, skypeId);
 		return interviewDetails;
 	}
