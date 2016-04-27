@@ -35,4 +35,9 @@ public class Profile extends AuditEntity{
 	Boolean interviewSet;
 	String skypeId;
 	String status;
+	String referralRelation;
+	String tenureYear;
+	String tenureMonth;
+	String screeningStatus;
+	String compatibilityStatus;
 }

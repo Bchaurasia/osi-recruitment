@@ -43,11 +43,16 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 				$scope.recruitmentData.push(userr.name);
 			}
 		})
+		$scope.range = [];
+		for(var i=0;i<=20;i++) {
+			$scope.range.push(i);
+		}
 	}).error(function(data, status, headers, config) {
 		$log.error(status)
 	});
 	profileService.getProfileById($scope.user).then(function(data){
 		$scope.candidate = data;
+		$scope.candidate.tenureYear = parseInt($scope.candidate.tenureYear);
 		$scope.candidate.mobileNo = $scope.candidate.mobileNo === null ? "" : $scope.candidate.mobileNo.substring(3, 13);
 		$scope.candidate.altmobileNo = $scope.candidate.altmobileNo === null ? "" : $scope.candidate.altmobileNo.substring(3, 13);
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;

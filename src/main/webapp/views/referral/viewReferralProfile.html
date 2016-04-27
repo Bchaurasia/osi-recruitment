@@ -229,25 +229,64 @@
 					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-		<!-- <div class="input-field col s6">
-				<ui-select multiple ng-model="sk.jobcodeProfiles"
-					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select JobCodes..">{{$item}}</ui-select-match>
-				<ui-select-choices
-					repeat="jobcode in jobcodelist | orderBy:'toString()' | filter:$select.search">
-				{{jobcode}} </ui-select-choices> </ui-select>&nbsp;&nbsp;&nbsp;
-				<label style="position: absolute; top: -22px;">Job Code</label>
-
-			</div>
-		</div> -->
-
+		
 		<div class="row">
 			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
 					placeholder="Enter any additional notes..."></textarea>
 				<label style="position: absolute; top: -22px;">Additional Notes</label>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter your relation with candidate"
+					id="relationship" class="form-control" type="text"
+					ng-model="candidate.referralRelation" maxlength="20" required>
+				<label style="position: absolute; top: -22px;">How do you
+					know the candidate?<b class="mandatory">*</b>
+				</label>
+			</div>
+
+			<div class="input-field col s6">
+				<label style="position: absolute; top: -22px;">Since how
+					long do you know the candidate?<b class="mandatory">*</b>
+				</label>
+			</div>
+			<div class="input-field col s2">
+				<select ng-model="candidate.tenureYear"
+					id="tenureYear" ng-options="o for o in range"
+					style="position: absolute; top: -15px;"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Years</option>
+				</select>
+			</div>
+
+			<div class="input-field col s2">
+				<select ng-model="candidate.tenureMonth"
+					id="tenureMonth" ng-options="o for o in info.expMonths"
+					style="position: absolute; top: -15px;"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Months</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter yes/no" id="screeningStatus"
+					class="form-control" type="text"
+					ng-model="candidate.screeningStatus" maxlength="20"> <label
+					style="position: absolute; top: -22px;">Did you screen the
+					resume?</label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Enter yes/no" id="compatibilityStatus"
+					class="form-control" type="text"
+					ng-model="candidate.compatibilityStatus" maxlength="20"> <label
+					style="position: absolute; top: -22px;">Will the candidate
+					fit in our culture?</label>
 			</div>
 		</div>
 

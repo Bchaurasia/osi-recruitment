@@ -34,7 +34,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
-	
+		
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -42,6 +42,11 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 					$scope.recruitmentData.push(userr.name);
 				}
 			});
+			$scope.range = [];
+			for(var i=0;i<=20;i++) {
+				$scope.range.push(i);
+			}
+			
 	}).catch(function(message) {
 		$log.error(message)
 	});
