@@ -133,5 +133,12 @@ public class PositionRepository {
 		
 		return result;
 	}
+	
+	public List<Position> retrievePositionsbasedOnPositionType(String positionType) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("positionType").regex(positionType));
+		List<Position> positionDetail = mongoOperations.find(query, Position.class);
+		return positionDetail;
+	}
 
 }

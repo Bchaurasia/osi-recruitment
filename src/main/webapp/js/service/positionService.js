@@ -11,7 +11,8 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 		getPositionByRequisitionId : getPositionByRequisitionId,
 		getPositionBylocation : getPositionBylocation,
 		getClients : getClients,
-		searchPositionsBySearchQuery : searchPositionsBySearchQuery
+		searchPositionsBySearchQuery : searchPositionsBySearchQuery,
+		getPositionsByPositionType : getPositionsByPositionType
 	};
 	
 	function addPosition(positionObj){
@@ -25,7 +26,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 	}
 	
 	function createPositionError(response){
-		return "Failed To Create Position! Response Status: " + response.status;
+		return $q.reject("Failed To Create Position! Response Status: " + response.status);
 	}
 	
 	function updatePosition(positionObj){
@@ -38,7 +39,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 	}
 	
 	function updatePositionError(response){
-		return "Failed To update Position! Response Status: " + response.status;
+		return $q.reject("Failed To update Position! Response Status: " + response.status);
 	}
 	
 	function getPosition(){
@@ -83,7 +84,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 		return response.data;
 	}
 	function getPositionError(response){
-		return "Failed To Get Position! Response";
+		return $q.reject("Failed To Get Position! Response");
 	}
 	function getClients(){
 		return $http.get('resources/client')
@@ -97,5 +98,15 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 	
 	function getClientError(response){
 		return "Failed To Get Clients! Response";
+	}
+	
+	function getPositionsByPositionType(positionType){
+		return $http.get('resources/searchPositionsBasedOnPositionType?positionType='+positionType)
+		.then(getPositionSuccess)
+		.catch(getPositionFailure);
+	}
+	
+	function getPositionFailure(response){
+		return $q.reject("Failed To Get Clients! Response");
 	}
 }

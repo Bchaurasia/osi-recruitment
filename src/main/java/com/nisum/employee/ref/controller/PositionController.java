@@ -113,4 +113,11 @@ public class PositionController {
 		return (null == positionsDetail) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
 				: new ResponseEntity<List<PositionAggregate>>(positionsDetail, HttpStatus.OK);
 	} 
+	
+	@Secured({"ROLE_HR","ROLE_USER","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/searchPositionsBasedOnPositionType", method = RequestMethod.GET)
+	public ResponseEntity<?> retrievePositionsBasedOnPositionType(@RequestParam(value = "positionType", required = true) String positionType) {
+		List<Position> positionsDetail = positionService.retrievePositionsbasedOnPositionType(positionType);
+		return new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
+	} 
 }
