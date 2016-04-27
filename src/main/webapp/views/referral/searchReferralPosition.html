@@ -1,0 +1,62 @@
+<form action="#" name="searchPosition" class="searchRequisition" onvalidate>
+	<form id="integerForm" role="form" class="form-horizontal">
+		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+		<div class="row" style="width: 90%">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<input type="text" class="form-control" ng-model="searchQuery"
+					ng-enter="searchPositionQuery()"data-tooltip="Search by Designation or Client">
+				<div align="left">
+					&nbsp;&nbsp; <a class="btn-floating"
+						ng-click="searchPositionQuery()"data-tooltip="Search Position"><i class="material-icons">search</i></a>
+				</div>
+			</div>
+			<br>
+
+		</div>
+		<table class="bordered" style="width: 90%">
+			<thead>
+				<tr>
+				    <th>Job code</th>
+					<th>REQ Id</th>
+					<th>Designation</th>
+					<th>Location</th>
+					<th>Client</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="animate-repeat"
+					ng-repeat="data in allReferralPositions"
+					style="font-size: 80%">
+					<td class="mdl-data-table__cell--non-numeric"><a
+						style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.requisitionId}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>	
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<div class="row" style="width: 90%">
+			<div class="col-md-3" align="left">
+				<h5>
+					<small> Total Positions : {{ allReferralPositions.length }}</small>
+				</h5>
+			</div>
+
+			<div class="col-md-9">
+				<ul class="pagination1 pull-right" style="cursor:pointer">
+					<li ng-class="{disabled: currentPage == 0}"><a
+						ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+					<li ng-repeat="n in range(currentPage)"
+						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+						ng-bind="n + 1"></a></li>
+					<li class="waves-effect"
+						ng-class="{disabled: currentPage == pageCount() - 1}"><a
+						ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</form>
