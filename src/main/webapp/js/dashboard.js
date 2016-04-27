@@ -28,6 +28,12 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		location.href='#recruitment/viewPosition';
 	};
 	
+	$scope.editProfile = function(data) {
+		sharedService.setprofileUserId(data.emailId);
+		sharedService.setjobCode(data.jobcodeProfile);
+		location.href='#referral/viewReferralProfile';
+	};
+	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
 		$scope.prolilesData = data;
