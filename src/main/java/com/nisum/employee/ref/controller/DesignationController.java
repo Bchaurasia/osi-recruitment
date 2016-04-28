@@ -57,7 +57,7 @@ public class DesignationController {
 	@RequestMapping(value="/design/{designation}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<?> deleteDesignation(@PathVariable("designation") String designation) throws Exception {
-		designationService.deleteDesignation(designation);;
+		designationService.deleteDesignation(designation);
 		String jsonObj="{\"msg\":\"Deleted\"}";
 		return new ResponseEntity<String>(jsonObj,
 				HttpStatus.OK);
