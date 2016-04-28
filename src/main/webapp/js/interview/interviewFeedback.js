@@ -32,7 +32,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	$scope.addNewSkill = function(newSkill) {
 		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
 		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
-		$scope.newSkill ="";
+		newSkill ="";
 	 };
 	  
 	$scope.addFunctionSkill = function(newSkill) {
@@ -53,8 +53,8 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	$scope.userRole = $rootScope.user.roles;
 	var i = 0;
 	$scope.position.primarySkills=[];
-	
-	
+	$scope.newSkill1="";
+	$scope.newSkillDisable=true;
 	$scope.init = function() {
 		if(sharedService.getjobCode() == undefined || sharedService.getprofileUserId() == undefined) {
 			$state.go("recruitment.interviewManagement");
@@ -63,7 +63,15 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		$scope.emailId = sharedService.getprofileUserId();
 	}
 	$scope.init();
-	
+	$scope.disableSkills = function(newSkill1) {
+		if(newSkill1==="") {
+			$scope.newSkillDisable=true;
+		}
+		else{
+			$scope.newSkillDisable=false;
+			alert($scope.newSkill1);
+		}
+	}
 	var profile_url = $http.get('resources/profile?emailId='+$scope.emailId);
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
