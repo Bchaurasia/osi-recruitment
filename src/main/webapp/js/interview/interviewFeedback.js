@@ -79,6 +79,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interview = response[1].data[0];
 			$scope.interviewFeedback.rateSkills =[];
 			$scope.interviewFeedback.domainSkills=[];
+			$scope.position = response[2].data;
 			for(var i=0; i<$scope.position.primarySkills.length;i++){
 					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
 			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
@@ -92,7 +93,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			}
 			$scope.interviewSchedule = $scope.interview.rounds[i-1].interviewSchedule;
 			$scope.interviewFeedback.roundName=$scope.interview.roundName;
-			$scope.position = response[2].data;
+			
 			},
 			function(errorMsg) {
 				$log.error("-------"+errorMsg);
