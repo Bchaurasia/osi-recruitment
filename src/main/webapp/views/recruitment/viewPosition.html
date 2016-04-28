@@ -138,14 +138,16 @@
 		<div ng-show="accordianFlag" class="input-field col s12">
 			<label><b>Shortlisted Candidates for this position:</b></label>
 			<div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
-				<span class="col s4"><b>Person</b></span>
-				<span class="col s4"><b>Email Id</b></span>
-				<span class="col s4"><b>Progress</b></span>
+				<span class="col s3"><b>Person</b></span>
+				<span class="col s3"><b>Email Id</b></span>
+				<span class="col s3"><b>Progress</b></span>
+				<span class="col s3"><b>Last Round Status</b></span>
 			</div>
 			<div class="collapsible-header row" style="text-align: left;" ng-repeat="interviewCandidate in interviewCandidates">
-				<span class="col s4"><b>{{interviewCandidate.candidateName}}</b></span>
-				<span class="col s4"><b>{{interviewCandidate.candidateEmail}}</b></span>
-				<span class="col s4"><b>{{interviewCandidate.progress}}</b></span>
+				<span class="col s3"><b>{{interviewCandidate.candidateName}}</b></span>
+				<span class="col s3"><b>{{interviewCandidate.candidateEmail}}</b></span>
+				<span class="col s3"><b>{{interviewCandidate.progress}}</b></span>
+				<span class="col s3"><b>{{interviewCandidate.status || "--"}}</b></span>
 			</div>
 		</div>
 		

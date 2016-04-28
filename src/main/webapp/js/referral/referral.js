@@ -8,5 +8,5 @@ app.controller("referralCtrl", ['$scope', '$http', '$filter', '$timeout','$q','$
 		$scope.indeX = $state.is(stateName);
         return $scope.indeX;
     };
-
+    
 }]);

@@ -1,7 +1,7 @@
 angular.module('erApp')
 		   .service('positionService',['$http','$filter','$rootScope','appConstants','$q', '$timeout',	positionService]);
 
-function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
+function positionService($http,$filter,$rootScope,$timeout,$log,$q,appConstants) {
 	return {
 		createPosition : addPosition,
 		updatePosition : updatePosition,
@@ -97,7 +97,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,appConstants) {
 	}
 	
 	function getClientError(response){
-		return "Failed To Get Clients! Response";
+		return $q.reject("Failed To Get Clients! Response");
 	}
 	
 	function getPositionsByPositionType(positionType){

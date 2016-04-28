@@ -44,12 +44,16 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	@Autowired
 	private ProfileSearchService profileSearchService;
 	
-	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException{
+	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws Exception{
 		InterviewDetails interviewDetails = null;
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewFeedback.getCandidateId());
 		if(interviewDetails2.getInterviewerId() != null){
 			interviewDetails = enrichInterviewDetails2(interviewDetails2, interviewFeedback);
 			interviewDetailsRepository.scheduleInterview(interviewDetails);
+			List<Profile> pro = profileService.getProfileByEmailId(interviewFeedback.getCandidateId());
+			profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails.getProgress());
+			pro.get(0).setStatus(interviewDetails.getProgress());
+			profileSearchService.updateProfileIndex(pro.get(0));
 			notificationService.sendFeedbackMail(interviewFeedback);
 			return interviewDetails;
 		}
