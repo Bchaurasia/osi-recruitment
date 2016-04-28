@@ -85,7 +85,7 @@ public class InterviewController {
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/interviewFeedback", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> saveFeedback(@RequestBody InterviewFeedback interviewFeedback) {
+	public ResponseEntity<?> saveFeedback(@RequestBody InterviewFeedback interviewFeedback) throws Exception {
 		try {
 			interviewDetailsService.saveFeedback(interviewFeedback);
 		} catch (MessagingException e) {

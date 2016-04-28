@@ -9,7 +9,7 @@ import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
 
 public interface IInterviewDetailsService {
-	InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException;
+	InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws MessagingException, Exception;
 	
 	InterviewDetails  scheduleInterview(InterviewSchedule interviewSchedule) throws Exception;
 	
