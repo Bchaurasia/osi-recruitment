@@ -36,4 +36,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                }
         }
     })
+    .state('referral.viewReferralPosition', {url:'/viewReferralPosition', views: {'': {templateUrl: 'views/referral/viewReferralPosition.html', controller: 'viewReferralPositionCtrl'}},
+    	resolve : {
+        	permission: function(authorizationService,$route) {
+        		return authorizationService.permissionCheck(["ROLE_USER","ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN","ROLE_USER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
+               }
+        }
+    })
 }]);
