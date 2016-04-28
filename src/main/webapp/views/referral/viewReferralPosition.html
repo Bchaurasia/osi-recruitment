@@ -70,14 +70,14 @@
 				<label>Primary Skills : </label>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" ng-hide="showSecondarySkillsDiv">
 			<div class="input-field col s12">
 				<h6>
 					<b class="viewInterviewDetails">{{positionDetails.secondarySkills}}</b>
 				</h6>
 				<label>Secondary Skills : </label>
 			</div>
-		</div><br />
+		</div>
 		<div class="row">
 			<div class="input-field col s12">
 				<h6>
@@ -86,102 +86,5 @@
 				<label>Job Profile : </label>
 			</div>
 		</div>
-		<!-- <div ng-repeat="data in interviewscheduleDetails.rounds" class="collapsible collapsible-accordion">
-		<div class="row collapsible-header">
-			<h6 align="left">
-				<b>Interview Details for {{data.roundName}}</b>
-			</h6>
-		</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.roundName}}</p>
-					<label>Interview Round :</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.interviewerName}}
-					</p>
-					<label>Interviewer Name :</label>
-				</div>
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.interviewDateTime}}</p>
-					<label>Interview Date and Time : </label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.interviewerMobileNumber}}</p>
-					<label>Interviewer Cell # :</label>
-				</div>
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.interviewLocation}}</p>
-					<label>Location :</label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.emailIdInterviewer}}
-					</p>
-					<label>Interviewer Email Id :</label>
-				</div>
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.skypeId}}</p>
-					<label> Skype Id :</label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewSchedule.typeOfInterview}}
-					</p>
-					<label>Type Of Interview :</label>
-				</div>
-			</div><div class="row">
-				<div class="input-field col s12">
-					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewSchedule.additionalNotes || "--"}}</p>
-					<label>Additional Notes :</label>
-				</div>
-			</div>
-			<div class="row collapsible-header">
-			<h6 align="left">
-				<b>Feedback Details for {{data.roundName}}</b>
-			</h6>
-		</div>
-			<div class="row" ng-repeat="skill in data.interviewFeedback.rateSkills">
-				<div class="input-field col s6">
-					<p class="viewInterview" >{{skill.skill}}
-					</p>
-					<label>Skill :</label>
-				</div>
-				<div class="input-field col s6">
-					<p class="viewInterview" >{{skill.rating}}/10
-					</p>
-					<label>Rating :</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.additionalSkills || "--"}}</p>
-					<label>Additional Skills :</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.strengths || "--"}}</p>
-					<label>Strengths :</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.improvement || "--"}}</p>
-					<label>Improvement :</label>
-				</div>
-			</div>
-		</div> -->
 	</form>
 </div>
-<br>
-<br>
