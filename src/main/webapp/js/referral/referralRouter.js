@@ -29,6 +29,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                }
         }
     })
+    
     .state('referral.viewReferralProfile', {url:'/viewReferralProfile', views: {'': {templateUrl: 'views/referral/viewReferralProfile.html', controller: 'editReferralProfileCtrl'}},
     	resolve : {
         	permission: function(authorizationService,$route) {
