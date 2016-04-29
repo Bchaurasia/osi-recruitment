@@ -17,10 +17,11 @@
 			<thead>
 				<tr>
 				    <th>Job code</th>
+				    <th>Status</th>
 					<th>Designation</th>
 					<th>Location</th>
 					<th>Client</th>
-					<th>Status</th>
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -28,10 +29,11 @@
 					<td class="mdl-data-table__cell--non-numeric">
 						<a style="cursor: pointer;" ng-click="displayReferralPosition(data.jobcode)">{{data.jobcode}}</a>
 					</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.status}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{data.status}}</td>		
+							
 				</tr>
 			</tbody>
 		</table>
