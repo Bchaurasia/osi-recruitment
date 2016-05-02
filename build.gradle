@@ -21,7 +21,7 @@ repositories {
     mavenCentral()
 }
 
-ext.springVersion = "4.0.0"
+ext.springVersion = "4.2.0"
 ext.springSecurity =   "3.2.0"
 ext.springExceptionHandlerVersion = "2.0.1"
 ext.springDataVersion = "1.8.2"
@@ -68,7 +68,7 @@ dependencies {
    }
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.4'
     compile group: 'org.codehaus.jackson', name: 'jackson-core-lgpl', version: '1.9.11'
-    compile group:'com.fasterxml.jackson.core', name:'jackson-databind', version:'2.2.3'
+	compile group:'com.fasterxml.jackson.core', name:'jackson-databind', version:'2.6.0'
 	compile group: 'org.codehaus.jackson', name: 'jackson-mapper-lgpl', version: '1.9.11'
 	compile group: 'joda-time',name:'joda-time',version:'1.6.1'
 	compile group: 'com.google.guava',name:'guava',version:'17.0'
