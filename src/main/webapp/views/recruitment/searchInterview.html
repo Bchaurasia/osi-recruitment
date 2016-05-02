@@ -1,4 +1,4 @@
-<form action="#" name="interviewManagement" class="interviewManagement"
+<form name="interviewManagement" class="interviewManagement"
 	onvalidate>
 	<form id="integerForm" role="form" class="form-horizontal">
 	<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
@@ -39,7 +39,7 @@
 					<td class="mdl-data-table__cell--non-numeric"><i
 						ng-repeat="jobcode in data.currentPositionId"> {{jobcode}}</i></td>
 					<td class="mdl-data-table__cell--non-numeric">
-						<button style="background-color: #F8F8F8; border: 0px;" href=""
+						<button style="background-color: #F8F8F8; border: 0px;" href="#"
 							id="" class="interview-schedule" data-tooltip="Schedule interview"
 							ng-disabled="disableSchedule(data.status) || hasRole('ROLE_INTERVIEWER')"
 							ng-click="schedule(data.interviewerId)">

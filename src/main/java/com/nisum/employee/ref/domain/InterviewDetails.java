@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "interviews",type = "interview", shards = 1, replicas = 0, refreshInterval = "-1")
 public class InterviewDetails  {
 	

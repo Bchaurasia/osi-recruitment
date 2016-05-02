@@ -21,6 +21,8 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.disabled=false;
 	$scope.jobcode={};
 	$scope.disableSchedueBtn= true;
+	var interviewId = sharedService.getInterviewId();
+	console.log("Schedule Service : interviewId"+interviewId);
 	
 	$scope.setJobcode= function(requisitionId) {
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
@@ -38,24 +40,23 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.init = function() {
 	$scope.jobcodelistObj={};	
 	$scope.interviewschedule.interviewDateTime="";
-	if(sharedService.getInterviewId() == undefined) {
+	if(interviewId == undefined) {
 		$state.go("recruitment.interviewManagement");
 	}
-	$scope.interviewerId = sharedService.getInterviewId();
-		interviewService.getInterviewDetailsById($scope.interviewerId).then(
+		interviewService.getInterviewDetailsById(interviewId).then(
 		function(data){
 			
 			$scope.interviewscheduleDetails=data;
 
 			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
-			$scope.interviewId=$scope.interviewscheduleDetails.candidateId;
 			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
 			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
-			$scope.interviewschedule.candidateMobileNumber = $scope.interviewscheduleDetails.candidateMobileNumber;
-			$scope.interviewschedule.candidateSkypeId = $scope.interviewscheduleDetails.candidateSkypeId;
 			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
-			$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
-			$scope.setJobcode($scope.interviewschedule.requisitionId);
+			
+			if($scope.interviewscheduleDetails.requisitionId != undefined){
+				$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
+				$scope.setJobcode($scope.interviewschedule.requisitionId);
+			}
 			profileService.getProfileById($scope.interviewschedule.candidateId).then(function(data){
 				$scope.interviewschedule.candidateSkypeId=data.skypeId;
 				$scope.interviewschedule.candidateMobileNumber=data.mobileNo;
@@ -147,7 +148,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
 		console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
 		interviewService.scheduleInterview($scope.interviewschedule).then(function(data){
-			 $scope.message = "Interview scheduled successfully";
+			 $scope.message = "Scheduled interview successfully for "+$scope.interviewschedule.candidateName;
 			 $scope.sendNotification($scope.message,'recruitment/interviewManagement');
 		}).catch(function(data){
 			  var cls = 'alert alert-danger alert-error';
