@@ -37,6 +37,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.showApprover2Comments=false;
 	$scope.disableApprover1CommentBox=true;
 	$scope.disableApprover2CommentBox =true;
+	$scope.accordianFlag = false;
 	
 	var id;
 	$scope.init = function() {
@@ -48,7 +49,18 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		requisitionService.getRequisitionById(id).then(function(data){
 			$scope.requisition = data;
 			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
-		}).catch(function(msg){
+			
+			if($scope.requisition.approval2 == undefined
+					   && $scope.requisition.approval1.approved || $scope.requisition.approval1.approved && $scope.requisition.approval2.approved){
+				$scope.accordianFlag = true;
+				
+				positionService.getPositionByRequisitionId(id).then(function(data){
+			        $scope.allPositionsForRequisition =data;
+					}).catch(function(msg){
+			        $log.error(msg); 
+					});
+			} 
+			}).catch(function(msg){
 	    	$log.error(msg); 
 	    });
 		var getDesignation = $http.get('resources/design');
