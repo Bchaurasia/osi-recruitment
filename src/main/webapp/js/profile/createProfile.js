@@ -22,7 +22,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
     $scope.message = "";
     $scope.InterviewDetails = {};
 	$scope.uploadError = true;
-	
+	$scope.candidate.expMonth="0";
     var ran = Math.floor((Math.random()*999)+1);
 	var uploadedFileName = null;
 	$scope.data = {};

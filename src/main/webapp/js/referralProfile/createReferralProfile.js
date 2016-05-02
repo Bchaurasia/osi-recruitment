@@ -22,7 +22,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
     $scope.message = "";
     $scope.InterviewDetails = {};
 	$scope.uploadError = true;
-	
+	$scope.candidate.tenureMonth ="0";
     var ran = Math.floor((Math.random()*999)+1);
 	var uploadedFileName = null;
 	$scope.data = {};
