@@ -11,13 +11,11 @@
 								on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 						</div>
 					</div>
-					<input type="text" ng-model="newFunctionalSkill" ng-change="disableFunctionalSkills(newFunctionalSkill)" maxlength="40" name="" placeholder="Enter Domain." style="width: 31%;height: auto;">
-					<!-- <a ng-click="addFunctionSkill(newFunctionalSkill)" data-tooltip="Add Domain"><i
-						class="material-icons">add</i></a> -->
+					<input type="text" ng-model="functional.newSkill" maxlength="40" name="" placeholder="Enter Domain." style="width: 31%;height: auto;">
 						<button style="background-color: #F8F8F8; border: 0px;" href=""
 							id="" class="interview-feedback" data-tooltip="Add New Skill"
-							 ng-disabled="newFunctionalSkillDisable"
-							ng-click="addFunctionSkill(newFunctionalSkill)">
+							 ng-disabled="!functional.newSkill"
+							ng-click="addFunctionSkill()">
 							<i class="material-icons">add</i>
 						</button>
 				</td>

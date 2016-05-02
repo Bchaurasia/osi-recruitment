@@ -1,7 +1,9 @@
 app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','sharedService', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI','interviewService','appConstants', 
                                         function($scope, $http, $q, $window, sharedService, $timeout, $rootScope, $log, $state, $location,profileService, blockUI,interviewService,appConstants) {
-	$scope.newTechnicalSkill="";
-	$scope.newFunctionalSkill="";
+	$scope.technical={};
+	$scope.functional={};
+	$scope.technical.newSkill="";
+	$scope.functional.newSkill="";
 	
 	$scope.tabs = [
 	   			{
@@ -32,16 +34,16 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	   			
 	   		];
 	
-	$scope.addNewSkill = function(newSkill) {
+	$scope.addNewSkill = function() {
 		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
-		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
-		$scope.newTechnicalSkill="";
+		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.technical.newSkill,"rating":0});
+		$scope.technical.newSkill="";
 	 };
 	  
-	$scope.addFunctionSkill = function(newSkill) {
+	$scope.addFunctionSkill = function() {
 			var newItemNo = $scope.interviewFeedback.domainSkills.length+1;
-			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":newSkill,"rating":0});
-			$scope.newFunctionalSkill="";
+			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.functional.newSkill,"rating":0});
+			$scope.functional.newSkill="";
 	};  
 	  
 	$scope.profile = {};
@@ -66,23 +68,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		$scope.emailId = sharedService.getprofileUserId();
 	}
 	$scope.init();
-	$scope.disableSkills = function(newSkill1) {
-		if(newSkill1==="") {
-			$scope.newSkillDisable=true;
-		}
-		else{
-			$scope.newSkillDisable=false;
-			$scope.newTechnicalSkill="";
-		}
-	}
-	$scope.disableFunctionalSkills = function(newSkill) {
-		if(newSkill==="") {
-			$scope.newFunctionalSkillDisable=true;
-		}
-		else{
-			$scope.newFunctionalSkillDisable=false;
-		}
-	}
 	var profile_url = $http.get('resources/profile?emailId='+$scope.emailId);
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
