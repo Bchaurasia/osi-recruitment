@@ -99,8 +99,7 @@
 					ng-change="setSkillsAndJDDetails()"
 					ng-options="o.jobDescriptionName for o in JobDescriptionList"
 					class="form-control input-sm" id="jobDescription">
-					<option value='' disabled="disabled">Select Job
-						Description Title</option>
+					<option value="">Select Job	Description Title</option>
 				</select> <label class="label-alignment">Job Description Title</label>
 			</div>
 			<div class="input-field col s6">
@@ -170,7 +169,7 @@
 					ng-model="requisition.approval2"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Approver 2</option>
+					<option value="">Select Approver 2</option>
 				</select> <label>Approver 2</label>
 			</div>
 		</div>

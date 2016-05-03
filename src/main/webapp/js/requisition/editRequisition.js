@@ -338,4 +338,10 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			sharedService.setjobCode(jobcodeProfile);
 			location.href='#recruitment/viewPosition';
 		};
+		
+		$scope.getJobDescriptionByClient = function(client){
+			jobDescriptionService.getJobDescriptionByClient(client).then(function(data){
+				$scope.JobDescriptionList = data;
+			});
+		}
 }]);

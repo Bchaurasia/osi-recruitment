@@ -77,7 +77,7 @@
 					ng-options="o.jobDescriptionName for o in JobDescriptionList"
 					ng-model="jobDescription" ng-change="setSkillsAndJDDetails()"
 					class="form-control input-sm" id="jobDescription">
-					<option value=''>Select Job Description Title</option>
+					<option value="">Select Job Description Title</option>
 				</select> <label class="label-alignment">Job Description Title</label>
 			</div>
 
@@ -172,7 +172,7 @@
 					ng-disabled="disApproval2"
 					ng-options="o.name for o in approvals | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option>Select Approver 2</option>
+					<option value="">Select Approver 2</option>
 				</select> <label>Approver 2</label>
 				<a href="#" ng-click="showApprover2Comments = !showApprover2Comments"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
 			</div>
