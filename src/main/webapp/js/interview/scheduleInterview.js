@@ -68,7 +68,13 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		)
 		requisitionService.getAllRequisitions().then(function(requisitions){
 			$scope.requisitionObj=requisitions;
-			_.find( $scope.requisitionObj,function(requisition){
+			$scope.approvedRequisition=[];
+			angular.forEach($scope.requisitionObj,function(requisition){
+				 if(requisition.status==="APPROVED"){
+					 $scope.approvedRequisition.push(requisition);
+				 }
+			 });
+			_.find($scope.approvedRequisition,function(requisition){
 				$scope.requisitionIdlist.push(requisition.requisitionId); 
 			 });
 			console.debug("requisition detail object :"+angular.toJson($scope.requisitionIdlist));
