@@ -56,8 +56,7 @@
 					</li>
 				</ul>
 			</div>
-			<div
-				ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
+			<div ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
 				<h6 align="left">
 					<b>Requisitions </b>
 				</h6>
@@ -103,36 +102,7 @@
 					</li>
 				</ul>
 			</div>
-			<div ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
-			<h6 align="left">
-				<b>Upcoming Interviews</b>
-			</h6>
-			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #035396">
-					<div class="collapsible-header row white-field">
-						<span class="col s3"><b>Name</b></span> <span class="col s3"><b>Round</b></span>
-						<span class="col s3"><b>Schedule Time</b></span><span
-							class="col s3"><b>Status</b></span>
-					</div>
-				</li>
-				<li ng-repeat="schedule in showScheduleDataInterview">
-					<div class="collapsible-header row">
-						<span class="col s3">{{schedule.cname}}</span> <span
-							class="col s3">{{schedule.round}}</span> <span class="col s3">{{schedule.date
-							| date:'medium'}}</span> <span class="col s3"
-							ng-show="interviewDateTimeFuture(schedule.date)">Interview
-							Pending</span> <span class="col s3"
-							ng-show="interviewDateTimePastFeedbackPending(schedule.date,schedule.status)">Feedback
-							Pending</span> <span class="col s3"
-							ng-show="interviewDateTimePastFeedback(schedule.date,schedule.status)">Feedback
-							Submitted</span>
-					</div>
-				</li>
-				<li ng-show="showNoInterviewMsg">
-					<p style="color: red;">No Upcoming Interviews.</p>
-				</li>
-			</ul>
-		</div>
+			
 		</div>
 		<div class="col s12 m6 "
 			ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
@@ -163,10 +133,41 @@
 				</li>
 			</ul>
 		</div>
+		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
+			<h6 align="left">
+				<b>Upcoming Interviews</b>
+			</h6>
+			<ul class="collapsible" data-collapsible="accordion">
+				<li style="background-color: #035396">
+					<div class="collapsible-header row white-field">
+						<span class="col s3"><b>Name</b></span> <span class="col s3"><b>Round</b></span>
+						<span class="col s3"><b>Schedule Time</b></span><span
+							class="col s3"><b>Status</b></span>
+					</div>
+				</li>
+				<li ng-repeat="schedule in showScheduleDataInterview">
+					<div class="collapsible-header row">
+						<span class="col s3">{{schedule.cname}}</span> <span
+							class="col s3">{{schedule.round}}</span> <span class="col s3">{{schedule.date
+							| date:'medium'}}</span> <span class="col s3"
+							ng-show="interviewDateTimeFuture(schedule.date)">Interview
+							Pending</span> <span class="col s3"
+							ng-show="interviewDateTimePastFeedbackPending(schedule.date,schedule.status)">Feedback
+							Pending</span> <span class="col s3"
+							ng-show="interviewDateTimePastFeedback(schedule.date,schedule.status)">Feedback
+							Submitted</span>
+					</div>
+				</li>
+				<li ng-show="showNoInterviewMsg">
+					<p style="color: red;">No Upcoming Interviews.</p>
+				</li>
+			</ul>
+		</div>
 	</div>
-	<div class="row">
+	
+	<div>
 		<h6 align="left">
-			<b>Your Referred Profiles</b>
+			<b>You Referred Profiles</b>
 		</h6>
 		<ul class="collapsible" data-collapsible="accordion">
 			<li style="background-color: #035396">
