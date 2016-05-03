@@ -158,9 +158,9 @@
 		
 		<div class="row">
 			<div class="input-field col s6">
-				<select placeholder="Select Approver 1" ng-model="approval1"
+				<select placeholder="Select Approver 1" ng-model="requisition.approval1"
 					ng-disabled="disApproval1"
-					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					ng-options="o.name for o in approvals track by o.emailId"
 					class="form-control input-sm" required>
 					<option>Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
@@ -168,9 +168,9 @@
 				
 			</div>
 			<div class="input-field col s6" ng-hide="hideApproval2">
-				<select placeholder="Select Approver 2" ng-model="approval2"
+				<select placeholder="Select Approver 2" ng-model="requisition.approval2"
 					ng-disabled="disApproval2"
-					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					ng-options="o.name for o in approvals track by o.emailId"
 					class="form-control input-sm">
 					<option value="">Select Approver 2</option>
 				</select> <label>Approver 2</label>

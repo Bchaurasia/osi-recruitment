@@ -168,7 +168,7 @@
 			<div class="row">
 				<div class="input-field col s6">
 					<select placeholder="Select Approver 1" ng-model="requisition.approval1"
-						ng-change="approverfield()" ng-disabled="disApproval1"
+						ng-disabled="disApproval1"
 						ng-options="o.name for o in approvals track by o.emailId"
 						class="form-control input-sm" required>
 						<option>Select Approver 1</option>

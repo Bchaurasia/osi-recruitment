@@ -25,8 +25,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.position = {};
 	$scope.reqId = 0;
 	$scope.hrManager={};
-	// $scope.approval1={};
-	// $scope.approval2={};
 	$scope.JobDescriptionList=[];
 	$scope.today = new Date();
 	$scope.hideApproval2=false;
@@ -96,12 +94,14 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	
 	
 	function setUsers(data){
-		$scope.approvals =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
-		$scope.approvals =_.sortBy($scope.approvals, 'name');	
-		$scope.approval1 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval1.emailId})[0];
-		if($scope.requisition.approval2 !== undefined){
-			$scope.approval2 = _.filter($scope.approvals, function(user){ return user.emailId === $scope.requisition.approval2.emailId})[0];
-		}
+		var	approverUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
+		angular.forEach(approverUser,function(user){
+				var approver={};
+				approver.emailId = user.emailId;
+				approver.name = user.name;
+				$scope.approvals.push(approver);
+			});
+		$scope.approvals =_.sortBy($scope.approvals, 'name');
 		
 		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
@@ -269,7 +269,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 
 	$scope.updateRequisitionDetails = function(){
 		if ($scope.requisition !== undefined) {
-			setApprovers();
 			setTargetDateNUpdatedBy();
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			requisitionService.updateRequisition($scope.requisition).then(
@@ -281,17 +280,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 				     });
 		}
 	}
-	setApprovers = function(){
-		$scope.requisition.approval1.name = $scope.approval1.name;
-		$scope.requisition.approval1.emailId = $scope.approval1.emailId;
-		$scope.requisition.approval1.approved = false;
-		if($scope.approval2 !== undefined){
-			$scope.requisition.approval2.name = $scope.approval2.name;
-			$scope.requisition.approval2.emailId = $scope.approval2.emailId;
-			$scope.requisition.approval2.approved = false;
-		}
-	}
-	
+		
 	setTargetDateNUpdatedBy = function(){
 		$scope.requisition.updatedBy = $scope.user.emailId;
 		$scope.requisition.client = $scope.client.clientName;

@@ -149,6 +149,7 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.requisition.position = $scope.position.designation;
 			$scope.requisition.createdBy = $scope.user.emailId;
 			$scope.requisition.updatedBy = $scope.user.emailId;
+			$scope.requisition.client = $scope.client.clientName;
 			$scope.requisition.requisitionDate.toString();
 
 			requisitionService.cloneRequisition($scope.requisition)
