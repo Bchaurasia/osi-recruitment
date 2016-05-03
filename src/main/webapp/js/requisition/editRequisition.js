@@ -50,8 +50,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.requisition = data;
 			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
 			
-			if($scope.requisition.approval2 == undefined
-					   && $scope.requisition.approval1.approved || $scope.requisition.approval1.approved && $scope.requisition.approval2.approved){
+			if($scope.requisition.status =="APPROVED"){
 				$scope.accordianFlag = true;
 				
 				positionService.getPositionByRequisitionId(id).then(function(data){
@@ -334,4 +333,9 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			$scope.requisition.skillType = $scope.jobDescription.skills;
 			$scope.requisition.jobTitle = $scope.jobDescription.jobDescriptionName;
 	 }
+	 
+	 $scope.editPosition = function(jobcodeProfile) {
+			sharedService.setjobCode(jobcodeProfile);
+			location.href='#recruitment/viewPosition';
+		};
 }]);

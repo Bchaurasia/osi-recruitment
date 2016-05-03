@@ -192,7 +192,7 @@
 			</div>
 		</div>
 		<div ng-show="accordianFlag" class="input-field col s12">
-			<label><b>All created positions for this requisition:</b></label>
+			<label style="position: absolute; top: -22px;"><b>All created positions for this requisition:</b></label>
 			<div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
 				<span class="col s3"><b>Job code</b></span>
 				<span class="col s3"><b>Status</b></span>
@@ -200,12 +200,16 @@
 				<span class="col s3"><b>Client</b></span>
 			</div>
 			<div class="collapsible-header row" style="text-align: left;" ng-repeat="position in allPositionsForRequisition">
-				<span class="col s3"><b>{{position.jobcode}}</b></span>
+				<span class="col s3"><b><a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.jobcode}}</a></b></span>
 				<span class="col s3"><b>{{position.status}}</b></span>
 				<span class="col s3"><b>{{position.designation}}</b></span>
 				<span class="col s3"><b>{{position.client}}</b></span>
 			</div>
 		</div>
+		<div ng-show="!accordianFlag" class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
+			<label style="color: black;font-size: small;"><b>No Positions created as Requisition is not Approved !</b></label>
+		</div>
+		<br>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-show="showApprovalBtn"
 				ng-disabled="updateRequisition.$invalid || disableApprovalBtn"
