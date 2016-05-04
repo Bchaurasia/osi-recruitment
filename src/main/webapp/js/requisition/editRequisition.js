@@ -47,7 +47,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		requisitionService.getRequisitionById(id).then(function(data){
 			$scope.requisition = data;
 			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
-			
+			$scope.qall();
 			if($scope.requisition.status =="APPROVED"){
 				$scope.accordianFlag = true;
 				
@@ -60,9 +60,14 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			}).catch(function(msg){
 	    	$log.error(msg); 
 	    });
+		
+	}
+	
+	$scope.init();
+	$scope.qall = function(){
 		var getDesignation = $http.get('resources/design');
 		var getClients = $http.get('resources/clientInfo');
-		var getJds = $http.get('resources/jobDescription');
+		var getJds = $http.get('resources/jobDescriptionByClient?client='+$scope.requisition.client);
 		var getusers = $http.get('resources/user');
 		
 		$q.all([getDesignation,getClients,getJds,getusers]).then(
@@ -87,8 +92,6 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 				}
 			);
 	}
-	
-	$scope.init();
 	$scope.requisition= {};
 	$scope.requisition.qualifications = [];
 	

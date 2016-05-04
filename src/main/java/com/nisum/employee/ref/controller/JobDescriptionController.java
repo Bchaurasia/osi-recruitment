@@ -1,6 +1,7 @@
 package com.nisum.employee.ref.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,14 @@ public class JobDescriptionController {
         return new ResponseEntity <ArrayList<JobDescription>>(jobDescription, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/jobDescriptionByClient",method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveJobDescriptionByClient(@RequestParam(value = "client", required = true) String client) {
+		List<JobDescription> jobDescription = null;
+		
+			jobDescription = jobDescriptionService.retrieveJobDescriptionsByClient(client);
+		
+        return new ResponseEntity <List<JobDescription>>(jobDescription, HttpStatus.OK);
+	}
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value="/jobDescription", method = RequestMethod.POST)
 	@ResponseBody

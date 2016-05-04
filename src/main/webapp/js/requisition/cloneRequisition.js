@@ -43,12 +43,20 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	       		       delete $scope.requisition.approval2.comment;
 	    	        	$scope.requisition.approval2.approved=false;
 	    	    	}
+	       	$scope.qall();
 		}).catch(function(msg){
 	    	$log.error(msg); 
 	    });
+		
+		
+	}
+	
+	$scope.init();
+	
+	$scope.qall=function(){
 		var getDesignation = $http.get('resources/design');
 		var getClients = $http.get('resources/clientInfo');
-		var getJds = $http.get('resources/jobDescription');
+		var getJds = $http.get('resources/jobDescriptionByClient?client='+$scope.requisition.client);
 		var getusers = $http.get('resources/user');
 		
 		$q.all([getDesignation,getClients,getJds,getusers]).then(
@@ -75,8 +83,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 				}
 			);
 	}
-	
-	$scope.init();
 	
 	function setUsers(data){
 		var	approverUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
@@ -229,8 +235,9 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	 }
 	 
 	 $scope.getJDByClient = function(client){
-		jobDescriptionService.getJobDescriptionByClient(client.clientName).then(function(data){
-			$scope.jobDescriptionList = data;
+		 alert("BIbha");
+		jobDescriptionService.getJobDescriptionByClient(client).then(function(data){
+			$scope.JobDescriptionList = data;
 		});
 	}
 	

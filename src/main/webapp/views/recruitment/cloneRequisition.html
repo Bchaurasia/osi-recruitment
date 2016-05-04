@@ -65,7 +65,7 @@
 				<div class="input-field col s6">
 					<select ng-model="client"
 						ng-options="o.clientName for o in clients | orderBy:'toString()'"
-						ng-change="getJDByClient(client)" class="form-control input-sm"
+						ng-change="getJDByClient(client.clientName)" class="form-control input-sm"
 						required>
 						<option value="requisition.client">{{requisition.client}}</option>
 					</select> <label>Client<b class="mandatory">*</b></label>

@@ -1,6 +1,7 @@
 package com.nisum.employee.ref.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,12 @@ public class JobDescriptionRepository {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").regex(Pattern.compile(jdName, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
 		return (ArrayList<JobDescription>) mongoOperations.find(query, JobDescription.class);
+	}
+	
+	public List<JobDescription> getJDByClient(String client) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("client").is(client));
+		List<JobDescription> jobDescription = mongoOperations.find(query, JobDescription.class);
+		return jobDescription;
 	}
 }

@@ -19,9 +19,9 @@ function jobDescriptionService($http,$filter,$rootScope,$log,$q,$cacheFactory,ap
 	}
 	
 	function getJobDescriptionByClient(client){
-		return $http.get('resources/jobDescription')
+		return $http.get('resources/jobDescriptionByClient?client='+client)
 			 .then(function(response){
-				 return _.filter(response.data, function(jd){ return jd.client === client });
+				 return response.data;
 			 })
 			.catch(sendErrorJobDescriptionMsg);
 	}
