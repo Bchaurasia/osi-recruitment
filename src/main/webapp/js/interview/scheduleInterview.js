@@ -26,8 +26,14 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.setJobcode= function(requisitionId) {
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
+			$scope.positionObj=[];
 			$scope.jobcodelistObj=positions;
-			$scope.jobcode =_.find( $scope.jobcodelistObj,function(positionObj){
+			angular.forEach($scope.jobcodelistObj,function(position){
+				 if(position.status!== "Hired"){
+					 $scope.positionObj.push(position);
+				 }
+			 });
+			$scope.jobcode =_.find($scope.positionObj,function(positionObj){
              return positionObj.jobcode === $scope.interviewscheduleDetails.jobCode; 
 			});
 			$scope.interviewschedule.jobcode=$scope.jobcode;

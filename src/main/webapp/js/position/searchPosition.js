@@ -12,6 +12,9 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','sharedSe
 		console.log("---------> ");
 		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
 			$scope.positions = data;
+			if($scope.positions.length<appConstants.ITEMS_PER_PAGE){
+				$scope.currentPage = 0;
+			}
 		}).catch(function(msg){
 	   	  $log.error("Failed To Load Data! ---> "+msg);
 	   	  $scope.errorHide = false;

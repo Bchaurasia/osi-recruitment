@@ -31,7 +31,7 @@
 					title="Choose a jobcode"> <ui-select-match
 					placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
-					repeat="position in jobcodelistObj | filter: $select.search">
+					repeat="position in positionObj | filter: $select.search">
 				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>
 				</ui-select-choices> </ui-select>
 				<label style="position: absolute; top: -22px;">Interview

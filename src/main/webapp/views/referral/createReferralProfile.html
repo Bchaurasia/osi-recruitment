@@ -27,6 +27,9 @@
 				<div class="validation-error"
 					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
 					Candidate Name must be at least 3 characters .</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.maxlength">
+					Candidate Name must be less then 30 characters .</div>
 			</div>
 			<div class="input-field col s6">
 				<input type="email" name="emailId" class="form-control"
@@ -267,8 +270,8 @@
 				</label>
 			</div>
 			<div class="input-field col s2">
-				<select ng-model="candidate.tenureYear"
-					id="tenureYear" ng-options="o for o in range"
+				<select ng-model="candidate.tenureYear" id="tenureYear"
+					ng-options="o for o in range"
 					style="position: absolute; top: -15px;"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Years</option>
@@ -276,8 +279,8 @@
 			</div>
 
 			<div class="input-field col s2">
-				<select ng-model="candidate.tenureMonth"
-					id="tenureMonth" ng-options="o for o in info.expMonths"
+				<select ng-model="candidate.tenureMonth" id="tenureMonth"
+					ng-options="o for o in info.expMonths"
 					style="position: absolute; top: -15px;"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Months</option>
