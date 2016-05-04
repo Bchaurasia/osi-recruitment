@@ -34,6 +34,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
+	$scope.candidate.expMonth="0";
 		
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
