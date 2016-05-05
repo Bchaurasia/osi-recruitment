@@ -235,7 +235,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	 }
 	 
 	 $scope.getJDByClient = function(client){
-		 alert("BIbha");
 		jobDescriptionService.getJobDescriptionByClient(client).then(function(data){
 			$scope.JobDescriptionList = data;
 		});
