@@ -29,9 +29,7 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	 
 	 function setRequisition(data){
 		 $scope.allRequisitions = data;
-		 if($scope.allRequisitions.length<appConstants.ITEMS_PER_PAGE){
 				$scope.currentPage = 0;
-			}
 	 }
 	
 	$scope.searchRequisition();

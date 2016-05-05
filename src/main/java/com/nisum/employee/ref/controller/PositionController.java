@@ -71,6 +71,7 @@ public class PositionController {
 		List<Position> positions=null;
 		try {
 			if(searchQuery != null && !searchQuery.isEmpty()){
+				//positions = positionSearchService.getPostionByClient(searchQuery);
 				positions = positionSearchService.getPostionByDesignationOrClient(searchQuery);
 			}else{
 				positions = positionSearchService.getAllPostions();
