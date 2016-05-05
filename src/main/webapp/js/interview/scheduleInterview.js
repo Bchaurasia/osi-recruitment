@@ -160,7 +160,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
 		console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
 		interviewService.scheduleInterview($scope.interviewschedule).then(function(data){
-			 $scope.message = "Scheduled interview successfully for "+$scope.interviewschedule.candidateName;
+			 $scope.message = "Interview scheduled successfully for "+$scope.interviewschedule.candidateName;
 			 $scope.sendNotification($scope.message,'recruitment/interviewManagement');
 		}).catch(function(data){
 			  var cls = 'alert alert-danger alert-error';
