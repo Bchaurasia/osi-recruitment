@@ -28,7 +28,7 @@
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="data in positions | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+					ng-repeat="data in positions | orderBy:'data.updatedDate'  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
@@ -38,11 +38,6 @@
 					<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>
 					
-					<!-- <td class="mdl-data-table__cell--non-numeric"><left>
-								</left>&nbsp;&nbsp;&nbsp;
-								<right><a href="" style="cursor:pointer;" ng-click="shareContent(data.jobcode)">
-									<img src="https://simplesharebuttons.com/images/somacro/linkedin.png" width="20" height="20" title="Share on Linked In" /></a></right>
-								</td> -->
 				</tr>
 			</tbody>
 		</table>

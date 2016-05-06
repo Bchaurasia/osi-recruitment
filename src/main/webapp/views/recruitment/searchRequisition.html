@@ -31,7 +31,7 @@
 
 				<tbody>
 					<tr class="animate-repeat"
-						ng-repeat="data in allRequisitions | orderBy : sortComment : true | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+						ng-repeat="data in allRequisitions | orderBy:'data.updatedDate'  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
 						style="font-size: 80%">
 						<!-- <td><span style="background-color: red;padding: 5px 12px;color: white;"><b>A</b></span></td> -->
 						<td><a style="cursor: pointer;"

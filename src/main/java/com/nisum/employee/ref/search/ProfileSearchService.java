@@ -24,14 +24,14 @@ public class ProfileSearchService {
 	public List<Profile> getAllProfiles() throws Exception {
 		Iterable<Profile> profile = profileIndexRepository.findAll();
 		List<Profile> porofileList = Lists.newArrayList(profile);
-		try{
+		/*try{
 		Collections.sort(porofileList,new Comparator<Profile>(){
             public int compare(Profile o1, Profile o2){
             	return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
             }});
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		}*/
 		return porofileList;
 	}
 	
