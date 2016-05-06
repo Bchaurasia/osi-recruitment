@@ -1,5 +1,6 @@
 package com.nisum.employee.ref.search;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,6 +37,11 @@ public class ProfileSearchService {
 	
 	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String data) throws Exception {
 		List<Profile> profilesList = profileIndexQueryRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(data);
+		if(profilesList.isEmpty()){
+			Profile profile = profileIndexRepository.findProfilesByEmailIdStartingWithAllIgnoreCase(data);
+			profilesList = new ArrayList<Profile>();
+			profilesList.add(profile);
+		}
 		return profilesList;
 	}
 	
@@ -52,14 +58,7 @@ public class ProfileSearchService {
 			addProfileIndex(profile);
 		}
 	}
-	
-	
-	public List<Profile> getProfilesByEmailId(String emailId){
-	List<Profile> profilesList = profileIndexRepository.findProfilesByEmailIdStartingWithAllIgnoreCase(emailId);
-	return profilesList;
-	}
-	
-	
+
 	public List<Profile> getProfilesByJobcodeProfile(String jobcodeProfile) {
 		List<Profile> profilesList = profileIndexRepository.findProfilesByJobcodeProfileStartingWithAllIgnoreCase(jobcodeProfile);
 		return profilesList;
