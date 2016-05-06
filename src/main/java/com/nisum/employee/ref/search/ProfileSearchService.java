@@ -17,6 +17,9 @@ public class ProfileSearchService {
 	@Autowired
 	private ProfileIndexRepository profileIndexRepository;
 	
+	@Autowired
+	private ProfileIndexQueryRepository profileIndexQueryRepository;
+	
 	public List<Profile> getAllProfiles() throws Exception {
 		Iterable<Profile> profile = profileIndexRepository.findAll();
 		List<Profile> porofileList = Lists.newArrayList(profile);
@@ -31,12 +34,8 @@ public class ProfileSearchService {
 		return porofileList;
 	}
 	
-	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String emailId, String name, String designation) throws Exception {
-		List<Profile> profilesList = profileIndexRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(emailId,name,designation);
-//		Collections.sort(profilesList,new Comparator<Profile>(){
-//            public int compare(Profile o1, Profile o2){
-//            	return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
-//            }});
+	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String data) throws Exception {
+		List<Profile> profilesList = profileIndexQueryRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(data);
 		return profilesList;
 	}
 	

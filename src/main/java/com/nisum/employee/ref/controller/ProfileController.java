@@ -70,10 +70,8 @@ public class ProfileController {
 		if (searchText != null && searchText.isEmpty()) {
 			positionsDetails = profileSearchService.getAllProfiles();
 		} else if (searchText != null && !searchText.isEmpty()) {
-			positionsDetails = profileSearchService.getProfilesByEmailIdOrByNameOrByDesignation(searchText,searchText,searchText);
-		} /*else if (searchText != null && !searchText.isEmpty() && positionsDetails != null && positionsDetails.isEmpty()) {
-			positionsDetails = profileSearchService.getProfilesByJobcodeProfile(searchText);
-		}*/
+			positionsDetails = profileSearchService.getProfilesByEmailIdOrByNameOrByDesignation(searchText);
+		} 
 		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
 

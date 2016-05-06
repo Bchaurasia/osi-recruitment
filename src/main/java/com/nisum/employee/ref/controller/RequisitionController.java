@@ -40,8 +40,7 @@ public class RequisitionController {
 			@RequestParam(value = "searchRequisition", required = true) String searchRequisition) throws Exception {
 		List<Requisition> requisitionsDetails = null;
 		if (!searchRequisition.isEmpty()) {
-			requisitionsDetails = requisitionSearchService.getRequisitionReqIdOrPositionOrClientByNameOrStatus(
-					searchRequisition, searchRequisition, searchRequisition);
+			requisitionsDetails = requisitionSearchService.getRequisitionReqIdOrPositionOrClientByNameOrStatus(searchRequisition);
 		} else {
 			requisitionsDetails = requisitionSearchService.getAllRequisitionDetails();
 		}

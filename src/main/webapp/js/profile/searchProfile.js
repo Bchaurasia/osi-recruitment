@@ -15,9 +15,7 @@ app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','sharedSer
 	function setProfiles(data)
 	{
 		$scope.profiles = data;
-		if($scope.profiles.length<appConstants.ITEMS_PER_PAGE){
 			$scope.currentPage = 0;
-		}
 	}
 	$scope.title = "Search";
 		$scope.editProfile = function(data) {

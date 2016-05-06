@@ -22,6 +22,10 @@ public class RequisitionSearchService {
 	@Autowired
 	private RequisitionIndexRepository requisitionIndexRepository;
 	
+	@Autowired
+	private RequisitionIndexQueryRepository requisitionIndexQueryRepository;
+	
+	
 	public List<Requisition> getAllRequisitionDetails() throws Exception {
 		Iterable<Requisition> requisition = requisitionIndexRepository.findAll();
 		List<Requisition> interviewDetailsList = Lists.newArrayList(requisition);
@@ -36,14 +40,8 @@ public class RequisitionSearchService {
 		return interviewDetailsList;
 	}
 	
-	public List<Requisition> getRequisitionReqIdOrPositionOrClientByNameOrStatus(String requisitionId,String position, String client) throws Exception {
-		Requisition requisition;
-		List<Requisition> requisitionList = requisitionIndexRepository.findByPositionStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWithOrderByUpdatedDateDesc(requisitionId, position, client,client.toUpperCase());
-		if(requisitionList.isEmpty()){
-			requisition=requisitionIndexRepository.findOne(requisitionId);
-			requisitionList=new ArrayList<>();
-			requisitionList.add(requisition);
-		}
+	public List<Requisition> getRequisitionReqIdOrPositionOrClientByNameOrStatus(String data) throws Exception {
+		List<Requisition> requisitionList = requisitionIndexQueryRepository.findByRequisitionDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWithOrderByUpdatedDateDesc(data);
 		return requisitionList;
 	}
 	
