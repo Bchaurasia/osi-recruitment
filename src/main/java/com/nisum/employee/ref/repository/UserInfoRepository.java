@@ -77,7 +77,7 @@ public class UserInfoRepository{
 		user1.equals(user) ;
 		Update update = new Update();
 		update.set("name", user.getName());
-		update.set("dob", user.getDob());
+		//update.set("dob", user.getDob());
 		update.set("location", user.getLocation());
 		update.set("roles", user.getRoles());
 		update.set("skills", user.getSkills());

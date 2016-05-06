@@ -37,7 +37,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 	
 	clientService.getClientInfo().then(setClientList);
 	
-	$scope.birthDate = new Date($scope.userToEdit.dob);
+	//$scope.birthDate = new Date($scope.userToEdit.dob);
 	
 	function setClientList(data){
 		angular.forEach(data, function(client){
@@ -47,7 +47,7 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 	
 	$scope.update = function(){
 		var validate=$scope.validateSave($scope.userToEdit);
-		$scope.userToEdit.dob = $scope.birthDate;
+		//$scope.userToEdit.dob = $scope.birthDate;
 		if(validate){
 		userService.updateUser($scope.userToEdit)
 			.then(function(msg){
@@ -90,14 +90,14 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 		return false;
 	}
 	
-	$scope.validateDate =  function(){
+	/*$scope.validateDate =  function(){
 		var date=new Date();
 		if(date<$scope.userToEdit.dob){
 			$scope.message = "select Proper Date";
 			$scope.adminCls=appConstants.ERROR_CLASS;
 			$timeout( function(){ $scope.alHide(); }, 5000);
 		}
-	}
+	}*/
 	
 	$scope.editRoles = function(){
 		$scope.hideRoles = false;
