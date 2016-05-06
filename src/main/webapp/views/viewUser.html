@@ -1,5 +1,6 @@
 <br>
 <br>
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 <div class="row" ng-controller="editUserCtrl">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion"
@@ -49,12 +50,12 @@
 			</div>
 
 			<div class="row">
-				<div class="input-field col s6">
+				<!-- <div class="input-field col s6">
 					<input type="date" ng-model="birthDate"
 						max="{{todayDate | date : 'yyyy-MM-dd' }}" id="birthDate" required>
 					<label>Date Of Birth <b class="mandatory">*</b>
 					</label>
-				</div>
+				</div> -->
 				<div class="input-field col s6">
 					<label>Location </label> <input class="form-control" type="text"
 						ng-model="user.location">
