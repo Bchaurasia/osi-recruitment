@@ -3,6 +3,10 @@ package com.nisum.employee.ref.service;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doReturn;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.google.common.collect.Lists;
 import com.nisum.employee.ref.domain.ClientInfo;
+import com.nisum.employee.ref.domain.Interviewer;
+import com.nisum.employee.ref.domain.RoundUser;
 import com.nisum.employee.ref.repository.ClientInfoRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -49,7 +56,7 @@ public class ClientInfoServiceTest {
 	@Test
 	public void shouldGetInterviewerNames() throws Exception {			
 		
-/*//		clientInfoService.getClientDetails();
+		clientInfoService.getClientDetails();
 		
 		List<String> interviewerNames = Lists.newArrayList();
 		List<ClientInfo> clients = Lists.newArrayList(new ClientInfo());
@@ -71,16 +78,16 @@ public class ClientInfoServiceTest {
 		technicalRound1.add(roundUser);
 		interviewer.setTechnicalRound1(technicalRound1);
 		clientInfo1.setInterviewers(interviewer);
-		
+		clients.removeAll(clients);
 		clients.add(clientInfo1);
 		
 		for (ClientInfo clientInfo : clients) {
 			Interviewer interviewers = clientInfo.getInterviewers();
 			String interviewerName = interviewers.getTechnicalRound1().get(0).getName();
 			interviewerNames.add(interviewerName);
-		}*/
+		}
 		clientInfoService.getInterviewerNames();
-		verify(clientInfoRepository, times(1)).getClientDetails();
+		verify(clientInfoRepository, times(2)).getClientDetails();
 	}
 	
 	@Test
