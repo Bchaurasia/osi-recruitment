@@ -11,7 +11,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.disabled = false;
 	$scope.disableCreateBtn = false;
 	$scope.disabled1 = false;
-	$scope.disabled2 = true;
 	$scope.commentBox = false;
 	$scope.commentBtn = true;
 	$scope.JobDesBtn = true;
@@ -22,7 +21,9 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.minExpYear=[];
 	$scope.maxExpYear=[];
 	$scope.clientList=[];
-	$scope.approvals = [];
+	$scope.approval1 = [];
+	$scope.approval2 = [];
+	
 	$scope.hr = [];
 	$scope.requisition ={};
 	$scope.approver={};
@@ -45,6 +46,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.skill=[];
 	$scope.today = new Date();
 	$scope.qualification = $scope.info.qualification;
+	$scope.previousApprover2=false;
 	
 	$scope.lengthOfQualifications = function() {
 		if($scope.requisition.qualifications.length == 1){
@@ -66,7 +68,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 				percent:'70'
 		};
 		$scope.requisition.qualifications.push(addQualification);
-		checkForEnableCreateButton();
 	};
 	
 	$scope.checkDisability = function(qualification){
@@ -104,10 +105,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.hideJobDes = function(){
 		$scope.JobDesBox = false;
 		$scope.JobDesBtn = true;
-	}
-	$scope.approverfield = function(){
-		$scope.disabled2 = false;
-		checkForEnableCreateButton();
 	}
 	
 	designationService.getDesignation().then(function(data){
@@ -157,7 +154,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			 $scope.disabled = false;
 			 $scope.reqErr = false;
 		}
-		 checkForEnableCreateButton();
 	}
 	
 	$scope.min = function(minValue){
@@ -171,7 +167,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.minErr = false;
 			$scope.disabled1 = false;
 		}
-		checkForEnableCreateButton();
 	}
 	
 	$scope.max = function(maxValue){
@@ -188,7 +183,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.maxErr = false;
 			$scope.disabled = false;
 		}
-		checkForEnableCreateButton();
 	}
 	
 	$scope.reqDate = function(requisitionDate,targetDate){
@@ -207,7 +201,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			 $scope.disabled = false;
 			 $scope.targetErr = false;
 		}
-		checkForEnableCreateButton();
 	}
 	
 
@@ -234,11 +227,15 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		// $scope.users = data;
 			var	approverUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });
 			angular.forEach(approverUser,function(user){
-					var approval1={};
-					approval1.name = user.name;
-					approval1.emailId = user.emailId;
-					$scope.approvals.push(approval1);
+					var approval={};
+					approval.name = user.name;
+					approval.emailId = user.emailId;
+					$scope.approval1.push(approval);
 				});
+			//$scope.approval1 =_.sortBy($scope.approval1, 'name');
+			$scope.approval2 = angular.copy($scope.approval1);
+			
+			
 			var	hrUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 
 			angular.forEach(hrUser,function(user){
@@ -298,13 +295,18 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.requisition.jobTitle = $scope.jobDescription.jobDescriptionName;
 	 }
 	
-	
-	function checkForEnableCreateButton(){
-		var length=$scope.requisition.qualifications.length;
-		if($scope.requisition.qualifications[length-1].qualification == "" || $scope.requisition.approval1.name == ""){
-			$scope.disableCreateBtn  =  true;
-		}else{
-			$scope.disableCreateBtn  =  false;
-		}
-	}
+	 
+   $scope.updateApprover1DropdownValue = function(selectedApprover2){
+	   
+	   if($scope.previousApprover2 && $scope.approval2Temp != undefined)
+		   {
+		   $scope.approval1.push($scope.approval2Temp);
+		   }
+	   $scope.approval2Temp= angular.copy(selectedApprover2);
+		
+	   $scope.approval1 = _.without( $scope.approval1, _.findWhere($scope.approval1, {emailId: selectedApprover2.emailId}));
+		
+	   $scope.previousApprover2  = true;
+		 
+	 }
 }]);

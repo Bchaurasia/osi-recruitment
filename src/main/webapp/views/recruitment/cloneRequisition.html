@@ -169,15 +169,15 @@
 				<div class="input-field col s6">
 					<select placeholder="Select Approver 1" ng-model="requisition.approval1"
 						ng-disabled="disApproval1"
-						ng-options="o.name for o in approvals track by o.emailId"
+						ng-options="o.name for o in approval1 track by o.emailId"
 						class="form-control input-sm" required>
 						<option>Select Approver 1</option>
 					</select> <label>Approver 1<b class="mandatory">*</b></label>
 				</div>
 				<div class="input-field col s6" ng-hide="hideApproval2">
 					<select placeholder="Select Approver 2" ng-model="requisition.approval2"
-						ng-disabled="disApproval2"
-						ng-options="o.name for o in approvals track by o.emailId"
+						ng-disabled="disApproval2" ng-change="updateApprover1DropdownValue(requisition.approval2)"
+						ng-options="o.name for o in approval2 | filter: { emailId: '!'+requisition.approval1.emailId} track by o.emailId"
 						class="form-control input-sm">
 						<option value="">Select Approver 2</option>
 					</select> <label>Approver 2</label> 
