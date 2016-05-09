@@ -6731,6 +6731,7 @@ nav ul a span.badge {
   margin-left: auto;
   left: auto;
   right: auto;
+  padding: 5px;
 }
 
 .row .col.s4 {

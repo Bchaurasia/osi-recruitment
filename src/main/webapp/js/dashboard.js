@@ -65,6 +65,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		dashboardService.getScheduleData()
 		.then(function (data){
 			$scope.showScheduleData = data;
+			console.debug(angular.toJson($scope.showScheduleData));
 			if(data == "" || data == null || data == undefined){
 				$scope.hideNoInterviewMsg = false;
 			}

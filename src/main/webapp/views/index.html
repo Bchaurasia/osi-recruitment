@@ -124,7 +124,7 @@
 							style="cursor: pointer;"
 							ng-click="showInterviewDetails(schedule.interviewId,schedule.round)">{{schedule.cname}}</a></span>
 						<span  class="col s3">{{schedule.interviewerName}} </span>	
-						<span class="col s3">{{schedule.round}}</span>
+						<span class="col s3">{{schedule.progress}}</span>
 						<span class="col s3">{{schedule.date | date:'medium'}}</span>
 					</div>
 				</li>
@@ -159,7 +159,7 @@
 					</div>
 				</li>
 				<li ng-show="showNoInterviewMsg">
-					<p style="color: red;">No Upcoming Interviews.</p>
+					<p style="color: red;">No Scheduled Interviews.</p>
 				</li>
 			</ul>
 		</div>
