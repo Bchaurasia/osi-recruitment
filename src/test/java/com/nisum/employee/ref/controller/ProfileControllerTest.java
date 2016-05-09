@@ -99,22 +99,22 @@ public class ProfileControllerTest {
 	}
 	
 	@Test
-	public void shouldSearchProfileToGetAllProfiles() throws Exception {
+	public void shouldSearchProfileToGetAllProfilesIfSearchQueryIsEmpty() throws Exception {
 		
 		List<Profile> profile = Lists.newArrayList(new Profile());
 		doReturn(profile).when(profileSearchService).getAllProfiles();
 		
-		mockMvc.perform(get("/searchProfile")).andExpect(status().isOk());
+		mockMvc.perform(get("/searchProfile?searchQuery="+"")).andExpect(status().isOk());
 		
 	}
-	
+		
 	@Test
 	public void shouldSearchToGetProfilesByEmailIdOrByNameOrByDesignation() throws Exception {
 		
 		List<Profile> profile = Lists.newArrayList(new Profile());
 		doReturn(profile).when(profileSearchService).getProfilesByEmailIdOrByNameOrByDesignation(anyString());
 		
-		mockMvc.perform(get("/searchProfile")).andExpect(status().isOk());
+		mockMvc.perform(get("/searchProfile?searchQuery="+any(String.class))).andExpect(status().isOk());
 		
 	}
 	
@@ -161,33 +161,8 @@ public class ProfileControllerTest {
 		
 		mockMvc.perform(post("/status?emailId="+any(String.class)+"&status="+any(String.class))).andExpect(status().isOk());
 		
-	}
-	
-	/*@Test
-	public void shouldDownloadOndemandOrder() throws Exception {
-		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);;
-
-        //GridFSDBFile file = mock(GridFSDBFile.class);
-        //when(file.getInputStream()).thenReturn(IOUtils.toInputStream(content));
-        //when(file.getLength()).thenReturn((long) content.length());
-        //when(file.getContentType()).thenReturn("application/json");
-        
-		List<GridFSDBFile> files = Lists.newArrayList(new GridFSDBFile());
+	}	
 		
-		doReturn(files).when(profileService).getFileData("abc@abc.com");
-		//response = new MockHttpServletResponse();
-		//GridFSDBFile file = files.get(0);
-		//response.setContentType(file.getContentType().toString());
-		//response.setContentLength((new Long(file.getLength()).intValue()));
-        //IOUtils.copyLarge(file.getInputStream(), response.getOutputStream());
-        
-		mockMvc.perform(get("/fileDownload?candidateId=abc@abc.com")).andExpect(status().isOk());
-		
-		//verify(profileService, times(1)).getFileData(anyString());
-		//mockMvc.perform(get("/fileDownload?candidateId=abc@abc.com").
-				//content(response.toString().getBytes())).andExpect(status().isOk());
-	}*/
-	
 	@Test
 	public void shouldGetProfileByReferralEmail() throws Exception {
 		
