@@ -32,7 +32,7 @@ public class RequisitionRepository {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("requisitionId").is(requisition.getRequisitionId()));
 		Requisition req = mongoOperations.findOne(query, Requisition.class);
-		req.setUpdatedDate(new Date());
+		requisition.setUpdatedDate(new Date());
 		if (req != null) {
 			query.fields().include("requisitionId");
 			Update update = new Update();
@@ -52,7 +52,7 @@ public class RequisitionRepository {
 			update.set("requisitionManager", requisition.getRequisitionManager());
 			update.set("createdBy", requisition.getCreatedBy());
 			update.set("updatedBy", requisition.getUpdatedBy());
-			update.set("updatedDate", req.getUpdatedDate());
+			update.set("updatedDate", requisition.getUpdatedDate());
 			update.set("status", requisition.getStatus());
 			update.set("jobTitle", requisition.getJobTitle());
 			if (requisition.getApproval2() != null) {
