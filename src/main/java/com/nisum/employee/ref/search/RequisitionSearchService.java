@@ -29,14 +29,14 @@ public class RequisitionSearchService {
 	public List<Requisition> getAllRequisitionDetails() throws Exception {
 		Iterable<Requisition> requisition = requisitionIndexRepository.findAll();
 		List<Requisition> interviewDetailsList = Lists.newArrayList(requisition);
-		try{
+	/*	try{
 			Collections.sort(interviewDetailsList,new Comparator<Requisition>(){
 				public int compare(Requisition o1, Requisition o2){
 					return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
 				}});
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		}*/
 		return interviewDetailsList;
 	}
 	

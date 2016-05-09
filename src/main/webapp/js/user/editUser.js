@@ -22,11 +22,11 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 	
 	$scope.successHide = true;
 	
-	$scope.birthDate = new Date($scope.user.dob);
+	//$scope.birthDate = new Date($scope.user.dob);
 	$scope.update = function(){
-		$scope.user.dob = $scope.birthDate;
+		//$scope.user.dob = $scope.birthDate;
 		data = userService.updateUser($scope.user).then(function(msg){
-			$scope.sendNotification(msg,'#/viewUser');
+			$scope.sendNotification(msg,'/viewUser');
 		}).catch(function(msg){
 			$scope.message=msg;
 			$scope.cls=appConstants.ERROR_CLASS;

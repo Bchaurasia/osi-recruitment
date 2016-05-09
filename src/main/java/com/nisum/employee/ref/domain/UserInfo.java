@@ -14,7 +14,7 @@ public class UserInfo {
 	@Id
 	String emailId;
 	String name;
-	String dob;
+	//String dob;
 	String doj;
 	String skypeId;
 	String location;

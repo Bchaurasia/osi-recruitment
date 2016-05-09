@@ -6,7 +6,8 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	$scope.pskills=$scope.info.skills;
 	$scope.qualification = $scope.info.qualification;
 	$scope.designation1=[];
-	$scope.approvals=[];
+	$scope.approval1 = [];
+	$scope.approval2 = [];
 	$scope.requisitionManager=[];
 	$scope.client =[];
 	var id = sharedService.getRequisitionId();
@@ -29,6 +30,7 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	$scope.disabled1 = false;
 	$scope.maxErr = false;
 	$scope.minErr = false;
+	 $scope.previousApprover2  = false;
 	$scope.init = function() {
 		if(id == undefined) {
 			$state.go("recruitment.searchRequisition");
@@ -90,9 +92,10 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 				var approver={};
 				approver.emailId = user.emailId;
 				approver.name = user.name;
-				$scope.approvals.push(approver);
+				$scope.approval1.push(approver);
 			});
-		$scope.approvals =_.sortBy($scope.approvals, 'name');
+		//$scope.approvals =_.sortBy($scope.approvals, 'name');
+		$scope.approval2 = angular.copy($scope.approval1);
 		
 		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
@@ -260,4 +263,18 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			}
 			 $scope.reqErr = false;
 		}
+	 
+	 $scope.updateApprover1DropdownValue = function(selectedApprover2){
+		   
+		   if($scope.previousApprover2 && $scope.approval2Temp != undefined)
+			   {
+			   $scope.approval1.push($scope.approval2Temp);
+			   }
+		   $scope.approval2Temp= angular.copy(selectedApprover2);
+			
+		   $scope.approval1 = _.without( $scope.approval1, _.findWhere($scope.approval1, {emailId: selectedApprover2.emailId}));
+			
+		   $scope.previousApprover2  = true;
+			 
+		 }
 }]);

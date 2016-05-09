@@ -1,4 +1,4 @@
-﻿<div ng-controller="editProfileController as model" class="container-fluid">
+<div ng-controller="editProfileController as model" class="container-fluid">
     <div class="row">
         <div class="col-md-6">
             <form name="profileForm" ng-submit="model.submit()" novalidate>
@@ -27,10 +27,10 @@
                     <label for="phone">Your phone number:</label>
                     <input type="tel" id="phone" name="phone" placeholder="Phone" ng-model="model.user.phone">
                 </div>
-                <div forminput>
+                <!-- <div forminput>
                     <label for="dob">Birthdate:</label>
                     <input type="date" id="dob" name="dob" ng-model="model.user.birthdate">
-                </div>
+                </div> -->
                 <div forminput>
                     <label for="age">Age:</label>
                     <input type="number" id="age" name="age" placeholder="Age" min="1" max="110" ng-model="model.user.age">

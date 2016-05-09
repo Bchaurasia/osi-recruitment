@@ -158,16 +158,16 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select placeholder="Select Approver 1"
-					ng-model="requisition.approval1" ng-change="approverfield()"
-					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					ng-model="requisition.approval1"
+					ng-options="o.name for o in approval1"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
 				<select placeholder="Select Approver 2"
-					ng-model="requisition.approval2"
-					ng-options="o.name for o in approvals | orderBy:'toString()'"
+					ng-model="requisition.approval2" ng-change="updateApprover1DropdownValue(requisition.approval2)"
+					ng-options="o.name for o in approval2 | filter: { emailId: '!'+requisition.approval1.emailId}"
 					class="form-control input-sm">
 					<option value="">Select Approver 2</option>
 				</select> <label>Approver 2</label>
@@ -175,7 +175,7 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="CreateRequisition.$invalid || disabled || disabled1 || disabled2 || disableCreateBtn"
+				ng-disabled="CreateRequisition.$invalid || disabled || disabled1 || disableCreateBtn"
 				ng-click="submit()" ui-sref="recruitment.searchRequisition">
 				<span class="glyphicon glyphicon-ok-circle"></span> Create
 			</button>

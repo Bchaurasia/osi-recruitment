@@ -25,7 +25,7 @@ public class PositionSearchService {
 	public List<Position> getAllPostions() {
 		Iterable<Position> position = positionIndexRepository.findAll();
 		List<Position> positionList = Lists.newArrayList(position);
-		try {
+		/*try {
 			Collections.sort(positionList, new Comparator<Position>() {
 				public int compare(Position o1, Position o2) {
 					return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
@@ -33,7 +33,7 @@ public class PositionSearchService {
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		return positionList;
 	}

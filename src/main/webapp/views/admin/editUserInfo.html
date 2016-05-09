@@ -52,17 +52,25 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="input-field col s6">
+							<!-- <div class="input-field col s6">
 								
 								<input type="date" ng-model="birthDate"
 									max="{{todayDate | date : 'yyyy-MM-dd' }}"
 									id="birthDate" required name="birthDate"> 
 									<label>DOB<b class="mandatory">*</b>
-							</div>
+							</div> -->
 							<div class="input-field col s6">
 								<input class="form-control" type="text"
 									ng-pattern="/^[a-zA-Z _]*$/" ng-model="userToEdit.location"
 									required> <label>Location<b class="mandatory">*</b></label>
+							</div>
+							<div class="input-field col s6">
+								<ui-select multiple ng-model="userToEdit.clientName"
+									theme="select2" ng-keypress="myFunct($event)"> <ui-select-match
+									placeholder="Select Clients..">{{$item}}</ui-select-match> <ui-select-choices
+									repeat="client in clientList | orderBy:'toString()' | filter:$select.search">
+								{{client}}</ui-select-choices> </ui-select>
+								<label style="position: absolute; top: -22px;">Clients</label>
 							</div>
 						</div>
 						<div class="row">
@@ -85,7 +93,7 @@
 							</div>
 						</div>
 						<br>
-						<div class="row">
+						<!-- <div class="row">
 							<div class="input-field col s6">
 								<ui-select multiple ng-model="userToEdit.clientName"
 									theme="select2" ng-keypress="myFunct($event)"> <ui-select-match
@@ -95,7 +103,7 @@
 								<label style="position: absolute; top: -22px;">Clients</label>
 							</div>
 						</div>
-
+ -->
 						<!-- <div class="card teal lighten-2" ng-init="isCollapsed = !isCollapsed">
 							<span style="color: grey; font-size: large;">Time Slots</span>
 							<div class="card-action">

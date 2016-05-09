@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.nisum.employee.ref.domain.Position;
+import com.nisum.employee.ref.domain.PositionAggregate;
 import com.nisum.employee.ref.search.PositionSearchService;
 import com.nisum.employee.ref.service.PositionService;
 import com.nisum.employee.ref.util.MockTestUtil;
@@ -105,13 +106,103 @@ public class PositionControllerTest {
 	}
 	
 	@Test
-	public void shouldsearchPositionsbyQuery() throws Exception {
-		List<Position> positions=   Lists.newArrayList(new Position());
+	public void shouldSearchPositionsByQuery() throws Exception {
+		List<Position> positions = Lists.newArrayList(new Position());
 		when(positionSearchService.getPostionByDesignationOrClient(any(String.class))).thenReturn(positions);
 
 		mockMvc.perform(
 				get("/searchPositionsBySearchQuery?searchQuery="+any(String.class))).andExpect(status().isOk());
 
 	}
+	
+	@Test
+	public void shouldRetrievePositionsBasedOnJobCode() throws Exception {
+		Position position = new Position();
+		when(positionService.retrievePositionsbasedOnJobCode(any(String.class))).thenReturn(position);
+		
+		mockMvc.perform(
+				get("/searchPositionsBasedOnJobCode?jobcode="+any(String.class))).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void shouldNotRetrievePositionsBasedOnJobCode() throws Exception {
+		
+		when(positionService.retrievePositionsbasedOnJobCode(any(String.class))).thenReturn(null);
+		
+		mockMvc.perform(
+				get("/searchPositionsBasedOnJobCode?jobcode="+any(String.class)).contentType(MediaType.APPLICATION_JSON).
+				content("")).andExpect(status().isNotFound());	
+				
+	}
+	
+	@Test
+	public void shouldRetrievePositionsBasedOnRequisitionId() throws Exception {
+		List<Position> positions = Lists.newArrayList(new Position());
+		when(positionService.retrievePositionsbasedOnRequisitionId(any(String.class))).thenReturn(positions);
+		
+		mockMvc.perform(
+				get("/searchPositionsBasedOnRequisitionId?requisitionId="+any(String.class))).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void shouldNotRetrievePositionsBasedOnRequisitionId() throws Exception {
+		
+		when(positionService.retrievePositionsbasedOnRequisitionId(any(String.class))).thenReturn(null);
+		
+		mockMvc.perform(
+				get("/searchPositionsBasedOnRequisitionId?requisitionId="+any(String.class)).contentType(MediaType.APPLICATION_JSON).
+				content("")).andExpect(status().isNotFound());	
+				
+	}
+	
+	@Test
+	public void shouldRetrievesearchPositionbasedOnLocation() throws Exception {
+		List<Position> positions = Lists.newArrayList(new Position());
+		when(positionService.retrievePositionbasedOnLocation(any(String.class))).thenReturn(positions);
+		
+		mockMvc.perform(
+				get("/searchPositionBasedOnLocation?location="+any(String.class))).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void shouldNotRetrievesearchPositionbasedOnLocation() throws Exception {
+		
+		when(positionService.retrievePositionbasedOnLocation(any(String.class))).thenReturn(null);
+		
+		mockMvc.perform(
+				get("/searchPositionBasedOnLocation?location="+any(String.class)).contentType(MediaType.APPLICATION_JSON).
+				content("")).andExpect(status().isNotFound());	
+				
+	}
+	
+	@Test
+	public void shouldRetrieveAllPositionsAggregate() throws Exception {
+		List<PositionAggregate> positions = Lists.newArrayList(new PositionAggregate());
+		when(positionService.retrieveAllPositionsAggregate()).thenReturn(positions);
+		
+		mockMvc.perform(
+				get("/getPositionsByAggregation")).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void shouldNotRetrieveAllPositionsAggregate() throws Exception {
+		
+		when(positionService.retrieveAllPositionsAggregate()).thenReturn(null);
+		
+		mockMvc.perform(
+				get("/getPositionsByAggregation").contentType(MediaType.APPLICATION_JSON).
+				content("")).andExpect(status().isNotFound());	
+				
+	}
+	
+	@Test
+	public void shouldRetrievePositionsBasedOnPositionType() throws Exception {
+		List<Position> positions = Lists.newArrayList(new Position());
+		when(positionService.retrievePositionsbasedOnPositionType(any(String.class))).thenReturn(positions);
+		
+		mockMvc.perform(
+				get("/searchPositionsBasedOnPositionType?positionType="+any(String.class))).andExpect(status().isOk());
+	}
+	
 	
 }

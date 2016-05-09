@@ -28,7 +28,7 @@
 			</thead>
 			<tbody> 
 				<tr class="animate-repeat"
-					ng-repeat="profile in filtered = (profiles | filter:search) | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+					ng-repeat="profile in filtered = (profiles | filter:search) | orderBy:'-updatedDate' | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a></td>
