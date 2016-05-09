@@ -29,7 +29,7 @@
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="data in positions | orderBy:'data.updatedDate'  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
+					ng-repeat="data in positions | orderBy:'-updatedDate'  | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editPosition(data.jobcode)">{{data.jobcode}}</a></td>
