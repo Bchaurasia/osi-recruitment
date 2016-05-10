@@ -4,6 +4,7 @@ apply plugin: "java"
 apply plugin: "eclipse"
 apply plugin: "war"
 apply plugin: "jacoco"
+apply plugin: "jetty"	
 
 buildscript {
   repositories {
@@ -121,6 +122,15 @@ test {
         classDumpFile = file("$buildDir/jacoco/classpathdumps")
     }         
 }
+
+jettyRunWar {
+    httpPort = 9000
+}
+
+jettyRunWar.stopPort = 8090
+jettyRunWar.stopKey = 'stopKey'
+jettyStop.stopPort = 8090
+jettyStop.stopKey = 'stopKey'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.11'
