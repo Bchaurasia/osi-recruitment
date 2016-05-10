@@ -24,7 +24,7 @@ app.controller('searchRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		 $timeout(function() {
 			 requisitionService.searchRequisition($scope.searchTxt).then(setRequisition);
 			 blockUI.stop();
-		 }, 700);
+		 }, 1000);
 	 }
 	 
 	 function setRequisition(data){
