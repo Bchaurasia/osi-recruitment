@@ -240,7 +240,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	};
 	
 	$scope.validateMobileNo = function(mobileNo){
-		if(mobileNo.length<10 || mobileNo.length>10){
+		if(mobileNo.length<13 || mobileNo.length>13){
 			$scope.mobileNoError = true;
 		}else{
 			$scope.mobileNoError = false;
@@ -248,7 +248,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	};
 	
 	$scope.validateAltMobileNo = function(mobileNo){
-		if(mobileNo.length<10 || mobileNo.length>10){
+		if(mobileNo.length<13 || mobileNo.length>13){
 			$scope.altMobileNoError = true;
 		}else{
 			$scope.altMobileNoError = false;

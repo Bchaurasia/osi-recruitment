@@ -39,10 +39,14 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input class="form-control" ng-change="validatePhNo($data)" placeholder="Enter 10 digit number"
-									ng-pattern="/^(\+91[\-\s]?)?[89]\d{9}$/" maxlength="13" type="text"
+								<input class="form-control" ng-change="validatePhNo($data)" placeholder="Enter 10 digit number" name="mobileNo"
+									ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/" maxlength="13" type="text"
 									ng-model="userToEdit.mobileNumber" required> <label>Mobile<b
 									class="mandatory">*</b></label>
+									<span class="validation-error"
+					                  ng-show="(EditUserInfo.mobileNo.$dirty || invalidSubmitAttempt) && EditUserInfo.mobileNo.$error.pattern">
+					                    Mobile number should be numeric and 10 digit number</span>
+			                      
 							</div>
 							<div class="input-field col s6">
 								<input class="form-control" ng-change="validateSkypeId($data)"
