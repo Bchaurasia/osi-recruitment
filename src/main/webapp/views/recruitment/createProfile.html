@@ -63,10 +63,10 @@
 				<label style="position: absolute; top: -22px;">Mobile Number
 					<b class="mandatory">*</b>
 				</label> <input type="text" placeholder="Enter Mobile number"
-					name="mobileNo" class="form-control" ng-change="toggleProDisable()"
+					name="mobileNo" class="form-control"
 					ng-blur="validateMobileNo(candidate.mobileNo)"
-					ng-model="candidate.mobileNo" ng-pattern="/^[0-9]+$/"
-					maxlength="10" required> <span class="validation-error"
+					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"
+					maxlength="13" required> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
 					provide a MobileNo</span>
 
@@ -79,10 +79,10 @@
 			</div>
 
 			<div class="input-field col s6">
-				<input placeholder="Enter alternate Mobile number"
-					name="altmobileNo" class="form-control" type="text"
-					numbers-only="numbers-only" ng-model="candidate.altmobileNo"
-					maxlength="10" ng-pattern="/^[0-9]+$/"> <label
+				<input type="text" placeholder="Enter alternate Mobile number"
+					name="altmobileNo" class="form-control"
+					ng-model="candidate.altmobileNo"
+					maxlength="13" ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"> <label
 					style="position: absolute; top: -22px;">Alternate Mobile
 					Number </label>
 				<div class="validation-error"

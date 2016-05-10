@@ -212,7 +212,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	})
 	
 	$scope.validateMobileNo = function(mobileNo){
-		if(mobileNo.length<10 || mobileNo.length>10){
+		if(mobileNo.length<13 || mobileNo.length>13){
 			$scope.mobileNoError = true;
 		}else{
 			$scope.mobileNoError = false;
