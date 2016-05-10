@@ -1,4 +1,4 @@
-/*This test validates that it is able to login and logout of Recruitment Portal*/
+/*This test validates that it is able to login and logout of Recruitment Portal with different users*/
 //Author: akakade
 
 package com.nisum.employee.ref.login;
