@@ -81,7 +81,9 @@ angular.module('erApp')
 	
 	$scope.alHide =  function(){
 	    $scope.message = "";
-	    $scope.cls = '';
+	    $scope.cls = "";
+	    sharedDataService.setClass("");
+		sharedDataService.setmessage("");
 	}
 }]);
 
