@@ -57,11 +57,11 @@ function jobDescriptionService($http,$filter,$rootScope,$log,$q,$cacheFactory,ap
 	}
 	
 	function updateJobDescriptionSuccess(response){
-		return  response.config.data.jobDescriptionName + response.msg;
+		return  response.config.data.jobDescriptionName + " updated successfully";
 	}
 	
 	function createJobDescriptionSuccess(response){
-		return  response.config.data.jobDescriptionName + response.msg;
+		return  response.config.data.jobDescriptionName + " created successfully";
 	}
 	function sendErrorupdate(response){
 		 return $q.reject('Error in Updating Job Description');

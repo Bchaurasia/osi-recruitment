@@ -124,7 +124,7 @@
 							style="cursor: pointer;"
 							ng-click="showInterviewDetails(schedule.interviewId,schedule.round)">{{schedule.cname}}</a></span>
 						<span  class="col s3">{{schedule.interviewerName}} </span>	
-						<span class="col s3">{{schedule.round}}</span>
+						<span class="col s3">{{schedule.progress}}</span>
 						<span class="col s3">{{schedule.date | date:'medium'}}</span>
 					</div>
 				</li>
@@ -147,19 +147,21 @@
 				</li>
 				<li ng-repeat="schedule in showScheduleDataInterview">
 					<div class="collapsible-header row">
-						<span class="col s3">{{schedule.cname}}</span> <span
-							class="col s3">{{schedule.round}}</span> <span class="col s3">{{schedule.date
-							| date:'medium'}}</span> <span class="col s3"
+						<span class="col s3">{{schedule.cname}}</span> 
+						<span class="col s3">{{schedule.round}}</span>
+						 <span class="col s3">{{schedule.date | date:'medium'}}</span> 
+						  <span class="col s3">{{schedule.status}}</span> 
+						<!--  <span class="col s3"
 							ng-show="interviewDateTimeFuture(schedule.date)">Interview
 							Pending</span> <span class="col s3"
 							ng-show="interviewDateTimePastFeedbackPending(schedule.date,schedule.status)">Feedback
 							Pending</span> <span class="col s3"
 							ng-show="interviewDateTimePastFeedback(schedule.date,schedule.status)">Feedback
-							Submitted</span>
+							Submitted</span> -->
 					</div>
 				</li>
 				<li ng-show="showNoInterviewMsg">
-					<p style="color: red;">No Upcoming Interviews.</p>
+					<p style="color: red;">No Scheduled Interviews.</p>
 				</li>
 			</ul>
 		</div>
@@ -175,10 +177,10 @@
 					<span class="col s6"><b>Name</b></span>
 					 <span class="col s6"><b>Status</b></span></div>
 			</li>
-			<li ng-repeat="profile in prolilesData">
+			<li ng-repeat="profile in profileData">
 				<div class="collapsible-header row">
 					<b> <span class="col s6">{{profile.candidateName}}</span> <span
-						class="col s6">{{profile.status}}</span></b>
+						class="col s6">{{profile.progress}}</span></b>
 				</div>
 			</li>
 			<li ng-hide="hideNoStatusMsg">

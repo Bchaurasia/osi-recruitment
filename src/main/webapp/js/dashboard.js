@@ -8,7 +8,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.hideNoInterviewMsg = true;
 	$scope.hideNoStatusMsg = true;
 	$scope.hideNoRequisitionMsg = true;
-	$scope.prolilesData=[];
+	$scope.profileData=[];
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
 	$scope.showNoAppRequisitionMsg = false;
@@ -36,7 +36,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 	profileService.searchProfileById($rootScope.user.emailId).then(function(data)
 	{
-		$scope.prolilesData = data;
+		$scope.profileData = data;
 		if(data == "" || data == null || data == undefined){
 			$scope.hideNoStatusMsg = false;
 		}else{
@@ -106,6 +106,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
 		.then(function (data){
 			$scope.showScheduleDataInterview = data;
+			console.log(angular.toJson($scope.showScheduleDataInterview));
 			if(data == "" || data == null || data == undefined){
 				$scope.showNoInterviewMsg = true;
 			}
