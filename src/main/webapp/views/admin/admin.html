@@ -5,7 +5,7 @@
 	<div class="col-md-11" align="center">
 		<ul class="tabs">
 			<li ng-repeat="t in tabs" class="tab" role="presentation"><a
-				ng-class="{active: isActive(t.route)}" ui-sref="{{t.route}}">{{t.heading}}
+				ng-class="{active: isActive(t.route)}" ui-sref="{{t.route}}" ng-click="alHide()">{{t.heading}}
 			</a></li>
 		</ul>
 	</div>

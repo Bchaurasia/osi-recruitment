@@ -4,12 +4,12 @@
 		<ul class="tabs">
 			<li ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 				role="presentation" class="tab">
-				<a ng-class="{active: isActive('referral.searchReferralProfile')}" ui-sref="referral.searchReferralProfile">Profile</a>
+				<a ng-class="{active: isActive('referral.searchReferralProfile')}" ui-sref="referral.searchReferralProfile" ng-click="alHide()">Profile</a>
 			</li>
 			
 			<li ng-show="hasRole('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
 				role="presentation" class="tab">
-				<a ng-class="{active: isActive('referral.searchReferralPosition')}" ui-sref="referral.searchReferralPosition">Position</a>
+				<a ng-class="{active: isActive('referral.searchReferralPosition')}" ui-sref="referral.searchReferralPosition" ng-click="alHide()">Position</a>
 			</li>
 				
 		</ul>
