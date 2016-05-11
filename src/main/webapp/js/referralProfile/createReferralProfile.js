@@ -96,6 +96,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    	$scope.candidate.createdBy = $scope.user.emailId;
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	$scope.candidate.referredBy  = $scope.user.emailId;
+		    	$scope.candidate.profileSource = "Referral";
 		    	
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){

@@ -89,6 +89,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
 		    	$scope.candidate.createdBy = $scope.user.emailId;
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
+		    	$scope.candidate.profileSource = "Recruiter";
 		    	
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){

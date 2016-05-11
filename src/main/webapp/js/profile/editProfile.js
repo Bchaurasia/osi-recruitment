@@ -48,10 +48,12 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	});
 	profileService.getProfileById($scope.user).then(function(data){
 		$scope.candidate = data;
+		$scope.creator = _.find($scope.userData, function(user){ return user.emailId === $scope.candidate.createdBy});
 		$scope.candidate.mobileNo = $scope.candidate.mobileNo === null ? "" : $scope.candidate.mobileNo.substring(3, 13);
 		$scope.candidate.altmobileNo = $scope.candidate.altmobileNo === null ? "" : $scope.candidate.altmobileNo.substring(3, 13);
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
+		
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;

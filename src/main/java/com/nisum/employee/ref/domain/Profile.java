@@ -40,4 +40,5 @@ public class Profile extends AuditEntity{
 	String tenureMonth;
 	String screeningStatus;
 	String compatibilityStatus;
+	String profileSource;
 }
