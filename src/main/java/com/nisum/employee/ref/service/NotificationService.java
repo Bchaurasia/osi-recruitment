@@ -1,10 +1,7 @@
 package com.nisum.employee.ref.service;
 import java.io.File;
 import java.io.StringWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -124,7 +121,7 @@ public class NotificationService{
 
 		VelocityContext context = getVelocityContext(interviewSchedule.getCandidateName(), interviewSchedule.getJobcode(), interviewSchedule.getInterviewerName(), interviewSchedule.getRoundName());
 		context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
-		context.put(INTERVIEW_DATE_TIME, getDateTime(interviewSchedule.getInterviewDateTime()));
+		context.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context.put(MOBILE_NO, mobileNo);
 		context.put(ALTMOBILE_NO, altMobileNo);
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
@@ -138,7 +135,7 @@ public class NotificationService{
 		context2.put(MOBILE_NO, mobileNo);
 		context2.put(ALTMOBILE_NO, altMobileNo);
 		context2.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
-		context2.put(INTERVIEW_DATE_TIME, getDateTime(interviewSchedule.getInterviewDateTime()));
+		context2.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context2.put(SKYPE_ID, skypeId);
 
 		Template interviewerTemplate = getVelocityTemplate(SRC_INTERVIEWER_VM);
@@ -257,20 +254,7 @@ public class NotificationService{
 				});
 		return session;
 	}
-	private String getDateTime(String dateTime){
-			SimpleDateFormat formatter, FORMATTER;
-			formatter = new SimpleDateFormat(YYYY_MM_DD_T_HH_MM_SS_SSS_Z);
-			FORMATTER = new SimpleDateFormat(DD_MMM_YYYY_HH_MM);
-			Date convertedDate = null;
-			try {
-				convertedDate = formatter.parse(dateTime.substring(0, 24));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			return FORMATTER.format(convertedDate);
-	}
-
-
+		
 	public void sendJobRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
 			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
 
