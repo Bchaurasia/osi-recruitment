@@ -73,7 +73,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 					 $scope.candidate.status = "Not Initialized";
 				}
 				if($scope.candidate.altmobileNo !== undefined){
-					$scope.candidate.altmobileNo = $scope.countryCode+$scope.candidate.altmobileNo;
+					$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
 				}
 				else
 				{
@@ -81,7 +81,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				}
 		    	//$scope.candidate.profilecreatedBy = sessionStorage.userId;
 		    	$scope.candidate.plocation = $scope.selection.pLocation;
-		    	$scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
+		    	$scope.candidate.mobileNo = $scope.candidate.mobileNo;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	//$scope.candidate.profileTimeStamp = timeStamp;
@@ -211,13 +211,13 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		 $timeout( function(){ $scope.alHide(); }, 5000);
 	})
 	
-	$scope.validateMobileNo = function(mobileNo){
-		if(mobileNo.length<13 || mobileNo.length>13){
+	/*$scope.validateMobileNo = function(mobileNo){
+		if(mobileNo.length<10 || mobileNo.length>10){
 			$scope.mobileNoError = true;
 		}else{
 			$scope.mobileNoError = false;
 		}
-	};
+	};*/
  		
 	$scope.validateEmailId = function(emailId){
 		if(emailId != undefined){

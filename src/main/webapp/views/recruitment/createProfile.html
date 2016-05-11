@@ -64,7 +64,6 @@
 					<b class="mandatory">*</b>
 				</label> <input type="text" placeholder="Enter Mobile number"
 					name="mobileNo" class="form-control"
-					ng-blur="validateMobileNo(candidate.mobileNo)"
 					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"
 					maxlength="13" required> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please

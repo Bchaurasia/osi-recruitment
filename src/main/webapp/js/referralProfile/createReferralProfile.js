@@ -79,7 +79,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 					 $scope.candidate.status = "Not Initialized";
 				}
 				if($scope.candidate.altmobileNo !== undefined){
-					$scope.candidate.altmobileNo = $scope.countryCode+$scope.candidate.altmobileNo;
+					$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
 				}
 				else
 				{
@@ -87,7 +87,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				}
 		    	//$scope.candidate.profilecreatedBy = sessionStorage.userId;
 		    	$scope.candidate.plocation = $scope.selection.pLocation;
-		    	$scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
+		    	$scope.candidate.mobileNo = $scope.candidate.mobileNo;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	//$scope.candidate.profileTimeStamp = timeStamp;
