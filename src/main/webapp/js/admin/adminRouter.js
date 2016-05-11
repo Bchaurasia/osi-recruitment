@@ -156,5 +156,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$routeProvider', function($s
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
             }
-    	}});
+    	}})
+    	.state('admin.datasync', {url:'/datasync', views: {'': {templateUrl: 'views/admin/esDataSync.html', controller: 'esDataSyncCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}});;
 }]);

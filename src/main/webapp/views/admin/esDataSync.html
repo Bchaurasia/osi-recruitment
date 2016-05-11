@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	<h4 class="col-md-8 col-sm-8 col-xs-8" align="center">ES Data Sync</h4>
+</div>	
+<div class="row">
+	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
+	<form class="col s8" name="dataSyncForm" onvalidate
+		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
+		
+		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+		<div class="row" align="center">
+			<div class="input-field col s12">
+				<button class="btn btn-info active" type="submit" ng-click="deleteIndex()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Delete Data Index
+				</button>
+				<button class="btn btn-info active" type="submit" ng-click="updateIndex()">
+					<span class="glyphicon glyphicon-remove"></span> Update DataIndex
+				</button>
+			</div>
+		</div>
+</div>

@@ -45,5 +45,8 @@ public class InterviewService implements IInterviewService{
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
-
+	
+	public List<InterviewDetails> getAllInterviewDetails(){
+		return interviewRepository.getAllInterviewDetails();
+	}
 }
