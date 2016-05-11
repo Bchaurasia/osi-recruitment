@@ -24,7 +24,16 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	var interviewId = sharedService.getInterviewId();
 	console.log("Schedule Service : interviewId"+interviewId);
 	
+	$scope.disableSchedue =  function(){
+	    if($scope.data.date !== undefined){
+	    	$scope.disableSchedueBtn= false;
+	    }else
+	    	$scope.disableSchedueBtn= true;
+	}
 	$scope.setJobcode= function(requisitionId) {
+		$scope.interviewschedule.jobcode=undefined;
+		$scope.interviewschedule.roundName=null;
+		$scope.interviewerName=null;
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
 			$scope.positionObj=[];
 			$scope.jobcodelistObj=positions;
@@ -40,7 +49,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		}).catch(function(msg){
 			$log.error(msg);
 		});
-
 	}
 	
 	$scope.init = function() {
@@ -100,6 +108,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.setInterviewData= function(round) {
+		$scope.interviewerName=null;
 		if(round=== "Hr Round"){
 			userService.getHrUsers().then(function(userData){
 				 $scope.interviewerNames = userData;
@@ -140,7 +149,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			  $scope.message = round +" is already done.";
 			  $timeout( function(){ $scope.alHide(); }, 5000);		
 		}
-		
 	}
 	
 	$scope.alHide =  function(){
@@ -168,13 +176,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			  $scope.sendNotificationWithStyle(msg,cls,'recruitment/interviewManagement');
 			 $log.error("failed=="+data);
 		})
-	}
-	
-	$scope.disableSchedue =  function(){
-	    if($scope.data.date !== undefined){
-	    	$scope.disableSchedueBtn= false;
-	    }else
-	    	$scope.disableSchedueBtn= true;
 	}
 	
 	

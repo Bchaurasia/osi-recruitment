@@ -147,7 +147,7 @@
 
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-click="schedule()" ng-disabled="schedule_form.$invalid || disableSchedueBtn"
+				ng-click="schedule()" ng-disabled="disableSchedueBtn || schedule_form.$invalid"
 				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">
 				<span class="glyphicon glyphicon-ok-circle"></span> Schedule
 			</button>
