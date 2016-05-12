@@ -134,7 +134,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.interviewDateTime = $scope.interviewSchedule.interviewDateTime;
 			$scope.interviewFeedback.typeOfInterview = $scope.interviewSchedule.typeOfInterview;
 			$scope.interviewFeedback.candidateId = $scope.emailId;
-			$scope.interviewFeedback.feedbackSubmmitedBy=sessionStorage.userId;
+			$scope.interviewFeedback.feedbackSubmittedBy=sessionStorage.userId;
 			profileService.addProfilesStatus($scope.emailId,$scope.interviewFeedback.status);
 			$http.post('resources/interviewFeedback', $scope.interviewFeedback).
 			  success(function(data) {

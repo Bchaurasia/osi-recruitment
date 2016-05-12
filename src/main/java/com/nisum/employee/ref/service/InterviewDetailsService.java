@@ -72,7 +72,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		pro.get(0).setStatus(interviewDetails.getProgress());
 		profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails.getProgress());
 		profileSearchService.updateProfileIndex(pro.get(0));
-		notificationService.sendScheduleMail(interviewSchedule, mobileNo, altMobileNo, skypeId);
+	//	notificationService.sendScheduleMail(interviewSchedule, mobileNo, altMobileNo, skypeId);
 		return interviewDetails;
 	}
 	
