@@ -193,12 +193,6 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 			return "Enter valid name..";
 	};
 
-	/*$scope.validatePhNo = function(data) {
-		if (/^\+?\d{10,12}$/.test(data)) {
-			return true;
-		} else
-			return "Enter valid mobile number..";
-	};*/
 		
 	$scope.validateAlphanumeric = function(data) {
 		if (/^[a-zA-Z0-9]+$/.test(data)) {
