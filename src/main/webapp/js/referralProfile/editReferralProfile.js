@@ -14,9 +14,6 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.sk={};
 	$scope.sk.jobcodeProfiles = [];
 	$scope.sk.primarySkills = [];
-	$scope.countryCode = "+91";
-	$scope.mobileNoError = false;
-	$scope.altMobileNoError = false;
 	$scope.todayDate = new Date();
 	
 	$scope.init = function() {
@@ -53,8 +50,6 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	profileService.getProfileById($scope.user).then(function(data){
 		$scope.candidate = data;
 		$scope.candidate.tenureYear = parseInt($scope.candidate.tenureYear);
-		$scope.candidate.mobileNo = $scope.candidate.mobileNo === null ? "" : $scope.candidate.mobileNo.substring(3, 13);
-		$scope.candidate.altmobileNo = $scope.candidate.altmobileNo === null ? "" : $scope.candidate.altmobileNo.substring(3, 13);
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
@@ -167,24 +162,14 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	        var curr_month = dt.getMonth();
 	        var curr_year = dt.getFullYear();
 	        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
-	        //$scope.candidate.profileModifiedTimeStamp = timeStamp;
-	        //$scope.candidate.profileModifiedBy = sessionStorage.userId;
 	        $scope.candidate.designation = $scope.designation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
-	        $scope.candidate.mobileNo = $scope.countryCode+$scope.candidate.mobileNo;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
 				 $scope.candidate.status = "Initialized";
-			}
-			if($scope.candidate.altmobileNo !== undefined){
-				$scope.candidate.altmobileNo = $scope.countryCode+$scope.candidate.altmobileNo;
-			}
-			else
-			{
-				$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
 			}
 	        profileService.updateProfile($scope.candidate).then(function(msg){
 	        	$scope.sendNotification(msg,'referral/searchReferralProfile');
@@ -243,21 +228,6 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		}
 	};
 	
-	$scope.validateMobileNo = function(mobileNo){
-		if(mobileNo.length<13 || mobileNo.length>13){
-			$scope.mobileNoError = true;
-		}else{
-			$scope.mobileNoError = false;
-		}
-	};
-	
-	$scope.validateAltMobileNo = function(mobileNo){
-		if(mobileNo.length<13 || mobileNo.length>13){
-			$scope.altMobileNoError = true;
-		}else{
-			$scope.altMobileNoError = false;
-		}
-	};
 	
 	$scope.download = function(){
 		$http.get('resources/fileDownload?candidateId='+$scope.user, {responseType: 'arraybuffer'})

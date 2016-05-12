@@ -14,7 +14,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.userData = {};
 	$scope.recruitmentData = [];
 	$scope.fileError = true;
-	$scope.mobileNoError = false;
 	$scope.duplicateEmailIdError = false;
 	$scope.countryCode = "+91";
 	$scope.showErrorMsg=false;
@@ -72,19 +71,9 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-				if($scope.candidate.altmobileNo !== undefined){
-					$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
-				}
-				else
-				{
-					$scope.candidate.altmobileNo = $scope.candidate.altmobileNo;
-				}
-		    	//$scope.candidate.profilecreatedBy = sessionStorage.userId;
 		    	$scope.candidate.plocation = $scope.selection.pLocation;
-		    	$scope.candidate.mobileNo = $scope.candidate.mobileNo;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
-		    	//$scope.candidate.profileTimeStamp = timeStamp;
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
 		    	$scope.candidate.createdBy = $scope.user.emailId;
@@ -101,12 +90,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				    $log.info(msg);
 				    $scope.sendNotification(msg,'recruitment/searchProfile');
 		    	}).catch(function(msg){
-		    		if($scope.candidate.altmobileNo !== undefined){
-						console.log(angular.toJson($scope.candidate.altmobileNo.slice(3,13)));
-						$scope.candidate.altmobileNo=$scope.candidate.altmobileNo.slice(3,13);
-					}
-		    		console.log(angular.toJson($scope.candidate.mobileNo.slice(3,13)));
-		    		$scope.candidate.mobileNo=$scope.candidate.mobileNo.slice(3,13);
+		    		
 		    		var cls=appConstants.ERROR_CLASS;
 		    		$scope.sendNotificationWithStyle(msg,cls,'');
 					$log.error(msg);
@@ -212,14 +196,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		 $timeout( function(){ $scope.alHide(); }, 5000);
 	})
 	
-	/*$scope.validateMobileNo = function(mobileNo){
-		if(mobileNo.length<10 || mobileNo.length>10){
-			$scope.mobileNoError = true;
-		}else{
-			$scope.mobileNoError = false;
-		}
-	};*/
- 		
 	$scope.validateEmailId = function(emailId){
 		if(emailId != undefined){
 			profileService.getProfileById(emailId).then(function(data){

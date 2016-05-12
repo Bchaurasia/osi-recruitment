@@ -9,6 +9,15 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
+				<b class="bannerleft">{{creator.name}}</b> <label>Submitted By:</label>
+			</div>
+			<div class="input-field col s6">
+				<b class="bannerright">{{candidate.profileSource}}</b> <label>Profile Source:</label>
+			</div>
+		</div><br> <br>
+				
+		<div class="row">
+			<div class="input-field col s6">
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
 					ng-maxlength="30" name="candidateName" class="form-control"
 					type="text" ng-model="candidate.candidateName"
@@ -61,9 +70,8 @@
 			<div class="input-field col s6">
 				<input type="text" placeholder="Enter Mobile number" name="mobileNo"
 					class="form-control"
-					ng-blur="validateMobileNo(candidate.mobileNo)"
-					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"
-					maxlength="10" required> <label
+					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"
+					maxlength="11" required> <label
 					style="position: absolute; top: -22px;">Mobile Number <b
 					class="mandatory">*</b>
 				</label> <span class="validation-error"
@@ -74,19 +82,18 @@
 					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.required">
 					Please specify your mobile number.</div>
 				<div class="validation-error"
-					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.pattern || mobileNoError">
+					ng-show="(UpdateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.mobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 
 			<div class="input-field col s6">
 				<input type="text" placeholder="Enter alternate Mobile number"
 					name="altmobileNo" class="form-control" ng-model="candidate.altmobileNo"
-					ng-blur="validateAltMobileNo(candidate.altmobileNo)" maxlength="13"
-					ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"> <label
+					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11"> <label
 					style="position: absolute; top: -22px;">Alternate Mobile
 					Number </label>
 				<div class="validation-error"
-					ng-show="(UpdateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.altmobileNo.$error.pattern || altMobileNoError">
+					ng-show="(UpdateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && UpdateCandidate.altmobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 		</div>
@@ -242,19 +249,8 @@
 					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-			<!-- <div class="input-field col s6">
-				<ui-select multiple ng-model="sk.jobcodeProfiles"
-					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select JobCodes..">{{$item}}</ui-select-match>
-				<ui-select-choices
-					repeat="jobcode in jobcodelist | orderBy:'toString()' | filter:$select.search">
-				{{jobcode}} </ui-select-choices> </ui-select>&nbsp;&nbsp;&nbsp;
-				<label style="position: absolute; top: -22px;">Job Code</label>
-
 			</div>
-		</div> -->
-
+			
 			<div class="row">
 				<div class="input-field col s12">
 					<textarea class="materialize-textarea" cols="50" rows="2"
@@ -275,7 +271,7 @@
 			</div>
 			<div align="center" class="row">
 				<button class="btn btn-info active" type="submit"
-					ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || mobileNoError || altMobileNoError"
+					ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
 					ng-click="updateProfileDetails()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Update
 				</button>

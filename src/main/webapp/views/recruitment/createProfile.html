@@ -64,8 +64,8 @@
 					<b class="mandatory">*</b>
 				</label> <input type="text" placeholder="Enter Mobile number"
 					name="mobileNo" class="form-control"
-					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"
-					maxlength="13" required> <span class="validation-error"
+					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"
+					maxlength="11" required> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
 					provide a MobileNo</span>
 
@@ -73,7 +73,7 @@
 					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
 					Please specify your mobile number.</div>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern || mobileNoError">
+					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</div>
 			</div>
 
@@ -81,7 +81,7 @@
 				<input type="text" placeholder="Enter alternate Mobile number"
 					name="altmobileNo" class="form-control"
 					ng-model="candidate.altmobileNo"
-					maxlength="13" ng-pattern="/^((0091)|(\+91)|0?)[1-9]{1}\d{9}$/"> <label
+					maxlength="11" ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"> <label
 					style="position: absolute; top: -22px;">Alternate Mobile
 					Number </label>
 				<div class="validation-error"
@@ -241,16 +241,7 @@
 					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-			<!-- <div class="input-field col s6">
-				<ui-select multiple ng-model="sk.jobcodeProfile"
-					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select JobCodes..">{{$item}}</ui-select-match>
-				<ui-select-choices
-					repeat="jobcode in jobcodelist | orderBy:'toString()' | filter:$select.search">
-				{{jobcode}} </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">Job Code </label>
-			</div> -->
+			
 		</div>
 
 		<div class="row">

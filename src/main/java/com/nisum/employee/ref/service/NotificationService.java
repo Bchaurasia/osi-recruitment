@@ -1,13 +1,19 @@
 package com.nisum.employee.ref.service;
 import java.io.File;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.activation.MailcapCommandMap;
+import javax.activation.MimetypesFileTypeMap;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -142,8 +148,17 @@ public class NotificationService{
 
 		StringWriter writer2 = new StringWriter();
 		interviewerTemplate.merge(context2, writer2);
-		        
-		// ----------- End Interviewer Config -----------
+		
+		//register the text/calendar mime type
+		MimetypesFileTypeMap mimetypes = (MimetypesFileTypeMap)MimetypesFileTypeMap.getDefaultFileTypeMap();
+   	 	mimetypes.addMimeTypes("text/calendar ics ICS");
+   	 
+   	//register the handling of text/calendar mime type
+   	    MailcapCommandMap mailcap = (MailcapCommandMap) MailcapCommandMap.getDefaultCommandMap();
+   	    mailcap.addMailcap("text/calendar;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+		
+		
+		
 
 		// --- Set Interviewer Email Content ---
 		Message msgInterviewer = new MimeMessage(session);
@@ -155,27 +170,92 @@ public class NotificationService{
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
 		messageBodyPart = new MimeBodyPart();
+		
+		BodyPart calendarPart = buildCalendarPart();
+	    multipart.addBodyPart(calendarPart);
+		
+		
 		String[] resume = profileService.getResume(interviewSchedule.getCandidateId());
 		DataSource source = new FileDataSource(resume[0]);
 		messageBodyPart.setDataHandler(new DataHandler(source));
 		messageBodyPart.setFileName(interviewSchedule.getCandidateName() + "_" + resume[1]);
 		multipart.addBodyPart(messageBodyPart);
 		msgInterviewer.setContent(multipart);
+		
 	         
 	         
 		// --- Set Candidate Content ---
-		Message message = getMessage();
-		message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
-		message.setSubject(OSI_TECHNOLOGIES + YOUR_INTERVIEW_FOR+interviewSchedule.getRoundName()+" Is Scheduled.");
-		message.setContent(writer.toString(), TEXT_HTML);
-
+		Message msgCandidate = getMessage();
+		msgCandidate.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
+		msgCandidate.setSubject(OSI_TECHNOLOGIES + YOUR_INTERVIEW_FOR+interviewSchedule.getRoundName()+" Is Scheduled.");
+		msgCandidate.setContent(writer.toString(), TEXT_HTML);
+		
+		BodyPart candidateMsgBodyPart = new MimeBodyPart();
+		candidateMsgBodyPart.setContent(writer.toString(), TEXT_HTML);
+		Multipart candiateMultipart = new MimeMultipart();
+		candiateMultipart.addBodyPart(candidateMsgBodyPart);
+		BodyPart calendarPart2 = buildCalendarPart();
+		candiateMultipart.addBodyPart(calendarPart2);
+		msgCandidate.setContent(candiateMultipart);
+		
 		// --- Send Mails ---
 		Transport.send(msgInterviewer);		
-		Transport.send(message);
+		Transport.send(msgCandidate);
 
 		return "Mails Sent Successfully!";
 	}
-
+	
+	//define somewhere the icalendar date format
+    private static SimpleDateFormat iCalendarDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmm'00'");
+    
+//	   private BodyPart buildCalendarPart(String organizer,String candiate,Date time ) throws Exception {
+		   private BodyPart buildCalendarPart() throws Exception {
+	    	BodyPart calendarPart = new MimeBodyPart();
+	 
+	        Calendar cal = Calendar.getInstance();
+	        //cal.setTime(date);
+	        cal.setTimeZone(TimeZone.getTimeZone("GMT"));
+	        iCalendarDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+	        cal.add(Calendar.DAY_OF_MONTH, 1);
+	        Date start = cal.getTime();
+	        cal.add(Calendar.HOUR_OF_DAY, 1);
+	        Date end = cal.getTime();
+	        
+	 
+	        //check the icalendar spec in order to build a more complicated meeting request
+	        String calendarContent =
+	                "BEGIN:VCALENDAR\n" +
+	                        "METHOD:REQUEST\n" +
+	                        "PRODID: BCP - Meeting\n" +
+	                        "VERSION:2.0\n" +
+	                        "BEGIN:VEVENT\n" +
+	                        "DTSTAMP:" + iCalendarDateFormat.format(start) + "\n" +
+	                        "DTSTART:" + iCalendarDateFormat.format(start)+ "\n" +
+	                        "DTEND:"  + iCalendarDateFormat.format(end)+ "\n" +
+	                        "SUMMARY:test request\n" +
+	                        "UID:324\n" +
+	                        "ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:MAILTO:bchaurasia@osius.com\n" +
+	                        "ORGANIZER:MAILTO:" + "bchaurasia@osius.com" +"\n" +
+	                        "LOCATION:on the net\n" +
+	                        "DESCRIPTION:learn some stuff\n" +
+	                        "SEQUENCE:0\n" +
+	                        "PRIORITY:5\n" +
+	                        "CLASS:PUBLIC\n" +
+	                        "STATUS:CONFIRMED\n" +
+	                        "TRANSP:OPAQUE\n" +
+	                        "BEGIN:VALARM\n" +
+	                        "ACTION:DISPLAY\n" +
+	                        "DESCRIPTION:REMINDER\n" +
+	                        "TRIGGER;RELATED=START:-PT00H15M00S\n" +
+	                        "END:VALARM\n" +
+	                        "END:VEVENT\n" +
+	                        "END:VCALENDAR";
+	 
+	        calendarPart.addHeader("Content-Class", "urn:content-classes:calendarmessage");
+	        calendarPart.setContent(calendarContent, "text/calendar;method=CANCEL");
+	 
+	        return calendarPart;
+	    }
 	
 	public void sendFeedbackMail(InterviewFeedback interviewFeedback)
 			throws MessagingException {
@@ -278,6 +358,12 @@ public class NotificationService{
 		message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(userId));
 		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Requisition "+requisitionApproverDetails.getJobRequisitionId());
+		
+		
+		
+		
+		
+		
 		
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
