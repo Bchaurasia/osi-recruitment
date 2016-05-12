@@ -1,4 +1,4 @@
-	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','sharedService', '$log', '$rootScope' , 'appConstants','interviewService', function($scope, $http, $q, $window,sharedService, $log, $rootScope, appConstants,interviewService ) {
+	app.controller('interviewManagementCtrl',['$scope', '$http','$q', '$window','sharedService', '$log', '$rootScope' , 'appConstants','interviewService','userService', function($scope, $http, $q, $window,sharedService, $log, $rootScope, appConstants,interviewService,userService ) {
 		$scope.interview = {};
 		$scope.positionDisable = true;
 		$scope.searchDisable = true;
@@ -25,13 +25,21 @@
 		$scope.searchQuery="";
 		$scope.interviewCandidates=[];
 		
-		interviewService.getInterviewDetailsByCandidateId().then(
+	/*	interviewService.getInterviewDetailsByCandidateId().then(
 				function(data){
 					$scope.interviewCandidates = data;
 				}).catch(function(response){
 					
-				});
+				});*/
 		
+		userService.getUserById(sessionStorage.userId).then(setUser).catch(errorMsg);
+		function setUser(data){
+			$scope.user = data;
+			$rootScope.user = data;
+		}
+		function errorMsg(message){
+			console.log("message--->"+message);
+		}
 		$scope.feedback = function(positionId,candidateEmail) {
 			sharedService.setjobCode(positionId);
 			sharedService.setprofileUserId(candidateEmail);
@@ -64,13 +72,24 @@
 		};
 		
 		$scope.searchInterview = function(){
-			interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
-			$scope.interviewDetails = data;
-		}).catch({
-			function(response){
-				$log.error(response.data);
+			if($scope.user.roles =="ROLE_INTERVIEWER"){
+				interviewService.getInterviewDetailsByInterviewerEmailId(sessionStorage.userId).then(function(data){
+					$scope.interviewDetails = data;
+				}).catch({
+					function(response){
+						$log.error(response.data);
+					}
+				})
+			}else{
+				interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
+					$scope.interviewDetails = data;
+				}).catch({
+					function(response){
+						$log.error(response.data);
+					}
+				})
 			}
-		})}
+		}
 		
 		$scope.searchInterview();
 		

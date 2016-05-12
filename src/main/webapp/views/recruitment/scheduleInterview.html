@@ -11,8 +11,13 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewschedule.requisitionId" theme="selectize"
-					ng-disabled="disabled" style="width: 80%"
+			 <input type="checkbox" class="checkbox" ng-model="flag" checked><b>Allow Multiple rounds</b>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6" align="left">
+				<ui-select ng-model="interviewschedule.requisitionId"
+					theme="selectize" ng-disabled="disabled" style="width: 80%"
 					on-select="setJobcode(interviewschedule.requisitionId)"
 					title="Choose a requisitionId"> <ui-select-match
 					placeholder="Select or search Requisition Id.">{{$select.selected}}</ui-select-match>
@@ -27,9 +32,8 @@
 			</div>
 			<div class="input-field col s6" align="left">
 				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
-					ng-disabled="disabled" style="width: 80%"
-					title="Choose a jobcode"> <ui-select-match
-					placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
+					ng-disabled="disabled" style="width: 80%" title="Choose a jobcode">
+				<ui-select-match placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
 					repeat="position in positionObj | filter: $select.search">
 				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>
@@ -53,9 +57,8 @@
 			</div>
 			<div class="input-field col s6">
 				<select ng-change="setvalues(interviewerName)"
-					placeholder="Select InterviewerName"
-					ng-model="interviewerName"
-					ng-options="o.name for o in interviewerNames"
+					placeholder="Select InterviewerName" ng-model="interviewerName"
+					ng-options="o.name for o in interviewerNames" ng-disabled="disabled" 
 					class="form-control input-sm" required>
 					<option value='' disabled="disabled">Select Interviewer</option>
 				</select> <label>Interviewer Name<b class="mandatory">*</b></label>
@@ -94,7 +97,7 @@
 					<option value="" ng-disabled="disabled">Select Location</option>
 				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
-			
+
 		</div>
 
 		<div class="row">
@@ -107,10 +110,11 @@
 						Format</option>
 				</select> <label>Type Of Interview<b class="mandatory">*</b></label>
 			</div>
-           <div class="input-field col s6">
+			<div class="input-field col s6">
 				<div class="demo-section k-content" align="left">
-					<input kendo-date-time-picker ng-model="data.date" id="interviewDate"
-						ng-disabled="disabled" min="{{today}}" k-ng-model="kdate" ng-change="disableSchedue()"
+					<input kendo-date-time-picker ng-model="data.date"
+						id="interviewDate" ng-disabled="disabled" min="{{today}}"
+						k-ng-model="kdate" ng-change="disableSchedue()"
 						style="width: 81%;Additional Notes" />
 				</div>
 				<label style="position: absolute; top: -22px;">Interview
@@ -118,22 +122,25 @@
 				</label>
 			</div>
 		</div>
-		
-       <div class="row">
-		<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Skype'">
+
+		<div class="row">
+			<div class="input-field col s6"
+				ng-if="sel.selectedtypeOfInterview === 'Skype'">
 				<input type="text" ng-model="interviewschedule.candidateSkypeId"
 					ng-disabled="true" name="candidateSkypeId" class="form-control"
-					placeholder="Enter Skype Id"  /> <label>
-					Candidate Skype Id<b class="mandatory">*</b>
+					placeholder="Enter Skype Id" /> <label> Candidate Skype
+					Id<b class="mandatory">*</b>
 			</div>
-			<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
-				<input type="text" ng-model="interviewschedule.candidateMobileNumber"
-					ng-disabled="true" name="candidateMobileNumber" class="form-control"
-					placeholder="Enter Mobile Number"  /> <label>
+			<div class="input-field col s6"
+				ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
+				<input type="text"
+					ng-model="interviewschedule.candidateMobileNumber"
+					ng-disabled="true" name="candidateMobileNumber"
+					class="form-control" placeholder="Enter Mobile Number" /> <label>
 					Candidate Mobile Number<b class="mandatory">*</b>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"
@@ -147,7 +154,8 @@
 
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-click="schedule()" ng-disabled="disableSchedueBtn || schedule_form.$invalid"
+				ng-click="schedule()"
+				ng-disabled="disableSchedueBtn || schedule_form.$invalid"
 				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">
 				<span class="glyphicon glyphicon-ok-circle"></span> Schedule
 			</button>

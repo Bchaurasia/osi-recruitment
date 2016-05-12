@@ -20,10 +20,11 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.requisitionIdlist=[];
 	$scope.disabled=false;
 	$scope.jobcode={};
+	//$scope.interviewscheduleDetails.isMultipleInterviewFlag=false;
+	$scope.flag=false;
 	$scope.disableSchedueBtn= true;
 	var interviewId = sharedService.getInterviewId();
 	console.log("Schedule Service : interviewId"+interviewId);
-	
 	$scope.disableSchedue =  function(){
 	    if($scope.data.date !== undefined){
 	    	$scope.disableSchedueBtn= false;
@@ -136,18 +137,21 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			}
 		})
 		var index =$scope.interviewscheduleDetails.progress.indexOf('Scheduled');
-		var round =$filter('limitTo')($scope.interviewscheduleDetails.progress, index-1, 0);
-		if(index !== -1 && (round !== $scope.interviewschedule.roundName)){
+		var round1 =$filter('limitTo')($scope.interviewscheduleDetails.progress, index-1, 0);
+		if(round1 === $scope.interviewschedule.roundName){
 			  $scope.disabled=true;
 			  $scope.cls = 'alert alert-danger alert-error';
-			  $scope.message = round +" is scheduled,You need to be submit feedback.";
+			  $scope.message = round1 +" is already done.";
+			  $timeout( function(){ $scope.alHide(); }, 5000);		
+		}
+		if(!($scope.flag)){
+		if(index !== -1 && (round1 !== $scope.interviewschedule.roundName)){
+			  $scope.disabled=true;
+			  $scope.cls = 'alert alert-danger alert-error';
+			  $scope.message = round1 +" is scheduled,You need to be submit feedback.";
 			  $timeout( function(){ $scope.alHide(); }, 5000);
 			  return;
-		}else if(round === $scope.interviewschedule.roundName){
-			  $scope.disabled=true;
-			  $scope.cls = 'alert alert-danger alert-error';
-			  $scope.message = round +" is already done.";
-			  $timeout( function(){ $scope.alHide(); }, 5000);		
+		}
 		}
 	}
 	
@@ -157,10 +161,11 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.schedule =  function(){
 		
+		DateTime=new Date($scope.data.date);
 		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
 		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
 		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
-		$scope.interviewschedule.interviewDateTime = $scope.data.date;
+		$scope.interviewschedule.interviewDateTime = DateTime;
 		$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
 		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
 		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;

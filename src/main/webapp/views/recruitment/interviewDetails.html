@@ -8,6 +8,7 @@
 					{{interviewscheduleDetails.candidateName}}</b>
 			</h5>
 		</div>
+		
 		<div class="row">
 			<div class="input-field col s6">
 				<h6>
@@ -130,6 +131,13 @@
 			<h6 align="left">
 				<b>Feedback Details for {{data.roundName}}</b>
 			</h6>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.feedbackSubmittedBy}}</p>
+				<label>Feedback SubmittedBy :</label>
+			</div>
+			
 		</div>
 		<div class="row"
 			ng-repeat="skill in data.interviewFeedback.rateSkills">
