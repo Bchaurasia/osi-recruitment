@@ -9,13 +9,16 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<b class="bannerleft">{{creator.name}}</b> <label>Submitted By:</label>
+				<b class="bannerleft">{{creator.name}}</b> <label>Submitted
+					By:</label>
 			</div>
 			<div class="input-field col s6">
-				<b class="bannerright">{{candidate.profileSource}}</b> <label>Profile Source:</label>
+				<b style="position: absolute; left: 24%;">{{candidate.profileSource}}</b>
+				<label>Profile Source:</label>
 			</div>
-		</div><br> <br>
-				
+		</div>
+		<br> <br>
+
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
@@ -69,11 +72,10 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input type="text" placeholder="Enter Mobile number" name="mobileNo"
-					class="form-control"
-					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"
-					maxlength="11" required> <label
-					style="position: absolute; top: -22px;">Mobile Number <b
-					class="mandatory">*</b>
+					class="form-control" ng-model="candidate.mobileNo"
+					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11" required>
+				<label style="position: absolute; top: -22px;">Mobile Number
+					<b class="mandatory">*</b>
 				</label> <span class="validation-error"
 					ng-show="submitted && UpdateCandidate.mobileNo.$invalid">Please
 					provide a MobileNo</span>
@@ -88,7 +90,8 @@
 
 			<div class="input-field col s6">
 				<input type="text" placeholder="Enter alternate Mobile number"
-					name="altmobileNo" class="form-control" ng-model="candidate.altmobileNo"
+					name="altmobileNo" class="form-control"
+					ng-model="candidate.altmobileNo"
 					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11"> <label
 					style="position: absolute; top: -22px;">Alternate Mobile
 					Number </label>
@@ -249,37 +252,37 @@
 					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
 					referred is required.kpl</div>
 			</div>
-			</div>
-			
-			<div class="row">
-				<div class="input-field col s12">
-					<textarea class="materialize-textarea" cols="50" rows="2"
-						ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
-						placeholder="Enter any additional notes..."></textarea>
-					<label style="position: absolute; top: -22px;">Additional
-						Notes</label>
-				</div>
-			</div>
+		</div>
 
-			<div class="row">
-				<div class="input-field col s4">
-					<button type="button" class="waves-effect waves-light btn"
-						align="left" ng-click="download();">
-						<i class="material-icons left">file_download</i>Download Resume
-					</button>
-				</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea class="materialize-textarea" cols="50" rows="2"
+					ng-change="changeEvent()" name="notes" ng-model="candidate.notes"
+					placeholder="Enter any additional notes..."></textarea>
+				<label style="position: absolute; top: -22px;">Additional
+					Notes</label>
 			</div>
-			<div align="center" class="row">
-				<button class="btn btn-info active" type="submit"
-					ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
-					ng-click="updateProfileDetails()">
-					<span class="glyphicon glyphicon-ok-circle"></span> Update
-				</button>
-				<button class="btn btn-info active"
-					ui-sref="recruitment.searchProfile">
-					<span class="glyphicon glyphicon-remove"></span> Cancel
+		</div>
+
+		<div class="row">
+			<div class="input-field col s4">
+				<button type="button" class="waves-effect waves-light btn"
+					align="left" ng-click="download();">
+					<i class="material-icons left">file_download</i>Download Resume
 				</button>
 			</div>
+		</div>
+		<div align="center" class="row">
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
+				ng-click="updateProfileDetails()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Update
+			</button>
+			<button class="btn btn-info active"
+				ui-sref="recruitment.searchProfile">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</div>
 	</form>
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 </div>
