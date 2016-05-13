@@ -82,7 +82,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	$scope.info = $rootScope.info;
 	(function(){
 		if(_.contains($scope.userRole, "ROLE_INTERVIEWER")){
-			$scope.info.status = ["Hired", "OnHold", "Rejected"];
+			$scope.info.status = ["Selected", "OnHold", "Rejected"];
 		}
 	}())
 	$q.all([profile_url, interview_URL, position_URL]).then(
