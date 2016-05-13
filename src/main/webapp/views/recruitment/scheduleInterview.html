@@ -11,7 +11,8 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6" align="left">
-			 <input type="checkbox" class="checkbox" ng-model="flag" checked><b>Allow Multiple rounds</b>
+				<input type="checkbox" class="filled-in" id="filled-in-box" ng-model="flag" />
+      			<label for="filled-in-box">Allow Multiple Rounds</label>
 			</div>
 		</div>
 		<div class="row">
@@ -58,8 +59,8 @@
 			<div class="input-field col s6">
 				<select ng-change="setvalues(interviewerName)"
 					placeholder="Select InterviewerName" ng-model="interviewerName"
-					ng-options="o.name for o in interviewerNames" ng-disabled="disabled" 
-					class="form-control input-sm" required>
+					ng-options="o.name for o in interviewerNames"
+					ng-disabled="disabled" class="form-control input-sm" required>
 					<option value='' disabled="disabled">Select Interviewer</option>
 				</select> <label>Interviewer Name<b class="mandatory">*</b></label>
 			</div>
@@ -128,8 +129,8 @@
 				ng-if="sel.selectedtypeOfInterview === 'Skype'">
 				<input type="text" ng-model="interviewschedule.candidateSkypeId"
 					ng-disabled="true" name="candidateSkypeId" class="form-control"
-					placeholder="Enter Skype Id" /> <label> Candidate Skype
-					Id<b class="mandatory">*</b>
+					placeholder="Enter Skype Id" /> <label> Candidate Skype Id<b
+					class="mandatory">*</b>
 			</div>
 			<div class="input-field col s6"
 				ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
