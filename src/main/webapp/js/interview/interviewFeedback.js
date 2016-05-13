@@ -4,6 +4,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	$scope.functional={};
 	$scope.technical.newSkill="";
 	$scope.functional.newSkill="";
+	$scope.disabledFeedbackbtn=true;
 	userService.getUserById(sessionStorage.userId).then(setUser).catch(errorMsg);
 	
 	function setUser(data){
@@ -76,6 +77,18 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		$scope.emailId = sharedService.getprofileUserId();
 	}
 	$scope.init();
+	$scope.disablefeedback = function() {
+		console.debug("rateskill"+angular.toJson($scope.interviewFeedback.rateSkills[0].rating));
+		for(var i=0; i<$scope.interviewFeedback.rateSkills.length;i++){
+			if($scope.interviewFeedback.rateSkills[i].rating===0)
+			{
+				$scope.disabledFeedbackbtn=true;
+			}
+			else{
+				$scope.disabledFeedbackbtn=false;
+			}
+		}
+	}
 	var profile_url = $http.get('resources/profile?emailId='+$scope.emailId);
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
@@ -95,6 +108,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			for(var i=0; i<$scope.position.primarySkills.length;i++){
 					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
 			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
+			$scope.disablefeedback();
 			}
 			for(i=0;$scope.interview.rounds.length;i++){
 				
@@ -104,7 +118,14 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 				{
 					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
 					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+					$scope.hideSubmit=false;
 					break;
+				}
+				else if(($scope.interview.rounds[i].roundName=="Hr Round")){
+					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
+					$scope.interviewFeedback = $scope.interview.rounds[i].interviewFeedback;
+					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+					$scope.hideSubmit=true;
 				}
 			}
 			
@@ -125,8 +146,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	};
 	
 	$scope.submit = function(){
-		blockUI.start("Submitting Feedback...");
-		setTimeout(function () {
 			$scope.interviewFeedback.candidateName = $scope.profile.candidateName;
 			$scope.interviewFeedback.interviewerEmail = $scope.interviewSchedule.emailIdInterviewer;
 			$scope.interviewFeedback.interviewerName = $scope.interviewSchedule.interviewerName;
@@ -136,24 +155,24 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.candidateId = $scope.emailId;
 			$scope.interviewFeedback.feedbackSubmittedBy=sessionStorage.userId;
 			profileService.addProfilesStatus($scope.emailId,$scope.interviewFeedback.status);
-			$http.post('resources/interviewFeedback', $scope.interviewFeedback).
-			  success(function(data) {
+			blockUI.start("Submitting Feedback...");
+			$timeout(function() {
+				$http.post('resources/interviewFeedback', $scope.interviewFeedback).
+				success(function(data) {
 					$scope.sendNotification("Feedback Submitted Successfully!",'recruitment/interviewManagement');
 					$location.path("recruitment/interviewManagement");
-				  $scope.cls = 'alert  alert-success';
-				  $scope.message = "Feedback Submitted Successfully!";
-				  $timeout( function(){ $scope.alHide(); }, 5000);
-				  $scope.reset();
-				  
-				  $log.info("Feedback Submitted Successfully!");
-			  }).
-			  error(function(data) {
-				  $timeout( function(){ $scope.alHide(); }, 5000);
-				  $log.error("Feedback Submission Failed! --->"+data);
-			  });
-		
+					$scope.cls = 'alert  alert-success';
+					$scope.message = "Feedback Submitted Successfully!";
+					$timeout( function(){ $scope.alHide(); }, 5000);
+					$scope.reset();
+					$log.info("Feedback Submitted Successfully!");
+				}).
+				error(function(data) {
+					$timeout( function(){ $scope.alHide(); }, 5000);
+					$log.error("Feedback Submission Failed! --->"+data);
+				});
 			blockUI.stop();
-		},1000);
+			}, 1000);
 	}
 	
 	$scope.alHide =  function(){

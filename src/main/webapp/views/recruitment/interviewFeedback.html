@@ -86,7 +86,7 @@
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
 				ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow"
-				ng-disabled="feedback_form.$invalid">
+				ng-disabled="disabledFeedbackbtn || feedback_form.$invalid">
 				<span class="glyphicon glyphicon-ok-circle"></span> Submit
 			</button>
 			<button class="btn btn-info active"
