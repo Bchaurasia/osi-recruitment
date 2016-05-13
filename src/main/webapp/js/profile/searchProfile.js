@@ -17,6 +17,13 @@ app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','sharedSer
 		$scope.profiles = data;
 			$scope.currentPage = 0;
 	}
+	
+	/*$scope.getCandidateName=function(emailId){
+		profileService.getProfileByCreateremailId(emailId).then(function(data){
+			$scope.profileDetails = data;
+		});
+	}*/
+	
 	$scope.title = "Search";
 		$scope.editProfile = function(data) {
 			sharedService.setprofileUserId(data.emailId);

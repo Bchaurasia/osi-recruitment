@@ -1,16 +1,21 @@
 package com.nisum.employee.ref.service;
 import java.io.File;
 import java.io.StringWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.activation.MailcapCommandMap;
+import javax.activation.MimetypesFileTypeMap;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -119,12 +124,13 @@ public class NotificationService{
 		
 		String to = interviewSchedule.getCandidateId();
 		String toInterviewer = interviewSchedule.getEmailIdInterviewer();
+		Date date = change12HrsTo24HrsFormat(interviewSchedule.getInterviewDateTime());
 		
 		Session session = getSession();
 
 		VelocityContext context = getVelocityContext(interviewSchedule.getCandidateName(), interviewSchedule.getJobcode(), interviewSchedule.getInterviewerName(), interviewSchedule.getRoundName());
 		context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
-		context.put(INTERVIEW_DATE_TIME, getDateTime(interviewSchedule.getInterviewDateTime()));
+		context.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context.put(MOBILE_NO, mobileNo);
 		context.put(ALTMOBILE_NO, altMobileNo);
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
@@ -138,15 +144,22 @@ public class NotificationService{
 		context2.put(MOBILE_NO, mobileNo);
 		context2.put(ALTMOBILE_NO, altMobileNo);
 		context2.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
-		context2.put(INTERVIEW_DATE_TIME, getDateTime(interviewSchedule.getInterviewDateTime()));
+		context2.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context2.put(SKYPE_ID, skypeId);
 
 		Template interviewerTemplate = getVelocityTemplate(SRC_INTERVIEWER_VM);
 
 		StringWriter writer2 = new StringWriter();
 		interviewerTemplate.merge(context2, writer2);
-		        
-		// ----------- End Interviewer Config -----------
+		
+		//register the text/calendar mime type
+		MimetypesFileTypeMap mimetypes = (MimetypesFileTypeMap)MimetypesFileTypeMap.getDefaultFileTypeMap();
+   	 	mimetypes.addMimeTypes("text/calendar ics ICS");
+   	 
+   	//register the handling of text/calendar mime type
+   	    MailcapCommandMap mailcap = (MailcapCommandMap) MailcapCommandMap.getDefaultCommandMap();
+   	    mailcap.addMailcap("text/calendar;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+		
 
 		// --- Set Interviewer Email Content ---
 		Message msgInterviewer = new MimeMessage(session);
@@ -158,27 +171,118 @@ public class NotificationService{
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
 		messageBodyPart = new MimeBodyPart();
+		
+		BodyPart calendarPart = buildCalendarPart(date);
+	    multipart.addBodyPart(calendarPart);
+		
+		
 		String[] resume = profileService.getResume(interviewSchedule.getCandidateId());
 		DataSource source = new FileDataSource(resume[0]);
 		messageBodyPart.setDataHandler(new DataHandler(source));
 		messageBodyPart.setFileName(interviewSchedule.getCandidateName() + "_" + resume[1]);
 		multipart.addBodyPart(messageBodyPart);
 		msgInterviewer.setContent(multipart);
+		
 	         
 	         
 		// --- Set Candidate Content ---
-		Message message = getMessage();
-		message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
-		message.setSubject(OSI_TECHNOLOGIES + YOUR_INTERVIEW_FOR+interviewSchedule.getRoundName()+" Is Scheduled.");
-		message.setContent(writer.toString(), TEXT_HTML);
-
+		Message msgCandidate = getMessage();
+		msgCandidate.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
+		msgCandidate.setSubject(OSI_TECHNOLOGIES + YOUR_INTERVIEW_FOR+interviewSchedule.getRoundName()+" Is Scheduled.");
+		msgCandidate.setContent(writer.toString(), TEXT_HTML);
+		
+		BodyPart candidateMsgBodyPart = new MimeBodyPart();
+		candidateMsgBodyPart.setContent(writer.toString(), TEXT_HTML);
+		Multipart candiateMultipart = new MimeMultipart();
+		candiateMultipart.addBodyPart(candidateMsgBodyPart);
+		BodyPart calendarPart2 = buildCalendarPart(date);
+		candiateMultipart.addBodyPart(calendarPart2);
+		msgCandidate.setContent(candiateMultipart);
+		
 		// --- Send Mails ---
 		Transport.send(msgInterviewer);		
-		Transport.send(message);
+		Transport.send(msgCandidate);
 
 		return "Mails Sent Successfully!";
 	}
-
+	
+	//define somewhere the icalendar date format
+    private static SimpleDateFormat iCalendarDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmm'00'");
+    
+//	   private BodyPart buildCalendarPart(String organizer,String candiate,Date time ) throws Exception {
+		   private BodyPart buildCalendarPart(Date date) throws Exception {
+	    	BodyPart calendarPart = new MimeBodyPart();
+	 
+	        Calendar cal = Calendar.getInstance();
+	        cal.setTime(date);
+	        cal.setTimeZone(TimeZone.getTimeZone("GMT"));
+	        iCalendarDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+	        cal.add(Calendar.DAY_OF_MONTH, 1);
+	        cal.add(Calendar.DATE, -1);
+	        Date start = cal.getTime();
+	        cal.add(Calendar.HOUR_OF_DAY, 1);
+	        Date end = cal.getTime();
+	        
+	 
+	        //check the icalendar spec in order to build a more complicated meeting request
+	        String calendarContent =
+	                "BEGIN:VCALENDAR\n" +
+	                        "METHOD:REQUEST\n" +
+	                        "PRODID: BCP - Meeting\n" +
+	                        "VERSION:2.0\n" +
+	                        "BEGIN:VEVENT\n" +
+	                        "DTSTAMP:" + iCalendarDateFormat.format(start) + "\n" +
+	                        "DTSTART:" + iCalendarDateFormat.format(start)+ "\n" +
+	                        "DTEND:"  + iCalendarDateFormat.format(end)+ "\n" +
+	                        "SUMMARY:Portal Request\n" +
+	                        "UID:324\n" +
+	                        "ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:MAILTO:ositechportal@gmail.com\n" +
+	                        "ORGANIZER:MAILTO:" + "ositechportal@gmail.com" +"\n" +
+	                        "LOCATION:on the net\n" +
+	                        "DESCRIPTION:learn some stuff\n" +
+	                        "SEQUENCE:0\n" +
+	                        "PRIORITY:5\n" +
+	                        "CLASS:PUBLIC\n" +
+	                        "STATUS:CONFIRMED\n" +
+	                        "TRANSP:OPAQUE\n" +
+	                        "BEGIN:VALARM\n" +
+	                        "ACTION:DISPLAY\n" +
+	                        "DESCRIPTION:REMINDER\n" +
+	                        "TRIGGER;RELATED=START:-PT00H15M00S\n" +
+	                        "END:VALARM\n" +
+	                        "END:VEVENT\n" +
+	                        "END:VCALENDAR";
+	 
+	        calendarPart.addHeader("Content-Class", "urn:content-classes:calendarmessage");
+	        calendarPart.setContent(calendarContent, "text/calendar;method=CANCEL");
+	 
+	        return calendarPart;
+	    }
+		   private Date change12HrsTo24HrsFormat(String dateTime){
+			      //Format of the date defined in the input String
+			      DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+			      //Desired format: 24 hour format: Change the pattern as per the need
+			      DateFormat outputformat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+			      Date date = null;
+			      String output = null;
+			      try{
+			         //Converting the input String to Date
+			    	 date= df.parse(dateTime);
+			         //Changing the format of date and storing it in String
+			    	 output = outputformat.format(date);
+			         //Displaying the date
+			    	 System.out.println(output);
+			    	
+			    	 //Convert 24Hrs String to Date Object
+			    	 DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+			    	 date = format.parse(output);
+			    	 System.out.println(date); 
+			    	 
+			      }catch(ParseException pe){
+			         pe.printStackTrace();
+			       }
+			      return date;
+		   }
 	
 	public void sendFeedbackMail(InterviewFeedback interviewFeedback)
 			throws MessagingException {
@@ -257,20 +361,7 @@ public class NotificationService{
 				});
 		return session;
 	}
-	private String getDateTime(String dateTime){
-			SimpleDateFormat formatter, FORMATTER;
-			formatter = new SimpleDateFormat(YYYY_MM_DD_T_HH_MM_SS_SSS_Z);
-			FORMATTER = new SimpleDateFormat(DD_MMM_YYYY_HH_MM);
-			Date convertedDate = null;
-			try {
-				convertedDate = formatter.parse(dateTime.substring(0, 24));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			return FORMATTER.format(convertedDate);
-	}
-
-
+		
 	public void sendJobRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
 			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
 
@@ -294,6 +385,12 @@ public class NotificationService{
 		message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(userId));
 		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Requisition "+requisitionApproverDetails.getJobRequisitionId());
+		
+		
+		
+		
+		
+		
 		
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);

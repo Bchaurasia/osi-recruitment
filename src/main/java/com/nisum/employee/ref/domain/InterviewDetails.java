@@ -24,6 +24,8 @@ public class InterviewDetails  {
 	ArrayList<String> candidateSkills;
 	String candidateEmail;
 	String interviewerEmail;
+	ArrayList<String> scheduledInterviewersEmails;
+	Boolean isMultipleInterviewFlag;
 	String interviewerName;
 	String clientName;
 	String progress;

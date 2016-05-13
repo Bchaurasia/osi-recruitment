@@ -72,7 +72,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		pro.get(0).setStatus(interviewDetails.getProgress());
 		profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails.getProgress());
 		profileSearchService.updateProfileIndex(pro.get(0));
-		notificationService.sendScheduleMail(interviewSchedule, mobileNo, altMobileNo, skypeId);
+	//	notificationService.sendScheduleMail(interviewSchedule, mobileNo, altMobileNo, skypeId);
 		return interviewDetails;
 	}
 	
@@ -124,7 +124,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	public List<InterviewDetails> getInterviewByInterviewer(String interviewerEmail) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
-		query.addCriteria(Criteria.where("interviewerEmail").regex(Pattern.compile(interviewerEmail, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+		query.addCriteria(Criteria.where("scheduledInterviewersEmails").all(interviewerEmail));
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
@@ -219,7 +219,8 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
-		}
+			interviewDetails2.getScheduledInterviewersEmails().add(interviewSchedule.getEmailIdInterviewer());	
+			}
 		}else{
 			int i=0;
 			List<Round> rounds = new ArrayList<Round>();
@@ -232,35 +233,29 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
+			try {
+				ArrayList<String> emailIds =  new ArrayList<String>();
+				emailIds.add(interviewSchedule.getEmailIdInterviewer());
+				interviewDetails2.setScheduledInterviewersEmails(emailIds);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		return interviewDetails2;
 	}
 	
 	public InterviewDetails enrichInterviewDetails2(InterviewDetails interviewDetails2, InterviewFeedback interviewFeedback){
-		int i = 0;
-		if(interviewDetails2.getRounds().get(i).getInterviewFeedback()==null){
-		InterviewSchedule is = interviewDetails2.getRounds().get(i).getInterviewSchedule();
-		List<Round> rounds = new ArrayList<Round>();
-		rounds.add(i,new Round(interviewFeedback.getRoundName(), is, interviewFeedback));
-		interviewDetails2.setCandidateEmail(interviewFeedback.getCandidateId());
-		interviewDetails2.setInterviewerEmail(interviewFeedback.getInterviewerEmail());
-		interviewDetails2.setInterviewerName(interviewFeedback.getInterviewerName());
-		interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
-		interviewDetails2.setRounds(rounds);
-		interviewDetails2.setStatus(interviewFeedback.getStatus());
-		}else{
-			int size = interviewDetails2.getRounds().size();
-			size--;
-			InterviewSchedule is = interviewDetails2.getRounds().get(size).getInterviewSchedule();
-			List<Round> rounds = interviewDetails2.getRounds();
-			rounds.set(size,new Round(interviewFeedback.getRoundName(), is, interviewFeedback));
-			interviewDetails2.setCandidateEmail(interviewFeedback.getCandidateId());
-			interviewDetails2.setInterviewerEmail(interviewFeedback.getInterviewerEmail());
-			interviewDetails2.setInterviewerName(interviewFeedback.getInterviewerName());
-			interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
-			interviewDetails2.setRounds(rounds);
-			interviewDetails2.setStatus(interviewFeedback.getStatus());
-		}
+			for (int j=0;j<interviewDetails2.getRounds().size();j++) {
+				if(interviewDetails2.getRounds().get(j).getInterviewFeedback() == null &&
+						interviewDetails2.getRounds().get(j).getInterviewSchedule().getEmailIdInterviewer().equals(interviewFeedback.getInterviewerEmail()))
+				{
+					interviewDetails2.getRounds().get(j).setInterviewFeedback(interviewFeedback);
+					interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
+					interviewDetails2.setStatus(interviewFeedback.getStatus());
+					interviewDetails2.getScheduledInterviewersEmails().remove(interviewFeedback.getInterviewerEmail());
+					break;
+				}	
+			}
 		return interviewDetails2;
 	}
 }

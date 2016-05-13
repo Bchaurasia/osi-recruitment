@@ -22,6 +22,8 @@
 					<th>Name</th>
 					<th>Email Id</th>
 					<th>Designation</th>
+					<th>Submitted By</th>
+					<th>Profile Source</th>
 					<th>Status</th>
 				</tr>
 			</thead>
@@ -33,6 +35,8 @@
 						style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.designation}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.createdBy}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.profileSource}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
 
 				</tr>

@@ -2,9 +2,10 @@ package com.nisum.employee.ref.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-//@Setter
+@Setter
 @AllArgsConstructor
 public class Round {
 	private String roundName;

@@ -353,4 +353,8 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			   $scope.previousApprover2  = true;
 				 
 			 }
+		
+		$scope.goToBottom = function (){
+			  event.preventDefault();
+		};
 }]);

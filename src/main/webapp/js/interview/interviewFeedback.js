@@ -1,10 +1,18 @@
-app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','sharedService', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI','interviewService','appConstants', 
-                                        function($scope, $http, $q, $window, sharedService, $timeout, $rootScope, $log, $state, $location,profileService, blockUI,interviewService,appConstants) {
+app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','sharedService', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI','interviewService','appConstants','userService', 
+                                        function($scope, $http, $q, $window, sharedService, $timeout, $rootScope, $log, $state, $location,profileService, blockUI,interviewService,appConstants,userService) {
 	$scope.technical={};
 	$scope.functional={};
 	$scope.technical.newSkill="";
 	$scope.functional.newSkill="";
+	userService.getUserById(sessionStorage.userId).then(setUser).catch(errorMsg);
 	
+	function setUser(data){
+		$scope.user = data;
+		$rootScope.user = data;
+	}
+	function errorMsg(message){
+		console.log("message--->"+message);
+	}
 	$scope.tabs = [
 	   			{
 	   				"heading": "Technical",
@@ -88,15 +96,17 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
 			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
 			}
-			var i=$scope.interview.rounds.length;
-			if($scope.interview.rounds[i-1].interviewFeedback!==null){
-				$scope.interviewFeedback=$scope.interview.rounds[i-1].interviewFeedback;
-				$scope.interviewFeedback.status=$scope.interview.status;
-				console.debug("interview feedback  :"+angular.toJson($scope.interviewFeedback.rateSkills));
-				$scope.hideSubmit = true;
+			for(i=0;$scope.interview.rounds.length;i++){
+				
+				if(_.isNull($scope.interview.rounds[i].interviewFeedback)
+				&& ( $scope.interview.rounds[i].interviewSchedule.emailIdInterviewer === sessionStorage.userId
+				  || _.contains($scope.user.roles, "ROLE_HR")))
+				{
+					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
+					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+					break;
+				}
 			}
-			$scope.interviewSchedule = $scope.interview.rounds[i-1].interviewSchedule;
-			$scope.interviewFeedback.roundName=$scope.interview.roundName;
 			
 			},
 			function(errorMsg) {
@@ -124,6 +134,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.interviewDateTime = $scope.interviewSchedule.interviewDateTime;
 			$scope.interviewFeedback.typeOfInterview = $scope.interviewSchedule.typeOfInterview;
 			$scope.interviewFeedback.candidateId = $scope.emailId;
+			$scope.interviewFeedback.feedbackSubmittedBy=sessionStorage.userId;
 			profileService.addProfilesStatus($scope.emailId,$scope.interviewFeedback.status);
 			$http.post('resources/interviewFeedback', $scope.interviewFeedback).
 			  success(function(data) {
@@ -142,7 +153,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			  });
 		
 			blockUI.stop();
-		},3000);
+		},1000);
 	}
 	
 	$scope.alHide =  function(){

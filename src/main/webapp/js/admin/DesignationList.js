@@ -23,9 +23,9 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	$scope.att1=["skills"];
 	
 	$scope.init = function() {
+		$timeout( function(){ $scope.message = ""; $scope.cls = ''; sharedDataService.setmessage("");sharedDataService.getClass("");}, 5000);
 		designationService.getDesignation().then(function(data){
 			$scope.designation1=data;
-			$timeout( function(){ $scope.message = ""; $scope.cls = ''; sharedDataService.setmessage("");sharedDataService.getClass("");}, 5000);
 			console.log("-----------"+angular.toJson($scope.design));
 		}).catch(function(msg){
 			$scope.message=msg;

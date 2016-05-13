@@ -6,6 +6,7 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 		getInterviewFeedback : getInterviewFeedback,
 		submitInterviewFeedback : submitInterviewFeedback,
 		getInterviewDetailsByCandidateId : getInterviewDetailsByCandidateId,
+		getInterviewDetailsByInterviewerEmailId:getInterviewDetailsByInterviewerEmailId,
 		getInterviewDetailsByJobCode : getInterviewDetailsByJobCode,
 		createInterview : createInterview,
 		updateInterview : updateInterview,
@@ -23,6 +24,15 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 	}
 	function getInterviewDetailsById(interviewId){
 		return $http.get('resources/getInterviewDetailsById?interviewId='+interviewId)
+		     .then(function(response){
+		    	 return response.data;
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving candidate Deatils status: ' + response.status );
+		     });
+	}
+	function getInterviewDetailsByInterviewerEmailId(interviewId){
+		return $http.get('resources/getInterviewByInterviewer?interviewerEmail='+interviewId)
 		     .then(function(response){
 		    	 return response.data;
 		     })

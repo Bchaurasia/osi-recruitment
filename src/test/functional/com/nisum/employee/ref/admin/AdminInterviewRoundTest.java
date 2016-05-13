@@ -23,7 +23,7 @@ public class AdminInterviewRoundTest {
 	public void clientTest() throws InterruptedException {
 		WebDriver driver = new FirefoxDriver();
 		try {
-			log_IN_OUT.loginUser(driver);
+			log_IN_OUT.loginUser(driver, null, null);
 
 			driver.switchTo();
 			driver.get("http://localhost:8080/EmployeeReferral/main.html#/admin/client");

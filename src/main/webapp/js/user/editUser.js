@@ -75,12 +75,7 @@ app.controller('editUserCtrl',['$scope', '$http','$q', '$window', '$timeout', '$
 	$scope.removeSlot = function (index) {
 		$scope.user.timeSlots.splice(index, 1);
     }
-	$scope.validatePhNo = function(data) {
-		if (/^\+?\d{10,10}$/.test(data)) {
-			return true;
-		} else
-			return "Enter valid mobile number..";
-	};
+	
 	$scope.validateSkypeId = function(data) {
 		if (/^[a-z][a-z0-9\.,\-_]{5,31}$/.test(data)) {
 			return true;

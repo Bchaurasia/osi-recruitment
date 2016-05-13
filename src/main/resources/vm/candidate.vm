@@ -20,13 +20,13 @@ The details of your interview are: <br><br>
 <td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$typeOfInterview</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Date Of Interview</td>
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Date Of Interview:</td>
 <td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$interviewDateTime</td> 
 </tr>
 
 </table>
 <br><br>
- We are definitely looking forward to speaking with you then.<br> <br> Have a nice day! 
+ We are definitely looking forward to speak with you.<br> <br> Have a nice day! 
 <br><br>
 
  <span style="font-size:15px">Regards,</span><br>

@@ -33,7 +33,7 @@ public class PositionCsvTest {
 			
 			
 			try{
-				loginPageTest.loginUser(driver);
+				loginPageTest.loginUser(driver, null, null);
 				 driver.switchTo();
 				WebElement position=driver.findElement(By.xpath(POSITION));
 				position.click();

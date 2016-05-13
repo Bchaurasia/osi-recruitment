@@ -164,7 +164,7 @@
 					class="form-control input-sm" required>
 					<option>Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
-				<a href="#" ng-click="showApprover1Comments = !showApprover1Comments"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
+				<a href="#" ng-click="showApprover1Comments = !showApprover1Comments;goToBottom();"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
 				
 			</div>
 			<div class="input-field col s6" ng-hide="hideApproval2">
@@ -174,13 +174,13 @@
 					class="form-control input-sm">
 					<option value="">Select Approver 2</option>
 				</select> <label>Approver 2</label>
-				<a href="#" ng-click="showApprover2Comments = !showApprover2Comments"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
+				<a href="#" ng-click="showApprover2Comments = !showApprover2Comments;goToBottom();"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col s6">
 					<div class="input-field col s10">
-				   		<textarea id="icon_prefix2" placeholder="Approver1 comments" ng-show="showApprover1Comments" class="materialize-textarea" ng-disabled="disableApprover1CommentBox" ng-model="requisition.approval1.comment"></textarea>
+				   		<textarea id="bottom" placeholder="Approver1 comments" ng-show="showApprover1Comments" class="materialize-textarea" ng-disabled="disableApprover1CommentBox" ng-model="requisition.approval1.comment"></textarea>
 				   		<label for="textarea1" ng-show="showApprover1Comments">Comment</label>
 				   </div>
 			</div>
