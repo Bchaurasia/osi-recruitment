@@ -38,8 +38,8 @@
 							ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
 						<td>{{data.position}}</td>
 						<td>{{data.client}}</td>
-						<td align="center"><a style="cursor: pointer;"
-							ng-click="cloneRequisition(data.requisitionId)" data-tooltip="Clone"><i class="material-icons">repeat_one</a></td>
+						<td align="center"><button style="cursor: pointer;border: none;background: none;color:#2196F3" ng-disabled="!hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+                          ng-click="cloneRequisition(data.requisitionId)" data-tooltip="Clone"><i class="material-icons">repeat_one</button></td>
 						<td align="center"  >
 							<i class="material-icons" style="color:#2196F3 ;font-size: 25px; " data-tooltip="{{data.status}}">{{getStatusIcon(data.status)}}</i>
 						</td>
