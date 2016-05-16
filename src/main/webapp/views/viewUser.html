@@ -23,7 +23,7 @@
 						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.required">
 						User Name is required.</div>
 					<div class="validation-error"
-						ng-show="(UserInformation.userName.$dirty  || invalidSubmitAttempt) && UserInformation.userName.$error.pattern">
+						ng-show="UserInformation.userName.$dirty  ||  UserInformation.userName.$error.pattern">
 						User Name must be characters only.</div>
 					<div class="validation-error"
 						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.minlength">
