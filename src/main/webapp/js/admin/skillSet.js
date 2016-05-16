@@ -65,7 +65,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
     	 var index = $scope.skills.indexOf(skill);
     	 var deleteUser = $window.confirm('Are you absolutely sure you want to delete?');
     	 if(deleteUser){
-    		 $scope.skills1.value.sort();
+  
     		 $scope.skills1.value.splice(index,1);
 			
     		 infoService.updateInformation($scope.skills1).then(function(msg){
