@@ -13,20 +13,20 @@
 		<div class="row">
 			<div class="row">
 				<div class="input-field col s6">
-					<label>Name<b class="mandatory">*</b></label> <input
+					<label style="position: absolute; top: -22px;">Name<b class="mandatory">*</b></label> <input
 						class="form-control" name=userName ng-pattern="/^[a-zA-Z _]*$/"
 						type="text" ng-minlength="3" ng-maxlength="30"
-						ng-model="user.name" required> <span
+						ng-model="user.name" required> <!-- <span
 						class="validation-error"
-						ng-show="UserInformation.userName.$invalid"></span>
+						ng-show="UserInformation.userName.$invalid"></span> -->
 					<div class="validation-error"
-						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.required">
+						ng-show="UserInformation.userName.$error.required">
 						User Name is required.</div>
 					<div class="validation-error"
-						ng-show="UserInformation.userName.$dirty  ||  UserInformation.userName.$error.pattern">
+						ng-show="UserInformation.userName.$error.pattern">
 						User Name must be characters only.</div>
 					<div class="validation-error"
-						ng-show="(UserInformation.userName.$dirty || invalidSubmitAttempt) && UserInformation.userName.$error.minlength">
+						ng-show="UserInformation.userName.$error.minlength">
 						User Name must be at least 3 characters .</div>
 				</div>
 				<div class="input-field col s6">
@@ -38,11 +38,11 @@
 				<div class="input-field col s6"> 
 					<input class="form-control" maxlength="11" type="text" placeholder="Enter 10 digit number" name="mobileNo"
 						ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11"
-						ng-model="user.mobileNumber" required> <label>
+						ng-model="user.mobileNumber" required> <label style="position: absolute; top: -22px;">
 						Mobile<b class="mandatory">*</b>
 					</label>
 					     <span class="validation-error"
-					ng-show="(UserInformation.mobileNo.$dirty || invalidSubmitAttempt) && UserInformation.mobileNo.$error.pattern">
+					ng-show="UserInformation.mobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</span>
 				</div>
 				<div class="input-field col s6">

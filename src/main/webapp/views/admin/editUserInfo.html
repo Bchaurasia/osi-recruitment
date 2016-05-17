@@ -18,18 +18,18 @@
 								<input class="form-control" ng-change="validateChar($data)"
 									name="userNameValid" ng-pattern="/^[a-zA-Z _]*$/"
 									ng-minlength="3" ng-maxlength="30" type="text"
-									ng-model="userToEdit.name" required> <label>Full
+									ng-model="userToEdit.name" required> <label style="position: absolute; top: -22px;">Full
 									Name<b class="mandatory">*</b>
 								</label> <span class="validation-error"
 									ng-show="EditUserInfo.userNameValid.$invalid"></span>
 								<div class="validation-error"
-									ng-show="(EditUserInfo.userNameValid.$dirty || invalidSubmitAttempt) && EditUserInfo.userNameValid.$error.required">
+									ng-show="EditUserInfo.userNameValid.$error.required">
 									User Name is required.</div>
 								<div class="validation-error"
-									ng-show="EditUserInfo.userNameValid.$dirty || EditUserInfo.userNameValid.$error.pattern">
+									ng-show="EditUserInfo.userNameValid.$error.pattern">
 									User Name must be characters only.</div>
 								<div class="validation-error"
-									ng-show="(EditUserInfo.userNameValid.$dirty || invalidSubmitAttempt) && EditUserInfo.userNameValid.$error.minlength">
+									ng-show="EditUserInfo.userNameValid.$error.minlength">
 									User Name must be at least 3 characters .</div>
 							</div>
 							<div class="input-field col s6">
@@ -41,16 +41,16 @@
 							<div class="input-field col s6">
 								<input class="form-control" placeholder="Enter 10 digit number" name="mobileNo"
 									ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11" type="text"
-									ng-model="userToEdit.mobileNumber" required> <label>Mobile<b
+									ng-model="userToEdit.mobileNumber" required> <label style="position: absolute; top: -22px;">Mobile<b
 									class="mandatory">*</b></label>
 									<span class="validation-error"
-					                  ng-show="(EditUserInfo.mobileNo.$dirty || invalidSubmitAttempt) && EditUserInfo.mobileNo.$error.pattern">
+					                  ng-show="EditUserInfo.mobileNo.$error.pattern">
 					                    Mobile number should be numeric and 10 digit number</span>
 			                      
 							</div>
 							<div class="input-field col s6">
 								<input class="form-control" ng-change="validateSkypeId($data)"
-									type="text" ng-model="userToEdit.skypeId" required> <label>Skype
+									type="text" ng-model="userToEdit.skypeId" required> <label style="position: absolute; top: -22px;">Skype
 									ID<b class="mandatory">*</b>
 								</label>
 							</div>
@@ -66,7 +66,7 @@
 							<div class="input-field col s6">
 								<input class="form-control" type="text"
 									ng-pattern="/^[a-zA-Z _]*$/" ng-model="userToEdit.location"
-									required> <label>Location<b class="mandatory">*</b></label>
+									required> <label style="position: absolute; top: -22px;">Location<b class="mandatory">*</b></label>
 							</div>
 							<div class="input-field col s6">
 								<ui-select multiple ng-model="userToEdit.clientName"
