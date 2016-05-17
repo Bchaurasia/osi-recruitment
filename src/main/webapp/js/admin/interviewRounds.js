@@ -53,7 +53,7 @@ $scope.save = function(){
 $scope.checkRounds = function(){
 	var flag=true;
 	angular.forEach( $scope.interviewRounds, function(ir){
-		if($scope.newInterviewRound==ir){
+		if($scope.newInterviewRound.toLowerCase() === ir.toLowerCase()){
 			  $scope.message="Interview Round Already Exists";
 			  $scope.cls=appConstants.ERROR_CLASS;
 			  $timeout( function(){ $scope.alHide(); }, 5000);
@@ -100,13 +100,7 @@ $scope.deleteInterviewRound = function(index,interviewRound){
 		$scope.gotoAnchor();
 	}
 	$scope.gotoAnchor = function() {
-	       var newHash = 'top';
-	       console.log("hash...." + $location.hash());
-	       if ($location.hash() !== newHash) {
-	         $location.hash('top');
-	       } else {
-	         $anchorScroll();
-	       }
+			  event.preventDefault();
 	};
 	$scope.cancel = function(){
         $scope.dis = false;
