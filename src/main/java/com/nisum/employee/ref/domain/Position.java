@@ -1,8 +1,12 @@
 package com.nisum.employee.ref.domain;
 
+import static org.springframework.data.elasticsearch.annotations.FieldIndex.not_analyzed;
+import static org.springframework.data.elasticsearch.annotations.FieldType.String;
+
 import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +19,7 @@ public class Position  extends AuditEntity{
 	@Id
 	String jobcode;
 	String requisitionId;
+	@Field(type = String, index = not_analyzed)
 	String designation;
 	String minExpYear;
 	String maxExpYear;
