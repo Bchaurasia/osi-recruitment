@@ -6,6 +6,12 @@ apply plugin: "war"
 apply plugin: "jacoco"
 apply plugin: "jetty"	
 
+def buildProperties = new Properties()
+file("version.properties").withInputStream {
+        stream -> buildProperties.load(stream)
+}
+
+version = buildProperties.version
 buildscript {
   repositories {
     maven {
