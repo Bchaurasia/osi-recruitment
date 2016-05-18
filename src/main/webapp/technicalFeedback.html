@@ -8,7 +8,7 @@
 					<div class="row" ng-repeat="round in interviewFeedback.rateSkills">
 						<div class="col s6">{{ round.skill }}:<b class="mandatory">*</b></div>
 						<div class="col s6">
-							<rating ng-model="round.rating" max="10" readonly="false"
+							<rating ng-model="round.rating" max="10" readonly="false" ng-change="disablefeedback()"
 								on-hover="hoveringOver(value)" on-leave="overStar = null" required></rating>
 						</div>
 					</div>
@@ -17,7 +17,7 @@
 						<button style="background-color: #F8F8F8; border: 0px;" href=""
 							id="" class="interview-feedback" data-tooltip="Add New Skill"
 							 ng-disabled="!technical.newSkill"
-							ng-click="addNewSkill()">
+							ng-click="addNewSkill();disablefeedback()">
 							<i class="material-icons">add</i>
 						</button>
 				</td>

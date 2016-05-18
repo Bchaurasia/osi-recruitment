@@ -8,7 +8,7 @@
 					{{interviewscheduleDetails.candidateName}}</b>
 			</h5>
 		</div>
-		
+
 		<div class="row">
 			<div class="input-field col s6">
 				<h6>
@@ -85,7 +85,8 @@
 				<label>Interviewer Name :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.interviewDateTime | date:'medium'}}</p>
+				<p class="viewInterview">{{data.interviewSchedule.interviewDateTime
+					| date:'medium'}}</p>
 				<label>Interview Date and Time : </label>
 			</div>
 		</div>
@@ -132,14 +133,14 @@
 				<b>Feedback Details for {{data.roundName}}</b>
 			</h6>
 		</div>
-		<div class="row">
+		<div class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewFeedback.feedbackSubmittedBy}}</p>
 				<label>Feedback SubmittedBy :</label>
 			</div>
-			
+
 		</div>
-		<div class="row"
+		<div class="row" ng-show="data.interviewFeedback"
 			ng-repeat="skill in data.interviewFeedback.rateSkills">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{skill.skill}}</p>
@@ -150,26 +151,32 @@
 				<label>Rating :</label>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s12">
 				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.additionalSkills
 					|| "--"}}</p>
 				<label>Additional Skills :</label>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s12">
 				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.strengths
 					|| "--"}}</p>
 				<label>Strengths :</label>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s12">
 				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.improvement
 					|| "--"}}</p>
 				<label>Improvement :</label>
 			</div>
+		</div>
+		<div class="row" ng-show="!(data.interviewFeedback)"
+			style="color: red;">
+			<h6>
+				<b>Feedback not submitted!</b>
+			</h6>
 		</div>
 		</tab> </tabset>
 

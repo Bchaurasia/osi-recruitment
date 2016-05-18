@@ -1,180 +1,184 @@
-app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI','clientService','interviewService','$state', '$location','userService','profileService','sharedService','positionService','requisitionService', 
-                                        function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope, blockUI, clientService, interviewService,$state,$location,userService,profileService,sharedService,positionService,requisitionService) {
-	$scope.interviewerNames = [];
-	$scope.info = $rootScope.info;
-	$scope.pskills = [];
-	$scope.pskills = $scope.info.skills;
-	$scope.skills = {};
-	$scope.interviewschedule = {};
-	$scope.disabledDate = true;
-	$scope.scheduleButnHide = true;
+app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','sharedService', '$timeout', '$rootScope','$log','$state', '$location','profileService', 'blockUI','interviewService','appConstants','userService', 
+                                        function($scope, $http, $q, $window, sharedService, $timeout, $rootScope, $log, $state, $location,profileService, blockUI,interviewService,appConstants,userService) {
+	$scope.technical={};
+	$scope.functional={};
+	$scope.technical.newSkill="";
+	$scope.functional.newSkill="";
+	$scope.disabledFeedbackbtn=true;
+	userService.getUserById(sessionStorage.userId).then(setUser).catch(errorMsg);
+	
+	function setUser(data){
+		$scope.user = data;
+		$rootScope.user = data;
+	}
+	function errorMsg(message){
+		console.log("message--->"+message);
+	}
+	$scope.tabs = [
+	   			{
+	   				"heading": "Technical",
+	   				"active": true,
+	   				"template":"technicalFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Functional",
+	   				"active": false,
+	   				"template":"functionalFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Soft Skills",
+	   				"active": false,
+	   				"template":"softSkillsFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Comment",
+	   				"active": false,
+	   				"template":"commentFeedback.html"
+	   			},
+	   			{
+	   				"heading": "Management Skills",
+	   				"active": false,
+	   				"template":"mangementSkillset.html"
+	   			},
+	   			
+	   		];
+	
+	$scope.addNewSkill = function() {
+		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
+		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.technical.newSkill,"rating":0});
+		$scope.technical.newSkill="";
+	 };
+	  
+	$scope.addFunctionSkill = function() {
+			var newItemNo = $scope.interviewFeedback.domainSkills.length+1;
+			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.functional.newSkill,"rating":0});
+			$scope.functional.newSkill="";
+	};  
+	  
+	$scope.profile = {};
+	$scope.interview = {};
+	$scope.position = {};
+	$scope.interviewFeedback = {};
+	$scope.interviewSchedule = {};
+	$scope.ratings=[];
 	$scope.message = "";
-	$scope.jobcodelist=[];
-	$scope.interview={};
-	$scope.interviewerData={};
-	$scope.JobCodeRound=[];
-	$scope.disabled=false;
-	$scope.interviewscheduleDetails={};
-	$scope.interviewscheduleDetails.rounds=[];
-	$scope.today = new Date();
-	$scope.requisitionIdlist=[];
-	$scope.disabled=false;
-	$scope.jobcode={};
-	$scope.disableSchedueBtn= true;
-	var interviewId = sharedService.getInterviewId();
-	console.log("Schedule Service : interviewId"+interviewId);
-	
-	$scope.disableSchedue =  function(){
-	    if($scope.data.date !== undefined){
-	    	$scope.disableSchedueBtn= false;
-	    }else
-	    	$scope.disableSchedueBtn= true;
-	}
-	$scope.setJobcode= function(requisitionId) {
-		$scope.interviewschedule.jobcode=undefined;
-		$scope.interviewschedule.roundName=null;
-		$scope.interviewerName=null;
-		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
-			$scope.positionObj=[];
-			$scope.jobcodelistObj=positions;
-			angular.forEach($scope.jobcodelistObj,function(position){
-				 if(position.status!== "Hired"){
-					 $scope.positionObj.push(position);
-				 }
-			 });
-			$scope.jobcode =_.find($scope.positionObj,function(positionObj){
-             return positionObj.jobcode === $scope.interviewscheduleDetails.jobCode; 
-			});
-			$scope.interviewschedule.jobcode=$scope.jobcode;
-		}).catch(function(msg){
-			$log.error(msg);
-		});
-	}
-	
+	$scope.info = {};
+	$scope.disableSchedule = true;
+	$scope.userRole = $rootScope.user.roles;
+	var i = 0;
+	$scope.position.primarySkills=[];
+	$scope.newSkillDisable=true;
+	$scope.newFunctionalSkillDisable=true;
 	$scope.init = function() {
-	$scope.jobcodelistObj={};	
-	$scope.interviewschedule.interviewDateTime="";
-	if(interviewId == undefined) {
-		$state.go("recruitment.interviewManagement");
-	}
-		interviewService.getInterviewDetailsById(interviewId).then(
-		function(data){
-			
-			$scope.interviewscheduleDetails=data;
-
-			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
-			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
-			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
-			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
-			
-			if($scope.interviewscheduleDetails.requisitionId != undefined){
-				$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
-				$scope.setJobcode($scope.interviewschedule.requisitionId);
-			}
-			profileService.getProfileById($scope.interviewschedule.candidateId).then(function(data){
-				$scope.interviewschedule.candidateSkypeId=data.skypeId;
-				$scope.interviewschedule.candidateMobileNumber=data.mobileNo;
-			}).catch(function(){
-				
-			});
-			
-			}		
-		)
-		requisitionService.getAllRequisitions().then(function(requisitions){
-			$scope.requisitionObj=requisitions;
-			$scope.approvedRequisition=[];
-			angular.forEach($scope.requisitionObj,function(requisition){
-				 if(requisition.status==="APPROVED"){
-					 $scope.approvedRequisition.push(requisition);
-				 }
-			 });
-			_.find($scope.approvedRequisition,function(requisition){
-				$scope.requisitionIdlist.push(requisition.requisitionId); 
-			 });
-			console.debug("requisition detail object :"+angular.toJson($scope.requisitionIdlist));
-		}).catch(function(msg){
-			$log.error(msg);
-		});
-		
+		if(sharedService.getjobCode() == undefined || sharedService.getprofileUserId() == undefined) {
+			$state.go("recruitment.interviewManagement");
+		}
+		$scope.jobcode =sharedService.getjobCode();
+		$scope.emailId = sharedService.getprofileUserId();
 	}
 	$scope.init();
-	
-	$scope.setvalues= function(InterviewerName) {
-		$scope.interviewerData  =_.find( $scope.interviewerNames,function(interviewerObj){
-			if(interviewerObj.emailId == InterviewerName.emailId){
-             return interviewerObj; 
+	$scope.disablefeedback = function() {
+		console.debug("rateskill"+angular.toJson($scope.interviewFeedback.rateSkills[0].rating));
+		for(var i=0; i<$scope.interviewFeedback.rateSkills.length;i++){
+			if($scope.interviewFeedback.rateSkills[i].rating===0)
+			{
+				$scope.disabledFeedbackbtn=true;
 			}
-		 });
-	}
-	
-	$scope.setInterviewData= function(round) {
-		$scope.interviewerName=null;
-		if(round=== "Hr Round"){
-			userService.getHrUsers().then(function(userData){
-				 $scope.interviewerNames = userData;
-			});
-		}else if(round=== "Manager Round"){
-			userService.getManagerUsers().then(function(userData){
-				 $scope.interviewerNames = userData;
-			});
-		}
-		else{
-			userService.getInterviewUsers().then(function(userData){
-				 $scope.interviewerNames = userData;
-			});
-		}
-		
-		_.find($scope.interviewscheduleDetails.rounds,function(Obj){
-			if(Obj.roundName !== round){
-				$scope.disabled=false;
-				}
 			else{
-				$scope.disabled=true;
-				$scope.cls = 'alert alert-danger alert-error';
-				$scope.message = round +" is already done.";
-				$timeout( function(){ $scope.alHide(); }, 2500);	
+				$scope.disabledFeedbackbtn=false;
 			}
-		})
-		var index =$scope.interviewscheduleDetails.progress.indexOf('Scheduled');
-		var round =$filter('limitTo')($scope.interviewscheduleDetails.progress, index-1, 0);
-		if(index !== -1 && (round !== $scope.interviewschedule.roundName)){
-			  $scope.disabled=true;
-			  $scope.cls = 'alert alert-danger alert-error';
-			  $scope.message = round +" is scheduled,You need to be submit feedback.";
-			  $timeout( function(){ $scope.alHide(); }, 5000);
-			  return;
-		}else if(round === $scope.interviewschedule.roundName){
-			  $scope.disabled=true;
-			  $scope.cls = 'alert alert-danger alert-error';
-			  $scope.message = round +" is already done.";
-			  $timeout( function(){ $scope.alHide(); }, 5000);		
 		}
+	}
+	var profile_url = $http.get('resources/profile?emailId='+$scope.emailId);
+	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
+	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
+	$scope.info = $rootScope.info;
+	(function(){
+		if(_.contains($scope.userRole, "ROLE_INTERVIEWER")){
+			$scope.info.status = ["Selected", "OnHold", "Rejected"];
+		}
+	}())
+	$q.all([profile_url, interview_URL, position_URL]).then(
+			function(response){
+			$scope.profile = response[0].data[0];
+			$scope.interview = response[1].data[0];
+			$scope.interviewFeedback.rateSkills =[];
+			$scope.interviewFeedback.domainSkills=[];
+			$scope.position = response[2].data;
+			for(var i=0; i<$scope.position.primarySkills.length;i++){
+					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
+			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
+			$scope.disablefeedback();
+			}
+			for(i=0;$scope.interview.rounds.length;i++){
+				
+				if(_.isNull($scope.interview.rounds[i].interviewFeedback)
+				&& ( $scope.interview.rounds[i].interviewSchedule.emailIdInterviewer === sessionStorage.userId
+				  || _.contains($scope.user.roles, "ROLE_HR")))
+				{
+					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
+					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+					$scope.hideSubmit=false;
+					break;
+				}
+				else if(($scope.interview.rounds[i].roundName=="Hr Round")){
+					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
+					$scope.interviewFeedback = $scope.interview.rounds[i].interviewFeedback;
+					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+					$scope.hideSubmit=true;
+				}
+			}
+			
+			},
+			function(errorMsg) {
+				$log.error("-------"+errorMsg);
+			}
+		);
+	
+	$scope.max = 10;
+	$scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+	};
+	
+	$scope.status = {
+		    isFirstOpen: true,
+	};
+	
+	$scope.submit = function(){
+			$scope.interviewFeedback.candidateName = $scope.profile.candidateName;
+			$scope.interviewFeedback.interviewerEmail = $scope.interviewSchedule.emailIdInterviewer;
+			$scope.interviewFeedback.interviewerName = $scope.interviewSchedule.interviewerName;
+		    $scope.interviewFeedback.jobcode = $scope.interviewSchedule.jobcode;
+			$scope.interviewFeedback.interviewDateTime = $scope.interviewSchedule.interviewDateTime;
+			$scope.interviewFeedback.typeOfInterview = $scope.interviewSchedule.typeOfInterview;
+			$scope.interviewFeedback.candidateId = $scope.emailId;
+			$scope.interviewFeedback.feedbackSubmittedBy=sessionStorage.userId;
+			profileService.addProfilesStatus($scope.emailId,$scope.interviewFeedback.status);
+			blockUI.start("Submitting Feedback...");
+			$timeout(function() {
+				$http.post('resources/interviewFeedback', $scope.interviewFeedback).
+				success(function(data) {
+					$scope.sendNotification("Feedback Submitted Successfully!",'recruitment/interviewManagement');
+					$location.path("recruitment/interviewManagement");
+					$scope.cls = 'alert  alert-success';
+					$scope.message = "Feedback Submitted Successfully!";
+					$timeout( function(){ $scope.alHide(); }, 5000);
+					$scope.reset();
+					$log.info("Feedback Submitted Successfully!");
+				}).
+				error(function(data) {
+					$timeout( function(){ $scope.alHide(); }, 5000);
+					$log.error("Feedback Submission Failed! --->"+data);
+				});
+			blockUI.stop();
+			}, 1000);
 	}
 	
 	$scope.alHide =  function(){
 	    $scope.message = "";
-	}
-	
-	$scope.schedule =  function(){
-		
-		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
-		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
-		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
-		$scope.interviewschedule.interviewDateTime = $scope.data.date;
-		$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
-		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
-		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
-		$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
-		console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
-		interviewService.scheduleInterview($scope.interviewschedule).then(function(data){
-			 $scope.message = "Interview scheduled successfully for "+$scope.interviewschedule.candidateName;
-			 $scope.sendNotification($scope.message,'recruitment/interviewManagement');
-		}).catch(function(data){
-			  var cls = 'alert alert-danger alert-error';
-			  var msg = "Something wrong, try again";
-			  $scope.sendNotificationWithStyle(msg,cls,'recruitment/interviewManagement');
-			 $log.error("failed=="+data);
-		})
+	    $scope.cls = '';
+	    $location.path("recruitment/interviewManagement");
 	}
 	
 	
