@@ -38,9 +38,24 @@ public class InterviewSearchService {
 		
 		return interviewDetailsList;
 	}
+	public List<InterviewDetails> getInterviewByInterviewer(String data){
+		List<InterviewDetails> interviewDetailsList=interviewIndexRepository.findByInterviewerEmailStartingWith(data);
+		return interviewDetailsList;
+	}
 	
 	public InterviewDetails addInterviewDetailsIndex(InterviewDetails interviewDetails) throws Exception {
 		InterviewDetails interviewDetailsData = interviewIndexRepository.save(interviewDetails);
+		return interviewDetailsData;
+	}
+	
+	public InterviewDetails updateInterviewDetailsIndex(InterviewDetails interviewDetails) throws Exception {
+		InterviewDetails interviewDetailsData;
+		if(interviewIndexRepository.exists(interviewDetails.getInterviewerId())){
+			interviewIndexRepository.delete(interviewDetails.getInterviewerId());
+			interviewDetailsData=addInterviewDetailsIndex(interviewDetails);
+			}else{
+				interviewDetailsData=addInterviewDetailsIndex(interviewDetails);
+			}
 		return interviewDetailsData;
 	}
 	

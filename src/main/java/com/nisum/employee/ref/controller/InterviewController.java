@@ -36,9 +36,11 @@ public class InterviewController {
 	public ResponseEntity<?> searchInterviews(@RequestParam(value = "interviewerQuery", required = false) String interviewerQuery) {
 		List<InterviewDetails> interviewDetails = null;
 		if(interviewerQuery != null && !interviewerQuery.isEmpty()){
-			interviewDetails =interviewDetailsService.getInterviewByCandidateId(interviewerQuery);
+			//interviewDetails =interviewDetailsService.getInterviewByCandidateId(interviewerQuery);
+			interviewDetails=interviewSearchService.getInterviewDetailsByNameAndStatus(interviewerQuery, interviewerQuery);
 		}else{
-			interviewDetails =interviewDetailsService.getAll();
+			//interviewDetails =interviewDetailsService.getAll();
+			interviewDetails=interviewSearchService.getAllInterviewDetails();
 		}
 		return  new ResponseEntity<List<InterviewDetails>>(interviewDetails, HttpStatus.OK);
 	}
@@ -54,7 +56,8 @@ public class InterviewController {
 	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail) {
 		List<InterviewDetails> checkDetails = null;
-		checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
+		checkDetails=interviewSearchService.getInterviewByInterviewer(interviewerEmail);
+	//	checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
 		return new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	

@@ -9,4 +9,5 @@ import com.nisum.employee.ref.domain.InterviewDetails;
 public interface InterviewIndexRepository extends ElasticsearchRepository<InterviewDetails, String>{
 	
 	 List<InterviewDetails> findByCandidateNameStartingWithOrProgressStartingWithAllIgnoreCase(String candidateName, String progress);
+	 List<InterviewDetails> findByInterviewerEmailStartingWith(String interviewerEmail);
 }

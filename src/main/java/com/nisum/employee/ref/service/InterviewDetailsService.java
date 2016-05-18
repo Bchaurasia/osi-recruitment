@@ -50,6 +50,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		if(interviewDetails2.getInterviewerId() != null){
 			interviewDetails = enrichInterviewDetails2(interviewDetails2, interviewFeedback);
 			interviewDetailsRepository.scheduleInterview(interviewDetails);
+			interviewDetails=interviewSearchService.updateInterviewDetailsIndex(interviewDetails);
 			List<Profile> pro = profileService.getProfileByEmailId(interviewFeedback.getCandidateId());
 			profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails.getProgress());
 			pro.get(0).setStatus(interviewDetails.getProgress());
@@ -65,6 +66,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewSchedule.getCandidateId());
 		interviewDetails = enrichInterviewDetails(interviewDetails2 ,interviewSchedule);
 		interviewDetailsRepository.scheduleInterview(interviewDetails);
+		interviewDetails=interviewSearchService.updateInterviewDetailsIndex(interviewDetails);
 		List<Profile> pro = profileService.getProfileByEmailId(interviewSchedule.getCandidateId());
 		String mobileNo = pro.get(0).getMobileNo();
 		String altMobileNo = pro.get(0).getAltmobileNo();
