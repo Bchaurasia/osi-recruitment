@@ -61,7 +61,7 @@ public class UserController {
 		response.setDate(new Date());
 		response.setData(user);
 		response.setHttpStatus(200);
-		response.setMessage("User Updated succesfully.");
+		response.setMessage("User updated successfully");
 		
 		return new ResponseEntity<ResponseVO<UserInfo>>(response, HttpStatus.OK);
 	}

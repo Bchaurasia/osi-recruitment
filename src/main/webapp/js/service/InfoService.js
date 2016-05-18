@@ -77,11 +77,11 @@ function deleteInformation(info){
 function updateInformation(info){
 	return $http.put('resources/info',info)
 			.then(function(response){
-				deleteInfoFromCache();
-				return info.key+" successfully updated";
+				//deleteInfoFromCache();
+				return " Interview round successfully updated";
 			})
 			.catch(
-					function(response) { return "error while deleting "+ response.config.data.key +" information"}
+					function(response) { return "error while creating interview round"}
 			);
 }
 
