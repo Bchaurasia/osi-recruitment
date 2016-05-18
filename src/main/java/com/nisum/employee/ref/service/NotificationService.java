@@ -98,6 +98,8 @@ public class NotificationService{
 	private String SRC_FEEDBACK_HR_VM;
 	@Value("${SRC_JOB_REQUISITION_VM}")
     private String SRC_JOB_REQUISITION_VM;
+	@Value("${SRC_INTERVIEW_FEEDBACK_FORM}")
+	private String SRC_INTERVIEW_FEEDBACK_FORM;
 
 	@Autowired
 	IProfileService profileService;
@@ -156,21 +158,21 @@ public class NotificationService{
 		MimetypesFileTypeMap mimetypes = (MimetypesFileTypeMap)MimetypesFileTypeMap.getDefaultFileTypeMap();
    	 	mimetypes.addMimeTypes("text/calendar ics ICS");
    	 
-   	//register the handling of text/calendar mime type
+   	   //register the handling of text/calendar mime type
    	    MailcapCommandMap mailcap = (MailcapCommandMap) MailcapCommandMap.getDefaultCommandMap();
    	    mailcap.addMailcap("text/calendar;; x-java-content-handler=com.sun.mail.handlers.text_plain");
 		
 
 		// --- Set Interviewer Email Content ---
-		Message msgInterviewer = new MimeMessage(session);
-		msgInterviewer.setFrom(new InternetAddress(from));
+		Message msgInterviewer = getMessage();
+		//msgInterviewer.setFrom(new InternetAddress(from));
 		msgInterviewer.setRecipients(Message.RecipientType.TO,InternetAddress.parse(toInterviewer));
 		msgInterviewer.setSubject(OSI_TECHNOLOGIES + YOU_NEED_TO_TAKE_INTERVIEW_OF+interviewSchedule.getCandidateName());
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(writer2.toString(), TEXT_HTML);
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
-		messageBodyPart = new MimeBodyPart();
+    	BodyPart resumeBodyPart = new MimeBodyPart();
 		
 		BodyPart calendarPart = buildCalendarPart(date);
 	    multipart.addBodyPart(calendarPart);
@@ -178,12 +180,27 @@ public class NotificationService{
 		
 		String[] resume = profileService.getResume(interviewSchedule.getCandidateId());
 		DataSource source = new FileDataSource(resume[0]);
-		messageBodyPart.setDataHandler(new DataHandler(source));
-		messageBodyPart.setFileName(interviewSchedule.getCandidateName() + "_" + resume[1]);
-		multipart.addBodyPart(messageBodyPart);
+		resumeBodyPart.setDataHandler(new DataHandler(source));
+		resumeBodyPart.setFileName(interviewSchedule.getCandidateName() + "_" + resume[1]);
+
+		//************************************
+
+		//code to attach interview feedback in Interview's mail
+
+		String absolutePath=new File(Thread.currentThread().getContextClassLoader().getResource("").getFile()).getPath();
+		String filename =absolutePath + "/vm/"+SRC_INTERVIEW_FEEDBACK_FORM;
+
+		DataSource feedbackForm = new FileDataSource(filename);
+		BodyPart feedbackBodyPart = new MimeBodyPart();
+		feedbackBodyPart.setDataHandler(new DataHandler(feedbackForm));
+		feedbackBodyPart.setFileName("OSI_Interview_Feedback_Form.doc");
+
+		//************************************
+
+		multipart.addBodyPart(resumeBodyPart);
+		multipart.addBodyPart(feedbackBodyPart);
 		msgInterviewer.setContent(multipart);
 		
-	         
 	         
 		// --- Set Candidate Content ---
 		Message msgCandidate = getMessage();
@@ -382,15 +399,9 @@ public class NotificationService{
 		jobRequisitionTemplate.merge(context, writer);
 		
 		Message message1 = getMessage();
-		message1.setFrom(new InternetAddress(from));
+		//message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(userId));
 		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Requisition "+requisitionApproverDetails.getJobRequisitionId());
-		
-		
-		
-		
-		
-		
 		
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
