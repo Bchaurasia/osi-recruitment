@@ -23,6 +23,7 @@ public class InterviewSchedule extends AuditEntity{
 	String additionalNotes;
 	String candidateId;
 	String candidateName;
+	Boolean isFeedBackSubmitted;
 	ArrayList<String> candidateSkills;
 	
 }

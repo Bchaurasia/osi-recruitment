@@ -18,6 +18,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN", "ROLE_USER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
             }
     	}})
+    .state('viewHelpPage', {url:'/viewHelpPage', views: {'': {templateUrl: 'views/helpPage.html', controller: 'editUserCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN", "ROLE_USER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
+            }
+    	}})
     .state('routeForUnauthorizedAccess', {url:'/routeForUnauthorizedAccess', views: {'': {templateUrl: 'views/index.html'}}})
     
     .state('reportInfo', {url:'/reportInfo', views: {'': {templateUrl: 'views/reportInfo.html', controller: 'highChatCtrl'}},

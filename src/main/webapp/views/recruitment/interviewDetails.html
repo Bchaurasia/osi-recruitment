@@ -63,7 +63,6 @@
 
 			</div>
 		</div>
-
 		<tabset justified="true"> <tab
 			ng-repeat="data in interviewscheduleDetails.rounds"
 			heading="{{ data.roundName }}" active="data.active"> <br>
@@ -127,6 +126,14 @@
 					|| "--"}}</p>
 				<label>Additional Notes :</label>
 			</div>
+		</div>
+		<div class="row" style="align:center">
+			
+		<button class="btn btn-info active" type="submit" ng-hide="data.interviewSchedule.isFeedBackSubmitted"
+					ng-disabled="hasRole('ROLE_INTERVIEWER')"
+					ng-click="cancelInterview(interviewschedule.candidateId,data.roundName,interviewschedule.candidateName)">
+					<span class="glyphicon glyphicon-remove"></span> Cancel Interview
+				</button>
 		</div>
 		<div class="row collapsible-header">
 			<h6 align="left">

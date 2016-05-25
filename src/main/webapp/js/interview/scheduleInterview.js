@@ -181,5 +181,22 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		})
 	}
 	
+	$scope.cancelInterview = function(candidateId,roundName,candidateName) {
+		console.log("candidateName is::::"+candidateName);
+		console.log("cancelling interview 22222 :"+candidateId+"---"+roundName+"--"+candidateName);
+		interviewService.cancelInterview(candidateId,roundName,candidateName)
+		.then(successMsg)
+		.catch(errorMsg);
+		
+		function successMsg(msg){
+			$scope.sendNotification(msg,'recruitment/interviewManagement');
+		}
+		
+		function errorMsg(msg){
+			var cls='alert alert-danger alert-error';
+			$scope.sendNotificationWithStyle(msg,cls,'recruitment/interviewManagement');
+		}
+		
 	
+	}
 }]);

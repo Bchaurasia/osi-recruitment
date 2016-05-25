@@ -40,6 +40,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
@@ -100,7 +101,8 @@ public class NotificationService{
     private String SRC_JOB_REQUISITION_VM;
 	@Value("${SRC_INTERVIEW_FEEDBACK_FORM}")
 	private String SRC_INTERVIEW_FEEDBACK_FORM;
-
+	@Value("${SRC_CANCELINTERVIEW_VM}")
+	private String SRC_CANCELINTERVIEW_VM;
 	@Autowired
 	IProfileService profileService;
 	
@@ -440,6 +442,53 @@ public class NotificationService{
 		userNotification.setUserId(userId);
 		userNotification.setMessage(message);
 		userNotification.setRead(readStatus);
+	}
+public String sendCancelMail(InterviewSchedule interviewSchedule) throws Exception{
+		
+	   String to = interviewSchedule.getCandidateId();
+	   String toInterviewer = interviewSchedule.getEmailIdInterviewer();
+	   Date date = change12HrsTo24HrsFormat(interviewSchedule.getInterviewDateTime());
+	   List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+	   List<String> HR_Emails = new ArrayList<String>();
+
+		for (UserInfo ui : info) {
+			HR_Emails.add(ui.getEmailId());
+		}
+	   Session session = getSession();
+
+	    VelocityContext context = getVelocityContext(interviewSchedule.getCandidateName(), interviewSchedule.getJobcode(), interviewSchedule.getInterviewerName(), interviewSchedule.getRoundName());
+		context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
+		context.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
+		context.put(LOCATION, interviewSchedule.getInterviewLocation());
+		Template cancelInterviewTemplate = getVelocityTemplate(SRC_CANCELINTERVIEW_VM);
+
+		StringWriter writer = new StringWriter();
+		cancelInterviewTemplate.merge(context, writer);
+		
+	
+		// --- Set Interviewer Email Content ---
+		Message cancelInterview = new MimeMessage(session);
+		cancelInterview.setFrom(new InternetAddress(from));
+		String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer ;
+	    for (String obj : HR_Emails) {
+			if(toMail== null || toMail == "")
+				toMail = obj ;
+			else 
+				toMail = toMail + "," + obj;
+		}
+		
+		cancelInterview.setRecipients(Message.RecipientType.TO,InternetAddress.parse(toMail));
+		cancelInterview.setSubject(OSI_TECHNOLOGIES + " Interview cancelled:"+interviewSchedule.getRoundName());
+		BodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setContent(writer.toString(), TEXT_HTML);
+		Multipart multipart = new MimeMultipart();
+		multipart.addBodyPart(messageBodyPart);
+		cancelInterview.setContent(multipart);
+		
+			
+		// --- Send Mails ---
+		Transport.send(cancelInterview);		
+		return "Mails Sent Successfully!";
 	}
 
 }

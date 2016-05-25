@@ -213,7 +213,15 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			if(size!=0){
 			List<Round> rounds = interviewDetails2.getRounds();
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
+			/*String interSchedule = ""; 
+			for(Round rnd:rounds){
+				if(interSchedule == null || interSchedule == "")
+					interSchedule = rnd.getRoundName() ;
+				else
+					interSchedule = interSchedule +" , " + rnd.getRoundName() ;
+			}*/
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
+	//		interviewDetails2.setProgress(interSchedule + " Scheduled");
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
 			interviewDetails2.setInterviewerName(interviewSchedule.getInterviewerName());
 			interviewDetails2.setRounds(rounds);
@@ -247,17 +255,72 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	}
 	
 	public InterviewDetails enrichInterviewDetails2(InterviewDetails interviewDetails2, InterviewFeedback interviewFeedback){
-			for (int j=0;j<interviewDetails2.getRounds().size();j++) {
-				if(interviewDetails2.getRounds().get(j).getInterviewFeedback() == null &&
-						interviewDetails2.getRounds().get(j).getInterviewSchedule().getEmailIdInterviewer().equals(interviewFeedback.getInterviewerEmail()))
-				{
-					interviewDetails2.getRounds().get(j).setInterviewFeedback(interviewFeedback);
-					interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
-					interviewDetails2.setStatus(interviewFeedback.getStatus());
-					interviewDetails2.getScheduledInterviewersEmails().remove(interviewFeedback.getInterviewerEmail());
-					break;
-				}	
-			}
-		return interviewDetails2;
+		for (int j=0;j<interviewDetails2.getRounds().size();j++) {
+			if(interviewDetails2.getRounds().get(j).getInterviewFeedback() == null &&
+					interviewDetails2.getRounds().get(j).getInterviewSchedule().getEmailIdInterviewer().equals(interviewFeedback.getInterviewerEmail()))
+			{
+				interviewDetails2.getRounds().get(j).setInterviewFeedback(interviewFeedback);
+				interviewDetails2.getRounds().get(j).getInterviewSchedule().setIsFeedBackSubmitted(true);
+				/*List<Round> rounds = interviewDetails2.getRounds();
+				String interSchedule = ""; 
+				for(Round rnd:rounds){
+					if(interSchedule == null || interSchedule == ""){
+						if(rnd.getRoundName().equalsIgnoreCase(interviewFeedback.getRoundName()))
+						  interSchedule = rnd.getRoundName() + " Feedback Submitted";
+						else
+							 interSchedule = rnd.getRoundName() + " Scheduled";
+					}else{
+						if(rnd.getRoundName().equalsIgnoreCase(interviewFeedback.getRoundName()))
+						    interSchedule = interSchedule +" , " + rnd.getRoundName() + " Feedback Submitted";
+						else
+							interSchedule = interSchedule +" , " + rnd.getRoundName() + " Scheduled";
+					}
+				}*/
+				
+				interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
+				interviewDetails2.setStatus(interviewFeedback.getStatus());
+				interviewDetails2.getScheduledInterviewersEmails().remove(interviewFeedback.getInterviewerEmail());
+				break;
+			}	
+		}
+	return interviewDetails2;
+}
+	
+	@Override
+	public void cancelInterviewSchedule(String candidateId,String roundName) throws Exception{
+		
+		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(candidateId);
+		List<Round> rounds1 = interviewDetails2.getRounds();
+		int i=0;
+		for (Round round : rounds1) {
+		if(round.getInterviewSchedule().getRoundName().equals(roundName))
+			break;
+		i++;
+		}
+		InterviewSchedule interviewSchedule = rounds1.get(i).getInterviewSchedule();
+		rounds1.remove(i);
+		
+	//	String interSchedule = ""; 
+	//	for(Round rnd:rounds1){
+	//		if(interSchedule == null || interSchedule == "")
+	//			interSchedule = rnd.getRoundName() ;
+	//		else
+	//			interSchedule = interSchedule +" , " + rnd.getRoundName() ;
+	//	}
+	//	interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
+	//	if(interSchedule != null && !interSchedule.isEmpty())
+	//	  interviewDetails2.setProgress(interSchedule + " Scheduled");
+	//	else
+	//	  interviewDetails2.setProgress("Not Initialized");	
+		interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Cancelled");
+		interviewDetails2.setRounds(rounds1);
+		interviewDetailsRepository.scheduleInterview(interviewDetails2);
+		interviewSearchService.addInterviewDetailsIndex(interviewDetails2);
+		
+		List<Profile> pro = profileService.getProfileByEmailId(candidateId);
+		pro.get(0).setStatus(interviewDetails2.getProgress());
+		profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails2.getProgress());
+		profileSearchService.updateProfileIndex(pro.get(0));
+		notificationService.sendCancelMail(interviewSchedule);
 	}
 }

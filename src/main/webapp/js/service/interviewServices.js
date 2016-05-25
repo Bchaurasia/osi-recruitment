@@ -12,7 +12,8 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 		updateInterview : updateInterview,
 		searchInterviewDetails : searchInterviewDetails,
 		getInterviewDetailsById : getInterviewDetailsById,
-		scheduleInterview:scheduleInterview
+		scheduleInterview:scheduleInterview,
+		cancelInterview:cancelInterview
 	};
 	function scheduleInterview(interviewDetails){
 		return $http.post('resources/interviewSchedule',interviewDetails).then(function(response){
@@ -21,6 +22,15 @@ function interviewService($http,$filter,$rootScope,appConstants,$q,$timeout,$log
 	     .catch(function(response){
 	    	 return $q.reject('Error while Scheduling interview: ' + response.status );
 	     });;
+	}
+	function cancelInterview(candidateId,roundName,candidateName){
+		return $http.post('resources/cancelInterview?interviewId='+candidateId+"&roundName="+roundName+"&candidateName="+candidateName).then(function(response){
+			console.log("cancelled interview"+response.data.msg);
+	    	 return response.data.msg;
+	     })
+	     .catch(function(response){
+	    	 return $q.reject('Error while canceling interview: ' + response.data.msg);
+	     });
 	}
 	function getInterviewDetailsById(interviewId){
 		return $http.get('resources/getInterviewDetailsById?interviewId='+interviewId)

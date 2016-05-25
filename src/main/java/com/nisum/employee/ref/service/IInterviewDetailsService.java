@@ -40,5 +40,6 @@ public interface IInterviewDetailsService {
 	List<InterviewDetails> getInterviewByinterviewId(String interviewId);
 
 	void updateInterviewDetails(InterviewDetails interviewDetails);
+	void cancelInterviewSchedule(String candidateId,String roundName) throws Exception;
 
 }

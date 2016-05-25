@@ -25,11 +25,15 @@ import com.nisum.employee.ref.service.InterviewDetailsService;
 @Controller
 public class InterviewController {
 	
+	private static final String MSG_START = "{\"msg\":\"";
+	private static final String MSG_END = "\"}";
+	
 	@Autowired
 	private InterviewDetailsService interviewDetailsService;
 	
 	@Autowired
 	InterviewSearchService interviewSearchService;
+	
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchInterviewDetails", method = RequestMethod.GET)
@@ -141,6 +145,14 @@ public class InterviewController {
 		String successmessage = "{\"msg\":\"Profile successfully Updated\"}";
 		return (null == successmessage) ? new ResponseEntity<String>( "Positions are not found", HttpStatus.NOT_FOUND)
 				: new ResponseEntity<String>(successmessage, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value="/cancelInterview", method = RequestMethod.POST)
+	public ResponseEntity<?> cancelInterviewSchedule(@RequestParam(value = "interviewId", required = true) String interviewId,@RequestParam(value = "roundName", required = true) String roundName,@RequestParam(value = "candidateName", required = true) String candidateName) throws Exception {
+		interviewDetailsService.cancelInterviewSchedule(interviewId,roundName);
+		String jsonObj = MSG_START + roundName +" for " + candidateName +" cancelled successfully."+ MSG_END;
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 
 }

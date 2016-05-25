@@ -164,7 +164,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 					$scope.cls = 'alert  alert-success';
 					$scope.message = "Feedback Submitted Successfully!";
 					$timeout( function(){ $scope.alHide(); }, 5000);
-					$scope.reset();
+				//	$scope.reset();
 					$log.info("Feedback Submitted Successfully!");
 				}).
 				error(function(data) {
