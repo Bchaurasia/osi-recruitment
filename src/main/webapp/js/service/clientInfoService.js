@@ -28,9 +28,14 @@ function clientInfoService($http,$q,$timeout,appConstants){
 		 .catch(sendGetClientError);	
 	}
 	function addClient(clientInfo){
-		return $http.post('resources/clientInfo', clientInfo)
-					.then(clientAddedSuccess)
-					.catch(sendGetClientError);
+		
+		return $http.post('resources/clientInfo', clientInfo).then(function(response){
+	    	 return response.data.msg;
+	     })
+	     .catch(function(response){
+	    	 return $q.reject('Error while adding client: ' + response.data.msg);
+	     });
+		
 	}
 	
 	function updateClient(clientInfo){

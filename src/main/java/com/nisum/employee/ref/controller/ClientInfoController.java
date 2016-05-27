@@ -20,6 +20,8 @@ import com.nisum.employee.ref.service.ClientInfoService;
 @Controller
 public class ClientInfoController {
 
+	private static final String MSG_START = "{\"msg\":\"";
+	private static final String MSG_END = "\"}";
 	@Autowired(required=false)
 	private ClientInfoService clientInfoService;
 	
@@ -74,8 +76,21 @@ public class ClientInfoController {
 	@RequestMapping(value = "/clientInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> createClient(@RequestBody ClientInfo clientInfo) {
-		clientInfoService.createClient(clientInfo);
-		return new ResponseEntity<ClientInfo>(clientInfo, HttpStatus.OK);
+		
+		List<ClientInfo> clients = null;
+		boolean exist = false;
+		String jsonObj = null;
+		 clients = clientInfoService.getClientDetailsByClient(clientInfo.getClientName());
+		 if(clients != null && !clients.isEmpty()){
+			 exist =true;
+			   jsonObj = MSG_START + clientInfo.getClientName() +" already exist."+ MSG_END;
+			  
+		}else{
+			clientInfoService.createClient(clientInfo);
+			jsonObj = MSG_START + clientInfo.getClientName() +" created successfully."+ MSG_END;
+			// return new ResponseEntity<ClientInfo>(clientInfo, HttpStatus.OK);
+		}
+		 return new ResponseEntity<String>(jsonObj, HttpStatus.OK);	
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})

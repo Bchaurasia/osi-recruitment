@@ -42,7 +42,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		if($scope.checkClients()){
 			$scope.client.clientId = $scope.client.clientName.toUpperCase().replace(/\s/g, '');
 			clientService.createClient($scope.client)
-						 .then(function(msg) { 
+						 .then(function(msg) {
 							 $scope.sendSharedMessage(msg,'/admin/client');
 						 })
 						 .catch(function (msg) {
