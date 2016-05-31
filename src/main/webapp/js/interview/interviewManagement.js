@@ -47,10 +47,12 @@
 		};
 		
 		$scope.disableFeedback = function(rounds) {
-			if(rounds == null){
-				return true;
-			}else{
+			if(rounds != null && rounds.length > 0){
+				console.log("11111"+rounds.length);
 				return false;
+			}else{
+				console.log("22222"+rounds.length);
+				return true;
 			}
 		}
 		
