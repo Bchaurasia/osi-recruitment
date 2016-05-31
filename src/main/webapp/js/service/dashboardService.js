@@ -15,7 +15,7 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	}
 	
 	function getScheduleData(obj){
-		return $http.get('resources/getInterviewByParam')
+		return $http.get('resources/searchInterviewDetails')
 		.then(getScheduleDataSuccess)
 		.catch(getScheduleDataError);
 	}
