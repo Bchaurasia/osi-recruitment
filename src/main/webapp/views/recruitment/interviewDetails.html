@@ -130,7 +130,7 @@
 		<div class="row" style="align:center">
 			
 		<button class="btn btn-info active" type="submit" ng-hide="data.interviewSchedule.isFeedBackSubmitted"
-					ng-disabled="hasRole('ROLE_INTERVIEWER')"
+					ng-show="hasRole('ROLE_INTERVIEWER','ROLE_HR')"
 					ng-click="cancelInterview(interviewschedule.candidateId,data.roundName,interviewschedule.candidateName)">
 					<span class="glyphicon glyphicon-remove"></span> Cancel Interview
 				</button>
