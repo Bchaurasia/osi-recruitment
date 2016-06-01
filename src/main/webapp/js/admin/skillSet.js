@@ -32,7 +32,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 		if(ck){
 		$scope.skills1.value.push($scope.newSkill);
 		
-		infoService.updateInformation($scope.skills1).then(function(msg){
+		infoService.createInformation($scope.skills1).then(function(msg){
 			 sendSharedMessage(msg,appConstants.SUCCESS_CLASS);
 			  $timeout( function(){ $scope.alHide(); }, 5000);
 			  $scope.newSkill="";
@@ -68,7 +68,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
   
     		 $scope.skills1.value.splice(index,1);
 			
-    		 infoService.updateInformation($scope.skills1).then(function(msg){
+    		 infoService.removeInformation($scope.skills1).then(function(msg){
     			 sendSharedMessage(msg,appConstants.SUCCESS_CLASS);
     			 $timeout( function(){ $scope.alHide(); }, 5000);
     		 }).catch(function(msg){

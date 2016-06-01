@@ -6,7 +6,8 @@ function infoService($http,$filter,$rootScope,$log,$q,$cacheFactory,appConstants
 		getInfo : getInformationFromCache,
 		getInfoById : getInformationById,
 		updateInformation : updateInformation,
-		removeInformation : deleteInformation
+		removeInformation : deleteInformation,
+		createInformation: createInformation
 	};
 
 function getInformationFromCache(){
@@ -78,12 +79,24 @@ function updateInformation(info){
 	return $http.put('resources/info',info)
 			.then(function(response){
 				//deleteInfoFromCache();
-				return " Interview round successfully updated";
+				return " Interview round created successfully";
 			})
 			.catch(
 					function(response) { return "error while creating interview round"}
 			);
 }
+
+function createInformation(info){
+	return $http.put('resources/info',info)
+			.then(function(response){
+				//deleteInfoFromCache();
+				return " Skill created successfully";
+			})
+			.catch(
+					function(response) { return "error while creating skill"}
+			);
+}
+
 
 function getInformationById(id){
 	return $http.get('resources/info')
