@@ -184,4 +184,57 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		sharedService.setinterviewRound(obj2);
 		location.href='#showInterview';
 	};
+	
+	// Build the chart
+    $('#container').highcharts({
+    	
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'profile status'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Profile status',
+            colorByPoint: true,
+            data: [{
+                name: 'hired',
+                y: 56.33
+            }, {
+                name: 'Selected',
+                y: 24.03,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'on hold',
+                y: 10.38
+            }, {
+                name: 'Initiated',
+                y: 4.77
+            }, {
+                name: 'inactive',
+                y: 0.91
+            }, {
+                name: 'not initialized',
+                y: 0.2
+            }]
+        }]
+    });
+
 }]);
