@@ -139,7 +139,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			 }
 		     positionService.updatePosition($scope.position).then(
 			    function(msg){
-			    	$scope.sendNotification(msg,'recruitment/searchPosition');
+			    //	$scope.sendNotification(msg,'recruitment/searchPosition');
+			    	$scope.message=msg;
+			    	$scope.cls = 'alert  alert-success';
 			    }).catch(function(errorMsg){
 			    	$scope.message=errorMsg;
 					$scope.cls=appConstants.ERROR_CLASS;
@@ -196,5 +198,32 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			return true;
 		} else
 			return "Number of Positions should be Atleast One!..";
+	}
+	$scope.publishJob = function() {
+		var position1={};
+		var skills =[];
+		if ($scope.position !== undefined) {
+			 $scope.position.updatedBy = $scope.user.emailId;
+			 $scope.position.hiringManager.name  = $scope.hrManager.name;
+			 $scope.position.hiringManager.emailId  = $scope.hrManager.emailId;
+			 $scope.position.designation =  $scope.designation;
+			 $scope.position.client = $scope.selClient;
+			 if($scope.interviewer != undefined){
+				 $scope.position.interviewer = $scope.interviewer.emailId;
+			 }
+			 publishReferalService.publishJobToReferal($scope.position).then(
+			    function(msg){
+			    	$scope.sendNotification(msg,'recruitment/searchPosition');
+			    }).catch(function(errorMsg){
+			    	$scope.message=errorMsg;
+					$scope.cls=appConstants.ERROR_CLASS;
+			     });
+		}
+			
+	}
+	$scope.status = {
+			isFirstOpen: true,
 	};
+	
+	
 }]);

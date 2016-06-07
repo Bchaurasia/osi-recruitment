@@ -1,3 +1,4 @@
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion" name="UpdatePosition" onvalidate>
@@ -153,10 +154,16 @@
 		
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="UpdatePosition.$invalid"
+				ng-disabled="UpdatePosition.$invalid || position.publishStatus == 'true'"
 				ng-click="updatePositionDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
-			</button>
+			</button>		
+			<button class="btn btn-info active" type="submit"
+				ng-show="position.positionType == 'Referral' && hasRole('ROLE_HR')"
+				ng-click="publishJob()"
+				ng-disabled="position.publishStatus == true">
+				<span class="glyphicon glyphicon-share"></span> Publish
+				</button>
 
 			<button class="btn btn-info active"
 				ui-sref="recruitment.searchPosition">

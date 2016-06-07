@@ -1,0 +1,57 @@
+<html>
+<body style="font-family:calibri; font-size:15px; background-color:#F9FCF7;">
+
+<div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black; border-color:#004C7F;">
+<div style="padding-left:20px; padding-right:20px;">
+<p style="color: black;font-size:15px; font-family:Calibri;">
+<br><br>
+<h2 align="center" style="color:red">$title </h2>
+
+
+<table style="width:450px; border: 0px solid Gray;">
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Skills :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$skills</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Experience:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$min_exp to $max_exp</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Qualification</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$qualification</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Job_Location:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$location</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Job_Code:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$jobcode</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Job_Description:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$job_description</td> 
+</tr>
+
+</table>
+<br><br>
+please login to osi recuritment portal and upload your friend resume
+<br><br>
+
+ <span style="font-size:15px">Regards,</span><br>
+ <span style="font-size:15px">Recruitment Team,</span><br>
+ <span style="font-color:Gray;color:Gray;font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>
+</div>
+
+<br>
+<div style="background-color:#D9E1E3;height:100px;border:1px solid #004C7F;border-bottom-color: #D9E1E3">
+<a href="http://osi-tech.com" target="_blank" style="font-size: 35px;text-decoration: blink;">
+  <img src="http://www.osi-tech.com/images/osi-logo2.png" style="width:350px; height:100px" > </a>
+</div>
+
+</div>
+
+</body>
+</form>
+</html>

@@ -40,9 +40,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
+import com.nisum.employee.ref.domain.Position;
+import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.domain.UserNotification;
@@ -82,6 +83,15 @@ public class NotificationService{
 	private static final String MAIL_SMTP_STARTTLS_ENABLE = "mail.smtp.starttls.enable";
 	private static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
 	
+	private static final String POSITION = "position";
+	private static final String OSI_TECHNOLOGIES1 = "From The Desk Of HR : Referal Drive For ";
+	private static final String JOB_DESCRIPTION = "job_description";
+	private static final String SKILLS = "skills";
+	private static final String MIN_EXP = "min_exp";
+	private static final String MAX_EXP = "max_exp";
+	private static final String QUALIFICATION = "qualification";
+	private static final String TITLE = "title";
+	
 	@Value("${mail.fromAddress}")
 	private String from;
 	@Value("${mail.username}")
@@ -90,6 +100,9 @@ public class NotificationService{
 	private String password;
 	@Value("${mail.host}")
 	private String host;
+	
+	@Value("${mail.toAddress}")
+	private String to;
 	 
 	@Value("${SRC_CANDIDATE_VM}")
 	private String SRC_CANDIDATE_VM;
@@ -103,6 +116,8 @@ public class NotificationService{
 	private String SRC_INTERVIEW_FEEDBACK_FORM;
 	@Value("${SRC_CANCELINTERVIEW_VM}")
 	private String SRC_CANCELINTERVIEW_VM;
+	@Value("${SRC_POST_REF_JOB_VM}")
+    private String SRC_POST_REF_JOB;
 	@Autowired
 	IProfileService profileService;
 	
@@ -490,6 +505,60 @@ public String sendCancelMail(InterviewSchedule interviewSchedule) throws Excepti
 		Transport.send(cancelInterview);		
 		return "Mails Sent Successfully!";
 	}
+public String sendJobToReffarals(Position position, Requisition requisition)
+		 throws MessagingException {
 
+	 VelocityEngine engine = new VelocityEngine();
+		 engine.init();
+
+		 Template jobRequisitionTemplate = getVelocityTemplate(SRC_POST_REF_JOB);
+
+		 ArrayList<String> skills=position.getPrimarySkills();
+		 String formatedskills=skills.toString().replace(",", "-")  //remove the commas
+		    .replace("[", "")  //remove the right bracket
+		    .replace("]", "")  //remove the left bracket
+		    .trim(); 
+
+
+		 List<String> qualifications1 = new ArrayList<String>();
+
+		 for(int i=0;i<requisition.getQualifications().size();i++){
+		 String qualifications=requisition.getQualifications().get(i).getQualification();
+
+		 qualifications1.add(qualifications);
+		 }
+		 String formatedqualifications1 = qualifications1.toString()
+		    .replace(",", "or")  //remove the commas
+		    .replace("[", "")  //remove the right bracket
+		    .replace("]", "")  //remove the left bracket
+		    .trim(); 
+		 VelocityContext context = new VelocityContext();
+		 context.put(TITLE, requisition.getJobTitle());
+		 context.put(POSITION, position.getDesignation());
+		 context.put(CNAME, position.getClient());
+		 context.put(JOB_DESCRIPTION, position.getJobProfile());
+		 context.put(SKILLS, formatedskills);
+		 context.put(MIN_EXP, position.getMinExpYear());
+		 context.put(MAX_EXP, position.getMaxExpYear());
+		 context.put(LOCATION, position.getLocation());
+		 context.put(QUALIFICATION, formatedqualifications1);
+		 context.put(JOBCODE, position.getJobcode());
+		 StringWriter writer = new StringWriter();
+		 jobRequisitionTemplate.merge(context, writer);
+
+		 Message message1 = getMessage();
+		 message1.setFrom(new InternetAddress(from));
+		 message1.setRecipients(Message.RecipientType.TO,
+		 InternetAddress.parse(to));
+		 message1.setSubject(requisition.getJobTitle()
+		 +" OSI - "+position.getLocation());
+
+		 message1.setContent(writer.toString(), TEXT_HTML);
+		 Transport.send(message1);
+		 
+
+		 return "Mails Sent Successfully!";
+
+		 }
 }
 
