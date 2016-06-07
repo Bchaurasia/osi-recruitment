@@ -34,4 +34,5 @@ public class Position  extends AuditEntity{
 	UserVO hiringManager;
 	String status;
 	String positionType;
+	boolean publishStatus;
 }
