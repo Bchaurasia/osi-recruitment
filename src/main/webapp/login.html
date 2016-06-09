@@ -65,8 +65,7 @@
 </script> -->
 </head>
 
-<body ng-app="myApp">
-	<div ng-controller="myContoler">
+<body ng-app="myApp" ng-controller="myContoler">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="navbar navbar-fixed-top">
@@ -215,8 +214,6 @@
 	</div>
 
 	<!-- /account-container -->
-
-	<div>
 		<div class="footer mdl-shadow--4dp">
 			<div class="footer-inner">
 				<div class="row" align="right" style="margin-right: 20px">
@@ -227,7 +224,7 @@
 					</div>
 						<div class="col-md-8"></div>
 						<div class="col-md-2">
-							<a href="http://www.osius.com/" class="ng-binding">© 2015 OSI Technologies.</a>
+							<a href="http://www.osius.com/">{{copyrights}}</a>
 						</div>
 						<!-- /span12 -->
 					</div>

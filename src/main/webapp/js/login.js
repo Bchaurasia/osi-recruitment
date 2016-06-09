@@ -3,7 +3,8 @@ angular.module('myApp', ['directive.g+signin','ngMessages'])
     	  $scope.login={};
     	  $scope.login.username="";
     	  $scope.login.password="";
-    	
+    	  $scope.copyrights= "©"+new Date().getFullYear()+" OSI Technologies";
+    	  
     	  $scope.userLogin=function(){
     		  console.log('Signed in!');
               $('#custom-input-username').val($scope.login.username);
@@ -27,4 +28,5 @@ angular.module('myApp', ['directive.g+signin','ngMessages'])
           // User has not authorized the G+ App!
           console.log('Not signed into Google Plus.');
         });
+        
       });
