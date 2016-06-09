@@ -1,5 +1,5 @@
-app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService','interviewService',
-                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService,interviewService) {
+app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService','interviewService','publishReferalService',
+                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService,interviewService,publishReferalService) {
 		
 	$scope.hideRounds= true;
 	$scope.hideSkills = true;
@@ -77,7 +77,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 					}
 				},
 				function(errorMsg) {
-					//$log.error("Failed! ---> "+errorMsg);
+					// $log.error("Failed! ---> "+errorMsg);
 					$scope.message="error while getting requised data ";
 					 $scope.cls=appConstants.ERROR_CLASS;
 					 $timeout( function(){ $scope.alHide(); }, 5000);
@@ -139,12 +139,14 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			 }
 		     positionService.updatePosition($scope.position).then(
 			    function(msg){
-			    //	$scope.sendNotification(msg,'recruitment/searchPosition');
+			    // $scope.sendNotification(msg,'recruitment/searchPosition');
 			    	$scope.message=msg;
 			    	$scope.cls = 'alert  alert-success';
+			    	$timeout( function(){ $scope.alHide(); }, 5000);
 			    }).catch(function(errorMsg){
 			    	$scope.message=errorMsg;
 					$scope.cls=appConstants.ERROR_CLASS;
+					$timeout( function(){ $scope.alHide(); }, 5000);
 			     });
 		}
 	}
@@ -200,6 +202,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			return "Number of Positions should be Atleast One!..";
 	}
 	$scope.publishJob = function() {
+		
 		var position1={};
 		var skills =[];
 		if ($scope.position !== undefined) {
