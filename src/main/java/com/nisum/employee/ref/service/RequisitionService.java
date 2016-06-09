@@ -23,23 +23,24 @@ public class RequisitionService implements IRequisitionService {
 
 	@Autowired
 	private RequisitionRepository requisitionRepository;
-	
+
 	@Autowired
 	RequisitionSearchService requisitionSearchService;
-	
+
 	@Autowired
 	PositionService positionService;
 
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
-	
+
 	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has been approved successfully ";
 
 	@Override
 	public void prepareRequisition(Requisition requisition) {
-			requisition.setStatus(INITIATED);
-			Requisition persistedRequisition = requisitionRepository.prepareRequisition(requisition);
-			requisitionSearchService.addRequisitionIndex(persistedRequisition);
+		requisition.setStatus(INITIATED);
+		Requisition persistedRequisition = requisitionRepository
+				.prepareRequisition(requisition);
+		requisitionSearchService.addRequisitionIndex(persistedRequisition);
 		try {
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (MessagingException e) {
@@ -50,34 +51,59 @@ public class RequisitionService implements IRequisitionService {
 	@Override
 	public RequisitionApproverDetails updateRequisition(Requisition requisition)
 			throws AddressException, MessagingException {
-		Requisition updatereq =requisitionRepository.updateRequisition(requisition);
+		Requisition updatereq = requisitionRepository
+				.updateRequisition(requisition);
 		requisitionSearchService.updateRequisitionIndex(updatereq);
 		return jobRequisitionNotificationService.sendNotification(updatereq);
 	}
 
 	@Override
+	public void updateRequisition1(Requisition requisition)
+			throws AddressException, MessagingException {
+		Requisition updatereq = requisitionRepository
+				.updateRequisition(requisition);
+		requisitionSearchService.updateRequisitionIndex(updatereq);
+
+	}
+
+	@Override
 	public String approveRequisition(Requisition requisition)
 			throws AddressException, MessagingException {
-		if ((requisition.getApproval2() == null && requisition.getApproval1().isApproved())
-			|| (requisition.getApproval2() != null && requisition.getApproval1().isApproved() 
-			     && requisition.getApproval2().isApproved())) {
+		if ((requisition.getApproval2() == null && requisition.getApproval1()
+				.isApproved())
+				|| (requisition.getApproval2() != null
+						&& requisition.getApproval1().isApproved() && requisition
+						.getApproval2().isApproved())) {
 			requisition.setStatus(APPROVED);
 			positionService.createRequitionPosition(requisition);
-			updateRequisition(requisition);
-			return requisition.getRequisitionId() + REQUISITION_HAS_APPROVED_SUCCESSFULLY+" and "
-					+ requisition.getNoOfPositions() + " positions created successfully";
+			/* Added by Tarun */
+
+			updateRequisition1(requisition);
+
+			/* End of changes by Tarun */
+			return requisition.getRequisitionId()
+					+ REQUISITION_HAS_APPROVED_SUCCESSFULLY + " and "
+					+ requisition.getNoOfPositions()
+					+ " positions created successfully";
 		} else {
 			requisition.setStatus(PARTIALY_APPROVED);
-			updateRequisition(requisition);
+			/* Added by Tarun */
+
+			updateRequisition1(requisition);
+
+			/* End of changes by Tarun */
+
 			try {
 				jobRequisitionNotificationService.sendNotification(requisition);
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
-			return requisition.getRequisitionId()+ REQUISITION_HAS_APPROVED_SUCCESSFULLY
-					+ ", sent approve request notification to " + requisition.getApproval2().getName();
+			return requisition.getRequisitionId()
+					+ REQUISITION_HAS_APPROVED_SUCCESSFULLY
+					+ ", sent approve request notification to "
+					+ requisition.getApproval2().getName();
 		}
-		
+
 	}
 
 	@Override
@@ -90,7 +116,7 @@ public class RequisitionService implements IRequisitionService {
 	public void rejectRequisition(Requisition requisition) {
 		requisition.setStatus(REJECTED);
 		try {
-			updateRequisition(requisition);
+			updateRequisition1(requisition);
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (AddressException e) {
 			e.printStackTrace();

@@ -84,7 +84,7 @@ public class PositionRepository {
 		update.set("createdBy", position.getCreatedBy());
 		update.set("updatedBy", position.getUpdatedBy());
 		update.set("positionType", position.getPositionType());
-		update.set("publishStatus", true);
+//		update.set("publishStatus", true);
 		mongoOperations.updateFirst(query, update, Position.class);
 		return position;
 	}
