@@ -14,34 +14,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	function errorMsg(message){
 		console.log("message--->"+message);
 	}
-	$scope.tabs = [
-	   			{
-	   				"heading": "Technical",
-	   				"active": true,
-	   				"template":"technicalFeedback.html"
-	   			},
-	   			{
-	   				"heading": "Functional",
-	   				"active": false,
-	   				"template":"functionalFeedback.html"
-	   			},
-	   			{
-	   				"heading": "Soft Skills",
-	   				"active": false,
-	   				"template":"softSkillsFeedback.html"
-	   			},
-	   			{
-	   				"heading": "Comment",
-	   				"active": false,
-	   				"template":"commentFeedback.html"
-	   			},
-	   			{
-	   				"heading": "Management Skills",
-	   				"active": false,
-	   				"template":"mangementSkillset.html"
-	   			},
-	   			
-	   		];
 	
 	$scope.addNewSkill = function() {
 		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
@@ -118,9 +90,44 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 				{
 					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
 					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+					
+					$scope.filterbyRound = function (tab) {  
+						return _.contains(tab.rounds, $scope.interviewFeedback.roundName);
+					};  
+					     
+					$scope.tabs = [
+				   	{	
+	               		"rounds": ["Technical Round 1","Technical Round 2"],
+						"heading": "Technical",
+						"template":"technicalFeedback.html"
+					},
+		   			{	
+						"rounds": ["Technical Round 1","Technical Round 2","Manager Round","Hr Round"],
+		   				"heading": "Functional",
+		   				"template":"functionalFeedback.html"
+		   			},
+		   			{	
+		   				"rounds": ["Technical Round 1","Technical Round 2","Manager Round","Hr Round"],
+		   				"heading": "Soft Skills",
+		   				"template":"softSkillsFeedback.html"
+		   			},		   			
+		   			{	
+		   				"rounds": ["Manager Round","Hr Round"],
+		   				"heading": "Management Skills",
+		   				"template":"mangementSkillset.html"
+		   			},
+		   			{	
+		   				"rounds": ["Technical Round 1","Technical Round 2","Manager Round","Hr Round"],
+		   				"heading": "Comment",
+		   				"template":"commentFeedback.html"
+		   			}
+		   		];
+
+					$scope.disabledFeedbackbtn=false;
 					$scope.hideSubmit=false;
 					break;
 				}
+				
 				else if(($scope.interview.rounds[i].roundName=="Hr Round")){
 					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
 					$scope.interviewFeedback = $scope.interview.rounds[i].interviewFeedback;
@@ -164,7 +171,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 					$scope.cls = 'alert  alert-success';
 					$scope.message = "Feedback Submitted Successfully!";
 					$timeout( function(){ $scope.alHide(); }, 5000);
-				//	$scope.reset();
+					$scope.reset();
 					$log.info("Feedback Submitted Successfully!");
 				}).
 				error(function(data) {
