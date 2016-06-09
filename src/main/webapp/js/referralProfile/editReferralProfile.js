@@ -62,6 +62,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 			$log.error(msg);
 		})
 		$scope.getDesignations();
+		$scope.getExpectedDesignations();
 	})
 	.catch(function(data){
 		console.log("Failed to get data"+data);
@@ -133,7 +134,16 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 			 $timeout( function(){ $scope.alHide(); }, 5000);
 		});
 	}
-	
+	$scope.getExpectedDesignations = function(){
+		designationService.getDesignation().then(function(data){
+			$scope.expectedDesignations=data;
+			$scope.expectedDesignation = _.find($scope.expectedDesignations, function(designation){ return designation.designation == $scope.candidate.expectedDesignation; });
+		}).catch(function(msg){
+			$scope.message=msg;
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $timeout( function(){ $scope.alHide(); }, 5000);
+		});
+	}
 	$scope.setJobCodes = function(){
 		$scope.sk.jobcodeProfiles=[];
 		positionService.getPositionByDesignation($scope.designation.designation).then(function(data){
