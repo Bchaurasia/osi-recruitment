@@ -1,47 +1,55 @@
 <div style="display: none">
-<form id="logout-form" action="j_spring_security_logout" method="post"></form>
+	<form id="logout-form" action="j_spring_security_logout" method="post"></form>
 </div>
 
- <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <span><img class="navbar-brand"
-				src="static/osi_images/logo.png" alt="OSI Technologies" id="logostyle"
-				title="OSI Technologies" /></span>
-        <ul class="left hide-on-med-and-down" style="width: 87%">
-          <li ui-sref-active="active"><a  ui-sref="main"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" ng-click="alHide()">
-				<span id="Dashboard">&nbsp;&nbsp;Dashboard</span></a></li>
-			<li ui-sref-active="active"><a  ui-sref="recruitment" data-target="#recruitment"
-				ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" ng-click="alHide()">
-				<span>&nbsp;&nbsp;Recruitment</span></a></li>
-			<li ui-sref-active="active"><a  ui-sref="referral" data-target="#referral"	
-				ng-show="hasRole('ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')" ng-click="alHide()">
-				<span>&nbsp;&nbsp;Referral</span></a></li>		
-			<li ui-sref-active="active"><a  ui-sref="admin" data-target="#admin"
-				ng-show="hasRole('ROLE_ADMIN')" ng-click="alHide()">
-					<span>&nbsp;&nbsp;Admin</span></a></li>
-			<li class="dropdown right"><a href=""
-				class="dropdown-toggle" data-toggle="dropdown" ng-click="alHide()">
-				<i class="material-icons left">tag_faces</i>
-				{{user.name}}&nbsp;&nbsp;<span class="badge">{{count}}</span><b class="caret"></b></a>
-				<ul class="dropdown-menu pull-right ulwidth">
-					<li><a href="#viewUser" ng-click="alHide()"><i
-							class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
-					<li><a href="" data-toggle="modal" data-target="#myModal"><i
-							class="icon-bell"></i>&nbsp;&nbsp;Notification <span class="new badge">{{count}}</span> </a></li>
-					<li><a href="#viewHelpPage" ng-click="alHide()"><i
-							class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Help</a></li>
-					<li><a id="logout" href="#" onClick="signOut()"><i
-							class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;Logout</a></li>
-					
-				</ul></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  
-  <div class="modal fade" id="myModal" role="dialog">
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<span><img class="navbar-brand"
+				src="static/osi_images/logo.png" alt="OSI Technologies"
+				id="logostyle" title="OSI Technologies" /></span>
+			<ul class="left hide-on-med-and-down" style="width: 87%">
+				<li ui-sref-active="active"><a ui-sref="main"
+					ng-show="hasRole('ROLE_ADMIN,ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+					ng-click="alHide()"> <span id="Dashboard">&nbsp;&nbsp;Dashboard</span></a></li>
+				<li ui-sref-active="active"><a ui-sref="offer.list"
+					ng-show="hasRole('ROLE_HR,ROLE_REQUISITION_APPROVER')">
+						<span>&nbsp;&nbsp;Offer</span>
+				</a></li>
+				<li ui-sref-active="active"><a ui-sref="recruitment"
+					data-target="#recruitment"
+					ng-show="hasRole('ROLE_ADMIN,ROLE_MANAGER,ROLE_HR,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+					ng-click="alHide()"> <span>&nbsp;&nbsp;Recruitment</span></a></li>
+				<li ui-sref-active="active"><a ui-sref="referral"
+					data-target="#referral"
+					ng-show="hasRole('ROLE_USER,ROLE_MANAGER,ROLE_HR,ROLE_ADMIN,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+					ng-click="alHide()"> <span>&nbsp;&nbsp;Referral</span></a></li>
+				<li ui-sref-active="active"><a ui-sref="admin"
+					data-target="#admin" ng-show="hasRole('ROLE_ADMIN')"
+					ng-click="alHide()"> <span>&nbsp;&nbsp;Admin</span></a></li>
+				<li class="dropdown right"><a href="" class="dropdown-toggle"
+					data-toggle="dropdown" ng-click="alHide()"> <i
+						class="material-icons left">tag_faces</i>
+						{{user.name}}&nbsp;&nbsp;<span class="badge">{{count}}</span><b
+						class="caret"></b></a>
+					<ul class="dropdown-menu pull-right ulwidth">
+						<li><a href="#viewUser" ng-click="alHide()"><i
+								class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
+						<li><a href="" data-toggle="modal" data-target="#myModal"><i
+								class="icon-bell"></i>&nbsp;&nbsp;Notification <span
+								class="new badge">{{count}}</span> </a></li>
+						<li><a href="#viewHelpPage" ng-click="alHide()"><i
+								class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Help</a></li>
+						<li><a id="logout" href="#" onClick="signOut()"><i
+								class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;Logout</a></li>
+
+					</ul></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog" ng-controller="headerCtrl">
 
 		Modal content

@@ -6,7 +6,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	}
 
 	$scope.profile = offerService.getData();
-	// console.log(angular.toJson($scope.profile));
+	console.log(angular.toJson($scope.profile));
 	$scope.candidate = {};
 	$scope.candidate.emailId = $scope.profile.emailId;
 	$scope.candidate.jobcodeProfile = angular.copy($scope.profile.jobcodeProfile);
