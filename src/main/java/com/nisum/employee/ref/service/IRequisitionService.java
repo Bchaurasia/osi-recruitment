@@ -17,5 +17,7 @@ public interface IRequisitionService {
 	public List<Requisition> retrieveAllRequistions();
 	public String approveRequisition(Requisition requisition) throws AddressException, MessagingException;
 	public Requisition retrieveRequisitionBasedOnId(String requisitionId);
+	void updateRequisition1(Requisition requisition) throws AddressException,
+			MessagingException;
 	
 }

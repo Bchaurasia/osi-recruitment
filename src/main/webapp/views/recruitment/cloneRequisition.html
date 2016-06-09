@@ -46,7 +46,7 @@
 						min="{{today | date : 'yyyy-MM-dd' }}"
 						ng-change="reqDate(requisitionDate,targetDate)"
 						id="requisitionDate" required name="requisitionDate"> <label>Requisition
-						Date<b class="mandatory">*</b>
+						Date<b class="mandatory">*</b> <small>[mm-dd-yyyy]</small>
 					</label> <span class="validation-error" ng-show="reqErr">Requistion
 						date should not be after Target Date.</span>
 				</div>
@@ -55,7 +55,7 @@
 						min="{{today | date : 'yyyy-MM-dd' }}"
 						ng-change="validTargetDate(requisitionDate,targetDate)"
 						id="targetDate" required> <label>Target Date<b
-						class="mandatory">*</b></label> <span class="validation-error"
+						class="mandatory">*</b><small>[mm-dd-yyyy]</small></label> <span class="validation-error"
 						ng-show="targetErr || cloneRequisition.targetDate.$dirty || invalidSubmitAttempt">
 						Target date should not be before Requsition Date</span>
 				</div>
