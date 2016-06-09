@@ -26,14 +26,13 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	var uploadedFileName = null;
 	$scope.data = {};
 	var uploadedFile = null;
-	$scope.candidate.plocation = "";
 	$scope.selectedJC = {};
 	$scope.candidate.jobcodeProfile = "";
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
-	
+	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -71,14 +70,12 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-		    	$scope.candidate.plocation = $scope.selection.pLocation;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
 		    	$scope.candidate.createdBy = $scope.user.emailId;
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
-		    	$scope.candidate.profileSource = "Recruiter";
 		    	
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){

@@ -15,6 +15,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.sk.jobcodeProfiles = [];
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
+	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
 	
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
@@ -60,6 +61,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		})
 		
 		$scope.getDesignations();
+		$scope.getExpectedDesignations();
 	})
 	.catch(function(data){
 		console.log("Failed to get data"+data);
@@ -125,6 +127,16 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		designationService.getDesignation().then(function(data){
 			$scope.designations=data;
 			$scope.designation = _.find($scope.designations, function(designation){ return designation.designation == $scope.candidate.designation; });
+		}).catch(function(msg){
+			$scope.message=msg;
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $timeout( function(){ $scope.alHide(); }, 5000);
+		});
+	}
+	$scope.getExpectedDesignations = function(){
+		designationService.getDesignation().then(function(data){
+			$scope.expectedDesignations=data;
+			$scope.expectedDesignation = _.find($scope.expectedDesignations, function(designation){ return designation.designation == $scope.candidate.expectedDesignation; });
 		}).catch(function(msg){
 			$scope.message=msg;
 			 $scope.cls=appConstants.ERROR_CLASS;

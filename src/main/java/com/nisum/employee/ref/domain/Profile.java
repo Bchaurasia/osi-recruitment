@@ -41,4 +41,10 @@ public class Profile extends AuditEntity{
 	String screeningStatus;
 	String compatibilityStatus;
 	String profileSource;
+	float currentCTC;
+	float expectedCTC;
+	int noticePeriod; 
+	String currentLocation;
+	String expectedDesignation;
+	
 }
