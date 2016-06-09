@@ -25,7 +25,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	var uploadedFileName = null;
 	$scope.data = {};
 	var uploadedFile = null;
-	$scope.candidate.plocation = "";
+//	$scope.candidate.plocation = "";
 	$scope.selectedJC = {};
 	$scope.candidate.jobcodeProfile = "";
 	$scope.positionData = {};
@@ -76,7 +76,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-		    	$scope.candidate.plocation = $scope.selection.pLocation;
+		    //	$scope.candidate.plocation = $scope.selection.pLocation;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;
@@ -91,7 +91,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
 				    $scope.CreateCandidate.$setPristine();
 				    $scope.candidate={};
-				    $scope.selection.pLocation="";
+				 //   $scope.selection.pLocation="";
 				    $scope.sk.primarySkills="";
 				    $log.info(msg);
 				    $scope.sendNotification(msg,'referral/searchReferralProfile');
