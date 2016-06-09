@@ -78,13 +78,13 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select ng-model="candidate.imigrationStatus" name="immigration"
-					ng-options="o as o for o in iStatus" class="form-control input-sm"
+				<select ng-model="candidate.relocationAllowance" name="relAlowance"
+					ng-options="o for o in allowances" class="form-control input-sm"
 					required>
-					<option value="" disabled="disabled">Select Immigration
-						Status</option>
-				</select> <label style="position: absolute; top: -22px;">Immigration
-					Status<b class="mandatory">*</b>
+					<option value="" disabled="disabled">Select Relocation
+						Allowance</option>
+				</select> <label style="position: absolute; top: -22px;">Relocation
+					Allowance<b class="mandatory">*</b>
 				</label>
 			</div>
 
@@ -107,29 +107,10 @@
 				</label>
 
 			</div>
-
-			<div class="input-field col s6">
-				<input placeholder="Enter your current company"
-					name="currentEmployer" class="form-control" type="text"
-					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
-				<label style="position: absolute; top: -22px;">Sign-on Bonus
-				</label>
-
-			</div>
+			
 		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="candidate.relocationAllowance" name="relAlowance"
-					ng-options="o for o in allowances" class="form-control input-sm"
-					required>
-					<option value="" disabled="disabled">Select Relocation
-						Allowance</option>
-				</select> <label style="position: absolute; top: -22px;">Relocation
-					Allowance<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-		<div class="row">
+	
+		<div class="row" ng-hide="true">
 			<div class="input-field col s6">
 				<input type="file" class="custom-file-input"
 					ng-file-select="upload($files)" valid-file required /> <label
