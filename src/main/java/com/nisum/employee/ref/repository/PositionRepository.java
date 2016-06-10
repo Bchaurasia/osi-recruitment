@@ -177,31 +177,7 @@ public class PositionRepository {
 		return positionDetail;
 	}
 
-	public Position updatePublishStatus(Position position) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("jobcode").is(position.getJobcode()));
-		query.fields().include("jobcode");
-		Update update = new Update();
-		update.set("designation", position.getDesignation());
-		update.set("minExpYear", position.getMinExpYear());
-		update.set("maxExpYear", position.getMaxExpYear());
-		update.set("primarySkills", position.getPrimarySkills());
-		update.set("secondarySkills", position.getSecondarySkills());
-		update.set("interviewRounds", position.getInterviewRounds());
-		update.set("jobProfile", position.getJobProfile());
-		update.set("location", position.getLocation());
-		update.set("client", position.getClient());
-		update.set("hiringManager", position.getHiringManager());
-		update.set("priority", position.getPriority());
-		update.set("interviewer", position.getInterviewer());
-		update.set("status", position.getStatus());
-		update.set("updatedDate", position.getUpdatedDate());
-		update.set("createdDate", position.getCreatedDate());
-		update.set("createdBy", position.getCreatedBy());
-		update.set("updatedBy", position.getUpdatedBy());
-		update.set("positionType", position.getPositionType());
-		update.set("publishStatus", true);
-		mongoOperations.updateFirst(query, update, Position.class);
-		return position;
+	public void updatePublishStatus(Position position) {
+		mongoOperations.save(position);
 	}
 }

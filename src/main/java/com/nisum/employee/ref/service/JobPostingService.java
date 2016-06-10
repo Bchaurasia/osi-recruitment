@@ -27,17 +27,17 @@ public class JobPostingService implements IJobPostingService {
 	private NotificationService notificationService;
 	
 	public void postReferalJob(Position position) throws Exception {
-		Position updatePublishStatus = positionRepository.updatePublishStatus(position);
-		Position position1 = requisitionRepository.retrievePositionBasedOnId(position.getJobcode());
+		position.setPublishStatus(true);
+		positionRepository.updatePublishStatus(position);
 		Requisition requisition = requisitionRepository.retrieveRequisitionBasedOnId(position.getRequisitionId());
 	 
 	 try {
 		 //notificationService.sendRefralJob(requisition);
-		 notificationService.sendJobToReffarals(position1,requisition);
+		 notificationService.sendJobToReffarals(position,requisition);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-		positionSearchService.updatePositionIndex(updatePublishStatus);
+		positionSearchService.updatePositionIndex(position);
 
 		
 	}
