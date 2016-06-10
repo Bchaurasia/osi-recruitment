@@ -151,6 +151,12 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 					return true;
 				}
 	}
+	
+	function getDDMMYYYFormatDate(dateStr)
+	{
+		var format = { day : 'numeric', month : 'numeric', year :'numeric'  };
+		return new Date(dateStr).toLocaleDateString('en-US', format);
+	}
 
 	$scope.cloneRequisitionDetails = function(){
 		if ($scope.requisition !== undefined && $scope.requisition.status !== "REJECTED") {
@@ -159,7 +165,8 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.requisition.createdBy = $scope.user.emailId;
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			$scope.requisition.client = $scope.client.clientName;
-			$scope.requisition.requisitionDate.toString();
+			$scope.requisition.targetDate = getDDMMYYYFormatDate($scope.targetDate);
+			$scope.requisition.requisitionDate = getDDMMYYYFormatDate($scope.requisitionDate);
 
 			requisitionService.cloneRequisition($scope.requisition)
 				.then(successMsg)
@@ -189,7 +196,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
       }
 	
 	$scope.validateSkills = function(){
-		alert("inside validate skill");
 		if($scope.requisition.skillType=== undefined)
 		{
 			$scope.skillErr = true;
