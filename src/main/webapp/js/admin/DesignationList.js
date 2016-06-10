@@ -43,13 +43,25 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 
 	$scope.save = function(){
 		console.log(angular.toJson($scope.designation));
+		if($scope.validateDesignation()){
 		  designationService.addDesignation($scope.designation).then(function(msg){
 			  $scope.sendSharedMessage(msg,'/admin/designation');
 		  }).catch(function(msg){ 
 			  $scope.message=msg;
 		      $scope.cls=appConstants.ERROR_CLASS; $scope.gotoAnchor(); 
 		  })
-		
+		}
+	}
+	
+	$scope.validateDesignation = function(){
+		$scope.isDesigExist=_.find($scope.designation1, function(desg){ return desg.designation === $scope.designation.designation });
+		if($scope.isDesigExist){
+			 $scope.message="Designation Already Exists";
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $scope.sendSharedMessageWithCls($scope.message,$scope.cls,'/admin/designation');
+			return false;
+		}
+		else return true;
 	}
 	$scope.skills = function(){
 		$scope.hideSkills = false;
