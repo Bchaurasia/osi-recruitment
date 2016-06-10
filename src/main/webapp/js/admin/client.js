@@ -68,13 +68,14 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	}
 	
 	$scope.checkClients = function(){
-		angular.forEach($scope.clients, function(cl){
-			if($scope.client.clientName == cl.clientName){
-				 $scope.message="Client Already Exists";
-				 $scope.cls=appConstants.ERROR_CLASS;
-				 $scope.checkCl = false;
-		}});
-		return true;
+		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName === $scope.client.clientName });
+		if($scope.isClientExist){
+			$scope.message="Client Already Exists";
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $scope.sendSharedMessageWithCls($scope.message,$scope.cls,'/admin/client');
+			return false;
+		}
+		else return true;
 	}
 	
 	$scope.editClient = function(data){

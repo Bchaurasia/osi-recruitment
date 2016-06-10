@@ -73,6 +73,15 @@ angular.module('erApp')
 				$location.path(path);
 		}
 	}
+	
+	$scope.sendSharedMessageWithCls = function(msg,cls,path){
+		sharedDataService.setClass(cls);
+		sharedDataService.setmessage(msg);
+		 $timeout( function(){ $scope.alHide(); }, 5000);
+		 if(path.length > 0){
+				$location.path(path);
+		}
+	}
 	$scope.positionMessage = function(msg,path){
 		$scope.message = sharedService.getmessage();
 		$scope.cls = sharedService.getclass();

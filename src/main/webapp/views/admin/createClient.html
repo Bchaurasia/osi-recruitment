@@ -6,7 +6,7 @@
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
 	<form class="col s8" name="clientForm" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke;">
-		
+		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 		<div class="row">
 			<div class="input-field col s6">
 				<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Client
