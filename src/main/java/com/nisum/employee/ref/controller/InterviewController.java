@@ -60,8 +60,8 @@ public class InterviewController {
 	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail) {
 		List<InterviewDetails> checkDetails = null;
-		checkDetails=interviewSearchService.getInterviewByInterviewer(interviewerEmail);
-	//	checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
+		//checkDetails=interviewSearchService.getInterviewByInterviewer(interviewerEmail);
+		checkDetails = interviewDetailsService.getInterviewByInterviewer(interviewerEmail);
 		return new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
