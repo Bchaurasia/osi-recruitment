@@ -54,7 +54,7 @@ public class JobRequisitionNotificationService {
 		requisitionFullyApproved.setRequisitionManagerEmail(details.getCreatedBy());
 		requisitionFullyApproved.setJobRequisitionId(details.getRequisitionId());		
 			
-		requisitionFullyApproved.setHREmailId(details.getRequisitionManager().getEmailId());
+		requisitionFullyApproved.setHrEmailId(details.getRequisitionManager().getEmailId());
 		
 		requisitionFullyApproved.setPosition(details.getNoOfPositions());
 	

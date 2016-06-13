@@ -448,7 +448,7 @@ public class NotificationService{
 		jobRequisitionTemplate.merge(context, writer);
 
 		Message message2 = getMessage();
-		message2.setRecipients(Message.RecipientType.TO,InternetAddress.parse(requisitionApproverDetails.getHREmailId()));
+		message2.setRecipients(Message.RecipientType.TO,InternetAddress.parse(requisitionApproverDetails.getHrEmailId()));
 		message2.setSubject(OSI_TECHNOLOGIES + " " + requisitionApproverDetails.getJobRequisitionId() + " Requisition has been approved");
 		message2.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message2);

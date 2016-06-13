@@ -11,7 +11,7 @@ public class RequisitionApproverDetails {
 	private String approverName;
 	private String approverEmailId;
 	private String requisitionManagerEmail;
-	private String HREmailId;
+	private String hrEmailId;
 	private String comment;
 	private String position;
 	
