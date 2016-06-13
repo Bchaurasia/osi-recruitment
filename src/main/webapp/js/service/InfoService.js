@@ -90,7 +90,7 @@ function createInformation(info){
 	return $http.put('resources/info',info)
 			.then(function(response){
 				//deleteInfoFromCache();
-				return " Skill created successfully";
+				return "added successfully";
 			})
 			.catch(
 					function(response) { return "error while creating skill"}
