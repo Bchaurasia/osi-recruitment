@@ -77,26 +77,29 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	}
 	
 	$scope.validate =  function(data){
-	    if(data<$scope.designation.minExpYear){
-	    	$scope.message="maxExpYear should be gretter than minExpYear";
-		    $scope.cls=appConstants.ERROR_CLASS;
-		    data="";
-		    $timeout( function(){ $scope.alHide(); }, 5000);
-		    return false;
+	    	var maxYear= parseInt(data);
+			var minYear= parseInt($scope.designation.minExpYear);
+		    if(maxYear<minYear){
+		    	$scope.message="maxExpYear should be greater than minExpYear";
+			    $scope.cls=appConstants.ERROR_CLASS;
+			    $timeout( function(){ $scope.alHide(); }, 5000);
 	    }
 	}
+	
 	$scope.validate1 =  function(data){
-		if(data>$scope.designation.maxExpYear){
-	    	$scope.message="maxExpYear should be gretter than minExpYear";
-		    $scope.cls=appConstants.ERROR_CLASS;
-		    data="";
-		    $timeout( function(){ $scope.alHide(); }, 5000);
-		    return false;
+			var minYear= parseInt(data);
+			var maxYear= parseInt($scope.designation.maxExpYear);
+			if(minYear>maxYear){
+		    	$scope.message="minExpYear should be less than maxExpYear";
+			    $scope.cls=appConstants.ERROR_CLASS;
+			    $timeout( function(){ $scope.alHide(); }, 5000);
 	    }
 	}
 	
 	$scope.invalidExperience = function(){
-		if($scope.designation.minExpYear>$scope.designation.maxExpYear){
+		var minYear= parseInt($scope.designation.minExpYear);
+		var maxYear= parseInt($scope.designation.maxExpYear);
+		if(minYear>maxYear){
 			return true;
 		}
 		return false;
