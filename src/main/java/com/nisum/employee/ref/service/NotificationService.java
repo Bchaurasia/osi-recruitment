@@ -118,6 +118,8 @@ public class NotificationService{
 	private String SRC_CANCELINTERVIEW_VM;
 	@Value("${SRC_POST_REF_JOB_VM}")
     private String SRC_POST_REF_JOB;
+	@Value("${SRC_APPROVE_REQUISITION_VM}")
+	private String SRC_APPROVE_REQUISITION_VM;
 	@Autowired
 	IProfileService profileService;
 	
@@ -423,7 +425,41 @@ public class NotificationService{
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 	}
-	
+	public void sendJobRequisitionNotificationForFullyApproved(RequisitionApproverDetails requisitionApproverDetails)
+			throws AddressException, MessagingException, ResourceNotFoundException, ParseErrorException,
+			MethodInvocationException {
+
+		String userId = requisitionApproverDetails.getApproverEmailId();
+		String message = "Approve the Requisition";
+		String readStatus = "No";
+		updateUserNotification(userId, message, readStatus);
+
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_APPROVE_REQUISITION_VM);
+
+		VelocityContext context = new VelocityContext();
+		context.put("approverName", requisitionApproverDetails.getApproverName());
+		context.put("requisitionId", requisitionApproverDetails.getJobRequisitionId());
+		context.put("noOfPositions", requisitionApproverDetails.getPosition());
+		
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+
+		Message message2 = getMessage();
+		message2.setRecipients(Message.RecipientType.TO,InternetAddress.parse(requisitionApproverDetails.getHREmailId()));
+		message2.setSubject(OSI_TECHNOLOGIES + " " + requisitionApproverDetails.getJobRequisitionId() + " Requisition has been approved");
+		message2.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message2);
+
+		Message message3 = getMessage();
+		message3.setRecipients(Message.RecipientType.TO,InternetAddress.parse(requisitionApproverDetails.getRequisitionManagerEmail()));
+		message3.setSubject(OSI_TECHNOLOGIES + " " +requisitionApproverDetails.getJobRequisitionId() + " Requisition has been approved");
+		message3.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message3);
+
+	}
 	public void sendRejectRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)throws AddressException, MessagingException,
 			ResourceNotFoundException, ParseErrorException,MethodInvocationException {
 

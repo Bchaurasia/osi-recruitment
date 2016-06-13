@@ -76,22 +76,21 @@ public class RequisitionService implements IRequisitionService {
 						.getApproval2().isApproved())) {
 			requisition.setStatus(APPROVED);
 			positionService.createRequitionPosition(requisition);
-			/* Added by Tarun */
-
 			updateRequisition1(requisition);
-
-			/* End of changes by Tarun */
+			
+			try {
+				jobRequisitionNotificationService.sendNotificationForFullyApproved(requisition);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+			
 			return requisition.getRequisitionId()
 					+ REQUISITION_HAS_APPROVED_SUCCESSFULLY + " and "
 					+ requisition.getNoOfPositions()
 					+ " positions created successfully";
 		} else {
 			requisition.setStatus(PARTIALY_APPROVED);
-			/* Added by Tarun */
-
 			updateRequisition1(requisition);
-
-			/* End of changes by Tarun */
 
 			try {
 				jobRequisitionNotificationService.sendNotification(requisition);

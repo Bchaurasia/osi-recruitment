@@ -28,6 +28,7 @@ public class JobRequisitionNotificationService {
 		if(details.getApproval1().isApproved() && details.getApproval2() != null){
 			requisitionApproverDetails.setApproverEmailId(details.getApproval2().getEmailId());
 			requisitionApproverDetails.setApproverName(details.getApproval2().getName());
+			
 		}else{
 			requisitionApproverDetails.setApproverEmailId(details.getApproval1().getEmailId());
 			requisitionApproverDetails.setApproverName(details.getApproval1().getName());
@@ -35,10 +36,32 @@ public class JobRequisitionNotificationService {
 		
 		if(REJECTED.equals(details.getStatus())){
 			notificationService.sendRejectRequisitionNotification(requisitionApproverDetails);
-		}else{
+		}else {
 			notificationService.sendJobRequisitionNotification(requisitionApproverDetails);
 		}
 		return requisitionApproverDetails;
 	}
+	
+	public RequisitionApproverDetails sendNotificationForFullyApproved(Requisition details) throws AddressException, MessagingException {
+		RequisitionApproverDetails requisitionFullyApproved = new RequisitionApproverDetails();
+		
+		if(details.getApproval1().isApproved() && details.getApproval2() != null){
+			requisitionFullyApproved.setApproverName(details.getApproval2().getName());
+		}else{
+			requisitionFullyApproved.setApproverName(details.getApproval1().getName());
+		}
+		
+		requisitionFullyApproved.setRequisitionManagerEmail(details.getCreatedBy());
+		requisitionFullyApproved.setJobRequisitionId(details.getRequisitionId());		
+			
+		requisitionFullyApproved.setHREmailId(details.getRequisitionManager().getEmailId());
+		
+		requisitionFullyApproved.setPosition(details.getNoOfPositions());
+	
+		notificationService.sendJobRequisitionNotificationForFullyApproved(requisitionFullyApproved);
+		
+		return requisitionFullyApproved;
+	}
+	
 
 }
