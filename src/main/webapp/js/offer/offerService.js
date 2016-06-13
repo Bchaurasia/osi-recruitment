@@ -10,6 +10,7 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 	        	return data;
 	     },
 		createPosition : addPosition,
+		getOfferData:getOfferData,
 		updatePosition : updatePosition,
 		getPosition: getPosition,
 		getPositionByDesignation : getPositionByDesignation,
@@ -17,7 +18,15 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 		getPositionBylocation : getPositionBylocation,
 		getClients : getClients
 	};
-	
+	function getOfferData(queryText){
+		return $http.get('resources/searchInterviewDetails?interviewerQuery='+queryText)
+		     .then(function(response){
+		    	 return data = response.data;
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving interview Deatils status: ' + response.status );
+		     });
+	}
 	function addPosition(positionObj){
 		return $http.post('resources/position', positionObj)
 		.then(createPositionSuccess)
