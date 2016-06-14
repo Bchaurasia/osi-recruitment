@@ -1,41 +1,31 @@
-<h2 class="heading-name">Report Management</h2><br>
-<div ng-controller="reportManagementCtrl" class="searchposition-container">
-	<div class="row" style="margin-top: 3%;margin-left: 10px">
-	<div class="col-md-4 ">
-	<label class="lbl "
-				for="jobcode"><i class="glyphicon glyphicon-barcode" ></i>
-					Jobcodes</label>
-	<select
-				name="jc" ng-model="candidate.jobcodeProfile" ng-change = "getReportStatus(candidate.jobcodeProfile)" required
-				placeholder="Select Jobcode" 
-				ng-options="item.jobcode as item.jobcode for item in positions | orderBy:'toString()'"
-				 id="jc" style="color: black;height: 30px;width: 71%;border-radius: 5px">
-			</select>
-	</div>
-	<div class="col-md-4">
-	<label class="lbl"
-				for="jobcode"><i class="glyphicon glyphicon-calendar"}"></i>&nbsp;&nbsp;From
-					Date</label> <input type="date" name="input" ng-model="exampless.value"
-				style="width: 57%;height: 30px;border-radius: 5px"
-				placeholder="From Date" />
-	</div>
-	<div class="col-md-3">
-	<label class="lbl"
-				for="jobcode"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;
-					To Date</label> <input type="date" id="exampleInput" name="input"
-				ng-model="example.value"
-				style="width: 57%;height: 30px;border-radius: 5px"
-				placeholder="From Date" />
-	</div>
-	<div class="col-md-1">
-	<a href="#reportInfo" style="margin-left: -35px"
-				id="" ng-disabled="searchDisable"
-				class="btn btn-info active" ng-hide="positionhidden"
-				ng-click="searchPosition()" ng-disabled="report.$invalid"> <span
-				class="glyphicon glyphicon-search"  
-				></span> 
-			</a>
-    </div>
-	</div>
-	<br>
-</div> 
+<iframe
+	src="http://192.168.32.100:5601/#/visualize/edit/Position-Reports?embed&_g=()&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!f,query:'*')),
+	vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'4',params:(field:location,order:desc,orderBy:'1',size:10),schema:segment,type:terms),
+	(id:'6',params:(field:primarySkills,order:desc,orderBy:'1',size:5),schema:segment,type:terms),(id:'7',params:(field:client,order:desc,orderBy:'1',size:10),
+	schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t,spyPerPage:10),type:pie))"
+	height="350" width="550">
+</iframe>
+
+<iframe
+	src="http://192.168.32.100:5601/#/visualize/edit/Profile-Reports?embed&_g=()&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),
+	vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(field:profileSource,order:desc,orderBy:'1',size:10),schema:segment,type:terms),
+	(id:'3',params:(field:interviewSet,order:desc,orderBy:'1',size:10),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t),
+	type:pie))"
+	height="350" width="550">
+</iframe>
+
+<iframe
+	src="http://192.168.32.100:5601/#/visualize/edit/Interview-Reports?embed&_g=()&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),
+	vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(field:status,order:desc,orderBy:'1',size:10),schema:segment,type:terms),
+	(id:'3',params:(field:rounds.interviewFeedback.communicationSkills,order:desc,orderBy:'1',size:5),schema:segment,type:terms)),listeners:(),
+	params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t,spyPerPage:10),type:pie))"
+	height="350" width="550">
+</iframe>
+
+<iframe
+	src="http://192.168.32.100:5601/#/visualize/edit/Requisition-Reports?embed&_g=()&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),
+	vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(field:noOfPositions,order:desc,orderBy:'1',size:10),schema:segment,type:terms),
+	(id:'3',params:(field:client,order:desc,orderBy:'1',size:10),schema:segment,type:terms),(id:'4',params:(field:status,order:desc,orderBy:'1',size:10),
+	schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t),type:pie))"
+	height="350" width="550">
+</iframe>
