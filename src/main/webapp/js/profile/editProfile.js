@@ -29,6 +29,38 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	infoService.getInfo().then(function(info){$scope.info = info;
 	$scope.pskills=$scope.info.skills;});
 	
+	$scope.candidate.qualifications=[{
+		qualification:'',
+		stream:'',
+		percentage:'70'
+	}];
+	
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				stream:'',
+				percentage:'70'
+		};
+		$scope.candidate.qualifications.push(addQualification);
+	};
+	
+	$scope.checkDisability = function(qualification){
+		if(qualification){
+			//$scope.disableCreateBtn  =  false;
+			return false;
+		}
+		else{
+			//$scope.disableCreateBtn  =  true;
+			return true;
+		}
+	}
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.candidate.qualifications.length - 1 == 0)) {
+			$scope.candidate.qualifications.splice(index,1);
+		} 
+	}
+	
 	$scope.status = {
 		    isFirstOpen: true,
 		    isFirstDisabled: false

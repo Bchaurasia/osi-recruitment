@@ -50,6 +50,38 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		$log.error(message)
 	});
 	
+	$scope.candidate.qualifications=[{
+		qualification:'',
+		stream:'',
+		percentage:'70'
+	}];
+	
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				stream:'',
+				percentage:'70'
+		};
+		$scope.candidate.qualifications.push(addQualification);
+	};
+	
+	$scope.checkDisability = function(qualification){
+		if(qualification){
+			//$scope.disableCreateBtn  =  false;
+			return false;
+		}
+		else{
+			//$scope.disableCreateBtn  =  true;
+			return true;
+		}
+	}
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.candidate.qualifications.length - 1 == 0)) {
+			$scope.candidate.qualifications.splice(index,1);
+		} 
+	}
+	
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;

@@ -33,6 +33,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
+	//$scope.candidate.percentage = "70";
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -43,6 +44,38 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	}).catch(function(message) {
 		$log.error(message)
 	});
+	
+	$scope.candidate.qualifications=[{
+		qualification:'',
+		stream:'',
+		percentage:'70'
+	}];
+	
+	$scope.addColumnCriteria = function() {
+		var addQualification = {		
+				qualification:'',
+				stream:'',
+				percentage:'70'
+		};
+		$scope.candidate.qualifications.push(addQualification);
+	};
+	
+	$scope.checkDisability = function(qualification){
+		if(qualification){
+			//$scope.disableCreateBtn  =  false;
+			return false;
+		}
+		else{
+			//$scope.disableCreateBtn  =  true;
+			return true;
+		}
+	}
+	
+	$scope.deleteQualification = function(index){
+		if (!($scope.candidate.qualifications.length - 1 == 0)) {
+			$scope.candidate.qualifications.splice(index,1);
+		} 
+	}
 	
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
