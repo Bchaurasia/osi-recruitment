@@ -47,9 +47,17 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
              return positionObj.jobcode === $scope.interviewscheduleDetails.jobCode; 
 			});
 			$scope.interviewschedule.jobcode=$scope.jobcode;
+			
 		}).catch(function(msg){
 			$log.error(msg);
 		});
+	}
+	
+	$scope.setJobDescription= function(jobcode) {
+		$scope.jobDescription = _.find($scope.positionObj, function(obj){
+			return obj.jobcode === jobcode.jobcode;
+		});
+		$scope.interviewschedule.jobDescription = $scope.jobDescription.jobProfile;
 	}
 	
 	$scope.init = function() {
@@ -71,6 +79,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			if($scope.interviewscheduleDetails.requisitionId != undefined){
 				$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
 				$scope.setJobcode($scope.interviewschedule.requisitionId);
+				$scope.interviewschedule.jobDescription = $scope.interviewscheduleDetails.jobDescription;
 			}
 			profileService.getProfileById($scope.interviewschedule.candidateId).then(function(data){
 				$scope.interviewschedule.candidateSkypeId=data.skypeId;
@@ -169,6 +178,9 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
 		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
 		$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
+		if($scope.interviewschedule.typeOfInterview === "Face To Face"){
+			$scope.interviewschedule.interviewAddress = $scope.sel.interviewLocation.address;
+		}
 		console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
 		interviewService.scheduleInterview($scope.interviewschedule).then(function(data){
 			 $scope.message = "Interview scheduled successfully for "+$scope.interviewschedule.candidateName;
@@ -182,8 +194,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.cancelInterview = function(candidateId,roundName,candidateName) {
-		console.log("candidateName is::::"+candidateName);
-		console.log("cancelling interview 22222 :"+candidateId+"---"+roundName+"--"+candidateName);
 		interviewService.cancelInterview(candidateId,roundName,candidateName)
 		.then(successMsg)
 		.catch(errorMsg);
@@ -196,7 +206,29 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			var cls='alert alert-danger alert-error';
 			$scope.sendNotificationWithStyle(msg,cls,'recruitment/interviewManagement');
 		}
-		
-	
 	}
+	
+	$scope.locations=[
+	                  {
+	      	          location:'Bangalore',
+	      	          address:'#166, 19th Main Sector - 4, HSR Layout, Bengaluru, Karnataka, India - 560102'
+	                  },
+	                  {
+	      		      location:'Chennai',
+	      		     address:'Plot No #C-23, 2nd Floor, Thiru Vi Ka Industrial Estate, Guindy, Chennai, Tamilnadu, India - 600032'
+	      	        },
+	      	        {
+	      			  location:'Delhi',
+	      			 address:'B-807-08 8th floor, BPTP Park Centra, Sector 30, Gurgaon, Haryana, India - 122001'
+	      		    },
+	      		    {
+	      			  location:'Hyderabad',
+	      			 address:'1-98/B Plot No 20&21, Avyas Tech Park, Krithika Layout, Madhapur, Hyderabad - 500081'
+	      		    },
+	      			 {
+	      		 	  location:'Pune',
+	      		 	  address:'#501, Pride Icon, 5th Floor, Thite Vasti, Kharadi, Pune, Maharashtra, India - 411014'
+	      			}
+	      				    
+	      		];
 }]);

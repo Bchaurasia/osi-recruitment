@@ -50,7 +50,7 @@
 					<td class="mdl-data-table__cell--non-numeric">
 						<button style="background-color: #F8F8F8; border: 0px;" href=""
 							id="" class="interview-feedback" data-tooltip="Submit feedback"
-							ng-disabled="disableFeedback(data.rounds) || hasRole('ROLE_ADMIN,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+							ng-disabled="disableFeedback(data.rounds) || hasNotRole('ROLE_HR,ROLE_INTERVIEWER,ROLE_MANAGER')"
 							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
 							<span class="glyphicon glyphicon-envelope"
 								style="position: relative; top: 1px;color:#034A85"></span>

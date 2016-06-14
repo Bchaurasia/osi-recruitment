@@ -96,20 +96,9 @@
 				<label>Interviewer Cell # :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.interviewLocation}}</p>
-				<label>Location :</label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewSchedule.emailIdInterviewer}}
 				</p>
 				<label>Interviewer Email Id :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.skypeId}}</p>
-				<label> Skype Id :</label>
 			</div>
 		</div>
 
@@ -119,6 +108,20 @@
 				</p>
 				<label>Type Of Interview :</label>
 			</div>
+			<div class="input-field col s6" ng-if="data.interviewSchedule.typeOfInterview === 'Face To Face'">
+				<p style="width:70%;" class="viewInterview">{{data.interviewSchedule.interviewAddress}}
+				</p>
+				<label>Interview Location:</label>
+			</div>
+			<div class="input-field col s6" ng-if="data.interviewSchedule.typeOfInterview === 'Skype'">
+				<p class="viewInterview">{{data.interviewSchedule.skypeId}}</p>
+				<label> Skype Id :</label>
+			</div>
+			<div class="input-field col s6" ng-if="data.interviewSchedule.typeOfInterview === 'Telephonic'">
+				<p class="viewInterview">{{data.interviewSchedule.candidateMobileNumber}}</p>
+				<label> Candidate Cell# :</label>
+			</div>
+			
 		</div>
 		<div class="row">
 			<div class="input-field col s12">

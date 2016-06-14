@@ -6,14 +6,13 @@
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Hi $cname,<br><br>
 
-You have been shortlisted for the position and are invited to attend an interview.<br>
-The details of your interview are: <br><br>
+You have been shortlisted for the position and are invited to attend an interview.<br><br>
+The details of your interview are: <br>
  
+<table style="width:100%; border: 0px solid Gray;">
 
-<table style="width:450px; border: 0px solid Gray;">
-
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Interview Round :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td> 
+<tr><td style="width:20%;border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Interview Round :</td>
+<td style="width:70%;border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td> 
 </tr>
 
 <tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Type of Interview:</td>
@@ -22,6 +21,14 @@ The details of your interview are: <br><br>
 
 <tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Date Of Interview:</td>
 <td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$interviewDateTime</td> 
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Location:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$address</td>
+</tr>
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Job Description:</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$job_description</td>
 </tr>
 
 </table>

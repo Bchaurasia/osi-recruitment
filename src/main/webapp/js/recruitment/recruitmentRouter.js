@@ -69,20 +69,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
             }
     	}})
-    .state('recruitment.showInterview', {url:'/showInterview', views: {'': {templateUrl: 'views/recruitment/interviewDetails.html', controller: 'scheduleInterviewCtrl'}},
+    .state('recruitment.interviewDetails', {url:'/interviewDetails', views: {'': {templateUrl: 'views/recruitment/interviewDetails.html', controller: 'scheduleInterviewCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
             }
     	}})
-    	
-    	.state('recruitment.interviewDetails', {url:'/interviewDetails', views: {'': {templateUrl: 'views/recruitment/interviewDetails.html', controller: 'interviewDetailsCtrl'}},
-    	resolve : {
-    		permission: function(authorizationService,$route) {
-    			return authorizationService.permissionCheck(["ROLE_ADMIN","ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
-            }
-    	}})
-    	
     	.state('recruitment.searchRequisition', {url:'/searchRequisition', views: {'': {templateUrl: 'views/recruitment/searchRequisition.html', controller: 'searchRequisitionCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {

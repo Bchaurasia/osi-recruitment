@@ -59,6 +59,7 @@ public class NotificationService{
 	private static final String OSI_TECHNOLOGIES = "OSI Recruitment Portal";
 	
 	private static final String LOCATION = "location";
+	private static final String ADDRESS = "address";
 	private static final String ALTMOBILE_NO = "altmobileNo";
 	private static final String MOBILE_NO = "mobileNo";
 	private static final String INTERVIEW_DATE_TIME = "interviewDateTime";
@@ -155,6 +156,8 @@ public class NotificationService{
 		context.put(MOBILE_NO, mobileNo);
 		context.put(ALTMOBILE_NO, altMobileNo);
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
+		context.put(JOB_DESCRIPTION, interviewSchedule.getJobDescription());
+		context.put(ADDRESS, interviewSchedule.getInterviewAddress());
 		
 		Template candidateTemplate = getVelocityTemplate(SRC_CANDIDATE_VM);
 
@@ -274,7 +277,7 @@ public class NotificationService{
 	                        "UID:324\n" +
 	                        "ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:MAILTO:ositechportal@gmail.com\n" +
 	                        "ORGANIZER:MAILTO:" + "ositechportal@gmail.com" +"\n" +
-	                        "LOCATION:on the net\n" +
+	                        "LOCATION: OSI Tech Office\n" +
 	                        "DESCRIPTION:learn some stuff\n" +
 	                        "SEQUENCE:0\n" +
 	                        "PRIORITY:5\n" +
@@ -307,12 +310,12 @@ public class NotificationService{
 			         //Changing the format of date and storing it in String
 			    	 output = outputformat.format(date);
 			         //Displaying the date
-			    	 System.out.println(output);
+			    	// System.out.println(output);
 			    	
 			    	 //Convert 24Hrs String to Date Object
 			    	 DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 			    	 date = format.parse(output);
-			    	 System.out.println(date); 
+			    	 //System.out.println(date); 
 			    	 
 			      }catch(ParseException pe){
 			         pe.printStackTrace();

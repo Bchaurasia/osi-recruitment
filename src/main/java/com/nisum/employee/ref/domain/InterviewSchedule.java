@@ -11,6 +11,7 @@ public class InterviewSchedule extends AuditEntity{
 	String roundName;
 	String interviewerName;
 	String jobcode;
+	String jobDescription;
 	String requisitionId;
 	String interviewerMobileNumber;
 	String skypeId;
@@ -25,5 +26,6 @@ public class InterviewSchedule extends AuditEntity{
 	String candidateName;
 	Boolean isFeedBackSubmitted;
 	ArrayList<String> candidateSkills;
+	String interviewAddress;
 	
 }

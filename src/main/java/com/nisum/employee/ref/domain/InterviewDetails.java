@@ -34,6 +34,7 @@ public class InterviewDetails  {
 	String designation;
 	String hrAssigned;
 	String jobCode;
+	String jobDescription;
 	String requisitionId;
 	String status;
 	String roundName;

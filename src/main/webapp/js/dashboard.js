@@ -20,7 +20,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 	$scope.showInterviewDetails = function(interviewId,interviewRound) {
 		sharedService.setInterviewId(interviewId);
-		location.href='#recruitment/showInterview';
+		location.href='#recruitment/interviewDetails';
 	};
 	
 	$scope.editPosition = function(jobcodeProfile) {
@@ -182,7 +182,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.showInterview = function(obj, obj2) {
 		sharedService.setjobCode(obj);
 		sharedService.setinterviewRound(obj2);
-		location.href='#showInterview';
+		location.href='#interviewDetails';
 	};
 	
 	// Build the chart

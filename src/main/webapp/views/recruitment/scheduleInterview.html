@@ -32,7 +32,7 @@
 
 			</div>
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewschedule.jobcode" theme="selectize"
+				<ui-select ng-model="interviewschedule.jobcode" theme="selectize" on-select="setJobDescription(interviewschedule.jobcode)"
 					ng-disabled="disabled" style="width: 80%" title="Choose a jobcode">
 				<ui-select-match placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
@@ -96,13 +96,13 @@
 					class="form-control input-sm" required name="location"
 					ng-disabled="disabled">
 					<option value="" ng-disabled="disabled">Select Location</option>
-				</select> <label>Location<b class="mandatory">*</b></label>
+				</select> <label>Interviewer Location<b class="mandatory">*</b></label>
 			</div>
 
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6">
+		<div class="input-field col s6">
 				<select ng-model="sel.selectedtypeOfInterview"
 					ng-options="o as o for o in info.typeOfInterview | orderBy:'toString()'"
 					class="form-control input-sm" required name="typeOfInterview"
@@ -125,12 +125,27 @@
 		</div>
 
 		<div class="row">
+		<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Face To Face'">
+				<select ng-model="sel.interviewLocation"
+					ng-options="o.location for o in locations | orderBy:'toString()'"
+					class="form-control input-sm" required name="typeOfInterview"
+					ng-disabled="disabled">
+					<option value="" disabled="disabled">Select Interview
+						Location</option>
+				</select> <label>Interview Location<b class="mandatory">*</b></label>
+				
+			</div>
+			<div class="input-field col s5" ng-if="sel.interviewLocation">
+				<textarea ng-model="sel.interviewLocation.address" cols="50" rows="2"
+					ng-disabled="true" name="interviewlocation" class="form-control"></textarea><label> Interview Address
+					<b class="mandatory">*</b></label>
+			</div>
 			<div class="input-field col s6"
 				ng-if="sel.selectedtypeOfInterview === 'Skype'">
 				<input type="text" ng-model="interviewschedule.candidateSkypeId"
 					ng-disabled="true" name="candidateSkypeId" class="form-control"
 					placeholder="Enter Skype Id" /> <label> Candidate Skype
-					Id<b class="mandatory">*</b>
+					Id<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6"
 				ng-if="sel.selectedtypeOfInterview === 'Telephonic'">

@@ -219,6 +219,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
+			interviewDetails2.setJobDescription(interviewSchedule.getJobDescription());
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
 			interviewDetails2.getScheduledInterviewersEmails().add(interviewSchedule.getEmailIdInterviewer());	
@@ -232,6 +233,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setRounds(rounds);
 			interviewDetails2.setCurrentPositionId(interviewSchedule.getJobcode());
 			interviewDetails2.setJobCode(interviewSchedule.getJobcode());
+			interviewDetails2.setJobDescription(interviewSchedule.getJobDescription());
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
 			try {

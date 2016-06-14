@@ -68,7 +68,7 @@
 		
 		$scope.showInterviewDetails = function(interviewId) {
 			sharedService.setInterviewId(interviewId);
-			location.href='#recruitment/showInterview';
+			location.href='#recruitment/interviewDetails';
 		};
 		
 		$scope.searchInterview = function(){
