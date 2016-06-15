@@ -170,10 +170,10 @@
 			</div>
 			
 			<div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove"
+				<button class="glyphicon glyphicon-remove" data-tooltip="Remove Educational Details"
 					ng-show="candidate.qualifications.length!=1" style="cursor: pointer;color:#26a69a;border:none;background: none;"
 					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn" class="glyphicon glyphicon-plus" style="cursor:pointer;color:#26a69a;border:none;background: none;"
+				<button id="addButtonColumn" class="glyphicon glyphicon-plus" data-tooltip="Add Educational Details" style="cursor:pointer;color:#26a69a;border:none;background: none;"
 				ng-show="$last" ng-click="addColumnCriteria()" ng-disabled="checkDisability(candidate.qualification)"></button>
 			</div>
 		</div>
