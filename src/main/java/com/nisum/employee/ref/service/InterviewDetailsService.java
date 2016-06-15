@@ -128,6 +128,15 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		Query query = new Query();
 		query.addCriteria(Criteria.where("scheduledInterviewersEmails").all(interviewerEmail));
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
+		if(checkDetails!= null){
+			for(InterviewDetails detail :checkDetails){
+				if(detail.getRounds().size() > 0){
+					int count = detail.getRounds().size()-1;
+					detail.setInterviewDateTime(detail.getRounds().get(count).getInterviewSchedule().getInterviewDateTime());
+				}
+			}
+			
+		}
 		return checkDetails;
 	}
 	
@@ -223,6 +232,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
 			interviewDetails2.getScheduledInterviewersEmails().add(interviewSchedule.getEmailIdInterviewer());	
+			interviewDetails2.setInterviewDateTime(interviewSchedule.getInterviewDateTime());
 		}else{
 			int i=0;
 			List<Round> rounds = new ArrayList<Round>();
@@ -236,6 +246,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setJobDescription(interviewSchedule.getJobDescription());
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
+			interviewDetails2.setInterviewDateTime(interviewSchedule.getInterviewDateTime());
 			try {
 				ArrayList<String> emailIds =  new ArrayList<String>();
 				emailIds.add(interviewSchedule.getEmailIdInterviewer());
@@ -279,6 +290,10 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	
 		interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Cancelled");
 		interviewDetails2.setRounds(rounds1);
+		if(rounds1 != null && rounds1.size()>0){
+			int count = rounds1.size()-1;
+			interviewDetails2.setInterviewDateTime(rounds1.get(count).getInterviewSchedule().getInterviewDateTime());
+		}
 		interviewDetailsRepository.scheduleInterview(interviewDetails2);
 		interviewSearchService.addInterviewDetailsIndex(interviewDetails2);
 		

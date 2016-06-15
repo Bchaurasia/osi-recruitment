@@ -39,5 +39,6 @@ public class InterviewDetails  {
 	String status;
 	String roundName;
 	List <Round> rounds;
+	String interviewDateTime;
 
 }

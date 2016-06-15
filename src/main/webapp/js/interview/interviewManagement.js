@@ -72,7 +72,8 @@
 		};
 		
 		$scope.searchInterview = function(){
-			if($scope.user.roles =="ROLE_INTERVIEWER" || $scope.user.roles =="ROLE_MANAGER"){
+			//alert(_.contains($scope.user.roles, "ROLE_INTERVIEWER"));
+			if((_.contains($scope.user.roles, "ROLE_INTERVIEWER") || _.contains($scope.user.roles, "ROLE_MANAGER")) && ( !_.contains($scope.user.roles, "ROLE_HR"))){
 				interviewService.getInterviewDetailsByInterviewerEmailId(sessionStorage.userId).then(function(data){
 					$scope.interviewDetails = data;
 				}).catch({
