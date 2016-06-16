@@ -28,7 +28,7 @@
 					data-target="#admin" ng-show="hasRole('ROLE_ADMIN')"
 					ng-click="alHide()"> <span>&nbsp;&nbsp;Admin</span></a></li>
 				<li ui-sref-active="active"><a ui-sref="report"
-					data-target="#report" ng-show="hasRole('ROLE_HR')"
+					data-target="#report" ng-show="hasRole('ROLE_HR',ROLE_MANAGER)"
 					ng-click="alHide()"> <span>&nbsp;&nbsp;Reports</span></a></li>
 				<li ui-sref-active="active"><a ui-sref="viewHelpPage"
 					data-target="#viewHelpPage" ng-click="alHide()"> <span>&nbsp;&nbsp;Help</span></a></li>
