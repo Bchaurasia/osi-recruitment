@@ -56,50 +56,64 @@
 					<option value="" disabled="disabled">Select Round</option>
 				</select> <label>Interview Round<b class="mandatory">*</b></label>
 			</div>
-			<div class="input-field col s6">
-				<select ng-change="setvalues(interviewerName)"
-					placeholder="Select InterviewerName" ng-model="interviewerName"
-					ng-options="o.name for o in interviewerNames" ng-disabled="disabled" 
-					class="form-control input-sm" required>
-					<option value='' disabled="disabled">Select Interviewer</option>
-				</select> <label>Interviewer Name<b class="mandatory">*</b></label>
+			<div class="input-field col s6" align="left">
+				<ui-select ng-model="interviewerName"
+					theme="selectize"style="width: 80%" ng-change="setvalues(interviewerName)"
+					title="Choose a interviewer"> <ui-select-match
+					placeholder="Select or search interviewer">{{interviewerName.name}}</ui-select-match>
+				<ui-select-choices
+					repeat="interviewerName in interviewerNames | filter: $select.search">
+				<span ng-bind-html="interviewerName.name | highlight: $select.search"></span>
+				</ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">
+					Interviewer Name<b class="mandatory">*</b>
+				</label>
+
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6">
-				<!-- ng-disabled = "true"  -->
-				<input type="text" maxlength="15"
-					ng-model="interviewerData.mobileNumber" ng-disabled="true"
-					name="mobileNo" class="form-control" placeholder="Enter Cell# "
-					required /> <label for="Days">Interviewer Cell # <b
-					class="mandatory">*</b>
+			<div class="input-field col s6">				
+				<div class="col-md-4">
+					<label class="lbl">Interviewer Cell # : 
+					</label>
+				</div>
+				<div class="col-md-2" style="display: inline;">
+					<b>{{interviewerData.mobileNumber}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<input type="text" ng-change="" ng-model="interviewerData.skypeId"
-					ng-disabled="true" name="skypeId" ngPattern="" class="form-control"
-					placeholder="Enter Skype Id" required /> <label for="Days">
-					Skype Id<b class="mandatory">*</b>
+			<div class="input-field col s6">				
+				<div class="col-md-4">
+					<label class="lbl">Skype Id : 
+					</label>
+				</div>
+				<div class="col-md-2" style="display: inline;">
+					<b>{{interviewerData.skypeId}}</b>
+				</div>
 			</div>
 		</div>
-
+		<br>
 		<div class="row">
-			<div class="input-field col s6">
-				<input type="email" ng-change="" ng-model="interviewerData.emailId"
-					ng-disabled="true" name="emailIdInterviewer" class="form-control"
-					placeholder="Enter Email Id" required /> <label for="Days">Interviewer
-					Email Id <b class="mandatory">*</b>
+			<div class="input-field col s6">				
+				<div class="col-md-4">
+					<label class="lbl">Interviewer Email Id : 
+					</label>
+				</div>
+				<div class="col-md-2" style="display: inline;">
+					<b>{{interviewerData.emailId}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<select ng-model="interviewerData.location" ng-disabled="true"
-					ng-options="o as o for o in info.locations | orderBy:'toString()'"
-					class="form-control input-sm" required name="location"
-					ng-disabled="disabled">
-					<option value="" ng-disabled="disabled">Select Location</option>
-				</select> <label>Interviewer Location<b class="mandatory">*</b></label>
+			<div class="input-field col s6">				
+				<div class="col-md-4">
+					<label class="lbl">Location : 
+					</label>
+				</div>
+				<div class="col-md-2" style="display: inline;">
+					<b>{{interviewerData.location}}</b>
+				</div>
 			</div>
-
 		</div>
+		<br>
 
 		<div class="row">
 		<div class="input-field col s6">
