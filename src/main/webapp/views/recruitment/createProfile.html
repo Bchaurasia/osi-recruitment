@@ -252,7 +252,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter your current CTC" name="currentCTC"
 					class="form-control" type="text" ng-model="candidate.currentCTC" ng-pattern="/^[0-9]*$/">
-				<label style="position: absolute; top: -22px;">Current CTC(in thousands)</label><span
+				<label style="position: absolute; top: -22px;">Current CTC (in INR)</label><span
 					class="validation-error" ng-required="CreateCandidate.currentCTC.$error.pattern"
 					ng-show="CreateCandidate.currentCTC.$error.pattern">
 					Provide a valid CTC</span>
@@ -272,7 +272,7 @@
 		      <div class="input-field col s6">
 				<input placeholder="Enter your Notice Period" name="noticePeriod"
 					class="form-control" type="text" ng-model="candidate.noticePeriod" ng-pattern="/^[0-9]*$/" maxlength="2" required>
-				<label style="position: absolute; top: -22px;">Notice Period(in days)<b class="mandatory">*</b></label>
+				<label style="position: absolute; top: -22px;">Notice Period (in days)<b class="mandatory">*</b></label>
 				<span class="validation-error"  ng-required="CreateCandidate.noticePeriod.$error.pattern" 
 				ng-show="CreateCandidate.noticePeriod.$error.pattern">
                     Notice period should be in days
