@@ -15,7 +15,7 @@ Hi $iname,<br><br>
 </tr>
 
 <tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Round Of interview : </td>
-<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$typeOfInterview</td>
+<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td>
 </tr>
 
 <tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Date Of Interview :</td>
@@ -23,7 +23,7 @@ Hi $iname,<br><br>
 </tr>
 
 <tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Type Of Interview :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:13px;">$roundName</td>
+<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:13px;">$typeOfInterview</td>
 </tr>
 
 <tr><td style="border: 0px solid #000000; text-align:left; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Candidate Mobile Number :</td>
