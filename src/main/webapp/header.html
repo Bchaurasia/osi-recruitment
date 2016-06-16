@@ -30,6 +30,8 @@
 				<li ui-sref-active="active"><a ui-sref="report"
 					data-target="#report" ng-show="hasRole('ROLE_HR')"
 					ng-click="alHide()"> <span>&nbsp;&nbsp;Reports</span></a></li>
+				<li ui-sref-active="active"><a ui-sref="viewHelpPage"
+					data-target="#viewHelpPage" ng-click="alHide()"> <span>&nbsp;&nbsp;Help</span></a></li>
 				<li class="dropdown right"><a href="" class="dropdown-toggle"
 					data-toggle="dropdown" ng-click="alHide()"> <i
 						class="material-icons left">tag_faces</i>
@@ -38,11 +40,6 @@
 					<ul class="dropdown-menu pull-right ulwidth">
 						<li><a href="#viewUser" ng-click="alHide()"><i
 								class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
-						<li><a href="" data-toggle="modal" data-target="#myModal"><i
-								class="icon-bell"></i>&nbsp;&nbsp;Notification <span
-								class="new badge">{{count}}</span> </a></li>
-						<li><a href="#viewHelpPage" ng-click="alHide()"><i
-								class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Help</a></li>
 						<li><a id="logout" href="#" onClick="signOut()"><i
 								class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;Logout</a></li>
 
