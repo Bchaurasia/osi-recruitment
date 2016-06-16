@@ -35,7 +35,7 @@ public class InterviewController {
 	InterviewSearchService interviewSearchService;
 	
 	
-	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchInterviewDetails", method = RequestMethod.GET)
 	public ResponseEntity<?> searchInterviews(@RequestParam(value = "interviewerQuery", required = false) String interviewerQuery) {
 		List<InterviewDetails> interviewDetails = null;
@@ -56,7 +56,7 @@ public class InterviewController {
 		return new ResponseEntity<InterviewDetails>(checkDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterviewByInterviewer", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterviewByInterviewer(@RequestParam(value = "interviewerEmail", required = false) String interviewerEmail) {
 		List<InterviewDetails> checkDetails = null;
@@ -65,7 +65,7 @@ public class InterviewController {
 		return new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/getInterviewByJobCode", method = RequestMethod.GET)
 	public ResponseEntity<?> getInterviewByJobCode(@RequestParam(value = "jobCode", required = false) String jobCode) {
 		List<InterviewDetails> checkDetails = null;
@@ -137,7 +137,7 @@ public class InterviewController {
 				: new ResponseEntity<List<InterviewDetails>>(checkDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_ADMIN", "ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/interview", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> updateIntewrviewDetails(@RequestBody InterviewDetails interviewDetails) {
