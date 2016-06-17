@@ -10,9 +10,14 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','sharedSe
 	
 	$scope.searchPositionQuery = function(){
 		console.log("---------> ");
+		if(sharedService.getDesignation() != undefined && sharedService.getDesignation() != null) {
+			$scope.searchQuery=sharedService.getDesignation();
+			sharedService.setDesignation(null);
+		}	
 		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
 			$scope.positions = data;
 				$scope.currentPage = 0;
+				$scope.searchQuery="";
 		}).catch(function(msg){
 	   	  $log.error("Failed To Load Data! ---> "+msg);
 	   	  $scope.errorHide = false;

@@ -23,8 +23,9 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		location.href='#recruitment/interviewDetails';
 	};
 	
-	$scope.editPosition = function(jobcodeProfile) {
+	$scope.editPosition = function(jobcodeProfile,designation) {
 		sharedService.setjobCode(jobcodeProfile);
+		sharedService.setDesignation(designation);
 		location.href='#recruitment/viewPosition';
 	};
 	
