@@ -51,14 +51,21 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
    .state('offer.list', {url:'', views: {'': {templateUrl: 'views/offer/candidatesList.html', controller: 'offerManagementCtrl'}},
 	   resolve : {
     		permission: function(authorizationService,$route) {
-    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
+    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
             }
     	}
     })
    .state('offer.createOffer', {url:'/createOffer', views: {'': {templateUrl: 'views/offer/createOffer.html', controller: 'createOfferCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {
-    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
+    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
+            }
+    	}
+    })
+     .state('offer.approveOffer', {url:'/approveOffer', views: {'': {templateUrl: 'views/offer/approveOffer.html', controller: 'createOfferCtrl'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_REQUISITION_APPROVER"]);
             }
     	}
     })

@@ -1,13 +1,11 @@
 package com.nisum.employee.ref.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = false)
 @Data()
@@ -16,16 +14,29 @@ public class Offer extends AuditEntity {
 
 	@Id
 	private String emailId;
+	private String requisitionId;
+	private String jobcodeProfile;
+	private String approvedPositions;
+	private String proposedPosition;
+	private String businessUnit;
+	private String candidateName;
+	private String expYear;
+	private String qualification;
+	private String currentEmployer;
+	private String profileSource;
+	private UserVO recruiter;
+	private float lastDrawnCTC;
+	private float expectedCTC;
+	private float proposedCTC;
+	private int noticePeriod;
+	private String relocationExpensesOffered;
+	private String currentLocation;
+	private String WorkLocation;
+	private String comments;
+	private RequisitionUser approval;
+	private UserVO reportingManager;
 	private String client;
 	private String project;
-	private String hrManager;
-	private String reportingManager;
-	private String imigrationStatus;
-	private String relocationAllowance;
+	private Date expectedJoiningDate;
 	private String singInBonus;
-	private String comments;
-	private Date joiningDate;
-	private ArrayList<String> jobcodeProfile;
-	private String location;
-	private String offerLetterName;
 }

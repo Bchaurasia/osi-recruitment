@@ -42,6 +42,7 @@ import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
+import com.nisum.employee.ref.domain.Offer;
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
@@ -59,7 +60,6 @@ public class NotificationService{
 	private static final String OSI_TECHNOLOGIES = "OSI Recruitment Portal";
 	
 	private static final String LOCATION = "location";
-	private static final String ADDRESS = "address";
 	private static final String ALTMOBILE_NO = "altmobileNo";
 	private static final String MOBILE_NO = "mobileNo";
 	private static final String INTERVIEW_DATE_TIME = "interviewDateTime";
@@ -121,6 +121,9 @@ public class NotificationService{
     private String SRC_POST_REF_JOB;
 	@Value("${SRC_APPROVE_REQUISITION_VM}")
 	private String SRC_APPROVE_REQUISITION_VM;
+	@Value("${SRC_APPROVE_OFFER_VM}")
+	private String SRC_APPROVE_OFFER_VM;
+	
 	@Autowired
 	IProfileService profileService;
 	
@@ -156,8 +159,6 @@ public class NotificationService{
 		context.put(MOBILE_NO, mobileNo);
 		context.put(ALTMOBILE_NO, altMobileNo);
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
-		context.put(JOB_DESCRIPTION, interviewSchedule.getJobDescription());
-		context.put(ADDRESS, interviewSchedule.getInterviewAddress());
 		
 		Template candidateTemplate = getVelocityTemplate(SRC_CANDIDATE_VM);
 
@@ -277,7 +278,7 @@ public class NotificationService{
 	                        "UID:324\n" +
 	                        "ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:MAILTO:ositechportal@gmail.com\n" +
 	                        "ORGANIZER:MAILTO:" + "ositechportal@gmail.com" +"\n" +
-	                        "LOCATION: OSI Tech Office\n" +
+	                        "LOCATION:on the net\n" +
 	                        "DESCRIPTION:learn some stuff\n" +
 	                        "SEQUENCE:0\n" +
 	                        "PRIORITY:5\n" +
@@ -310,12 +311,12 @@ public class NotificationService{
 			         //Changing the format of date and storing it in String
 			    	 output = outputformat.format(date);
 			         //Displaying the date
-			    	// System.out.println(output);
+			    	 System.out.println(output);
 			    	
 			    	 //Convert 24Hrs String to Date Object
 			    	 DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 			    	 date = format.parse(output);
-			    	 //System.out.println(date); 
+			    	 System.out.println(date); 
 			    	 
 			      }catch(ParseException pe){
 			         pe.printStackTrace();
@@ -428,6 +429,36 @@ public class NotificationService{
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 	}
+
+	public void sendOfferApprovalNotification(Offer offer)
+			throws AddressException, MessagingException, ResourceNotFoundException, ParseErrorException,
+			MethodInvocationException {
+
+		String userId = offer.getApproval().getEmailId();
+		String message = "Approve the Offer";
+		String readStatus = "No";
+		updateUserNotification(userId, message, readStatus);
+
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_APPROVE_OFFER_VM);
+
+		VelocityContext context = new VelocityContext();
+		context.put("approverName", offer.getApproval().getName());
+
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+
+		Message message1 = getMessage();
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
+		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Offer for jobId:"
+				+ offer.getJobcodeProfile());
+
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
+	}
+
 	public void sendJobRequisitionNotificationForFullyApproved(RequisitionApproverDetails requisitionApproverDetails)
 			throws AddressException, MessagingException, ResourceNotFoundException, ParseErrorException,
 			MethodInvocationException {

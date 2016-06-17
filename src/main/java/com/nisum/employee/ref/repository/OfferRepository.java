@@ -2,10 +2,13 @@ package com.nisum.employee.ref.repository;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +31,13 @@ public class OfferRepository {
 		mongoOperations.save(offer);
 	}
 	
-	
+	public Offer retrieveOfferDetails(String emailId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("emailId").regex(
+				Pattern.compile(emailId, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+		Offer offerDetails = mongoOperations.findOne(query, Offer.class);
+		return offerDetails;
+	}
 	public void saveResumeInBucket(MultipartFile multipartFile, String candidateId){
 		DBObject metaData = new BasicDBObject();
 		metaData.put("candidateId", candidateId);
