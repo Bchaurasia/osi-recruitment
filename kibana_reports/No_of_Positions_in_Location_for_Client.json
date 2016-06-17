@@ -1,0 +1,15 @@
+[
+  {
+    "_id": "No-of-Positions-in-Location-for-Client",
+    "_type": "visualization",
+    "_source": {
+      "title": "No of Positions in Location for Client",
+      "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"location\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"client\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"position\",\"query\":{\"query_string\":{\"query\":\"No-of-Positions-in-Location-for-Client\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  }
+]
