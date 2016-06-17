@@ -1,0 +1,26 @@
+<html>
+<body style="font-family:calibri; font-size:15px; background-color:#F9FCF7;">
+
+<div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
+<div style="padding-left:20px; padding-right:20px;">
+<p style="color: black;font-size:15px; font-family:Calibri;">
+Hi $approverName,<br><br>
+ Please approve the Offer .
+ <br>Click here
+<a href="http://localhost:8080/osi-recruitment-portal/login.html">"http://localhost:8080/osi-recruitment-portal/main.html#"</a>
+<br><br>
+ <span style="font-size:15px">Regards,</span><br>
+ <span style="font-size:15px">Recruitment Team,</span><br>
+ <span style="font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>
+</div>
+	
+<br>																			
+<div style="background-color:#D9E1E3;height:100px;border:1px solid #004C7F;border-bottom-color: #D9E1E3">
+<a href="http://osi-tech.com" target="_blank" style="font-size: 35px;text-decoration: blink;">
+  <img src="http://www.osi-tech.com/images/osi-logo2.png" style="width:350px; height:100px" > </a>
+</div>
+
+</div>
+
+</body>
+</html>

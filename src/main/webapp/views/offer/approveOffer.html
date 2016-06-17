@@ -1,0 +1,215 @@
+<br>
+<div class="row">
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="ApproveOffer" onvalidate>
+		<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Approve Offer</b>
+			</h5>
+		</div>
+		<!-- -->
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.candidateName}}</span><label>Candidate
+					Name:</label>
+			</div>
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.emailId}}</span> <label>Email
+					Id: </label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.requisitionId}}</span><label>RequisitionId:</label>
+			</div>
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.jobcodeProfile}}</span><label>JobCode:
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.approvedPositions}}</span> <label>Approved
+					Positions: </label>
+			</div>
+
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.proposedPosition}}</span> <label>Proposed
+					Position: </label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.currentEmployer}}</span> <label>Current
+					Employer:</label>
+			</div>
+
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.expYear}}</span><label>Experience
+					(Yrs):</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.qualification}}</span> <label>Qualification:</label>
+			</div>
+
+			<div class="input-field col s6">
+				<span class="offer-span"> {{candidate.profileSource}}</span><label>Profile
+					Source:</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.client}}</span><label>Client:</label>
+			</div>
+
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.reportingManager.name}}</span><label>Report
+					Manager: </label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.project}} </span><label>Project:</label>
+			</div>
+
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.recruiter.name}} </span><label>Recruiter:</label>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.relocationExpensesOffered}}</span>
+				<label>Relocation Expenses: </label>
+			</div>
+
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.expectedJoiningDate}}</span> <label>Expected
+					Joining Date: </label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.singInBonus}}</span><label>Sign-on
+					Bonus: </label>
+
+			</div>
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.noticePeriod}}</span><label>Notice
+					Period(in days): </label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.lastDrawnCTC}}</span><label>Last
+					Drawn CTC(in thousands):</label>
+			</div>
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.expectedCTC}}</span><label>Expected
+					CTC(in thousands):</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.proposedCTC}}</span><label>Proposed
+					CTC(in thousands): </label>
+			</div>
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.businessUnit}} </span><label>Business
+					Unit: </label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.currentLocation}}</span><label>Current
+					Location:</label>
+			</div>
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.workLocation}}</span><label>Work
+					Location: </label>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<h6 align="left">
+				<b>Interviewer Remarks:</b>
+			</h6>
+		</div>
+		<br>
+		<tabset justified="true"> <tab
+			ng-repeat="data in profile.rounds" heading="{{ data.roundName }}"
+			active="data.active"> <br>
+		<div class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.feedbackSubmittedBy}}</p>
+				<label>Feedback SubmittedBy :</label>
+			</div>
+
+		</div>
+		<div class="row" ng-show="data.interviewFeedback"
+			ng-repeat="skill in data.interviewFeedback.rateSkills">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{skill.skill}}</p>
+				<label>Skill :</label>
+			</div>
+			<div class="input-field col s6">
+				<p class="viewInterview">{{skill.rating}}/10</p>
+				<label>Rating :</label>
+			</div>
+		</div>
+		<div class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s12">
+				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.additionalSkills
+					|| "--"}}</p>
+				<label>Additional Skills :</label>
+			</div>
+		</div>
+		<div class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s12">
+				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.strengths
+					|| "--"}}</p>
+				<label>Strengths :</label>
+			</div>
+		</div>
+		<div class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s12">
+				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.improvement
+					|| "--"}}</p>
+				<label>Improvement :</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea class="materialize-textarea" cols="50" rows="2"
+					ng-change="changeEvent()" name="notes"
+					ng-model="candidate.comments"
+					placeholder="Enter any additional notes..."></textarea>
+				<label style="position: absolute; top: -22px;">Comment Notes</label>
+			</div>
+		</div>
+
+		<div align="center" class="row">
+			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
+				ng-click="approve()">
+				<span class="glyphicon glyphicon-ok-circle"></span>Approve
+			</button>
+			<button class="btn btn-info active" type="submit">
+				<span class="glyphicon glyphicon-ok-circle"></span> Reject
+			</button>
+			<button class="btn btn-info active" type="submit">
+				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
+			</button>
+			<button class="btn btn-info active" ui-sref="offer.list">
+				<span class="glyphicon glyphicon-remove"></span> Cancel
+			</button>
+		</div>
+	</form>
+	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+</div>
+<br>
+<br>
