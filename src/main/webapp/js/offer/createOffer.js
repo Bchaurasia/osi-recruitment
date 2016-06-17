@@ -38,7 +38,17 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			 console.log("fail to get data");
 		 });
 	}
-	
+	designationService.getDesignation().then(function(data){
+		$scope.designations=data;
+		$scope.profiledesignations = [];
+ 		angular.forEach($scope.designations,function(obj){
+ 			$scope.profiledesignations.push(obj.designation);
+ 		});
+	}).catch(function(msg){
+		$scope.message=msg;
+		 $scope.cls=appConstants.ERROR_CLASS;
+		 $timeout( function(){ $scope.alHide(); }, 5000);
+	})
 	$scope.init();
 	offerService.getOfferData($scope.candidate.emailId).then(function(offerdata){
 		if(offerdata!==""){
