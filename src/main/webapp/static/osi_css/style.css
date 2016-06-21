@@ -2939,3 +2939,10 @@ table.fc-border-separate {
     background-image: url(../osi_images/sprite.png);
     border-color: transparent;
 }
+.nav-tabs.nav-justified {
+    width: 74%;
+    margin-top: -36px;
+    border-bottom: 0;
+    background: 9;
+    background: #D7DDEA;
+}
