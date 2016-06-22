@@ -65,11 +65,9 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
 	$scope.info = $rootScope.info;
-	(function(){
-		if(_.contains($scope.userRole, "ROLE_INTERVIEWER")){
-			$scope.info.status = ["Selected", "OnHold", "Rejected"];
-		}
-	}())
+	$scope.info.status = ["Selected", "OnHold", "Rejected"];
+	//$scope.info.status = _.without( $scope.info.status, _.findWhere($scope.info.status,"Hired"));
+
 	$q.all([profile_url, interview_URL, position_URL]).then(
 			function(response){
 			$scope.profile = response[0].data[0];
