@@ -41,7 +41,7 @@ public class InterviewController {
 		List<InterviewDetails> interviewDetails = null;
 		if(interviewerQuery != null && !interviewerQuery.isEmpty()){
 			//interviewDetails =interviewDetailsService.getInterviewByCandidateId(interviewerQuery);
-			interviewDetails=interviewSearchService.getInterviewDetailsByNameAndStatus(interviewerQuery, interviewerQuery);
+			interviewDetails=interviewSearchService.getInterviewDetailsByNameAndStatus(interviewerQuery,interviewerQuery, interviewerQuery);
 		}else{
 			//interviewDetails =interviewDetailsService.getAll();
 			interviewDetails=interviewSearchService.getAllInterviewDetails();
