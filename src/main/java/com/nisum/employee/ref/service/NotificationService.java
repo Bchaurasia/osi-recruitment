@@ -51,6 +51,7 @@ import com.nisum.employee.ref.domain.UserNotification;
 @Service
 public class NotificationService{
 
+	private static final String CANDIDATE_APPROVAL_REQUEST = "Candidate Approval Request";
 	private static final String DD_MMM_YYYY_HH_MM = "dd-MMM-yyyy HH:mm";
 	private static final String YYYY_MM_DD_T_HH_MM_SS_SSS_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 	private static final String FILE_RESOURCE_LOADER_PATH = "file.resource.loader.path";
@@ -122,8 +123,11 @@ public class NotificationService{
     private String SRC_POST_REF_JOB;
 	@Value("${SRC_APPROVE_REQUISITION_VM}")
 	private String SRC_APPROVE_REQUISITION_VM;
-	@Value("${SRC_APPROVE_OFFER_VM}")
-	private String SRC_APPROVE_OFFER_VM;
+	@Value("${SRC_OFFER_TO_BE_APPROVED_VM}")
+	private String SRC_OFFER_TO_BE_APPROVED_VM;
+	@Value("${SRC_OFFER_VM}")
+	private String SRC_OFFER_VM;
+	
 	
 	@Autowired
 	IProfileService profileService;
@@ -445,7 +449,7 @@ public class NotificationService{
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
-		Template jobRequisitionTemplate = getVelocityTemplate(SRC_APPROVE_OFFER_VM);
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_OFFER_TO_BE_APPROVED_VM);
 
 		VelocityContext context = new VelocityContext();
 		context.put("approverName", offer.getApproval().getName());
@@ -455,13 +459,41 @@ public class NotificationService{
 
 		Message message1 = getMessage();
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Offer for jobId:"
-				+ offer.getJobcodeProfile());
+		message1.setSubject(CANDIDATE_APPROVAL_REQUEST + " : "+offer.getApprovedPositions()+" : "
+				+ offer.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 	}
+	public void approvedNotification(Offer offer)
+			throws AddressException, MessagingException, ResourceNotFoundException, ParseErrorException,
+			MethodInvocationException {
 
+		String userId = offer.getRecruiter().getEmailId();
+		String message = "Approve the Offer";
+		String readStatus = "No";
+		updateUserNotification(userId, message, readStatus);
+
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_OFFER_VM);
+
+		VelocityContext context = new VelocityContext();
+		context.put("recruiter", offer.getRecruiter().getName());
+		context.put("approverName", offer.getApproval().getName());
+
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+
+		Message message1 = getMessage();
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
+		message1.setSubject(CANDIDATE_APPROVAL_REQUEST + " : "+offer.getApprovedPositions()+" : "
+				+ offer.getCandidateName());
+
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
+	}
 	public void sendJobRequisitionNotificationForFullyApproved(RequisitionApproverDetails requisitionApproverDetails)
 			throws AddressException, MessagingException, ResourceNotFoundException, ParseErrorException,
 			MethodInvocationException {

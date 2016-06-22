@@ -8,11 +8,9 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.candidate = {};
 	$scope.managers = [];
 	$scope.approval1=[];
-	$scope.allowances = ["$100","$150","$200"];
-	$scope.bonus = ["$200","$400","$600"];
 	var offerLetterFile = null;
 	$scope.invalidFile = true;
-	
+	$scope.today=new Date();
 	
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
@@ -24,7 +22,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		 .then(function(response){
 				$scope.candidate1=response.data[0];
 				$scope.candidate.candidateName = $scope.candidate1.candidateName;
-				$scope.candidate.qualification=$scope.candidate1.qualification;
+				$scope.candidate.qualification=$scope.candidate1.qualifications;
 				$scope.candidate.expYear=$scope.candidate1.expYear;
 				$scope.candidate.approvedPositions=$scope.candidate1.designation;
 				$scope.candidate.currentEmployer=$scope.candidate1.currentEmployer;
@@ -33,6 +31,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 				$scope.candidate.expectedCTC=$scope.candidate1.expectedCTC;
 				$scope.candidate.noticePeriod=$scope.candidate1.noticePeriod;
 				$scope.candidate.currentLocation=$scope.candidate1.currentLocation;
+				$scope.candidate.profileSource=$scope.candidate1.profileSource;
 			})
 		 .catch(function(){
 			 console.log("fail to get data");
@@ -86,7 +85,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	});
 
 	$scope.saveOffer = function() {
-		//$scope.uploadFileIntoDB($scope.offerLetterFile);
 		$http.post(RELEASE_OFFER, $scope.candidate).success(function(data, status) {
 			$log.info("saved offer...");
 			$scope.sendNotification("Offer Saved Successfully",'/offer');
@@ -95,9 +93,17 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		});
 
 	};
-    $scope.today=new Date();
     $scope.approve = function(){
     	$http.post('resources/approveOffer', $scope.candidate).success(function(data, status) {
+    		$log.info("sending Notification");
+    		$scope.sendNotification(data.msg,'/offer');
+		  }).error(function(data) {
+			$log.error("error saving offer..." + data);
+		});
+	}
+    $scope.OfferStatus = function(){
+    	console.log(angular.toJson($scope.candidate));
+    	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");
     		$scope.sendNotification(data.msg,'/offer');
 		  }).error(function(data) {

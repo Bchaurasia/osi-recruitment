@@ -2946,3 +2946,8 @@ table.fc-border-separate {
     background: 9;
     background: #D7DDEA;
 }
+.offer-span{
+	position: relative;
+    bottom: 9px;
+    left: 213px;
+}

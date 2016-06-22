@@ -1,6 +1,7 @@
 package com.nisum.employee.ref.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
@@ -21,7 +22,7 @@ public class Offer extends AuditEntity {
 	private String businessUnit;
 	private String candidateName;
 	private String expYear;
-	private String qualification;
+	List<CandidateQualification> qualification;
 	private String currentEmployer;
 	private String profileSource;
 	private UserVO recruiter;
@@ -39,4 +40,5 @@ public class Offer extends AuditEntity {
 	private String project;
 	private Date expectedJoiningDate;
 	private String singInBonus;
+	private String offerStatus;
 }

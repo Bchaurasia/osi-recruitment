@@ -24,7 +24,7 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 		     });
 	}
 	function getOfferData(emailId){
-		return $http.get('resources//offer?emailId='+emailId)
+		return $http.get('resources/offer?emailId='+emailId)
 		     .then(function(response){
 		    	 return data = response.data;
 		     })

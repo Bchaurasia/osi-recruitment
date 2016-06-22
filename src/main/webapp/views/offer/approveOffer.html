@@ -88,7 +88,7 @@
 			</div>
 
 			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.expectedJoiningDate}}</span> <label>Expected
+				<span class="offer-span">{{candidate.expectedJoiningDate | date:'medium'}}</span> <label>Expected
 					Joining Date: </label>
 			</div>
 		</div>
@@ -194,14 +194,14 @@
 		</div>
 
 		<div align="center" class="row">
-			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
-				ng-click="approve()">
+			<button class="btn btn-info active" type="submit"
+				ng-click="OfferStatus()">
 				<span class="glyphicon glyphicon-ok-circle"></span>Approve
 			</button>
-			<button class="btn btn-info active" type="submit">
+			<button class="btn btn-info active" type="submit" ng-click="OfferStatus()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Reject
 			</button>
-			<button class="btn btn-info active" type="submit">
+			<button class="btn btn-info active" type="submit" ng-click="OfferStatus()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
 			</button>
 			<button class="btn btn-info active" ui-sref="offer.list">

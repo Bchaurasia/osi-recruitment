@@ -55,9 +55,20 @@ public class OfferController {
 	@Secured({"ROLE_HR"})
 	@ResponseBody
 	@RequestMapping(value = "/approveOffer", method = RequestMethod.POST)
+	public ResponseEntity<?> offerToBeApproved(@RequestBody Offer offer) throws Exception {
+		offerService.offerToBeApproved(offer);;
+		offerService.prepareOffer(offer);
+		String jsonObj = MSG_START + "Offer saved and Notification send to "+offer.getApproval().getName()+" Successfully"+ MSG_END;
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_REQUISITION_APPROVER"})
+	@ResponseBody
+	@RequestMapping(value = "/offerStatus", method = RequestMethod.POST)
 	public ResponseEntity<?> approveOffer(@RequestBody Offer offer) throws Exception {
+		offerService.prepareOffer(offer);
 		offerService.approveOffer(offer);
-		String jsonObj = MSG_START + "Notification send to "+offer.getApproval().getName()+" Successfully"+ MSG_END;
+		String jsonObj = MSG_START + "Offer saved and Notification send to "+offer.getRecruiter().getName()+" Successfully"+ MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 }

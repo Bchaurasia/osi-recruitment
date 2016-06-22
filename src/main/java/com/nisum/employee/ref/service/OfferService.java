@@ -28,9 +28,17 @@ public class OfferService{
 		return OfferRepository.retrieveOfferDetails(emailId);
 	}
 	
-	public void approveOffer(Offer offer) {
+	public void offerToBeApproved(Offer offer) {
 		try {
 			notificationService.sendOfferApprovalNotification(offer);
+		} catch (ResourceNotFoundException | ParseErrorException | MethodInvocationException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void approveOffer(Offer offer) {
+		try {
+			notificationService.approvedNotification(offer);;
 		} catch (ResourceNotFoundException | ParseErrorException | MethodInvocationException | MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
