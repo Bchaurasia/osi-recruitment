@@ -65,8 +65,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
 	$scope.info = $rootScope.info;
-	$scope.info.status = ["Selected", "OnHold", "Rejected"];
-	//$scope.info.status = _.without( $scope.info.status, _.findWhere($scope.info.status,"Hired"));
+	$scope.info.status = _.without( $scope.info.status, "Hired");
 
 	$q.all([profile_url, interview_URL, position_URL]).then(
 			function(response){
