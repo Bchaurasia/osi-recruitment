@@ -147,7 +147,9 @@
 				</li>
 				<li ng-repeat="schedule in showScheduleDataInterview">
 					<div class="collapsible-header row">
-						<span class="col s3">{{schedule.cname}}</span> 
+						<span class="col s3"><a
+							style="cursor: pointer;"
+							ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}</a></span> 
 						<span class="col s3">{{schedule.round}}</span>
 						 <span class="col s3">{{schedule.date | date:'medium'}}</span> 
 						  <span class="col s3">{{schedule.status}}</span> 

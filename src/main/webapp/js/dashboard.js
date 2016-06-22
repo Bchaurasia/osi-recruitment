@@ -13,6 +13,12 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.requisitionsDetails=[];
 	$scope.showNoAppRequisitionMsg = false;
 	
+	$scope.feedback = function(jobcode,candidateEmail) {
+		sharedService.setjobCode(jobcode);
+		sharedService.setprofileUserId(candidateEmail);
+		location.href='#recruitment/interviewFeedback';
+	};
+	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
