@@ -134,6 +134,7 @@
 					<option  value="" disabled="disabled">Select Position Type</option>
 				</select> <label>Position Type</label>
 			</div>
+			
 		</div>
 		<br />
 		<div ng-show="accordianFlag" class="input-field col s12">
@@ -145,7 +146,8 @@
 				<span class="col s3"><b>Last Round Status</b></span>
 			</div>
 			<div class="collapsible-header row" style="text-align: left;" ng-repeat="interviewCandidate in interviewCandidates">
-				<span class="col s3"><b>{{interviewCandidate.candidateName}}</b></span>
+				<span class="col s3"><a
+						style="cursor: pointer;" ng-click="showInterviewDetails(interviewCandidate.interviewerId)">{{interviewCandidate.candidateName}}</a></span>
 				<span class="col s3"><b>{{interviewCandidate.candidateEmail}}</b></span>
 				<span class="col s3"><b>{{interviewCandidate.progress}}</b></span>
 				<span class="col s3"><b>{{interviewCandidate.status || "--"}}</b></span>

@@ -224,6 +224,10 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		}
 			
 	}
+	$scope.showInterviewDetails = function(interviewId) {
+		sharedService.setInterviewId(interviewId);
+		location.href='#recruitment/interviewDetails';
+	};
 	$scope.status = {
 			isFirstOpen: true,
 	};
