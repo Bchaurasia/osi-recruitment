@@ -482,7 +482,8 @@ public class NotificationService{
 		VelocityContext context = new VelocityContext();
 		context.put("recruiter", offer.getRecruiter().getName());
 		context.put("approverName", offer.getApproval().getName());
-
+		context.put("offerStatus", offer.getOfferStatus());
+		
 		StringWriter writer = new StringWriter();
 		jobRequisitionTemplate.merge(context, writer);
 

@@ -11,7 +11,9 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	var offerLetterFile = null;
 	$scope.invalidFile = true;
 	$scope.today=new Date();
-	
+	$scope.approve=false;
+	$scope.reject=false;
+	$scope.negotiate=false;
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
 		console.log(angular.toJson($scope.profile));
@@ -101,7 +103,37 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$log.error("error saving offer..." + data);
 		});
 	}
-    $scope.OfferStatus = function(){
+    $scope.ApprovedOffer = function(){
+    	$scope.approve=true;
+    	$scope.reject=true;
+    	$scope.negotiate=true;
+    	$scope.candidate.offerStatus="Approved";
+    	console.log(angular.toJson($scope.candidate));
+    	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
+    		$log.info("sending Notification");
+    		$scope.sendNotification(data.msg,'/offer');
+		  }).error(function(data) {
+			$log.error("error saving offer..." + data);
+		});
+	}
+    $scope.RejectOffer = function(){
+    	$scope.approve=true;
+    	$scope.reject=true;
+    	$scope.negotiate=true;
+    	$scope.candidate.offerStatus="Rejected";
+    	console.log(angular.toJson($scope.candidate));
+    	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
+    		$log.info("sending Notification");
+    		$scope.sendNotification(data.msg,'/offer');
+		  }).error(function(data) {
+			$log.error("error saving offer..." + data);
+		});
+	}
+    $scope.NegotiateOffer = function(){
+    	$scope.approve=false;
+    	$scope.reject=false;
+    	$scope.negotiate=false;
+    	$scope.candidate.offerStatus="Under Negitiation";
     	console.log(angular.toJson($scope.candidate));
     	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");

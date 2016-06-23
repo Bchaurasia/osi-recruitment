@@ -52,7 +52,7 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.qualification}}</span> <label>Qualification:</label>
+				<span class="offer-span">{{candidate.qualification[0].qualification}}</span> <label>Qualification:</label>
 			</div>
 
 			<div class="input-field col s6">
@@ -195,13 +195,13 @@
 
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-click="OfferStatus()">
+				ng-click="ApprovedOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span>Approve
 			</button>
-			<button class="btn btn-info active" type="submit" ng-click="OfferStatus()">
+			<button class="btn btn-info active" type="submit" ng-click="RejectOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Reject
 			</button>
-			<button class="btn btn-info active" type="submit" ng-click="OfferStatus()">
+			<button class="btn btn-info active" type="submit" ng-click="NegotiateOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
 			</button>
 			<button class="btn btn-info active" ui-sref="offer.list">
