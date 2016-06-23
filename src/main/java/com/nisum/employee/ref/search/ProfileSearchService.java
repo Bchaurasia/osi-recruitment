@@ -36,12 +36,13 @@ public class ProfileSearchService {
 	}
 	
 	public List<Profile> getProfilesByEmailIdOrByNameOrByDesignation(String data) throws Exception {
-		List<Profile> profilesList = profileIndexQueryRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(data);
-		if(profilesList.isEmpty()){
-			Profile profile = profileIndexRepository.findProfilesByEmailIdStartingWithAllIgnoreCase(data);
-			profilesList = new ArrayList<Profile>();
-			profilesList.add(profile);
+		List<Profile> profilesList;
+		if(data.contains("@")){
+			profilesList = profileIndexRepository.findProfilesByEmailIdContainsAllIgnoreCase(data);
+		}else{
+			profilesList = profileIndexQueryRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(data);
 		}
+		
 		return profilesList;
 	}
 	
