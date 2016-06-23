@@ -54,8 +54,8 @@
 			}
 		}
 		
-		$scope.disableSchedule = function(status) {
-			if(status == "Rejected"){
+		$scope.disableSchedule = function(progress, status) {
+			if(status == "Rejected" ||((progress.indexOf("Hr Round Feedback Submitted") >= 0) && status == "Selected")){
 				return true;
 			}else{
 				return false;

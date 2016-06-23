@@ -46,7 +46,7 @@
 					<td class="mdl-data-table__cell--non-numeric">
 						<button style="background-color: #F8F8F8; border: 0px;" href="#"
 							id="" data-tooltip="Schedule interview"
-							ng-disabled="disableSchedule(data.status) || hasNotRole('ROLE_HR')"
+							ng-disabled="disableSchedule(data.progress,data.status) || hasNotRole('ROLE_HR')"
 							ng-click="schedule(data.interviewerId)"> 
 							<span class="glyphicon glyphicon-plus"
 								style="position: relative; top: 1px;color:#034A85""></span>
