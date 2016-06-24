@@ -38,6 +38,8 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		
 		requisitionService.getRequisitionById(id).then(function(data){
 			$scope.requisition = data;
+			$scope.targetDate = "";
+	    	$scope.requisitionDate = new Date();
 			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
 			$scope.requisition.approval1.approved=false;
 			delete $scope.requisition.approval1.comment;
@@ -76,9 +78,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 						$scope.jobDescription = _.find($scope.JobDescriptionList, function(jd){ return jd.jobDescriptionName === $scope.requisition.jobTitle });
 					}
 					
-					$scope.targetDate = "";
-			    	$scope.requisitionDate = new Date($scope.requisition.requisitionDate);
-			    	
 				},
 				function(errorMsg) {
 					$log.error("Failed! ---> "+errorMsg);
@@ -167,7 +166,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 			$scope.requisition.client = $scope.client.clientName;
 			$scope.requisition.targetDate = getDDMMYYYFormatDate($scope.targetDate);
 			$scope.requisition.requisitionDate = getDDMMYYYFormatDate($scope.requisitionDate);
-
 			requisitionService.cloneRequisition($scope.requisition)
 				.then(successMsg)
 				.catch(errorMsg);

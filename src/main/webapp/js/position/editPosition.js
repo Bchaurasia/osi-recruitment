@@ -139,10 +139,10 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			 }
 		     positionService.updatePosition($scope.position).then(
 			    function(msg){
-			    // $scope.sendNotification(msg,'recruitment/searchPosition');
-			    	$scope.message=msg;
+			      $scope.sendNotification(msg,'recruitment/searchPosition');
+			    	/*$scope.message=msg;
 			    	$scope.cls = 'alert  alert-success';
-			    	$timeout( function(){ $scope.alHide(); }, 5000);
+			    	$timeout( function(){ $scope.alHide(); }, 5000);*/
 			    }).catch(function(errorMsg){
 			    	$scope.message=errorMsg;
 					$scope.cls=appConstants.ERROR_CLASS;
