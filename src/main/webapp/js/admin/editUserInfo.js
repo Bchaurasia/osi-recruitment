@@ -193,6 +193,11 @@ app.controller("editUserInfoCtrl",['$scope', '$http', '$filter', '$timeout','$q'
 			return "Enter valid name..";
 	};
 
+	$scope.myFunct = function(keyEvent) {
+        if (keyEvent.which === 13)
+                keyEvent.preventDefault();
+	}
+
 		
 	$scope.validateAlphanumeric = function(data) {
 		if (/^[a-zA-Z0-9]+$/.test(data)) {

@@ -79,7 +79,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s6"> 
-								<ui-select multiple ng-model="userToEdit.roles" theme="select2"
+								<ui-select multiple ng-model="userToEdit.roles" theme="select2" ng-keypress="myFunct($event)"
 									ui-select-required> <ui-select-match
 									placeholder="Select roles..">{{$item}}</ui-select-match> <ui-select-choices
 									repeat="allRoles in info.userRoles | orderBy:'toString()' | filter:$select.search">
