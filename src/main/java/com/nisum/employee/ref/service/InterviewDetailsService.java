@@ -266,6 +266,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			{
 				interviewDetails2.getRounds().get(j).setInterviewFeedback(interviewFeedback);
 				interviewDetails2.getRounds().get(j).getInterviewSchedule().setIsFeedBackSubmitted(true);
+				interviewDetails2.getRounds().get(j).getInterviewSchedule().setRoundStatus(interviewFeedback.getRoundName() + " Feedback Submitted");
 				interviewDetails2.setProgress(interviewFeedback.getRoundName() + " Feedback Submitted");
 				interviewDetails2.setStatus(interviewFeedback.getStatus());
 				//interviewDetails2.getScheduledInterviewersEmails().remove(interviewFeedback.getInterviewerEmail());
