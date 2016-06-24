@@ -177,7 +177,7 @@
 				<label>Rating :</label>
 			</div>
 		</div>
-		<div class="row" ng-show="data.interviewFeedback">	
+		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.functionalComment">	
 			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewFeedback.functionalComment || "--"}}</p>
 				<label>Comments :</label>
