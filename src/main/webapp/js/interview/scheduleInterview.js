@@ -146,7 +146,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		})
 		var index =$scope.interviewscheduleDetails.progress.indexOf('Scheduled');
 		var round1 =$filter('limitTo')($scope.interviewscheduleDetails.progress, index-1, 0);
-		if(round1 === $scope.interviewschedule.roundName || $scope.flag===true){
+		if(round1 === $scope.interviewschedule.roundName){
 			  $scope.disabled=true;
 			  $scope.cls = 'alert alert-danger alert-error';
 			  $scope.message = round1 +" is already done.";
