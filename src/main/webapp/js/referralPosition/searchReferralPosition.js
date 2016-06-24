@@ -17,7 +17,6 @@ app.controller("searchReferralPositionCtrl", ['$scope', '$http', '$filter', '$ti
 		}	
 		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
 			$scope.positions = data;
-			if(!_.contains($scope.user.roles, "ROLE_HR")){
 		    	$scope.selectedPositions=[];
 		    		angular.forEach($scope.positions,function(position){
 				    	if(position.positionType === undefined || (position.positionType != undefined && position.positionType !="Private")){
@@ -25,7 +24,6 @@ app.controller("searchReferralPositionCtrl", ['$scope', '$http', '$filter', '$ti
 						}
 					});	
 		    		$scope.positions = angular.copy($scope.selectedPositions);
-		    }
 				$scope.currentPage = 0;
 				$scope.searchQuery="";
 		}).catch(function(msg){
