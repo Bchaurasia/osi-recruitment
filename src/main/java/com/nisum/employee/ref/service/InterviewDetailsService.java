@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.mail.MessagingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -220,6 +218,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		if(interviewDetails2.getRounds()!=null && interviewDetails2.getRounds().size()>0) {
 			int size = interviewDetails2.getRounds().size();
 			List<Round> rounds = interviewDetails2.getRounds();
+			interviewSchedule.setRoundStatus( interviewSchedule.getRoundName() + " Scheduled");
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 		
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
@@ -233,9 +232,11 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
 			interviewDetails2.getScheduledInterviewersEmails().add(interviewSchedule.getEmailIdInterviewer());	
 			interviewDetails2.setInterviewDateTime(interviewSchedule.getInterviewDateTime());
+
 		}else{
 			int i=0;
 			List<Round> rounds = new ArrayList<Round>();
+			interviewSchedule.setRoundStatus( interviewSchedule.getRoundName() + " Scheduled");
 			rounds.add(i,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
 			interviewDetails2.setInterviewerName(interviewSchedule.getInterviewerName());
