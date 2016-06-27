@@ -1,5 +1,7 @@
 package com.nisum.employee.ref.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,59 +18,78 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nisum.employee.ref.domain.Offer;
+import com.nisum.employee.ref.domain.OfferApprover;
 import com.nisum.employee.ref.repository.OfferRepository;
 import com.nisum.employee.ref.service.OfferService;
 
 @Controller
 public class OfferController {
-	
+
 	private static final String MSG_START = "{\"msg\":\"";
 	private static final String MSG_END = "\"}";
 	@Autowired
 	private OfferService offerService;
-	
+
 	@Autowired
 	private OfferRepository offerRepository;
-	
+
 	@ResponseBody
-	@Secured({"ROLE_ADMIN","ROLE_HR"})
-	@RequestMapping(value="/save-offer", method=RequestMethod.POST)
+	@Secured({ "ROLE_ADMIN", "ROLE_HR" })
+	@RequestMapping(value = "/save-offer", method = RequestMethod.POST)
 	public ResponseEntity<Offer> saveOfferDetails(@RequestBody Offer offer) {
-		offerService.prepareOffer(offer);;
+		offerService.prepareOffer(offer);
 		return new ResponseEntity<Offer>(offer, HttpStatus.OK);
 	}
-	
-	@Secured({"ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+
+	@Secured({ "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/offer", method = RequestMethod.GET)
-	public ResponseEntity<?> retrieveOffer(@RequestParam(value = "emailId", required = true) String emailId) throws Exception {
-		Offer offerdetail=offerService.getOfferDetail(emailId);
+	public ResponseEntity<?> retrieveOffer(@RequestParam(value = "emailId", required = true) String emailId)
+			throws Exception {
+		Offer offerdetail = offerService.getOfferDetail(emailId);
 		return new ResponseEntity<Offer>(offerdetail, HttpStatus.OK);
 	}
-	
+
 	@ResponseStatus(HttpStatus.OK)
-	@Secured({"ROLE_ADMIN","ROLE_HR"})
+	@Secured({ "ROLE_ADMIN", "ROLE_HR" })
 	@RequestMapping(value = "/upload-offer-letter", method = RequestMethod.POST)
-	public ResponseEntity<String> uploadOfferLetter	(HttpServletRequest request,@RequestParam(value = "file") MultipartFile multipartFile, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
+	public ResponseEntity<String> uploadOfferLetter(HttpServletRequest request,
+			@RequestParam(value = "file") MultipartFile multipartFile,
+			@RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
 		offerRepository.saveResumeInBucket(multipartFile, candidateId);
 		return new ResponseEntity<String>("Resume Uploaded Successfully", HttpStatus.OK);
 	}
-	@Secured({"ROLE_HR"})
+
+	@Secured({ "ROLE_HR" })
 	@ResponseBody
 	@RequestMapping(value = "/approveOffer", method = RequestMethod.POST)
 	public ResponseEntity<?> offerToBeApproved(@RequestBody Offer offer) throws Exception {
-		offerService.offerToBeApproved(offer);;
+		offerService.offerToBeApproved(offer);
+		if (offer.getApprovalList() == null) {
+			offer.setApprovalList(new ArrayList<OfferApprover>());
+		}
+		offer.getApprovalList().add(offer.getApproval());
 		offerService.prepareOffer(offer);
-		String jsonObj = MSG_START + "Offer saved and Notification send to "+offer.getApproval().getName()+" Successfully"+ MSG_END;
+		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getApproval().getName()
+				+ " Successfully" + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
-	
-	@Secured({"ROLE_REQUISITION_APPROVER"})
+
+	@Secured({ "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody
 	@RequestMapping(value = "/offerStatus", method = RequestMethod.POST)
 	public ResponseEntity<?> approveOffer(@RequestBody Offer offer) throws Exception {
-		offerService.prepareOffer(offer);
 		offerService.approveOffer(offer);
-		String jsonObj = MSG_START + "Offer saved and Notification send to "+offer.getRecruiter().getName()+" Successfully"+ MSG_END;
+		for (OfferApprover approver : offer.getApprovalList()) {
+			if(approver.getEmailId().equals(offer.getApproval().getEmailId())){
+				approver.setStatus(offer.getApproval().getStatus());
+				approver.setComment(offer.getApproval().getComment());
+				approver.setApproved(offer.getApproval().isApproved());
+			}
+		}
+		offerService.prepareOffer(offer);
+		
+		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getRecruiter().getName()
+				+ " Successfully" + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 }

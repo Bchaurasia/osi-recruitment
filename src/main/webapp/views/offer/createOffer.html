@@ -90,7 +90,7 @@
 			</div>
 			<div class="row" ng-repeat="data in candidate.qualification">
 				<span class="col s4"> {{data.qualification}}</span> <span
-					class="col s4"> {{data.stream}}</span> <span class="col s4">{{data.percentage}}</span>
+					class="col s4"> {{data.stream || "--"}}</span> <span class="col s4">{{data.percentage}}</span>
 			</div>
 		</div>
 		<div class="row">
@@ -132,8 +132,8 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter Relocation Allowance"
-					name="relAlowance" class="form-control" type="text"
+				<input placeholder="Enter Relocation Allowance" name="relAlowance"
+					class="form-control" type="text"
 					ng-model="candidate.relocationExpensesOffered" required> <label
 					style="position: absolute; top: -22px;">Relocation Expenses
 					Offered<b class="mandatory">*</b>
@@ -170,14 +170,14 @@
 				<input placeholder="Enter your current CTC" name="currentCTC"
 					class="form-control" type="text" ng-model="candidate.lastDrawnCTC"
 					ng-pattern="/^[0-9]*$/"> <label
-					style="position: absolute; top: -22px;">Last Drawn CTC(&#2352)<b class="mandatory">*</b>
+					style="position: absolute; top: -22px;">Last Drawn CTC (&#2352)<b class="mandatory">*</b>
 				</label></label>
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter your expected CTC" name="expectedCTC"
 					class="form-control" type="text" ng-model="candidate.expectedCTC"
 					ng-pattern="/^[0-9]*$/" required> <label
-					style="position: absolute; top: -22px;">Expected CTC(&#2352)<b class="mandatory">*</b>
+					style="position: absolute; top: -22px;">Expected CTC (&#2352)<b class="mandatory">*</b>
 				</label>
 			</div>
 		</div>
@@ -186,7 +186,7 @@
 				<input placeholder="Enter Proposed CTC" name="proposedCTC"
 					class="form-control" type="text" ng-model="candidate.proposedCTC"
 					ng-pattern="/^[0-9]*$/" required> <label
-					style="position: absolute; top: -22px;">Proposed CTC(&#2352)<b class="mandatory">*</b>
+					style="position: absolute; top: -22px;">Proposed CTC (&#2352)<b class="mandatory">*</b>
 				</label>
 			</div>
 			<div class="input-field col s6">
@@ -221,6 +221,13 @@
 					Source<b class="mandatory">*</b>
 				</label></label>
 			</div>
+			<div class="input-field col s6">
+				<textarea class="materialize-textarea" cols="50" rows="2"
+					ng-change="changeEvent()" name="notes"
+					ng-model="candidate.comments"
+					placeholder="Enter any additional notes..."></textarea>
+				<label style="position: absolute; top: -22px;">Comment Notes</label>
+			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
@@ -232,16 +239,29 @@
 				</select> <label>Approver<b class="mandatory">*</b></label>
 			</div>
 		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
-					ng-change="changeEvent()" name="notes"
-					ng-model="candidate.comments"
-					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Comment Notes</label>
-			</div>
+		<br>
+		<div class="row"  ng-show="candidate.approvalList">
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Approver</th>
+						<th>Status</th>
+						<th>Comment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="animate-repeat"
+						ng-repeat="data in candidate.approvalList" style="font-size: 80%">
+						<td>{{data.updatedDate  | date:'medium'}}</a></td>
+						<td>{{data.name}}</a></td>
+						<td>{{data.status}}</td>
+						<td>{{data.comment}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-
+		<br>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
 				ng-disabled="createOffer.$invalid" ng-click="approve()">

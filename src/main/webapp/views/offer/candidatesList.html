@@ -20,17 +20,19 @@
 					<th>Email Id</th>
 					<th>JobCode</th>
 					<th>Requisition Id</th>
+					<th>Offer Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="profile in myData"
+					ng-repeat="profile in myOfferData"
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
-						style="cursor: pointer;" ng-click="selectCandidate(profile)">{{profile.candidateName}}</a></td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.candidateEmail}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.jobCode}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.requisitionId}}</td>
+						style="cursor: pointer;" ng-click="selectCandidate(profile)">{{profile.candidate.candidateName}}</a></td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.candidate.candidateEmail}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.candidate.jobCode}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.candidate.requisitionId}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.offerdata.offerStatus}}</td>
 				</tr>
 			</tbody>
 		</table>

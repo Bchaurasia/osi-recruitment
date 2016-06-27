@@ -1,3 +1,4 @@
+
 <br>
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
@@ -187,21 +188,23 @@
 			<div class="input-field col s12">
 				<textarea class="materialize-textarea" cols="50" rows="2"
 					ng-change="changeEvent()" name="notes"
-					ng-model="candidate.comments"
+					ng-model="candidate.approval.comment"
 					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Comment Notes</label>
+				<label style="position: absolute; top: -22px;">Approvers Comment</label>
 			</div>
 		</div>
 
 		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit"
+			<button class="btn btn-info active" type="submit" ng-disabled=""
 				ng-click="ApprovedOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span>Approve
 			</button>
-			<button class="btn btn-info active" type="submit" ng-click="RejectOffer()">
+			<button class="btn btn-info active" type="submit" ng-click="RejectOffer()"
+			ng-disabled="">
 				<span class="glyphicon glyphicon-ok-circle"></span> Reject
 			</button>
-			<button class="btn btn-info active" type="submit" ng-click="NegotiateOffer()">
+			<button class="btn btn-info active" type="submit" ng-disabled=""
+			ng-click="NegotiateOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
 			</button>
 			<button class="btn btn-info active" ui-sref="offer.list">
