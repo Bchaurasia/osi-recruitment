@@ -2946,6 +2946,29 @@ table.fc-border-separate {
     background: 9;
     background: #D7DDEA;
 }
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    color: yellowgreen;
+    font-family: 'Glyphicons Halflings';
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    
+}
+ .glyphicon-remove:before {
+    content: "\e014";
+    color: white;
+}
+
+.glyphicon-ok-circle:before {
+    content: "\e089";
+    color: white;
+}
+  
+    
 .offer-span{
 	position: relative;
     bottom: 9px;
