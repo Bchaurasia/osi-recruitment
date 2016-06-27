@@ -2968,6 +2968,15 @@ table.fc-border-separate {
     color: white;
 }
   
+  .glyphicon-edit:before {
+    content: "\e065";
+    color: black;
+}
+
+.glyphicon-off:before {
+    content: "\e017";
+    color: red;
+}
     
 .offer-span{
 	position: relative;

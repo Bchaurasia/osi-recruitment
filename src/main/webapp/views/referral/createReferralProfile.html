@@ -252,7 +252,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter your current CTC" name="currentCTC"
 					class="form-control" type="text" ng-model="candidate.currentCTC" ng-pattern="/^[0-9]*$/">
-				<label style="position: absolute; top: -22px;">Current CTC (&#2352)</label><span
+				<label style="position: absolute; top: -22px;">Current CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)</label><span
 					class="validation-error" ng-required="CreateCandidate.currentCTC.$error.pattern"
 					ng-show="CreateCandidate.currentCTC.$error.pattern">
 					Provide a valid CTC</span>
@@ -260,7 +260,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter your expected CTC" name="expectedCTC"
 					class="form-control" type="text" ng-model="candidate.expectedCTC" ng-pattern="/^[0-9]*$/">
-				<label style="position: absolute; top: -22px;">Expected CTC (&#2352)</label>
+				<label style="position: absolute; top: -22px;">Expected CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)</label>
 				 <span class="validation-error" ng-required="CreateCandidate.expectedCTC.$error.pattern"
 				 ng-show="CreateCandidate.expectedCTC.$error.pattern">
                     Provide a valid CTC
