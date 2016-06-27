@@ -148,6 +148,10 @@
 				<p class="viewInterview">{{data.interviewFeedback.feedbackSubmittedBy}}</p>
 				<label>Feedback SubmittedBy :</label>
 			</div>
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.status}}</p>
+				<label>Status :</label>
+			</div>
 		</div>
 		<div class="row" ng-show="data.interviewFeedback"
 			ng-repeat="skill in data.interviewFeedback.rateSkills" ng-if="skill.rating!=0">
