@@ -1,6 +1,6 @@
 
 <br>
-<div class="row">
+<div class="row" ng-show="showDiv">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion"
 		name="ApproveOffer" onvalidate>
@@ -53,7 +53,8 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.qualification[0].qualification}}</span> <label>Qualification:</label>
+				<span class="offer-span">{{candidate.qualification[0].qualification}}</span>
+				<label>Qualification:</label>
 			</div>
 
 			<div class="input-field col s6">
@@ -89,8 +90,8 @@
 			</div>
 
 			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.expectedJoiningDate | date:'medium'}}</span> <label>Expected
-					Joining Date: </label>
+				<span class="offer-span">{{candidate.expectedJoiningDate |
+					date:'medium'}}</span> <label>Expected Joining Date: </label>
 			</div>
 		</div>
 
@@ -190,7 +191,8 @@
 					ng-change="changeEvent()" name="notes"
 					ng-model="candidate.approval.comment"
 					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Approvers Comment</label>
+				<label style="position: absolute; top: -22px;">Approvers
+					Comment</label>
 			</div>
 		</div>
 
@@ -199,12 +201,12 @@
 				ng-click="ApprovedOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span>Approve
 			</button>
-			<button class="btn btn-info active" type="submit" ng-click="RejectOffer()"
-			ng-disabled="">
+			<button class="btn btn-info active" type="submit"
+				ng-click="RejectOffer()" ng-disabled="">
 				<span class="glyphicon glyphicon-ok-circle"></span> Reject
 			</button>
 			<button class="btn btn-info active" type="submit" ng-disabled=""
-			ng-click="NegotiateOffer()">
+				ng-click="NegotiateOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
 			</button>
 			<button class="btn btn-info active" ui-sref="offer.list">
@@ -213,6 +215,16 @@
 		</div>
 	</form>
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+</div>
+<div class="row" ng-show="!showDiv">
+	<h6>
+		<b style="color: red;">There are no offers that warrant your
+			approval!</b>
+	</h6>
+	<br>
+	<button class="btn btn-info active" ui-sref="offer.list">
+		<span class="glyphicon glyphicon-remove"></span> Back
+	</button>
 </div>
 <br>
 <br>

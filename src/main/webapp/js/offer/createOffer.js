@@ -1,10 +1,10 @@
-app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$window','$timeout','$filter','$log','appConstants','offerService','userService','profileService','designationService',
-    function($scope, $state, $http, $upload, $q, $window, $timeout,$filter,$log,appConstants, offerService, userService,profileService,designationService) {
+app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$window','$timeout','$filter','$log','appConstants','offerService','userService','profileService','designationService','$rootScope',
+    function($scope, $state, $http, $upload, $q, $window, $timeout,$filter,$log,appConstants, offerService, userService,profileService,designationService,$rootScope) {
 
 	if(offerService.getData() == undefined) {
 		$state.go('offer.list');
 	}	
-	
+	$scope.user =$rootScope.user;
 	$scope.candidate = {};
 	$scope.managers = [];
 	$scope.approval1=[];
@@ -51,7 +51,20 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		if(offerdata!==""){
 			$scope.candidate=offerdata;
 			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
-		}	
+		}
+		if(_.findWhere($scope.candidate.approvalList, {emailId: $scope.user.emailId})){
+			$scope.showDiv=true;
+		}
+		else{
+			$scope.showDiv=false;
+		}
+		for(var i=0; i<$scope.candidate.approvalList.length;i++){
+			if($scope.candidate.approvalList[length].status==null){
+				$scope.disableSendApproval=true;
+			}else{
+				$scope.disableSendApproval=false;
+			}
+		}
 	}).catch(function(data){
 		$log.error(data);
 	})
@@ -138,4 +151,5 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$log.error("error saving offer..." + data);
 		});
 	}
+    
 }]);

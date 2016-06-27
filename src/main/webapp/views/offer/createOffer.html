@@ -264,7 +264,7 @@
 		<br>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
-				ng-disabled="createOffer.$invalid" ng-click="approve()">
+				ng-disabled="createOffer.$invalid || disableSendApproval" ng-click="approve()">
 				<span class="glyphicon glyphicon-ok-circle"></span>Send for Approval
 			</button>
 			<button class="btn btn-info active" type="submit"

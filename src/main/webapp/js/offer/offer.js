@@ -1,9 +1,16 @@
-app.controller('offerManagementCtrl',['$scope', '$http','$q', '$window','$state', '$timeout','$filter','$log','offerService','interviewService','$rootScope',
-                                      function($scope, $http, $q, $window, $state, $timeout,$filter,$log, offerService,interviewService,$rootScope) {
+app.controller('offerManagementCtrl',['$scope', '$http','$q', '$window','$state', '$timeout','$filter','$log','offerService','interviewService','userService',
+                                      function($scope, $http, $q, $window, $state, $timeout,$filter,$log, offerService,interviewService,userService) {
 	$scope.interviewDetails={};
 	$scope.myData={};
 	$scope.searchQuery="";
-	$scope.user =$rootScope.user;
+	userService.getUserById(sessionStorage.userId).then(setUser).catch(errorMsg);
+	function setUser(data){
+		$scope.user = data;
+	}
+	
+	function errorMsg(message){
+		console.log("message--->"+message);
+	}
 	$scope.data={};
 	$scope.myOfferData=[];
 	$scope.searchOfferQuery = function(){
