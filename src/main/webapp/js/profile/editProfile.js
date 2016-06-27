@@ -9,7 +9,6 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.selJobcodes=[];
 	$scope.hidejobcode = false;
 	$scope.hidejobcodemenu = true;
-	$scope.user="";
 	$scope.updateInterview={};
 	$scope.sk={};
 	$scope.sk.jobcodeProfiles = [];
@@ -21,7 +20,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("recruitment.searchProfile");
 		}
-		$scope.user = sharedService.getprofileUserId();
+		$scope.userId = sharedService.getprofileUserId();
 	}
 	
 	$scope.init();
@@ -76,7 +75,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	}).error(function(data, status, headers, config) {
 		$log.error(status)
 	});
-	profileService.getProfileById($scope.user).then(function(data){
+	profileService.getProfileById($scope.userId).then(function(data){
 		$scope.candidate = data;
 		$scope.creator = _.find($scope.userData, function(user){ return user.emailId === $scope.candidate.createdBy});
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
@@ -273,7 +272,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	
 	
 	$scope.download = function(){
-		$http.get('resources/fileDownload?candidateId='+$scope.user, {responseType: 'arraybuffer'})
+		$http.get('resources/fileDownload?candidateId='+$scope.userId, {responseType: 'arraybuffer'})
 	       .then(function (response) {
 	    	   var data = response.data;
 	    	    $scope.headers = response.headers();

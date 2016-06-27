@@ -318,12 +318,12 @@ public class NotificationService{
 			         //Changing the format of date and storing it in String
 			    	 output = outputformat.format(date);
 			         //Displaying the date
-			    	 System.out.println(output);
+			    	 //System.out.println(output);
 			    	
 			    	 //Convert 24Hrs String to Date Object
 			    	 DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 			    	 date = format.parse(output);
-			    	 System.out.println(date); 
+			    	 //System.out.println(date); 
 			    	 
 			      }catch(ParseException pe){
 			         pe.printStackTrace();
