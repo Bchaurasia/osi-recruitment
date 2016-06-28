@@ -32,7 +32,7 @@
 				<input placeholder="Enter requisitionId" name="requisitionId"
 					class="form-control" type="text" ng-model="candidate.requisitionId"
 					ng-disabled="true" required> <label
-					style="position: absolute; top: -22px;">RequisitionId<b
+					style="position: absolute; top: -22px;">Requisition Id<b
 					class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6">
@@ -48,7 +48,7 @@
 				<input name="approvedPositions" class="form-control"
 					ng-model="candidate.approvedPositions" ng-disabled="true" required>
 				<label style="position: absolute; top: -22px;">Approved
-					Positions <b class="mandatory">*</b>
+					Position <b class="mandatory">*</b>
 				</label>
 			</div>
 
@@ -106,7 +106,7 @@
 					ng-options="o.name as o.name for o in managers| orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="">Select Reporting Manager</option>
-				</select> <label style="position: absolute; top: -22px;">Report
+				</select> <label style="position: absolute; top: -22px;">Reporting
 					Manager<b class="mandatory">*</b>
 				</label>
 			</div>
@@ -136,7 +136,7 @@
 					class="form-control" type="text"
 					ng-model="candidate.relocationExpensesOffered" required> <label
 					style="position: absolute; top: -22px;">Relocation Expenses
-					Offered<b class="mandatory">*</b>
+					Offered (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
 				</label>
 			</div>
 
@@ -153,14 +153,14 @@
 				<input placeholder="Enter Sign-on Bonus" name="bonus"
 					class="form-control" type="text" ng-model="candidate.singInBonus"
 					required> <label style="position: absolute; top: -22px;">Sign-on
-					Bonus<b class="mandatory">*</b>
+					Bonus (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
 				</label>
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter your Notice Period" name="noticePeriod"
 					class="form-control" type="text" ng-model="candidate.noticePeriod"
 					ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
-					style="position: absolute; top: -22px;">Notice Period(in
+					style="position: absolute; top: -22px;">Notice Period (in
 					days)<b class="mandatory">*</b>
 				</label>
 			</div>
@@ -226,7 +226,7 @@
 					ng-change="changeEvent()" name="notes"
 					ng-model="candidate.comments"
 					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Comment Notes</label>
+				<label style="position: absolute; top: -22px;">Comments</label>
 			</div>
 		</div>
 		<div class="row">
@@ -265,7 +265,7 @@
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
 				ng-disabled="createOffer.$invalid || disableSendApproval" ng-click="approve()">
-				<span class="glyphicon glyphicon-ok-circle"></span>Send for Approval
+				<span class="glyphicon glyphicon-ok-circle"></span> Send for Approval
 			</button>
 			<button class="btn btn-info active" type="submit"
 				ng-disabled="createOffer.$invalid" ng-click="saveOffer()">

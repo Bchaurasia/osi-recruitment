@@ -197,15 +197,15 @@
 		</div>
 
 		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit" ng-disabled=""
+			<button class="btn btn-info active" type="submit" ng-disabled="showApprovalBtn"
 				ng-click="ApprovedOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span>Approve
 			</button>
 			<button class="btn btn-info active" type="submit"
-				ng-click="RejectOffer()" ng-disabled="">
+				ng-click="RejectOffer()" ng-disabled="showRejectBtn">
 				<span class="glyphicon glyphicon-ok-circle"></span> Reject
 			</button>
-			<button class="btn btn-info active" type="submit" ng-disabled=""
+			<button class="btn btn-info active" type="submit" ng-disabled="showNegotiateBtn"
 				ng-click="NegotiateOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
 			</button>

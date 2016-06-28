@@ -11,6 +11,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	var offerLetterFile = null;
 	$scope.invalidFile = true;
 	$scope.today=new Date();
+	
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
 		$scope.candidate.emailId = $scope.profile.candidateEmail;
@@ -59,11 +60,22 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.showDiv=false;
 		}
 		for(var i=0; i<$scope.candidate.approvalList.length;i++){
+			if($scope.candidate.approvalList[length-1].status=="Approved" || $scope.candidate.approvalList[length-1].status=="Rejected"){
+				$scope.showApprovalBtn = true;
+	    		$scope.showRejectBtn = true;
+	    		$scope.showNegotiateBtn = true; 
+			}
+			else{
+				$scope.showApprovalBtn = false;
+	    		$scope.showRejectBtn = false;
+	    		$scope.showNegotiateBtn = false; 
+			}
 			if($scope.candidate.approvalList[length].status==null){
 				$scope.disableSendApproval=true;
 			}else{
 				$scope.disableSendApproval=false;
 			}
+		
 		}
 	}).catch(function(data){
 		$log.error(data);
@@ -151,5 +163,5 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$log.error("error saving offer..." + data);
 		});
 	}
-    
-}]);
+
+ }]);
