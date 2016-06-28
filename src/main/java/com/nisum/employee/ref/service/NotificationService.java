@@ -348,6 +348,7 @@ public class NotificationService{
 				interviewFeedback.getRoundName());
 		context.put(STRENGTHS, interviewFeedback.getStrengths());
 		context.put(IMPROVEMENTS, interviewFeedback.getImprovement());
+		context.put(SKILLS,interviewFeedback.getAdditionalSkills());
 		context.put(RATING_LIST, interviewFeedback.getRateSkills());
 
 		Template candidateTemplate = getVelocityTemplate(SRC_FEEDBACK_HR_VM);

@@ -26,6 +26,10 @@ $cname's strengths:<br>
 <br><br>
 $cname's area of improvements:<br>
 <b>$improvements</b>
+<br><br>
+$cname's skills:<br>
+<b>$skills</b>
+<br><br>
 </p>
 <p style="font-size:18px;">Regards,<br>
 $iname</p>

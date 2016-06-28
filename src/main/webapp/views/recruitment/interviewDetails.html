@@ -258,6 +258,12 @@
 				<label>Onsite Suitability :</label>
 			</div>
 		</div>
+		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
+			   <div class="input-field col s6">
+					<p class="viewInterview">{{data.interviewFeedback.managementSkillComment || "--"}}</p>
+					<label>Comments :</label>
+			</div>
+		</div>
 		<div class="row" ng-show="!(data.interviewFeedback)"
 			style="color: red;">
 			<h6>

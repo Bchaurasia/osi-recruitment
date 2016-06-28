@@ -2973,6 +2973,25 @@ table.fc-border-separate {
     color: black;
 }
 
+.glyphicon-ok:before {
+    content: "\e013";
+    color: white;
+}
+
+.glyphicon-time:before {
+    content: "\e023";
+    color: black;
+}
+
+.glyphicon-book:before {
+    content: "\e043";
+    color: black;
+}
+
+.glyphicon-share:before {
+    content: "\e066";
+    color: white;
+}
 .glyphicon-off:before {
     content: "\e017";
     color: red;
