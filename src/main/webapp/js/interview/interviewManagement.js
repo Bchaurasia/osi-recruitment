@@ -73,7 +73,7 @@
 		
 		$scope.searchInterview = function(){
 			console.log('role contains'+_.contains($scope.user.roles, 'ROLE_HR','ROLE_REQUISITION_MANAGER','ROLE_REQUISITION_APPROVER'));
-			if(_.contains($scope.user.roles, 'ROLE_HR','ROLE_REQUISITION_MANAGER','ROLE_REQUISITION_APPROVER')){
+			if(_.contains($scope.user.roles, 'ROLE_HR') || _.contains($scope.user.roles,'ROLE_REQUISITION_MANAGER') || _.contains($scope.user.roles,'ROLE_REQUISITION_APPROVER')){
 		//	if((_.contains($scope.user.roles, "ROLE_INTERVIEWER") || _.contains($scope.user.roles, "ROLE_MANAGER")) && ( !_.contains($scope.user.roles, "ROLE_HR"))){
 				interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
 					$scope.interviewDetails = data;
