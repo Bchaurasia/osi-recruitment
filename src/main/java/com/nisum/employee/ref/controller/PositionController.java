@@ -65,7 +65,7 @@ public class PositionController {
 		return new ResponseEntity<List<Position>>(positionsDetails, HttpStatus.OK);
 	}
 	
-	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@Secured({"ROLE_USER","ROLE_HR","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchPositionsBySearchQuery", method = RequestMethod.GET)
 	public ResponseEntity<?> searchPositions(@RequestParam(value = "searchQuery", required = false) String searchQuery) {
 		List<Position> positions=null;

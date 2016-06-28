@@ -27,7 +27,7 @@ app.controller("searchReferralPositionCtrl", ['$scope', '$http', '$filter', '$ti
 				$scope.currentPage = 0;
 				$scope.searchQuery="";
 		}).catch(function(msg){
-	   	  $log.error("Failed To Load Data! ---> "+msg);
+	   	  console.log("Failed To Load Data! ---> "+msg);
 	     });
 	}
 	
