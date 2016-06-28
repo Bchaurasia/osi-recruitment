@@ -15,7 +15,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.recruitmentData = [];
 	$scope.fileError = true;
 	$scope.duplicateEmailIdError = false;
-	$scope.countryCode = "+91";
+	//$scope.countryCode = "+91";
 	$scope.showErrorMsg=false;
     $scope.showSuccessMsg= false;
     $scope.message = "";

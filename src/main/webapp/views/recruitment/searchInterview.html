@@ -33,7 +33,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="animate-repeat" ng-repeat="data in interviewDetails | orderBy:'-updatedDate' | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
+				<tr class="animate-repeat" ng-repeat="data in interviewDetails | orderBy:[EmptyToBottom].concat('-interviewDateTime') | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric">
 					<a style="cursor: pointer;"

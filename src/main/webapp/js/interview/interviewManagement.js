@@ -96,6 +96,10 @@
 		
 		$scope.searchInterview();
 		
+		$scope.EmptyToBottom = function(data) {
+				  return (angular.isDefined(data.interviewDateTime) ? -1 : 0);
+			}
+		
 		$scope.itemsPerPage = appConstants.ITEMS_PER_PAGE;
 		$scope.currentPage = 0;
 		$scope.changePage = function(){
