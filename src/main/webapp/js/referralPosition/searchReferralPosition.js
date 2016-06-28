@@ -16,7 +16,7 @@ app.controller("searchReferralPositionCtrl", ['$scope', '$http', '$filter', '$ti
 			sharedService.setDesignation(null);
 		}	
 		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
-			$scope.positions = data;
+			$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
 		    	$scope.selectedPositions=[];
 		    		angular.forEach($scope.positions,function(position){
 				    	if(position.positionType === undefined || (position.positionType != undefined && position.positionType !="Private")){
