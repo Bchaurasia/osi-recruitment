@@ -102,10 +102,10 @@
 			</div>
 
 			<div class="input-field col s6">
-				<select ng-model="candidate.reportingManager.name" name="pso"
-					ng-options="o.name as o.name for o in managers| orderBy:'toString()'"
+				<select ng-model="candidate.reportingManager" name="pso"
+					ng-options="o.name as o.name for o in managers| orderBy:'toString()' track by o.name"
 					class="form-control input-sm" required>
-					<option value="">Select Reporting Manager</option>
+					<option>Select Reporting Manager</option>
 				</select> <label style="position: absolute; top: -22px;">Reporting
 					Manager<b class="mandatory">*</b>
 				</label>
@@ -233,9 +233,9 @@
 			<div class="input-field col s6">
 				<select placeholder="Select Approver 1"
 					ng-model="candidate.approval"
-					ng-options="o.name for o in approval1"
+					ng-options="o.name for o in approval1 track by o.emailId"
 					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Approver</option>
+					<option disabled="disabled">Select Approver</option>
 				</select> <label>Approver<b class="mandatory">*</b></label>
 			</div>
 		</div>

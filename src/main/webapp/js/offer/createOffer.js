@@ -119,6 +119,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 
 	};
     $scope.approve = function(){
+    	$scope.candidate.offerStatus="Waiting for approval";
     	$scope.candidate.approval.updatedDate=new Date();
     	console.log(angular.toJson($scope.candidate));
     	$http.post('resources/approveOffer', $scope.candidate).success(function(data, status) {
@@ -153,7 +154,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		});
 	}
     $scope.NegotiateOffer = function(){
-    	$scope.candidate.offerStatus ="Under Negitiation";
+    	$scope.candidate.offerStatus ="Under Negotiation";
     	$scope.candidate.approval.updatedDate=new Date();
     	$scope.candidate.approval.status=$scope.candidate.offerStatus;
     	console.log(angular.toJson($scope.candidate));

@@ -82,8 +82,11 @@ public class OfferController {
 		for (OfferApprover approver : offer.getApprovalList()) {
 			if(approver.getEmailId().equals(offer.getApproval().getEmailId())){
 				approver.setStatus(offer.getApproval().getStatus());
-				approver.setComment(offer.getApproval().getComment());
 				approver.setApproved(offer.getApproval().isApproved());
+				System.out.println(approver.getComment());
+				if(approver.getComment()==null){
+				    approver.setComment(offer.getApproval().getComment());
+				}
 			}
 		}
 		offerService.prepareOffer(offer);
