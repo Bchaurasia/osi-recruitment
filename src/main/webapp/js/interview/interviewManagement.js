@@ -72,17 +72,19 @@
 		};
 		
 		$scope.searchInterview = function(){
-			//alert(_.contains($scope.user.roles, "ROLE_INTERVIEWER"));
-			if((_.contains($scope.user.roles, "ROLE_INTERVIEWER") || _.contains($scope.user.roles, "ROLE_MANAGER")) && ( !_.contains($scope.user.roles, "ROLE_HR"))){
-				interviewService.getInterviewDetailsByInterviewerEmailId(sessionStorage.userId).then(function(data){
+			console.log('role contains'+_.contains($scope.user.roles, 'ROLE_HR','ROLE_REQUISITION_MANAGER','ROLE_REQUISITION_APPROVER'));
+			if(_.contains($scope.user.roles, 'ROLE_HR','ROLE_REQUISITION_MANAGER','ROLE_REQUISITION_APPROVER')){
+		//	if((_.contains($scope.user.roles, "ROLE_INTERVIEWER") || _.contains($scope.user.roles, "ROLE_MANAGER")) && ( !_.contains($scope.user.roles, "ROLE_HR"))){
+				interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
 					$scope.interviewDetails = data;
 				}).catch({
 					function(response){
 						$log.error(response.data);
 					}
 				})
+				
 			}else{
-				interviewService.searchInterviewDetails($scope.searchQuery).then(function(data){
+				interviewService.getInterviewDetailsByInterviewerEmailId(sessionStorage.userId).then(function(data){
 					$scope.interviewDetails = data;
 				}).catch({
 					function(response){
