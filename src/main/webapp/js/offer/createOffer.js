@@ -53,14 +53,21 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.candidate=offerdata;
 			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
 		}
-		if(_.findWhere($scope.candidate.approvalList, {emailId: $scope.user.emailId})){
-			$scope.showDiv=true;
-		}
-		else{
-			$scope.showDiv=false;
-		}
+
+		var listlength=$scope.candidate.approvalList.length;
 		for(var i=0; i<$scope.candidate.approvalList.length;i++){
-			if($scope.candidate.approvalList[length-1].status=="Approved" || $scope.candidate.approvalList[length-1].status=="Rejected"){
+			if($scope.candidate.approvalList[listlength-1].status===null || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
+				$scope.disableSendApproval=true;
+			}else{
+				$scope.disableSendApproval=false;
+			}
+			if($scope.candidate.approvalList[listlength-1].emailId===$scope.user.emailId){
+				$scope.showDiv=true;
+			}
+			else{
+				$scope.showDiv=false;
+			}
+			if($scope.candidate.approvalList[listlength-1].status=="Approved" || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
 				$scope.showApprovalBtn = true;
 	    		$scope.showRejectBtn = true;
 	    		$scope.showNegotiateBtn = true; 
@@ -70,12 +77,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	    		$scope.showRejectBtn = false;
 	    		$scope.showNegotiateBtn = false; 
 			}
-			if($scope.candidate.approvalList[length].status==null){
-				$scope.disableSendApproval=true;
-			}else{
-				$scope.disableSendApproval=false;
-			}
-		
 		}
 	}).catch(function(data){
 		$log.error(data);
