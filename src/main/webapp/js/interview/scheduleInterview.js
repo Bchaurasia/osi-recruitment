@@ -69,6 +69,17 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		function(data){
 			
 			$scope.interviewscheduleDetails=data;
+			
+			if(_.contains($scope.user.roles, "ROLE_INTERVIEWER")){
+		    	$scope.rounds=[];
+		    		angular.forEach($scope.interviewscheduleDetails.rounds,function(round){
+				    	if(round.roundName === 'Technical Round 1' || round.roundName === 'Technical Round 2'){
+				    		$scope.rounds.push(round);
+						}
+					});	
+		    		
+		    	$scope.interviewscheduleDetails.rounds = angular.copy($scope.rounds);
+		    }
 
 			console.log("interview detail object :"+angular.toJson($scope.interviewscheduleDetails));
 			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
