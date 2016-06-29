@@ -1,8 +1,7 @@
-<form name="interviewManagement" class="interviewManagement"
-	onvalidate>
+<form name="interviewManagement" class="interviewManagement" onvalidate>
 	<form id="integerForm" role="form" class="form-horizontal">
-	<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
-		
+		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+
 		<div class="row" style="width: 90%">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
@@ -18,11 +17,11 @@
 		</div>
 
 		<table class="bordered" style="width: 90%">
-		<col style="width:15%">
-        <col style="width:10%">
-        <col style="width:13%">
-        <col style="width:18%">
-        <col style="width:20%">
+			<col style="width: 15%">
+			<col style="width: 10%">
+			<col style="width: 13%">
+			<col style="width: 18%">
+			<col style="width: 20%">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -33,33 +32,62 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="animate-repeat" ng-repeat="data in interviewDetails | orderBy:[EmptyToBottom].concat('-interviewDateTime') | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
+				<tr ng-if=" hasRole('ROLE_INTERVIEWER')" class="animate-repeat" ng-repeat="data in interviewDetails | filter: searchQuery|  orderBy:[EmptyToBottom].concat('-interviewDateTime') | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
 					style="font-size: 80%">
-					<td class="mdl-data-table__cell--non-numeric">
-					<a style="cursor: pointer;"
-					   ng-click="showInterviewDetails(data.interviewerId)" data-tooltip={{data.candidateEmail}}>{{data.candidateName}}</a>
-					</td>
+					<td class="mdl-data-table__cell--non-numeric"><a
+						style="cursor: pointer;"
+						ng-click="showInterviewDetails(data.interviewerId)"
+						data-tooltip={{data.candidateEmail}}>{{data.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.currentPositionId}}</i></td>
-					<td class="mdl-data-table__cell--non-numeric"> {{data.interviewDateTime}}</td>
+					<td class="mdl-data-table__cell--non-numeric">
+						{{data.interviewDateTime}}</td>
 					<td class="mdl-data-table__cell--non-numeric"
 						style="font-weight: bold">{{data.progress}}</td>
 					<td class="mdl-data-table__cell--non-numeric">
 						<button style="background-color: #F8F8F8; border: 0px;" href="#"
 							id="" data-tooltip="Schedule interview"
 							ng-disabled="disableSchedule(data.progress,data.status) || hasNotRole('ROLE_HR')"
-							ng-click="schedule(data.interviewerId)"> 
+							ng-click="schedule(data.interviewerId)">
 							<span class="glyphicon glyphicon-plus"
-								style="position: relative; top: 1px;color:#034A85""></span>
+								style="position: relative; top: 1px; color: #034A85""></span>
 						</button>
 						<button style="background-color: #F8F8F8; border: 0px;" href=""
 							id="" data-tooltip="Submit feedback"
 							ng-disabled="disableFeedback(data.rounds) || hasNotRole('ROLE_HR,ROLE_INTERVIEWER,ROLE_MANAGER')"
 							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
 							<span class="glyphicon glyphicon-envelope"
-								style="position: relative; top: 1px;color:#034A85"></span>
+								style="position: relative; top: 1px; color: #034A85"></span>
 						</button>
 					</td>
-					
+				</tr>
+				<tr class="animate-repeat" ng-if=" hasNotRole('ROLE_INTERVIEWER')"
+					ng-repeat="data in interviewDetails | orderBy:[EmptyToBottom].concat('-interviewDateTime') | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
+					style="font-size: 80%">
+					<td class="mdl-data-table__cell--non-numeric"><a
+						style="cursor: pointer;"
+						ng-click="showInterviewDetails(data.interviewerId)"
+						data-tooltip={{data.candidateEmail}}>{{data.candidateName}}</a></td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.currentPositionId}}</i></td>
+					<td class="mdl-data-table__cell--non-numeric">
+						{{data.interviewDateTime}}</td>
+					<td class="mdl-data-table__cell--non-numeric"
+						style="font-weight: bold">{{data.progress}}</td>
+					<td class="mdl-data-table__cell--non-numeric">
+						<button style="background-color: #F8F8F8; border: 0px;" href="#"
+							id="" data-tooltip="Schedule interview"
+							ng-disabled="disableSchedule(data.progress,data.status) || hasNotRole('ROLE_HR')"
+							ng-click="schedule(data.interviewerId)">
+							<span class="glyphicon glyphicon-plus"
+								style="position: relative; top: 1px; color: #034A85""></span>
+						</button>
+						<button style="background-color: #F8F8F8; border: 0px;" href=""
+							id="" data-tooltip="Submit feedback"
+							ng-disabled="disableFeedback(data.rounds) || hasNotRole('ROLE_HR,ROLE_INTERVIEWER,ROLE_MANAGER')"
+							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
+							<span class="glyphicon glyphicon-envelope"
+								style="position: relative; top: 1px; color: #034A85"></span>
+						</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -72,7 +100,7 @@
 			</div>
 
 			<div class="col-md-9">
-				<ul class="pagination1 pull-right" style="cursor:pointer">
+				<ul class="pagination1 pull-right" style="cursor: pointer">
 					<li ng-class="{disabled: currentPage == 0}"><a
 						ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
 					<li ng-repeat="n in range(currentPage)"
