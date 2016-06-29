@@ -2962,11 +2962,6 @@ table.fc-border-separate {
     content: "\e014";
     color: white;
 }
-
-.glyphicon-ok-circle:before {
-    content: "\e089";
-    color: white;
-}
   
   .glyphicon-edit:before {
     content: "\e065";
@@ -2988,6 +2983,20 @@ table.fc-border-separate {
     color: black;
 }
 
+.glyphicon-ok-circle::before {
+    content: "\e089";
+    color: white;
+}
+
+.glyphicon-remove-circle:before {
+    content: "\e088";
+    color: white;
+}
+
+.glyphicon-ok-circle:before {
+    content: "\e089";
+    color: white;
+}
 .glyphicon-share:before {
     content: "\e066";
     color: white;
@@ -2996,7 +3005,7 @@ table.fc-border-separate {
     content: "\e017";
     color: red;
 }
-    
+  
 .offer-span{
 	position: relative;
     bottom: 9px;
