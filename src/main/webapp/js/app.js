@@ -44,7 +44,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
    .state('offer', {url:'/offer',abstract:true, views: {'': {templateUrl: 'views/offer/offer.html', controller: 'offerManagementCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {
-    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_REQUISITION_APPROVER"]);
+    			return authorizationService.permissionCheck(["ROLE_HR","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
             }
     	}
     })

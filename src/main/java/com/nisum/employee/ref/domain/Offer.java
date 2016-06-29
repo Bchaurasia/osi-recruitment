@@ -35,7 +35,7 @@ public class Offer extends AuditEntity {
 	private String WorkLocation;
 	private String comments;
 	private OfferApprover approval;
-	private UserVO reportingManager;
+	private String reportingManager;
 	private String client;
 	private String project;
 	private Date expectedJoiningDate;
