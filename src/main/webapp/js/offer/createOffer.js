@@ -84,9 +84,12 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	
 	userService.getUsers().then(
 			function(data){
-				angular.forEach(data,function(userInfo) {
-				if(_.contains(userInfo.roles, "ROLE_MANAGER")){
-					$scope.managers.push(userInfo);
+				angular.forEach(data,function(user) {
+				if(_.contains(user.roles, "ROLE_MANAGER")){
+					var mgr={};
+					mgr.name = user.name;
+					mgr.emailId = user.emailId;
+					$scope.managers.push(mgr);
 				}
 			});
 			var	approverUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_REQUISITION_APPROVER"); });

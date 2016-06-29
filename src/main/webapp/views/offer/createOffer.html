@@ -104,7 +104,7 @@
 
 			<div class="input-field col s6">
 				<select ng-model="candidate.reportingManager" name="pso"
-					ng-options="o.name as o.name for o in managers| orderBy:'toString()' track by o.name"
+					ng-options="o.name for o in managers track by o.emailId"
 					class="form-control input-sm" required>
 					<option>Select Reporting Manager</option>
 				</select> <label style="position: absolute; top: -22px;">Reporting
