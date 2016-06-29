@@ -192,6 +192,18 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		})
 	}
 	
+	$scope.showCancelButton = function(emailIdInterviewer){
+		
+      if(_.contains($scope.user.roles, "ROLE_HR")){
+    	  return true;
+			
+      } else if(_.contains($scope.user.roles, "ROLE_INTERVIEWER") || _.contains($scope.user.roles, "ROLE_MANAGER")){
+			return  ($scope.user.emailId == emailIdInterviewer) ? true : false ;
+		}else{
+			return false;
+		}
+	}
+	
 	$scope.cancelInterview = function(candidateId,roundName,candidateName) {
 		if(confirm("Do you really want to cancel the interview?")){ 
 			blockUI.start("Canceling Interview...");
