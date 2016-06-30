@@ -23,7 +23,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.pskills = [];
 	$scope.message = "";
 	$scope.client =[];
-	$scope.statuses = ["Active", "Inactive", "Hired", "OnHold", "Rejected"];
+	$scope.statuses = ["Active", "Inactive", "Hired","OnHold","Selected","Rejected"];
 	$scope.priorities=["Low","Medium","High"];
 	$scope.hideStatuses = true;
 	$scope.userRole = $rootScope.user.roles;

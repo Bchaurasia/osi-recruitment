@@ -22,7 +22,8 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.requisitionId}}</span><label>Requisition Id:</label>
+				<span class="offer-span">{{candidate.requisitionId}}</span><label>Requisition
+					Id:</label>
 			</div>
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.jobcodeProfile}}</span><label>JobCode:
@@ -98,7 +99,8 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.singInBonus}}</span><label>Sign-on
-					Bonus (<img src="static/osi_images/rupee.png" width="9" height="11">):</label>
+					Bonus (<img src="static/osi_images/rupee.png" width="9" height="11">):
+				</label>
 
 			</div>
 			<div class="input-field col s6">
@@ -109,17 +111,21 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.lastDrawnCTC}}</span><label>Last
-					Drawn CTC (<img src="static/osi_images/rupee.png" width="9" height="11">):</label>
+					Drawn CTC (<img src="static/osi_images/rupee.png" width="9"
+					height="11">):
+				</label>
 			</div>
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.expectedCTC}}</span><label>Expected
-					CTC (<img src="static/osi_images/rupee.png" width="9" height="11">):</label>
+					CTC (<img src="static/osi_images/rupee.png" width="9" height="11">):
+				</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.proposedCTC}}</span><label>Proposed
-					CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)): </label>
+					CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)):
+				</label>
 			</div>
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.businessUnit}} </span><label>Business
@@ -195,18 +201,40 @@
 					Comment</label>
 			</div>
 		</div>
-
+		<br>
+		<div class="row" ng-show="candidate.approvalList">
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Approver</th>
+						<th>Status</th>
+						<th>Comment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="animate-repeat"
+						ng-repeat="data in candidate.approvalList" style="font-size: 80%">
+						<td>{{data.updatedDate | date:'medium'}}</a></td>
+						<td>{{data.name}}</a></td>
+						<td>{{data.status}}</td>
+						<td>{{data.comment}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
 		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit" ng-disabled="showApprovalBtn"
-				ng-click="ApprovedOffer()">
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="showApprovalBtn" ng-click="ApprovedOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Approve
 			</button>
 			<button class="btn btn-info active" type="submit"
 				ng-click="RejectOffer()" ng-disabled="showRejectBtn">
 				<span class="glyphicon glyphicon-ok-circle"></span> Reject
 			</button>
-			<button class="btn btn-info active" type="submit" ng-disabled="showNegotiateBtn"
-				ng-click="NegotiateOffer()">
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="showNegotiateBtn" ng-click="NegotiateOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
 			</button>
 			<button class="btn btn-info active" ui-sref="offer.list">
