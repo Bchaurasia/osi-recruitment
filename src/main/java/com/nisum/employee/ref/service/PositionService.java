@@ -111,6 +111,7 @@ public class PositionService implements IPositionService {
 		position.setCreatedBy(requisition.getCreatedBy());
 		position.setUpdatedBy(requisition.getCreatedBy());
 		position.setJobProfile(requisition.getJobDescription());
+		position.setTargetDate(requisition.getTargetDate());
 		position.setUpdatedDate(new Date());
 		position.setCreatedDate(new Date());
 		position.setUpdatedBy(requisition.getUpdatedBy());
