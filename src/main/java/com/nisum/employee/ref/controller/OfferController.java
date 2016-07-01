@@ -68,6 +68,8 @@ public class OfferController {
 			offer.setApprovalList(new ArrayList<OfferApprover>());
 		}
 		offer.getApprovalList().add(offer.getApproval());
+		offer.getApprovalList().get(offer.getApprovalList().size()-1).setComment(null);
+		offer.getApprovalList().get(offer.getApprovalList().size()-1).setStatus(null);
 		offerService.prepareOffer(offer);
 		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getApproval().getName()
 				+ " Successfully" + MSG_END;
@@ -79,15 +81,10 @@ public class OfferController {
 	@RequestMapping(value = "/offerStatus", method = RequestMethod.POST)
 	public ResponseEntity<?> approveOffer(@RequestBody Offer offer) throws Exception {
 		offerService.approveOffer(offer);
-		for (OfferApprover approver : offer.getApprovalList()) {
-			if(approver.getEmailId().equals(offer.getApproval().getEmailId())){
-				approver.setStatus(offer.getApproval().getStatus());
-				approver.setApproved(offer.getApproval().isApproved());
-				System.out.println(approver.getComment());
-				if(approver.getComment()==null){
-				    approver.setComment(offer.getApproval().getComment());
-				}
-			}
+		if(offer.getApprovalList().size()>0){
+			offer.getApprovalList().get(offer.getApprovalList().size()-1).setComment(offer.getApproval().getComment());
+			offer.getApprovalList().get(offer.getApprovalList().size()-1).setStatus(offer.getApproval().getStatus());
+			offer.getApprovalList().get(offer.getApprovalList().size()-1).setApproved(offer.getApproval().isApproved());
 		}
 		offerService.prepareOffer(offer);
 		

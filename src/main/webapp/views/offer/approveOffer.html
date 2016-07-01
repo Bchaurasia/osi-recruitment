@@ -159,7 +159,7 @@
 			</div>
 
 		</div>
-		<div class="row" ng-show="data.interviewFeedback"
+		<div ng-if="(data.roundName == 'Technical Round 1') || (data.roundName == 'Technical Round 2')" class="row" ng-show="data.interviewFeedback"
 			ng-repeat="skill in data.interviewFeedback.rateSkills">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{skill.skill}}</p>
@@ -168,6 +168,46 @@
 			<div class="input-field col s6">
 				<p class="viewInterview">{{skill.rating}}/10</p>
 				<label>Rating :</label>
+			</div>
+		</div>
+		<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"  class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.managementSkillset}}/10</p>
+				<label>Management Skills :</label>
+			</div>
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/10</p>
+				<label>SelfLearning & Initiative :</label>
+			</div>
+		</div>
+		<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')" class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/10</p>
+				<label>Customer Orientation :</label>
+			</div>
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/10</p>
+				<label>Business Attitude :</label>
+			</div>
+		</div>
+			<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')" class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/10</p>
+				<label>Flexibility :</label>
+			</div>
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/10</p>
+				<label>TeamWork :</label>
+			</div>
+		</div>
+		<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')" class="row" ng-show="data.interviewFeedback">
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/10</p>
+				<label>Onsite Suitability :</label>
+			</div>
+			<div class="input-field col s6">
+				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/10</p>
+				<label>Consulting & ArticulationSkills :</label>
 			</div>
 		</div>
 		<div class="row" ng-show="data.interviewFeedback">
