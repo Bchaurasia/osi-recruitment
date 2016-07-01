@@ -86,6 +86,14 @@
 			}else{
 				interviewService.getInterviewDetailsByInterviewerEmailId(sessionStorage.userId).then(function(data){
 					$scope.interviewDetails = data;
+					$scope.rounds=[];
+		    		angular.forEach($scope.interviewDetails,function(round){
+				    	if(!(round.progress.indexOf("Cancelled") != -1)){
+				    		$scope.rounds.push(round);
+						}
+					});	
+		    		
+		    	$scope.interviewDetails = angular.copy($scope.rounds);
 				}).catch({
 					function(response){
 						$log.error(response.data);

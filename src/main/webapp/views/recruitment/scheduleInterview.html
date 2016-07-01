@@ -120,7 +120,7 @@
 				<select ng-model="sel.selectedtypeOfInterview"
 					ng-options="o as o for o in info.typeOfInterview | orderBy:'toString()'"
 					class="form-control input-sm" required name="typeOfInterview"
-					ng-disabled="disabled">
+					ng-disabled="disabled" ng-change=hideInterviewAddress(sel.selectedtypeOfInterview)>
 					<option value="" disabled="disabled">Select Interview
 						Format</option>
 				</select> <label>Type Of Interview<b class="mandatory">*</b></label>
@@ -149,7 +149,7 @@
 				</select> <label>Interview Location<b class="mandatory">*</b></label>
 				
 			</div>
-			<div class="input-field col s5" ng-if="sel.interviewLocation">
+			<div class="input-field col s5" ng-if="sel.interviewLocation"  ng-hide="hideInterviewLocation">
 				<textarea ng-model="sel.interviewLocation.address" cols="50" rows="2"
 					ng-disabled="true" name="interviewlocation" class="form-control"></textarea><label> Interview Address
 					<b class="mandatory">*</b></label>

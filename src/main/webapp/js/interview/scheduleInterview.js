@@ -22,6 +22,8 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	//$scope.interviewscheduleDetails.isMultipleInterviewFlag=false;
 	$scope.flag=false;
 	$scope.disableSchedueBtn= true;
+	$scope.hideInterviewLocation = false;
+	
 	var interviewId = sharedService.getInterviewId();
 	console.log("Schedule Service : interviewId"+interviewId);
 	$scope.disableSchedue =  function(){
@@ -176,6 +178,13 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.alHide =  function(){
 	    $scope.message = "";
+	}
+	
+	$scope.hideInterviewAddress = function(selectedtypeOfInterview){
+		if(selectedtypeOfInterview == "Face To Face")
+			$scope.hideInterviewLocation = false;
+		else
+			$scope.hideInterviewLocation = true;
 	}
 	
 	$scope.schedule =  function(){
