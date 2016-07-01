@@ -5,20 +5,102 @@
 <div style="padding-left:20px;padding-right:20px;">
 <p style="font-size:18px;">Hi Team,<br><br>This mail is to inform that the interview feedback for <b>$roundName</b> of <b>$cname</b> for <b>$jobcode</b> has been submitted by $iname.
 </p>
+#if ($roundName == "Technical Round 1" || $roundName == "Technical Round 2")
 #set($count = 1)
 <table style="width:450px;border-collapse: collapse;">
 <th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>
-<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Skills</p></th> 
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Technical Skills</p></th> 
 <th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Ratings</p></th>
+
 #foreach($rating in $ratingList)
+
 <tr>
 <td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">$count. </p></td>
 <td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">$rating.skill</p></td>
 <td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$rating.rating</p></td>
 </tr>
+
 #set($count=$count+1)
 #end
 </table>
+<br>
+#end
+#set($count = 1)
+<table style="width:450px;border-collapse: collapse;">
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Functional Skills</p></th> 
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Ratings</p></th>
+
+#foreach($rating in $domainList)
+
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">$count. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">$rating.skill</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$rating.rating</p></td>
+</tr>
+
+#set($count=$count+1)
+#end
+</table>
+<br>
+
+<table style="width:450px;border-collapse: collapse;">
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Soft Skills</p></th> 
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Ratings</p></th>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">1. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Communication Skills</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$communicationSkills</p></td>
+</tr>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">2. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Consulting & Articulation Skills</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$consultingAndArticulationSkills</p></td>
+</tr>
+</table>
+<br>
+
+#if ($roundName == "Manager Round" || $roundName == "Hr Round")
+
+<table style="width:450px;border-collapse: collapse;">
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Management Skills</p></th> 
+<th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">Ratings</p></th>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">1. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Self Learning & Initiative</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$selfLearningAndInitiative</p></td>
+</tr>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">2. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Customer Orientation</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$customerOrientation</p></td>
+</tr>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">3. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Business Attitude</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$businessAttitude</p></td>
+</tr>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">4. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Flexibility</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$flexibility</p></td>
+</tr>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">5. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Team Work</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$teamWork</p></td>
+</tr>
+<tr>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">6. </p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="font-family:Calibri;font-size:18px;">Onsite Suitability</p></td>
+<td style="border: 1px solid #000000;text-align: center;background-color: #F9FCF7;"><p style="color:red;font-family:Calibri;font-size:18px;">$onsiteSuitability</p></td>
+</tr>
+</table>
+
+#end
+
 <br>
 <p style="font-size:18px;">
 $cname's strengths:<br> 

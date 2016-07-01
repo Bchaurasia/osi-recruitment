@@ -78,6 +78,16 @@ public class NotificationService{
 	private static final String IMPROVEMENTS = "improvements";
 	private static final String STRENGTHS = "strengths";
 	
+	private static final String DOMAIN_LIST = "domainList";
+	private static final String COMMUNICATION_SKILLS = "communicationSkills";
+	private static final String CONSULTING_AND_ARTICULATION_SKILLS = "consultingAndArticulationSkills";
+	private static final String SELF_LEARNING_AND_INITIATIVE = "selfLearningAndInitiative";
+	private static final String CUSTOMER_ORIENTATION = "customerOrientation";
+	private static final String BUSINESS_ATTITUDE = "businessAttitude";
+	private static final String FLEXIBILITY = "flexibility";
+	private static final String TEAM_WORK = "teamWork";
+	private static final String ONSITE_SUITABILITY = "onsiteSuitability";
+	
 	private static final String ROLE_HR = "ROLE_HR";
 	private static final String TRUE = "true";
 	private static final String PORT_587 = "587";
@@ -346,10 +356,20 @@ public class NotificationService{
 				interviewFeedback.getJobcode(),
 				interviewFeedback.getInterviewerName(),
 				interviewFeedback.getRoundName());
+		
+		context.put(DOMAIN_LIST, interviewFeedback.getDomainSkills());
+		context.put(COMMUNICATION_SKILLS, interviewFeedback.getCommunicationSkills());
+		context.put(CONSULTING_AND_ARTICULATION_SKILLS, interviewFeedback.getConsultingAndArticulationSkills());
+		context.put(SELF_LEARNING_AND_INITIATIVE, interviewFeedback.getSelfLearningAndInitiative());
+		context.put(CUSTOMER_ORIENTATION, interviewFeedback.getCustomerOrientation());
+		context.put(BUSINESS_ATTITUDE, interviewFeedback.getBusinessAttitude());
+		context.put(FLEXIBILITY, interviewFeedback.getFlexibility());
+		context.put(TEAM_WORK, interviewFeedback.getTeamWork());
+		context.put(ONSITE_SUITABILITY, interviewFeedback.getOnsiteSuitability());
 		context.put(STRENGTHS, interviewFeedback.getStrengths());
 		context.put(IMPROVEMENTS, interviewFeedback.getImprovement());
 		context.put(SKILLS,interviewFeedback.getAdditionalSkills());
-		context.put(RATING_LIST, interviewFeedback.getRateSkills());
+		context.put(RATING_LIST, interviewFeedback.getRateSkills());		
 
 		Template candidateTemplate = getVelocityTemplate(SRC_FEEDBACK_HR_VM);
 
