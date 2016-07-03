@@ -1,5 +1,7 @@
 package com.nisum.employee.ref.service;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,16 @@ public class AppInfoService implements IAppInfoService{
 
 	public void updateInterviewRoundsInfo(InfoEntity info) {
 		skillsRequired.updateInfo(info);
+	}
+    public InputStream getFileData() throws Exception {
+    	InputStream in = null;
+    	try {
+    		in = this.getClass().getClassLoader().getResourceAsStream("OSI_Recruitment_Portal_Help_v1.0.docx");
+           
+         }catch(Exception ex){
+        	 ex.printStackTrace();
+         }
+    	
+		return in;
 	}
 }

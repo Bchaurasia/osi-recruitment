@@ -18,7 +18,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN", "ROLE_USER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);
             }
     	}})
-    .state('viewHelpPage', {url:'/viewHelpPage', views: {'': {templateUrl: 'views/helpPage.html', controller: 'editUserCtrl'}},
+    .state('viewHelpPage', {url:'/viewHelpPage', views: {'': {templateUrl: 'views/helpPage.html', controller: 'helpCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_HR","ROLE_INTERVIEWER","ROLE_MANAGER","ROLE_ADMIN", "ROLE_USER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]);

@@ -1,5 +1,6 @@
  package com.nisum.employee.ref.controller;
 
+import java.io.BufferedInputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.search.ProfileSearchService;
+import com.nisum.employee.ref.service.IAppInfoService;
 import com.nisum.employee.ref.service.IProfileService;
 
 import gherkin.deps.net.iharder.Base64.InputStream;
@@ -39,6 +41,9 @@ public class ProfileController {
 	
 	@Autowired
 	private ProfileSearchService profileSearchService;
+	
+	@Autowired
+	private IAppInfoService infoService;
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -124,6 +129,24 @@ public class ProfileController {
 		response.setContentLength((new Long(file.getLength()).intValue()));
         IOUtils.copyLarge(file.getInputStream(), response.getOutputStream());
     	is.close();
+		}else{
+			log.info("file does not exist");
+		}
+		return new ResponseEntity<HttpServletResponse>(response, HttpStatus.OK);
+	}
+	
+	@SuppressWarnings("null")
+	@ResponseStatus(HttpStatus.OK)
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	
+	@RequestMapping(value = "/helpFileDownload", method = RequestMethod.GET)
+	public ResponseEntity<HttpServletResponse> downHelpDoc(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
+		BufferedInputStream file = (BufferedInputStream) infoService.getFileData();
+		if(file!=null){
+    	response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+		response.setContentLength(file.available());
+        IOUtils.copyLarge(file, response.getOutputStream());
+    	
 		}else{
 			log.info("file does not exist");
 		}
