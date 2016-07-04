@@ -2951,7 +2951,6 @@ table.fc-border-separate {
     position: relative;
     top: 1px;
     display: inline-block;
-    color: yellowgreen;
     font-family: 'Glyphicons Halflings';
     font-weight: 400;
     line-height: 1;
@@ -2959,8 +2958,6 @@ table.fc-border-separate {
     
 }
  .glyphicon-remove:before {
-    content: "\e014";
-    color: white;
 }
   
   .glyphicon-edit:before {
