@@ -41,6 +41,7 @@ public class OfferController {
 		return new ResponseEntity<Offer>(offer, HttpStatus.OK);
 	}
 
+	@ResponseBody
 	@Secured({ "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/offer", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveOffer(@RequestParam(value = "emailId", required = true) String emailId)
