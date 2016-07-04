@@ -25,6 +25,7 @@
 </table>
 <br>
 #end
+#if($domainSkillSize!=0)
 #set($count = 1)
 <table style="width:450px;border-collapse: collapse;">
 <th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>
@@ -42,6 +43,7 @@
 #set($count=$count+1)
 #end
 </table>
+#end
 <br>
 
 <table style="width:450px;border-collapse: collapse;">

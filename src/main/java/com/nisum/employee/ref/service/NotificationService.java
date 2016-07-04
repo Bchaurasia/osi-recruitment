@@ -78,6 +78,7 @@ public class NotificationService{
 	private static final String IMPROVEMENTS = "improvements";
 	private static final String STRENGTHS = "strengths";
 	
+	private static final String DOMAIN_SKILL_SIZE = "domainSkillSize";
 	private static final String DOMAIN_LIST = "domainList";
 	private static final String COMMUNICATION_SKILLS = "communicationSkills";
 	private static final String CONSULTING_AND_ARTICULATION_SKILLS = "consultingAndArticulationSkills";
@@ -357,6 +358,7 @@ public class NotificationService{
 				interviewFeedback.getInterviewerName(),
 				interviewFeedback.getRoundName());
 		
+		context.put(DOMAIN_SKILL_SIZE, interviewFeedback.getDomainSkills().size());
 		context.put(DOMAIN_LIST, interviewFeedback.getDomainSkills());
 		context.put(COMMUNICATION_SKILLS, interviewFeedback.getCommunicationSkills());
 		context.put(CONSULTING_AND_ARTICULATION_SKILLS, interviewFeedback.getConsultingAndArticulationSkills());
