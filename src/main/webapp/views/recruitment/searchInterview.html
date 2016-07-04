@@ -32,7 +32,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-if=" hasRole('ROLE_INTERVIEWER')" class="animate-repeat" ng-repeat="data in interviewDetails | filter: searchQuery|  orderBy:[EmptyToBottom].concat('-interviewDateTime') | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
+				<tr ng-if=" hasRole('ROLE_INTERVIEWER')" class="animate-repeat" ng-repeat="data in interviewDetails = (interviewDetails | filter:searchQuery)|  orderBy:[EmptyToBottom].concat('-interviewDateTime') | offset: currentPage*itemsPerPage | limitTo: itemsPerPage "
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;"
