@@ -242,22 +242,29 @@
 			</div>
 		</div>
 		<br>
+			<div class="row" ng-show="candidate.approvalList">
+			<div class="input-field col s12">
+					<label style="position: absolute; top: -22px;">Summary:</label>
+			</div>
+		</div>
 		<div class="row" ng-show="candidate.approvalList">
-			<table class="bordered">
-				<thead>
+			<table class="bordered offertable" style="font-size: 14px;">
+					<thead>
 					<tr>
 						<th>Date</th>
 						<th>Approver</th>
 						<th>Status</th>
-						<th>Comment</th>
+						<th>HR Comment</th>
+						<th>Approver Comment</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="animate-repeat"
 						ng-repeat="data in candidate.approvalList" style="font-size: 80%">
-						<td>{{data.updatedDate | date:'medium'}}</a></td>
+						<td>{{data.updatedDate  | date:'medium'}}</a></td>
 						<td>{{data.name}}</a></td>
 						<td>{{data.status}}</td>
+						<td>{{data.hrComment}}</td>
 						<td>{{data.comment}}</td>
 					</tr>
 				</tbody>

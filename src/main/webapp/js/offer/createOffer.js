@@ -11,7 +11,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	var offerLetterFile = null;
 	$scope.invalidFile = true;
 	$scope.today=new Date();
-	
+	$scope.candidate.comments="";
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
 		$scope.candidate.emailId = $scope.profile.candidateEmail;
@@ -51,12 +51,14 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	offerService.getOfferData($scope.candidate.emailId).then(function(offerdata){
 		if(offerdata!==""){
 			$scope.candidate=offerdata;
+			$scope.candidate.comments="";
+			$scope.candidate.approval.comment=""
 			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
 		}
 
 		var listlength=$scope.candidate.approvalList.length;
 		for(var i=0; i<$scope.candidate.approvalList.length;i++){
-			if($scope.candidate.approvalList[listlength-1].status===null || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
+			if($scope.candidate.approvalList[listlength-1].status==="Waiting for approval" || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
 				$scope.disableSendApproval=true;
 			}else{
 				$scope.disableSendApproval=false;

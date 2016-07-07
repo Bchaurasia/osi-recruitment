@@ -70,7 +70,8 @@ public class OfferController {
 		}
 		offer.getApprovalList().add(offer.getApproval());
 		offer.getApprovalList().get(offer.getApprovalList().size()-1).setComment(null);
-		offer.getApprovalList().get(offer.getApprovalList().size()-1).setStatus(null);
+		offer.getApprovalList().get(offer.getApprovalList().size()-1).setStatus(offer.getOfferStatus());
+		offer.getApprovalList().get(offer.getApprovalList().size()-1).setHrComment(offer.getComments());
 		offerService.prepareOffer(offer);
 		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getApproval().getName()
 				+ " Successfully" + MSG_END;

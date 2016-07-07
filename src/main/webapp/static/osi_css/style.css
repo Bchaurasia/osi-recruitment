@@ -3008,3 +3008,7 @@ table.fc-border-separate {
     bottom: 9px;
     left: 213px;
 }
+.offertable td,.offertable th{
+	border:1px solid #b1acac;
+	
+}

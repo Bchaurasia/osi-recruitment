@@ -227,7 +227,7 @@
 					ng-change="changeEvent()" name="notes"
 					ng-model="candidate.comments"
 					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Comments</label>
+				<label style="position: absolute; top: -22px;">HR Comment</label>
 			</div>
 		</div>
 		<div class="row">
@@ -241,14 +241,20 @@
 			</div>
 		</div>
 		<br>
+		<div class="row">
+			<div class="input-field col s12" ng-show="candidate.approvalList">
+					<label style="position: absolute; top: -22px;">Summary:</label>
+			</div>
+		</div>
 		<div class="row"  ng-show="candidate.approvalList">
-			<table class="bordered">
+			<table class="bordered offertable" style="font-size: 14px;">
 				<thead>
 					<tr>
 						<th>Date</th>
 						<th>Approver</th>
 						<th>Status</th>
-						<th>Comment</th>
+						<th>HR Comment</th>
+						<th>Approver Comment</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -257,6 +263,7 @@
 						<td>{{data.updatedDate  | date:'medium'}}</a></td>
 						<td>{{data.name}}</a></td>
 						<td>{{data.status}}</td>
+						<td>{{data.hrComment}}</td>
 						<td>{{data.comment}}</td>
 					</tr>
 				</tbody>
