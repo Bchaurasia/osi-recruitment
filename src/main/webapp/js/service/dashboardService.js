@@ -66,7 +66,7 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		angular.forEach(data, function(obj){
 			angular.forEach(obj.rounds, function(obj2){
 				var dbDate = new Date(obj2.interviewSchedule.interviewDateTime);
-				if(obj2.interviewSchedule.emailIdInterviewer == obj.interviewerEmail)
+				if(obj2.interviewSchedule.emailIdInterviewer == obj.interviewerEmail && obj2.interviewSchedule.emailIdInterviewer == $rootScope.user.emailId)
 					showScheduleData.push({"cname":obj.candidateName, "round":obj2.interviewSchedule.roundName, "date":dbDate, "interviewId":obj.interviewerId,"status":obj2.interviewSchedule.roundStatus,"jobcode":obj.currentPositionId,"email":obj.candidateEmail});
 				
 			})

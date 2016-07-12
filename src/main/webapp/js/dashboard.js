@@ -29,6 +29,18 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		location.href='#recruitment/interviewDetails';
 	};
 	
+	$scope.showFeedback = function(interviewId,candidateEmailId,positionId,status) {
+		if (status.indexOf("Scheduled") !=-1) {
+			sharedService.setjobCode(positionId);
+			sharedService.setprofileUserId(candidateEmailId);
+			location.href='#recruitment/interviewFeedback';
+		}
+		else {
+			sharedService.setInterviewId(interviewId);
+			location.href='#recruitment/interviewDetails';
+		}
+	}
+	
 	$scope.editPosition = function(jobcodeProfile,designation) {
 		sharedService.setjobCode(jobcodeProfile);
 		sharedService.setDesignation(designation);

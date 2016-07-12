@@ -149,7 +149,7 @@
 					<div class="collapsible-header row">
 						<span class="col s3"><a
 							style="cursor: pointer;"
-							ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}</a></span> 
+							ng-click="showFeedback(schedule.interviewId,schedule.email,schedule.jobcode,schedule.status)">{{schedule.cname}}</a></span> 
 						<span class="col s3">{{schedule.round}}</span>
 						 <span class="col s3">{{schedule.date | date:'medium'}}</span> 
 						  <span class="col s3">{{schedule.status}}</span> 
