@@ -66,6 +66,8 @@ public class NotificationService{
 	private static final String MOBILE_NO = "mobileNo";
 	private static final String INTERVIEW_DATE_TIME = "interviewDateTime";
 	private static final String TYPE_OF_INTERVIEW = "typeOfInterview";
+	private static final String CANDIDATE_NAME = "candidateName";
+	private static final String JOB_CODE = "jobCode";
 	
 	private static final String ROUND_NAME = "roundName";
 	private static final String INAME = "iname";
@@ -601,7 +603,9 @@ public String sendCancelMail(InterviewSchedule interviewSchedule) throws Excepti
 	   Session session = getSession();
 
 	    VelocityContext context = getVelocityContext(interviewSchedule.getCandidateName(), interviewSchedule.getJobcode(), interviewSchedule.getInterviewerName(), interviewSchedule.getRoundName());
-		context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
+		context.put(CANDIDATE_NAME, interviewSchedule.getCandidateName());
+		context.put(JOB_CODE, interviewSchedule.getJobcode());
+	    context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
 		context.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
 		Template cancelInterviewTemplate = getVelocityTemplate(SRC_CANCELINTERVIEW_VM);
