@@ -8,32 +8,32 @@ var less = require('gulp-less');
 var path = require('path');
 
 gulp.task('minifyCss', function () {
-	gulp.src('src/main/webapp/static/nisum_css/styl*.css')
+	gulp.src('src/main/webapp/static/**/*.css')
 	.pipe(cssmin())
 	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('out'));
-	});
+	.pipe(gulp.dest('src/main/webapp/dist/static'));
+});
+
 gulp.task('minifyjs', function () {
 	gulp.src('src/main/webapp/js/**/*.js')
 	.pipe(jsmin())
 	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('dist'));
+	.pipe(gulp.dest('src/main/webapp/dist/js'));
 });
 
 gulp.task('less', function () {
-	  return gulp.src('*.less')
+	  return gulp.src('src/main/webapp/static/**/*.less')
 	    .pipe(less({
 	      paths: [ path.join(__dirname, 'less', 'includes') ]
 	    }))
-	    .pipe(gulp.dest('./public/css'));
-	});
+	    .pipe(gulp.dest('src/main/webapp/dist/static'));
+});
 
 gulp.task('sass', function(){
-	  return gulp.src('*.sass')
+	  return gulp.src('src/main/webapp/static/**/*.sass')
 	    .pipe(sass()) // Using gulp-sass
-	    .pipe(gulp.dest('./public/css'))
-	});
-
+	    .pipe(gulp.dest('src/main/webapp/dist/static'))
+});
 
 
 gulp.task('default',['minifyCss','minifyjs','less','sass']);
