@@ -54,7 +54,7 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	}
 	
 	$scope.validateDesignation = function(){
-		$scope.isDesigExist=_.find($scope.designation1, function(desg){ return desg.designation === $scope.designation.designation });
+		$scope.isDesigExist=_.find($scope.designation1, function(desg){ return desg.designation.toLowerCase() === $scope.designation.designation.toLowerCase() });
 		if($scope.isDesigExist){
 			 $scope.message="Designation Already Exists";
 			 $scope.cls=appConstants.ERROR_CLASS;
