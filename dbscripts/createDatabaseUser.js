@@ -1,11 +1,11 @@
-var uname = "admin"
-var pass = "admin"
+var uname = "osiuser"
+var pass = "osiuser"
 
 conn = new Mongo("localhost:27017");
-db = conn.getDB("admin");
+db = conn.getDB("osirpdb");
 
 print("DB name : " + db);
-var getuser = db.getUser("admin")
+var getuser = db.getUser("osirpdb")
 
 print("result by getUser: " + getuser)
 if (getuser === null) {
@@ -13,9 +13,17 @@ if (getuser === null) {
 		user : uname,
 		pwd : pass,
 		roles : [ {
-			role : "root",
-			db : "admin"
-		} ]
+			role : "dbAdmin",
+			db : "osirpdb"
+		},
+		{
+			role : "dbOwner",
+			db : "osirpdb"
+		},
+		{
+			role : "userAdmin",
+			db : "osirpdb"
+		}]
 	});
 }
 
