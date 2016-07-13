@@ -25,6 +25,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.hideInterviewLocation = false;
 	
 	var interviewId = sharedService.getInterviewId();
+	var interviewRound = sharedService.getinterviewRound();
 	console.log("Schedule Service : interviewId"+interviewId);
 	$scope.disableSchedue =  function(){
 	    if($scope.data.date !== undefined){
@@ -69,8 +70,15 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 		interviewService.getInterviewDetailsById(interviewId).then(
 		function(data){
-			
+						
 			$scope.interviewscheduleDetails=data;
+			
+			$scope.rounds1=[];
+			angular.forEach($scope.interviewscheduleDetails.rounds,function(round){
+				if(round.roundName ===  interviewRound){
+					round.active = true;					
+				}
+			});	
 			
 			if(_.contains($scope.user.roles, "ROLE_INTERVIEWER")){
 		    	$scope.rounds=[];
