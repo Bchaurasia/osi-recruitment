@@ -3012,7 +3012,9 @@ table.fc-border-separate {
     padding: 24px;
     margin: 143px;
     margin-top: 82px;
-    background-color: floralwhite;
+    background-color: lightgrey;
+    border-color: blue;
+    
 }
 .offertable td,.offertable th{
 	border:1px solid #b1acac;
