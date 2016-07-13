@@ -3,8 +3,8 @@ angular.module('erApp')
 	                       function(Idle, $scope, $http,$anchorScroll,$rootScope,$filter,$location,$timeout,appConstants,infoService,userService,sharedDataService, $modal) {
 	
 	$scope.events = [];
-    $scope.idle = 300;
-    $scope.timeout = 15;
+    $scope.idle = 1200;
+    $scope.timeout = 60;
     
     function closeModals() {
         if ($scope.warning) {
@@ -184,8 +184,8 @@ app.filter('offset', function() {
 return input.slice(start);
 };
 }) .config(function(IdleProvider, KeepaliveProvider) {
-      IdleProvider.idle(300);
-      IdleProvider.timeout(15);
+      IdleProvider.idle(1200);
+      IdleProvider.timeout(60);
       KeepaliveProvider.interval(15);
     });
 
