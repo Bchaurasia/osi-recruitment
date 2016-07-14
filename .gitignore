@@ -4,5 +4,6 @@
 /.project
 /build/
 /.gradle/
-
 /data/elasticsearch/nodes
+/node_modules/
+/src/main/webapp/lib/bower_components/
