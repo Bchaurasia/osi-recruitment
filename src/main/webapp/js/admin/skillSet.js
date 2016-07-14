@@ -52,7 +52,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	$scope.checkSkillSet = function(){
 		$scope.skillExist=false;
 		angular.forEach($scope.skills, function(sk){
-			if($scope.newSkill==sk){
+			if($scope.newSkill.toLowerCase()==sk.toLowerCase()){
 				$scope.skillExist=true;
 		}	
 		});

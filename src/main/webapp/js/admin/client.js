@@ -79,7 +79,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	};
 	$scope.checkClientName= function(){
 		console.log("got the call");
-		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName === $scope.client.clientName });
+		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName.toLowerCase() === $scope.client.clientName.toLowerCase() });
 		if($scope.isClientExist){
 			$scope.clietNameError= true;
 		}else{
