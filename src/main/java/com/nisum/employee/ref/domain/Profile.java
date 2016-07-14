@@ -18,6 +18,7 @@ public class Profile extends AuditEntity{
 	String emailId;
 	//String qualification;
 	ArrayList<String> primarySkills;
+	String otherSkills;
 	String expYear;
 	String expMonth;
 	String uploadedFileName;

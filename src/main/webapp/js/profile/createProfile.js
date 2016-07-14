@@ -15,7 +15,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.recruitmentData = [];
 	$scope.fileError = true;
 	$scope.duplicateEmailIdError = false;
-	//$scope.countryCode = "+91";
 	$scope.showErrorMsg=false;
     $scope.showSuccessMsg= false;
     $scope.message = "";
@@ -33,7 +32,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
-	//$scope.candidate.percentage = "70";
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){

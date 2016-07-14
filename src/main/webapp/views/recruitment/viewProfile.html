@@ -235,13 +235,26 @@
 					enter your key skills.</span>
 			</div>
 		</div>
+
 		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter your Other Skills"
+					name="otherSkills" class="form-control" type="text"
+					ng-model="candidate.otherSkills" ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/">
+				<label style="position: absolute; top: -22px;">Other Skills</label>
+				
+			</div>
+			
 			<div class="input-field col s6">
 				<input placeholder="Enter your current Employer"
 					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
 				<label style="position: absolute; top: -22px;">Current Employer</label>
 			</div>
+			
+		</div>
+
+		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="designation" name="currentdesignation"
 					ng-change="setJobCodes()"
@@ -310,20 +323,6 @@
 				</select> <label style="position: absolute; top: -22px;">Source<b
 					class="mandatory">*</b></label>
 
-			</div>
-			<div class="input-field col s6">
-				<select ng-model="candidate.hrAssigned" name="referredBy"
-					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select</option>
-				</select> <label style="position: absolute; top: -22px;">Recruiter
-					Assigned <b class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="submitted && UpdateCandidate.referredBy.$invalid">Please
-					specify who is referred</span>
-				<div class="validation-error"
-					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
-					referred is required.kpl</div>
 			</div>
 						
 		</div>

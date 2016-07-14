@@ -3,6 +3,8 @@ package com.nisum.employee.ref.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,8 +31,17 @@ public class ProfileService implements IProfileService{
 	@Autowired
 	InterviewService interviewService;
 	
+	@Autowired
+	private NotificationService notificationService;
+	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		profileRepository.prepareCandidate(candidate);
+		try{
+			notificationService.sendProfileCreatedNotification(candidate);
+		}catch (MessagingException e) {
+				e.printStackTrace();
+		}
+		
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
 		return profileSearchService.addProfileIndex(candidate);
