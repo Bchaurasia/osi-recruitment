@@ -207,6 +207,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
+	        $scope.candidate.expectedDesignation=$scope.expectedDesignation.designation;
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
