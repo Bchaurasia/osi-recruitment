@@ -26,7 +26,8 @@ public class Profile extends AuditEntity{
 	String designation;
 	String pancardNo;
 	String passportNo;
-	//String stream;
+	String jobCode;
+	String requisitionId;
 	List<CandidateQualification> qualifications;
 	String address;
 	String notes;
@@ -49,5 +50,8 @@ public class Profile extends AuditEntity{
 	int noticePeriod; 
 	String currentLocation;
 	String expectedDesignation;
+	Boolean isApprovedFlag;
+	Boolean isCreatedByUser;
+	Boolean isReferral;
 	
 }

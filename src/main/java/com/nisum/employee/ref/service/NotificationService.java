@@ -724,6 +724,7 @@ public String sendProfileCreatedNotification(Profile candidate) throws Messaging
 		 Template jobRequisitionTemplate = getVelocityTemplate(SRC_PROFILE_VM);
 
 		 VelocityContext context = new VelocityContext();
+		 context.put("created_by_user", candidate.getIsCreatedByUser());
 		 context.put(CANDIDATE_NAME, candidate.getCandidateName());
 		 context.put(TOTAL_EXP, totalExperience);
 		 context.put(SKILLS, primarySkills);

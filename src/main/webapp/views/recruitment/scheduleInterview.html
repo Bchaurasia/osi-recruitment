@@ -15,7 +15,7 @@
       			<label for="filled-in-box">Allow Multiple Rounds</label>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" ng-if="interviewscheduleDetails.isReferral == false">
 			<div class="input-field col s6" align="left">
 				<ui-select ng-model="interviewschedule.requisitionId"
 					theme="selectize" ng-disabled="disabled" style="width: 80%"
@@ -43,6 +43,26 @@
 					Jobcode<b class="mandatory">*</b>
 				</label>
 
+			</div>
+		</div>
+		<div class="row" ng-if="interviewscheduleDetails.isReferral == true">
+			<div class="input-field col s6">				
+				<div class="col-md-4">
+					<label class="lbl">RequisitionId : 
+					</label>
+				</div>
+				<div class="col-md-2" style="display: inline;">
+					<b>{{interviewscheduleDetails.requisitionId}}</b>
+				</div>
+			</div>
+			<div class="input-field col s6">				
+				<div class="col-md-4">
+					<label class="lbl">Interview Jobcode : 
+					</label>
+				</div>
+				<div class="col-md-2" style="display: inline;">
+					<b>{{interviewscheduleDetails.jobCode}}</b>
+				</div>
 			</div>
 		</div>
 		<br>

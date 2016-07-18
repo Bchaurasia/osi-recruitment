@@ -50,7 +50,7 @@ public class PositionController {
 		return new ResponseEntity<String>(jsonObj, HttpStatus.ACCEPTED);
 	}
 	
-	@Secured({ "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER" })
+	@Secured({ "ROLE_USER", "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/position", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionByClient(@RequestParam(value = "client", required = false) String client,
 			@RequestParam(value = "designation", required = false) String designation) throws Exception {

@@ -101,6 +101,8 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
+				$scope.candidate.isCreatedByUser = false;
+				$scope.candidate.isReferral = false;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;

@@ -5,8 +5,9 @@
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Hi, <br><br>
-  Profile has been created for the candidate. <br><br>
- 
+  Profile has been created for the candidate. 
+#if($created_by_user == true) HR is requested to approve the same.#end
+<br><br> 
  <table style="width:450px; border: 0px solid Gray;">
 
 <tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Candidate Name :</td>

@@ -88,6 +88,16 @@ public class ProfileController {
 			String jsonObj=MSG+ profile.getCandidateName() +"'s profile successfully created\"}";
 			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/approveProfile", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<?> approveProfile(@RequestBody Profile candidate) {
+		profileService.approveCandidate(candidate);
+		System.out.println("in controller");
+		String jsonObj="{\"msg\":\"Uploaded profile successfully approved\"}";
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+	}
 
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/profile", method = RequestMethod.PUT)

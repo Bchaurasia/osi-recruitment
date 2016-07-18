@@ -35,16 +35,27 @@ public class ProfileService implements IProfileService{
 	private NotificationService notificationService;
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
+		candidate.setIsApprovedFlag(false);
 		profileRepository.prepareCandidate(candidate);
 		try{
 			notificationService.sendProfileCreatedNotification(candidate);
 		}catch (MessagingException e) {
 				e.printStackTrace();
 		}
+		if(!candidate.getIsCreatedByUser()) {
+			InterviewDetails interview = prepareInterviewDetails(candidate);
+			interviewService.prepareInterview(interview);
+		}
+		return profileSearchService.addProfileIndex(candidate);
+	}
+	
+	public void approveCandidate(Profile candidate) {
+		candidate.setIsApprovedFlag(true);
+		profileRepository.prepareCandidate(candidate);	
 		
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
-		return profileSearchService.addProfileIndex(candidate);
+		
 	}
 
 	private InterviewDetails prepareInterviewDetails(Profile candidate) {
@@ -56,6 +67,14 @@ public class ProfileService implements IProfileService{
 		interview.setHrAssigned(candidate.getHrAssigned());
 		interview.setProgress("Not Initialized");
 		interview.setInterviewerId(candidate.getEmailId()+"_"+(int)(Math.random() * 5000 + 1));
+		if(candidate.getIsReferral()) {
+			interview.setRequisitionId(candidate.getRequisitionId());
+			interview.setJobCode(candidate.getJobCode());
+			interview.setIsReferral(true);
+		}	
+		else {
+			interview.setIsReferral(false);
+		}
 		return interview;
 	}
 	

@@ -33,7 +33,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
 	$scope.candidate.expMonth="0";
-		
+	$scope.requisitionId="";	
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -89,6 +89,18 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 			$log.error(msg);
 		})
 	}
+	
+	$scope.getRequisitionIdFromJobCode = function(jobcode){
+		
+	    angular.forEach($scope.positions,function(obj){			
+				if(obj.jobcode === jobcode){
+					$scope.requisitionId = obj.requisitionId;
+				}
+			
+		});
+	    return $scope.requisitionId;
+	}
+	
 	 $scope.submit = function() {
 		 if ($scope.CreateCandidate.$valid) {
 			 $scope.submitted = false;
@@ -109,6 +121,11 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 					 $scope.candidate.status = "Not Initialized";
 				}
 		    //	$scope.candidate.plocation = $scope.selection.pLocation;
+				if(_.contains($scope.user.roles, 'ROLE_USER'))
+					$scope.candidate.isCreatedByUser = true;
+				else
+					$scope.candidate.isCreatedByUser = false;
+				$scope.candidate.isReferral = true;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;
@@ -117,7 +134,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	$scope.candidate.referredBy  = $scope.user.emailId;
 		    	$scope.candidate.profileSource = "Referral";
-		    	
+		    	$scope.candidate.requisitionId = $scope.requisitionId; 
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
@@ -234,7 +251,18 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		 $timeout( function(){ $scope.alHide(); }, 5000);
 	})
 	
- 		
+	positionService.getPosition().then(function(data){
+		$scope.positions=data;
+		$scope.profilepositions = [];
+ 		angular.forEach($scope.positions,function(obj){
+ 			$scope.profilepositions.push(obj.jobcode);
+ 		});
+	}).catch(function(msg){
+		$scope.message=msg;
+		 $scope.cls=appConstants.ERROR_CLASS;
+		 $timeout( function(){ $scope.alHide(); }, 5000);
+	})
+	 		
 	$scope.validateEmailId = function(emailId){
 		if(emailId != undefined){
 			profileService.getProfileById(emailId).then(function(data){

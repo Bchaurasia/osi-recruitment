@@ -120,6 +120,17 @@
 					Location<b class="mandatory">*</b></label>
 
 			</div>
+			
+			<div class="input-field col s6">
+				<select ng-model="candidate.jobCode" name="jobCode"
+					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
+					ng-options="o as o for o in profilepositions | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Position</option>
+				</select> <label style="position: absolute; top: -22px;">Position<b
+					class="mandatory">*</b></label>
+
+			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s12">

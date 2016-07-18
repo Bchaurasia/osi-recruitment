@@ -134,6 +134,29 @@
 					Location<b class="mandatory">*</b></label>
 
 			</div>
+			
+			<div class="input-field col s6" align="left" ng-if="candidate.isReferral == true">
+				<!-- <select ng-model="candidate.jobCode" name="jobCode"
+					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
+					ng-options="o as o for o in profilepositions track by $index"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Position</option>
+				</select> <label style="position: absolute; top: -22px;">Position : {{candidate.jobCode}}<b
+					class="mandatory">*</b></label> -->
+				<ui-select ng-model="candidate.jobCode"
+					theme="selectize" style="width: 80%"
+					on-select="getRequisitionIdFromJobCode(candidate.jobCode)"
+					title="Choose a requisitionId"> <ui-select-match
+					placeholder="Select Position.">{{candidate.jobCode}}</ui-select-match>
+				<ui-select-choices
+					repeat="jobCode in profilepositions | filter: $select.search">
+				<span ng-bind-html="jobCode | highlight: $select.search"></span> 
+				</ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">
+					Position<b class="mandatory">*</b>
+				</label>	
+
+			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s12">
@@ -347,7 +370,13 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
+				ng-show="candidate.isCreatedByUser && hasRole('ROLE_HR')"
+				ng-disabled="disableApproveBtn"
+				ng-click="approveProfile()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Approve
+			</button>
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn"
 				ng-click="updateProfileDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>
