@@ -1,0 +1,25 @@
+{
+  "name": "osi-recruitment-portal",
+  "description": "Required tech's =============== - Gradle [https://www.gradle.org/downloads] - Mongodb [https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.0.4-signed.msi?_ga=1.153554936.1328960631.1435177642] - Eclipse luna or newer is recommended [https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/lunar] - git [http://git-scm.com/download/win]",
+  "main": "app.js",
+  "authors": [
+    "OSI Technologies Pvt. Ltd."
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "bootstrap": "^3.3.6",
+    "underscore": "^1.8.3",
+    "moment": "^2.14.1",
+    "angular": "v1.3.15"
+  }
+}
