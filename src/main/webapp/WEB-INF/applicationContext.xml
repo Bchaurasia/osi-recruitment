@@ -83,8 +83,8 @@
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
 	</bean>
 	
-	<elasticsearch:node-client id="client" local="true" />
-	<!-- <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300,someip:9300"/> -->
+	<!-- <elasticsearch:node-client id="client" local="true" /> -->
+	<elasticsearch:transport-client id="client" cluster-nodes="localhost:9300"/>
 	<elasticsearch:repositories  elasticsearch-template-ref="elasticsearchTemplate" base-package="com.nisum.employee.ref.search."/>
 
 	<bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
