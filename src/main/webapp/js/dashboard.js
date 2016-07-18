@@ -44,7 +44,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 		positionService.getPosition().then(function(data){
 			$scope.totalPositionData=data;
-			console.log(data);
+			//console.log(data);
 			totalPositions=data.length;
 			for(var i=0;i<data.length;i++)
 				{
@@ -76,14 +76,14 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		var designationArray=[];
 		var designationWithStatusCount=[];
 		designationService.getDesignation().then(function(data){
-			console.log("--------------------==========="+angular.toJson(data));
+			//console.log("--------------------==========="+angular.toJson(data));
 			for(var i=0;i<data.length;i++)
 				{
-				console.log(angular.toJson(data[i].designation));
+				//console.log(angular.toJson(data[i].designation));
 				designationArray.push(data[i].designation);
 				}
-			console.log("desgnation array"+designationArray);
-			console.log("total position data "+$scope.totalPositionData);
+		//	console.log("desgnation array"+designationArray);
+			//console.log("total position data "+$scope.totalPositionData);
 			
 				 for(var j=0;j<designationArray.length;j++)
 				 {
@@ -93,22 +93,23 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 					var inactivecount=0;
 					var rejectedcount=0;
 					var selectedcount=0;
+					var totalCount=0;
 					for(var h=0;h<$scope.totalPositionData.length;h++)
 					{
 					
 					 
-					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=='Active'))
-						 activecount+=1;
+					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Active"))
+					 { activecount+=1; totalCount+=1}
 					  if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="OnHold"))
-						 onholdcount+=1;
+					     { onholdcount+=1;totalCount+=1}
 						 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Hired"))
-							 hiredcount+=1;
-							 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Inctive"))
-								 inactivecount+=1;
+						   { hiredcount+=1;totalCount+=1}
+							 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Inactive"))
+								 {inactivecount+=1;totalCount+=1}
 								 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Rejected"))
-									 rejectedcount+=1;
+								  { rejectedcount+=1;totalCount+=1}
 									 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Selected"))
-										 selectedcount+=1;
+									  { selectedcount+=1;totalCount+=1}
 					 
 				     }
 					
@@ -120,7 +121,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 						"Hired"   :hiredcount,
 					   "Inctive"  :inactivecount,
 					   "Rejected" :rejectedcount,
-					   "Selected" :selectedcount
+					   "Selected" :selectedcount,
+					   "Total"    :totalCount
 					});
 				
 				}
