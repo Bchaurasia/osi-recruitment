@@ -7,8 +7,9 @@
 			<div class="input-field col s6">
 				 <input placeholder="Enter Client Name" ng-maxlength="30"
 				    class="form-control" type="text"
-					ng-model="client.clientName" ng-pattern="/^[a-zA-Z _]*$/">
+					ng-model="client.clientName" ng-pattern="/^[a-zA-Z _]*$/" ng-change="checkClientName()">
 					<label class="lbl">Client Name: </label>
+					<span ng-show="clietNameError" class="validation-error">Client name already exist</span>
 			</div>
 			<div class="input-field col s6" align="center">
 				<select placeholder="Select Location" ng-model="client.locations"
@@ -223,8 +224,8 @@
 		<div align="center" class="row">
 			<div align="center" class="input-field col s11">
 				<button class="btn btn-primary" type="submit"
-					ng-click="updateClient()">
-					<span class="glyphicon glyphicon-ok-circle"></span> Save
+					ng-click="updateClient()" ng-disabled="clietNameError">
+					<span class="glyphicon glyphicon-ok-circle"  ></span> Save
 				</button>
 				<button class="btn btn-primary" ui-sref="admin.client.list">
 					<span class="glyphicon glyphicon-remove"></span> Cancel
