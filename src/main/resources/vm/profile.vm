@@ -21,11 +21,11 @@ Hi, <br><br>
 <tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Primary Skills :</td>
 <td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$skills</td>
 </tr>
-
+#if($other_skills)
 <tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Other Skills :</td>
 <td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$other_skills</td>
 </tr>
-
+#end
 </table><br><br>
   
  <span style="font-size:15px">Regards,</span><br>

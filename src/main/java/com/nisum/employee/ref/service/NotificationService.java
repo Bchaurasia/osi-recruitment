@@ -109,6 +109,7 @@ public class NotificationService{
 	private static final String TOTAL_EXP = "total_exp";
 	private static final String QUALIFICATION = "qualification";
 	private static final String TITLE = "title";
+	private static final String CREATED_BY_USER = "created_by_user";
 	
 	@Value("${mail.fromAddress}")
 	private String from;
@@ -722,9 +723,9 @@ public String sendProfileCreatedNotification(Profile candidate) throws Messaging
 		 String totalExperience = candidate.getExpYear() +"." + candidate.getExpMonth() ;
 		 
 		 Template jobRequisitionTemplate = getVelocityTemplate(SRC_PROFILE_VM);
-
+		 
 		 VelocityContext context = new VelocityContext();
-		 context.put("created_by_user", candidate.getIsCreatedByUser());
+		 context.put(CREATED_BY_USER, candidate.getIsCreatedByUser());
 		 context.put(CANDIDATE_NAME, candidate.getCandidateName());
 		 context.put(TOTAL_EXP, totalExperience);
 		 context.put(SKILLS, primarySkills);
