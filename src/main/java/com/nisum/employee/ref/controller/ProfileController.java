@@ -62,11 +62,21 @@ public class ProfileController {
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/profiledb", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveProfilefromDB(@RequestParam(value = "emailId", required = false) String emailId,@RequestParam(value = "jobcodeProfile", required = false) String jobcodeProfile,@RequestParam(value = "profilecreatedBy", required = false) String profilecreatedBy) throws Exception {
+		List<Profile> positionsDetails = null;
+		positionsDetails = profileSearchService.getAllProfilesFromDB();
+		
+		return new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchProfileByEmail", method = RequestMethod.GET)
 	public ResponseEntity<?> searchProfileByEmailId(@RequestParam(value = "emailId", required = false) String emailId) throws Exception {
 		List<Profile> positionsDetails = profileSearchService.getProfilesByProfilecreated(emailId);
 		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
+	
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchProfile", method = RequestMethod.GET)
@@ -79,6 +89,9 @@ public class ProfileController {
 		} 
 		return  new ResponseEntity<List<Profile>>(positionsDetails, HttpStatus.OK);
 	}
+	
+
+
 
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
