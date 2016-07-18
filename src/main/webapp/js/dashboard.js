@@ -13,6 +13,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.requisitionsDetails=[];
 	$scope.showNoAppRequisitionMsg = false;
 	var totalProfiles=0;
+	$scope.totalPositionData=[];
 	
 	$scope.feedback = function(jobcode,candidateEmail) {
 		sharedService.setjobCode(jobcode);
@@ -73,21 +74,59 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 	function getDesignationSpecificData(){
 		var designationArray=[];
+		var designationWithStatusCount=[];
 		designationService.getDesignation().then(function(data){
 			console.log("--------------------==========="+angular.toJson(data));
 			for(var i=0;i<data.length;i++)
 				{
 				console.log(angular.toJson(data[i].designation));
-				designationArray.push(angular.toJson(data[i].designation));
+				designationArray.push(data[i].designation);
 				}
 			console.log("desgnation array"+designationArray);
 			console.log("total position data "+$scope.totalPositionData);
-			for(var j=0;j<designationArray.length;j++)
-			{
-				if(designationArray[j])
-				console.log("designationArray"+designationArray[j]);
-			}
+			
+				 for(var j=0;j<designationArray.length;j++)
+				 {
+					var activecount=0;
+					var onholdcount=0;
+					var hiredcount=0;
+					var inactivecount=0;
+					var rejectedcount=0;
+					var selectedcount=0;
+					for(var h=0;h<$scope.totalPositionData.length;h++)
+					{
+					
+					 
+					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=='Active'))
+						 activecount+=1;
+					  if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="OnHold"))
+						 onholdcount+=1;
+						 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Hired"))
+							 hiredcount+=1;
+							 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Inctive"))
+								 inactivecount+=1;
+								 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Rejected"))
+									 rejectedcount+=1;
+									 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Selected"))
+										 selectedcount+=1;
+					 
+				     }
+					
+					
+					designationWithStatusCount.push({
+						"Position":designationArray[j],
+						"Active"  :activecount,
+						"OnHold"  :onholdcount,
+						"Hired"   :hiredcount,
+					   "Inctive"  :inactivecount,
+					   "Rejected" :rejectedcount,
+					   "Selected" :selectedcount
+					});
+				
+				}
+				 console.log("designationWithStatusCount "+angular.toJson(designationWithStatusCount));
 		});
+	//	console.log("designationWithStatusCount "+designationWithStatusCount);
 	
 	}
 	getDesignationSpecificData();
