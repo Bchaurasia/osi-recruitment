@@ -16,14 +16,25 @@
 								placeholder="Enter Client Name" ng-model="client.clientName" required/>
 			</div>
 			<div class="input-field col s6">
-				 <select placeholder="Select Designation" ng-change="getData()"
+				 <select placeholder="Select location" ng-change="otherLocations(client.locations)"
 					ng-disabled="disLocation" ng-model="client.locations" required
-					ng-options="o as o for o in locations | orderBy:'toString()'"
-					class="form-control input-sm">
-					<option value='' disabled="disabled">Select Location</option>
+					ng-options="o as o for o in locations"
+					class="form-control input-sm" >
+					<option value='' disabled="disabled" >Select Location</option>
+					
 				</select>
 				<label> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location<b class="mandatory">*</b>
 				</label>
+			</div>
+			
+		</div>
+		<div class="row" ng-show="showOtherLocation">
+			<div class="input-field col s6">
+				<label class="lbl"> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
+					Location
+				</label>
+				<input type="text" name="olocation" id="olocation" style="top: 1px; height: 29px"
+								placeholder="Enter Client Name" ng-model="otherLocation" required/>
 			</div>
 		</div>
 		<div class="row" align="center">
@@ -38,3 +49,4 @@
 			</div>
 		</div>
 </div>
+

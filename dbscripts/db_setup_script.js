@@ -26,7 +26,7 @@ db.sequence.insert({"_id":"JOB","seq":0});
 
 db.info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 
-db.info.insert({"_id":"Locations",value: ["Hyderabad", "Pune", "Bengaluru","SF","LA"]});
+db.info.insert({"_id":"Locations",value: [ "Bengaluru" , "Chennai", "Delhi", "Hyderabad", "Pune"]});
 
 db.info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "JQuery","Java Script","Ruby","JPA","JSP","iBatis","Rest WebService","Spring","Hibernate","C","C++","Oracle","MySQL","DB2","TeraData","MongoDB","Neo4J","CouchDB"]});
 
@@ -68,6 +68,7 @@ db.userInfo.insert({"_id":"agupta@nisum.com",'name':"Abhinav Kumar Gupta","mobil
 db.userInfo.insert({"_id":"atiwari@nisum.com",'name':"Abhishek Tiwari","mobileNumber":"9923838883","dob":"",location:"SF",skypeId:"atiwari",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.userInfo.insert({"_id":"sparopate@nisum.com",'name':"Sanket Paropate","mobileNumber":"9923838883","dob":"",location:"SF",skypeId:"sparopate",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 db.userInfo.insert({"_id":"spassavula@nisum.com",'name':"Sai","mobileNumber":"9923838883","dob":"",location:"SF",skypeId:"spassavula`",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
+db.userInfo.insert({"_id":"pthorat@nisum.com",'name':"Priyanka Thorat","mobileNumber":"9923839883","dob":"",location:"SF",skypeId:"atiwari",roles:["ROLE_ADMIN"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});
 
 //QA User data
 db.userInfo.insert({"_id":"osirecruithruser@gmail.com",'name':"Osi HR","mobileNumber":"9923838883","dob":"",location:"SF",skypeId:"osirecruitauser",roles:["ROLE_HR"],isNotAvailable:false,timeSlots:[{day:"Wednesday",time:"2015-06-17T09:35:24.899Z",hour:"3"},{day:"Monday",time:"2015-06-17T09:35:24.899Z",hour:"1"}]});

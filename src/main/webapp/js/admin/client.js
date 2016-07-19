@@ -11,12 +11,16 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
 	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": [],"managerRound":[],"hrRound":[]};
-
+	$scope.showOtherLocation=false;
+	$scope.location1=[];
+	
+	$scope.otherLocation="";
 	$scope.onload = function(){
-		
+		 
 		if($rootScope.info!=undefined)
 		{		
 	    $scope.locations = $rootScope.info.locations;
+	  
 		}
 		else{
 			$scope.data = infoService.getInfo();
@@ -25,9 +29,31 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 				$scope.location.push(userr.value.locations);
 			});
 		}
+		
+		
+		
+		
+		var flag =false;
+		angular.forEach($scope.locations, function(loc){
+			if( loc == "Others")
+			{
+				flag = true;
+			}
+		});
+		if(flag ==false)
+			{
+			$scope.locations.push("Others");
+			}
+		 
 	}
 	
+	infoService.getInfoById('Locations').then(function(Locations){
+		$scope.location1 = Locations;
+		}).catch(function(data, status, headers, config) {
+
+		})
 	$scope.onload();
+	
 	
 	$scope.client.locations="";
 	clientService.getClientInfo()
@@ -38,7 +64,43 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 			$timeout( function(){ $scope.message = ""; $scope.cls = ''; sharedDataService.setmessage("");sharedDataService.getClass("");}, 3000);
 		}
 	
+	$scope.save = function(){	
+		var ck=$scope.checkSkillSet();
+		if(ck){
+		$scope.location1.value.push($scope.otherLocation);
+		
+		infoService.createInformation($scope.location1).then(function(msg){
+			  msg = "Location \""+$scope.otherLocation+"\" "+msg;
+			 sendSharedMessage(msg,appConstants.SUCCESS_CLASS);
+			
+			  $timeout( function(){ $scope.alHide(); }, 5000);
+			  $scope.otherLocation="";
+		}).catch(function(msg){
+			sendSharedMessage(msg,appConstants.ERROR_CLASS);
+			$timeout( function(){ $scope.alHide(); }, 5000);
+		})
+		}
+	}
+	
+	$scope.checkSkillSet = function(){
+		var flag=true;
+		angular.forEach($scope.Locations, function(sk){
+			if($scope.otherLocation==sk){
+				  $scope.message="Location Already Exists";
+				  $scope.cls=appConstants.ERROR_CLASS;
+				  $timeout( function(){ $scope.alHide(); }, 5000);
+				  $scope.otherLocation = "";
+				  flag=false; 
+		}	
+		});
+		return flag;
+	}
+	
+	
 	$scope.submit = function(){
+		$scope.save();
+		
+		$scope.client.locations=$scope.otherLocation;
 		if($scope.checkClients()){
 			$scope.client.clientId = $scope.client.clientName.toUpperCase().replace(/\s/g, '');
 			clientService.createClient($scope.client)
@@ -50,6 +112,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 							 $scope.cls=appConstants.ERROR_CLASS;
 						});
 		}
+		
 	}
 	
 	$scope.deleteClient = function(clientId){
@@ -82,11 +145,17 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		sharedService.setclientId(data.clientId);
 		sharedService.setclientName(data.clientName);
 		$state.go('admin.client.editClient');
+		
 	}
 	
-	$scope.status1 = {
-			isFirstOpen: true,			    
-			open1:true
-	};
+	$scope.otherLocations = function(location)
+	{  
+		if(location == "Others")
+		{
+			$scope.showOtherLocation=true;
+		}
+		else
+			$scope.showOtherLocation=false;
+	};	
 	
 }]);
