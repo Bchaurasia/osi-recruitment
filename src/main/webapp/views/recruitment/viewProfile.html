@@ -260,19 +260,20 @@
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter your Other Skills"
-					name="otherSkills" class="form-control" type="text"
-					ng-model="candidate.otherSkills" ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/">
-				<label style="position: absolute; top: -22px;">Other Skills</label>
-				
-			</div>
 			
 			<div class="input-field col s6">
 				<input placeholder="Enter your current Employer"
 					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
 				<label style="position: absolute; top: -22px;">Current Employer</label>
+			</div>
+			
+			<div class="input-field col s6">
+				<input placeholder="Enter your Additional Skills"
+					name="otherSkills" class="form-control" type="text"
+					ng-model="candidate.otherSkills" ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/">
+				<label style="position: absolute; top: -22px;">Additional Skills</label>
+				
 			</div>
 			
 		</div>
