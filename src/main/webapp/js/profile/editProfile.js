@@ -94,7 +94,8 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$log.error(msg);
 		})
 		positionService.getPosition().then(function(data){
-			$scope.positions=data;
+			$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
+			//$scope.positions=data;
 			$scope.profilepositions = [];
 	 		angular.forEach($scope.positions,function(obj){
 	 			$scope.profilepositions.push(obj.jobcode);

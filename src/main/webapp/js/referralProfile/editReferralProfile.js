@@ -15,6 +15,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
 	$scope.requisitionId = "";
+	$scope.disableUpdateBtn = false;
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("referral.searchReferralProfile");
@@ -84,9 +85,11 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
-			
+		if($scope.candidate.isApprovedFlag)
+			$scope.disableUpdateBtn = true;
 			positionService.getPosition().then(function(data){
-				$scope.positions=data;
+				$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
+				//$scope.positions=data;
 				$scope.profilepositions = [];
 		 		angular.forEach($scope.positions,function(obj){
 		 			$scope.profilepositions.push(obj.jobcode);

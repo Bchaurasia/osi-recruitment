@@ -142,7 +142,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	public List<InterviewDetails> getInterviewByInterviewerAndJobCode(String jobCode) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
-		query.addCriteria(Criteria.where("jobCode").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+		query.addCriteria(Criteria.where("jobCode").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)).andOperator(Criteria.where("progress").ne("Not Initialized")));
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}

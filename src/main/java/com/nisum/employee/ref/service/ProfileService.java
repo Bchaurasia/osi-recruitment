@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.Profile;
+import com.nisum.employee.ref.repository.InterviewDetailsRepository;
 import com.nisum.employee.ref.repository.ProfileRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
@@ -30,6 +31,9 @@ public class ProfileService implements IProfileService{
 	
 	@Autowired
 	InterviewService interviewService;
+	
+	@Autowired
+	InterviewDetailsRepository interviewDetailsRepository;
 	
 	@Autowired
 	private NotificationService notificationService;
@@ -83,6 +87,16 @@ public class ProfileService implements IProfileService{
 			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
+			if(candidate.getIsCreatedByUser() != true) {
+				InterviewDetails interview = interviewDetailsRepository.getInterviewDetailsById(candidate.getEmailId());
+				if(candidate.getIsReferral()) {
+					//interview.setCandidateEmail(candidate.getEmailId());
+					interview.setIsUpdatedFromProfile(true);
+					interview.setRequisitionId(candidate.getRequisitionId());
+					interview.setJobCode(candidate.getJobCode());				
+				}	
+				interviewDetailsRepository.updateinterviewDetails(interview);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

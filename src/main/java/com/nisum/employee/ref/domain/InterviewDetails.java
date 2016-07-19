@@ -41,5 +41,6 @@ public class InterviewDetails  {
 	List <Round> rounds;
 	String interviewDateTime;
 	Boolean isReferral;
+	Boolean isUpdatedFromProfile;
 
 }
