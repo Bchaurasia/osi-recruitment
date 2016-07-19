@@ -134,6 +134,29 @@
 					Location<b class="mandatory">*</b></label>
 
 			</div>
+			
+			<div class="input-field col s6" align="left" ng-if="candidate.isReferral == true">
+				<!-- <select ng-model="candidate.jobCode" name="jobCode"
+					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
+					ng-options="o as o for o in profilepositions track by $index"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Position</option>
+				</select> <label style="position: absolute; top: -22px;">Position : {{candidate.jobCode}}<b
+					class="mandatory">*</b></label> -->
+				<ui-select ng-model="candidate.jobCode"
+					theme="selectize" style="width: 80%"
+					on-select="getRequisitionIdFromJobCode(candidate.jobCode)"
+					title="Choose a requisitionId"> <ui-select-match
+					placeholder="Select Position.">{{candidate.jobCode}}</ui-select-match>
+				<ui-select-choices
+					repeat="jobCode in profilepositions | filter: $select.search">
+				<span ng-bind-html="jobCode | highlight: $select.search"></span> 
+				</ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">
+					Position<b class="mandatory">*</b>
+				</label>	
+
+			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s12">
@@ -235,13 +258,26 @@
 					enter your key skills.</span>
 			</div>
 		</div>
+
 		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter your Other Skills"
+					name="otherSkills" class="form-control" type="text"
+					ng-model="candidate.otherSkills" ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/">
+				<label style="position: absolute; top: -22px;">Other Skills</label>
+				
+			</div>
+			
 			<div class="input-field col s6">
 				<input placeholder="Enter your current Employer"
 					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
 				<label style="position: absolute; top: -22px;">Current Employer</label>
 			</div>
+			
+		</div>
+
+		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="designation" name="currentdesignation"
 					ng-change="setJobCodes()"
@@ -311,20 +347,6 @@
 					class="mandatory">*</b></label>
 
 			</div>
-			<div class="input-field col s6">
-				<select ng-model="candidate.hrAssigned" name="referredBy"
-					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select</option>
-				</select> <label style="position: absolute; top: -22px;">Recruiter
-					Assigned <b class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="submitted && UpdateCandidate.referredBy.$invalid">Please
-					specify who is referred</span>
-				<div class="validation-error"
-					ng-show="( UpdateCandidate.referredBy.$dirty || invalidSubmitAttempt) && UpdateCandidate.referredBy.$error.required">
-					referred is required.kpl</div>
-			</div>
 						
 		</div>
 <!--  ends here  -->
@@ -348,7 +370,13 @@
 		</div>
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError"
+				ng-show="candidate.isCreatedByUser && hasRole('ROLE_HR')"
+				ng-disabled="disableApproveBtn"
+				ng-click="approveProfile()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Approve
+			</button>
+			<button class="btn btn-info active" type="submit"
+				ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn"
 				ng-click="updateProfileDetails()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>

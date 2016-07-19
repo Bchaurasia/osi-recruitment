@@ -81,7 +81,6 @@ angular.module('erApp')
  
       };
 	
-	
 	$scope.user = {};
 	$scope.info ={};
 	
