@@ -111,16 +111,32 @@
 					</select> <label class="label-alignment">Job Description Title</label>
 				</div>
 				<div class="input-field col s6">
-					<ui-select multiple ng-model="requisition.skillType"
-						ng-keypress="myFunct($event)" theme="select2" ui-select-required>
-					<ui-select-match placeholder="Select Skills..">{{$item}}</ui-select-match>
-					<ui-select-choices
-						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
-					{{color}} </ui-select-choices> </ui-select>
-					<label style="position: absolute; top: -22px;">Skills<b class="mandatory">*</b></label>
-				</div>
+				<select placeholder="Select Shift Timing"
+						ng-model="requisition.shiftTiming"
+						ng-options="o for o in info.shiftTimings"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select Shift Timings</option>
+					</select> <label>Shift Timings<b class="mandatory">*</b></label>
 			</div>
-
+		</div>
+		<div class="row" style="margin-bottom: 20px">
+		   <div class="input-field col s6">
+				<ui-select multiple ng-model="requisition.skillType"
+					ng-keypress="myFunct($event)" theme="select2" ui-select-required
+					ng-disabled="disabled"> <ui-select-match
+					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+				{{color}} </ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">Required Skills<b
+					class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+				<textarea id="additionalSkills" class="materialize-textarea" style="width:77%;"
+					ng-model="requisition.additionalSkills" length="120"
+					placeholder="Enter any additional Skills..."></textarea>
+				<label style="position: absolute; top: -22px;">Additional Skills</label>
+			</div>
+		</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<textarea id="textarea1" class="materialize-textarea" length="120"

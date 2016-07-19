@@ -46,6 +46,8 @@ db.info.insert({"_id":"interviewRounds",value: ["Technical Round 1", "Technical 
 
 db.info.insert({"_id":"typeOfInterview",value:["Face To Face", "Telephonic", "Skype"]});
 
+db.info.insert({"_id":"shiftTimings",value:["7.00 AM – 4.00 PM","9.30 AM  - 6.30 PM","2.00 PM – 11.00 PM","11.00 PM – 7.00 AM","3.30 PM – 12.30 AM"]});
+
 db.info.insert({"_id":"interviewDuration",value:["15", "30", "45", "60"]});
 db.info.insert({"_id":"progress",value:["15", "30", "45", "60"]});
 db.info.insert({"_id":"Priority",value:["Low", "Medium", "High"]});
