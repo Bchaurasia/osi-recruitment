@@ -28,7 +28,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 		if($scope.newSkill == "" || $scope.newSkill == null ||$scope.newSkill == undefined){
 			$scope.hideError = false;
 		}else{
-		var ck=$scope.checkSkillSet();
+			var ck=!$scope.skillExist;
 		if(ck){
 		$scope.skills1.value.push($scope.newSkill);
 		
@@ -49,17 +49,12 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	}
 	
 	$scope.checkSkillSet = function(){
-		var flag=true;
+		$scope.skillExist=false;
 		angular.forEach($scope.skills, function(sk){
 			if($scope.newSkill==sk){
-				  $scope.message="Skill Already Exists";
-				  $scope.cls=appConstants.ERROR_CLASS;
-				  $timeout( function(){ $scope.alHide(); }, 5000);
-				  $scope.newSkill = "";
-				  flag=false; 
+				$scope.skillExist=true;
 		}	
 		});
-		return flag;
 	}
 	
      $scope.deleteSkill = function(skill){

@@ -13,7 +13,8 @@
 					Name<b class="mandatory">*</b>
 				</label>
 				<input type="text" name="clientName" id="clientName" style="top: 1px; height: 29px"
-								placeholder="Enter Client Name" ng-model="client.clientName" required/>
+								placeholder="Enter Client Name" ng-model="client.clientName" ng-change="checkClientName()" required/>
+								<span ng-show="clietNameError" class="validation-error">Client name already exist</span>
 			</div>
 			<div class="input-field col s6">
 				 <select placeholder="Select location" ng-change="otherLocations(client.locations)"
@@ -40,7 +41,7 @@
 		<div class="row" align="center">
 			<div class="input-field col s12">
 				<button class="btn btn-info active"
-					ng-disabled="clientForm.$invalid" type="submit" ng-click="submit()">
+				    ng-disabled="clientForm.$invalid || clietNameError" type="submit" ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>
 				<button class="btn btn-info active" ui-sref="admin.client.list">

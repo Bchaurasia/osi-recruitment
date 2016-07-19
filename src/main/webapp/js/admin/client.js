@@ -10,6 +10,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.data = {};
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
+	$scope.clietNameError= false;
 	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": [],"managerRound":[],"hrRound":[]};
 	$scope.showOtherLocation=false;
 	$scope.location1=[];
@@ -85,12 +86,8 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.checkSkillSet = function(){
 		var flag=true;
 		angular.forEach($scope.Locations, function(sk){
-			if($scope.otherLocation==sk){
-				  $scope.message="Location Already Exists";
-				  $scope.cls=appConstants.ERROR_CLASS;
-				  $timeout( function(){ $scope.alHide(); }, 5000);
-				  $scope.otherLocation = "";
-				  flag=false; 
+			if($scope.newSkill.toLowerCase()==sk.toLowerCase()){
+				$scope.skillExist=true;
 		}	
 		});
 		return flag;
@@ -101,7 +98,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		$scope.save();
 		
 		$scope.client.locations=$scope.otherLocation;
-		if($scope.checkClients()){
+		if($scope.clietNameError == false){
 			$scope.client.clientId = $scope.client.clientName.toUpperCase().replace(/\s/g, '');
 			clientService.createClient($scope.client)
 						 .then(function(msg) {
@@ -130,16 +127,17 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 
 	}
 	
-	$scope.checkClients = function(){
-		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName === $scope.client.clientName });
-		if($scope.isClientExist){
-			$scope.message="Client Already Exists";
-			 $scope.cls=appConstants.ERROR_CLASS;
-			 $scope.sendSharedMessageWithCls($scope.message,$scope.cls,'/admin/client');
-			return false;
-		}
-		else return true;
-	}
+	
+	$scope.checkClientName= function(){
+				console.log("got the call");
+				$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName.toLowerCase() === $scope.client.clientName.toLowerCase() });
+				if($scope.isClientExist){
+					$scope.clietNameError= true;
+				}else{
+					$scope.clietNameError= false;
+							
+				}
+			}
 	
 	$scope.editClient = function(data){
 		sharedService.setclientId(data.clientId);

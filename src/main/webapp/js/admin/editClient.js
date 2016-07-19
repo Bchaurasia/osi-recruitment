@@ -22,6 +22,25 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 		}
 	);
 	
+	clientService.getClientInfo()
+	 .then(setClients);
+
+	function setClients(data){
+			$scope.clients = data;
+		}
+
+	$scope.checkClientName= function(){
+		console.log("got the call");
+		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName.toLowerCase() === $scope.client.clientName.toLowerCase() });
+		if($scope.isClientExist){
+			$scope.clietNameError= true;
+			console.log($scope.clietNameError);
+		}else{
+			$scope.clietNameError= false;
+					
+		}
+		}
+	
 	$scope.updateClient = function(){
 		var validate=$scope.validateSave($scope.client);
 		if(validate){
@@ -69,7 +88,5 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 		} else
 			return "Enter A Valid Name!..";
 	};
-	
-	
 	
 }]);
