@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.repository.ProfileRepository;
+import com.nisum.employee.ref.repository.UserInfoRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
 
@@ -21,6 +23,9 @@ public class ProfileService implements IProfileService{
 	ProfileRepository profileRepository;
 	
 	@Autowired
+	UserInfoRepository userInfoRepository;
+	
+	@Autowired
 	ProfileSearchService profileSearchService;
 	
 	@Autowired
@@ -29,11 +34,24 @@ public class ProfileService implements IProfileService{
 	@Autowired
 	InterviewService interviewService;
 	
+	@Autowired
+	IEventService eventService;
+	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
+		Event e=new Event();
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" is created by "+candidate.getCreatedBy());
+		e.setCategory("General");
+		e.setUsername(candidate.getCreatedBy());
+		eventService.setEvent(e);
+		//System.out.println(e.getEventDesc());
 		profileRepository.prepareCandidate(candidate);
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
+		
+		//System.out.println("profile creation called");
+		
 		return profileSearchService.addProfileIndex(candidate);
+		 
 	}
 
 	private InterviewDetails prepareInterviewDetails(Profile candidate) {

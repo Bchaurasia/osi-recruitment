@@ -5,6 +5,6 @@ import java.util.List;
 import com.nisum.employee.ref.domain.Event;
 
 public interface IEventService {
-public void setNotification(Event notification);
-public List<Event> getNotifications();
+public void setEvent(Event event);
+public List<Event> getEvents();
 }

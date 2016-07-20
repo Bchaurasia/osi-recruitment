@@ -18,13 +18,13 @@ public class EventRepository {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	public void addNotification(Event notification){
-		mongoOperations.save(notification);
+	public void addEvent(Event event){
+		mongoOperations.save(event);
 	}
 
-	public List<Event> retieveAllNotifications(){
-		List<Event>allNotifications=mongoOperations.findAll(Event.class);		
-		return allNotifications;
+	public List<Event> retieveEvents(){
+		List<Event>allEvents=mongoOperations.findAll(Event.class);		
+		return allEvents;
 		
 	}
 }

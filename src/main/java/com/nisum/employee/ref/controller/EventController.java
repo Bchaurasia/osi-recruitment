@@ -26,17 +26,17 @@ import lombok.extern.slf4j.Slf4j;
 public class EventController {
 	
 	@Autowired
-	private IEventService allNotificationsService;
+	private IEventService eventService;
 	
 	@Secured({"ROLE_HR","ROLE_ADMIN","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value="/notification", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> createNotifications(@RequestBody Event notification) {
+	public ResponseEntity<?> createNotifications(@RequestBody Event event) {
 		log.info("creating new notification");
-		allNotificationsService.setNotification(notification);
+		eventService.setEvent(event);
 		
 		
-		return new ResponseEntity<Event>(notification, HttpStatus.OK);
+		return new ResponseEntity<Event>(event, HttpStatus.OK);
 	}
 	
 	
@@ -44,8 +44,8 @@ public class EventController {
 	@ResponseBody
 	@RequestMapping(value = "/getNotification", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveAllRequisitions() {
-		List<Event> notificationDetails = allNotificationsService.getNotifications();
+		List<Event> eventDetails = eventService.getEvents();
 		
-		return new ResponseEntity<List<Event>>(notificationDetails, HttpStatus.OK);
+		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
 	}
 }
