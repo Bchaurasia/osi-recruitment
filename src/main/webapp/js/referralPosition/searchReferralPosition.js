@@ -91,5 +91,11 @@ app.controller("searchReferralPositionCtrl", ['$scope', '$http', '$filter', '$ti
 				sharedService.setjobCode(jobcodePosition);
 				location.href='#referral/viewReferralPosition';
 			};
+			
+		  $scope.displayReferralProfile = function(jobcodePosition) {
+			sharedService.setjobCode(jobcodePosition);
+			//$scope.candidate.jobCode = jobcodePosition;  
+			location.href='#referral/createReferralProfile';
+		   };
 			    
 }]);

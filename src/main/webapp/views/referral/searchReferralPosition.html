@@ -22,7 +22,7 @@
 					<th>Client</th>
 					<th>Priority</th>
 				    <th>Status</th>
-					
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,7 +35,7 @@
 					<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.priority}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.status}}</td>
-							
+					<td class="mdl-data-table__cell--non-numeric"><a style="cursor: pointer;" ng-click="displayReferralProfile(data.jobcode)">Refer</a></td>		
 				</tr>
 			</tbody>
 		</table>
