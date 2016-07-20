@@ -124,11 +124,10 @@
 			<div class="input-field col s6">
 				<select ng-model="candidate.jobCode" name="jobCode"
 					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
-					ng-options="o as o for o in profilepositions | orderBy:'toString()'"
-					class="form-control input-sm" required>
+					ng-options="o for o in profilepositions track by o"
+					class="form-control input-sm">
 					<option value="" disabled="disabled">Select Position</option>
-				</select> <label style="position: absolute; top: -22px;">Position<b
-					class="mandatory">*</b></label>
+				</select> <label style="position: absolute; top: -22px;">Position</label>
 
 			</div>
 		</div>
@@ -245,6 +244,17 @@
 				<label style="position: absolute; top: -22px;">Current Employer</label>
 			</div>
 			<div class="input-field col s6">
+				<input placeholder="Enter your Additional Skills"
+					name="otherSkills" class="form-control" type="text"
+					ng-model="candidate.otherSkills" ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/">
+				<label style="position: absolute; top: -22px;">Additional Skills</label>
+				
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<div class="input-field col s6">
 				<select ng-model="candidate.designation" name="currentdesignation"
 					ng-change="setJobCodes()"
 					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
@@ -301,7 +311,7 @@
 			</div>
 			
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="input-field col s6">
 				<select ng-model="candidate.hrAssigned" name="referredBy"
 					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
@@ -316,7 +326,7 @@
 					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
 					referred is required.</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="row">
 			<div class="input-field col s12">

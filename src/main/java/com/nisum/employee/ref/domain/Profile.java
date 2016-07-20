@@ -34,6 +34,7 @@ public class Profile extends AuditEntity{
 	String altmobileNo;
 	String currentEmployer;
 	String referredBy;
+	String referredByName;
 	String hrAssigned;
 	ArrayList<String> jobcodeProfile;
 	Boolean interviewSet;

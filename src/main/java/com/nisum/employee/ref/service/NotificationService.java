@@ -110,6 +110,7 @@ public class NotificationService{
 	private static final String QUALIFICATION = "qualification";
 	private static final String TITLE = "title";
 	private static final String CREATED_BY_USER = "created_by_user";
+	private static final String SUBMITTED_BY_USER = "submittedBy";
 	
 	@Value("${mail.fromAddress}")
 	private String from;
@@ -730,6 +731,7 @@ public String sendProfileCreatedNotification(Profile candidate) throws Messaging
 		 context.put(TOTAL_EXP, totalExperience);
 		 context.put(SKILLS, primarySkills);
 		 context.put(OTHER_SKILLS, candidate.getOtherSkills());
+		 context.put(SUBMITTED_BY_USER, candidate.getReferredByName());
 		 
 		 StringWriter writer = new StringWriter();
 		 jobRequisitionTemplate.merge(context, writer);

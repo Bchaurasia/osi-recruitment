@@ -103,6 +103,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				}
 				$scope.candidate.isCreatedByUser = false;
 				$scope.candidate.isReferral = false;
+				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;

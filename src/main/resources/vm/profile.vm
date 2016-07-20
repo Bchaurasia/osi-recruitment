@@ -26,6 +26,10 @@ Hi, <br><br>
 <td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$other_skills</td>
 </tr>
 #end
+
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Submitted By :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$submittedBy</td> 
+</tr>
 </table><br><br>
   
  <span style="font-size:15px">Regards,</span><br>
