@@ -12,6 +12,17 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.invalidFile = true;
 	$scope.today=new Date();
 	$scope.candidate.comments="";
+	$scope.candidate.orgGrade={};
+	$scope.candidate.orgGrade.designation={};
+	$scope.streamData=[];
+	$scope.levelDatalist=[];
+	//$scope.levelData={};
+	$scope.bus = ["ET","EA","OPS"];
+	//$scope.levels = ["L0","L1","L2","L3","L4","L5"]; // ET-L0-E0
+	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.finalStatusList = ["Offered","Rejected"];
+	$scope.candidate.currency="INR";
+	
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
 		$scope.candidate.emailId = $scope.profile.candidateEmail;
@@ -36,6 +47,35 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			 console.log("fail to get data");
 		 });
 	}
+	$scope.selectStream = function(bu){
+		$scope.candidate.orgGrade.orgBand=bu.orgBand;
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.bu, bu)){
+				$scope.streamData.push(band.stream);
+			}
+		});
+	};
+	$scope.selectLevel = function(stream){
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.stream, stream)){
+				$scope.levelData=band.levels;
+			}
+		});
+		angular.forEach($scope.levelData,function(band) {
+				$scope.levelDatalist.push(band.level);
+		});
+	};
+	$scope.selectGrade = function(level){
+		$scope.designationData= _.filter($scope.levelData , function(level1){ return _.isEqual(level1.level, level); });
+	};
+	offerService.getBandOfferData().then(function(data){
+		$scope.orgBands=data;
+	}).catch(function(msg){
+		$scope.message=msg;
+		 $scope.cls=appConstants.ERROR_CLASS;
+		 $timeout( function(){ $scope.alHide(); }, 5000);
+	})
+	
 	designationService.getDesignation().then(function(data){
 		$scope.designations=data;
 		$scope.profiledesignations = [];
@@ -53,12 +93,20 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.candidate=offerdata;
 			$scope.candidate.comments="";
 			$scope.candidate.approval.comment=""
+			$scope.bu=$scope.candidate.orgGrade.bu;
+			$scope.stream=$scope.candidate.orgGrade.stream;
+			$scope.level=$scope.candidate.orgGrade.level;
+			$scope.grade=$scope.candidate.orgGrade.designation;
+			$scope.name=$scope.candidate.orgGrade.designation;
 			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
+			$scope.selectStream($scope.bu);
+			$scope.selectLevel($scope.stream);
+			$scope.selectGrade($scope.level);
 		}
 
 		var listlength=$scope.candidate.approvalList.length;
 		for(var i=0; i<$scope.candidate.approvalList.length;i++){
-			if($scope.candidate.approvalList[listlength-1].status==="Waiting for approval" || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
+			if($scope.candidate.approvalList[listlength-1].status==="Waiting for approval" || $scope.candidate.approvalList[listlength-1].status=="Offered"){
 				$scope.disableSendApproval=true;
 			}else{
 				$scope.disableSendApproval=false;
@@ -69,12 +117,15 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			else{
 				$scope.showDiv=false;
 			}
-			if($scope.candidate.approvalList[listlength-1].status=="Approved" || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
+			if($scope.candidate.approvalList[listlength-1].status=="Rejected" || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
 				$scope.showApprovalBtn = true;
 	    		$scope.showRejectBtn = true;
 	    		$scope.showNegotiateBtn = true; 
-			}
-			else{
+			}else if($scope.candidate.approvalList[listlength-1].status=="Approved"){
+				$scope.showApprovalBtn = true;
+				$scope.showRejectBtn = false;
+	    		$scope.showNegotiateBtn = false; 
+			}else{
 				$scope.showApprovalBtn = false;
 	    		$scope.showRejectBtn = false;
 	    		$scope.showNegotiateBtn = false; 
@@ -114,7 +165,14 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	});
 
 	$scope.saveOffer = function() {
-		console.log(angular.toJson($scope.candidate));
+		$scope.candidate.orgGrade.bu=$scope.bu;
+		$scope.candidate.orgGrade.stream=$scope.stream;
+		$scope.candidate.orgGrade.level=$scope.level;
+		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
+		$scope.candidate.orgGrade.designation.name=$scope.name.name;
+		if($scope.candidate.finalStatus!==null){
+			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
+		}
 		$http.post(RELEASE_OFFER, $scope.candidate).success(function(data, status) {
 			$log.info("saved offer...");
 			$scope.sendNotification("Offer Saved Successfully",'/offer');
@@ -124,9 +182,16 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 
 	};
     $scope.approve = function(){
+    	$scope.candidate.orgGrade.bu=$scope.bu;
+		$scope.candidate.orgGrade.stream=$scope.stream;
+		$scope.candidate.orgGrade.level=$scope.level;
+		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
+		$scope.candidate.orgGrade.designation.name=$scope.name.name;
     	$scope.candidate.offerStatus="Waiting for approval";
+    	if($scope.candidate.finalStatus!==null){
+			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
+		}
     	$scope.candidate.approval.updatedDate=new Date();
-    	console.log(angular.toJson($scope.candidate));
     	$http.post('resources/approveOffer', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");
     		$scope.sendNotification(data.msg,'/offer');
@@ -138,7 +203,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
     	$scope.candidate.offerStatus="Approved";
     	$scope.candidate.approval.updatedDate=new Date();
     	$scope.candidate.approval.status=$scope.candidate.offerStatus;
-    	console.log(angular.toJson($scope.candidate));
     	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");
     		$scope.sendNotification(data.msg,'/offer');
@@ -150,7 +214,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
     	$scope.candidate.offerStatus="Rejected";
     	$scope.candidate.approval.updatedDate=new Date();
     	$scope.candidate.approval.status=$scope.candidate.offerStatus;
-    	console.log(angular.toJson($scope.candidate));
     	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");
     		$scope.sendNotification(data.msg,'/offer');
@@ -162,7 +225,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
     	$scope.candidate.offerStatus ="Under Negotiation";
     	$scope.candidate.approval.updatedDate=new Date();
     	$scope.candidate.approval.status=$scope.candidate.offerStatus;
-    	console.log(angular.toJson($scope.candidate));
     	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");
     		$scope.sendNotification(data.msg,'/offer');

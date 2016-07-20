@@ -26,11 +26,11 @@ public class Offer extends AuditEntity {
 	private String currentEmployer;
 	private String profileSource;
 	private UserVO recruiter;
-	private float lastDrawnCTC;
-	private float expectedCTC;
-	private float proposedCTC;
+	private int lastDrawnCTC;
+	private int expectedCTC;
+	private int proposedCTC;
 	private int noticePeriod;
-	private String relocationExpensesOffered;
+	private int relocationExpensesOffered;
 	private String currentLocation;
 	private String WorkLocation;
 	private String comments;
@@ -39,7 +39,11 @@ public class Offer extends AuditEntity {
 	private String client;
 	private String project;
 	private Date expectedJoiningDate;
-	private String singInBonus;
+	private int singInBonus;
 	private String offerStatus;
 	private List<OfferApprover> approvalList;
+	private String currency;
+	private String finalStatus;
+	private Band orgGrade;
+	
 }
