@@ -63,9 +63,9 @@
 				<label style="position: absolute; top: -22px;">Mobile Number
 					<b class="mandatory">*</b>
 				</label> <input type="text" placeholder="Enter Mobile number"
-					name="mobileNo" class="form-control"
-					ng-model="candidate.mobileNo" ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"
-					maxlength="11" required> <span class="validation-error"
+					name="mobileNo" class="form-control" ng-model="candidate.mobileNo"
+					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11" required>
+				<span class="validation-error"
 					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
 					provide a MobileNo</span>
 
@@ -80,8 +80,8 @@
 			<div class="input-field col s6">
 				<input type="text" placeholder="Enter alternate Mobile number"
 					name="altmobileNo" class="form-control"
-					ng-model="candidate.altmobileNo"
-					maxlength="11" ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"> <label
+					ng-model="candidate.altmobileNo" maxlength="11"
+					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"> <label
 					style="position: absolute; top: -22px;">Alternate Mobile
 					Number </label>
 				<div class="validation-error"
@@ -116,10 +116,10 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter your current Location"
 					name="currentLocation" class="form-control" type="text"
-					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/" required>
-				<label style="position: absolute; top: -22px;">Current
-					Location<b class="mandatory">*</b></label>
-
+					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/"
+					required> <label style="position: absolute; top: -22px;">Current
+					Location<b class="mandatory">*</b>
+				</label>
 			</div>
 		</div>
 		<div class="row">
@@ -130,11 +130,11 @@
 				<label style="position: absolute; top: -22px;">Address</label>
 			</div>
 		</div>
-		
+
 		<div class="row" align="left">
 			<div class="chip" align="left">Educational Details</div>
 		</div>
-		
+
 		<div class="row" ng-repeat="candi in candidate.qualifications">
 			<div class="input-field col s6">
 				<select placeholder="Select Qualification"
@@ -158,25 +158,31 @@
 					style="position: absolute; top: -22px;">Specialization </label>
 
 			</div>
-						
+
 			<div class="input-field col s2">
 				<input type="range" ng-model="candi.percentage" min="0" max="100" />
 				<label>Percentage<b class="mandatory">*</b></label> <span
 					class="range-slider__value">{{candi.percentage}}%</span>
 			</div>
-			
+
 			<div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove" data-tooltip="Remove Educational Details"
-					ng-show="candidate.qualifications.length!=1" style="cursor: pointer;color:#26a69a;border:none;background: none;"
-					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn" class="glyphicon glyphicon-plus" data-tooltip="Add Educational Details" style="cursor:pointer;color:#26a69a;border:none;background: none;"
-				ng-show="$last" ng-click="addColumnCriteria()" ng-disabled="checkDisability(candi.qualification)"></button>
+				<button class="glyphicon glyphicon-remove"
+					data-tooltip="Remove Educational Details"
+					ng-show="candidate.qualifications.length!=1"
+					style="cursor: pointer; color: #26a69a; border: none; background: none;"
+					ng-click="deleteQualification($index)"></button>
+				&nbsp;&nbsp;&nbsp;
+				<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+					data-tooltip="Add Educational Details"
+					style="cursor: pointer; color: #26a69a; border: none; background: none;"
+					ng-show="$last" ng-click="addColumnCriteria()"
+					ng-disabled="checkDisability(candi.qualification)"></button>
 			</div>
-			
-			
-			
+
+
+
 		</div>
-		
+
 		<div class="row" align="left">
 			<div class="chip" align="left">Professional Details</div>
 		</div>
@@ -210,7 +216,9 @@
 			</div>
 			<div class="col-md-2"></div>
 			<div class="input-field col s6">
-				<label style="position: absolute; top: -22px;">Skills Set<b class="mandatory">*</b>: </label>
+				<label style="position: absolute; top: -22px;">Skills Set<b
+					class="mandatory">*</b>:
+				</label>
 				<ui-select multiple ng-model="sk.primarySkills"
 					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
 					ui-select-required ng-disabled="disabled"> <ui-select-match
@@ -221,89 +229,49 @@
 					ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
 					enter your key skills.</span>
 			</div>
-			</div>
-			
-			<div class="row">
-			
+		</div>
+
+		<div class="row">
+
 			<div class="input-field col s6">
 				<input placeholder="Enter your current Employer"
 					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
-				<label style="position: absolute; top: -22px;">Current Employer</label>
+				<label style="position: absolute; top: -22px;">Current
+					Employer</label>
 			</div>
-			
+
 			<div class="input-field col s6">
-				<input placeholder="Enter your Additional Skills"
-					name="otherSkills" class="form-control" type="text"
-					ng-model="candidate.otherSkills" ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/">
-				<label style="position: absolute; top: -22px;">Additional Skills</label>
-				
+				<input placeholder="Enter your Additional Skills" name="otherSkills"
+					class="form-control" type="text" ng-model="candidate.otherSkills"
+					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label
+					style="position: absolute; top: -22px;">Additional Skills</label>
+
 			</div>
-			
+
 		</div>
-		
+
 		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="candidate.designation" name="currentdesignation"
 					ng-change="setJobCodes()"
 					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
 					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Current Designation</option>
-				</select> <label style="position: absolute; top: -22px;">Current Designation<b
-					class="mandatory">*</b></label>
+					<option value="" disabled="disabled">Select Current
+						Designation</option>
+				</select> <label style="position: absolute; top: -22px;">Current
+					Designation<b class="mandatory">*</b>
+				</label>
 
 			</div>
 		</div>
-		
+
 		<div class="row" align="left">
 			<div class="chip" align="left">Other Details</div>
 		</div>
-
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter your current CTC" name="currentCTC"
-					class="form-control" type="text" ng-model="candidate.currentCTC" ng-pattern="/^[0-9]*$/">
-				<label style="position: absolute; top: -22px;">Current CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)</label><span
-					class="validation-error" ng-required="CreateCandidate.currentCTC.$error.pattern"
-					ng-show="CreateCandidate.currentCTC.$error.pattern">
-					Provide a valid CTC</span>
-			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter your expected CTC" name="expectedCTC"
-					class="form-control" type="text" ng-model="candidate.expectedCTC" ng-pattern="/^[0-9]*$/">
-				<label style="position: absolute; top: -22px;">Expected CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)</label>
-				 <span class="validation-error" ng-required="CreateCandidate.expectedCTC.$error.pattern"
-				 ng-show="CreateCandidate.expectedCTC.$error.pattern">
-                    Provide a valid CTC
-                </span>
-			</div>
-		</div>
-
-		<div class="row">
-		      <div class="input-field col s6">
-				<input placeholder="Enter your Notice Period" name="noticePeriod"
-					class="form-control" type="text" ng-model="candidate.noticePeriod" ng-pattern="/^[0-9]*$/" maxlength="2" required>
-				<label style="position: absolute; top: -22px;">Notice Period (in days)<b class="mandatory">*</b></label>
-				<span class="validation-error"  ng-required="CreateCandidate.noticePeriod.$error.pattern" 
-				ng-show="CreateCandidate.noticePeriod.$error.pattern">
-                    Notice period should be in days
-                </span>
-			</div>
-			<div class="input-field col s6">
-				<select ng-model="candidate.expectedDesignation" name="expectedDesignation"
-					ng-change="setJobCodes()"
-					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Expected Designation</option>
-				</select> <label style="position: absolute; top: -22px;">Expected Designation<b
-					class="mandatory">*</b></label>
-
-			</div>
-		</div>
-
-		<div class="row">
-				<div class="input-field col s6">
-						<select ng-model="candidate.profileSource" name="profileSource"
+				<select ng-model="candidate.profileSource" name="profileSource"
 					ng-options="o as o for o in profileSources | orderBy:'toString()'"
 					class="form-control input-sm" required>
 					<option value="" disabled="disabled">Select Source</option>
@@ -311,7 +279,62 @@
 					class="mandatory">*</b></label>
 
 			</div>
-			
+			<div class="input-field col s6">
+				<select ng-model="candidate.currency" name="currency"
+					ng-options="o for o in currencyList" class="form-control input-sm">
+					<option>Select Currency</option>
+				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter your current CTC" name="currentCTC"
+					class="form-control" type="text" ng-model="candidate.currentCTC"
+					ng-pattern="/^[0-9]*$/"> <label
+					style="position: absolute; top: -22px;">Current CTC (<img
+					src="static/osi_images/rupee.png" width="9" height="11">)
+				</label><span class="validation-error"
+					ng-required="CreateCandidate.currentCTC.$error.pattern"
+					ng-show="CreateCandidate.currentCTC.$error.pattern"> Provide
+					a valid CTC</span>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Enter your expected CTC" name="expectedCTC"
+					class="form-control" type="text" ng-model="candidate.expectedCTC"
+					ng-pattern="/^[0-9]*$/"> <label
+					style="position: absolute; top: -22px;">Expected CTC (<img
+					src="static/osi_images/rupee.png" width="9" height="11">)
+				</label> <span class="validation-error"
+					ng-required="CreateCandidate.expectedCTC.$error.pattern"
+					ng-show="CreateCandidate.expectedCTC.$error.pattern">
+					Provide a valid CTC </span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter your Notice Period" name="noticePeriod"
+					class="form-control" type="text" ng-model="candidate.noticePeriod"
+					ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
+					style="position: absolute; top: -22px;">Notice Period (in
+					days)<b class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-required="CreateCandidate.noticePeriod.$error.pattern"
+					ng-show="CreateCandidate.noticePeriod.$error.pattern">
+					Notice period should be in days </span>
+			</div>
+			<div class="input-field col s6">
+				<select ng-model="candidate.expectedDesignation"
+					name="expectedDesignation" ng-change="setJobCodes()"
+					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Expected
+						Designation</option>
+				</select> <label style="position: absolute; top: -22px;">Expected
+					Designation<b class="mandatory">*</b>
+				</label>
+
+			</div>
 		</div>
 
 		<div class="row">

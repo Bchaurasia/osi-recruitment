@@ -51,16 +51,11 @@
 					Position <b class="mandatory">*</b>
 				</label>
 			</div>
-
 			<div class="input-field col s6">
-				<select ng-model="candidate.proposedPosition" name="relAlowance"
-					ng-options="o as o for o in profiledesignations"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Proposed
-						Position</option>
-				</select> <label style="position: absolute; top: -22px;">Proposed
-					Position<b class="mandatory">*</b>
-				</label>
+				<select ng-model="candidate.currency" name="currency"
+					ng-options="o for o in currencyList" class="form-control input-sm">
+					<option>Select Currency</option>
+				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
 			</div>
 		</div>
 		<div class="row">
@@ -135,18 +130,12 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select ng-model="candidate.currency" name="currency"
-					ng-options="o for o in currencyList" class="form-control input-sm">
-					<option>Select Currency</option>
-				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
-			</div>
-			<div class="input-field col s2">
 				<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
 					ng-options="o for o in bus" class="form-control input-sm">
 					<option value="" disabled="disabled">Select BU</option>
 				</select> <label style="position: absolute; top: -22px;"> BU: </label>
 			</div>
-			<div class="input-field col s3">
+			<div class="input-field col s6">
 				<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
 					ng-options="o for o in streamData track by o"
 					class="form-control input-sm">

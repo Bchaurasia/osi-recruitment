@@ -39,7 +39,6 @@ public class OfferController {
 	@Secured({ "ROLE_ADMIN", "ROLE_HR" })
 	@RequestMapping(value = "/save-offer", method = RequestMethod.POST)
 	public ResponseEntity<Offer> saveOfferDetails(@RequestBody Offer offer) {
-		offer.getApprovalList().get(offer.getApprovalList().size()-1).setHrComment(offer.getComments());
 		offerService.prepareOffer(offer);
 		return new ResponseEntity<Offer>(offer, HttpStatus.OK);
 	}

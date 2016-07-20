@@ -54,5 +54,6 @@ public class Profile extends AuditEntity{
 	Boolean isApprovedFlag;
 	Boolean isCreatedByUser;
 	Boolean isReferral;
+	 String currency;
 	
 }

@@ -18,7 +18,7 @@ public class Offer extends AuditEntity {
 	private String requisitionId;
 	private String jobcodeProfile;
 	private String approvedPositions;
-	private String proposedPosition;
+//	private String proposedPosition;
 	private String businessUnit;
 	private String candidateName;
 	private String expYear;

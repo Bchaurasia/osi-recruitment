@@ -170,6 +170,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.candidate.orgGrade.level=$scope.level;
 		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
 		$scope.candidate.orgGrade.designation.name=$scope.name.name;
+		console.log(angular.toJson($scope.candidate));
 		if($scope.candidate.finalStatus!==null){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}
@@ -182,12 +183,13 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 
 	};
     $scope.approve = function(){
+    	$scope.candidate.offerStatus="Waiting for approval";
+    	$scope.candidate.approval.updatedDate=new Date();
     	$scope.candidate.orgGrade.bu=$scope.bu;
 		$scope.candidate.orgGrade.stream=$scope.stream;
 		$scope.candidate.orgGrade.level=$scope.level;
 		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
 		$scope.candidate.orgGrade.designation.name=$scope.name.name;
-    	$scope.candidate.offerStatus="Waiting for approval";
     	if($scope.candidate.finalStatus!==null){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}

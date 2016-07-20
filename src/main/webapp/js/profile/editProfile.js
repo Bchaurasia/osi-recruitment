@@ -15,6 +15,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
+	$scope.currencyList = ["INR","USD","GBP","EUR"];
 	$scope.requisitionId="";
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
