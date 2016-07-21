@@ -26,6 +26,8 @@ db.sequence.insert({"_id":"JOB","seq":0});
 
 db.info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 
+db.info.insert({"_id":"Currency",value:["INR","USD","GBP","EUR"]});
+
 db.info.insert({"_id":"Locations",value: [ "Bangalore" , "Chennai", "Gurgaon", "Hyderabad", "Pune"]});
 
 db.info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "JQuery","Java Script","Ruby","JPA","JSP","iBatis","Rest WebService","Spring","Hibernate","C","C++","Oracle","MySQL","DB2","TeraData","MongoDB","Neo4J","CouchDB"]});
