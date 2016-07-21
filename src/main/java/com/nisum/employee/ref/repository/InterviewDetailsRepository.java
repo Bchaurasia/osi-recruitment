@@ -37,7 +37,7 @@ public class InterviewDetailsRepository{
 		InterviewDetails interview = mongoOperation.findOne(query, InterviewDetails.class);
 		query.fields().include("candidateEmail");
 		Update update = new Update();
-		if(interviewDetails.getIsUpdatedFromProfile()) {
+		if(interviewDetails.getIsUpdatedFromProfile()!=null) {
 			update.set("jobCode", interviewDetails.getJobCode());
 			update.set("requisitionId", interviewDetails.getRequisitionId());
 		}
