@@ -140,10 +140,58 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		);
 	
 	$scope.max = 10;
-	$scope.hoveringOver = function(value) {
+	$scope.percent=0;
+    $scope.hoveringOver = function(value) {
     $scope.overStar = value;
+    $scope.starValue = value;
     $scope.percent = 100 * (value / $scope.max);
-	};
+        if($scope.percent==10)
+        {
+            $scope.tooltip= "Poor" ;
+        }
+        else if($scope.percent==20 )
+        {
+            $scope.tooltip= "Fair" ;
+        }
+        else if($scope.percent==30 )
+        {
+            $scope.tooltip= "Good" ;
+        }
+        else if($scope.percent==40 )
+        {
+            
+            $scope.tooltip= "Very Good" ;
+        }
+        else if($scope.percent==50 )
+        {
+            $scope.tooltip= "Excellent" ;
+        }
+    };
+    
+    $scope.starColor = function(event)
+    {
+            if($scope.percent==10)
+            {
+                $(event.currentTarget).css('color','#ffad99');
+                
+            }
+            else if($scope.percent==20 )
+            {
+                $(event.currentTarget).css('color','#ff8566');//orange
+            }
+            else if($scope.percent==30 )
+            {
+                $(event.currentTarget).css('color','#ff5c33');
+            }
+            else if($scope.percent==40 )
+            {
+                $(event.currentTarget).css('color','#ff3300');
+            }
+            else if($scope.percent==50 )
+            {
+                $(event.currentTarget).css('color','#cc2900');
+            }
+    };
 	
 	$scope.status = {
 		    isFirstOpen: true,
@@ -184,6 +232,4 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	    $scope.cls = '';
 	    $location.path("recruitment/interviewManagement");
 	}
-	
-	
 }]);

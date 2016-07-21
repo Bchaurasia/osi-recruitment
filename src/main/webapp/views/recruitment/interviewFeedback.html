@@ -1,103 +1,90 @@
-<div class="row" align="left">
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="feedback_form" onvalidate>
-		<div class="row collapsible-header">
-			<h5 align="left">
-				<b>Interview Feedback Form - {{profile.candidateName}}</b>
-			</h5>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewFeedback.roundName}}
-					</b>
-				</h6>
-				<label>Interview Round : </label>
+<div class="ui raised less padded container segment" style="width:75%;">
+	<form class="ui form" name="feedback_form" onvalidate>
+		<div class="ui segment">
+			<h3 align="left" class="ui dividing header">Interview Feedback Form - {{profile.candidateName}}</h3>
+			<div align="left" class="five fields">
+				<div class="field">
+					<label class="ui label">Interview Round : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewFeedback.roundName}}</b>
+				</div>
+				<div class="field"></div>
+				<div class="field">
+					<label class="ui label">Interviewer :</label>
+				</div>
+				<div class="field">
+					<b>{{interviewSchedule.interviewerName}}</b>
+				</div>
+			</div>		
+			<div align="left" class="five fields">
+				<div class="field">
+					<label class="ui label">Interview Type : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewSchedule.typeOfInterview}}</b>
+				</div>
+				<div class="field"></div>
+				<div class="field">
+					<label class="ui label">Interview Date : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewSchedule.interviewDateTime | date:'medium'}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewSchedule.interviewerName}}
-					</b>
-				</h6>
-				<label>Interviewer : </label>
+			<div align="left" class="five fields">
+				<div class="field">
+					<label  class="ui label">Interview Job Code: </label>
+				</div>
+				<div class="field">
+					<b>{{interviewSchedule.jobcode}}</b>
+				</div>
+			</div>		
+			<div align="left" class="five fields">
+				<div class="field">
+					<label class="ui label">Interview Duration : </label>
+				</div>
+				<div class="field">
+					<select class="ui fluid dropdown" name="duration" placeholder="Select Duration"
+						ng-model="interviewFeedback.duration" ng-disabled="disableFields"
+						ng-options="o as o for o in info.interviewDuration "
+						class="form-control input-sm" name="duration" style="height: 30px; padding: 0px;" required>
+						<option value="" disabled="disabled">Duration</option>
+					</select>
+				</div>
+				<div class="field"></div>
+				<div class="field">
+					<label class="ui label">Select status : </label>
+				</div>
+				<div class="field">
+					<select class="ui fluid dropdown" name="status" placeholder="Select Duration"
+						ng-model="interviewFeedback.status" ng-disabled="disableFields"
+						ng-options="o as o for o in info.status "
+						class="form-control input-sm" id="status"
+						style="height: 30px; padding: 0px;" required>
+						<option value="" disabled="disabled">Status</option>
+					</select>
+				</div>
 			</div>
+		</div>	
+		<div class="ui raised segment">
+			<tabset justified="true" type="pills"> 
+				<tab ng-repeat="tab in tabs | filter:filterbyRound" heading="{{ tab.heading }}">
+					<div ng-include="tab.template"></div>
+				</tab> 
+			</tabset>
 		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewSchedule.typeOfInterview}}
-					</b>
-				</h6>
-				<label>Interview Type : </label>
-
+		<div class="ui two column centered grid">
+			<div class="center aligned column">
+				<div class="ui buttons row">
+					<button class="ui large primary button" type="submit"
+						ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow"
+						ng-disabled="disabledFeedbackbtn || feedback_form.$invalid">Save</button>
+				  	<div class="or"></div>
+				  	<button class="ui large secondary button" ui-sref="recruitment.interviewManagement">Back</button>
+				</div>
 			</div>
-
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewSchedule.interviewDateTime
-						| date:'medium'}} </b>
-				</h6>
-				<label>Interview Date : </label>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewSchedule.jobcode}} </b>
-				</h6>
-				<label>Interview Job Code: </label>
-
-			</div>
-
-		</div>
-
-
-		<div class="row">
-			<div class="input-field col s6">
-				<select name="duration" placeholder="Select Duration"
-					ng-model="interviewFeedback.duration" ng-disabled="disableFields"
-					ng-options="o as o for o in info.interviewDuration "
-					class="form-control input-sm" name="duration" required>
-					<option value='' disabled="disabled">
-					<option value="">Select Duration</option>
-				</select> <label>Interview Duration<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<select name="status" placeholder="Select Duration"
-					ng-model="interviewFeedback.status" ng-disabled="disableFields"
-					ng-options="o as o for o in info.status "
-					class="form-control input-sm" id="status" style="color: black;"
-					required>
-					<option value="" disabled="disabled">Select status</option>
-				</select> <label>Select status<b class="mandatory">*</b></label>
-			</div>
-		</div>
-		 
-		<div>
-			&nbsp;&nbsp;&nbsp;&#9733;Poor &nbsp;&nbsp;&#9733;&#9733;Average &nbsp;&nbsp;&#9733;&#9733;&#9733;Good &nbsp;&nbsp;&#9733;&#9733;&#9733;&#9733;Excellent &nbsp;&nbsp;&#9733;&#9733;&#9733;&#9733;&#9733;Outstanding
-		</div>
-		<div class="row">
-			<tabset justified="true"> <tab ng-repeat="tab in tabs | filter:filterbyRound"
-				heading="{{ tab.heading }}">
-			<div ng-include="tab.template"></div>
-			</tab> </tabset>
-		</div>
-		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit"
-				ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow"
-				ng-disabled="disabledFeedbackbtn || feedback_form.$invalid">
-				<span class="glyphicon glyphicon-ok-circle"></span> Submit
-			</button>
-			<button class="btn btn-info active"
-				ui-sref="recruitment.interviewManagement">
-				<span class="glyphicon glyphicon-remove"></span> Back
-			</button>
 		</div>
 	</form>
 </div>
-<br>
 <br>

@@ -1,35 +1,25 @@
-<br>
-<div style="width: 90%;">
-	<div class="row">
-		<div class="col s4">
+<div class="ui segment">
+	<div align="left" class="five fields">
+		<div class="field" style="padding-top: 15px;">
 			<b>Communication Skills:<b class="mandatory">*</b></b>
 		</div>
-		<div class="col s3">
-			<rating ng-model="interviewFeedback.communicationSkills" max="5" readonly="false"
-				on-hover="hoveringOver(value)" on-leave="overStar = null" required></rating>
+		<div class="field" style="padding-top: 15px;">
+			<rating ng-model="interviewFeedback.communicationSkills" max="5" readonly="false" ng-click="starColor($event)"
+				on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
 		</div>
-		<div class="col s5">
-			<div class="input-field">
-				<textarea class="materialize-textarea" length="120" ng-model="interviewFeedback.communicationSkillComment"
-					placeholder="Enter any comments/notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Comment</label>
-			</div>
-		</div>
+		<textarea class="materialize-textarea" rows="2" length="120" ng-model="interviewFeedback.communicationSkillComment"
+					placeholder="Enter any comments/notes for Communication Skills..." style="width:60%; resize: none;"></textarea>
 	</div>
-	<div class="row">
-		<div class="col s4">
+	<br>
+	<div align="left" class="five fields">
+		<div class="field">
 			<b>Consulting and articulation skills:<b class="mandatory">*</b></b>
 		</div>
-		<div class="col s3">
-			<rating ng-model="interviewFeedback.consultingAndArticulationSkills" max="5" readonly="false"
-				on-hover="hoveringOver(value)" on-leave="overStar = null" required></rating>
+		<div class="field" style="padding-top: 15px;">
+			<rating ng-model="interviewFeedback.consultingAndArticulationSkills" max="5" readonly="false" ng-click="starColor($event)"
+				on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
 		</div>
-		<div class="col s5">
-			<div class="input-field">
-				<textarea class="materialize-textarea" length="120" ng-model="interviewFeedback.consultingAndArticulationSkillsComment"
-					placeholder="Enter any comments/notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Comment</label>
-			</div>
-		</div>
+		<textarea class="materialize-textarea" rows="2" length="120" ng-model="interviewFeedback.consultingAndArticulationSkillsComment"
+					placeholder="Enter any comments/notes for Consulting and articulation skills..." style="width:60%; resize: none;"></textarea>
 	</div>
 </div>
