@@ -146,6 +146,8 @@ public class NotificationService{
 	private String SRC_OFFER_VM;
 	@Value("${SRC_PROFILE_VM}")
 	private String SRC_PROFILE_VM;
+	@Value("${SRC_PROFILE_APPROVED_VM}")
+	private String SRC_PROFILE_APPROVED_VM;
 	
 	
 	@Autowired
@@ -754,6 +756,33 @@ public String sendProfileCreatedNotification(Profile candidate) throws Messaging
 		 return "Mails Sent Successfully!";
 
 		 }
+	public void sendProfileApprovedNotification(Profile candidate) throws MessagingException {
+		 String createdBy = candidate.getCreatedBy();		 
+		 String message = "Profile approved";
+		 String readStatus = "No";		 
+		 
+		 updateUserNotification(createdBy, message, readStatus);
+		 VelocityEngine engine = new VelocityEngine();
+		 engine.init();
+		
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_PROFILE_APPROVED_VM);
+		
+		VelocityContext context = new VelocityContext();
+		context.put("jobCode", candidate.getJobCode());
+		context.put("createdBy", candidate.getReferredByName());
+		context.put("candidateName", candidate.getCandidateName());
+		
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+		
+		Message message1 = getMessage();
+		//message1.setFrom(new InternetAddress(from));
+		message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(createdBy));
+		message1.setSubject(OSI_TECHNOLOGIES + " :Profile has been approved for: "+candidate.getCandidateName());
+		
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
+	}
 
 }
 
