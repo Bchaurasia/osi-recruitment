@@ -99,7 +99,8 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			//$scope.positions=data;
 			$scope.profilepositions = [];
 	 		angular.forEach($scope.positions,function(obj){
-	 			$scope.profilepositions.push(obj.jobcode);
+	 			if(obj.positionType !="Private")
+	 				$scope.profilepositions.push(obj.jobcode);
 	 		});
 		}).catch(function(msg){
 			$scope.message=msg;
