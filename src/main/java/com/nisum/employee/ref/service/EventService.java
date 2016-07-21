@@ -7,20 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.Event;
+import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.repository.EventRepository;
 import com.nisum.employee.ref.repository.SequenceRepository;
+import com.nisum.employee.ref.repository.UserInfoRepository;
 @Service
 public class EventService implements IEventService {
 	@Autowired
 	EventRepository eventRepo;
 	@Autowired
 	private SequenceRepository sequenceRepository;
+	@Autowired
+	private UserInfoRepository userInfoRepository;
 	@Override	
 	public void setEvent(Event event) {
 		// TODO Auto-generated method stub
 		event.setEventId("EVE_" + sequenceRepository.getNextSequenceId("EVE"));
 		event.setTimeStamp(new Date());
-		System.out.println(event);
+		List<UserInfo> userInfo=userInfoRepository.retrieveUserById(event.getEmailId());
+		for(UserInfo user:userInfo){
+			if(user.getName()==""||user.getName()==null)
+			{
+				event.setUsername(event.getEmailId());	
+			
+			}
+			else
+			{
+				event.setUsername(user.getName());
+				
+			}
+		}
+		//System.out.println(event);
 		try{
 			eventRepo.addEvent(event);
 		}catch(Exception e){

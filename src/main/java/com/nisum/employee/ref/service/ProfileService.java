@@ -39,9 +39,10 @@ public class ProfileService implements IProfileService{
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		Event e=new Event();
-		e.setEventDesc("Profile of "+candidate.getCandidateName()+" is created by "+candidate.getCreatedBy());
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created");
 		e.setCategory("General");
-		e.setUsername(candidate.getCreatedBy());
+//		e.setUsername(candidate.getCreatedBy());
+		e.setEmailId(candidate.getCreatedBy());
 		eventService.setEvent(e);
 		//System.out.println(e.getEventDesc());
 		profileRepository.prepareCandidate(candidate);
