@@ -8,6 +8,7 @@ import javax.mail.internet.AddressException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.repository.RequisitionRepository;
@@ -29,6 +30,9 @@ public class RequisitionService implements IRequisitionService {
 
 	@Autowired
 	PositionService positionService;
+	
+	@Autowired
+	IEventService eventService;
 
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
@@ -40,6 +44,10 @@ public class RequisitionService implements IRequisitionService {
 		requisition.setStatus(INITIATED);
 		Requisition persistedRequisition = requisitionRepository
 				.prepareRequisition(requisition);
+		Event eventObj=new Event();
+		eventObj.setCategory("Management");
+		eventObj.setEventDesc(requisition.getRequisitionId() +" for "+requisition.getNoOfPositions()+" positions of "+requisition.getPosition()+" is created ");
+		eventService.setEvent(eventObj);
 		requisitionSearchService.addRequisitionIndex(persistedRequisition);
 		try {
 			jobRequisitionNotificationService.sendNotification(requisition);
@@ -63,6 +71,10 @@ public class RequisitionService implements IRequisitionService {
 		Requisition updatereq = requisitionRepository
 				.updateRequisition(requisition);
 		requisitionSearchService.updateRequisitionIndex(updatereq);
+		Event eventObj=new Event();
+		eventObj.setCategory("Management");			
+		eventObj.setEventDesc(requisition.getRequisitionId()+" is updated ");
+		eventService.setEvent(eventObj);
 
 	}
 
@@ -77,6 +89,11 @@ public class RequisitionService implements IRequisitionService {
 			requisition.setStatus(APPROVED);
 			positionService.createRequitionPosition(requisition);
 			updateRequisition1(requisition);
+			
+			Event eventObj=new Event();
+			eventObj.setCategory("Management");			
+			eventObj.setEventDesc(requisition.getRequisitionId()+" is approved  ");
+			eventService.setEvent(eventObj);
 			
 			try {
 				jobRequisitionNotificationService.sendNotificationForFullyApproved(requisition);

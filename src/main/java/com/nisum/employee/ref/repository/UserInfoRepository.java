@@ -34,10 +34,10 @@ public class UserInfoRepository{
 		query.addCriteria(Criteria.where("_id").exists(true).orOperator(Criteria.where("emailId").is(userId)));
 		return mongoOperations.exists(query, UserInfo.class);
 	}
-	public List<UserInfo> retrieveUserById(String userId) {
+	public UserInfo retrieveUserById(String userId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("emailId").regex(Pattern.compile(userId, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
-		return mongoOperations.find(query, UserInfo.class);
+		return mongoOperations.findOne(query, UserInfo.class);
 	}
 	
 	public List<UserInfo> retrieveUserByName(String name) {

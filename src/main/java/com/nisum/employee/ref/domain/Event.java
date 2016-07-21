@@ -12,13 +12,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "event")
+//@Document(collection = "event")
 public class Event {
     @Id
 	String eventId;
     String eventDesc;
-    Date timeStamp;
+    Date createdTimeStamp;
     String username;
+    String name;
     String category;
     String emailId;
 	

@@ -9,7 +9,7 @@ public interface IUserService {
 
 	List<UserInfo> retrieveUser();
 
-	List<UserInfo> retrieveUserById(String userId);
+	UserInfo retrieveUserById(String userId);
 
 	List<UserInfo> retrieveUserByName(String name);
 

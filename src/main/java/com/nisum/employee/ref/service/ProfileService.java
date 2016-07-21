@@ -19,6 +19,8 @@ import com.nisum.employee.ref.search.ProfileSearchService;
 @Service
 public class ProfileService implements IProfileService{
 
+	private static final String GENERAL = "General";
+
 	@Autowired
 	ProfileRepository profileRepository;
 	
@@ -39,16 +41,13 @@ public class ProfileService implements IProfileService{
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		Event e=new Event();
-		e.setEventDesc("Profile of "+candidate.getCandidateName()+" is created by "+candidate.getCreatedBy());
-		e.setCategory("General");
-		e.setUsername(candidate.getCreatedBy());
+		e.setEventDesc(candidate.getCandidateName() + "Profile has created.");
+		e.setCategory(GENERAL);
 		eventService.setEvent(e);
-		//System.out.println(e.getEventDesc());
+		
 		profileRepository.prepareCandidate(candidate);
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
-		
-		//System.out.println("profile creation called");
 		
 		return profileSearchService.addProfileIndex(candidate);
 		 

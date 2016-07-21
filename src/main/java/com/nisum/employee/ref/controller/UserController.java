@@ -38,7 +38,7 @@ public class UserController {
 		List<UserInfo> userInfos = null;
 		
 		if(emailId != null){
-			userInfos = userService.retrieveUserById(emailId);
+			userInfos = (List<UserInfo>) userService.retrieveUserById(emailId);
 		} else if (name != null) {
 			userInfos = userService.retrieveUserByName(name);
 		} else  if(clientName != null){

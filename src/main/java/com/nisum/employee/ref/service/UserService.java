@@ -27,7 +27,7 @@ public class UserService implements IUserService{
 		return userInfoRepository.retrieveUser();
 	}
 	
-	public List<UserInfo> retrieveUserById(String userId) {
+	public UserInfo retrieveUserById(String userId) {
 		return userInfoRepository.retrieveUserById(userId);
 	}
 	

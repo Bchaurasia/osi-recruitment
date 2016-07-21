@@ -42,8 +42,17 @@ public class EventController {
 	
 	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody
-	@RequestMapping(value = "/getNotification", method = RequestMethod.GET)
-	public ResponseEntity<?> retrieveAllRequisitions() {
+	@RequestMapping(value = "/getAllFeeds", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveAllFeeds() {
+		List<Event> eventDetails = eventService.getEvents();
+		
+		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
+	}
+	
+	@Secured({ "ROLE_USER","ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@ResponseBody
+	@RequestMapping(value = "/getGeneralFeeds", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveGeneralFeeds() {
 		List<Event> eventDetails = eventService.getEvents();
 		
 		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
