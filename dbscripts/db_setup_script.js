@@ -85,18 +85,16 @@ db.userInfo.insert({"_id":"tpotluri@osius.com",'name':"Raju Kanumury","mobileNum
 //ADMIN role
 db.userInfo.insert({"_id":"rlingala@osius.com",'name':"Ranjith Lingala","mobileNumber":"9966889726",location:"Hyderabad",skypeId:"rlingala",roles:["ROLE_HR,ROLE_ADMIN"]});
 
-db.clientInfo.insert([
-                	  {"_id":"MACYS","clientName":"Macy’s","locations":"Hyderabad","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"GAP","clientName":"GAP","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"BOULDER LOGIC","clientName":"Boulder logic","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"PROLOGIC","clientName":"Prologic","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"PLANVIEW","clientName":"PlanView","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"BITSTEW","clientName":"Bitstew","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"TOUCH COMMERCE","clientName":"Touch Commerce","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"E3 RETAIL","clientName":"E3 Retail","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"LIBERCUS","clientName":"Libercus","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  {"_id":"JACOBS","clientName":"Jacobs","locations":"SF","interviewers":{Level 1:[],Level 2:[],Managerial:[],HR:[]}},
-                	  
+db.clientInfo.insert([{"_id":"MACYS","clientName":"Macy’s","locations":"Hyderabad","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"GAP","clientName":"GAP","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"BOULDER LOGIC","clientName":"Boulder logic","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"PROLOGIC","clientName":"Prologic","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"PLANVIEW","clientName":"PlanView","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"BITSTEW","clientName":"Bitstew","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"TOUCH COMMERCE","clientName":"Touch Commerce","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"E3 RETAIL","clientName":"E3 Retail","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"LIBERCUS","clientName":"Libercus","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
+                	  {"_id":"JACOBS","clientName":"Jacobs","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}}
                 	  ]);
 
 db.designation.insert([{"_id":"Project Associate Trainee","maxExpYear":"1","minExpYear":"0","skills":["Java","C"]},
