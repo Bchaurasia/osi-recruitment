@@ -38,31 +38,26 @@ public class ProfileService implements IProfileService{
 	InterviewService interviewService;
 	
 	@Autowired
-<<<<<<< HEAD
 	InterviewDetailsRepository interviewDetailsRepository;
 	
 	@Autowired
 	private NotificationService notificationService;
 	
-	public Profile prepareCandidate(Profile candidate) throws Exception {
-		candidate.setIsApprovedFlag(false);
-=======
+
+	@Autowired
 	IEventService eventService;
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		Event e=new Event();
 		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created");
 		e.setCategory("General");
-//		e.setUsername(candidate.getCreatedBy());
 		e.setEmailId(candidate.getCreatedBy());
 		eventService.setEvent(e);
-		//System.out.println(e.getEventDesc());
->>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 		profileRepository.prepareCandidate(candidate);
 		try{
 			notificationService.sendProfileCreatedNotification(candidate);
-		}catch (MessagingException e) {
-				e.printStackTrace();
+		}catch (MessagingException exp) {
+			exp.printStackTrace();
 		}
 		if(!candidate.getIsCreatedByUser()) {
 			InterviewDetails interview = prepareInterviewDetails(candidate);
@@ -71,6 +66,7 @@ public class ProfileService implements IProfileService{
 		return profileSearchService.addProfileIndex(candidate);
 	}
 	
+
 	public void approveCandidate(Profile candidate) {
 		candidate.setIsApprovedFlag(true);
 		profileRepository.prepareCandidate(candidate);	
@@ -78,13 +74,6 @@ public class ProfileService implements IProfileService{
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
 		
-<<<<<<< HEAD
-=======
-		//System.out.println("profile creation called");
-		
-		return profileSearchService.addProfileIndex(candidate);
-		 
->>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 	}
 
 	private InterviewDetails prepareInterviewDetails(Profile candidate) {
