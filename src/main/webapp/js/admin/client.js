@@ -12,10 +12,13 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.message = sharedDataService.getmessage();
 	$scope.clietNameError= false;
 	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": [],"managerRound":[],"hrRound":[]};
+<<<<<<< HEAD
 	$scope.showOtherLocation=false;
 	$scope.location1=[];
 	
 	$scope.otherLocation="";
+=======
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 	$scope.onload = function(){
 		 
 		if($rootScope.info!=undefined)
@@ -95,9 +98,12 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	
 	
 	$scope.submit = function(){
+<<<<<<< HEAD
 		$scope.save();
 		
 		$scope.client.locations=$scope.otherLocation;
+=======
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 		if($scope.clietNameError == false){
 			$scope.client.clientId = $scope.client.clientName.toUpperCase().replace(/\s/g, '');
 			clientService.createClient($scope.client)
@@ -126,6 +132,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		$scope.cls=appConstants.ERROR_CLASS;  	};
 
 	}
+<<<<<<< HEAD
 	
 	
 	$scope.checkClientName= function(){
@@ -139,6 +146,9 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 				}
 			}
 	
+=======
+
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 	$scope.editClient = function(data){
 		sharedService.setclientId(data.clientId);
 		sharedService.setclientName(data.clientName);
@@ -146,6 +156,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		
 	}
 	
+<<<<<<< HEAD
 	$scope.otherLocations = function(location)
 	{  
 		if(location == "Others")
@@ -155,5 +166,22 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		else
 			$scope.showOtherLocation=false;
 	};	
+=======
+	$scope.status1 = {
+			isFirstOpen: true,			    
+			open1:true
+	};
+	$scope.checkClientName= function(){
+		console.log("got the call");
+		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName.toLowerCase() === $scope.client.clientName.toLowerCase() });
+		if($scope.isClientExist){
+			$scope.clietNameError= true;
+		}else{
+			$scope.clietNameError= false;
+					
+		}
+		}
+	
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 	
 }]);

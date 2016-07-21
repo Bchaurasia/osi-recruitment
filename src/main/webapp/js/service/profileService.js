@@ -34,7 +34,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		.catch(sendErrorprofileMsg);
 	}
 	function getProfiles(){
-		return $http.get('resources/profile')
+		return $http.get('resources/profiledb')
 			 .then(getProlilesData)
 			 .catch(sendErrorprofileMsg);
 	}

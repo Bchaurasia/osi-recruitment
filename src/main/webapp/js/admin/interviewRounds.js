@@ -17,7 +17,10 @@ app.controller('interviewRoundController',['$scope', '$http','$q', '$window', '$
 	$scope.message="";
 	$scope.hideError = true;
 	$scope.roundExist=false;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 	infoService.getInfoById('interviewRounds')
 			   .then(function(data){
 				   	$log.info("interview Rounds---------"+angular.toJson(data))
@@ -55,9 +58,16 @@ $scope.checkRounds = function(){
 	$scope.roundExist=false;
 	angular.forEach( $scope.interviewRounds, function(ir){
 		if($scope.newInterviewRound.toLowerCase() === ir.toLowerCase()){
+<<<<<<< HEAD
 			$scope.roundExist=true;
 	}	
 	});
+=======
+			  $scope.roundExist=true;
+	}	
+	});
+	
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 }
 
 $scope.deleteInterviewRound = function(index,interviewRound){

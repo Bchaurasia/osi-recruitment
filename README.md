@@ -1,4 +1,3 @@
-
 Required tech's
 ===============
 - Gradle [https://www.gradle.org/downloads]
@@ -9,7 +8,7 @@ Required tech's
 Import Project:
 - Open eclipse and import git project.
 
-- Repository Link: https://bitbucket.org/osirecruitmentportal/osi-recruitment-portal
+- Repository Link:https://ositechportal@bitbucket.org/ositechportal/osi-recruitment-portal.git
 
 - Then go to the project folder through command prompt.
 
@@ -30,4 +29,4 @@ MongoDB:
 
 ----------------------------
 
-Now open "http://localhost:8080/EmployeeReferral/" on a web browser.
+Now open "http://localhost:8080/osi-recruitment-portal/" on a web browser.

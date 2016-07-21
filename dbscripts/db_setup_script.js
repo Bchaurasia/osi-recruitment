@@ -20,9 +20,12 @@ db.createCollection("designation");
 print("designation Collection Created!");
 db.createCollection("sequence");
 print("sequence Collection Created!");
+db.createCollection("event");
+print("event Collection Created!");
 
 db.sequence.insert({"_id":"REQ","seq":0});
 db.sequence.insert({"_id":"JOB","seq":0});
+db.sequence.insert({"_id":"EVE","seq":0});
 
 db.info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 

@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.repository.InterviewDetailsRepository;
 import com.nisum.employee.ref.repository.ProfileRepository;
+import com.nisum.employee.ref.repository.UserInfoRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
 
@@ -22,6 +24,9 @@ public class ProfileService implements IProfileService{
 
 	@Autowired
 	ProfileRepository profileRepository;
+	
+	@Autowired
+	UserInfoRepository userInfoRepository;
 	
 	@Autowired
 	ProfileSearchService profileSearchService;
@@ -33,6 +38,7 @@ public class ProfileService implements IProfileService{
 	InterviewService interviewService;
 	
 	@Autowired
+<<<<<<< HEAD
 	InterviewDetailsRepository interviewDetailsRepository;
 	
 	@Autowired
@@ -40,6 +46,18 @@ public class ProfileService implements IProfileService{
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		candidate.setIsApprovedFlag(false);
+=======
+	IEventService eventService;
+	
+	public Profile prepareCandidate(Profile candidate) throws Exception {
+		Event e=new Event();
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created");
+		e.setCategory("General");
+//		e.setUsername(candidate.getCreatedBy());
+		e.setEmailId(candidate.getCreatedBy());
+		eventService.setEvent(e);
+		//System.out.println(e.getEventDesc());
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 		profileRepository.prepareCandidate(candidate);
 		try{
 			notificationService.sendProfileCreatedNotification(candidate);
@@ -60,6 +78,13 @@ public class ProfileService implements IProfileService{
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
 		
+<<<<<<< HEAD
+=======
+		//System.out.println("profile creation called");
+		
+		return profileSearchService.addProfileIndex(candidate);
+		 
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 	}
 
 	private InterviewDetails prepareInterviewDetails(Profile candidate) {

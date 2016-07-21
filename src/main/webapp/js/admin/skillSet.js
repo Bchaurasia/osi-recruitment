@@ -16,7 +16,8 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	$scope.newSkill="";
 	$scope.message="";
 	$scope.hideError = true;
-		
+	$scope.skillExist=false;
+
 		infoService.getInfoById('skills').then(function(skills){
 		$scope.skills1 = skills;
 		$scope.skills=skills.value.sort();
@@ -28,7 +29,11 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 		if($scope.newSkill == "" || $scope.newSkill == null ||$scope.newSkill == undefined){
 			$scope.hideError = false;
 		}else{
+<<<<<<< HEAD
 			var ck=!$scope.skillExist;
+=======
+		var ck=!$scope.skillExist;
+>>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 		if(ck){
 		$scope.skills1.value.push($scope.newSkill);
 		
