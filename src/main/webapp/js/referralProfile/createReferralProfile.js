@@ -35,7 +35,8 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.candidate.expMonth="0";
 	$scope.requisitionId="";
 	$scope.candidate.jobCode = sharedService.getjobCode();
-		
+	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.candidate.currency="INR";
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){

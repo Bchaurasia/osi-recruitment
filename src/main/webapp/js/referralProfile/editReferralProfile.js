@@ -16,6 +16,8 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.todayDate = new Date();
 	$scope.requisitionId = "";
 	$scope.disableUpdateBtn = false;
+	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.candidate.currency="INR";
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("referral.searchReferralProfile");
