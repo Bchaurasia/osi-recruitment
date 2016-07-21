@@ -15,7 +15,7 @@
       			<label for="filled-in-box">Allow Multiple Rounds</label>
 			</div>
 		</div>
-		<div class="row" ng-if="interviewscheduleDetails.isReferral == false">
+		<div class="row" ng-if="showRequisitionDropdown == true">
 			<div class="input-field col s6" align="left">
 				<ui-select ng-model="interviewschedule.requisitionId"
 					theme="selectize" ng-disabled="disabled" style="width: 80%"
@@ -45,7 +45,7 @@
 
 			</div>
 		</div>
-		<div class="row" ng-if="interviewscheduleDetails.isReferral == true">
+		<div class="row" ng-if="showRequisitionDropdown == false">
 			<div class="input-field col s6">				
 				<div class="col-md-4">
 					<label class="lbl">RequisitionId : 

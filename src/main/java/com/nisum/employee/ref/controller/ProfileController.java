@@ -94,7 +94,6 @@ public class ProfileController {
 	@ResponseBody
 	public ResponseEntity<?> approveProfile(@RequestBody Profile candidate) {
 		profileService.approveCandidate(candidate);
-		System.out.println("in controller");
 		String jsonObj="{\"msg\":\"Uploaded profile successfully approved\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}

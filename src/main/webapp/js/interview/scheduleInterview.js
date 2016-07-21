@@ -23,7 +23,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.flag=false;
 	$scope.disableSchedueBtn= true;
 	$scope.hideInterviewLocation = false;
-	
+	$scope.showRequisitionDropdown = true;
 	var interviewId = sharedService.getInterviewId();
 	var interviewRound = sharedService.getinterviewRound();
 	console.log("Schedule Service : interviewId"+interviewId);
@@ -69,9 +69,16 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 		$state.go("recruitment.interviewManagement");
 	}
 		interviewService.getInterviewDetailsById(interviewId).then(
-		function(data){
-						
+		function(data){			
+			
 			$scope.interviewscheduleDetails=data;
+						
+			if($scope.interviewscheduleDetails.isReferral == true) {
+				if($scope.interviewscheduleDetails.jobCode != undefined)
+					$scope.showRequisitionDropdown = false;
+				else
+					$scope.showRequisitionDropdown = true;
+			}
 			
 			$scope.rounds1=[];
 			angular.forEach($scope.interviewscheduleDetails.rounds,function(round){
