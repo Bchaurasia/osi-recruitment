@@ -72,7 +72,7 @@ public class PositionService implements IPositionService {
 	}
 
 	public List<PositionAggregate> retrieveAllPositionsAggregate() {
-		return positionRepository.retrieveAllPositionsAggregateFromElastic();
+		return positionRepository.retrieveAllPositionsAggregate();
 	}
 	
 	public List<Position> retrievePositionsbasedOnPositionType(String positionType) {

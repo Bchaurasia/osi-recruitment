@@ -101,7 +101,7 @@ public class PositionServiceTest {
 	@Test
 	public void testRetrieveAllPositionsAggregate() {
 		positionService.retrieveAllPositionsAggregate();
-		verify(positionRepository, times(1)).retrieveAllPositionsAggregateFromElastic();
+		verify(positionRepository, times(1)).retrieveAllPositionsAggregate();
 	}
 
 	@Test
