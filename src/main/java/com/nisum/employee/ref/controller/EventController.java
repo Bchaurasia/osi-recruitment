@@ -40,7 +40,7 @@ public class EventController {
 	}
 	
 	
-	//@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody
 	@RequestMapping(value = "/getEvents", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveAllEvents() {
@@ -49,6 +49,7 @@ public class EventController {
 		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
 	}
 	
+	@Secured({"ROLE_USER","ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody
 	@RequestMapping(value = "/getEventsGeneral", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveGeneralEvents() {
