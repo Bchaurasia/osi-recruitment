@@ -23,7 +23,7 @@ public class EventService implements IEventService {
 	public void setEvent(Event event) {
 		// TODO Auto-generated method stub
 		event.setEventId("EVE_" + sequenceRepository.getNextSequenceId("EVE"));
-		event.setTimeStamp(new Date());
+		event.setCreatedTimeStamp(new Date());
 		List<UserInfo> userInfo=userInfoRepository.retrieveUserById(event.getEmailId());
 		for(UserInfo user:userInfo){
 			if(user.getName()==""||user.getName()==null)
@@ -52,6 +52,13 @@ public class EventService implements IEventService {
 	public List<Event> getEvents() {
 		// TODO Auto-generated method stub
 		return eventRepo.retieveEvents();
+	
+	}
+	
+	@Override
+	public List<Event> getEventsForGeneral() {
+		// TODO Auto-generated method stub
+		return eventRepo.retieveEventsForGeneral();
 	
 	}
 
