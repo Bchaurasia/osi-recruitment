@@ -41,7 +41,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.positionObj=[];
 			$scope.jobcodelistObj=positions;
 			angular.forEach($scope.jobcodelistObj,function(position){
-				 if(position.status === "Active"){
+				 if(position.status!== "Hired"){
 					 $scope.positionObj.push(position);
 				 }
 			 });
@@ -90,7 +90,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			if(_.contains($scope.user.roles, "ROLE_INTERVIEWER")){
 		    	$scope.rounds=[];
 		    		angular.forEach($scope.interviewscheduleDetails.rounds,function(round){
-				    	if(round.roundName === 'Technical Round 1' || round.roundName === 'Technical Round 2'){
+				    	if(round.roundName === 'Level 1' || round.roundName === 'Level 2'){
 				    		$scope.rounds.push(round);
 						}
 					});	
@@ -146,11 +146,11 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.setInterviewData= function(round) {
 		$scope.interviewerName=null;
-		if(round=== "Hr Round"){
+		if(round=== "HR"){
 			userService.getHrUsers().then(function(userData){
 				 $scope.interviewerNames = userData;
 			});
-		}else if(round=== "Manager Round"){
+		}else if(round=== "Managerial"){
 			userService.getManagerUsers().then(function(userData){
 				 $scope.interviewerNames = userData;
 			});

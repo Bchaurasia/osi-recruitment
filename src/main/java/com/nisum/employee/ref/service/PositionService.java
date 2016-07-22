@@ -121,10 +121,10 @@ public class PositionService implements IPositionService {
 
 	private ArrayList<String> getInterviewRounds() {
 		ArrayList<String> interviewRounds = new ArrayList<>();
-		interviewRounds.add("Technical Round 1");
-		interviewRounds.add("Technical Round 2");
-		interviewRounds.add("Hr Round");
-		interviewRounds.add("Manager Round");
+		interviewRounds.add("Level 1");
+		interviewRounds.add("Level 2");
+		interviewRounds.add("HR");
+		interviewRounds.add("Managerial");
 		return interviewRounds;
 	}
 }

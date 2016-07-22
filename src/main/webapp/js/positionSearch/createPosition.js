@@ -12,7 +12,7 @@ app.controller("createPositionCtrl", ['$scope', '$http', '$upload','$filter', '$
    
 	$scope.position.primarySkills = {};
 	$scope.position.interviewRounds = {};
-	$scope.position.interviewRounds = ['Technical Round 1','Technical Round 2','Hr Round','Manager Round'];
+	$scope.position.interviewRounds = ['Level 1','Level 2','HR','Managerial'];
 	$scope.position.designation = "";
 	$scope.position.minExpYear = "";
 	$scope.position.maxExpYear = "";

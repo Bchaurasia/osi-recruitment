@@ -184,7 +184,7 @@
 
 		</div>
 		<div
-			ng-if="(data.roundName == 'Technical Round 1') || (data.roundName == 'Technical Round 2')"
+			ng-if="(data.roundName == 'Level 1') || (data.roundName == 'Level 2')"
 			class="row" ng-show="data.interviewFeedback"
 			ng-repeat="skill in data.interviewFeedback.rateSkills">
 			<div class="input-field col s6">
@@ -197,7 +197,7 @@
 			</div>
 		</div>
 		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
+			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
 			class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewFeedback.managementSkillset}}/5</p>
@@ -209,7 +209,7 @@
 			</div>
 		</div>
 		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
+			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
 			class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/5</p>
@@ -221,7 +221,7 @@
 			</div>
 		</div>
 		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
+			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
 			class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/5</p>
@@ -233,7 +233,7 @@
 			</div>
 		</div>
 		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
+			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
 			class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/5</p>

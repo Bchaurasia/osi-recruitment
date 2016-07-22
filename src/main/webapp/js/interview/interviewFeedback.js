@@ -94,27 +94,27 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 					     
 					$scope.tabs = [
 				   	{	
-	               		"rounds": ["Technical Round 1","Technical Round 2"],
+	               		"rounds": ["Level 1","Level 2"],
 						"heading": "Technical",
 						"template":"technicalFeedback.html"
 					},
 		   			{	
-						"rounds": ["Technical Round 1","Technical Round 2","Manager Round","Hr Round"],
+						"rounds": ["Level 1","Level 2","Manager Round","HR"],
 		   				"heading": "Functional",
 		   				"template":"functionalFeedback.html"
 		   			},
 		   			{	
-		   				"rounds": ["Technical Round 1","Technical Round 2","Manager Round","Hr Round"],
+		   				"rounds": ["Level 1","Level 2","Manager Round","HR"],
 		   				"heading": "Soft Skills",
 		   				"template":"softSkillsFeedback.html"
 		   			},		   			
 		   			{	
-		   				"rounds": ["Manager Round","Hr Round"],
+		   				"rounds": ["Managerial","HR"],
 		   				"heading": "Management Skills",
 		   				"template":"mangementSkillset.html"
 		   			},
 		   			{	
-		   				"rounds": ["Technical Round 1","Technical Round 2","Manager Round","Hr Round"],
+		   				"rounds": ["Level 1","Level 2","Managerial","HR"],
 		   				"heading": "Comment",
 		   				"template":"commentFeedback.html"
 		   			}
@@ -125,7 +125,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 					break;
 				}
 				
-				else if(($scope.interview.rounds[i].roundName=="Hr Round")){
+				else if(($scope.interview.rounds[i].roundName=="HR")){
 					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
 					$scope.interviewFeedback = $scope.interview.rounds[i].interviewFeedback;
 					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;

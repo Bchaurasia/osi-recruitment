@@ -5,7 +5,7 @@
 <div style="padding-left:20px;padding-right:20px;">
 <p style="font-size:18px;">Hi Team,<br><br>This mail is to inform that the interview feedback for <b>$roundName</b> of <b>$cname</b> for <b>$jobcode</b> has been submitted by $iname.
 </p>
-#if ($roundName == "Technical Round 1" || $roundName == "Technical Round 2")
+#if ($roundName == "Level 1" || $roundName == "Level 2")
 #set($count = 1)
 <table style="width:450px;border-collapse: collapse;">
 <th style="border: 1px solid #000000;text-align: center;background-color:#004C7F;color:#ffffff;"><p style="font-family:Calibri;font-size:18px;">#</p></th>

@@ -11,9 +11,8 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
 	$scope.clietNameError= false;
-	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": [],"managerRound":[],"hrRound":[]};
+	$scope.client.interviewers = {"Level1": [], "Level2": [],"managerial":[],"hr":[]};
 	$scope.showOtherLocation=false;
-	$scope.disable=false;
 	$scope.location1=[];
 	
 	$scope.otherLocation="";
@@ -151,22 +150,10 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	{  
 		if(location == "Others")
 		{
-			
-			if($scope.otherLocation !=""){
-				$scope.disable=false;
-			}
-				
-			else{
-				$scope.disable=true;
-			}
-				
 			$scope.showOtherLocation=true;
-			
 		}
-		else{
-			$scope.disable=false;
+		else
 			$scope.showOtherLocation=false;
-		}
 	};	
 	
 }]);
