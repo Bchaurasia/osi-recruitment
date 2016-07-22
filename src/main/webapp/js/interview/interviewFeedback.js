@@ -99,12 +99,12 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 						"template":"technicalFeedback.html"
 					},
 		   			{	
-						"rounds": ["Level 1","Level 2","Manager Round","HR"],
+						"rounds": ["Level 1","Level 2","Managerial","HR"],
 		   				"heading": "Functional",
 		   				"template":"functionalFeedback.html"
 		   			},
 		   			{	
-		   				"rounds": ["Level 1","Level 2","Manager Round","HR"],
+		   				"rounds": ["Level 1","Level 2","Managerial","HR"],
 		   				"heading": "Soft Skills",
 		   				"template":"softSkillsFeedback.html"
 		   			},		   			
