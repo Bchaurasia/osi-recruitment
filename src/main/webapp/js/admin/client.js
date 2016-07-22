@@ -13,6 +13,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.clietNameError= false;
 	$scope.client.interviewers = {"technicalRound1": [], "technicalRound2": [],"managerRound":[],"hrRound":[]};
 	$scope.showOtherLocation=false;
+	$scope.disable=false;
 	$scope.location1=[];
 	
 	$scope.otherLocation="";
@@ -150,10 +151,22 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	{  
 		if(location == "Others")
 		{
+			
+			if($scope.otherLocation !=""){
+				$scope.disable=false;
+			}
+				
+			else{
+				$scope.disable=true;
+			}
+				
 			$scope.showOtherLocation=true;
+			
 		}
-		else
+		else{
+			$scope.disable=false;
 			$scope.showOtherLocation=false;
+		}
 	};	
 	
 }]);

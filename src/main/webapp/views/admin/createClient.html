@@ -11,37 +11,45 @@
 			<div class="input-field col s6">
 				<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Client
 					Name<b class="mandatory">*</b>
-				</label>
-				<input type="text" name="clientName" id="clientName" style="top: 1px; height: 29px"
-								placeholder="Enter Client Name" ng-model="client.clientName" ng-change="checkClientName()" required/>
-								<span ng-show="clietNameError" class="validation-error">Client name already exist</span>
+				</label> <input type="text" name="clientName" id="clientName"
+					style="top: 1px; height: 29px" placeholder="Enter Client Name"
+					ng-model="client.clientName" required />
 			</div>
 			<div class="input-field col s6">
-				 <select placeholder="Select location" ng-change="otherLocations(client.locations)"
-					ng-disabled="disLocation" ng-model="client.locations" required
-					ng-options="o as o for o in locations"
-					class="form-control input-sm" >
-					<option value='' disabled="disabled" >Select Location</option>
-					
-				</select>
-				<label> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location<b class="mandatory">*</b>
+				<select placeholder="Select location"
+					ng-change="otherLocations(client.locations)"
+					ng-disabled="disLocation" ng-model="client.locations"
+					ng-options="o as o for o in locations" disabled="disabled"
+					class="form-control input-sm" required>
+					<option value=''>Select Location</option>
+
+				</select> <label> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location<b
+					class="mandatory">*</b>
 				</label>
 			</div>
 			
 		</div>
 		<div class="row" ng-show="showOtherLocation">
 			<div class="input-field col s6">
-				<label class="lbl"> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
+				<label class="lbl"> <i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
 					Location
-				</label>
-				<input type="text" name="olocation" id="olocation" style="top: 1px; height: 29px"
-								placeholder="Enter Client Name" ng-model="otherLocation" required/>
+				</label> <input type="text" name="olocation" id="olocation"
+					style="top: 1px; height: 29px"
+					ng-change="otherLocations(client.locations)"
+					placeholder="Enter Client Name" ng-model="otherLocation"
+					ng-minlength="3">
+
+				<div class="validation-error"
+					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.minlength">
+					Other Location must be at least 3 characters .</div>
 			</div>
 		</div>
 		<div class="row" align="center">
 			<div class="input-field col s12">
 				<button class="btn btn-info active"
-				    ng-disabled="clientForm.$invalid || clietNameError" type="submit" ng-click="submit()">
+					ng-disabled="disable || clientForm.$invalid" type="submit"
+					ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>
 				<button class="btn btn-info active" ui-sref="admin.client.list">

@@ -12,19 +12,36 @@
 					<span ng-show="clietNameError" class="validation-error">Client name already exist</span>
 			</div>
 			<div class="input-field col s6" align="center">
-				<select placeholder="Select Location" ng-model="client.locations"
-					ng-options="o as o for o in plocation"
+				<select placeholder="Select Location" ng-model="client.locations" ng-change="otherLocations(client.locations)"
+					ng-options="o as o for o in plocation" disabled="disabled" ng-disabled="disLocation"
 					class="form-control input-sm" required>
 					<option value="">{{client.locations}}</option>
 				</select> <label>Location</label>
 			</div>
 		</div>
+		
+		<div class="row" ng-show="showOtherLocation">
+			<div class="input-field col s6">
+				<label class="lbl"> <i
+					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
+					Location
+				</label> <input type="text" name="olocation" id="olocation"
+					style="top: 1px; height: 29px"
+					ng-change="otherLocations(client.locations)"
+					placeholder="Enter Client Name" ng-model="otherLocation"
+					ng-minlength="3">
+
+				<div class="validation-error"
+					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.minlength">
+					Other Location must be at least 3 characters .</div>
+			</div>
+		</div>
 		<br>
 		<div align="center" class="row">
 			<div align="center" class="input-field col s11">
-				<button class="btn btn-primary" type="submit"
-					ng-click="updateClient()" ng-disabled="clietNameError">
-            		<span class="glyphicon glyphicon-ok-circle"  ></span> Save
+				<button class="btn btn-primary" ng-disabled="disable || clientForm.$invalid"
+				 type="submit" ng-click="updateClient()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>
 				<button class="btn btn-primary" ui-sref="admin.client.list">
 					<span class="glyphicon glyphicon-remove"></span> Cancel

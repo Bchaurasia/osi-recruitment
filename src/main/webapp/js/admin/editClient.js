@@ -4,13 +4,17 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 	$scope.clientId = sharedService.getclientId();
 	$scope.clientName = sharedService.getclientName();
 	$scope.client = {};
+	$scope.clients = {};
 	$scope.clientUsers = {};
 	$scope.successAlert='alert  alert-success';
 	$scope.errorAlert='alert alert-danger alert-error';
 	$scope.client.locations="";
+	$scope.location1=[];
 	$scope.plocation=$rootScope.info.locations;
 	var getClient = $http.get( 'resources/getClientById?clientId='+$scope.clientId);
 	var getUsers_URL = $http.get('resources/user?clientName='+$scope.clientName);
+	$scope.showOtherLocation = false;
+	$scope.disable=false;
 	
 	$q.all([getClient, getUsers_URL]).then(
 		function(response){
@@ -42,6 +46,8 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 		}
 	
 	$scope.updateClient = function(){
+		
+		$scope.client.locations=$scope.otherLocation;
 		var validate=$scope.validateSave($scope.client);
 		if(validate){
 		clientService.updateClient($scope.client)
@@ -88,5 +94,27 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 		} else
 			return "Enter A Valid Name!..";
 	};
+	
+	$scope.otherLocations = function(location)
+	{  
+		if(location == "Others")
+		{
+			
+			if($scope.otherLocation != ""){
+				$scope.disable=false;
+			}
+				
+			else{
+				$scope.disable=true;
+			}
+				
+			$scope.showOtherLocation=true;
+			
+		}
+		else{
+			$scope.disable=false;
+			$scope.showOtherLocation=false;
+		}
+	};	
 	
 }]);
