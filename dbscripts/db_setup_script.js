@@ -83,18 +83,18 @@ db.userInfo.insert({"_id":"panduri@osius.com",'name':"Pradeep Anduri","mobileNum
 db.userInfo.insert({"_id":"tpotluri@osius.com",'name':"Raju Kanumury","mobileNumber":"9963268260",location:"Hyderabad",skypeId:"rkanumury",roles:["ROLE_HR"]});
 
 //ADMIN role
-db.userInfo.insert({"_id":"rlingala@osius.com",'name':"Ranjith Lingala","mobileNumber":"9966889726",location:"Hyderabad",skypeId:"rlingala",roles:["ROLE_HR,ROLE_ADMIN"]});
+db.userInfo.insert({"_id":"rlingala@osius.com",'name':"Ranjith Lingala","mobileNumber":"9966889726",location:"Hyderabad",skypeId:"rlingala",roles:["ROLE_HR","ROLE_ADMIN"]});
 
-db.clientInfo.insert([{"_id":"MACYS","clientName":"Macy’s","locations":"Hyderabad","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"GAP","clientName":"GAP","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"BOULDER LOGIC","clientName":"Boulder logic","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"PROLOGIC","clientName":"Prologic","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"PLANVIEW","clientName":"PlanView","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"BITSTEW","clientName":"Bitstew","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"TOUCH COMMERCE","clientName":"Touch Commerce","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"E3 RETAIL","clientName":"E3 Retail","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"LIBERCUS","clientName":"Libercus","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}},
-                	  {"_id":"JACOBS","clientName":"Jacobs","locations":"SF","interviewers":{Level_1:[],Level_2:[],Managerial:[],HR:[]}}
+db.clientInfo.insert([{"_id":"MACYS","clientName":"Macy’s","locations":"Hyderabad"},
+                	  {"_id":"GAP","clientName":"GAP","locations":"SF"},
+                	  {"_id":"BOULDER LOGIC","clientName":"Boulder logic","locations":"SF"},
+                	  {"_id":"PROLOGIC","clientName":"Prologic","locations":"SF"},
+                	  {"_id":"PLANVIEW","clientName":"PlanView","locations":"SF"},
+                	  {"_id":"BITSTEW","clientName":"Bitstew","locations":"SF"},
+                	  {"_id":"TOUCH COMMERCE","clientName":"Touch Commerce","locations":"SF"},
+                	  {"_id":"E3 RETAIL","clientName":"E3 Retail","locations":"SF"},
+                	  {"_id":"LIBERCUS","clientName":"Libercus","locations":"SF"},
+                	  {"_id":"JACOBS","clientName":"Jacobs","locations":"SF"}
                 	  ]);
 
 db.designation.insert([{"_id":"Project Associate Trainee","maxExpYear":"1","minExpYear":"0","skills":["Java","C"]},
