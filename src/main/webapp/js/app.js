@@ -1,4 +1,4 @@
-var app = angular.module('erApp', ['ngTagsInput','ngGrid','ngRoute','angularFileUpload','blockUI', 'ui.utils.masks', 'ui.router','xeditable','ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ui.select','ngSanitize','ngNotify','components','ngAnimate','kendo.directives','ngIdle']);
+var app = angular.module('erApp', ['ngTagsInput','ngGrid','ngRoute','angularFileUpload','blockUI', 'ui.utils.masks', 'ui.router','xeditable','ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ui.select','ngSanitize','ngNotify','components','ngAnimate','kendo.directives','ngIdle','angularMoment']);
 
 app.config(['$stateProvider', '$urlRouterProvider', 'KeepaliveProvider', 'IdleProvider', function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider) {
     
