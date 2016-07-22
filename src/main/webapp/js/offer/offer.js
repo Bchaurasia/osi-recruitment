@@ -16,7 +16,7 @@ app.controller('offerManagementCtrl',['$scope', '$http','$q', '$window','$state'
 	$scope.searchOfferQuery = function(){
 		offerService.getOfferDataFromInterview($scope.searchQuery).then(function(candidateData){
 			$scope.myData = _.filter(candidateData, function(candidate){ 
-						 if(angular.equals(candidate.status,'Selected') && angular.equals(candidate.roundName,'Hr Round')){
+						 if(angular.equals(candidate.status,'Selected') && angular.equals(candidate.roundName,'HR')){
 							 offerService.getOfferData(candidate.candidateEmail).then(function(offerdata){
 								 $scope.data=offerdata;
 										$scope.data={candidate,offerdata};
