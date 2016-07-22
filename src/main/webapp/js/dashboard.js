@@ -12,9 +12,12 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
 	$scope.showNoAppRequisitionMsg = false;
-	var totalProfiles=0;
 	$scope.totalPositionData=[];
-	
+	$scope.designationWithStatusCount=[];
+	$scope.totalProfiles=0;
+	$scope.HiredCount = 0;
+	$scope.totalRequisitions = 0;
+	$scope.totalPositions = 0;
 	$scope.feedback = function(jobcode,candidateEmail) {
 		sharedService.setjobCode(jobcode);
 		sharedService.setprofileUserId(candidateEmail);
@@ -27,7 +30,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		
 		profileService.getProfiles().then(function(data){
 			console.log("total profiles " + data.length);			
-			totalProfiles=data.length;
+			$scope.totalProfiles=data.length;
 		}).catch(function(data){
 			
 		});		
@@ -39,24 +42,23 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	function getTotalHired()
 	{
 		var totalPositions=[];
-		var HiredCount=0;
-		var totalPositions=0;
 	
 		positionService.getPosition().then(function(data){
 			$scope.totalPositionData=data;
 			//console.log(data);
-			totalPositions=data.length;
+			
+			$scope.totalPositions=data.length;
 			for(var i=0;i<data.length;i++)
 				{
 				
 				if(data[i].status=="Hired")
 					{
-					 HiredCount+=1;
+					 $scope.HiredCount+=1;
 					}
 				}
 			
-			console.log("HiredCount "+HiredCount);
-			console.log("total positions "+totalPositions )
+			//console.log("HiredCount "+HiredCount);
+			//console.log("total positions "+totalPositions )
 		});
 		
 		
@@ -64,17 +66,16 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	getTotalHired();
 	
 	function getTotalRequisitions(){
-		var totalRequisitions=0;
 		requisitionService.getAllRequisitions().then(function(data){
-			totalRequisitions=data.length;
-			console.log("total requisitions= "+totalRequisitions);
+			$scope.totalRequisitions=data.length;
+			//console.log("total requisitions= "+totalRequisitions);
 		});
 	}
 	getTotalRequisitions();
 	
 	function getDesignationSpecificData(){
 		var designationArray=[];
-		var designationWithStatusCount=[];
+		
 		designationService.getDesignation().then(function(data){
 			//console.log("--------------------==========="+angular.toJson(data));
 			for(var i=0;i<data.length;i++)
@@ -114,19 +115,19 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				     }
 					
 					
-					designationWithStatusCount.push({
+					$scope.designationWithStatusCount.push({
 						"Position":designationArray[j],
 						"Active"  :activecount,
 						"OnHold"  :onholdcount,
 						"Hired"   :hiredcount,
-					   "Inctive"  :inactivecount,
+					   "Inactive"  :inactivecount,
 					   "Rejected" :rejectedcount,
 					   "Selected" :selectedcount,
 					   "Total"    :totalCount
 					});
 				
 				}
-				 console.log("designationWithStatusCount "+angular.toJson(designationWithStatusCount));
+				 console.log("designationWithStatusCount "+angular.toJson($scope.designationWithStatusCount));
 		});
 	//	console.log("designationWithStatusCount "+designationWithStatusCount);
 	
@@ -250,6 +251,22 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			$scope.hideNoInterviewMsg = false;
 		});
 	}
+	
+	$scope.getGraphData = function(position) {
+//		alert(position);
+		var graphDetails = _.find($scope.designationWithStatusCount, function (o) { return o.Position == position; });
+//		alert(angular.toJson(graphDetails));
+		$scope.graphData = graphDetails;
+		$scope.positionDetails = {};
+		$scope.positionDetails.position = graphDetails.Position;
+		$scope.positionDetails.active = Math.round((graphDetails.Active * 100)/graphDetails.Total);
+		$scope.positionDetails.inactive = Math.round((graphDetails.Inactive * 100)/graphDetails.Total);
+		$scope.positionDetails.hired = Math.round((graphDetails.Hired * 100)/graphDetails.Total);
+		$scope.positionDetails.onhold = Math.round((graphDetails.Onhold * 100)/graphDetails.Total);
+		$scope.positionDetails.selected = Math.round((graphDetails.Selected * 100)/graphDetails.Total);
+		/*$scope.positionDetails.rejected = Math.round((graphDetails.rejected * 100)/graphDetails.total;*/
+	}
+	
 	
 	/*
 	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
