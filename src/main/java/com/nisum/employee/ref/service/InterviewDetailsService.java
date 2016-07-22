@@ -219,6 +219,12 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			int size = interviewDetails2.getRounds().size();
 			List<Round> rounds = interviewDetails2.getRounds();
 			interviewSchedule.setRoundStatus( interviewSchedule.getRoundName() + " Scheduled");
+			ArrayList<String> emailIds =  new ArrayList<String>();
+			interviewDetails2.setScheduledInterviewersEmails(emailIds);
+			for (Round round : rounds) {
+					interviewDetails2.getScheduledInterviewersEmails().add(round.getInterviewSchedule().getEmailIdInterviewer());	
+				}
+			
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 		
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
@@ -230,7 +236,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			interviewDetails2.setJobDescription(interviewSchedule.getJobDescription());
 			interviewDetails2.setRequisitionId(interviewSchedule.getRequisitionId());
 			interviewDetails2.setRoundName(interviewSchedule.getRoundName());
-			interviewDetails2.getScheduledInterviewersEmails().add(interviewSchedule.getEmailIdInterviewer());	
+			interviewDetails2.getScheduledInterviewersEmails().add(interviewSchedule.getEmailIdInterviewer());
 			interviewDetails2.setInterviewDateTime(interviewSchedule.getInterviewDateTime());
 
 		}else{

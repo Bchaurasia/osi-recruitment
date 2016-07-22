@@ -3,7 +3,7 @@ var app = angular.module('erApp', ['ngTagsInput','ngGrid','ngRoute','angularFile
 app.config(['$stateProvider', '$urlRouterProvider', 'KeepaliveProvider', 'IdleProvider', function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider) {
     
 	
-    IdleProvider.windowInterrupt('focus');
+   IdleProvider.windowInterrupt('focus');
 	
 	$urlRouterProvider.otherwise('/');
         

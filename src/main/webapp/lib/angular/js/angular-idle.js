@@ -84,7 +84,7 @@ angular.module('ngIdle.idle', ['ngIdle.keepalive', 'ngIdle.localStorage'])
       idle: 20 * 60, // in seconds (default is 20min)
       timeout: 30, // in seconds (default is 30sec)
       autoResume: 'idle', // lets events automatically resume (unsets idle state/resets warning)
-      interrupt: 'mousemove keydown DOMMouseScroll mousewheel mousedown touchstart touchmove scroll',
+      interrupt: 'click keydown DOMMouseScroll mousewheel mousedown touchstart touchmove scroll',
       windowInterrupt: null,
       keepalive: true
     };
@@ -309,7 +309,7 @@ angular.module('ngIdle.idle', ['ngIdle.keepalive', 'ngIdle.localStorage'])
             return; // Fix for Chrome desktop notifications, triggering mousemove event.
           }
 
-          if (event.type !== 'mousemove' || lastMove.hasMoved(event)) {
+          if (event.type !== 'mousemove') {
             svc.interrupt();
           }
         });
