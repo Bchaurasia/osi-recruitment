@@ -5,7 +5,8 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	return {
 		getPositionData : getPositionData,
 		getScheduleData : getScheduleData,
-		getScheduleDataInterview : getScheduleDataInterview
+		getScheduleDataInterview : getScheduleDataInterview,
+		getAllEvents : getAllEvents
 	};
 	
 	function getPositionData(obj){
@@ -32,6 +33,15 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 				data = response.data;
 		})
 		.catch(getScheduleDataError);
+	}
+	
+	function getAllEvents() {
+		return $http.get('resources/getEvents').then(function(response){
+			return response.data;
+			
+		}).catch(function(response) {
+			return "Failed to get Events!"
+		})
 	}
 	
 	function getPositionDataSuccess(response){

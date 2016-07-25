@@ -11,6 +11,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.profileData=[];
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
+	// $scope.events = [];
 	$scope.showNoAppRequisitionMsg = false;
 	$scope.totalPositionData=[];
 	$scope.designationWithStatusCount=[];
@@ -39,13 +40,20 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	}
 	getProfileCount();
 	
+$scope.state = false;
+    
+    $scope.toggleState = function() {
+        $scope.state = !$scope.state;
+    };
+    
+    
 	function getTotalHired()
 	{
 		var totalPositions=[];
 	
 		positionService.getPosition().then(function(data){
 			$scope.totalPositionData=data;
-			//console.log(data);
+			// console.log(data);
 			
 			$scope.totalPositions=data.length;
 			for(var i=0;i<data.length;i++)
@@ -57,8 +65,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 					}
 				}
 			
-			//console.log("HiredCount "+HiredCount);
-			//console.log("total positions "+totalPositions )
+			// console.log("HiredCount "+HiredCount);
+			// console.log("total positions "+totalPositions )
 		});
 		
 		
@@ -68,7 +76,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	function getTotalRequisitions(){
 		requisitionService.getAllRequisitions().then(function(data){
 			$scope.totalRequisitions=data.length;
-			//console.log("total requisitions= "+totalRequisitions);
+			// console.log("total requisitions= "+totalRequisitions);
 		});
 	}
 	getTotalRequisitions();
@@ -77,14 +85,14 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		var designationArray=[];
 		
 		designationService.getDesignation().then(function(data){
-			//console.log("--------------------==========="+angular.toJson(data));
+			// console.log("--------------------==========="+angular.toJson(data));
 			for(var i=0;i<data.length;i++)
 				{
-				//console.log(angular.toJson(data[i].designation));
+				// console.log(angular.toJson(data[i].designation));
 				designationArray.push(data[i].designation);
 				}
-		//	console.log("desgnation array"+designationArray);
-			//console.log("total position data "+$scope.totalPositionData);
+		// console.log("desgnation array"+designationArray);
+			// console.log("total position data "+$scope.totalPositionData);
 			
 				 for(var j=0;j<designationArray.length;j++)
 				 {
@@ -129,7 +137,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				}
 				 console.log("designationWithStatusCount "+angular.toJson($scope.designationWithStatusCount));
 		});
-	//	console.log("designationWithStatusCount "+designationWithStatusCount);
+	// console.log("designationWithStatusCount "+designationWithStatusCount);
 	
 	}
 	getDesignationSpecificData();
@@ -226,7 +234,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
 			.then(function(data){
-				//$scope.requisitionsDetails = data;
+				// $scope.requisitionsDetails = data;
 				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;
@@ -252,10 +260,14 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		});
 	}
 	
+	dashboardService.getAllEvents().then(function(data){
+		$scope.events = data;
+	});
+	
 	$scope.getGraphData = function(position) {
-//		alert(position);
+// alert(position);
 		var graphDetails = _.find($scope.designationWithStatusCount, function (o) { return o.Position == position; });
-//		alert(angular.toJson(graphDetails));
+// alert(angular.toJson(graphDetails));
 		$scope.graphData = graphDetails;
 		$scope.positionDetails = {};
 		$scope.positionDetails.position = graphDetails.Position;
@@ -264,49 +276,38 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.positionDetails.hired = Math.round((graphDetails.Hired * 100)/graphDetails.Total);
 		$scope.positionDetails.onhold = Math.round((graphDetails.Onhold * 100)/graphDetails.Total);
 		$scope.positionDetails.selected = Math.round((graphDetails.Selected * 100)/graphDetails.Total);
-		/*$scope.positionDetails.rejected = Math.round((graphDetails.rejected * 100)/graphDetails.total;*/
+		/*
+		 * $scope.positionDetails.rejected = Math.round((graphDetails.rejected *
+		 * 100)/graphDetails.total;
+		 */
 	}
 	
 	
 	/*
-	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
-			|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER"))){
-		requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
-			 $scope.allRequisitions=data;
-			if(_.isEmpty(data) ){
-				$scope.hideNoRequisitionMsg = false;
-			}else{
-				$scope.hideNoRequisitionMsg = true;
-			}
-			}).catch(function(msg){
-			$log.error(msg);
-			});	
-	}		
-	
-	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
-		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
-			.then(function(data){
-				$scope.requisitionsDetails = data;
-			})
-			.catch(function(msg){
-				$log.error(msg);
-			});
-	}
-	
-	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
-			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER")))){
-		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
-		.then(function (data){
-			$scope.showScheduleDataInterview = data;
-			if(data == "" || data == null || data == undefined){
-				$scope.showNoInterviewMsg = true;
-			}
-		}).catch(function(msg){
-			$log.error(msg);
-			$scope.hideNoInterviewMsg = false;
-		});
-	}
-	*/
+	 * if(!_.isUndefined($rootScope.user) &&
+	 * (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") ||
+	 * _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER"))){
+	 * requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
+	 * $scope.allRequisitions=data; if(_.isEmpty(data) ){
+	 * $scope.hideNoRequisitionMsg = false; }else{ $scope.hideNoRequisitionMsg =
+	 * true; } }).catch(function(msg){ $log.error(msg); }); }
+	 * 
+	 * if(!_.isUndefined($rootScope.user) &&
+	 * _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
+	 * requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
+	 * .then(function(data){ $scope.requisitionsDetails = data; })
+	 * .catch(function(msg){ $log.error(msg); }); }
+	 * 
+	 * if(!_.isUndefined($rootScope.user) &&
+	 * (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") ||
+	 * _.contains($rootScope.user.roles,"ROLE_HR") ||
+	 * _.contains($rootScope.user.roles,"ROLE_MANAGER")))){
+	 * dashboardService.getScheduleDataInterview($rootScope.user.emailId)
+	 * .then(function (data){ $scope.showScheduleDataInterview = data; if(data == "" ||
+	 * data == null || data == undefined){ $scope.showNoInterviewMsg = true; }
+	 * }).catch(function(msg){ $log.error(msg); $scope.hideNoInterviewMsg =
+	 * false; }); }
+	 */
 	$scope.interviewDateTimeFuture = function(date) {
 		var today = new Date();
 		if(today < date)

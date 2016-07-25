@@ -26,6 +26,7 @@
 	padding: 10px 5px;
 	font-size: 171%;
 	height: 35px;
+	background: #b5b4b4;
 }
 
 .req-title {
@@ -62,11 +63,11 @@
 </style>
 
 <!-- <div class="statistics-container" align="center"></div> -->
-<div id="btn" class="ui black huge launch right attached button"
+<!-- <div id="btn" class="ui black huge launch right attached button"
 	style="display: absolute; left: 0px; width: 70px;">
 	<i class="material-icons">keyboard_arrow_left</i> <span class="text"
 		style="display: none;">Activities</span>
-</div>
+</div> -->
 <div class="row">
 	<div class="col-md-8 row">
 		<div class="ui statistics" align="center">
@@ -174,51 +175,6 @@
 			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
 		</div>
 		<br> <br>
-
-	</div>
-
-	<div class="col-md-4">
-		<br>
-		<div class="ui feed " style="font-size: 100%;">
-			<h5 style="margin-top: 10px">Upcoming Events</h5>
-			<hr style="margin-left: 15px;">
-			<div style="max-height: 488px; height: auto; overflow: auto;">
-				<div class="event"
-					ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate "
-					ng-hide="showNoInterviewMsg">
-					<div class="label">
-						<span ng-if="schedule.round == 'Technical Round 1'"
-							class="initial" style="background: #e47575">TR 1</span> <span
-							ng-if="schedule.round == 'Technical Round 2'" class="initial"
-							style="background: #d4ab61">TR 2</span> <span
-							ng-if="schedule.round == 'Hr Round'" class="initial"
-							style="background: #7ad27a">HR </span> <span
-							ng-if="schedule.round == 'Manager Round'" class="initial"
-							style="background: #9696dc">MR</span>
-					</div>
-					<div class="content">
-						<div class="summary" align="left">
-							You need to take interview of <a class="user"
-								ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
-							</a> for <a class="user"
-								ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
-							</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
-									MMMM Do YYYY, h:mm a' }}</time></b>.
-							<div class="date">
-								<time am-time-ago="schedule.createdDate"></time>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div ng-show="showNoInterviewMsg">
-				<b style="font-size: 142%; color: #bfbbbb;">No Events </b>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-6">
 		<h5 style="margin-top: 15px" align="center">Requisition for
 			Approval</h5>
 		<hr>
@@ -254,110 +210,79 @@
 					Requisition to approve.</b>
 			</div>
 		</div>
+
 	</div>
-	<div class="col-md-6">
-		<h5 style="margin-top: 15px" align="center">Referred Profiles</h5>
-		<hr>
-	</div>
-</div>
-<div id="feed" class="ui styled sidebar "
-	style="background: white; width: 27%; padding: 10px">
-	<div class="ui feed " style="font-size: 100%;">
-		<h5 style="margin-top: 10px">Recent Activities</h5>
-		<hr style="margin-left: 15px;">
-		<div align="left">
-			<div class="event">
-				<div class="label">
-					<!-- <img src="/images/avatar/small/elliot.jpg"> -->
-				</div>
-				<div class="content">
-					<div class="summary">
-						<a class="user"> Elliot Fu </a> added you as a friend
-						<div class="date">1 Hour Ago</div>
+
+	<div class="col-md-4">
+		<br>
+		<div class="ui feed " style="font-size: 100%;">
+			<h5 style="margin-top: 10px">Upcoming Events</h5>
+			<hr style="margin-left: 15px;">
+			<div style="max-height: 250px; height: auto; overflow: auto;">
+				<div class="event"
+					ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate "
+					ng-hide="showNoInterviewMsg">
+					<div class="label">
+						<span ng-if="schedule.round == 'Technical Round 1'"
+							class="initial" style="background: #e47575">TR 1</span> <span
+							ng-if="schedule.round == 'Technical Round 2'" class="initial"
+							style="background: #d4ab61">TR 2</span> <span
+							ng-if="schedule.round == 'Hr Round'" class="initial"
+							style="background: #7ad27a">HR </span> <span
+							ng-if="schedule.round == 'Manager Round'" class="initial"
+							style="background: #9696dc">MR</span>
 					</div>
-					<div class="meta">
-						<a class="like"> <i class="like icon"></i> 4 Likes
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="event">
-				<div class="label">
-					<!-- <img src="/images/avatar/small/helen.jpg"> -->
-				</div>
-				<div class="content">
-					<div class="summary">
-						<a>Helen Troy</a> added <a>2 new illustrations</a>
-						<div class="date">4 days ago</div>
-					</div>
-					<div class="extra images">
-						<a><img src="/images/wireframe/image.png"></a> <a><img
-							src="/images/wireframe/image.png"></a>
-					</div>
-					<div class="meta">
-						<a class="like"> <i class="like icon"></i> 1 Like
-						</a>
+					<div class="content">
+						<div class="summary" align="left">
+							You need to take interview of <a class="user"
+								ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
+							</a> for <a class="user"
+								ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
+							</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
+									MMMM Do YYYY, h:mm a' }}</time></b>.
+							<div class="date">
+								<time am-time-ago="schedule.createdDate"></time>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="event">
-				<div class="label">
-					<!-- <img src="/images/avatar/small/jenny.jpg"> -->
-				</div>
-				<div class="content">
-					<div class="summary">
-						<a class="user"> Jenny Hess </a> added you as a friend
-						<div class="date">2 Days Ago</div>
-					</div>
-					<div class="meta">
-						<a class="like"> <i class="like icon"></i> 8 Likes
-						</a>
-					</div>
-				</div>
+			<div ng-show="showNoInterviewMsg">
+				<b style="font-size: 142%; color: #bfbbbb;">No Events </b>
 			</div>
-			<div class="event">
-				<div class="label">
-					<!-- <img src="/images/avatar/small/joe.jpg"> -->
-				</div>
-				<div class="content">
-					<div class="summary">
-						<a>Joe Henderson</a> posted on his page
-						<div class="date">3 days ago</div>
-					</div>
-					<div class="extra text">Ours is a life of constant reruns.
-						We're always circling back to where we'd we started, then starting
-						all over again. Even if we don't run extra laps that day, we
-						surely will come back for more of the same another day soon.</div>
-					<div class="meta">
-						<a class="like"> <i class="like icon"></i> 5 Likes
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="event">
-				<div class="label">
-					<!-- <img src="/images/avatar/small/justen.jpg"> -->
-				</div>
-				<div class="content">
-					<div class="summary">
-						<a>Justen Kitsune</a> added <a>2 new photos</a> of you
-						<div class="date">4 days ago</div>
-					</div>
-					<div class="extra images">
-						<a><img src="/images/wireframe/image.png"></a> <a><img
-							src="/images/wireframe/image.png"></a>
-					</div>
-					<div class="meta">
-						<a class="like"> <i class="like icon"></i> 41 Likes
-						</a>
+			<div class="ui feed " style="font-size: 100%;">
+				<h5 style="margin-top: 10px">Recent Activities</h5>
+				<hr style="margin-left: 15px;">
+				<div align="left"
+					style="max-height: 250px; height: auto; overflow: auto;">
+					<div class="event" ng-repeat="feed in events">
+						<div class="label">
+							<span class="initial" style="width: 34px;">{{feed.username.charAt(0).toUpperCase()}}</span>
+						</div>
+						<div class="content">
+							<div class="summary">
+								{{feed.eventDesc}}<br>
+								<div class="date">
+									<time am-time-ago="feed.createdTimeStamp"></time>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- <div class="row">
+	<div class="col-md-6"></div>
+	<div class="col-md-6">
+		<h5 style="margin-top: 15px" align="center">Referred Profiles</h5>
+		<hr>
+	</div>
+</div>
+ -->
 
-
+<!-- 
 <script>
 	$(".launch.button").mouseenter(function() {
 		$(this).stop().animate({
@@ -372,6 +297,8 @@
 		}, 300);
 	});
 	$("#feed").sidebar({
-		overlay : true
+		overlay : false
 	}).sidebar('attach events', '.ui.launch.button');
 </script>
+
+ -->
