@@ -1,330 +1,389 @@
-
 <br>
 <div class="row" ng-show="showDiv">
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="ApproveOffer" onvalidate>
-		<div class="row collapsible-header">
-			<h5 align="left">
-				<b>Approve Offer</b>
-			</h5>
-		</div>
-		<!-- -->
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.candidateName}}</span><label>Candidate
-					Name:</label>
+	<div class="ui raised less padded container segment" style="width:75%;">
+		<h3 align="left" class="ui dividing header">Approve Offer for - {{candidate.candidateName}}</h3>
+		<form class="ui form" name="ApproveOffer" onvalidate>
+			<div class="ui segment" style="background-color: aliceblue;">
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Candidate Name: </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.candidateName}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Email Id: </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.emailId}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Requisition Id: </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.requisitionId}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Job Code: </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.jobcodeProfile}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Approved Positions: </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.approvedPositions}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Current Employer : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.currentEmployer}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Experience (Yrs): </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.expYear}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Qualification : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.qualification[0].qualification}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Profile Source : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.profileSource}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Client : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.client}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Reporting Manager : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.reportingManager.name}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Project : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.project}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Recruiter : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.recruiter.name}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Currency : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.currency}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">BU : </label>
+					</div>
+					<div class="field">
+						<b>{{bu}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Stream : </label>
+					</div>
+					<div class="field">
+						<b>{{stream}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Level : </label>
+					</div>
+					<div class="field">
+						<b>{{level}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Grade : </label>
+					</div>
+					<div class="field">
+						<b>{{grade.grade}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Designation : </label>
+					</div>
+					<div class="field">
+						<b>{{name.name}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Relocation Expenses : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.relocationExpensesOffered}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Expected Joining Date : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.expectedJoiningDate | date:'medium'}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Sign-on Bonus : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.singInBonus}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Notice Period (in days) : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.noticePeriod}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Last Drawn CTC : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.lastDrawnCTC}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Expected CTC : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.expectedCTC}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Proposed CTC : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.proposedCTC}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Business Unit : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.businessUnit}}</b>
+					</div>
+				</div>
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label">Current Location : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.currentLocation}}</b>
+					</div>
+					<div class="field">
+						<label class="ui label">Work Location : </label>
+					</div>
+					<div class="field">
+						<b>{{candidate.workLocation}}</b>
+					</div>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.emailId}}</span> <label>Email
-					Id: </label>
+			<h5 align="left" class="ui dividing header">Interviewer Remarks : </h5>
+			<tabset justified="true" type="pills">
+				<tab ng-repeat="data in profile.rounds" heading="{{ data.roundName }}" active="data.active">
+					<div class="ui segment" style="background-color: aliceblue;">
+						<div align="left" class="four fields">
+							<div class="field">
+								<label class="ui label">Feedback SubmittedBy : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.feedbackSubmittedBy}}</b>
+							</div>
+						</div>
+						<div align="left" class="four fields" ng-if="(data.roundName == 'Level 1') || (data.roundName == 'Level 2')"
+				 			ng-show="data.interviewFeedback" ng-repeat="skill in data.interviewFeedback.rateSkills">
+							<div class="field">
+								<label class="ui label">Skill : </label>
+							</div>
+							<div class="field">
+								<b>{{skill.skill}}</b>
+							</div>
+							<div class="field">
+								<label class="ui label">Rating : </label>
+							</div>
+							<div class="field">
+								<b>{{skill.rating}}/5</b>
+							</div>
+						</div>
+						<div align="left" class="four fields" ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
+							ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Management Skills : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.managementSkillset}}/5</b>
+							</div>
+							<div class="field">
+								<label class="ui label">SelfLearning & Initiative : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.selfLearningAndInitiative}}/5</b>
+							</div>
+						</div>
+						<div align="left" class="four fields" ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
+							ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Customer Orientation : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.customerOrientation}}/5</b>
+							</div>
+							<div class="field">
+								<label class="ui label">Business Attitude : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.businessAttitude}}/5</b>
+							</div>
+						</div>
+						<div align="left" class="four fields" ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
+							ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Flexibility : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.flexibility}}/5</b>
+							</div>
+							<div class="field">
+								<label class="ui label">TeamWork : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.teamWork}}/5</b>
+							</div>
+						</div>
+						<div align="left" class="four fields" ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
+							ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Onsite Suitability : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.onsiteSuitability}}/5</b>
+							</div>
+							<div class="field">
+								<label class="ui label">Consulting & ArticulationSkills : </label>
+							</div>
+							<div class="field">
+								<b>{{data.interviewFeedback.consultingAndArticulationSkills}}/5</b>
+							</div>
+						</div>
+						<div align="left" class="four fields" ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Additional Skills : </label>
+							</div>
+							<b>{{data.interviewFeedback.additionalSkills || "--"}}</b>
+						</div>
+						<div align="left" class="four fields" ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Strengths : </label>
+							</div>
+							<b>{{data.interviewFeedback.strengths || "--"}}</b>
+						</div>
+						<div align="left" class="four fields" ng-show="data.interviewFeedback">
+							<div class="field">
+								<label class="ui label">Improvement : </label>
+							</div>
+							<b>{{data.interviewFeedback.improvement || "--"}}</b>
+						</div>
+					</div>
+				</tab>
+			</tabset>
+			<div class="ui segment" style="background-color: aliceblue;">
+				<div align="left" class="four fields">
+					<div class="field">
+						<label class="ui label" style="position: relative; top: 15px;">Approvers Comment : </label>
+					</div>
+					<textarea class="materialize-textarea" cols="50" rows="2"
+					ng-change="changeEvent()" name="notes" ng-model="candidate.approval.comment"
+					placeholder="Enter any additional notes..." style="resize:none;"></textarea>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.requisitionId}}</span><label>Requisition
-					Id:</label>
+			<h5 align="left" class="ui dividing header">Summary : </h5>
+			<div ng-show="candidate.approvalList">
+				<table class="ui celled padded table">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Approver</th>
+							<th>Status</th>
+							<th>HR Comment</th>
+							<th>Approver Comment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="animate-repeat" ng-repeat="data in candidate.approvalList" style="font-size: 80%">
+							<td><b>{{data.updatedDate | date:'medium'}}</b></td>
+							<td><b>{{data.name}}</b></td>
+							<td><b>{{data.status}}</b></td>
+							<td><b>{{data.hrComment}}</b></td>
+							<td><b>{{data.comment}}</b></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.jobcodeProfile}}</span><label>JobCode:
-				</label>
+			<br>
+			<div class="center aligned column">
+				<button class="ui green large button" type="submit"
+					ng-disabled="showApprovalBtn" ng-click="ApprovedOffer()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Approve
+				</button>
+				<button class="ui red large button" type="submit"
+					ng-click="RejectOffer()" ng-disabled="showRejectBtn">
+					<span class="glyphicon glyphicon-remove-sign"></span> Reject
+				</button>
+				<button class="ui yellow large button" type="submit"
+					ng-disabled="showNegotiateBtn" ng-click="NegotiateOffer()">
+					<span class="glyphicon glyphicon-minus-sign"></span> Negotiate
+				</button>
+				<button class="ui grey large button" ui-sref="offer.list">
+					<span class="glyphicon glyphicon-chevron-left"></span> Back
+				</button>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.approvedPositions}}</span> <label>Approved
-					Positions: </label>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.currentEmployer}}</span> <label>Current
-					Employer:</label>
-			</div>
-
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.expYear}}</span><label>Experience
-					(Yrs):</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.qualification[0].qualification}}</span>
-				<label>Qualification:</label>
-			</div>
-
-			<div class="input-field col s6">
-				<span class="offer-span"> {{candidate.profileSource}}</span><label>Profile
-					Source:</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.client}}</span><label>Client:</label>
-			</div>
-
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.reportingManager.name}}</span><label>Reporting
-					Manager: </label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.project}} </span><label>Project:</label>
-			</div>
-
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.recruiter.name}} </span><label>Recruiter:</label>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.currency}} </span>
-				<label> Currency: </label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{bu}} </span> <label> BU: </label>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{stream}} </span> <label>Stream: </label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{level}} </span> <label> Level: </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{grade.grade}} </span> <label>Grade:
-				</label>
-			</div>
-			<div class="col-md-2"></div>
-			<div class="input-field col s6">
-				<span class="offer-span"> {{name.name}} </span> <label>
-					Designation: </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.relocationExpensesOffered}}</span>
-				<label>Relocation Expenses: </label>
-			</div>
-
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.expectedJoiningDate |
-					date:'medium'}}</span> <label>Expected Joining Date: </label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.singInBonus}}</span><label>Sign-on
-					Bonus:
-				</label>
-
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.noticePeriod}}</span><label>Notice
-					Period (in days): </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.lastDrawnCTC}}</span><label>Last
-					Drawn CTC:
-				</label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.expectedCTC}}</span><label>Expected
-					CTC :
-				</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.proposedCTC}}</span><label>Proposed
-					CTC:
-				</label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.businessUnit}} </span><label>Business
-					Unit: </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.currentLocation}}</span><label>Current
-					Location:</label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.workLocation}}</span><label>Work
-					Location: </label>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<h6 align="left">
-				<b>Interviewer Remarks:</b>
-			</h6>
-		</div>
-		<br>
-		<tabset justified="true"> <tab
-			ng-repeat="data in profile.rounds" heading="{{ data.roundName }}"
-			active="data.active"> <br>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.feedbackSubmittedBy}}</p>
-				<label>Feedback SubmittedBy :</label>
-			</div>
-
-		</div>
-		<div
-			ng-if="(data.roundName == 'Level 1') || (data.roundName == 'Level 2')"
-			class="row" ng-show="data.interviewFeedback"
-			ng-repeat="skill in data.interviewFeedback.rateSkills">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.skill}}</p>
-				<label>Skill :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.rating}}/5</p>
-				<label>Rating :</label>
-			</div>
-		</div>
-		<div
-			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
-			class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.managementSkillset}}/5</p>
-				<label>Management Skills :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/5</p>
-				<label>SelfLearning & Initiative :</label>
-			</div>
-		</div>
-		<div
-			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
-			class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/5</p>
-				<label>Customer Orientation :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/5</p>
-				<label>Business Attitude :</label>
-			</div>
-		</div>
-		<div
-			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
-			class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/5</p>
-				<label>Flexibility :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/5</p>
-				<label>TeamWork :</label>
-			</div>
-		</div>
-		<div
-			ng-if="(data.roundName == 'Managerial') || (data.roundName == 'HR')"
-			class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/5</p>
-				<label>Onsite Suitability :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/5</p>
-				<label>Consulting & ArticulationSkills :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.additionalSkills
-					|| "--"}}</p>
-				<label>Additional Skills :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.strengths
-					|| "--"}}</p>
-				<label>Strengths :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.improvement
-					|| "--"}}</p>
-				<label>Improvement :</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
-					ng-change="changeEvent()" name="notes"
-					ng-model="candidate.approval.comment"
-					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Approvers
-					Comment</label>
-			</div>
-		</div>
-		<br>
-		<div class="row" ng-show="candidate.approvalList">
-			<div class="input-field col s12">
-				<label style="position: absolute; top: -22px;">Summary:</label>
-			</div>
-		</div>
-		<div class="row" ng-show="candidate.approvalList">
-			<table class="bordered offertable" style="font-size: 14px;">
-				<thead>
-					<tr>
-						<th>Date</th>
-						<th>Approver</th>
-						<th>Status</th>
-						<th>HR Comment</th>
-						<th>Approver Comment</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="animate-repeat"
-						ng-repeat="data in candidate.approvalList" style="font-size: 80%">
-						<td>{{data.updatedDate | date:'medium'}}</a></td>
-						<td>{{data.name}}</a></td>
-						<td>{{data.status}}</td>
-						<td>{{data.hrComment}}</td>
-						<td>{{data.comment}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<br>
-		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit"
-				ng-disabled="showApprovalBtn" ng-click="ApprovedOffer()">
-				<span class="glyphicon glyphicon-ok-circle"></span> Approve
-			</button>
-			<button class="btn btn-info active" type="submit"
-				ng-click="RejectOffer()" ng-disabled="showRejectBtn">
-				<span class="glyphicon glyphicon-ok-circle"></span> Reject
-			</button>
-			<button class="btn btn-info active" type="submit"
-				ng-disabled="showNegotiateBtn" ng-click="NegotiateOffer()">
-				<span class="glyphicon glyphicon-ok-circle"></span> Negotiate
-			</button>
-			<button class="btn btn-info active" ui-sref="offer.list">
-				<span class="glyphicon glyphicon-remove"></span> Cancel
-			</button>
-		</div>
-	</form>
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+		</form>
+	</div>
 </div>
+<div class="row" ng-show="!showDiv">
+	<div class="ui raised less padded container segment" style="width:75%;">
+		<div class="ui negative message">
+			<div class="header">There are no offers that warrant your approval!</div>
+		</div>
+		<button class="ui large primary button" ui-sref="offer.list">
+			<span class="glyphicon glyphicon-chevron-left"></span> Back
+		</button>
+	</div>
+</div>
+<br>
+
+<!-- <br>
 <div class="row" ng-show="!showDiv">
 	<h6>
 		<b style="color: red;">There are no offers that warrant your
@@ -335,5 +394,4 @@
 		<span class="glyphicon glyphicon-remove"></span> Back
 	</button>
 </div>
-<br>
-<br>
+<br> -->	

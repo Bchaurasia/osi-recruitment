@@ -1,89 +1,86 @@
-<div class="row" style="width: 86%" align="left">
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10" name="schedule_form" ng-submit="schedule()" onvalidate>
-		<div class="row collapsible-header">
-			<h5 align="left">
-				<b>Position Details	of job code : {{positionDetails.jobcode}}</b>
-			</h5>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.designation}}</b>
-				</h6>
-				<label>Designation : </label>
+<div class="ui raised less padded container segment" style="width: 80%;">
+	<h3 align="left" class="ui dividing header">Position Details of
+		job code - {{positionDetails.jobcode}}</h3>
+	<form class="ui form" name="schedule_form" ng-submit="schedule()"
+		onvalidate>
+		<div class="ui segment" style="background-color: aliceblue;">
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Designation : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.designation}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Status : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.status}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.status}}</b>
-				</h6>
-				<label>Status : </label>
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Updated By : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.updatedBy}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Requisition id : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.requisitionId}}</b>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.updatedBy}}</b>
-				</h6>
-				<label>Updated By: </label>
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Min Exp: </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.minExpYear}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Max Exp: </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.maxExpYear}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.requisitionId}}</b>
-				</h6>
-				<label>Requisition Id : </label>
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Location : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.location}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Client : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.client}}</b>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.minExpYear}}</b>
-				</h6>
-				<label>Min Exp : </label>
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Primary Skills : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.primarySkills.join(', ')}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Job Profile : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.jobProfile}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.maxExpYear}}</b>
-				</h6>
-				<label>Max Exp : </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.location}}</b>
-				</h6>
-				<label>Location : </label>
-			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.client}}</b>
-				</h6>
-				<label>Client : </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.primarySkills.join(', ')}}</b>
-				</h6>
-				<label style="position: absolute; top: -12px;">Primary Skills : </label>
-			</div>
-		</div>
-		<div class="row" ng-hide="showSecondarySkillsDiv">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.secondarySkills}}</b>
-				</h6>
-				<label>Secondary Skills : </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{positionDetails.jobProfile}}</b>
-				</h6>
-				<label style="position: absolute; top: -13px;">Job Profile : </label>
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Secondary Skills : </label>
+				</div>
+				<div class="field">
+					<b>{{positionDetails.secondarySkills}}</b>
+				</div>
 			</div>
 		</div>
 	</form>
