@@ -73,7 +73,7 @@ body {
 }
 
 .range-slider__value {
-	background-color: #26A69A;
+	background-color: #004D87;
 	padding: 4px;
 	color: white;
 	border-radius: 4px;
@@ -3020,3 +3020,36 @@ table.fc-border-separate {
 	border:1px solid #b1acac;
 	
 }
+
+
+#logostyleLogin {
+	width: 115px;
+	height: 94px;
+}
+
+a#liginLogoAncher {
+	margin:0;
+	padding:0 0 0 80px;
+}
+
+div.roundLabels{
+	  margin-left: 10px;
+}
+
+.marginFromHeader{
+	margin-top:30px;
+}
+
+a img.navbar-brand{
+	Padding-right:0px;
+}
+
+
+button.glyphicon.glyphicon-remove,button.glyphicon.glyphicon-plus{
+	cursor: pointer; color: #004D87; border: none; background: none;
+}
+
+.portalThemeColor{
+	color: #004D87;
+}
+

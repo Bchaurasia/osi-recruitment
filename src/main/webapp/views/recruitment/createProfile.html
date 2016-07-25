@@ -8,7 +8,7 @@
 				<b>Create Profile</b>
 			</h5>
 		</div>
-		<div class="row">
+		<div class="row marginFromHeader">
 			<div class="input-field col s6">
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
 					ng-maxlength="30" name="candidateName" class="form-control"
@@ -132,7 +132,7 @@
 		</div>
 
 		<div class="row" align="left">
-			<div class="chip" align="left">Educational Details</div>
+			<div class="chip roundLabels" align="left">Educational Details</div>
 		</div>
 
 		<div class="row" ng-repeat="candi in candidate.qualifications">
@@ -169,12 +169,10 @@
 				<button class="glyphicon glyphicon-remove"
 					data-tooltip="Remove Educational Details"
 					ng-show="candidate.qualifications.length!=1"
-					style="cursor: pointer; color: #26a69a; border: none; background: none;"
 					ng-click="deleteQualification($index)"></button>
 				&nbsp;&nbsp;&nbsp;
 				<button id="addButtonColumn" class="glyphicon glyphicon-plus"
 					data-tooltip="Add Educational Details"
-					style="cursor: pointer; color: #26a69a; border: none; background: none;"
 					ng-show="$last" ng-click="addColumnCriteria()"
 					ng-disabled="checkDisability(candi.qualification)"></button>
 			</div>
@@ -184,7 +182,7 @@
 		</div>
 
 		<div class="row" align="left">
-			<div class="chip" align="left">Professional Details</div>
+			<div class="chip roundLabels" align="left">Professional Details</div>
 		</div>
 
 		<div class="row">

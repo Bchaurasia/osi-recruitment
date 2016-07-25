@@ -7,43 +7,45 @@
 				<b>Requisition : {{requisition.requisitionId}}</b>
 			</h5>
 		</div>
-		<div class="row">
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="requisition.position" ng-change="getData()"
-				theme="selectize" style="width: 80%">
-				   <ui-select-match placeholder="Select Designation">{{$select.selected}}</ui-select-match>
-				<ui-select-choices
-					repeat="designation in designation1 | orderBy:'toString()'| filter: $select.search">
-				<span ng-bind-html="designation | highlight: $select.search"></span>
-				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">
-					Position<b class="mandatory">*</b>
-				</label>	
-			</div>
-			
-			<div class="input-field col s6">
-				<div class="row">
-					<div class="input-field col s6">
-						<input id="minExpYear" type="range"
-							ng-model="requisition.minExpYear" ng-disabled="false"
-							ng-change="min(requisition.minExpYear)" min="0" max="15" required />
-						<span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
-					</div>
-					<div class="input-field col s6">
-						<input id="maxExpYear" type="range"
-							ng-model="requisition.maxExpYear" ng-disabled="false"
-							ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
-						<span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
-					</div>
+		<div class="row marginFromHeader">
+			<div class="row">
+				<div class="input-field col s6" align="left">
+					<ui-select ng-model="requisition.position" ng-change="getData()"
+					theme="selectize" style="width: 80%">
+					   <ui-select-match placeholder="Select Designation">{{$select.selected}}</ui-select-match>
+					<ui-select-choices
+						repeat="designation in designation1 | orderBy:'toString()'| filter: $select.search">
+					<span ng-bind-html="designation | highlight: $select.search"></span>
+					</ui-select-choices> </ui-select>
+					<label style="position: absolute; top: -22px;">
+						Position<b class="mandatory">*</b>
+					</label>	
 				</div>
 				
-				<label style="margin-top: 14px">Exp. Required<b
-					class="mandatory">*</b></label> <span class="validation-error"
-					ng-show="minErr"> Min Exp should not be greater than Max
-					Exp.</span> <span class="validation-error" ng-show="maxErr"> Max
-					Exp should not be less than Min Exp.</span>
-			</div>
+				<div class="input-field col s6">
+					<div class="row">
+						<div class="input-field col s6">
+							<input id="minExpYear" type="range"
+								ng-model="requisition.minExpYear" ng-disabled="false"
+								ng-change="min(requisition.minExpYear)" min="0" max="15" required />
+							<span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
+						</div>
+						<div class="input-field col s6">
+							<input id="maxExpYear" type="range"
+								ng-model="requisition.maxExpYear" ng-disabled="false"
+								ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
+							<span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
+						</div>
+					</div>
+					
+					<label style="margin-top: 14px">Exp. Required<b
+						class="mandatory">*</b></label> <span class="validation-error"
+						ng-show="minErr"> Min Exp should not be greater than Max
+						Exp.</span> <span class="validation-error" ng-show="maxErr"> Max
+						Exp should not be less than Min Exp.</span>
+				</div>
 
+			</div>
 			<div class="row">
 				<div class="input-field col s6">
 					<input type="date" ng-model="requisitionDate"
@@ -177,9 +179,9 @@
 				</div>
 				<div class="input-field col s1">
 					<button class="glyphicon glyphicon-remove"
-						ng-show="lengthOfQualifications()" style="cursor: pointer;color:#26a69a;border:none;background: none;"
+						ng-show="lengthOfQualifications()" 
 						ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
-					<button id="addButtonColumn" style="cursor: pointer;color:#26a69a;border:none;background: none;"
+					<button id="addButtonColumn"
 						ng-disabled="checkDisability(requisition.qualification)"
 						ng-show="$last" class="glyphicon glyphicon-plus"
 						ng-click="addColumnCriteria()"></button>

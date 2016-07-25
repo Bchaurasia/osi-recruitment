@@ -163,9 +163,9 @@
 			</div>
 			<div class="input-field col s1">
 				<button class="glyphicon glyphicon-remove"
-					ng-show="lengthOfQualifications()" style="cursor: pointer;color:#26a69a;border:none;background: none;"
+					ng-show="lengthOfQualifications()" 
 					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn" style="cursor:pointer;color:#26a69a;border:none;background: none;"
+				<button id="addButtonColumn" 
 				    ng-disabled="check(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
 					ng-click="addColumnCriteria()"></button>
@@ -180,7 +180,9 @@
 					class="form-control input-sm" required>
 					<option>Select Approver 1</option>
 				</select> <label>Approver 1<b class="mandatory">*</b></label>
-				<a href="#" ng-click="showApprover1Comments = !showApprover1Comments;goToBottom();"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
+				<a href="#" ng-click="showApprover1Comments = !showApprover1Comments;goToBottom();">
+				<i class="material-icons prefix small portalThemeColor" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i>
+				</a>
 				
 			</div>
 			<div class="input-field col s6" ng-hide="hideApproval2">
