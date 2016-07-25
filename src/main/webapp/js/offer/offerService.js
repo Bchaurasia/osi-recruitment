@@ -39,7 +39,7 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 		    	 return data = response.data;
 		     })
 		     .catch(function(response){
-		    	 return $q.reject('Error while retrieving offer Deatils status: ' + response.status );
+		    	 return $q.reject('Error while retrieving offer Band Deatils status: ' + response.status );
 		     });
 	}
 	function saveOfferData(offer){

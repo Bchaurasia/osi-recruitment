@@ -157,6 +157,18 @@ app.config(['$stateProvider', '$urlRouterProvider','$routeProvider', function($s
     			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
             }
     	}})
+    		.state('admin.orgBand', {url:'/orgBand', views: {'': {templateUrl: 'views/orgBand/createOrgBand.html', controller: 'createOrgBand'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
+    		.state('admin.orgBand.create', {url:'/create', views: {'': {templateUrl: 'views/orgBand/searchOrgBand.html', controller: 'searchOrgBand'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
     	.state('admin.datasync', {url:'/datasync', views: {'': {templateUrl: 'views/admin/esDataSync.html', controller: 'esDataSyncCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {

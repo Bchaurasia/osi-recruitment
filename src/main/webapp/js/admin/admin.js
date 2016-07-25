@@ -11,6 +11,7 @@ app.controller("adminCtrl", ['$scope','$rootScope','$http', '$filter', '$timeout
     $scope.tabs = [
                    { heading: "Employee", route:"admin.users.list"},
                    { heading: "Client", route:"admin.client.list"},
+                   { heading: "OrgBand", route:"admin.orgBand"},
                    { heading: "Designation", route:"admin.designation.list"},
                    { heading: "Skill", route:"admin.skillSet"},
                    { heading: "ROUNDS", route:"admin.interviewRound.list"},

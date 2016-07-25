@@ -12,16 +12,26 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.invalidFile = true;
 	$scope.today=new Date();
 	$scope.candidate.comments="";
+	$scope.candidate.offerStatus="";
+	$scope.candidate.finalStatus="";
 	$scope.candidate.orgGrade={};
 	$scope.candidate.orgGrade.designation={};
 	$scope.streamData=[];
 	$scope.levelDatalist=[];
-	//$scope.levelData={};
+	$scope.designationData= {
+			"designations":[]
+	};
 	$scope.bus = ["ET","EA","OPS"];
-	//$scope.levels = ["L0","L1","L2","L3","L4","L5"]; // ET-L0-E0
 	$scope.currencyList = ["INR","USD","GBP","EUR"];
 	$scope.finalStatusList = ["Offered","Rejected"];
 	$scope.candidate.currency="INR";
+	$scope.hideFinalStatus=function(){
+		if($scope.candidate.offerStatus===""){
+			$scope.hideFinalStatus=true;
+		}else{
+			$scope.hideFinalStatus=false;
+		}
+	}
 	
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
@@ -46,8 +56,10 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		 .catch(function(){
 			 console.log("fail to get data");
 		 });
+		
 	}
 	$scope.selectStream = function(bu){
+		$scope.streamData=[];
 		$scope.candidate.orgGrade.orgBand=bu.orgBand;
 		angular.forEach($scope.orgBands,function(band) {
 			if(_.isEqual(band.bu, bu)){
@@ -56,6 +68,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		});
 	};
 	$scope.selectLevel = function(stream){
+		$scope.levelDatalist=[];
 		angular.forEach($scope.orgBands,function(band) {
 			if(_.isEqual(band.stream, stream)){
 				$scope.levelData=band.levels;
@@ -65,8 +78,24 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 				$scope.levelDatalist.push(band.level);
 		});
 	};
-	$scope.selectGrade = function(level){
-		$scope.designationData= _.filter($scope.levelData , function(level1){ return _.isEqual(level1.level, level); });
+	$scope.selectGrade = function(selectedLevel){
+		$scope.designationgrades=[];
+		$scope.designationData= _.filter($scope.levelData , 
+				function(level1){ 
+					return _.isEqual(level1.level, selectedLevel); 
+					});
+		$scope.designationgrades = _.uniq($scope.designationData[0].designations, function(design){
+			return design.grade;
+		});
+	};
+	$scope.selectDesignation = function(selectedGrade){
+		$scope.designationdesignations=[];
+		$scope.designationdesignations = _.filter($scope.designationData[0].designations, function(design){
+			 if(_.isEqual(design.grade, selectedGrade.grade)){
+				return design.name;
+			}
+		});
+		console.log(angular.toJson($scope.designationdesignations));
 	};
 	offerService.getBandOfferData().then(function(data){
 		$scope.orgBands=data;
@@ -102,6 +131,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.selectStream($scope.bu);
 			$scope.selectLevel($scope.stream);
 			$scope.selectGrade($scope.level);
+			$scope.hideFinalStatus();
 		}
 
 		var listlength=$scope.candidate.approvalList.length;
@@ -190,7 +220,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.candidate.orgGrade.level=$scope.level;
 		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
 		$scope.candidate.orgGrade.designation.name=$scope.name.name;
-    	if($scope.candidate.finalStatus!==null){
+    	if($scope.candidate.finalStatus!==""){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}
     	$scope.candidate.approval.updatedDate=new Date();

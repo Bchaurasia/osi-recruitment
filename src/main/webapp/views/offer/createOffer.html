@@ -53,9 +53,12 @@
 			</div>
 			<div class="input-field col s6">
 				<select ng-model="candidate.currency" name="currency"
-					ng-options="o for o in currencyList" class="form-control input-sm">
+					ng-options="o for o in currencyList" class="form-control input-sm"
+					required="required">
 					<option>Select Currency</option>
-				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+				</select> <label style="position: absolute; top: -22px;"> Currency<b
+					class="mandatory">*</b>:
+				</label>
 			</div>
 		</div>
 		<div class="row">
@@ -131,38 +134,53 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
-					ng-options="o for o in bus" class="form-control input-sm">
+					ng-options="o for o in bus" class="form-control input-sm"
+					required="required">
 					<option value="" disabled="disabled">Select BU</option>
-				</select> <label style="position: absolute; top: -22px;"> BU: </label>
+				</select> <label style="position: absolute; top: -22px;"> BU<b
+					class="mandatory">*</b>:
+				</label>
 			</div>
 			<div class="input-field col s6">
-				<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
+				<select ng-model="stream" name="currency"
+					ng-change="selectLevel(stream)"
 					ng-options="o for o in streamData track by o"
-					class="form-control input-sm">
+					class="form-control input-sm" required="required">
 					<option value="" disabled="disabled">Select Stream</option>
-				</select> <label style="position: absolute; top: -22px;">Stream: </label>
+				</select> <label style="position: absolute; top: -22px;">Stream<b
+					class="mandatory">*</b>:
+				</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s2">
-				<select ng-model="level" name="currency" ng-change="selectGrade(level)" 
-					ng-options="o for o in levelDatalist" class="form-control input-sm">
+				<select ng-model="level" name="level" ng-change="selectGrade(level)"
+					ng-options="o for o in levelDatalist" class="form-control input-sm"
+					required="required">
 					<option value="" disabled="disabled">Select Level</option>
-				</select> <label style="position: absolute; top: -22px;"> Level: </label>
+				</select> <label style="position: absolute; top: -22px;"> Level<b
+					class="mandatory">*</b>:
+				</label>
 			</div>
 			<div class="input-field col s2">
-				<select ng-model="grade" name="currency"
-					ng-options="o.grade for o in designationData[0].designations track by o.grade"
-					class="form-control input-sm">
+				<select ng-model="grade" name="grade"
+					ng-change="selectDesignation(grade)"
+					ng-options="o.grade for o in designationgrades track by o.grade"
+					class="form-control input-sm" required="required">
 					<option value="" disabled="disabled">Select Grade</option>
-				</select> <label style="position: absolute; top: -22px;">Grade: </label>
+				</select> <label style="position: absolute; top: -22px;">Grade<b
+					class="mandatory">*</b>:
+				</label>
 			</div>
-				<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="input-field col s6">
 				<select ng-model="name" name="currency"
-					ng-options="o.name for o in designationData[0].designations track by o.grade" class="form-control input-sm">
-						<option value="" disabled="disabled">Select Designation</option>
-				</select> <label style="position: absolute; top: -22px;"> Designation: </label>
+					ng-options="o.name for o in designationdesignations track by o.grade"
+					class="form-control input-sm" required="required">
+					<option value="" disabled="disabled">Select Designation</option>
+				</select> <label style="position: absolute; top: -22px;"> Designation<b
+					class="mandatory">*</b>:
+				</label>
 			</div>
 
 		</div>
@@ -192,8 +210,7 @@
 				<input placeholder="Enter Sign-on Bonus" name="bonus"
 					class="form-control" type="number" ng-model="candidate.singInBonus"
 					required> <label style="position: absolute; top: -22px;">Sign-on
-					Bonus <b
-					class="mandatory">*</b>
+					Bonus <b class="mandatory">*</b>
 				</label>
 
 			</div>
@@ -210,9 +227,9 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter your current CTC" name="currentCTC"
 					class="form-control" type="number"
-					ng-model="candidate.lastDrawnCTC"> <label
-					style="position: absolute; top: -22px;">Last Drawn CTC 
-					<b class="mandatory">*</b>
+					ng-model="candidate.lastDrawnCTC" required="required"> <label
+					style="position: absolute; top: -22px;">Last Drawn CTC <b
+					class="mandatory">*</b>
 				</label>
 
 			</div>
@@ -220,8 +237,7 @@
 				<input placeholder="Enter your expected CTC" name="expectedCTC"
 					class="form-control" type="number" ng-model="candidate.expectedCTC"
 					required> <label style="position: absolute; top: -22px;">Expected
-					CTC<b
-					class="mandatory">*</b>
+					CTC<b class="mandatory">*</b>
 				</label>
 
 			</div>
@@ -231,8 +247,7 @@
 				<input placeholder="Enter Proposed CTC" name="proposedCTC"
 					class="form-control" type="number" ng-model="candidate.proposedCTC"
 					required> <label style="position: absolute; top: -22px;">Proposed
-					CTC<b
-					class="mandatory">*</b>
+					CTC<b class="mandatory">*</b>
 				</label>
 
 			</div>
@@ -286,7 +301,7 @@
 			</div>
 			<div class="input-field col s6">
 				<select placeholder="Select Final Status"
-					ng-model="candidate.finalStatus"
+					ng-model="candidate.finalStatus" ng-disabled="hideFinalStatus"
 					ng-options="o for o in finalStatusList"
 					class="form-control input-sm">
 					<option value="" disabled="disabled">Select Final Status</option>
