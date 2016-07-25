@@ -26,7 +26,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.data = {};
 	var uploadedFile = null;
 	$scope.selectedJC = {};
-	$scope.candidate.jobcodeProfile = "";
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
@@ -93,7 +92,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		        var curr_year = dt.getFullYear();
 		        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
 		        var skills =[];
-		        var jobcodes = [];
 				if ($scope.candidate !== undefined) {
 					angular.forEach($scope.position.primarySkills, function(value, key) {
 						 skills.push(value.text);
@@ -107,7 +105,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				$scope.candidate.isReferral = false;
 				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
-		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
 		    	$scope.candidate.createdBy = $scope.user.emailId;

@@ -25,16 +25,13 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	var uploadedFileName = null;
 	$scope.data = {};
 	var uploadedFile = null;
-//	$scope.candidate.plocation = "";
 	$scope.selectedJC = {};
-	$scope.candidate.jobcodeProfile = "";
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
 	$scope.candidate.expMonth="0";
 	$scope.requisitionId="";
-	$scope.candidate.jobCode = sharedService.getjobCode();
 	$scope.currencyList = ["INR","USD","GBP","EUR"];
 	$scope.candidate.currency="INR";
 	userService.getUsers().then(function(data) {
@@ -52,6 +49,11 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	}).catch(function(message) {
 		$log.error(message)
 	});
+	
+	if(sharedService.getjobCode() != undefined && sharedService.getjobCode() != null) {
+        $scope.candidate.jobCode = sharedService.getjobCode();
+        sharedService.setjobCode(null);
+}
 	
 	$scope.candidate.qualifications=[{
 		qualification:'',
@@ -112,7 +114,6 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		        var curr_year = dt.getFullYear();
 		        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
 		        var skills =[];
-		        var jobcodes = [];
 				if ($scope.candidate !== undefined) {
 					angular.forEach($scope.position.primarySkills, function(value, key) {
 						 skills.push(value.text);
@@ -122,14 +123,12 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-		    //	$scope.candidate.plocation = $scope.selection.pLocation;
 				if(_.contains($scope.user.roles, 'ROLE_USER'))
 					$scope.candidate.isCreatedByUser = true;
 				else
 					$scope.candidate.isCreatedByUser = false;
 				$scope.candidate.isReferral = true;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
-		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;
 		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
 		    	$scope.candidate.createdBy = $scope.user.emailId;
