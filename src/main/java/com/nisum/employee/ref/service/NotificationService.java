@@ -68,7 +68,10 @@ public class NotificationService{
 	private static final String INTERVIEW_DATE_TIME = "interviewDateTime";
 	private static final String TYPE_OF_INTERVIEW = "typeOfInterview";
 	private static final String CANDIDATE_NAME = "candidateName";
-		
+	private static final String HR_NAME = "hr_name";
+	private static final String HR_CONTACT_DETAILS = "hr_contactNo";
+	private static final String HR_EMAIL = "hr_emailId";	
+	
 	private static final String ROUND_NAME = "roundName";
 	private static final String INAME = "iname";
 	private static final String CNAME = "cname";
@@ -189,6 +192,9 @@ public class NotificationService{
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
 		context.put(JOB_DESCRIPTION, interviewSchedule.getJobDescription());
 		context.put(ADDRESS, interviewSchedule.getInterviewAddress());
+		context.put(HR_NAME, interviewSchedule.getHrName());
+		context.put(HR_CONTACT_DETAILS, interviewSchedule.getHrContactNo());
+		context.put(HR_EMAIL, interviewSchedule.getHrEmailId());
 		
 		Template candidateTemplate = getVelocityTemplate(SRC_CANDIDATE_VM);
 

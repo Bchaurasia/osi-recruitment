@@ -103,6 +103,10 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
 			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
 			
+			$scope.interviewschedule.hrName = $scope.user.name;
+			$scope.interviewschedule.hrContactNo = $scope.user.mobileNumber;
+			$scope.interviewschedule.hrEmailId = $scope.user.emailId;
+			
 			if($scope.interviewscheduleDetails.requisitionId != undefined){
 				$scope.interviewschedule.requisitionId=$scope.interviewscheduleDetails.requisitionId;
 				$scope.setJobcode($scope.interviewschedule.requisitionId);

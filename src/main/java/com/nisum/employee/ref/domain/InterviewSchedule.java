@@ -28,5 +28,7 @@ public class InterviewSchedule extends AuditEntity{
 	ArrayList<String> candidateSkills;
 	String interviewAddress;
 	String roundStatus;
-	
+	String hrContactNo;
+	String hrName;
+	String hrEmailId;
 }
