@@ -102,7 +102,6 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.interviewschedule.candidateId = $scope.interviewscheduleDetails.candidateEmail;
 			$scope.interviewschedule.candidateName = $scope.interviewscheduleDetails.candidateName;
 			$scope.interviewschedule.candidateSkills = $scope.interviewscheduleDetails.candidateSkills;
-			
 			$scope.interviewschedule.hrName = $scope.user.name;
 			$scope.interviewschedule.hrContactNo = $scope.user.mobileNumber;
 			$scope.interviewschedule.hrEmailId = $scope.user.emailId;
@@ -208,27 +207,35 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.schedule =  function(){
 		
-		$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
-		$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
-		$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
-		$scope.interviewschedule.interviewDateTime = $scope.data.date;
-		$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
-		$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
-		$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
-		$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
-		if($scope.interviewschedule.typeOfInterview === "Face To Face"){
-			$scope.interviewschedule.interviewAddress = $scope.sel.interviewLocation.address;
-		}
-		console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
-		interviewService.scheduleInterview($scope.interviewschedule).then(function(data){
-			 $scope.message = "Interview scheduled successfully for "+$scope.interviewschedule.candidateName;
-			 $scope.sendNotification($scope.message,'recruitment/interviewManagement');
-		}).catch(function(data){
-			  var cls = 'alert alert-danger alert-error';
-			  var msg = "Something wrong, try again";
-			  $scope.sendNotificationWithStyle(msg,cls,'recruitment/interviewManagement');
-			 $log.error("failed=="+data);
-		})
+		if($scope.interviewscheduleDetails.progress === "Not Initialized"){
+			var message = "Please schedule other rounds before HR" ;
+			var cls='alert alert-danger alert-error';
+				$scope.sendNotificationWithStyle(message,cls,'recruitment/interviewManagement');
+			}
+		else {
+			$scope.interviewschedule.jobcode = $scope.interviewschedule.jobcode.jobcode;
+			$scope.interviewschedule.typeOfInterview = $scope.sel.selectedtypeOfInterview;
+			$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
+			$scope.interviewschedule.interviewDateTime = $scope.data.date;
+			$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
+			$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
+			$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
+			$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
+			if($scope.interviewschedule.typeOfInterview === "Face To Face"){
+				$scope.interviewschedule.interviewAddress = $scope.sel.interviewLocation.address;
+			}
+			console.log("scheduling data :"+angular.toJson($scope.interviewschedule));
+			interviewService.scheduleInterview($scope.interviewschedule).then(function(data){
+				$scope.message = "Interview scheduled successfully for "+$scope.interviewschedule.candidateName;
+				$scope.sendNotification($scope.message,'recruitment/interviewManagement');
+			}).catch(function(data){
+				var cls = 'alert alert-danger alert-error';
+				var msg = "Something wrong, try again";
+				$scope.sendNotificationWithStyle(msg,cls,'recruitment/interviewManagement');
+				$log.error("failed=="+data);
+			})
+		}	
+			
 	}
 	
 	$scope.showCancelButton = function(emailIdInterviewer){
