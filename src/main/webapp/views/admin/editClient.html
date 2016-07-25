@@ -1,34 +1,36 @@
 <br>
 <div class="row" align="center">
 	<div class="col-md-2 col-sm-2 col-xs-2 "></div>
-	<form class="col s8" name="UpdatePosition" onvalidate
+	<form class="col s8" name="clientForm" onvalidate
 		style="background-color: #fff; border-radius: 10px; padding-top: 1%; border: 1px solid whitesmoke; width: 70%;">
 		<div class="row">
 			<div class="input-field col s6">
-				 <input placeholder="Enter Client Name" ng-maxlength="30"
+				 <input placeholder="Enter Client Name" ng-maxlength="30" name="clientName"
 				    class="form-control" type="text"
-					ng-model="client.clientName" ng-pattern="/^[a-zA-Z _]*$/" ng-change="checkClientName()">
-					<label class="lbl">Client Name: </label>
+					ng-model="client.clientName" ng-pattern="/^[a-zA-Z _']*$/" ng-change="checkClientName()">
+					<label class="lbl">Client Name: <b class="mandatory">*</b></label>
 					<span ng-show="clietNameError" class="validation-error">Client name already exist</span>
+					<span class="validation-error"
+						ng-show="clientForm.clientName.$error.pattern">
+						Enter non-numeric character</span>
 			</div>
 			<div class="input-field col s6" align="center">
-				<select placeholder="Select Location" ng-model="client.locations" ng-change="otherLocations(client.locations)"
-					ng-options="o as o for o in plocation" disabled="disabled" ng-disabled="disLocation"
+				<select placeholder="Select Location" ng-model="client.locations"
+					ng-options="o as o for o in plocation" 
 					class="form-control input-sm" required>
-					<option value="">{{client.locations}}</option>
-				</select> <label>Location</label>
+					<option value="" disabled="disabled">{{client.locations}}</option>
+				</select> <label>Location<b class="mandatory">*</b></label>
 			</div>
 		</div>
 		
-		<div class="row" ng-show="showOtherLocation">
+		<div class="row" ng-show="client.locations=='Others'">
 			<div class="input-field col s6">
 				<label class="lbl"> <i
 					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
-					Location
+					Location<b class="mandatory">*</b>
 				</label> <input type="text" name="olocation" id="olocation"
 					style="top: 1px; height: 29px"
-					ng-change="otherLocations(client.locations)"
-					placeholder="Enter Client Name" ng-model="otherLocation"
+					placeholder="Enter Location Name" ng-model="otherLocation" ng-required="client.locations=='Others'"
 					ng-minlength="3">
 
 				<div class="validation-error"
@@ -39,7 +41,7 @@
 		<br>
 		<div align="center" class="row">
 			<div align="center" class="input-field col s11">
-				<button class="btn btn-primary" ng-disabled="disable || clientForm.$invalid"
+				<button class="btn btn-primary" ng-disabled="clientForm.$invalid || clietNameError"
 				 type="submit" ng-click="updateClient()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

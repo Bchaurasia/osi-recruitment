@@ -94,7 +94,7 @@ function createInformation(info){
 				return "added successfully";
 			})
 			.catch(
-					function(response) { return "error while creating skill"}
+					function(response) { return $q.reject("error while creating info");}
 			);
 }
 

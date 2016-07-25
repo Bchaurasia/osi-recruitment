@@ -11,8 +11,8 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.clientCls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
 	$scope.clietNameError= false;
-	$scope.client.interviewers = {"Level1": [], "Level2": [],"managerial":[],"hr":[]};
-	$scope.showOtherLocation=false;
+	//$scope.client.interviewers = {"Level1": [], "Level2": [],"managerial":[],"hr":[]};
+	//$scope.showOtherLocation=false;
 	$scope.location1=[];
 	
 	$scope.otherLocation="";
@@ -30,8 +30,6 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 				$scope.location.push(userr.value.locations);
 			});
 		}
-		
-		
 		
 		
 		var flag =false;
@@ -56,7 +54,7 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 	$scope.onload();
 	
 	
-	$scope.client.locations="";
+	//$scope.client.locations="";
 	clientService.getClientInfo()
 	 .then(setClients);
 
@@ -66,49 +64,42 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		}
 	
 	$scope.save = function(){	
-		var ck=$scope.checkSkillSet();
-		if(ck){
 		$scope.location1.value.push($scope.otherLocation);
-		
 		infoService.createInformation($scope.location1).then(function(msg){
-			  msg = "Location \""+$scope.otherLocation+"\" "+msg;
-			 sendSharedMessage(msg,appConstants.SUCCESS_CLASS);
-			
-			  $timeout( function(){ $scope.alHide(); }, 5000);
-			  $scope.otherLocation="";
+			$scope.createClient();
+
 		}).catch(function(msg){
-			sendSharedMessage(msg,appConstants.ERROR_CLASS);
-			$timeout( function(){ $scope.alHide(); }, 5000);
+			$scope.cls=appConstants.ERROR_CLASS;
+			$scope.sendSharedMessageWithCls(msg,cls,'/admin/client');
 		})
-		}
 	}
 	
-	$scope.checkSkillSet = function(){
-		var flag=true;
-		angular.forEach($scope.Locations, function(sk){
-			if($scope.newSkill.toLowerCase()==sk.toLowerCase()){
-				$scope.skillExist=true;
-		}	
+	$scope.createClient = function(){
+		clientService.createClient($scope.client)
+		 .then(function(msg) {
+			 $scope.sendSharedMessage(msg,'/admin/client');
+		 })
+		 .catch(function (msg) {
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $scope.sendSharedMessageWithCls(msg,cls,'/admin/client');
 		});
-		return flag;
 	}
-	
 	
 	$scope.submit = function(){
-		$scope.save();
-		
-		$scope.client.locations=$scope.otherLocation;
-		if($scope.clietNameError == false){
-			$scope.client.clientId = $scope.client.clientName.toUpperCase().replace(/\s/g, '');
-			clientService.createClient($scope.client)
-						 .then(function(msg) {
-							 $scope.sendSharedMessage(msg,'/admin/client');
-						 })
-						 .catch(function (msg) {
-							 $scope.message=msg;
-							 $scope.cls=appConstants.ERROR_CLASS;
-						});
-		}
+		$scope.checkClientName();
+		$scope.client.clientId = $scope.client.clientName.toUpperCase().replace(/\s/g, '');
+		if($scope.clietNameError== false){
+			if($scope.otherLocation){
+				$scope.save();
+				$scope.client.locations=$scope.otherLocation;
+			}else{
+				$scope.createClient();
+			}
+		}/*else{
+			var msg = "Client already exists"
+			var cls=appConstants.ERROR_CLASS;
+			 $scope.sendSharedMessageWithCls(msg,cls,'/admin/client');
+		}*/
 		
 	}
 	
@@ -145,15 +136,5 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		$state.go('admin.client.editClient');
 		
 	}
-	
-	$scope.otherLocations = function(location)
-	{  
-		if(location == "Others")
-		{
-			$scope.showOtherLocation=true;
-		}
-		else
-			$scope.showOtherLocation=false;
-	};	
 	
 }]);
