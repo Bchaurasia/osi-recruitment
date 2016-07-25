@@ -252,15 +252,16 @@
 		</div>
 
 		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="candidate.designation" name="currentdesignation"
-					ng-change="setJobCodes()"
-					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Current
-						Designation</option>
-				</select> <label style="position: absolute; top: -22px;">Current
-					Designation<b class="mandatory">*</b>
+			<div class="input-field col s6" align="left">
+				<ui-select ng-model="candidate.designation" ng-change="setJobCodes()" name="currentdesignation"
+				theme="selectize" style="width: 80%">
+				   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
+				<ui-select-choices
+					repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
+				<span ng-bind-html="designation | highlight: $select.search"></span>
+				</ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">
+					Current Designation<b class="mandatory">*</b>
 				</label>
 
 			</div>
@@ -321,15 +322,16 @@
 					ng-show="CreateCandidate.noticePeriod.$error.pattern">
 					Notice period should be in days </span>
 			</div>
-			<div class="input-field col s6">
-				<select ng-model="candidate.expectedDesignation"
-					name="expectedDesignation" ng-change="setJobCodes()"
-					ng-options="o as o for o in profiledesignations | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Expected
-						Designation</option>
-				</select> <label style="position: absolute; top: -22px;">Expected
-					Designation<b class="mandatory">*</b>
+			<div class="input-field col s6" align="left">
+				<ui-select ng-model="candidate.expectedDesignation" ng-change="setJobCodes()" name="expectedDesignation"
+				theme="selectize" style="width: 80%">
+				   <ui-select-match placeholder="Select Expected Designation">{{$select.selected}}</ui-select-match>
+				<ui-select-choices
+					repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
+				<span ng-bind-html="designation | highlight: $select.search"></span>
+				</ui-select-choices> </ui-select>
+				<label style="position: absolute; top: -22px;">
+					Expected Designation<b class="mandatory">*</b>
 				</label>
 
 			</div>

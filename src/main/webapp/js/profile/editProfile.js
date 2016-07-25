@@ -29,6 +29,17 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	infoService.getInfo().then(function(info){$scope.info = info;
 	$scope.pskills=$scope.info.skills;});
 	
+	designationService.getDesignation().then(function(data){
+		$scope.designations=[];
+		angular.forEach(data,function(obj){
+			$scope.designations.push(obj.designation);
+ 		});
+	}).catch(function(msg){
+		$scope.message=msg;
+		 $scope.cls=appConstants.ERROR_CLASS;
+		 $timeout( function(){ $scope.alHide(); }, 5000);
+	});
+	
 	$scope.candidate.qualifications=[{
 		qualification:'',
 		stream:'',
@@ -107,8 +118,6 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			 $scope.cls=appConstants.ERROR_CLASS;
 			 $timeout( function(){ $scope.alHide(); }, 5000);
 		})
-		$scope.getDesignations();
-		$scope.getExpectedDesignations();
 	})
 	.catch(function(data){
 		console.log("Failed to get data"+data);
@@ -170,30 +179,9 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
         $scope.hidejobcode = false;
 	}
 	
-	$scope.getDesignations = function(){
-		designationService.getDesignation().then(function(data){
-			$scope.designations=data;
-			$scope.designation = _.find($scope.designations, function(designation){ return designation.designation == $scope.candidate.designation; });
-		}).catch(function(msg){
-			$scope.message=msg;
-			 $scope.cls=appConstants.ERROR_CLASS;
-			 $timeout( function(){ $scope.alHide(); }, 5000);
-		});
-	}
-	$scope.getExpectedDesignations = function(){
-		designationService.getDesignation().then(function(data){
-			$scope.expectedDesignations=data;
-			$scope.expectedDesignation = _.find($scope.expectedDesignations, function(designation){ return designation.designation == $scope.candidate.expectedDesignation; });
-		}).catch(function(msg){
-			$scope.message=msg;
-			 $scope.cls=appConstants.ERROR_CLASS;
-			 $timeout( function(){ $scope.alHide(); }, 5000);
-		});
-	}
-	
 	$scope.setJobCodes = function(){
 		$scope.sk.jobcodeProfiles=[];
-		positionService.getPositionByDesignation($scope.designation.designation).then(function(data){
+		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.jobcodelist = [];
 			angular.forEach(data, function(job){
 	        	$scope.jobcodelist.push(job.jobcode);
@@ -229,12 +217,9 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        var curr_year = dt.getFullYear();
 	        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
 	        $scope.candidate.requisitionId = $scope.requisitionId;
-	        $scope.candidate.designation = $scope.designation.designation;
-	        $scope.candidate.expectedDesignation = $scope.expectedDesignation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
-	        $scope.candidate.expectedDesignation=$scope.expectedDesignation.designation;
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
