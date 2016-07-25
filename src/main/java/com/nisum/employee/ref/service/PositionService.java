@@ -28,6 +28,9 @@ public class PositionService implements IPositionService {
 
 	@Autowired
 	PositionSearchService positionSearchService;
+	
+	@Autowired
+	private NotificationService notificationService;
 
 	public void preparePosition(Position position) {
 		positionRepository.preparePosition(position);
@@ -38,6 +41,7 @@ public class PositionService implements IPositionService {
 			position.setUpdatedDate(new Date());
 			Position updatedPosition = positionRepository.updatePosition(position);
 			positionSearchService.updatePositionIndex(updatedPosition);
+			notificationService.sendPositionUpdateNotification(position);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

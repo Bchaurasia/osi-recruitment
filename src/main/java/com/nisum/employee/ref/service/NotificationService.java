@@ -148,6 +148,8 @@ public class NotificationService{
 	private String SRC_PROFILE_VM;
 	@Value("${SRC_PROFILE_APPROVED_VM}")
 	private String SRC_PROFILE_APPROVED_VM;
+	@Value("${SRC_POSITION_UPDATE}")
+	private String SRC_POSITION_UPDATE;
 	
 	
 	@Autowired
@@ -782,6 +784,49 @@ public String sendProfileCreatedNotification(Profile candidate) throws Messaging
 		
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
+	}
+	
+	public void sendPositionUpdateNotification(Position position) throws MessagingException{
+		 String createdBy = position.getCreatedBy();		 
+		 String message = "Position updated";
+		 String readStatus = "No";		 
+		 updateUserNotification(createdBy, message, readStatus);
+		 VelocityEngine engine = new VelocityEngine();
+		 engine.init();
+		 Template positionUpdateTemplate = getVelocityTemplate(SRC_POSITION_UPDATE);
+			
+			VelocityContext context = new VelocityContext();
+			context.put("jobCode", position.getJobcode());
+			context.put("createdBy", position.getCreatedBy());
+			context.put("designation", position.getDesignation());
+			context.put("location", position.getLocation());
+			context.put("skills", position.getPrimarySkills());
+			context.put("status", position.getStatus());
+			context.put("UpdatedBy", position.getUpdatedBy());
+			
+			 List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+			   List<String> HR_Emails = new ArrayList<String>();
+
+				for (UserInfo ui : info) {
+					HR_Emails.add(ui.getEmailId());
+				}
+			
+			StringWriter writer = new StringWriter();
+			positionUpdateTemplate.merge(context, writer);
+			 Message message1 = getMessage();
+			 message1.setFrom(new InternetAddress(from));
+			 String toMail = createdBy ;
+			    for (String hrEMails : HR_Emails) {
+					if(toMail== null || toMail == "")
+						toMail = hrEMails ;
+					else 
+						toMail = toMail + "," + hrEMails;
+				}
+			 message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+			 message1.setSubject("Position updated with job code: "+position.getJobcode());
+			 message1.setContent(writer.toString(), TEXT_HTML);
+			 Transport.send(message1);
+			 
 	}
 
 }
