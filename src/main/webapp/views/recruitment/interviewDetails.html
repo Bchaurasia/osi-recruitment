@@ -1,278 +1,297 @@
-<div class="row" style="width: 86%" align="left">
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10" name="schedule_form"
-		ng-submit="schedule()" onvalidate>
-		<div class="row collapsible-header">
-			<h5 align="left">
-				<b>Interview Details of -
-					{{interviewscheduleDetails.candidateName}}</b>
-			</h5>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewscheduleDetails.currentPositionId}}
-					</b>
-				</h6>
-				<label>Interview Jobcode : </label>
-
+<div class="ui raised less padded container segment" style="width:75%;">
+	<h3 align="left" class="ui dividing header">Interview details for - {{interviewscheduleDetails.candidateName}}</h3>
+	<form class="ui form" name="schedule_form" ng-submit="schedule()" onvalidate>
+		<div class="ui segment" style="background-color: aliceblue;">
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Interview Jobcode : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewscheduleDetails.currentPositionId}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Designation : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewscheduleDetails.designation}}</b>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewscheduleDetails.designation}}
-					</b>
-				</h6>
-				<label>Designation : </label>
-
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">HR Assigned : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewscheduleDetails.hrAssigned}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Status : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewscheduleDetails.status}}</b>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewscheduleDetails.hrAssigned}}
-					</b>
-				</h6>
-				<label>HR Assigned : </label>
-
-			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewscheduleDetails.status}}
-					</b>
-				</h6>
-				<label>Status : </label>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewscheduleDetails.progress}}
-					</b>
-				</h6>
-				<label>Progress: </label>
-
-			</div>
-			<div class="input-field col s6">
-				<h6>
-					<b class="viewInterviewDetails">{{interviewschedule.candidateId}}
-					</b>
-				</h6>
-				<label>Interviewee EmailId : </label>
-
+			<div align="left" class="four fields">
+				<div class="field">
+					<label class="ui label">Progress: </label>
+				</div>
+				<div class="field">
+					<b>{{interviewscheduleDetails.progress}}</b>
+				</div>
+				<div class="field">
+					<label class="ui label">Interviewee EmailId : </label>
+				</div>
+				<div class="field">
+					<b>{{interviewschedule.candidateId}}</b>
+				</div>
 			</div>
 		</div>
-		<tabset justified="true"> <tab
-			ng-repeat="data in interviewscheduleDetails.rounds"
-			heading="{{ data.roundName }}" active="data.active"> <br>
-		<div class="row collapsible-header">
-			<h6 align="left">
-				<b>Interview Details for {{data.roundName}}</b>
-			</h6>
+		<div class="ui segment">
+			<tabset justified="true" type="pills">
+				<tab ng-repeat="data in interviewscheduleDetails.rounds" heading="{{ data.roundName }}" active="data.active">
+					<div class="ui segment">
+						<div class="ui segment" style="background-color: aliceblue;">
+							<h5 align="left" class="ui dividing header">Interview Details for {{data.roundName}}</h5>
+							<div align="left" class="four fields">
+								<div class="field">
+									<label class="ui label">Interview Round : </label>
+								</div>
+								<div class="field">
+									<b>{{data.roundName}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields">
+								<div class="field">
+									<label class="ui label">Interviewer Name : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewSchedule.interviewerName}}</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Interview Date and Time : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewSchedule.interviewDateTime | date:'medium'}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields">
+								<div class="field">
+									<label class="ui label">Interviewer Cell # : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewSchedule.interviewerMobileNumber}}</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Interviewer Email Id : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewSchedule.emailIdInterviewer}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields">
+								<div class="field">
+									<label class="ui label">Type Of Interview : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewSchedule.typeOfInterview}}</b>
+								</div>
+								<div class="field" ng-if="data.interviewSchedule.typeOfInterview === 'Face To Face'">
+									<label class="ui label">Interview Location : </label>
+								</div>
+								<div class="field" ng-if="data.interviewSchedule.typeOfInterview === 'Face To Face'">
+									<b>{{data.interviewSchedule.interviewAddress}}</b>
+								</div>
+								<div class="field" ng-if="data.interviewSchedule.typeOfInterview === 'Skype'">
+									<label class="ui label">Skype Id : </label>
+								</div>
+								<div class="field" ng-if="data.interviewSchedule.typeOfInterview === 'Skype'">
+									<b>{{data.interviewSchedule.skypeId}}</b>
+								</div>
+								<div class="field" ng-if="data.interviewSchedule.typeOfInterview === 'Telephonic'">
+									<label class="ui label">Candidate Cell# : </label>
+								</div>
+								<div class="field" ng-if="data.interviewSchedule.typeOfInterview === 'Telephonic'">
+									<b>{{data.interviewSchedule.candidateMobileNumber}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields">
+								<div class="field">
+									<label class="ui label">Additional Notes : </label>
+								</div>
+								<p>{{data.interviewSchedule.additionalNotes || "--"}}</p>
+							</div>
+							<br>
+							<button class="ui large primary button" type="submit"
+								ng-show="showCancelButton(data.interviewSchedule.emailIdInterviewer) && !(data.interviewFeedback)"
+								ng-click="cancelInterview(interviewschedule.candidateId,data.roundName,interviewschedule.candidateName)">
+								<span class="glyphicon glyphicon-remove"></span> Cancel Interview
+							</button>
+						</div>
+						<div class="ui segment" style="background-color: aliceblue;">
+							<h5 align="left" class="ui dividing header">Feedback Details for {{data.roundName}}</h5>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback">
+								<div class="field">
+									<label class="ui label">Feedback SubmittedBy : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.feedbackSubmittedBy}}</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Status : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.status}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback"
+								ng-repeat="skill in data.interviewFeedback.rateSkills" ng-if="skill.rating!=0">
+								<div class="field">
+									<label class="ui label">Skill : </label>
+								</div>
+								<div class="field">
+									<b>{{skill.skill}}</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Rating : </label>
+								</div>
+								<div class="field">
+									<b>{{skill.rating}}/5</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.technicalComment">
+								<div class="field">
+									<label class="ui label">Comments : </label>
+								</div>
+								<p>{{data.interviewFeedback.technicalComment}}</p>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback"
+								ng-repeat="skill in data.interviewFeedback.domainSkills">
+								<div class="field">
+									<label class="ui label">Skill : </label>
+								</div>
+								<div class="field">
+									<b>{{skill.skill}}</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Rating : </label>
+								</div>
+								<div class="field">
+									<b>{{skill.rating}}/5</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.functionalComment">
+								<div class="field">
+									<label class="ui label">Comments : </label>
+								</div>
+								<p>{{data.interviewFeedback.functionalComment || "--"}}</p>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback">
+								<div class="field">
+									<label class="ui label">Communication Skills : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.communicationSkills}}/5</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Comments : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.communicationSkillComment || "--"}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback">
+								<div class="field">
+									<label class="ui label">Consulting & Articulation Skills : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.consultingAndArticulationSkills}}/5</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Comments : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.consultingAndArticulationSkillsComment || "--"}}</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback">
+								<div class="field">
+									<label class="ui label">Additional Skills : </label>
+								</div>
+								<b>{{data.interviewFeedback.additionalSkills || "--"}}</b>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback">
+								<div class="field">
+									<label class="ui label">Strengths : </label>
+								</div>
+								<b>{{data.interviewFeedback.strengths || "--"}}</b>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback">
+								<div class="field">
+									<label class="ui label">Improvement : </label>
+								</div>
+								<b>{{data.interviewFeedback.improvement || "--"}}</b>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback" 
+								ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
+								<div class="field">
+									<label class="ui label">Self Learning & Initiative : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.selfLearningAndInitiative}}/5</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Customer Orientation : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.customerOrientation}}/5</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback" 
+								ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
+								<div class="field">
+									<label class="ui label">Business Attitude : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.businessAttitude}}/5</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Flexibility : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.flexibility}}/5</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback" 
+								ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
+								<div class="field">
+									<label class="ui label">Team Work : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.teamWork}}/5</b>
+								</div>
+								<div class="field">
+									<label class="ui label">Onsite Suitability : </label>
+								</div>
+								<div class="field">
+									<b>{{data.interviewFeedback.onsiteSuitability}}/5</b>
+								</div>
+							</div>
+							<div align="left" class="four fields" ng-show="data.interviewFeedback" 
+								ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
+								<div class="field">
+									<label class="ui label">Comments : </label>
+								</div>
+								<p>{{data.interviewFeedback.managementSkillComment || "--"}}</p>
+							</div>
+							<div class="ui negative message" ng-show="!(data.interviewFeedback)">
+								<div class="header">
+									Feedback not submitted!
+								</div>
+							</div>
+						</div>
+					</div>
+				</tab>
+			</tabset>
 		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.roundName}}</p>
-				<label>Interview Round :</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.interviewerName}}
-				</p>
-				<label>Interviewer Name :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.interviewDateTime
-					| date:'medium'}}</p>
-				<label>Interview Date and Time : </label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.interviewerMobileNumber}}</p>
-				<label>Interviewer Cell # :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.emailIdInterviewer}}
-				</p>
-				<label>Interviewer Email Id :</label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewSchedule.typeOfInterview}}
-				</p>
-				<label>Type Of Interview :</label>
-			</div>
-			<div class="input-field col s6" ng-if="data.interviewSchedule.typeOfInterview === 'Face To Face'">
-				<p style="width:70%;" class="viewInterview">{{data.interviewSchedule.interviewAddress}}
-				</p>
-				<label>Interview Location:</label>
-			</div>
-			<div class="input-field col s6" ng-if="data.interviewSchedule.typeOfInterview === 'Skype'">
-				<p class="viewInterview">{{data.interviewSchedule.skypeId}}</p>
-				<label> Skype Id :</label>
-			</div>
-			<div class="input-field col s6" ng-if="data.interviewSchedule.typeOfInterview === 'Telephonic'">
-				<p class="viewInterview">{{data.interviewSchedule.candidateMobileNumber}}</p>
-				<label> Candidate Cell# :</label>
-			</div>
-			
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewSchedule.additionalNotes
-					|| "--"}}</p>
-				<label style="position: absolute; top: -22px;">Additional Notes :</label>
-			</div>
-		</div>
-		<div class="row" style="align:center">
-			
-		<button class="btn btn-info active" type="submit"
-					ng-show="showCancelButton(data.interviewSchedule.emailIdInterviewer) && !(data.interviewFeedback)"
-					ng-click="cancelInterview(interviewschedule.candidateId,data.roundName,interviewschedule.candidateName)">
-					<span class="glyphicon glyphicon-remove"></span> Cancel Interview
-				</button>
-		</div>
-		<div class="row collapsible-header">
-			<h6 align="left">
-				<b>Feedback Details for {{data.roundName}}</b>
-			</h6>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.feedbackSubmittedBy}}</p>
-				<label>Feedback SubmittedBy :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.status}}</p>
-				<label>Status :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback"
-			ng-repeat="skill in data.interviewFeedback.rateSkills" ng-if="skill.rating!=0">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.skill}}</p>
-				<label>Skill :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.rating}}/5</p>
-				<label>Rating :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.technicalComment">	
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.technicalComment}}</p>
-				<label style="position: absolute; top: -12px;">Comments :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback"
-			ng-repeat="skill in data.interviewFeedback.domainSkills">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.skill}}</p>
-				<label>Skill :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.rating}}/5</p>
-				<label>Rating :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.functionalComment">	
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.functionalComment || "--"}}</p>
-				<label style="position: absolute; top: -12px;">Comments :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.communicationSkills}}/5</p>
-				<label>Communication Skills :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.communicationSkillComment || "--"}}</p>
-				<label style="position: absolute; top: -12px;">Comments :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/5</p>
-				<label style="position: absolute; top: -12px;">Consulting &<br> Articulation Skills :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkillsComment || "--"}}</p>
-				<label style="position: absolute; top: -12px;">Comments :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.additionalSkills
-					|| "--"}}</p>
-				<label style="position: absolute; top: -12px;">Additional Skills :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.strengths
-					|| "--"}}</p>
-				<label style="position: absolute; top: -12px;">Strengths :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback">
-			<div class="input-field col s12">
-				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewFeedback.improvement
-					|| "--"}}</p>
-				<label style="position: absolute; top: -12px;">Improvement :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/5</p>
-				<label>Self Learning & Initiative :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/5</p>
-				<label>Customer Orientation :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/5</p>
-				<label>Business Attitude :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/5</p>
-				<label>Flexibility :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/5</p>
-				<label>Team Work :</label>
-			</div>
-			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/5</p>
-				<label>Onsite Suitability :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
-			   <div class="input-field col s6">
-					<p class="viewInterview">{{data.interviewFeedback.managementSkillComment || "--"}}</p>
-					<label style="position: absolute; top: -12px;">Comments :</label>
-			</div>
-		</div>
-		<div class="row" ng-show="!(data.interviewFeedback)"
-			style="color: red;">
-			<h6>
-				<b>Feedback not submitted!</b>
-			</h6>
-		</div>
-		</tab> </tabset>
-
 	</form>
 </div>
-<br>
-<br>
+
