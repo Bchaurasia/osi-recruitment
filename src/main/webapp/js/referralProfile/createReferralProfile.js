@@ -137,7 +137,10 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    	$scope.candidate.referredBy  = $scope.user.emailId;
 		    	$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.profileSource = "Referral";
-		    	$scope.candidate.requisitionId = $scope.requisitionId; 
+		    	//$scope.candidate.requisitionId = $scope.requisitionId; 
+		    	console.log("job code selected is::"+$scope.candidate.jobCode);
+		    	$scope.candidate.requisitionId = $scope.getRequisitionIdFromJobCode($scope.candidate.jobCode);
+		    	console.log("requisition id selected is::"+$scope.candidate.requisitionId);
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		

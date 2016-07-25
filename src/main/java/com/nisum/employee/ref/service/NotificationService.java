@@ -803,6 +803,7 @@ public String sendProfileCreatedNotification(Profile candidate) throws Messaging
 			context.put("skills", position.getPrimarySkills());
 			context.put("status", position.getStatus());
 			context.put("UpdatedBy", position.getUpdatedBy());
+			context.put("positionType", position.getPositionType());
 			
 			 List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
 			   List<String> HR_Emails = new ArrayList<String>();
