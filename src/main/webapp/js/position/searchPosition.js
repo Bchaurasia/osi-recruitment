@@ -16,6 +16,14 @@ app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','sharedSe
 		}	
 		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
 			    $scope.positions = data;
+			    $scope.selectedPositions=[];
+			    angular.forEach($scope.positions,function(position){
+			    	var date = new Date(position.createdDate);
+			    	var createDate = date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear();
+			    	position.createdDate= createDate;
+			    	$scope.selectedPositions.push(position);
+			    });
+			    $scope.positions = angular.copy($scope.selectedPositions);
 			    /*if(!_.contains($scope.user.roles, "ROLE_HR")){
 			    	$scope.selectedPositions=[];
 			    		angular.forEach($scope.positions,function(position){
