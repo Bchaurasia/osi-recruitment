@@ -207,7 +207,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	
 	$scope.schedule =  function(){
 		
-		if($scope.interviewscheduleDetails.progress === "Not Initialized"){
+		if($scope.interviewscheduleDetails.progress === "Not Initialized" && $scope.interviewschedule.roundName == "HR"){
 			var message = "Please schedule other rounds before HR" ;
 			var cls='alert alert-danger alert-error';
 				$scope.sendNotificationWithStyle(message,cls,'recruitment/interviewManagement');
