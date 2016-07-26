@@ -23641,7 +23641,7 @@ a.ui.nag {
 	z-index: 2;
 	box-shadow: 1px 1px 0 0 #bababc
 }
-
+/* 
 [data-tooltip] {
 	position: relative
 }
@@ -23966,7 +23966,7 @@ a.ui.nag {
 	-webkit-transform-origin: left center;
 	transform-origin: left center
 }
-
+ */
 .ui.popup {
 	margin: 0
 }

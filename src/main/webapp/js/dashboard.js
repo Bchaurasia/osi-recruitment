@@ -19,10 +19,18 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.HiredCount = 0;
 	$scope.totalRequisitions = 0;
 	$scope.totalPositions = 0;
-	$scope.feedback = function(jobcode,candidateEmail) {
-		sharedService.setjobCode(jobcode);
-		sharedService.setprofileUserId(candidateEmail);
-		location.href='#recruitment/interviewFeedback';
+	
+	$scope.feedback = function(jobcode,candidateEmail,status,interviewId) {
+
+		if (status.indexOf("Scheduled") !=-1) {
+			sharedService.setjobCode(jobcode);
+			sharedService.setprofileUserId(candidateEmail);
+			location.href='#recruitment/interviewFeedback';
+		}
+		else {
+			sharedService.setInterviewId(interviewId);
+			location.href='#recruitment/interviewDetails';
+		}
 	};
 	console.log(profileService.getProfiles());
 	
@@ -164,6 +172,7 @@ $scope.state = false;
 			location.href='#recruitment/interviewDetails';
 		}
 	}
+	
 	
 	$scope.editPosition = function(jobcodeProfile,designation) {
 		sharedService.setjobCode(jobcodeProfile);
