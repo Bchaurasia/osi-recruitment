@@ -224,10 +224,11 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
-	        if($scope.candidate.jobcodeProfile=="")
+	        $scope.candidate.status = "Not Initialized";
+	        /*if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
-				 $scope.candidate.status = "Initialized";
+				 $scope.candidate.status = "Initialized";*/
 			}
 	        profileService.updateProfile($scope.candidate).then(function(msg){
 	        	$scope.sendNotification(msg,'referral/searchReferralProfile');
