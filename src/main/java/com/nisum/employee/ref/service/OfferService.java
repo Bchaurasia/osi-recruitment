@@ -25,22 +25,8 @@ public class OfferService {
 	@Autowired
 	private NotificationService notificationService;
 
-	@Autowired
-	private ProfileService profileService;
 
 	public void prepareOffer(Offer offerDetail) {
-		Profile profile = profileService.getCandidateByEmailId(offerDetail.getEmailId());
-		if (offerDetail.getFinalStatus() == "Offered" || offerDetail.getFinalStatus() != "Rejected") {
-			try {
-				notificationService.OfferedCandidateNotificationToHRTeam(offerDetail, profile);
-				if (profile.getReferredBy() != null) {
-					notificationService.OfferedCandidateNotificationToReferredBy(offerDetail, profile);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		OfferRepository.saveOffer(offerDetail);
 	}
 

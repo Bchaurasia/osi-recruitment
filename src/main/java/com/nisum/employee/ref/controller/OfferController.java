@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.domain.Offer;
 import com.nisum.employee.ref.domain.OfferApprover;
+import com.nisum.employee.ref.domain.Profile;
+import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.repository.OfferRepository;
+import com.nisum.employee.ref.service.NotificationService;
 import com.nisum.employee.ref.service.OfferService;
+import com.nisum.employee.ref.service.ProfileService;
 
 @Controller
 public class OfferController {
@@ -35,10 +38,30 @@ public class OfferController {
 	@Autowired
 	private OfferRepository offerRepository;
 
+	
+	@Autowired
+	private ProfileService profileService;
+	
+	@Autowired
+	private NotificationService notificationService;
+
+	
 	@ResponseBody
 	@Secured({ "ROLE_ADMIN", "ROLE_HR" })
 	@RequestMapping(value = "/save-offer", method = RequestMethod.POST)
 	public ResponseEntity<Offer> saveOfferDetails(@RequestBody Offer offer) {
+		Profile profile = profileService.getCandidateByEmailId(offer.getEmailId());
+		if (offer.getFinalStatus().equals("Offered") || offer.getFinalStatus().equals("Rejected")) {
+			try {
+				notificationService.OfferedCandidateNotificationToHRTeam(offer, profile);
+				if (profile.getReferredBy() != null) {
+					notificationService.OfferedCandidateNotificationToReferredBy(offer, profile);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		offerService.prepareOffer(offer);
 		return new ResponseEntity<Offer>(offer, HttpStatus.OK);
 	}
