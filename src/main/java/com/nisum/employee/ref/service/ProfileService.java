@@ -113,6 +113,10 @@ public class ProfileService implements IProfileService{
 		return profileRepository.retrieveCandidateDetails(emailId);
 	}
 	
+	public Profile getCandidateByEmailId(String emailId) {
+		return profileRepository.getCandidate(emailId);
+	}
+	
 	public List<Profile> retrieveProfileByJobCode(String jobcodeProfile) {
 		return profileRepository.retrieveProfileByJobCode(jobcodeProfile);
 	}
