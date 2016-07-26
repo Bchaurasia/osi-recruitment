@@ -6,8 +6,8 @@
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Dear $ReferredByName ,<br><br>We are pleased to inform you that your referral $CandidateName has been hired for the
 $jobCode He/She will work as $Designation and will be reporting to $Manager.<br><br> 
-his date of joining OSI is: $JoiningDate<br>
-Work location:$location<br><br>
+His/Her date of joining OSI is: $JoiningDate<br>
+Work Location:$location<br><br>
 We wish him/her the best in his new role and a rewarding career at OSI !<br><br><br>
  <span style="font-size:15px">Regards,</span><br>
  <span style="font-size:15px">Recruitment Team,</span><br>
