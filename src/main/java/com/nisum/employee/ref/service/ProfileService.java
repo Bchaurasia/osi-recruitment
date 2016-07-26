@@ -91,6 +91,11 @@ public class ProfileService implements IProfileService{
 			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
+			try{
+				notificationService.sendProfileUpdatedNotification(candidate);
+			}catch (MessagingException e) {
+					e.printStackTrace();
+			}
 			if(candidate.getIsCreatedByUser() != true) {
 				InterviewDetails interview = interviewDetailsRepository.getInterviewDetailsById(candidate.getEmailId());
 				if(candidate.getIsReferral()) {

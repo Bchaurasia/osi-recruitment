@@ -159,6 +159,8 @@ public class NotificationService {
 	private String SRC_OFFER_INFO_TO_HR;
 	@Value("${SRC_OFFER_INFO_TO_REFERRER}")
 	private String SRC_OFFER_INFO_TO_REFERRER;
+	@Value("${SRC_PROFILE_UPDATED_VM}")
+	private String SRC_PROFILE_UPDATED_VM;
 	
 	@Autowired
 	IProfileService profileService;
@@ -861,7 +863,14 @@ public class NotificationService {
 		String createdBy = candidate.getCreatedBy();
 		String message = "Profile approved";
 		String readStatus = "No";
+		
+		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+		List<String> HR_Emails = new ArrayList<String>();
 
+		for (UserInfo ui : info) {
+			HR_Emails.add(ui.getEmailId());
+		}
+		
 		updateUserNotification(createdBy, message, readStatus);
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
@@ -878,7 +887,14 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		// message1.setFrom(new InternetAddress(from));
-		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(createdBy));
+		String toMail = createdBy;
+		for (String hrEMails : HR_Emails) {
+			if (toMail == null || toMail == "")
+				toMail = hrEMails;
+			else
+				toMail = toMail + "," + hrEMails;
+		}
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " :Profile has been approved for: " + candidate.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -927,6 +943,47 @@ public class NotificationService {
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 
+	}
+
+	public void sendProfileUpdatedNotification(Profile candidate)  throws MessagingException {
+		String createdBy = candidate.getCreatedBy();
+		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+		List<String> HR_Emails = new ArrayList<String>();
+
+		for (UserInfo ui : info) {
+			HR_Emails.add(ui.getEmailId());
+		}
+		String message = "Profile updated";
+		String readStatus = "No";
+
+		updateUserNotification(createdBy, message, readStatus);
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_PROFILE_UPDATED_VM);
+
+		VelocityContext context = new VelocityContext();
+		context.put("jobCode", candidate.getJobCode());
+		context.put("createdBy", candidate.getReferredByName());
+		context.put("candidateName", candidate.getCandidateName());
+
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+
+		Message message1 = getMessage();
+		message1.setFrom(new InternetAddress(from));
+		String toMail = createdBy;
+		for (String hrEMails : HR_Emails) {
+			if (toMail == null || toMail == "")
+				toMail = hrEMails;
+			else
+				toMail = toMail + "," + hrEMails;
+		}
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		message1.setSubject(OSI_TECHNOLOGIES + " :Profile has been updated for: " + candidate.getCandidateName());
+
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
 	}
 
 }
