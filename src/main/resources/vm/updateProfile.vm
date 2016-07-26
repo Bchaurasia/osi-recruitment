@@ -4,7 +4,7 @@
 <div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
-Hi,<br><br>Profile for $candidateName #if($jobCode) with Job Code $jobCode #end has been updated successfully.<br><br> 
+Hi,<br><br>Profile for $candidateName #if($jobCode) with Job Code $jobCode #end has been updated successfully by $updatedBy<br><br> 
  <span style="font-size:15px">Regards,</span><br>
  <span style="font-size:15px">Recruitment Team,</span><br>
  <span style="font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>

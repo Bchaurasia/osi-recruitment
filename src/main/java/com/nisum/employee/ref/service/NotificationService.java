@@ -116,6 +116,7 @@ public class NotificationService {
 	private static final String TITLE = "title";
 	private static final String CREATED_BY_USER = "created_by_user";
 	private static final String SUBMITTED_BY_USER = "submittedBy";
+	private static final String UPDATED_BY = "updatedBy";
 
 	@Value("${mail.fromAddress}")
 	private String from;
@@ -966,6 +967,7 @@ public class NotificationService {
 		context.put("jobCode", candidate.getJobCode());
 		context.put("createdBy", candidate.getReferredByName());
 		context.put("candidateName", candidate.getCandidateName());
+		context.put(UPDATED_BY, candidate.getUpdatedBy());
 
 		StringWriter writer = new StringWriter();
 		jobRequisitionTemplate.merge(context, writer);
@@ -980,7 +982,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject(OSI_TECHNOLOGIES + " :Profile has been updated for: " + candidate.getCandidateName());
+		message1.setSubject("Profile has been updated for: " + candidate.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);

@@ -94,7 +94,7 @@ angular.module('erApp')
 	function setUser(data){
 		$scope.user = data;
 		$rootScope.user = data;
-		if(angular.isDefined($scope.directToProfilePageForFirstTimeUser)){
+		if(angular.isDefined($rootScope.directToProfilePageForFirstTimeUser)){
 			location.href='#viewUser';
 		}
 	}
