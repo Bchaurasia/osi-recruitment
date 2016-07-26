@@ -92,6 +92,7 @@ function userService($http,$rootScope,appConstants,$q) {
 			if( sessionStorage.userId.includes("@")){
 				user.emailId = sessionStorage.userId;
 				user.name = sessionStorage.name;
+				$rootScope.directToProfilePageForFirstTimeUser = true;
 				return addUserDetails(user);
 			}
 		}else{
