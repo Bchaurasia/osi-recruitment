@@ -66,6 +66,9 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		$q.all([getDesignation,getClients,getJds,getusers]).then(
 				function(response){
 					$scope.designations = response[0].data;
+					angular.forEach($scope.designations,function(deg){
+						$scope.designation1.push(deg.designation);
+					})
 					if($scope.requisition.position !== undefined && !_.isEmpty($scope.designations)){
 						$scope.position = _.find($scope.designations, function(deg){ return deg.designation === $scope.requisition.position });
 					}
@@ -160,7 +163,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	$scope.cloneRequisitionDetails = function(){
 		if ($scope.requisition !== undefined && $scope.requisition.status !== "REJECTED") {
 			delete $scope.requisition.requisitionId;
-			$scope.requisition.position = $scope.position.designation;
 			$scope.requisition.createdBy = $scope.user.emailId;
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			$scope.requisition.client = $scope.client.clientName;
