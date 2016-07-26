@@ -140,7 +140,8 @@ public class ProfileServiceTest {
 		candidate.setEmailId("abc@abc.com");
 		candidate.setPrimarySkills(skills);
 		candidate.setDesignation("Dev");
-		candidate.setHrAssigned("XYZ");
+		candidate.setCreatedBy("XYZ");
+		candidate.setIsCreatedByUser(true); 
 		candidate.setCreatedDate(new Date());
 		
 		return candidate;
