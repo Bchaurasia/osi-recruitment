@@ -546,7 +546,7 @@ public class NotificationService {
 		VelocityContext context = new VelocityContext();
 		context.put("CandidateName", offer.getCandidateName());
 		context.put("jobCode", offer.getJobcodeProfile());
-		context.put("Manager", offer.getReportingManager());
+		context.put("Manager", offer.getReportingManager().getName());
 		context.put("JoiningDate", offer.getExpectedJoiningDate());
 		context.put("location", offer.getWorkLocation());
 		context.put("ReferredByName", ReferredByName);
@@ -591,7 +591,7 @@ public class NotificationService {
 		VelocityContext context = new VelocityContext();
 		context.put("CandidateName", offer.getCandidateName());
 		context.put("jobCode", offer.getJobcodeProfile());
-		context.put("Manager", offer.getReportingManager());
+		context.put("Manager", offer.getReportingManager().getName());
 		context.put("JoiningDate", offer.getExpectedJoiningDate());
 		context.put("location", offer.getWorkLocation());
 		context.put("ReferredByName", ReferredByName);
