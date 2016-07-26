@@ -1,32 +1,33 @@
-<br>
-<div align="center">
-	<table style="width: 90%; font-size: 95%">
-		<tbody>
-			<tr>
-				<td><b>Technical Skills</b></td>
-				<td>
-					<div class="row" ng-repeat="round in interviewFeedback.rateSkills">
-						<div class="col s6">{{ round.skill }}:<b class="mandatory">*</b></div>
-						<div class="col s6">
-							<rating ng-model="round.rating" max="5" readonly="false" ng-change="disablefeedback()"
-								on-hover="hoveringOver(value)" on-leave="overStar = null" required></rating>
-						</div>
+	<div align="left" class="five fields">
+		<div class="field">
+			<b>Technical Skills : </b>
+		</div>
+		<div class="field" style="padding-left: 10px;">
+			<div class="row" ng-repeat="round in interviewFeedback.rateSkills">
+				<div align="left" class="two fields">
+					<div class="field">{{ round.skill }}:<b class="mandatory">*</b></div>
+					<div class="field">
+						<rating ng-model="round.rating" max="5" readonly="false" ng-click="starColor($event)"
+                                on-hover="hoveringOver(value)" on-leave="hooverStar = null;" data-tooltip={{tooltip}}>
+                        </rating>
 					</div>
-					<input type="text" ng-model="technical.newSkill" 
-								maxlength="40" name="" placeholder="Enter Skill." style="width: 31%;height: auto;">
-						<button style="background-color: #F8F8F8; border: 0px;" href=""
-							id="" class="interview-feedback" data-tooltip="Add New Skill"
-							 ng-disabled="!technical.newSkill"
-							ng-click="addNewSkill();disablefeedback()">
-							<i class="material-icons">add</i>
-						</button>
-				</td>
-				<td><div class="input-field">
-						<textarea class="materialize-textarea" length="120" ng-model="interviewFeedback.technicalComment"
-							placeholder="Enter any comments/notes..."></textarea>
-							<label style="position: absolute; top: -22px;">Comment</label>
-					</div></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+				</div>
+			</div>
+			<input type="text" ng-model="technical.newSkill" maxlength="40" name="" 
+					placeholder="Enter Skill." style="width: 60%; margin-left: -10px; margin-right: -20px;">
+			<button style="background-color: #F8F8F8; border: 0px;" href=""
+				id="" class="interview-feedback" data-tooltip="Add New Skill"
+				 ng-disabled="!technical.newSkill"
+				ng-click="addNewSkill();disablefeedback()">
+				<i class="material-icons" style="background-color: #337ab7; color: white;">add</i>
+			</button>
+		</div>
+	</div>
+	<br>
+	<div align="left" class="five fields">
+		<div class="field">
+			<b>Comment : </b>
+		</div>
+		<textarea class="materialize-textarea" rows="2" style="width:60%; resize: none;" length="120" ng-model="interviewFeedback.technicalComment"
+				placeholder="Enter any comments/notes..."></textarea>
+	</div>

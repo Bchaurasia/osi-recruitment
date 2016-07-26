@@ -46,6 +46,12 @@ public class ProfileRepository {
 		mongoOperations.upsert(query, update, "profile");
 	}
 
+	public Profile getCandidate(String emailId) {
+		Query query = new Query(Criteria.where("_id").is(emailId));
+		Profile profile=mongoOperations.findOne(query, Profile.class);
+		return profile;
+	}
+
 	public List<Profile> retrieveCandidateDetails(String emailId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("emailId").regex(

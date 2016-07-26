@@ -11,17 +11,19 @@
 			<div class="input-field col s6">
 				<label class="lbl"> <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Client
 					Name<b class="mandatory">*</b>
-				</label> <input type="text" name="clientName" id="clientName"
+				</label> <input type="text" name="clientName" id="clientName" ng-pattern="/^[a-zA-Z _']*$/"  ng-change="checkClientName()"
 					style="top: 1px; height: 29px" placeholder="Enter Client Name"
 					ng-model="client.clientName" required />
+					<span ng-show="clietNameError" class="validation-error">Client name already exist</span>
+					<span class="validation-error"
+						ng-show="clientForm.clientName.$error.pattern">
+						Enter valid name</span>
 			</div>
 			<div class="input-field col s6">
-				<select placeholder="Select location"
-					ng-change="otherLocations(client.locations)"
-					ng-disabled="disLocation" ng-model="client.locations"
-					ng-options="o as o for o in locations" disabled="disabled"
+				<select placeholder="Select location" ng-model="client.locations"
+					ng-options="o as o for o in locations"
 					class="form-control input-sm" required>
-					<option value=''>Select Location</option>
+					<option value='' disabled="disabled">Select Location</option>
 
 				</select> <label> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Location<b
 					class="mandatory">*</b>
@@ -29,15 +31,14 @@
 			</div>
 			
 		</div>
-		<div class="row" ng-show="showOtherLocation">
+		<div class="row" ng-show="client.locations=='Others'">
 			<div class="input-field col s6">
 				<label class="lbl"> <i
 					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
-					Location
+					Location<b class="mandatory">*</b>
 				</label> <input type="text" name="olocation" id="olocation"
 					style="top: 1px; height: 29px"
-					ng-change="otherLocations(client.locations)"
-					placeholder="Enter Client Name" ng-model="otherLocation"
+					placeholder="Enter Location Name" ng-model="otherLocation" ng-required="client.locations=='Others'"
 					ng-minlength="3">
 
 				<div class="validation-error"
@@ -48,7 +49,7 @@
 		<div class="row" align="center">
 			<div class="input-field col s12">
 				<button class="btn btn-info active"
-					ng-disabled="disable || clientForm.$invalid" type="submit"
+					ng-disabled="clientForm.$invalid || clietNameError" type="submit"
 					ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

@@ -25,14 +25,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.currencyList = ["INR","USD","GBP","EUR"];
 	$scope.finalStatusList = ["Offered","Rejected"];
 	$scope.candidate.currency="INR";
-	$scope.hideFinalStatus=function(){
-		if($scope.candidate.offerStatus===""){
-			$scope.hideFinalStatus=true;
-		}else{
-			$scope.hideFinalStatus=false;
-		}
-	}
-	
 	$scope.init = function(){
 		$scope.profile = offerService.getData();
 		$scope.candidate.emailId = $scope.profile.candidateEmail;
@@ -131,7 +123,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.selectStream($scope.bu);
 			$scope.selectLevel($scope.stream);
 			$scope.selectGrade($scope.level);
-			$scope.hideFinalStatus();
+			 hideFinalStatusFun();
 		}
 
 		var listlength=$scope.candidate.approvalList.length;
@@ -264,5 +256,12 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$log.error("error saving offer..." + data);
 		});
 	}
-
+    hideFinalStatusFun();
+    function hideFinalStatusFun(){
+    	if($scope.candidate.offerStatus === "Rejected" || $scope.candidate.offerStatus === "Approved"){
+			$scope.hideFinalStatus=false;
+		}else{
+			$scope.hideFinalStatus=true;
+		}
+    }
  }]);

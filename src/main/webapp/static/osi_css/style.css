@@ -3053,3 +3053,23 @@ button.glyphicon.glyphicon-remove,button.glyphicon.glyphicon-plus{
 	color: #004D87;
 }
 
+div.row.collapsible-header h5 b{
+	 font-size:175%; 
+}
+
+div.row.collapsible-header h5{
+	 padding: 15px 0px 15px 0px;
+}
+   
+   
+   input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 2em;
+	height: 1.2em;
+	border-radius: .375em;
+	border: none;
+	background-image: linear-gradient(to bottom, #004D87 0, #004D87 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #004D87),
+		color-stop(100%, #004D87));
+	background-image: -webkit-linear-gradient(top, #004D87 0, #004D87 100%);
+}

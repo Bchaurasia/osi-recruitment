@@ -1,5 +1,5 @@
-app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window', '$timeout', '$log','$location', 'sharedService','clientService','sharedDataService', 
-                                 	function($scope, $http,$rootScope, $q, $window, $timeout, $log,$location, sharedService, clientService,sharedDataService) {
+app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window', '$timeout', '$log','$location', 'sharedService','clientService','sharedDataService','appConstants','infoService', 
+                                 	function($scope, $http,$rootScope, $q, $window, $timeout, $log,$location, sharedService, clientService,sharedDataService,appConstants,infoService) {
 	
 	$scope.clientId = sharedService.getclientId();
 	$scope.clientName = sharedService.getclientName();
@@ -13,8 +13,8 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 	$scope.plocation=$rootScope.info.locations;
 	var getClient = $http.get( 'resources/getClientById?clientId='+$scope.clientId);
 	var getUsers_URL = $http.get('resources/user?clientName='+$scope.clientName);
-	$scope.showOtherLocation = false;
-	$scope.disable=false;
+	//$scope.showOtherLocation = false;
+	//$scope.disable=false;
 	
 	$q.all([getClient, getUsers_URL]).then(
 		function(response){
@@ -32,7 +32,13 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 	function setClients(data){
 			$scope.clients = data;
 		}
+	
+	infoService.getInfoById('Locations').then(function(Locations){
+		$scope.location1 = Locations;
+		}).catch(function(data, status, headers, config) {
 
+		})
+	
 	$scope.checkClientName= function(){
 		console.log("got the call");
 		$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName.toLowerCase() === $scope.client.clientName.toLowerCase() });
@@ -44,28 +50,36 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 					
 		}
 		}
+	$scope.save = function(){	
+		$scope.location1.value.push($scope.otherLocation);
+		infoService.createInformation($scope.location1).then(function(msg){
+			$scope.updateClientDetails();
+
+		}).catch(function(msg){
+			$scope.cls=appConstants.ERROR_CLASS;
+			$scope.sendSharedMessageWithCls(msg,cls,'/admin/client');
+		})
+	}
+	
+	$scope.updateClientDetails= function(){
+		clientService.updateClient($scope.client)
+		 .then(function(msg) {
+			 $scope.sendSharedMessage(msg,'/admin/client');
+		 })
+		 .catch(function (msg) {
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $scope.sendSharedMessageWithCls(msg,cls,'/admin/client');
+		});
+	}
 	
 	$scope.updateClient = function(){
-		
-		$scope.client.locations=$scope.otherLocation;
-		var validate=$scope.validateSave($scope.client);
-		if(validate){
-		clientService.updateClient($scope.client)
-					 .then(successMsg)
-					 .catch(errorMsg);
-		}
-		else{
-			$scope.sendErrorMsg("Please fill Mandatory fields");
-		}
-		function successMsg(data) { 
-		  $location.path('/admin/client');
-		  sharedDataService.setClass($scope.successAlert);
-		  sharedDataService.setmessage(data);
-		}	 
-			
-		function errorMsg(data) {
-			$scope.sendErrorMsg("Something Went Wrong! Please Try Again!");
-		}
+		//$scope.checkClientName();
+			if($scope.otherLocation){
+				$scope.save();
+				$scope.client.locations=$scope.otherLocation;
+			}else{
+				$scope.updateClientDetails();
+			}
 	}
 	
 	$scope.validateSave = function(client){
@@ -94,27 +108,5 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 		} else
 			return "Enter A Valid Name!..";
 	};
-	
-	$scope.otherLocations = function(location)
-	{  
-		if(location == "Others")
-		{
-			
-			if($scope.otherLocation != ""){
-				$scope.disable=false;
-			}
-				
-			else{
-				$scope.disable=true;
-			}
-				
-			$scope.showOtherLocation=true;
-			
-		}
-		else{
-			$scope.disable=false;
-			$scope.showOtherLocation=false;
-		}
-	};	
-	
+		
 }]);

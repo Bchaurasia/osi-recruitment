@@ -34,5 +34,7 @@ public interface IProfileService {
 
 	void approveCandidate(Profile candidate);
 	
+	public Profile getCandidateByEmailId(String emailId);
+	
 	
 }
