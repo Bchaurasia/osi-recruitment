@@ -49,7 +49,7 @@ public class ProfileService implements IProfileService{
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		Event e=new Event();
-		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created");
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created.");
 		e.setCategory("General");
 		e.setEmailId(candidate.getCreatedBy());
 		eventService.setEvent(e);

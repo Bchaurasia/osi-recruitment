@@ -6,7 +6,8 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		getPositionData : getPositionData,
 		getScheduleData : getScheduleData,
 		getScheduleDataInterview : getScheduleDataInterview,
-		getAllEvents : getAllEvents
+		getAllEvents : getAllEvents,
+		getInterviewDetails : getInterviewDetails
 	};
 	
 	function getPositionData(obj){
@@ -89,4 +90,13 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	function getScheduleDataError(response){
 		return q.reject("Failed To Get Interview Details!");
 	}
+	function getInterviewDetails() {
+		return $http.get('resources/allInterviewDetails').then(function(response){
+			return response.data;
+			
+		}).catch(function(response) {
+			return "Failed to get Events!"
+		})
+	}
+	
 }

@@ -70,7 +70,7 @@ public class RequisitionService implements IRequisitionService {
 	public void updateRequisition1(Requisition requisition)
 			throws AddressException, MessagingException {
 		Event e= new Event();
-		e.setEventDesc(requisition.getRequisitionId()+ " has been updated");
+		e.setEventDesc(requisition.getRequisitionId()+ " has been updated.");
 		e.setCategory("Management");
 		e.setEmailId(requisition.getCreatedBy());
 		eventService.setEvent(e);
@@ -94,7 +94,7 @@ public class RequisitionService implements IRequisitionService {
 			
 			try {
 				Event e= new Event();
-				e.setEventDesc(requisition.getRequisitionId()+ " has been approved");
+				e.setEventDesc(requisition.getNoOfPositions()+ " "+requisition.getPosition()+ " positions for "+requisition.getClient() + " has been created.");
 				e.setCategory("Management");
 				e.setEmailId(requisition.getCreatedBy());
 				eventService.setEvent(e);

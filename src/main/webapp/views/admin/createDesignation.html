@@ -18,11 +18,8 @@
 					ng-maxlength="30" name="designation" class="form-control"
 					ng-model="designation.designation" ng-change="checkDesignaton()" required
 					placeholder="Enter Designation"> 
-<<<<<<< HEAD
 					<span ng-show="designationExist" class="validation-error">Designation already exist</span>
-=======
-						<span ng-show="designationExist" class="validation-error">Designation already exist</span>
->>>>>>> remotes/origin/osirecruit-474-dashboard_backend
+
 			<span class="validation-error"
 					ng-show="submitted && CreateDesignation.designation.$invalid">Please
 					provide Designation
@@ -74,11 +71,7 @@
 		</div>
 		<br>
 		<div align="center" class="row">
-<<<<<<< HEAD
-				<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience() || designationExist"
-=======
 			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience() || designationExist"
->>>>>>> remotes/origin/osirecruit-474-dashboard_backend
 				ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

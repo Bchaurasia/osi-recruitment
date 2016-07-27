@@ -68,33 +68,23 @@
 	<i class="material-icons">keyboard_arrow_left</i> <span class="text"
 		style="display: none;">Activities</span>
 </div> -->
+
 <div class="row">
-	<div class="col-md-8 row">
-		<div class="ui statistics" align="center">
-			<div class="statistic col-md-3">
-				<div class="value total">{{totalProfiles}}</div>
-				<div class="label">
-					<a ui-sref="recruitment.searchProfile">Profiles</a>
-				</div>
-			</div>
-			<div class="statistic col-md-3">
-				<div class="value total">{{totalRequisitions}}</div>
-				<div class="label">
-					<a ui-sref="recruitment.searchRequisition">requisition</a>
-				</div>
-			</div>
-			<div class="statistic col-md-3">
-				<div class="value total">{{totalPositions}}</div>
-				<div class="label">
-					<a ui-sref="recruitment.searchPosition">positions</a>
-				</div>
-			</div>
-			<div class="statistic col-md-3">
-				<div class="value total">{{HiredCount}}</div>
-				<div class="label">hired</div>
-			</div>
-		</div>
+
+			<!--  <div class="">
+				<div id="profileGraph"></div>
+				
+			</div>  -->
+	<div class="col-md-8 ">
+				<div id="profileDount" style="float: left;"></div>
+				<div id="positionDonut" style="float: left;"></div>
+		
 		<br>
+		
+		<!-- <div id="container1" ng-show="showColumnGraph"></div>
+		 -->
+		 <div id="container1" ng-show="showColumnGraph"></div>
+		<div  ng-show="!showColumnGraph">
 
 		<h5 style="margin-top: 10px">Statistics</h5>
 		<hr>
@@ -155,7 +145,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row">
+			<div class="row">
 			<div class="col-md-2">Rejected</div>
 			<div class=" col-md-10">
 				<div class="progress">
@@ -164,12 +154,13 @@
 				</div>
 			</div>
 		</div>
- -->
+
 			<b>{{positionDetails.position}}</b> <br> <br>
 			<div ng-repeat="position in designationWithStatusCount">
 				<button class="statistics-btn" ng-if="position.Total != 0"
 					ng-click="getGraphData(position.Position)">{{position.Position}}</button>
 			</div>
+		</div>
 		</div>
 		<div ng-hide="hideNoPositionsMsg">
 			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
@@ -257,7 +248,7 @@
 					style="max-height: 250px; height: auto; overflow: auto;">
 					<div class="event" ng-repeat="feed in events">
 						<div class="label">
-							<span class="initial" style="width: 34px;">{{feed.username.charAt(0).toUpperCase()}}</span>
+							<span class="initial" style="width: 34px;">{{feed.initial.toUpperCase()}}</span>
 						</div>
 						<div class="content">
 							<div class="summary">
