@@ -1,25 +1,23 @@
-<div class="ui segment" style="background-color: aliceblue;">
-	<div align="left" class="five fields">
-		<div class="field" style="padding-top: 15px;">
-			<b>Communication Skills:<b class="mandatory">*</b></b>
-		</div>
-		<div class="field" style="padding-top: 15px;">
-			<rating ng-model="interviewFeedback.communicationSkills" max="5" readonly="false" ng-click="starColor($event)"
-				on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-		</div>
-		<textarea class="materialize-textarea" rows="2" length="120" ng-model="interviewFeedback.communicationSkillComment"
-					placeholder="Enter any comments/notes for Communication Skills..." style="width:60%; resize: none;"></textarea>
+<div align="left" class="five fields">
+	<div class="field" style="padding-top: 15px;">
+		<b>Communication Skills:<b class="mandatory">*</b></b>
 	</div>
-	<br>
-	<div align="left" class="five fields">
-		<div class="field">
-			<b>Consulting and articulation skills:<b class="mandatory">*</b></b>
-		</div>
-		<div class="field" style="padding-top: 15px;">
-			<rating ng-model="interviewFeedback.consultingAndArticulationSkills" max="5" readonly="false" ng-click="starColor($event)"
-				on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-		</div>
-		<textarea class="materialize-textarea" rows="2" length="120" ng-model="interviewFeedback.consultingAndArticulationSkillsComment"
-					placeholder="Enter any comments/notes for Consulting and articulation skills..." style="width:60%; resize: none;"></textarea>
+	<div class="field" style="padding-top: 15px;">
+		<rating ng-model="interviewFeedback.communicationSkills" max="5" readonly="false" ng-click="starColor($event)"
+			on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
 	</div>
+	<textarea class="materialize-textarea" rows="2" length="120" ng-model="interviewFeedback.communicationSkillComment"
+				placeholder="Enter any comments/notes for Communication Skills..." style="width:60%; resize: none;"></textarea>
+</div>
+<br>
+<div align="left" class="five fields">
+	<div class="field">
+		<b>Consulting and articulation skills:<b class="mandatory">*</b></b>
+	</div>
+	<div class="field" style="padding-top: 15px;">
+		<rating ng-model="interviewFeedback.consultingAndArticulationSkills" max="5" readonly="false" ng-click="starColor($event)"
+			on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
+	</div>
+	<textarea class="materialize-textarea" rows="2" length="120" ng-model="interviewFeedback.consultingAndArticulationSkillsComment"
+				placeholder="Enter any comments/notes for Consulting and articulation skills..." style="width:60%; resize: none;"></textarea>
 </div>

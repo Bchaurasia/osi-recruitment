@@ -1,62 +1,60 @@
-<div class="ui segment" style="background-color: aliceblue;">
-	<div align="left" class="two fields">
-		<div class="field">
-			<div align="left" class="two fields">
-				<div class="field">
-					<b>Self Learning & Initiative:<b class="mandatory">*</b></b>
-				</div>
-				<div class="field">
-					<rating ng-model="interviewFeedback.flexibility" max="5" readonly="false" ng-click="starColor($event)"
-										on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-				</div>
+<div align="left" class="two fields">
+	<div class="field">
+		<div align="left" class="two fields">
+			<div class="field">
+				<b>Self Learning & Initiative:<b class="mandatory">*</b></b>
 			</div>
-			<div align="left" class="two fields">
-				<div class="field">
-					<b>Customer Orientation:<b class="mandatory">*</b></b>
-				</div>
-				<div class="field">
-					<rating ng-model="interviewFeedback.customerOrientation" max="5" readonly="false" ng-click="starColor($event)"
-								on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-				</div>
-			</div>
-			<div align="left" class="two fields">
-				<div class="field">
-					<b>Business Attitude:<b class="mandatory">*</b></b>
-				</div>
-				<div class="field">
-					<rating ng-model="interviewFeedback.businessAttitude" max="5" readonly="false" ng-click="starColor($event)"
-								on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-				</div>
-			</div>
-			<div align="left" class="two fields">
-				<div class="field">
-					<b>Flexibility:<b class="mandatory">*</b></b>
-				</div>
-				<div class="field">
-					<rating ng-model="interviewFeedback.flexibility" max="5" readonly="false" ng-click="starColor($event)"
-								on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-				</div>
-			</div>
-			<div align="left" class="two fields">
-				<div class="field">
-					<b>Team Work:<b class="mandatory">*</b></b>
-				</div>
-				<div class="field">
-					<rating ng-model="interviewFeedback.teamWork" max="5" readonly="false" ng-click="starColor($event)"
-								on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-				</div>
-			</div>
-			<div align="left" class="two fields">
-				<div class="field">
-					<b>Onsite Suitability:<b class="mandatory">*</b></b>
-				</div>
-				<div class="field">
-					<rating ng-model="interviewFeedback.onsiteSuitability" max="5" readonly="false" ng-click="starColor($event)"
-								on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
-				</div>
+			<div class="field">
+				<rating ng-model="interviewFeedback.flexibility" max="5" readonly="false" ng-click="starColor($event)"
+									on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
 			</div>
 		</div>
-			<textarea class="materialize-textarea" rows="3" length="120" ng-model="interviewFeedback.managementSkillComment"
-							placeholder="Enter any comments/notes..." style="resize: none; width: 75%;"></textarea>
+		<div align="left" class="two fields">
+			<div class="field">
+				<b>Customer Orientation:<b class="mandatory">*</b></b>
+			</div>
+			<div class="field">
+				<rating ng-model="interviewFeedback.customerOrientation" max="5" readonly="false" ng-click="starColor($event)"
+							on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
+			</div>
+		</div>
+		<div align="left" class="two fields">
+			<div class="field">
+				<b>Business Attitude:<b class="mandatory">*</b></b>
+			</div>
+			<div class="field">
+				<rating ng-model="interviewFeedback.businessAttitude" max="5" readonly="false" ng-click="starColor($event)"
+							on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
+			</div>
+		</div>
+		<div align="left" class="two fields">
+			<div class="field">
+				<b>Flexibility:<b class="mandatory">*</b></b>
+			</div>
+			<div class="field">
+				<rating ng-model="interviewFeedback.flexibility" max="5" readonly="false" ng-click="starColor($event)"
+							on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
+			</div>
+		</div>
+		<div align="left" class="two fields">
+			<div class="field">
+				<b>Team Work:<b class="mandatory">*</b></b>
+			</div>
+			<div class="field">
+				<rating ng-model="interviewFeedback.teamWork" max="5" readonly="false" ng-click="starColor($event)"
+							on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
+			</div>
+		</div>
+		<div align="left" class="two fields">
+			<div class="field">
+				<b>Onsite Suitability:<b class="mandatory">*</b></b>
+			</div>
+			<div class="field">
+				<rating ng-model="interviewFeedback.onsiteSuitability" max="5" readonly="false" ng-click="starColor($event)"
+							on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating>
+			</div>
+		</div>
 	</div>
+		<textarea class="materialize-textarea" rows="3" length="120" ng-model="interviewFeedback.managementSkillComment"
+						placeholder="Enter any comments/notes..." style="resize: none; width: 75%;"></textarea>
 </div>
