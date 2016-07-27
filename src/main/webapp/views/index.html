@@ -1,75 +1,4 @@
-<style>
-.statistics-container {
-	padding: 1% 8%;
-	border-bottom: 1px solid #bbadad;
-}
 
-.progress-container {
-	padding: 15px;
-	/* border: 1px solid #bbadad; */
-	border-radius: 5px;
-}
-
-.statistics-btn {
-	background: none;
-	padding: 4px;
-	border: 1px solid #867777;
-	border-radius: 3px;
-	margin: 5px;
-	float: left;
-}
-
-.initial {
-	width: 51px;
-	margin: 5px;
-	float: left;
-	padding: 10px 5px;
-	font-size: 171%;
-	height: 35px;
-	background: #b5b4b4;
-	cursor: pointer;
-}
-
-.req-title {
-	background: #d0cdcd;
-	color: #777575;
-	padding: 14px;
-	font-size: 124%;
-	font-weight: bolder;
-	border-radius: 5px;
-}
-
-.total {
-	width: 100px;
-	height: 100px;
-	border-radius: 90px; padding : 20px 0; background : none;
-	border-radius : 90px;
-	border-radius: 90px;
-	padding: 20px 0;
-	background: none;
-	border: 7px solid #c7c7c7;
-	border-radius: 90px;
-}
-
-.progress-bar {
-	transition: width 1s ease-in-out;
-}
-
-.statistics-btn:clicked {
-	background: none;
-}
-
-.ui.statistics>.statistic:first-child {
-	border-left: none;
-}
-</style>
-
-<!-- <div class="statistics-container" align="center"></div> -->
-<!-- <div id="btn" class="ui black huge launch right attached button"
-	style="display: absolute; left: 0px; width: 70px;">
-	<i class="material-icons">keyboard_arrow_left</i> <span class="text"
-		style="display: none;">Activities</span>
-</div> -->
 <div class="row">
 	<div class="col-md-8 row">
 		<div class="ui statistics" align="center">
@@ -157,16 +86,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row">
-			<div class="col-md-2">Rejected</div>
-			<div class=" col-md-10">
-				<div class="progress">
-					<div class="progress-bar" role="progressbar" aria-valuenow="0"
-						aria-valuemin="0" aria-valuemax="100" ng-style="{width: (positionDetails.rejected + '%')}">{{positionDetails.rejected}}%</div>
-				</div>
-			</div>
-		</div>
- -->
 			<b>{{positionDetails.position}}</b> <br> <br>
 			<div ng-repeat="position in designationWithStatusCount">
 				<button class="statistics-btn" ng-if="position.Total != 0"
@@ -215,30 +134,35 @@
 
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-4" style="position: fixed; right: 0px;">
 		<br>
-		<div class="ui feed " style="font-size: 100%;">
-			<h5 style="margin-top: 10px">Upcoming Events</h5>
-			<hr style="margin-left: 15px;">
+		<div class="ui feed " style="font-size: 100%; margin-top: -15px;">
+			<b style="margin-top: 10px; font-size: 115%;">Upcoming Events</b>
+			<!-- <hr style="margin-left: 15px;"> -->
 			<div style="max-height: 250px; height: auto; overflow: auto;">
 				<div class="event"
 					ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate "
 					ng-hide="showNoInterviewMsg">
 					<div class="label">
 						<span ng-if="schedule.round == 'Technical Round 1'"
-							class="initial" style="background: #e47575" ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">TR 1</span> <span
-							ng-if="schedule.round == 'Technical Round 2'" class="initial"
-							style="background: #d4ab61" ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">TR 2</span> <span
-							ng-if="schedule.round == 'Hr Round'" class="initial"
-							style="background: #7ad27a" ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">HR </span> <span
-							ng-if="schedule.round == 'Manager Round'" class="initial"
-							style="background: #9696dc" ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">MR</span>
+							class="initial" style="background: #e47575"
+							ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">TR
+							1</span> <span ng-if="schedule.round == 'Technical Round 2'"
+							class="initial" style="background: #d4ab61"
+							ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">TR
+							2</span> <span ng-if="schedule.round == 'Hr Round'" class="initial"
+							style="background: #7ad27a"
+							ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">HR
+						</span> <span ng-if="schedule.round == 'Manager Round'" class="initial"
+							style="background: #9696dc"
+							ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">MR</span>
 					</div>
 					<div class="content">
 						<div class="summary" align="left">
-							You need to take interview of <a class="user" style="cursor: pointer;"
+							You need to take interview of <a class="user"
+								style="cursor: pointer;"
 								ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">{{schedule.cname}}
-							</a> for <a class="user"  style="cursor: pointer;"
+							</a> for <a class="user" style="cursor: pointer;"
 								ng-click="feedback(schedule.jobcode,schedule.email,schedule.status,schedule.interviewId)">{{schedule.round}}
 							</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
 									MMMM Do YYYY, h:mm a' }}</time></b>.
@@ -253,13 +177,14 @@
 				<b style="font-size: 142%; color: #bfbbbb;">No Events </b>
 			</div>
 			<div class="ui feed " style="font-size: 100%;">
-				<h5 style="margin-top: 10px">Recent Activities</h5>
-				<hr style="margin-left: 15px;">
+				<b style="margin-top: 10px; font-size: 115%;">Recent Activities</b>
+				<!-- <hr style="margin-left: 15px;"> -->
 				<div align="left"
-					style="max-height: 368px; height: auto; overflow: auto;">
+					style="max-height: 250px; height: auto; overflow: auto;">
 					<div class="event" ng-repeat="feed in events">
 						<div class="label">
-							<span class="initial" style="width: 34px;" data-tooltip="{{feed.username}}">{{feed.username.charAt(0).toUpperCase()}}</span>
+							<span class="initial" style="width: 34px;"
+								data-tooltip="{{feed.username}}">{{feed.username.charAt(0).toUpperCase()}}</span>
 						</div>
 						<div class="content">
 							<div class="summary">
@@ -275,32 +200,3 @@
 		</div>
 	</div>
 </div>
-<!-- <div class="row">
-	<div class="col-md-6"></div>
-	<div class="col-md-6">
-		<h5 style="margin-top: 15px" align="center">Referred Profiles</h5>
-		<hr>
-	</div>
-</div>
- -->
-
-<!-- 
-<script>
-	$(".launch.button").mouseenter(function() {
-		$(this).stop().animate({
-			width : '215px'
-		}, 300, function() {
-			$(this).find('.text').show();
-		});
-	}).mouseleave(function(event) {
-		$(this).find('.text').hide();
-		$(this).stop().animate({
-			width : '70px'
-		}, 300);
-	});
-	$("#feed").sidebar({
-		overlay : false
-	}).sidebar('attach events', '.ui.launch.button');
-</script>
-
- -->

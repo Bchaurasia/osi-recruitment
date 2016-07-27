@@ -3020,3 +3020,108 @@ table.fc-border-separate {
 	border:1px solid #b1acac;
 	
 }
+
+
+.statistics-container {
+	padding: 1% 8%;
+	border-bottom: 1px solid #bbadad;
+}
+
+.progress-container {
+	padding: 15px;
+	/* border: 1px solid #bbadad; */
+	border-radius: 5px;
+}
+
+.statistics-btn {
+	background: none;
+	padding: 4px;
+	border: 1px solid #867777;
+	border-radius: 3px;
+	margin: 5px;
+	float: left;
+}
+
+.initial {
+	width: 51px;
+	margin: 5px;
+	float: left;
+	padding: 10px 5px;
+	font-size: 171%;
+	height: 35px;
+	background: #b5b4b4;
+	cursor: pointer;
+}
+
+.req-title {
+	background: #d0cdcd;
+	color: #777575;
+	padding: 14px;
+	font-size: 124%;
+	font-weight: bolder;
+	border-radius: 5px;
+}
+
+.total {
+	width: 100px;
+	height: 100px;
+	border-radius: 90px;
+	padding: 20px 0;
+	background: none;
+	border-radius: 90px;
+	border-radius: 90px;
+	padding: 20px 0;
+	background: none;
+	border: 7px solid #c7c7c7;
+	border-radius: 90px;
+	border-radius: 90px;
+	padding: 20px 0;
+	background: none;
+	border: 7px solid #c7c7c7;
+	background: none;
+	border-radius: 90px;
+	border-radius: 90px;
+	border-radius: 90px;
+	padding: 20px 0;
+	background: none;
+	border: 7px solid #c7c7c7;
+}
+
+.progress-bar {
+	transition: width 1s ease-in-out;
+}
+
+.statistics-btn:clicked {
+	background: none;
+}
+
+.ui.statistics>.statistic:first-child {
+	border-left: none;
+}
+
+.summary {
+	font-size: 90%;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px #969090;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: #969090;
+	-webkit-box-shadow: inset 0 0 6px #969090;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #969090;
+}
