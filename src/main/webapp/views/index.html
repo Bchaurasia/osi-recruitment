@@ -40,7 +40,7 @@
 			<div>
 				<ul class="collapsible" data-collapsible="accordion">
 					<li style="background-color: #035396">
-						<div class="collapsible-header white-field">
+						<div class="collapsible-header white-field nonclickable">
 							<span class="col s6"><b>Position</b></span> <span class="col s6"><b>Required</b></span>
 						</div>
 					</li>
@@ -111,7 +111,7 @@
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #035396">
-					<div class="collapsible-header white-field">
+					<div class="collapsible-header white-field nonclickable">
 						<span class="col s2" style="padding-top: 5px"><b>Name</b></span>
 						<span class="col s3"><b>Interviewer Name</b></span> 
 						<span class="col s3"><b>Round</b></span>
@@ -139,7 +139,7 @@
 			</h6>
 			<ul class="collapsible" data-collapsible="accordion">
 				<li style="background-color: #035396">
-					<div class="collapsible-header row white-field">
+					<div class="collapsible-header row white-field nonclickable">
 						<span class="col s3"><b>Name</b></span> <span class="col s3"><b>Round</b></span>
 						<span class="col s3"><b>Schedule Time</b></span><span
 							class="col s3"><b>Status</b></span>
@@ -174,14 +174,14 @@
 			<b>Your Referred Profiles</b>
 		</h6>
 		<ul class="collapsible" data-collapsible="accordion">
-			<li style="background-color: #035396">
-				<div class="collapsible-header row collapsible-header white-field">
-					<span class="col s6"><b>Name</b></span>
+			<li style="background-color: #035396 ;">
+				<div class="collapsible-header row collapsible-header white-field nonclickable">
+					<span class="col s6" style="background-color: #035396 ;"><b>Name</b></span>
 					 <span class="col s6"><b>Status</b></span></div>
 			</li>
 			<li ng-repeat="profile in profileData">
-				<div class="collapsible-header row">
-					<b> <span class="col s6">{{profile.candidateName}}</span> <span
+				<div class="collapsible-header row nonclickable">
+					<b> <span class="col s6 nonclickable">{{profile.candidateName}}</span> <span
 						class="col s6">{{profile.status}}</span></b>
 				</div>
 			</li>

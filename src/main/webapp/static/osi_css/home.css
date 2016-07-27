@@ -532,3 +532,9 @@ ul {
 .mandatory{
 	color: red;
 }
+
+.nonclickable{
+	pointer-events: none;
+	cursor: default !important;
+	
+}
