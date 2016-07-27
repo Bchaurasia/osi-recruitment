@@ -129,11 +129,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 
 		var listlength=$scope.candidate.approvalList.length;
 		for(var i=0; i<$scope.candidate.approvalList.length;i++){
-			if($scope.candidate.approvalList[listlength-1].status==="Waiting for approval" || $scope.candidate.approvalList[listlength-1].status=="Offered"){
-				$scope.disableSendApproval=true;
-			}else{
-				$scope.disableSendApproval=false;
-			}
+			
 			if($scope.candidate.approvalList[listlength-1].emailId===$scope.user.emailId){
 				$scope.showDiv=true;
 			}
@@ -263,6 +259,11 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.hideFinalStatus=false;
 		}else{
 			$scope.hideFinalStatus=true;
+		}
+    	if($scope.candidate.offerStatus === "Waiting for approval" || $scope.candidate.offerStatus === "Offered"){
+    		$scope.disableSendApproval=true;
+		}else{
+			$scope.disableSendApproval=false;
 		}
     }
  }]);
