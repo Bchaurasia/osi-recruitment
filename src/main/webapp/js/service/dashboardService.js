@@ -6,7 +6,13 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		getPositionData : getPositionData,
 		getScheduleData : getScheduleData,
 		getScheduleDataInterview : getScheduleDataInterview,
-		getAllEvents : getAllEvents
+		getAllEvents : getAllEvents,
+		getRequisitionBasedOnApproverId:getRequisitionBasedOnApproverId,
+		getPositionDataSuccess:getPositionDataSuccess,
+		getPositionDataError:getPositionDataError,
+		getScheduleDataSuccess:getScheduleDataSuccess,
+		getScheduleDataInterviewSuccess:getScheduleDataInterviewSuccess,
+		getScheduleDataError:getScheduleDataError
 	};
 	
 	function getPositionData(obj){
@@ -86,7 +92,7 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		return showScheduleData;
 	}
 	
-	function getScheduleDataError(response){
+	function getScheduleDataError(response,$q){
 		return q.reject("Failed To Get Interview Details!");
 	}
 }

@@ -11,7 +11,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.profileData=[];
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
-	// $scope.events = [];
+	$scope.showColumnGraph=true;
 	$scope.showNoAppRequisitionMsg = false;
 	$scope.totalPositionData=[];
 	$scope.designationWithStatusCount=[];
@@ -19,6 +19,23 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.HiredCount = 0;
 	$scope.totalRequisitions = 0;
 	$scope.totalPositions = 0;
+	var data1=[];
+	var data2=[];
+	var data3=[];
+	var data4=[];
+	var data5=[];
+	var data6=[];
+	var categories=[];
+	var series=[];
+	
+	angular.element(document).ready(function() {
+		getTotalHired();
+		getDesignationSpecificData();
+		getProfileCount();
+		getTotalRequisitions();
+       });
+	
+	
 	$scope.feedback = function(jobcode,candidateEmail) {
 		sharedService.setjobCode(jobcode);
 		sharedService.setprofileUserId(candidateEmail);
@@ -38,7 +55,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
    
 	}
-	getProfileCount();
+	
 	
 $scope.state = false;
     
@@ -71,29 +88,26 @@ $scope.state = false;
 		
 		
 	}
-	getTotalHired();
+	
 	
 	function getTotalRequisitions(){
 		requisitionService.getAllRequisitions().then(function(data){
 			$scope.totalRequisitions=data.length;
-			// console.log("total requisitions= "+totalRequisitions);
 		});
 	}
-	getTotalRequisitions();
+	
 	
 	function getDesignationSpecificData(){
 		var designationArray=[];
 		
 		designationService.getDesignation().then(function(data){
-			// console.log("--------------------==========="+angular.toJson(data));
+		
 			for(var i=0;i<data.length;i++)
 				{
-				// console.log(angular.toJson(data[i].designation));
+				
 				designationArray.push(data[i].designation);
 				}
-		// console.log("desgnation array"+designationArray);
-			// console.log("total position data "+$scope.totalPositionData);
-			
+		
 				 for(var j=0;j<designationArray.length;j++)
 				 {
 					var activecount=0;
@@ -108,21 +122,22 @@ $scope.state = false;
 					
 					 
 					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Active"))
-					 { activecount+=1; totalCount+=1}
-					  if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="OnHold"))
-					     { onholdcount+=1;totalCount+=1}
-						 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Hired"))
-						   { hiredcount+=1;totalCount+=1}
-							 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Inactive"))
-								 {inactivecount+=1;totalCount+=1}
-								 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Rejected"))
-								  { rejectedcount+=1;totalCount+=1}
-									 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Selected"))
-									  { selectedcount+=1;totalCount+=1}
+					    { activecount+=1; totalCount+=1}
+					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="OnHold"))
+					    { onholdcount+=1;totalCount+=1}
+					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Hired"))
+						{ hiredcount+=1;totalCount+=1}
+					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Inactive"))
+						{inactivecount+=1;totalCount+=1}
+					 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Rejected"))
+						{ rejectedcount+=1;totalCount+=1}
+					 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Selected"))
+						{ selectedcount+=1;totalCount+=1}
 					 
 				     }
 					
-					
+					if(totalCount!=0)
+					{
 					$scope.designationWithStatusCount.push({
 						"Position":designationArray[j],
 						"Active"  :activecount,
@@ -133,14 +148,77 @@ $scope.state = false;
 					   "Selected" :selectedcount,
 					   "Total"    :totalCount
 					});
+					
+					}
 				
 				}
-				 console.log("designationWithStatusCount "+angular.toJson($scope.designationWithStatusCount));
+				 console.log(angular.toJson($scope.designationWithStatusCount));
+				
+				 angular.forEach($scope.designationWithStatusCount, function(value, key) 
+					{
+					    categories.push(value.Position);
+					    data1.push(value.Active);
+						data2.push(value.OnHold);
+						data3.push(value.Hired);
+						data4.push(value.Inactive)
+						data5.push(value.Rejected)
+						data6.push(value.Selected)
+					});
+				 series.push({name:'Active',data:data1});
+				 series.push({name:'OnHold',data:data2});
+				 series.push({name:'Hired',data:data3});
+				 series.push({name:'Inactive',data:data4});
+				 series.push({name:'Rejected',data:data5});
+				 series.push({name:'Selected',data:data6});
+				 
+				 /*if($scope.designationWithStatusCount.length>10)
+					 $scope.showColumnGraph=false;*/
+				 
+				 $('#container1').highcharts({
+				        chart: {
+				            type: 'column'
+				        },
+				        title: {
+				            text: 'Statistics'
+				        },
+				        
+				        xAxis: {
+				        	categories,
+				        	
+				            crosshair: true
+				        },
+				        yAxis: {
+				            min: 0,
+				            tickInterval: 5,
+				            title: {
+				                     text: 'Number of positions'
+				                   }
+				        },
+				        tooltip: {
+				            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				                '<td style="padding:0"><b>{point.y:1.0f} </b></td></tr>',
+				            footerFormat: '</table>',
+				            shared: true,
+				            useHTML: true
+				        },
+				        plotOptions: {
+				            column: {
+				                pointPadding: 0.2,
+				                borderWidth: 0
+				            }
+				        },
+				        series
+				    });
+				 
+					
 		});
-	// console.log("designationWithStatusCount "+designationWithStatusCount);
+	
 	
 	}
-	getDesignationSpecificData();
+	
+	
+
 	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
@@ -260,9 +338,21 @@ $scope.state = false;
 		});
 	}
 	
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
+			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER")||_.contains($rootScope.user.roles,"ROLE_ADMIN")||_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER")||_.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") )){
 	dashboardService.getAllEvents().then(function(data){
 		$scope.events = data;
+		for(i=0; i<$scope.events.length; i++){
+			var subName=$scope.events[i].username.split(" ");
+			if(subName.length==2){
+			$scope.events[i].initial=subName[0].charAt(0).concat(subName[1].charAt(0));
+			}
+			else{
+			$scope.events[i].initial=subName[0].charAt(0);
+			}
+			}
 	});
+	}
 	
 	$scope.getGraphData = function(position) {
 // alert(position);

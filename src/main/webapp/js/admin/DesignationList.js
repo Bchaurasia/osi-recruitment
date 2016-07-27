@@ -12,14 +12,8 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	$scope.pskills=$rootScope.info.skills;
 	$scope.expYear=$rootScope.info.expYears;
 	$scope.designationExist=false;
-<<<<<<< HEAD
-=======
-
->>>>>>> remotes/origin/osirecruit-474-dashboard_backend
-	
 	$scope.cls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
-	
 	$scope.newDesig="";
 	
 	$scope.col=["Designations","Min Exp","Max Exp"];

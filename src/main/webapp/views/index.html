@@ -95,6 +95,10 @@
 			</div>
 		</div>
 		<br>
+		
+		<div id="container1" ng-show="showColumnGraph"></div>
+		
+		<div  ng-show="!showColumnGraph">
 
 		<h5 style="margin-top: 10px">Statistics</h5>
 		<hr>
@@ -155,7 +159,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row">
+			<div class="row">
 			<div class="col-md-2">Rejected</div>
 			<div class=" col-md-10">
 				<div class="progress">
@@ -164,12 +168,13 @@
 				</div>
 			</div>
 		</div>
- -->
+
 			<b>{{positionDetails.position}}</b> <br> <br>
 			<div ng-repeat="position in designationWithStatusCount">
 				<button class="statistics-btn" ng-if="position.Total != 0"
 					ng-click="getGraphData(position.Position)">{{position.Position}}</button>
 			</div>
+		</div>
 		</div>
 		<div ng-hide="hideNoPositionsMsg">
 			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
@@ -257,7 +262,7 @@
 					style="max-height: 250px; height: auto; overflow: auto;">
 					<div class="event" ng-repeat="feed in events">
 						<div class="label">
-							<span class="initial" style="width: 34px;">{{feed.username.charAt(0).toUpperCase()}}</span>
+							<span class="initial" style="width: 34px;">{{feed.initial.toUpperCase()}}</span>
 						</div>
 						<div class="content">
 							<div class="summary">
