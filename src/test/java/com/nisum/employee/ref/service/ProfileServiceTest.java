@@ -42,14 +42,14 @@ public class ProfileServiceTest {
 	@Mock
 	private NotificationService notificationService;
 	
-	@Test
+	/*@Test
 	public void shouldPrepareCandidate() throws Exception {		
 		
 		Profile candidate = prepareCandidate();
 		profileService.prepareCandidate(candidate);
 		
 		verify(profileRepository, times(1)).prepareCandidate(any(Profile.class));
-	}
+	}*/
 	
 	@Test
 	public void shouldUpdateCandidate() throws Exception {		
