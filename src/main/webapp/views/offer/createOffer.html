@@ -147,13 +147,13 @@
 		<div class="row" style="padding-left:8%">
 			<div class="input-field col s2">
 				<select ng-model="level" name="currency" ng-change="selectGrade(level)" 
-					ng-options="o for o in levelDatalist" class="form-control input-sm">
+					ng-options="o for o in levelDatalist track by o" class="form-control input-sm">
 					<option value="" disabled="disabled">Select Level</option>
 				</select> <label style="position: absolute; top: -22px;"> Level: </label>
 			</div>
 			<div class="input-field col s2">
-				<select ng-model="grade" name="currency"
-					ng-options="o.grade for o in designationData[0].designations track by o.grade"
+				<select ng-model="grade" name="grade" ng-change="selectDesignation(grade)" 
+					ng-options="o.grade for o in  designationgrades track by o.grade"
 					class="form-control input-sm">
 					<option value="" disabled="disabled">Select Grade</option>
 				</select> <label style="position: absolute; top: -22px;">Grade: </label>
@@ -161,7 +161,7 @@
 				<div class="col-md-2"></div>
 			<div class="input-field col s6">
 				<select ng-model="name" name="currency"
-					ng-options="o.name for o in designationData[0].designations track by o.grade" class="form-control input-sm">
+					ng-options="o.name for o in designationdesignations track by o.grade" class="form-control input-sm">
 						<option value="" disabled="disabled">Select Designation</option>
 				</select> <label style="position: absolute; top: -22px;"> Designation: </label>
 			</div>
@@ -332,7 +332,7 @@
 				Approval
 			</button>
 			<button class="btn btn-info active" type="submit"
-				ng-disabled="createOffer.$invalid" ng-click="saveOffer()">
+				ng-disabled="createOffer.$invalid || disableSendApproval" ng-click="saveOffer()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Save
 			</button>
 			<button class="btn btn-info active" ui-sref="offer.list">

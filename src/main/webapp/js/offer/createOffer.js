@@ -79,6 +79,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.designationgrades = _.uniq($scope.designationData[0].designations, function(design){
 			return design.grade;
 		});
+		console.log(angular.toJson($scope.designationgrades));
 	};
 	$scope.selectDesignation = function(selectedGrade){
 		$scope.designationdesignations=[];
