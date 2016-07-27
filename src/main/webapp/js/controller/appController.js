@@ -4,7 +4,7 @@ angular.module('erApp')
 	
 	$scope.events = [];
     $scope.idle = 1200;
-    $scope.timeout = 60;
+    $scope.timeout = 300;
     
     function closeModals() {
         if ($scope.warning) {
@@ -187,8 +187,8 @@ return input.slice(start);
 };
 }) .config(function(IdleProvider, KeepaliveProvider) {
       IdleProvider.idle(1200);
-      IdleProvider.timeout(60);
-      KeepaliveProvider.interval(15);
+      IdleProvider.timeout(300);
+      //KeepaliveProvider.interval(15);
     });
 
 app.run(function($rootScope, Idle, $log, Keepalive){
