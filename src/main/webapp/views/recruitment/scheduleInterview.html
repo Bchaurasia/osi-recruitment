@@ -77,10 +77,10 @@
 				</select> <label>Interview Round<b class="mandatory">*</b></label>
 			</div>
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewerName"
-					theme="selectize"style="width: 80%" ng-change="setvalues(interviewerName)"
+				<ui-select ng-model="interviewschedule.interviewerName"
+					theme="selectize"style="width: 80%" ng-change="setvalues(interviewschedule.interviewerName)"
 					title="Choose a interviewer"> <ui-select-match
-					placeholder="Select or search interviewer">{{interviewerName.name}}</ui-select-match>
+					placeholder="Select or search interviewer">{{$select.selected.name}}</ui-select-match>
 				<ui-select-choices
 					repeat="interviewerName in interviewerNames | filter: $select.search">
 				<span ng-bind-html="interviewerName.name | highlight: $select.search"></span>

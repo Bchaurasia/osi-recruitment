@@ -36,7 +36,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	$scope.setJobcode= function(requisitionId) {
 		$scope.interviewschedule.jobcode=undefined;
 		$scope.interviewschedule.roundName=null;
-		$scope.interviewerName=null;
+		$scope.interviewschedule.interviewerName=null;
 		positionService.getPositionByRequisitionId(requisitionId).then(function(positions){
 			$scope.positionObj=[];
 			$scope.jobcodelistObj=positions;
@@ -148,7 +148,8 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 	}
 	
 	$scope.setInterviewData= function(round) {
-		$scope.interviewerName=null;
+		$scope.interviewschedule.interviewerName=null;
+		$scope.interviewerData=null;
 		if(round=== "HR"){
 			userService.getHrUsers().then(function(userData){
 				 $scope.interviewerNames = userData;
@@ -218,7 +219,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.interviewschedule.interviewLocation =$scope.interviewerData.location;
 			$scope.interviewschedule.interviewDateTime = $scope.data.date;
 			$scope.interviewschedule.emailIdInterviewer = $scope.interviewerData.emailId;
-			$scope.interviewschedule.interviewerName=$scope.interviewerData.name;
+			$scope.interviewschedule.interviewerName = $scope.interviewerData.name;
 			$scope.interviewschedule.interviewerMobileNumber=$scope.interviewerData.mobileNumber;
 			$scope.interviewschedule.skypeId=$scope.interviewerData.skypeId;
 			if($scope.interviewschedule.typeOfInterview === "Face To Face"){
