@@ -37,11 +37,11 @@ public class InterviewDetailsRepository{
 		InterviewDetails interview = mongoOperation.findOne(query, InterviewDetails.class);
 		query.fields().include("candidateEmail");
 		Update update = new Update();
-		if(interviewDetails.getIsUpdatedFromProfile()!=null) {
+		/*if(interviewDetails.getIsUpdatedFromProfile()!=null) {
 			update.set("jobCode", interviewDetails.getJobCode());
 			update.set("requisitionId", interviewDetails.getRequisitionId());
 		}
-		else {
+		else {*/
 			update.set("candidateName",interviewDetails.getCandidateName());
 			update.set("currentPositionId",interview.getCurrentPositionId());
 			update.set("positionId", interviewDetails.getPositionId());
@@ -50,7 +50,7 @@ public class InterviewDetailsRepository{
 			update.set("designation",interviewDetails.getDesignation());
 			update.set("hrAssigned",interviewDetails.getHrAssigned());
 			update.set("interviewerEmail", interviewDetails.getInterviewerEmail());
-		}
+		//}
 		mongoOperation.updateFirst(query, update, InterviewDetails.class);
 	}
 

@@ -52,8 +52,9 @@ public class Profile extends AuditEntity{
 	String currentLocation;
 	String expectedDesignation;
 	Boolean isApprovedFlag;
-	Boolean isCreatedByUser;
+	//Boolean isCreatedByUser;
 	Boolean isReferral;
-	 String currency;
+	String currency;
+	String updatedByName;
 	
 }

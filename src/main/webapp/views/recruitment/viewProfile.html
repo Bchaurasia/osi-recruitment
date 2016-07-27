@@ -394,7 +394,7 @@
 			</button>
 		
 			<button class="btn btn-info active" type="submit"
-				ng-show="candidate.isCreatedByUser && hasRole('ROLE_HR')"
+				ng-show="candidate.isReferral && hasRole('ROLE_HR')"
 				ng-disabled="disableApproveBtn" ng-click="approveProfile()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Approve
 			</button>

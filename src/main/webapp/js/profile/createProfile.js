@@ -101,7 +101,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-				$scope.candidate.isCreatedByUser = false;
+				//$scope.candidate.isCreatedByUser = false;
 				$scope.candidate.isReferral = false;
 				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;

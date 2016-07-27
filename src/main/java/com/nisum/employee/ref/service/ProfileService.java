@@ -46,7 +46,7 @@ public class ProfileService implements IProfileService{
 		}catch (MessagingException e) {
 				e.printStackTrace();
 		}
-		if(!candidate.getIsCreatedByUser()) {
+		if(!candidate.getIsReferral()) {
 			InterviewDetails interview = prepareInterviewDetails(candidate);
 			interviewService.prepareInterview(interview);
 		}
@@ -96,16 +96,16 @@ public class ProfileService implements IProfileService{
 			}catch (MessagingException e) {
 					e.printStackTrace();
 			}
-			if(candidate.getIsCreatedByUser() != true) {
+			
+			/*if(!candidate.getIsReferral()) {
 				InterviewDetails interview = interviewDetailsRepository.getInterviewDetailsById(candidate.getEmailId());
-				if(candidate.getIsReferral()) {
-					//interview.setCandidateEmail(candidate.getEmailId());
-					interview.setIsUpdatedFromProfile(true);
-					interview.setRequisitionId(candidate.getRequisitionId());
-					interview.setJobCode(candidate.getJobCode());				
-				}	
+				interview.setIsUpdatedFromProfile(true);
+				interview.setRequisitionId(candidate.getRequisitionId());
+				interview.setJobCode(candidate.getJobCode());				
+			
 				interviewDetailsRepository.updateinterviewDetails(interview);
-			}
+			}*/
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

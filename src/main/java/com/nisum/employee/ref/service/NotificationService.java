@@ -117,6 +117,7 @@ public class NotificationService {
 	private static final String CREATED_BY_USER = "created_by_user";
 	private static final String SUBMITTED_BY_USER = "submittedBy";
 	private static final String UPDATED_BY = "updatedBy";
+	private static final String UPDATED_BY_NAME = "updatedByName";
 
 	@Value("${mail.fromAddress}")
 	private String from;
@@ -831,7 +832,7 @@ public class NotificationService {
 		Template jobRequisitionTemplate = getVelocityTemplate(SRC_PROFILE_VM);
 
 		VelocityContext context = new VelocityContext();
-		context.put(CREATED_BY_USER, candidate.getIsCreatedByUser());
+		context.put(CREATED_BY_USER, candidate.getIsReferral());
 		context.put(CANDIDATE_NAME, candidate.getCandidateName());
 		context.put(TOTAL_EXP, totalExperience);
 		context.put(SKILLS, primarySkills);
@@ -954,10 +955,10 @@ public class NotificationService {
 		for (UserInfo ui : info) {
 			HR_Emails.add(ui.getEmailId());
 		}
-		String message = "Profile updated";
+		/*String message = "Profile updated";
 		String readStatus = "No";
 
-		updateUserNotification(createdBy, message, readStatus);
+		updateUserNotification(createdBy, message, readStatus);*/
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
@@ -968,6 +969,7 @@ public class NotificationService {
 		context.put("createdBy", candidate.getReferredByName());
 		context.put("candidateName", candidate.getCandidateName());
 		context.put(UPDATED_BY, candidate.getUpdatedBy());
+		context.put(UPDATED_BY_NAME, candidate.getUpdatedByName());
 
 		StringWriter writer = new StringWriter();
 		jobRequisitionTemplate.merge(context, writer);

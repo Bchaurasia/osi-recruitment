@@ -123,10 +123,10 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-				if(_.contains($scope.user.roles, 'ROLE_USER'))
+				/*if(_.contains($scope.user.roles, 'ROLE_USER'))
 					$scope.candidate.isCreatedByUser = true;
 				else
-					$scope.candidate.isCreatedByUser = false;
+					$scope.candidate.isCreatedByUser = false;*/
 				$scope.candidate.isReferral = true;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.interviewSet = false;

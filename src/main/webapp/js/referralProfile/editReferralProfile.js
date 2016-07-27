@@ -98,7 +98,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
-		if($scope.candidate.isApprovedFlag)
+		if($scope.candidate.isApprovedFlag || $scope.candidate.status !== "Not Initialized")
 			$scope.disableUpdateBtn = true;
 			positionService.getPosition().then(function(data){
 				$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
@@ -225,6 +225,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
 	        $scope.candidate.status = "Not Initialized";
+	        $scope.candidate.updatedByName = $scope.user.name;
 	        /*if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else

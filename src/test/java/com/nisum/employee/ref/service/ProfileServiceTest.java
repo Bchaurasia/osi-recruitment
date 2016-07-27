@@ -141,7 +141,7 @@ public class ProfileServiceTest {
 		candidate.setPrimarySkills(skills);
 		candidate.setDesignation("Dev");
 		candidate.setCreatedBy("XYZ");
-		candidate.setIsCreatedByUser(true); 
+		//candidate.setIsCreatedByUser(true); 
 		candidate.setCreatedDate(new Date());
 		
 		return candidate;

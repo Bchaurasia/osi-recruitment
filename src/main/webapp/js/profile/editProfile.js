@@ -96,6 +96,8 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$scope.disableApproveBtn = true;
 			$scope.disableUpdateBtn = true;
 		}
+		if($scope.candidate.status !== "Not Initialized")
+			$scope.disableUpdateBtn = true;
 		console.log("in getdata-->: "+angular.toJson($scope.candidate));
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
@@ -221,6 +223,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
 	        $scope.candidate.status = "Not Initialized";
+	        $scope.candidate.updatedByName = $scope.user.name;
 	        /*if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
