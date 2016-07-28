@@ -4,11 +4,8 @@
 <div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
-Dear $ReferredByName ,<br><br>We are pleased to inform you that your referral $CandidateName has been hired for the
-$jobCode. He/She will work as $Designation and will be reporting to $Manager.<br><br> 
-His/Her date of joining OSI is: $JoiningDate<br>
-Work Location:$location<br><br>
-We wish him/her the best in his new role and a rewarding career at OSI !<br><br><br>
+Hi ,<br><br>Please be informed that candidate $CandidateName #if($ReferredByEmail) referred by $ReferredByName ($ReferredByEmail) #end has been rejected for the
+$jobCode.<br><br><br>
  <span style="font-size:15px">Regards,</span><br>
  <span style="font-size:15px">Recruitment Team,</span><br>
  <span style="font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>
@@ -24,3 +21,4 @@ We wish him/her the best in his new role and a rewarding career at OSI !<br><br>
 
 </body>
 </html>
+

@@ -51,11 +51,22 @@ public class OfferController {
 	@RequestMapping(value = "/save-offer", method = RequestMethod.POST)
 	public ResponseEntity<Offer> saveOfferDetails(@RequestBody Offer offer) {
 		Profile profile = profileService.getCandidateByEmailId(offer.getEmailId());
-		if (offer.getFinalStatus().equals("Offered") || offer.getFinalStatus().equals("Rejected")) {
+		if (offer.getFinalStatus().equals("Offered")) {
 			try {
 				notificationService.OfferedCandidateNotificationToHRTeam(offer, profile);
 				if (profile.getReferredBy() != null) {
 					notificationService.OfferedCandidateNotificationToReferredBy(offer, profile);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (offer.getFinalStatus().equals("Rejected")) {
+			try {
+				notificationService.rejectedCandidateNotificationToHRTeam(offer, profile);;
+				if (profile.getReferredBy() != null) {
+					notificationService.rejectOfferedCandidateNotificationToReferredBy(offer, profile);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

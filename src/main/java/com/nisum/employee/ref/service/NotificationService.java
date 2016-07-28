@@ -163,7 +163,11 @@ public class NotificationService {
 	private String SRC_OFFER_INFO_TO_REFERRER;
 	@Value("${SRC_PROFILE_UPDATED_VM}")
 	private String SRC_PROFILE_UPDATED_VM;
-	
+	@Value("${SRC_REJECT_OFFER_INFO_TO_HR}")
+	private String SRC_REJECT_OFFER_INFO_TO_HR;
+	@Value("${SRC_REJECT_OFFER_INFO_TO_REFERRER}")
+	private String SRC_REJECT_OFFER_INFO_TO_REFERRER;
+
 	@Autowired
 	IProfileService profileService;
 
@@ -509,6 +513,12 @@ public class NotificationService {
 		String message = "Approve the Offer";
 		String readStatus = "No";
 		updateUserNotification(userId, message, readStatus);
+		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+		List<String> HR_Emails = new ArrayList<String>();
+
+		for (UserInfo ui : info) {
+			HR_Emails.add(ui.getEmailId());
+		}
 
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
@@ -524,19 +534,26 @@ public class NotificationService {
 		jobRequisitionTemplate.merge(context, writer);
 
 		Message message1 = getMessage();
-		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(
-				CANDIDATE_APPROVAL_REQUEST + " : " + offer.getCandidateName() + " is selected for Designation :" + offer.getOrgGrade().getDesignation().getName());
+		String toMail = userId;
+		for (String hrEMails : HR_Emails) {
+			if (toMail == null || toMail == "")
+				toMail = hrEMails;
+			else
+				toMail = toMail + "," + hrEMails;
+		}
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		message1.setSubject(CANDIDATE_APPROVAL_REQUEST + " : " + offer.getCandidateName()
+				+ " is selected for Designation :" + offer.getOrgGrade().getDesignation().getName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 	}
 
-	public void OfferedCandidateNotificationToReferredBy(Offer offer,Profile profile) throws AddressException, MessagingException,
-			ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+	public void OfferedCandidateNotificationToReferredBy(Offer offer, Profile profile) throws AddressException,
+			MessagingException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
 		String ReferredByName = profile.getReferredByName();
 		String ReferredByEmail = profile.getReferredBy();
-		
+
 		String userId = ReferredByEmail;
 		String message = "Candidate Selected";
 		String readStatus = "No";
@@ -562,15 +579,15 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(
-				"Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :" + offer.getOrgGrade().getDesignation().getName());
+		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
+				+ offer.getOrgGrade().getDesignation().getName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 	}
 
-	public void OfferedCandidateNotificationToHRTeam(Offer offer,Profile profile) throws AddressException, MessagingException,
-			ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+	public void OfferedCandidateNotificationToHRTeam(Offer offer, Profile profile) throws AddressException,
+			MessagingException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
 
 		String userId = offer.getRecruiter().getEmailId();
 		String message = "Candidate Selected";
@@ -591,7 +608,7 @@ public class NotificationService {
 
 		String ReferredByName = profile.getReferredByName();
 		String ReferredByEmail = profile.getReferredBy();
-		
+
 		VelocityContext context = new VelocityContext();
 		context.put("CandidateName", offer.getCandidateName());
 		context.put("jobCode", offer.getJobcodeProfile());
@@ -614,9 +631,88 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject(
-				"Candidate" + " : " + offer.getApprovedPositions() + " : " + offer.getCandidateName());
+		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
+				+ offer.getOrgGrade().getDesignation().getName());
 
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
+	}
+
+	public void rejectOfferedCandidateNotificationToReferredBy(Offer offer, Profile profile) throws AddressException,
+			MessagingException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+		String ReferredByName = profile.getReferredByName();
+		String ReferredByEmail = profile.getReferredBy();
+
+		String userId = ReferredByEmail;
+		String message = "Candidate Rejected";
+		String readStatus = "No";
+		updateUserNotification(userId, message, readStatus);
+
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_REJECT_OFFER_INFO_TO_REFERRER);
+
+		VelocityContext context = new VelocityContext();
+		context.put("CandidateName", offer.getCandidateName());
+		context.put("jobCode", offer.getJobcodeProfile());
+		context.put("ReferredByName", ReferredByName);
+
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+
+		Message message1 = getMessage();
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
+		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
+				+ offer.getOrgGrade().getDesignation().getName());
+
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
+	}
+
+	public void rejectedCandidateNotificationToHRTeam(Offer offer, Profile profile) throws AddressException,
+			MessagingException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+
+		String userId = offer.getRecruiter().getEmailId();
+		String message = "Candidate Rejected";
+		String readStatus = "No";
+		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+		List<String> HR_Emails = new ArrayList<String>();
+
+		for (UserInfo ui : info) {
+			HR_Emails.add(ui.getEmailId());
+		}
+
+		updateUserNotification(userId, message, readStatus);
+
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_REJECT_OFFER_INFO_TO_HR);
+
+		String ReferredByName = profile.getReferredByName();
+		String ReferredByEmail = profile.getReferredBy();
+
+		VelocityContext context = new VelocityContext();
+		context.put("CandidateName", offer.getCandidateName());
+		context.put("jobCode", offer.getJobcodeProfile());
+		context.put("ReferredByName", ReferredByName);
+		context.put("ReferredByEmail", ReferredByEmail);
+
+		StringWriter writer = new StringWriter();
+		jobRequisitionTemplate.merge(context, writer);
+
+		Message message1 = getMessage();
+		String toMail = userId;
+		for (String hrEMails : HR_Emails) {
+			if (toMail == null || toMail == "")
+				toMail = hrEMails;
+			else
+				toMail = toMail + "," + hrEMails;
+		}
+		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
+				+ offer.getOrgGrade().getDesignation().getName());
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 	}
@@ -739,7 +835,6 @@ public class NotificationService {
 
 		cancelInterview.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		cancelInterview.setSubject(interviewSchedule.getRoundName() + " Interview Cancelled for :" + interviewSchedule.getCandidateName());
-		
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(writer.toString(), TEXT_HTML);
 		Multipart multipart = new MimeMultipart();
@@ -866,14 +961,14 @@ public class NotificationService {
 		String createdBy = candidate.getCreatedBy();
 		String message = "Profile approved";
 		String readStatus = "No";
-		
+
 		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
 		List<String> HR_Emails = new ArrayList<String>();
 
 		for (UserInfo ui : info) {
 			HR_Emails.add(ui.getEmailId());
 		}
-		
+
 		updateUserNotification(createdBy, message, readStatus);
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
@@ -948,7 +1043,7 @@ public class NotificationService {
 
 	}
 
-	public void sendProfileUpdatedNotification(Profile candidate)  throws MessagingException {
+	public void sendProfileUpdatedNotification(Profile candidate) throws MessagingException {
 		String createdBy = candidate.getCreatedBy();
 		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
 		List<String> HR_Emails = new ArrayList<String>();
@@ -956,10 +1051,11 @@ public class NotificationService {
 		for (UserInfo ui : info) {
 			HR_Emails.add(ui.getEmailId());
 		}
-		/*String message = "Profile updated";
-		String readStatus = "No";
-
-		updateUserNotification(createdBy, message, readStatus);*/
+		/*
+		 * String message = "Profile updated"; String readStatus = "No";
+		 * 
+		 * updateUserNotification(createdBy, message, readStatus);
+		 */
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
