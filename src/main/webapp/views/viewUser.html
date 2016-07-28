@@ -39,19 +39,26 @@
 
 			<div class="row">
 				<div class="input-field col s6"> 
-					<input class="form-control" maxlength="11" type="text" placeholder="Enter 10 digit number" name="mobileNo"
+					<input class="form-control" maxlength="11" type="text" placeholder="Enter 10 digit number" name="mobileNumber"
 						ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11"
 						ng-model="user.mobileNumber" required> <label style="position: absolute; top: -22px;">
 						Mobile<b class="mandatory">*</b>
-					</label>
+					</label><div class="validation-error"
+						ng-show="UserInformation.mobileNumber.$error.required">
+						Mobile Number is required.</div>
 					     <span class="validation-error"
-					ng-show="UserInformation.mobileNo.$error.pattern">
+					ng-show="UserInformation.mobileNumber.$error.pattern">
 					Mobile number should be numeric and 10 digit number</span>
 				</div>
-				<div class="input-field col s6">
-					<input class="form-control" ng-change="validateSkypeId($data)"
-						type="text" ng-model="user.skypeId"> <label>Skype
-						ID</label>
+				<div class="input-field col s6" >
+					<input class="form-control" ng-change="validateSkypeId($data)" name="skypeId"
+						type="text" ng-model="user.skypeId" required>
+					  <label>Skype 
+						ID <b class="mandatory">*</b></label>
+						<div class="validation-error"
+						ng-show="UserInformation.skypeId.$error.required">
+						Skype Name is required.</div>
+						 
 				</div>
 			</div>
 
@@ -63,8 +70,12 @@
 					</label>
 				</div> -->
 				<div class="input-field col s6">
-					<label>Location </label> <input class="form-control" type="text"
-						ng-model="user.location">
+					<label  style="position: absolute; top: -22px;">Location <b class="mandatory">*</b> </label> 
+					<input class="form-control" ng-change="validateLocationId($data)" name="locationId" 
+					type="text"	ng-model="user.location" required>
+					<div class="validation-error"
+						ng-show="UserInformation.locationId.$error.required">
+						Location is required.</div>
 				</div>
 			</div>
 
