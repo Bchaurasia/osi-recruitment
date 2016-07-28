@@ -65,7 +65,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'KeepaliveProvider', 'IdlePr
             }
     	}
     })
-     .state('offer.approveOffer', {url:'/approveOffer', views: {'': {templateUrl: 'views/offer/approveOffer.html', controller: 'createOfferCtrl'}},
+     .state('offer.approveOffer', {url:'/approveOffer', views: {'': {templateUrl: 'views/offer/approveOffer.html', controller: 'approveOfferCtrl'}},
     	resolve : {
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_REQUISITION_APPROVER"]);
