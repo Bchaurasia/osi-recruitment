@@ -45,10 +45,16 @@
 						</div>
 					</li>
 					<li ng-repeat="position in positionData">
-						<div class="collapsible-header row">
-							<span class="col s6"><a style="cursor: pointer;"
+						<div class="collapsible-header row">{{$scope.checkRole()}}
+						  <div ng-if="hasRole('ROLE_MANAGER')">
+							<span class="col s6">{{position.designation}}</span>
+							<span class="col s6">{{position.total}}</span>
+						</div>
+						<div ng-if="hasNotRole('ROLE_MANAGER')">
+							<span class="col s6"><a style="cursor: pointer;" 
 								ng-click="editPosition(position.jobcode,position.designation)">{{position.designation}}</a></span>
 							<span class="col s6">{{position.total}}</span>
+						</div>
 						</div>
 					</li>
 					<li ng-hide="hideNoPositionsMsg">
