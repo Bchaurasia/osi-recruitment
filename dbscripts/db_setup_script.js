@@ -76,7 +76,7 @@ db.userInfo.insert({"_id":"osiuseremployee@gmail.com",'name':"Osi User","mobileN
 db.userInfo.insert({"_id":"vbattula@osius.com",'name':"Venkat Battula","mobileNumber":"9963268260",location:"Hyderabad",skypeId:"vbattula",roles:["ROLE_HR"]});
 db.userInfo.insert({"_id":"rvottem@osius.com",'name':"Rajesh Vottem","mobileNumber":"9966088920",location:"Hyderabad",skypeId:"rvottem",roles:["ROLE_HR"]});
 db.userInfo.insert({"_id":"npalavalasa@osius.com",'name':"Naveen Palavalasa","mobileNumber":"9642618888",location:"Hyderabad",skypeId:"npalavalasa",roles:["ROLE_HR"]});
-db.userInfo.insert({"_id":"pnagirddi@osius.com",'name':"Pavan Nagireddi","mobileNumber":"9010871371",location:"Hyderabad",skypeId:"pnagirddi",roles:["ROLE_HR"]});
+db.userInfo.insert({"_id":"pnagireddi@osius.com",'name':"Pavan Nagireddi","mobileNumber":"9010871371",location:"Hyderabad",skypeId:"pnagirddi",roles:["ROLE_HR"]});
 db.userInfo.insert({"_id":"ssharief@osius.com",'name':"Shaik Sharief","mobileNumber":"9502472772",location:"Hyderabad",skypeId:"ssharief",roles:["ROLE_HR"]});
 db.userInfo.insert({"_id":"skandhiraju@osius.com",'name':"Sravanthi Kandhiraju","mobileNumber":"7799000681",location:"Hyderabad",skypeId:"skandhiraju",roles:["ROLE_HR"]});
 db.userInfo.insert({"_id":"panduri@osius.com",'name':"Pradeep Anduri","mobileNumber":"9642254302",location:"Hyderabad",skypeId:"panduri",roles:["ROLE_HR"]});
