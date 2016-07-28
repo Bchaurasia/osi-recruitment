@@ -3073,3 +3073,25 @@ div.row.collapsible-header h5{
 		color-stop(100%, #004D87));
 	background-image: -webkit-linear-gradient(top, #004D87 0, #004D87 100%);
 }
+
+
+.backColor{
+	background-color:aliceblue;
+}
+
+.ui.segment.backColor{
+	background-color:aliceblue;
+}
+
+div.input-field label{
+	color:black ;
+}
+
+input,select,textarea {
+	background-color:#fff !important;
+}
+
+ form.formWidth#createOfferForm{
+	width:70%;
+	margin-left: 14.5%;
+}

@@ -1,307 +1,333 @@
 <br>
-<div class="row">
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
+<div class="row " align="center">
+	<form id="createOfferForm" class="col s12 m12 l10 collapsible collapsible-accordion formWidth"  align="center"
 		name="createOffer"  onvalidate>
 		<div class="row collapsible-header" >
 			<h3 align="left" style="padding-top:10px">
 				<b>Create Offer</b>
 			</h3>
 		</div>
+		
 		<!-- -->
-		<div class="row" style="padding-left:8%;padding-top:1%">
-			<div class="input-field col s6">
-				<input placeholder="Enter Candidate Name" ng-minlength="3"
-					ng-maxlength="30" name="candidateName" class="form-control"
-					type="text" ng-model="candidate.candidateName" ng-disabled="true"
-					ng-pattern="/^[a-zA-Z _]*$/" required> <label
-					style="position: absolute; top: -22px;">Candidate Name<b
-					class="mandatory">*</b></label>
+			<div class="ui segment backColor ">
+				<div class="row" style="padding-left:0%;padding-top:1%">
+					<div class="input-field col s6">
+						<input placeholder="Enter Candidate Name" ng-minlength="3"
+							style="background-color:gray;"
+							ng-maxlength="30" name="candidateName" class="form-control"
+							type="text" ng-model="candidate.candidateName" ng-disabled="true"
+							ng-pattern="/^[a-zA-Z _]*$/" required> <label 
+							style="position: absolute; top: -22px;">Candidate Name<b
+							class="mandatory">*</b></label>
+					</div>
+					<div class="input-field col s6">
+						<input type="email" name="emailId" class="form-control"
+							ng-model="candidate.emailId" ng-disabled="true" required>
+							 <label class="blackFont"
+							style="position: absolute; top: -22px;">Email Id <b
+							class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+				<div class="row"  style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter requisitionId" name="requisitionId"
+							class="form-control" type="text" ng-model="candidate.requisitionId"
+							ng-disabled="true" required> <label
+							style="position: absolute; top: -22px;">Requisition Id<b
+							class="mandatory">*</b></label>
+					</div>
+					<div class="input-field col s6">
+						<input name="jobcodeProfile" class="form-control"
+							ng-model="candidate.jobcodeProfile" ng-disabled="true" style="width:75%" required>
+						<label style="position: absolute; top: -22px;">JobCode <b
+							class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input name="approvedPositions" class="form-control"
+							ng-model="candidate.approvedPositions" ng-disabled="true" style="width:75%" required>
+						<label style="position: absolute; top: -22px;">Approved
+							Position <b class="mandatory">*</b>
+						</label>
+					</div>
+					<div class="input-field col s6">
+						<select ng-model="candidate.currency" name="currency"
+							style="background-color:white;"
+							ng-options="o for o in currencyList" class="form-control input-sm">
+							<option>Select Currency</option>
+						</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+					</div>
+				</div>
+		</div>
+		<div class="ui segment backColor ">
+			<div class="row" style="padding-left:0%">
+				<div class="input-field col s6">
+					<input placeholder="Enter your current Employer"
+						name="currentEmployer" class="form-control" type="text"
+						ng-model="candidate.currentEmployer"> <label
+						style="position: absolute; top: -22px;" required>Current
+						Employer<b class="mandatory">*</b>
+					</label>
+				</div>
+	
+				<div class="input-field col s6">
+					<input placeholder="Enter Experience (Yrs)" name="expYear"
+						class="form-control" type="text" ng-model="candidate.expYear"
+						required> <label style="position: absolute; top: -22px;">Experience
+						(Yrs)<b class="mandatory">*</b>
+					</label></label>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<input type="email" name="emailId" class="form-control"
-					ng-model="candidate.emailId" ng-disabled="true" required> <label
-					style="position: absolute; top: -22px;">Email Id <b
-					class="mandatory">*</b>
-				</label>
+			<div class="row"
+				style=" position: relative;  width: 88.6%; margin-left: 12px; margin-bottom:25px; "
+				>
+				<!-- <div class="row" style="padding-right:15%;font-weight:bold;padding-top:5px">
+					<label class="col s4" style="padding-right:10%;font-size: medium;" >Qualification</label>
+					<label class="col s4" style="font-size: medium;">Stream</label>
+					<label class="col s4"  style="padding-left:10%;font-size: medium;">Percentage</label>
+				</div>
+				
+				<div class="row" ng-repeat="data in candidate.qualification" style="padding-left:-10%">
+					<span class="col s4" style="padding-right:15%"> {{data.qualification}}</span>
+					<span class="col s4" style="padding-right:16%"> {{data.stream || "--"}}</span> 
+					<span class="col s4" style="padding-right:19%">{{data.percentage}}</span>
+				</div> -->
+				
+				<table class="ui single line table" >
+				 <thead>
+				    <tr>
+				      <th>Qualification</th>
+				      <th>Stream</th>
+				      <th>Percentage</th>
+				    </tr>
+				  </thead>
+				   <tr ng-repeat="data in candidate.qualification">
+				      <td> {{data.qualification}}</td>
+				      <td>{{data.stream || "--"}}</td>
+				      <td>{{data.percentage}}</td>
+				    </tr>
+				</table>
 			</div>
 		</div>
-		<div class="row"  style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter requisitionId" name="requisitionId"
-					class="form-control" type="text" ng-model="candidate.requisitionId"
-					ng-disabled="true" required> <label
-					style="position: absolute; top: -22px;">Requisition Id<b
-					class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<input name="jobcodeProfile" class="form-control"
-					ng-model="candidate.jobcodeProfile" ng-disabled="true" style="width:75%" required>
-				<label style="position: absolute; top: -22px;">JobCode <b
-					class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input name="approvedPositions" class="form-control"
-					ng-model="candidate.approvedPositions" ng-disabled="true" style="width:75%" required>
-				<label style="position: absolute; top: -22px;">Approved
-					Position <b class="mandatory">*</b>
-				</label>
-			</div>
-			<div class="input-field col s6">
-				<select ng-model="candidate.currency" name="currency"
-					ng-options="o for o in currencyList" class="form-control input-sm">
-					<option>Select Currency</option>
-				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter your current Employer"
-					name="currentEmployer" class="form-control" type="text"
-					ng-model="candidate.currentEmployer"> <label
-					style="position: absolute; top: -22px;" required>Current
-					Employer<b class="mandatory">*</b>
-				</label>
-			</div>
-
-			<div class="input-field col s6">
-				<input placeholder="Enter Experience (Yrs)" name="expYear"
-					class="form-control" type="text" ng-model="candidate.expYear"
-					required> <label style="position: absolute; top: -22px;">Experience
-					(Yrs)<b class="mandatory">*</b>
-				</label></label>
-			</div>
-		</div>
-		<div class="row"
-			style="float: left; position: relative; left: 8%; width: 81.5%; margin-left: 12px; border: 1px solid #b1acac; border-radius: 5px; padding-left:8%;">
-			<div class="row" style="padding-right:15%;font-weight:bold;padding-top:5px">
-				<label class="col s4" style="padding-right:10%;font-size: medium;" >Qualification</label>
-				<label class="col s4" style="font-size: medium;">Stream</label>
-				<label class="col s4"  style="padding-left:10%;font-size: medium;">Percentage</label>
-			</div>
-			
-			<div class="row" ng-repeat="data in candidate.qualification" style="padding-left:-10%">
-				<span class="col s4" style="padding-right:15%"> {{data.qualification}}</span>
-				<span class="col s4" style="padding-right:16%"> {{data.stream || "--"}}</span> 
-				<span class="col s4" style="padding-right:19%">{{data.percentage}}</span>
-			</div>
-		</div>
-		<br>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input name="client" class="form-control" type="text"
-					ng-model="candidate.client" ng-disabled="true" required> <label
-					style="position: absolute; top: -22px;">Client<b
-					class="mandatory">*</b></label></label>
-			</div>
-
-			<div class="input-field col s6">
-				<select ng-model="candidate.reportingManager"
-					name="reportingManager"
-					ng-options="o.name for o in managers track by o.emailId"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Reporting
-						Manager</option>
-				</select> <label style="position: absolute; top: -22px;">Reporting
-					Manager<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter Project name" name="stream"
-					class="form-control" type="text" ng-model="candidate.project"
-					required> <label style="position: absolute; top: -22px;">Project
-					<b class="mandatory">*</b>
-				</label></label>
-			</div>
-
-			<div class="input-field col s6">
-				<input placeholder="Enter Stream" name="hrManager"
-					class="form-control" type="text"
-					ng-model="candidate.recruiter.name" required> <label
-					style="position: absolute; top: -22px;">Recruiter<b
-					class="mandatory">*</b></label> </label>
-
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
-					ng-options="o for o in bus" class="form-control input-sm">
-					<option value="" disabled="disabled">Select BU</option>
-				</select> <label style="position: absolute; top: -22px;"> BU: </label>
-			</div>
-			<div class="input-field col s6">
-				<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
-					ng-options="o for o in streamData track by o"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Stream</option>
-				</select> <label style="position: absolute; top: -22px;">Stream: </label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s2">
-				<select ng-model="level" name="currency" ng-change="selectGrade(level)" 
-					ng-options="o for o in levelDatalist track by o" class="form-control input-sm">
-					<option value="" disabled="disabled">Select Level</option>
-				</select> <label style="position: absolute; top: -22px;"> Level: </label>
-			</div>
-			<div class="input-field col s2">
-				<select ng-model="grade" name="grade" ng-change="selectDesignation(grade)" 
-					ng-options="o.grade for o in  designationgrades track by o.grade"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Grade</option>
-				</select> <label style="position: absolute; top: -22px;">Grade: </label>
-			</div>
-				<div class="col-md-2"></div>
-			<div class="input-field col s6">
-				<select ng-model="name" name="currency"
-					ng-options="o.name for o in designationdesignations track by o.grade" class="form-control input-sm">
-						<option value="" disabled="disabled">Select Designation</option>
-				</select> <label style="position: absolute; top: -22px;"> Designation: </label>
-			</div>
-
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter Relocation Allowance" name="relAlowance"
-					class="form-control" type="number"
-					ng-model="candidate.relocationExpensesOffered" required> <label
-					style="position: absolute; top: -22px;">Relocation Expenses
-					Offered<b class="mandatory">*</b>
-				</label>
-				<div class="validation-error"
-					ng-show="(createOffer.relAlowance.$dirty  || invalidSubmitAttempt) && createOffer.relAlowance.$error.pattern">
-					Relocation Expenses Offered must be number only.</div>
-			</div>
-
-			<div class="input-field col s6">
-				<input type="date" ng-model="candidate.expectedJoiningDate"
-					min="{{today | date : 'yyyy-MM-dd' }}" required> <label>Expected
-					Joining Date<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter Sign-on Bonus" name="bonus"
-					class="form-control" type="number" ng-model="candidate.singInBonus"
-					required> <label style="position: absolute; top: -22px;">Sign-on
-					Bonus <b
-					class="mandatory">*</b>
-				</label>
-
-			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter your Notice Period" name="noticePeriod"
-					class="form-control" type="number"
-					ng-model="candidate.noticePeriod" maxlength="2" required> <label
-					style="position: absolute; top: -22px;">Notice Period (in
-					days)<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter your current CTC" name="currentCTC"
-					class="form-control" type="number"
-					ng-model="candidate.lastDrawnCTC"> <label
-					style="position: absolute; top: -22px;">Last Drawn CTC 
-					<b class="mandatory">*</b>
-				</label>
-
-			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter your expected CTC" name="expectedCTC"
-					class="form-control" type="number" ng-model="candidate.expectedCTC"
-					required> <label style="position: absolute; top: -22px;">Expected
-					CTC<b
-					class="mandatory">*</b>
-				</label>
-
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter Proposed CTC" name="proposedCTC"
-					class="form-control" type="number" ng-model="candidate.proposedCTC"
-					required> <label style="position: absolute; top: -22px;">Proposed
-					CTC<b
-					class="mandatory">*</b>
-				</label>
-
-			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter Business Unit" name="businessUnit"
-					class="form-control" type="text" ng-model="candidate.businessUnit"
-					required> <label style="position: absolute; top: -22px;">Business
-					Unit<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter Current Location" name="currentLocation"
-					class="form-control" type="text"
-					ng-model="candidate.currentLocation" required> <label
-					style="position: absolute; top: -22px;">Current Location<b
-					class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter Work Location" name="WorkLocation"
-					class="form-control" type="text" ng-model="candidate.workLocation"
-					required> <label style="position: absolute; top: -22px;">Work
-					Location<b class="mandatory">*</b>
-				</label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<input placeholder="Enter profileSource" name="expYear"
-					class="form-control" type="text" ng-model="candidate.profileSource">
-				<label style="position: absolute; top: -22px;" required>Profile
-					Source<b class="mandatory">*</b>
-				</label></label>
-			</div>
-			<div class="input-field col s6">
-				<textarea class="materialize-textarea" cols="50" rows="2"
-					name="notes" ng-model="candidate.comments"
-					placeholder="Enter any additional notes..." style="width:77%"></textarea>
-				<label style="position: absolute; top: -22px;">HR Comment</label>
-			</div>
-		</div>
-		<div class="row" style="padding-left:8%">
-			<div class="input-field col s6">
-				<select placeholder="Select Approver 1"
-					ng-model="candidate.approval"
-					ng-options="o.name for o in approval1 track by o.emailId"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Approver</option>
-				</select> <label>Approver<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<select placeholder="Select Final Status"
-					ng-model="candidate.finalStatus"
-					ng-options="o for o in finalStatusList"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Final Status</option>
-				</select> <label>Final Status</label>
-			</div>
-		</div>
-		<br>
+		<div class="ui segment backColor">
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input name="client" class="form-control" type="text"
+							ng-model="candidate.client" ng-disabled="true" required> <label
+							style="position: absolute; top: -22px;">Client<b
+							class="mandatory">*</b></label></label>
+					</div>
+		
+					<div class="input-field col s6">
+						<select ng-model="candidate.reportingManager"
+							name="reportingManager"
+							ng-options="o.name for o in managers track by o.emailId"
+							class="form-control input-sm" required>
+							<option value="" disabled="disabled">Select Reporting
+								Manager</option>
+						</select> <label style="position: absolute; top: -22px;">Reporting
+							Manager<b class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+		
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter Project name" name="stream"
+							class="form-control" type="text" ng-model="candidate.project"
+							required> <label style="position: absolute; top: -22px;">Project
+							<b class="mandatory">*</b>
+						</label></label>
+					</div>
+		
+					<div class="input-field col s6">
+						<input placeholder="Enter Stream" name="hrManager"
+							class="form-control" type="text"
+							ng-model="candidate.recruiter.name" required> <label
+							style="position: absolute; top: -22px;">Recruiter<b
+							class="mandatory">*</b></label> </label>
+		
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
+							ng-options="o for o in bus" class="form-control input-sm">
+							<option value="" disabled="disabled">Select BU</option>
+						</select> <label style="position: absolute; top: -22px;"> BU: </label>
+					</div>
+					<div class="input-field col s6">
+						<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
+							ng-options="o for o in streamData track by o"
+							class="form-control input-sm">
+							<option value="" disabled="disabled">Select Stream</option>
+						</select> <label style="position: absolute; top: -22px;">Stream: </label>
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s2">
+						<select ng-model="level" name="currency" ng-change="selectGrade(level)" 
+							ng-options="o for o in levelDatalist track by o" class="form-control input-sm">
+							<option value="" disabled="disabled">Select Level</option>
+						</select> <label style="position: absolute; top: -22px;"> Level: </label>
+					</div>
+					<div class="input-field col s2">
+						<select ng-model="grade" name="grade" ng-change="selectDesignation(grade)" 
+							ng-options="o.grade for o in  designationgrades track by o.grade"
+							class="form-control input-sm">
+							<option value="" disabled="disabled">Select Grade</option>
+						</select> <label style="position: absolute; top: -22px;">Grade: </label>
+					</div>
+						<div class="col-md-2"></div>
+					<div class="input-field col s6">
+						<select ng-model="name" name="currency"
+							ng-options="o.name for o in designationdesignations track by o.grade" class="form-control input-sm">
+								<option value="" disabled="disabled">Select Designation</option>
+						</select> <label style="position: absolute; top: -22px;"> Designation: </label>
+					</div>
+		
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter Relocation Allowance" name="relAlowance"
+							class="form-control" type="number"
+							ng-model="candidate.relocationExpensesOffered" required> <label
+							style="position: absolute; top: -22px;">Relocation Expenses
+							Offered<b class="mandatory">*</b>
+						</label>
+						<div class="validation-error"
+							ng-show="(createOffer.relAlowance.$dirty  || invalidSubmitAttempt) && createOffer.relAlowance.$error.pattern">
+							Relocation Expenses Offered must be number only.</div>
+					</div>
+		
+					<div class="input-field col s6">
+						<input type="date" ng-model="candidate.expectedJoiningDate"
+							min="{{today | date : 'yyyy-MM-dd' }}" required> <label>Expected
+							Joining Date<b class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+		
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter Sign-on Bonus" name="bonus"
+							class="form-control" type="number" ng-model="candidate.singInBonus"
+							required> <label style="position: absolute; top: -22px;">Sign-on
+							Bonus <b
+							class="mandatory">*</b>
+						</label>
+		
+					</div>
+					<div class="input-field col s6">
+						<input placeholder="Enter your Notice Period" name="noticePeriod"
+							class="form-control" type="number"
+							ng-model="candidate.noticePeriod" maxlength="2" required> <label
+							style="position: absolute; top: -22px;">Notice Period (in
+							days)<b class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter your current CTC" name="currentCTC"
+							class="form-control" type="number"
+							ng-model="candidate.lastDrawnCTC"> <label
+							style="position: absolute; top: -22px;">Last Drawn CTC 
+							<b class="mandatory">*</b>
+						</label>
+		
+					</div>
+					<div class="input-field col s6">
+						<input placeholder="Enter your expected CTC" name="expectedCTC"
+							class="form-control" type="number" ng-model="candidate.expectedCTC"
+							required> <label style="position: absolute; top: -22px;">Expected
+							CTC<b
+							class="mandatory">*</b>
+						</label>
+		
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter Proposed CTC" name="proposedCTC"
+							class="form-control" type="number" ng-model="candidate.proposedCTC"
+							required> <label style="position: absolute; top: -22px;">Proposed
+							CTC<b
+							class="mandatory">*</b>
+						</label>
+		
+					</div>
+					<div class="input-field col s6">
+						<input placeholder="Enter Business Unit" name="businessUnit"
+							class="form-control" type="text" ng-model="candidate.businessUnit"
+							required> <label style="position: absolute; top: -22px;">Business
+							Unit<b class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter Current Location" name="currentLocation"
+							class="form-control" type="text"
+							ng-model="candidate.currentLocation" required> <label
+							style="position: absolute; top: -22px;">Current Location<b
+							class="mandatory">*</b></label>
+					</div>
+					<div class="input-field col s6">
+						<input placeholder="Enter Work Location" name="WorkLocation"
+							class="form-control" type="text" ng-model="candidate.workLocation"
+							required> <label style="position: absolute; top: -22px;">Work
+							Location<b class="mandatory">*</b>
+						</label>
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<input placeholder="Enter profileSource" name="expYear"
+							class="form-control" type="text" ng-model="candidate.profileSource">
+						<label style="position: absolute; top: -22px;" required>Profile
+							Source<b class="mandatory">*</b>
+						</label></label>
+					</div>
+					<div class="input-field col s6">
+						<textarea class="materialize-textarea" cols="50" rows="2"
+							name="notes" ng-model="candidate.comments"
+							placeholder="Enter any additional notes..." style="width:77%"></textarea>
+						<label style="position: absolute; top: -22px;">HR Comment</label>
+					</div>
+				</div>
+				<div class="row" style="padding-left:0%">
+					<div class="input-field col s6">
+						<select placeholder="Select Approver 1"
+							ng-model="candidate.approval"
+							ng-options="o.name for o in approval1 track by o.emailId"
+							class="form-control input-sm" required>
+							<option value="" disabled="disabled">Select Approver</option>
+						</select> <label>Approver<b class="mandatory">*</b></label>
+					</div>
+					<div class="input-field col s6">
+						<select placeholder="Select Final Status"
+							ng-model="candidate.finalStatus"
+							ng-options="o for o in finalStatusList"
+							class="form-control input-sm">
+							<option value="" disabled="disabled">Select Final Status</option>
+						</select> <label>Final Status</label>
+					</div>
+				</div>
+				<br>
+				</div>
+		
 		<div class="row" >
 			<div class="input-field col s12" ng-show="candidate.approvalList">
-				<label style="position: absolute; top: -22px;">Summary:</label>
+				<h4 class="ui dividing header" align="left">Summary:</h4>
+				<!-- <label style="position: absolute; top: -22px;">Summary:</label> -->
 			</div>
 		</div>
 		<div class="row" ng-show="candidate.approvalList">
-			<table class="bordered offertable" style="font-size: 14px;">
+			<table class="ui celled violet table" style="font-size: 14px;">
 				<thead>
 					<tr>
 						<th>Date</th>
