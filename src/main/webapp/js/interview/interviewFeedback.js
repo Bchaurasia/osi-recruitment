@@ -170,6 +170,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
     
     $scope.starColor = function(event)
     {
+    	$scope.disabledFeedbackbtn=false;
             if($scope.percent==10)
             {
                 $(event.currentTarget).css('color','#ffd699');
