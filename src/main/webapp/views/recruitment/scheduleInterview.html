@@ -1,218 +1,207 @@
 <div ng-show="message" ng-include="'notificationTemplate.html'"></div>
-<div class="row">
-	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="schedule_form" onvalidate>
-		<div class="row collapsible-header">
-			<h5 align="left">
-				<b>Schedule Interview for -
-					{{interviewscheduleDetails.candidateName}}</b> <small>({{interviewscheduleDetails.candidateEmail}})</small>
-			</h5>
-		</div>
-		<div class="row">
+<div class="ui raised less padded container segment" style="width:77%;">
+	<h3 align="left" class="ui dividing header">Schedule Interview for - {{interviewscheduleDetails.candidateName}}
+		<small> ({{interviewscheduleDetails.candidateEmail}})</small>
+	</h3>
+	<form class="ui form" name="schedule_form" onvalidate>
+		<div class="ui segment" style="background-color: aliceblue;">
 			<div class="input-field col s6" align="left">
 			 <input type="checkbox" class="filled-in" id="filled-in-box" ng-model="flag" />
       			<label for="filled-in-box">Allow Multiple Rounds</label>
 			</div>
-		</div>
-		<div class="row" ng-if="showRequisitionDropdown == true">
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewschedule.requisitionId"
-					theme="selectize" ng-disabled="disabled" style="width: 80%"
-					on-select="setJobcode(interviewschedule.requisitionId)"
-					title="Choose a requisitionId"> <ui-select-match
-					placeholder="Select or search Requisition Id.">{{$select.selected}}</ui-select-match>
-				<ui-select-choices
-					repeat="requisition in requisitionIdlist | filter: $select.search">
-				<span ng-bind-html="requisition | highlight: $select.search"></span>
-				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">
-					RequisitionId<b class="mandatory">*</b>
-				</label>
-
-			</div>
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewschedule.jobcode" theme="selectize" on-select="setJobDescription(interviewschedule.jobcode)"
+			<br>
+			<div class="two fields" ng-if="showRequisitionDropdown == true">
+				<div align="left" class="field">
+      				<label>Requisition ID : <b class="mandatory">*</b></label>
+      				<ui-select ng-model="interviewschedule.requisitionId"
+						theme="selectize" ng-disabled="disabled" style="width: 80%"
+						on-select="setJobcode(interviewschedule.requisitionId)"
+						title="Choose a requisitionId"> 
+						<ui-select-match placeholder="Select or search Requisition Id.">{{$select.selected}}</ui-select-match>
+						<ui-select-choices repeat="requisition in requisitionIdlist | filter: $select.search">
+							<span ng-bind-html="requisition | highlight: $select.search"></span>
+						</ui-select-choices> 
+					</ui-select>
+      			</div>
+      			<div align="left" class="field">
+      				<label>Jobcode : <b class="mandatory">*</b></label>
+      				<ui-select ng-model="interviewschedule.jobcode" theme="selectize" on-select="setJobDescription(interviewschedule.jobcode)"
 					ng-disabled="disabled" style="width: 80%" title="Choose a jobcode">
 				<ui-select-match placeholder="Select or search Job code.">{{$select.selected.jobcode}}</ui-select-match>
 				<ui-select-choices
 					repeat="position in positionObj | filter: $select.search">
 				<span ng-bind-html="position.jobcode | highlight: $select.search"></span>
 				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">Interview
-					Jobcode<b class="mandatory">*</b>
-				</label>
-
+      			</div>
 			</div>
-		</div>
-		<div class="row" ng-if="showRequisitionDropdown == false">
-			<div class="input-field col s6">				
-				<div class="col-md-4">
-					<label class="lbl">RequisitionId : 
-					</label>
+			<div class="four fields" ng-if="showRequisitionDropdown == false">
+				<div class="field">
+					<label class="ui label">RequisitionId :  </label>
 				</div>
-				<div class="col-md-2" style="display: inline;">
+				<div class="field">
 					<b>{{interviewscheduleDetails.requisitionId}}</b>
 				</div>
-			</div>
-			<div class="input-field col s6">				
-				<div class="col-md-4">
-					<label class="lbl">Interview Jobcode : 
-					</label>
+				<div class="field">
+					<label class="ui label">Interview Job Code : </label>
 				</div>
-				<div class="col-md-2" style="display: inline;">
+				<div class="field">
 					<b>{{interviewscheduleDetails.jobCode}}</b>
 				</div>
 			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="interviewschedule.roundName"
-					class="form-control input-sm"
-					ng-change="setInterviewData(interviewschedule.roundName)"
-					ng-options="o as o for o in interviewschedule.jobcode.interviewRounds | orderBy:'toString()'"
-					required>
-					<option value="" disabled="disabled">Select Round</option>
-				</select> <label>Interview Round<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="interviewschedule.interviewerName"
-					theme="selectize"style="width: 80%" ng-change="setvalues(interviewschedule.interviewerName)"
-					title="Choose a interviewer"> <ui-select-match
-					placeholder="Select or search interviewer">{{$select.selected.name}}</ui-select-match>
-				<ui-select-choices
-					repeat="interviewerName in interviewerNames | filter: $select.search">
-				<span ng-bind-html="interviewerName.name | highlight: $select.search"></span>
-				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">
-					Interviewer Name<b class="mandatory">*</b>
-				</label>
-
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">				
-				<div class="col-md-4">
-					<label class="lbl">Interviewer Cell # : 
-					</label>
+			<div class="two fields">
+				<div align="left" class="field">
+					<label>Interview Round : <b class="mandatory">*</b></label>
+					<select ng-model="interviewschedule.roundName"
+						ng-change="setInterviewData(interviewschedule.roundName)"
+						ng-options="o as o for o in interviewschedule.jobcode.interviewRounds | orderBy:'toString()'"
+						style="cursor: pointer;
+								width:80%; border-color: #b8b8b8;
+							    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+							    background-color: #ffffffc4; position: relative;
+							    z-index: 1; display: inline-block;
+							    padding: 5px 8px; overflow: hidden;
+							    border: 1px solid #d0d0d0;"	
+						paceholder="Select Round" required>
+						<option value="" disabled="disabled">Select Round</option>
+					</select>
 				</div>
-				<div class="col-md-2" style="display: inline;">
+				<div align="left" class="field">
+					<label>Interviewer Name : <b class="mandatory">*</b></label>
+					<ui-select ng-model="interviewschedule.interviewerName"
+						theme="selectize"style="width: 80%" ng-change="setvalues(interviewschedule.interviewerName)"
+						title="Choose a interviewer"> 
+						<ui-select-match
+						placeholder="Select or search interviewer">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices
+						repeat="interviewerName in interviewerNames | filter: $select.search">
+						<span ng-bind-html="interviewerName.name | highlight: $select.search"></span>
+						</ui-select-choices> 
+					</ui-select>
+				</div>
+			</div>
+		</div>
+		<div class="ui segment" style="background-color: aliceblue;">
+			<div class="four fields">
+				<div class="field">
+					<label class="ui label">Interviewer Cell # :  </label>
+				</div>
+				<div class="field">
 					<b>{{interviewerData.mobileNumber}}</b>
 				</div>
-			</div>
-			<div class="input-field col s6">				
-				<div class="col-md-4">
-					<label class="lbl">Skype Id : 
-					</label>
+				<div class="field">
+					<label class="ui label">Skype Id : </label>
 				</div>
-				<div class="col-md-2" style="display: inline;">
+				<div class="field">
 					<b>{{interviewerData.skypeId}}</b>
 				</div>
 			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="input-field col s6">				
-				<div class="col-md-4">
-					<label class="lbl">Interviewer Email Id : 
-					</label>
+			<div class="four fields">
+				<div class="field">
+					<label class="ui label">Interviewer Email Id :  </label>
 				</div>
-				<div class="col-md-2" style="display: inline;">
+				<div class="field">
 					<b>{{interviewerData.emailId}}</b>
 				</div>
-			</div>
-			<div class="input-field col s6">				
-				<div class="col-md-4">
-					<label class="lbl">Location : 
-					</label>
+				<div class="field">
+					<label class="ui label">Location : </label>
 				</div>
-				<div class="col-md-2" style="display: inline;">
+				<div class="field">
 					<b>{{interviewerData.location}}</b>
 				</div>
 			</div>
 		</div>
-		<br>
-
-		<div class="row">
-		<div class="input-field col s6">
-				<select ng-model="sel.selectedtypeOfInterview"
-					ng-options="o as o for o in info.typeOfInterview | orderBy:'toString()'"
-					class="form-control input-sm" required name="typeOfInterview"
-					ng-disabled="disabled" ng-change=hideInterviewAddress(sel.selectedtypeOfInterview)>
-					<option value="" disabled="disabled">Select Interview
-						Format</option>
-				</select> <label>Type Of Interview<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<div class="demo-section k-content" align="left">
-					<input kendo-date-time-picker ng-model="data.date"
-						id="interviewDate" ng-disabled="disabled" min="{{today}}"
-						k-ng-model="kdate" ng-change="disableSchedue()"
-						style="width: 81%;Additional Notes" />
+		<div class="ui segment" style="background-color: aliceblue;">
+			<div class="two fields">
+				<div align="left" class="field">
+					<label>Type Of Interview : <b class="mandatory">*</b></label>
+					<select ng-model="sel.selectedtypeOfInterview"
+						ng-options="o as o for o in info.typeOfInterview | orderBy:'toString()'"
+						required name="typeOfInterview"
+						ng-disabled="disabled" ng-change=hideInterviewAddress(sel.selectedtypeOfInterview)
+						style="cursor: pointer;
+								width:80%; border-color: #b8b8b8;
+							    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+							    background-color: #ffffffc4; position: relative;
+							    z-index: 1; display: inline-block;
+							    padding: 5px 8px; overflow: hidden;
+							    border: 1px solid #d0d0d0;">
+						<option value="" disabled="disabled">Select Interview Format</option>
+					</select>
 				</div>
-				<label style="position: absolute; top: -22px;">Interview
-					Date and Time<b class="mandatory">*</b>
-				</label>
+				<div align="left" class="field">
+					<label>Interview Date and Time : <b class="mandatory">*</b></label>
+					<div class="demo-section k-content" style="width:80%" align="left">
+						<input kendo-date-time-picker ng-model="data.date"
+							id="interviewDate" ng-disabled="disabled" min="{{today}}"
+							k-ng-model="kdate" ng-change="disableSchedue()"
+							style="width:100%;" />
+					</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="row">
-		<div class="input-field col s6" ng-if="sel.selectedtypeOfInterview === 'Face To Face'">
-				<select ng-model="sel.interviewLocation"
-					ng-options="o.location for o in locations | orderBy:'toString()'"
-					class="form-control input-sm" required name="typeOfInterview"
-					ng-disabled="disabled">
-					<option value="" disabled="disabled">Select Interview
-						Location</option>
-				</select> <label>Interview Location<b class="mandatory">*</b></label>
-				
+			<div class="two fields" ng-if="sel.selectedtypeOfInterview === 'Face To Face'">
+				<div align="left" class="field">
+					<label>Interview Location : <b class="mandatory">*</b></label>
+					<select ng-model="sel.interviewLocation"
+						ng-options="o.location for o in locations | orderBy:'toString()'"
+						required name="typeOfInterview" ng-disabled="disabled"
+						style="cursor: pointer;
+								width:80%; border-color: #b8b8b8;
+							    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+							    background-color: #ffffffc4; position: relative;
+							    z-index: 1; display: inline-block;
+							    padding: 5px 8px; overflow: hidden;
+							    border: 1px solid #d0d0d0;">
+						<option value="" disabled="disabled">Select Interview Location</option>
+					</select>
+				</div>
+				<div align="left" class="field" ng-if="sel.interviewLocation"  ng-hide="hideInterviewLocation">
+					<label> Interview Address : <b class="mandatory">*</b></label>
+					<textarea ng-model="sel.interviewLocation.address" style="width: 80%;color: blue;" rows="2"
+						ng-disabled="true" name="interviewlocation" class="form-control"></textarea>
+				</div>
 			</div>
-			<div class="input-field col s5" ng-if="sel.interviewLocation"  ng-hide="hideInterviewLocation">
-				<textarea ng-model="sel.interviewLocation.address" cols="50" rows="2"
-					ng-disabled="true" name="interviewlocation" class="form-control"></textarea><label> Interview Address
-					<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6"
-				ng-if="sel.selectedtypeOfInterview === 'Skype'">
-				<input type="text" ng-model="interviewschedule.candidateSkypeId"
+			<div class="two fields" ng-if="sel.selectedtypeOfInterview === 'Skype'">
+				<div align="left" class="field">
+					<label> Candidate Skype Id : <b class="mandatory">*</b></label>
+					<input type="text" ng-model="interviewschedule.candidateSkypeId"
 					ng-disabled="true" name="candidateSkypeId" class="form-control"
-					placeholder="Enter Skype Id" /> <label> Candidate Skype
-					Id<b class="mandatory">*</b></label>
+					placeholder="Enter Skype Id" style="color: blue;"/>
+				</div>
 			</div>
-			<div class="input-field col s6"
-				ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
-				<input type="text"
-					ng-model="interviewschedule.candidateMobileNumber"
+			<div class="two fields" ng-if="sel.selectedtypeOfInterview === 'Telephonic'">
+				<div align="left" class="field">
+					<label> Candidate Mobile Number : <b class="mandatory">*</b></label>
+					<input type="text" ng-model="interviewschedule.candidateMobileNumber"
 					ng-disabled="true" name="candidateMobileNumber"
-					class="form-control" placeholder="Enter Mobile Number" /> <label>
-					Candidate Mobile Number<b class="mandatory">*</b>
+					class="form-control" placeholder="Enter Mobile Number" style="color: blue;"/>
+				</div>
+			</div>
+			<br>
+			<div class="two fields">
+				<div align="left" class="field">
+					<label>Additional Notes</label>
+					<textarea class="materialize-textarea" rows="2"
+						ng-change="changeEvent()" name="intNotes"
+						ng-model="interviewschedule.additionalNotes" ng-disabled="disabled"
+						placeholder="Enter any additional notes..." style="width:175%;resize: none;">
+					</textarea>
+				</div>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
-					ng-change="changeEvent()" name="intNotes"
-					ng-model="interviewschedule.additionalNotes" ng-disabled="disabled"
-					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Additional
-					Notes</label>
+		<div class="ui two column centered grid">
+			<div class="center aligned column">
+				<div class="ui buttons row">
+					<button class="ui primary button" type="submit"
+						ng-click="schedule()"
+						ng-disabled="disableSchedueBtn || schedule_form.$invalid"
+						ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">
+						<span class="glyphicon glyphicon-ok-circle"></span>  Schedule</button>
+				  	<div class="or"> </div>
+				  	<button class="ui secondary button" ui-sref="recruitment.interviewManagement">
+				  	<span class="glyphicon glyphicon-remove"></span>  Back  </button>
+				</div>
 			</div>
-		</div>
-
-		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit"
-				ng-click="schedule()"
-				ng-disabled="disableSchedueBtn || schedule_form.$invalid"
-				ng-show="hasRole('ROLE_ADMIN','ROLE_HR,ROLE_INTERVIEWER');scheduleButnHide">
-				<span class="glyphicon glyphicon-ok-circle"></span> Schedule
-			</button>
-			<button class="btn btn-info active"
-				ui-sref="recruitment.interviewManagement">
-				<span class="glyphicon glyphicon-remove"></span> Back
-			</button>
 		</div>
 	</form>
 </div>
