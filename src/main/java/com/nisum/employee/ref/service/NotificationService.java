@@ -738,7 +738,8 @@ public class NotificationService {
 		}
 
 		cancelInterview.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		cancelInterview.setSubject(OSI_TECHNOLOGIES + " Interview cancelled:" + interviewSchedule.getRoundName());
+		cancelInterview.setSubject(interviewSchedule.getRoundName() + " Interview Cancelled for :" + interviewSchedule.getCandidateName());
+		
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(writer.toString(), TEXT_HTML);
 		Multipart multipart = new MimeMultipart();
