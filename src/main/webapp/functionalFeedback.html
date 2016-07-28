@@ -8,7 +8,7 @@
 				<div class="field">{{ round.skill }}</div>
 				<div class="field">
 					 <rating ng-model="round.rating" max="5" readonly="false" ng-click="starColor($event)"
-						on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}}></rating> 
+						on-hover="hoveringOver(value)" on-leave="overStar = null" data-tooltip={{tooltip}} required></rating> 
 				</div>
 			</div>
 		</div>

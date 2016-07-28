@@ -4,7 +4,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	$scope.functional={};
 	$scope.technical.newSkill="";
 	$scope.functional.newSkill="";
-	$scope.disabledFeedbackbtn=true;
 	userService.getUserById(sessionStorage.userId).then(setUser).catch(errorMsg);
 	
 	function setUser(data){
@@ -17,13 +16,13 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 	
 	$scope.addNewSkill = function() {
 		var newItemNo = $scope.interviewFeedback.rateSkills.length+1;
-		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.technical.newSkill,"rating":0});
+		$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.technical.newSkill,"rating":""});
 		$scope.technical.newSkill="";
 	 };
 	  
 	$scope.addFunctionSkill = function() {
 			var newItemNo = $scope.interviewFeedback.domainSkills.length+1;
-			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.functional.newSkill,"rating":0});
+			$scope.interviewFeedback.domainSkills.push({"skill":$scope.position.primarySkills[newItemNo], "skill":$scope.functional.newSkill,"rating":""});
 			$scope.functional.newSkill="";
 	};  
 	  
@@ -49,18 +48,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		$scope.emailId = sharedService.getprofileUserId();
 	}
 	$scope.init();
-	$scope.disablefeedback = function() {
-		console.debug("rateskill"+angular.toJson($scope.interviewFeedback.rateSkills[0].rating));
-		for(var i=0; i<$scope.interviewFeedback.rateSkills.length;i++){
-			if($scope.interviewFeedback.rateSkills[i].rating===0)
-			{
-				$scope.disabledFeedbackbtn=true;
-			}
-			else{
-				$scope.disabledFeedbackbtn=false;
-			}
-		}
-	}
 	var profile_url = $http.get('resources/profile?emailId='+$scope.emailId);
 	var interview_URL = $http.get('resources/getInterviewByParam?candiateId='+$scope.emailId);
 	var position_URL = $http.get('resources/searchPositionsBasedOnJobCode?jobcode='+$scope.jobcode);
@@ -75,9 +62,8 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.domainSkills=[];
 			$scope.position = response[2].data;
 			for(var i=0; i<$scope.position.primarySkills.length;i++){
-					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":0}); 
+					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":""}); 
 			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
-			$scope.disablefeedback();
 			}
 			for(i=0;$scope.interview.rounds.length;i++){
 				
@@ -120,7 +106,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		   			}
 		   		];
 
-					$scope.disabledFeedbackbtn=false;
 					$scope.hideSubmit=false;
 					break;
 				}
@@ -170,7 +155,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
     
     $scope.starColor = function(event)
     {
-    	$scope.disabledFeedbackbtn=false;
             if($scope.percent==10)
             {
                 $(event.currentTarget).css('color','#ffd699');

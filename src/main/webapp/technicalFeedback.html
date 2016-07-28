@@ -8,17 +8,19 @@
 				<div class="field">{{ round.skill }}:<b class="mandatory">*</b></div>
 				<div class="field">
 					<rating ng-model="round.rating" max="5" readonly="false" ng-click="starColor($event)"
-                               on-hover="hoveringOver(value)" on-leave="hooverStar = null;" data-tooltip={{tooltip}}>
+                               on-hover="hoveringOver(value)" on-leave="hooverStar = null;" data-tooltip={{tooltip}} required>
                        </rating>
+                       
 				</div>
 			</div>
+			<!-- <input type="text" ng-model="round.rating" required/> -->
 		</div>
 		<input type="text" ng-model="technical.newSkill" maxlength="40" name="" 
 				placeholder="Enter a skill" style="width: 60%; margin-left: -10px; margin-right: -20px;">
 		<button style="background-color: #F8F8F8; border: 0px;" href=""
 			id="" class="interview-feedback" data-tooltip="Add New Skill"
 			 ng-disabled="!technical.newSkill"
-			ng-click="addNewSkill();disablefeedback()">
+			ng-click="addNewSkill()">
 			<i class="material-icons" style="background-color: #337ab7; color: white;">add</i>
 		</button>
 	</div>
