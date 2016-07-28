@@ -64,8 +64,8 @@ angular.module('components', [])
                 
                 body = body.concat('<div class="row">'+
 						'<div class="col-md-3">'+
-							'<h5><small>Total '+
-								': {{ filtereddataRepeat.length }}</small></h5>'+
+							'<h5><big>Total '+
+								': {{ filtereddataRepeat.length }}</big></h5>'+
 						'</div>');
                 if(_.isEmpty(scope.dataArrayAttribute))
                 {	
