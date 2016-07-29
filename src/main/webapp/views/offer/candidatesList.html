@@ -5,10 +5,10 @@
 		<div class="row" style="width: 90%">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
-				<input type="text" class="form-control" ng-model="search"  ng-enter="searchOfferQuery()"data-tooltip="Search by Name,Email Id or Designation">
+				<input type="text" class="form-control" ng-model="search"  data-tooltip="Search by Name and Email Id">
 				<div align="left">
-					&nbsp;&nbsp; <a class="btn-floating"
-						ng-click="searchOfferQuery()"data-tooltip="Search Profile"><i class="material-icons">search</i></a>&nbsp;&nbsp;
+					&nbsp;&nbsp; <a class="btn-floating nonclickable"
+						data-tooltip="Search Profile"><i class="material-icons">search</i></a>&nbsp;&nbsp;
 				</div>
 			</div>
 			<div class="col-md-1" align="center" />
@@ -26,7 +26,7 @@
 			</thead>
 			<tbody>
 				<tr class="animate-repeat"
-					ng-repeat="profile in myOfferData"
+					ng-repeat="profile in myOfferData | filter:search"
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="selectCandidate(profile)">{{profile.candidate.candidateName}}</a></td>
