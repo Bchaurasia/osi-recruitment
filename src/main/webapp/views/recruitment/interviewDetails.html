@@ -1,7 +1,7 @@
 <div class="ui raised less padded container segment" style="width:75%;">
 	<h3 align="left" class="ui dividing header">Interview details for - {{interviewscheduleDetails.candidateName}}</h3>
 	<form class="ui form" name="schedule_form" ng-submit="schedule()" onvalidate>
-		<div class="ui segment" style="background-color: aliceblue;">
+		<div class="ui segment"  >
 			<div align="left" class="four fields">
 				<div class="field">
 					<label class="ui label">Interview Jobcode : </label>
@@ -41,8 +41,8 @@
 			</div>
 		</div>
 		<tabset justified="true" type="pills">
-			<tab ng-repeat="data in interviewscheduleDetails.rounds" heading="{{ data.roundName }}" active="data.active">
-				<div class="ui segment" style="background-color: aliceblue;">
+			<tab  ng-repeat="data in interviewscheduleDetails.rounds" heading="{{ data.roundName }}" active="data.active">
+				<div clacss="ui segment"  >
 					<h5 align="left" class="ui dividing header">Interview Details for {{data.roundName}}</h5>
 					<div align="left" class="four fields">
 						<div class="field">
@@ -113,13 +113,13 @@
 						<p>{{data.interviewSchedule.additionalNotes || "--"}}</p>
 					</div>
 					<br>
-					<button class="ui large primary button" type="submit"
+					<button id="cancelInterview" class="ui large portalThemeColor button  " type="submit"
 						ng-show="showCancelButton(data.interviewSchedule.emailIdInterviewer) && !(data.interviewFeedback)"
 						ng-click="cancelInterview(interviewschedule.candidateId,data.roundName,interviewschedule.candidateName)">
 						<span class="glyphicon glyphicon-remove"></span> Cancel Interview
 					</button>
 				</div>
-				<div class="ui segment" style="background-color: aliceblue;">
+				<div class="ui segment"  >
 					<h5 align="left" class="ui dividing header">Feedback Details for {{data.roundName}}</h5>
 					<div align="left" class="four fields" ng-show="data.interviewFeedback">
 						<div class="field">

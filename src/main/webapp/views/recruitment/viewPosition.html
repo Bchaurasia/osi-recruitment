@@ -1,158 +1,190 @@
 <div ng-show="message" ng-include="'notificationTemplate.html'"></div>
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
+
 	<form class="col s12 m12 l10 collapsible collapsible-accordion" name="UpdatePosition" onvalidate>
 		<div class="row collapsible-header">
 			<h5 align="left">
 				<b>Edit Position: {{jobcode}}</b>
 			</h5>
 		</div>
-		<div class="row marginFromHeader">
-			<div class="input-field col s6">
-				<select placeholder="Select Designation" ng-model="designation"
-					ng-options="o as o for o in designationList | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="true" required>
-				</select> <label>Designation<b class="mandatory">*</b></label>
-			</div>
-
-			<div class="input-field col s6">
-				<select placeholder="Select Location" ng-model="position.location"
-					ng-options="o as o for o in info.locations | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="true" required>
-				</select> <label>Location<b class="mandatory">*</b></label>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="input-field col s6">
-				<div class="row">
+		
+		<div class="ui segment " style="padding-left:4%;">
+				<div class="row marginFromHeader">
 					<div class="input-field col s6">
-						<input type="range" ng-model="position.minExpYear"
-							ng-disabled="flagDisabled"
-							ng-change="min(requisition.minExpYear)" min="0" max="15" required />
-						<span class="range-slider__value">Min:{{position.minExpYear}}</span>
+						<select placeholder="Select Designation" ng-model="designation"
+							ng-options="o as o for o in designationList | orderBy:'toString()'"
+							class="form-control input-sm" ng-disabled="true" required>
+						</select> <label>Designation<b class="mandatory">*</b></label>
 					</div>
+		
 					<div class="input-field col s6">
-						<input type="range" ng-model="position.maxExpYear"
-							ng-disabled="flagDisabled"
-							ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
-						<span class="range-slider__value">Max:{{position.maxExpYear}}</span>
+						<select placeholder="Select Location" ng-model="position.location"
+							ng-options="o as o for o in info.locations | orderBy:'toString()'"
+							class="form-control input-sm" ng-disabled="true" required>
+						</select> <label>Location<b class="mandatory">*</b></label>
 					</div>
 				</div>
-				<label style="margin-top: 14px">Experience Required<b
-					class="mandatory">*</b></label>
+		
+		
+				<div class="row" style="margin-bottom:2%;">
+					<div class="input-field col s6">
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="range" ng-model="position.minExpYear"
+									ng-disabled="flagDisabled"
+									ng-change="min(requisition.minExpYear)" min="0" max="15" required />
+								<span class="range-slider__value">Min:{{position.minExpYear}}</span>
+							</div>
+							<div class="input-field col s6">
+								<input type="range" ng-model="position.maxExpYear"
+									ng-disabled="flagDisabled"
+									ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
+								<span class="range-slider__value">Max:{{position.maxExpYear}}</span>
+							</div>
+						</div>
+						<label style="margin-top: 14px">Experience Required<b
+							class="mandatory">*</b></label>
+					</div>
+		
+					<div class="input-field col s6" style="margin-top: 14px">
+						<select placeholder="Select Client" ng-model="selClient"
+							ng-options="o as o for o in clients | orderBy:'toString()'"
+							class="form-control input-sm" ng-disabled="true" required>
+						</select> <label >Client<b class="mandatory">*</b></label>
+					</div>
+				</div>
+		
+				<div class="row">
+					<div class="input-field col s6">
+						<ui-select multiple ng-model="position.primarySkills"
+							ng-keypress="myFunct($event)" theme="select2" ui-select-required
+							ng-disabled="disabled"> <ui-select-match
+							placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+							repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+						{{color}} </ui-select-choices> </ui-select>
+						<label style="position: absolute; top: -22px;">Primary
+							Skills<b class="mandatory">*</b>
+						</label>
+					</div>
+		
+					<div class="input-field col s6">
+						<textarea ng-model="position.secondarySkills"
+							class="materialize-textarea" style="width: 77%"
+							id="secondarySkills"></textarea>
+						<label style="position: absolute; top: -22px;">Additional
+							Skills</label>
+					</div>
+				</div>
+		
+				<div class="row">
+					<div class="input-field col s6">
+						<textarea id="textarea1" class="materialize-textarea" length="120"
+							style="width: 77%" ng-disabled="flagDisabled"
+							ng-model="position.jobProfile" required></textarea>
+						<label style="position: absolute; top: -22px;">Job
+							Description<b class="mandatory">*</b>
+						</label>
+					</div>
+		
+					<div class="input-field col s6">
+						<ui-select multiple ng-model="position.interviewRounds"
+							ui-select-required theme="select2">
+						<ui-select-match placeholder="Select Rounds..">{{$item}}</ui-select-match>
+						<ui-select-choices
+							repeat="color in interviewRounds | orderBy:'toString()' | filter:$select.search">
+						{{color}} </ui-select-choices> </ui-select>
+						<label style="top: -23px">Interview Rounds<b
+							class="mandatory">*</b></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<select placeholder="Select Hiring HR" ng-model="hrManager"
+							ng-options="o.name for o in hrManagers"
+							class="form-control input-sm" required>
+							<option>Select Hiring Managers</option>
+						</select> <label>Hiring HR<b class="mandatory">*</b></label>
+					</div>
+					<div class="input-field col s6">
+						<select placeholder="Select Priority" ng-model="position.priority"
+							ng-options="o as o for o in priorities"
+							class="form-control input-sm">
+							<option>{{position.priority}}</option>
+						</select> <label>Priority</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<select ng-model="interviewer"
+							ng-options="o.name for o in interviewers"
+							class="form-control input-sm">
+							<option value="">Select Point Of Contact</option>
+						</select> <label>Point Of Contact</label>
+					</div>
+					<div class="input-field col s6">
+						<select placeholder="Select Status" ng-model="position.status"
+							ng-options="o for o in statuses" class="form-control input-sm">
+							<option>Select Status</option>
+						</select> <label>Status</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<select ng-model="position.positionType"
+							ng-options="o for o in positionTypes | orderBy:'toString()'"
+							class="form-control input-sm">
+							<option  value="" disabled="disabled">Select Position Type</option>
+						</select> <label>Position Type</label>
+					</div>
+					
+				</div>
+				<br />
+				
 			</div>
-
-			<div class="input-field col s6">
-				<select placeholder="Select Client" ng-model="selClient"
-					ng-options="o as o for o in clients | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="true" required>
-				</select> <label>Client<b class="mandatory">*</b></label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<ui-select multiple ng-model="position.primarySkills"
-					ng-keypress="myFunct($event)" theme="select2" ui-select-required
-					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
-					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
-				{{color}} </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">Primary
-					Skills<b class="mandatory">*</b>
-				</label>
-			</div>
-
-			<div class="input-field col s6">
-				<textarea ng-model="position.secondarySkills"
-					class="materialize-textarea" style="width: 77%"
-					id="secondarySkills"></textarea>
-				<label style="position: absolute; top: -22px;">Additional
-					Skills</label>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<textarea id="textarea1" class="materialize-textarea" length="120"
-					style="width: 77%" ng-disabled="flagDisabled"
-					ng-model="position.jobProfile" required></textarea>
-				<label style="position: absolute; top: -22px;">Job
-					Description<b class="mandatory">*</b>
-				</label>
-			</div>
-
-			<div class="input-field col s6">
-				<ui-select multiple ng-model="position.interviewRounds"
-					ui-select-required theme="select2">
-				<ui-select-match placeholder="Select Rounds..">{{$item}}</ui-select-match>
-				<ui-select-choices
-					repeat="color in interviewRounds | orderBy:'toString()' | filter:$select.search">
-				{{color}} </ui-select-choices> </ui-select>
-				<label style="top: -23px">Interview Rounds<b
-					class="mandatory">*</b></label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<select placeholder="Select Hiring HR" ng-model="hrManager"
-					ng-options="o.name for o in hrManagers"
-					class="form-control input-sm" required>
-					<option>Select Hiring Managers</option>
-				</select> <label>Hiring HR<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<select placeholder="Select Priority" ng-model="position.priority"
-					ng-options="o as o for o in priorities"
-					class="form-control input-sm">
-					<option>{{position.priority}}</option>
-				</select> <label>Priority</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="interviewer"
-					ng-options="o.name for o in interviewers"
-					class="form-control input-sm">
-					<option value="">Select Point Of Contact</option>
-				</select> <label>Point Of Contact</label>
-			</div>
-			<div class="input-field col s6">
-				<select placeholder="Select Status" ng-model="position.status"
-					ng-options="o for o in statuses" class="form-control input-sm">
-					<option>Select Status</option>
-				</select> <label>Status</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="position.positionType"
-					ng-options="o for o in positionTypes | orderBy:'toString()'"
-					class="form-control input-sm">
-					<option  value="" disabled="disabled">Select Position Type</option>
-				</select> <label>Position Type</label>
-			</div>
-			
-		</div>
-		<br /><br />
-		<div ng-show="accordianFlag" class="input-field col s12">
-			<label style="position: absolute; top: -22px;"><b>Shortlisted Candidates for this position:</b></label>
-			<div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
-				<span class="col s3"><b>Person</b></span>
-				<span class="col s3"><b>Email Id</b></span>
-				<span class="col s3"><b>Progress</b></span>
-				<span class="col s3"><b>Last Round Status</b></span>
-			</div>
-			<div class="collapsible-header row" style="text-align: left;" ng-repeat="interviewCandidate in interviewCandidates">
-				<span class="col s3"><a
-						style="cursor: pointer;" ng-click="showInterviewDetails(interviewCandidate.interviewerId)">{{interviewCandidate.candidateName}}</a></span>
-				<span class="col s3"><b>{{interviewCandidate.candidateEmail}}</b></span>
-				<span class="col s3"><b>{{interviewCandidate.progress}}</b></span>
-				<span class="col s3"><b>{{interviewCandidate.status || "--"}}</b></span>
-			</div>
-		</div>
+				
+		
+				<div ng-show="accordianFlag" id="positionTable"  style=" margin-bottom: 3%;">
+							<!-- <label style="position: absolute; top: -22px;"><b>Shortlisted Candidates for this position:</b></label> -->
+						<h4 class="ui dividing header" align="left">Shortlisted Candidates for this position:</h4>	
+						<table class="ui single line table" >
+						 <thead>
+						    <tr>
+						      <th>Person</th>
+						      <th>Email Id</th>
+						      <th>Progress</th>
+						      <th>Last Round Status</th>
+						    </tr>
+						  </thead>
+						   <tr ng-repeat="interviewCandidate in interviewCandidates">
+						      <td> <a style="cursor: pointer;" ng-click="showInterviewDetails(interviewCandidate.interviewerId)">{{interviewCandidate.candidateName}}</a></td>
+						      <td><b>{{interviewCandidate.candidateEmail}}</b></td>
+						      <td><b>{{interviewCandidate.progress}}</b></td>
+						      <td><b>{{interviewCandidate.status || "--"}}</b></td>
+						    </tr>
+						</table>
+						
+						
+							<!-- <div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
+								<span class="col s3"><b>Person</b></span>
+								<span class="col s3"><b>Email Id</b></span>
+								<span class="col s3"><b>Progress</b></span>
+								<span class="col s3"><b>Last Round Status</b></span>
+							</div>
+							<div class="collapsible-header row" style="text-align: left;" ng-repeat="interviewCandidate in interviewCandidates">
+								<span class="col s3"><a
+										style="cursor: pointer;" ng-click="showInterviewDetails(interviewCandidate.interviewerId)">{{interviewCandidate.candidateName}}</a></span>
+								<span class="col s3"><b>{{interviewCandidate.candidateEmail}}</b></span>
+								<span class="col s3"><b>{{interviewCandidate.progress}}</b></span>
+								<span class="col s3"><b>{{interviewCandidate.status || "--"}}</b></span>
+							</div> -->
+							
+							
+	
+				
+				</div>
+		
+		
 		
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"

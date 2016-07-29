@@ -6,3 +6,5 @@
 /.gradle/
 
 /data/elasticsearch/nodes
+/.idea/
+/node_modules/

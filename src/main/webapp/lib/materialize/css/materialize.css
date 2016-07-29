@@ -2938,7 +2938,7 @@ table {
 
 table.bordered > thead > tr,
 table.bordered > tbody > tr {
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid #034A85;
 }
 
 table.striped > tbody > tr:nth-child(odd) {

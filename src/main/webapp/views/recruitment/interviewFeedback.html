@@ -1,7 +1,7 @@
 <div class="ui raised less padded container segment" style="width:75%;">
 	<h3 align="left" class="ui dividing header">Interview Feedback Form - {{profile.candidateName}}</h3>
 	<form class="ui form" name="feedback_form" onvalidate>
-		<div class="ui segment" style="background-color: aliceblue;">
+		<div class="ui segment"  >
 			<div align="left" class="five fields">
 				<div class="field">
 					<label class="ui label">Interview Round : </label>
@@ -69,7 +69,7 @@
 		</div>	
 		<tabset justified="true" type="pills"> 
 			<tab ng-repeat="tab in tabs | filter:filterbyRound" heading="{{ tab.heading }}">
-				<div class="ui raised segment" style="background-color: aliceblue;">
+				<div class="ui raised segment"  >
 					<div ng-include="tab.template"></div>
 				</div>
 			</tab> 

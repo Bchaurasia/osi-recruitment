@@ -3076,7 +3076,7 @@ div.row.collapsible-header h5{
 
 
 .backColor{
-	background-color:aliceblue;
+	background-color:white;
 }
 
 .ui.segment.backColor{
@@ -3095,3 +3095,30 @@ input,select,textarea {
 	width:70%;
 	margin-left: 14.5%;
 }
+
+.formControlWidth{
+	width:75%;
+}
+
+
+div.field select.select-overide{
+		cursor: pointer;
+		width:80%; border-color: #b8b8b8;
+	    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+	    background-color: #ffffffc4; position: relative;
+	    z-index: 1; display: inline-block;
+	    padding: 5px 8px; overflow: hidden;
+	    border: 1px solid #d0d0d0;
+}
+
+
+    div.bottomMargin#positionTable{
+    margin-bottom: 3%;
+    }
+    
+    
+    button#cancelInterview,.buttonTheme{
+     color:white;
+     background-color: #004D87;
+     border-redious:0px;
+    }

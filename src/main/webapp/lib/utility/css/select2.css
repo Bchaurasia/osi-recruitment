@@ -431,10 +431,10 @@ disabled look for disabled choices in the results dropdown
     margin: 0;
     padding: 0;
     position: relative;
-    border: 1px solid #9e9e9e;
+    border: 1px solid white;
     cursor: text;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #034A85;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eee), color-stop(15%, #fff));
     background-image: -webkit-linear-gradient(top, #eee 1%, #fff 15%);
     background-image: -moz-linear-gradient(top, #eee 1%, #fff 15%);
@@ -498,7 +498,7 @@ disabled look for disabled choices in the results dropdown
     position: relative;
 
     line-height: 13px;
-    color:  black;
+    color:  white;
     cursor: default;
     /* border: 1px solid #034A85; */
 
@@ -515,7 +515,7 @@ disabled look for disabled choices in the results dropdown
           -ms-user-select: none;
               user-select: none;
 
-    background-color: #E4E4E4;
+    background-color: #034A85;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
 /*     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
     background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
@@ -537,7 +537,7 @@ disabled look for disabled choices in the results dropdown
     position: absolute;
     right: 3px;
     top: 4px;
-
+    color : red;
     font-size: 1px;
     outline: none;
     background: url('../../../static/nisum_images/select2.png') right top no-repeat;

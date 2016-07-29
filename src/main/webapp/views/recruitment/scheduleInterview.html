@@ -4,7 +4,7 @@
 		<small> ({{interviewscheduleDetails.candidateEmail}})</small>
 	</h3>
 	<form class="ui form" name="schedule_form" onvalidate>
-		<div class="ui segment" style="background-color: aliceblue;">
+		<div class="ui segment" >
 			<div class="input-field col s6" align="left">
 			 <input type="checkbox" class="filled-in" id="filled-in-box" ng-model="flag" />
       			<label for="filled-in-box">Allow Multiple Rounds</label>
@@ -52,15 +52,9 @@
 				<div align="left" class="field">
 					<label>Interview Round : <b class="mandatory">*</b></label>
 					<select ng-model="interviewschedule.roundName"
+						class="select-overide"
 						ng-change="setInterviewData(interviewschedule.roundName)"
 						ng-options="o as o for o in interviewschedule.jobcode.interviewRounds | orderBy:'toString()'"
-						style="cursor: pointer;
-								width:80%; border-color: #b8b8b8;
-							    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-							    background-color: #ffffffc4; position: relative;
-							    z-index: 1; display: inline-block;
-							    padding: 5px 8px; overflow: hidden;
-							    border: 1px solid #d0d0d0;"	
 						paceholder="Select Round" required>
 						<option value="" disabled="disabled">Select Round</option>
 					</select>
@@ -80,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="ui segment" style="background-color: aliceblue;">
+		<div class="ui segment" >
 			<div class="four fields">
 				<div class="field">
 					<label class="ui label">Interviewer Cell # :  </label>
@@ -110,7 +104,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="ui segment" style="background-color: aliceblue;">
+		<div class="ui segment" >
 			<div class="two fields">
 				<div align="left" class="field">
 					<label>Type Of Interview : <b class="mandatory">*</b></label>

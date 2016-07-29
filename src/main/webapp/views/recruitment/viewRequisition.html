@@ -7,6 +7,9 @@
 				<b>Edit Requisition: {{requisition.requisitionId}}</b>
 			</h5>
 		</div>
+		
+		<div class="ui segment">
+		
 		<div class="row">
 			<div class="input-field col s6">
 				<b class="bannerleft">{{requisition.position}}</b> <label>Designation:</label>
@@ -195,6 +198,8 @@
 				<a href="#" ng-click="showApprover2Comments = !showApprover2Comments;goToBottom();"><i class="material-icons prefix small" data-tooltip="add/view comment" style="position: relative; left: -4%;">comment</i></a>
 			</div>
 		</div>
+		
+		
 		<div class="row">
 			<div class="col s6">
 					<div class="input-field col s10">
@@ -209,25 +214,34 @@
 				   </div>
 			</div>
 		</div>
-		<div ng-show="accordianFlag" class="input-field col s12">
-			<label style="position: absolute; top: -22px;"><b>All created positions for this requisition:</b></label>
-			<div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
-				<span class="col s3"><b>Job code</b></span>
-				<span class="col s3"><b>Status</b></span>
-				<span class="col s3"><b>Designation</b></span>
-				<span class="col s3"><b>Client</b></span>
-			</div>
-			<div class="collapsible-header row" style="text-align: left;" ng-repeat="position in allPositionsForRequisition">
-				<span class="col s3"><b><a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.jobcode}}</a></b></span>
-				<span class="col s3"><b>{{position.status}}</b></span>
-				<span class="col s3"><b>{{position.designation}}</b></span>
-				<span class="col s3"><b>{{position.client}}</b></span>
-			</div>
+		
 		</div>
-		<!-- <div ng-show="!accordianFlag" class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
-			<label style="color: black;font-size: small;"><b>No Positions created as Requisition is not Approved !</b></label>
-		</div> -->
+		
+		<div ng-show="accordianFlag" class="input-field col s12" style="margin-bottom: 20px;">
+			<!-- <label style="position: absolute; top: -22px;"><b>All created positions for this requisition:</b></label> -->
+			<h5 align="left" class="ui dividing header">All created positions for this requisition:All created positions for this requisition:</h5>
+				<table class="ui single line table" >
+						 <thead style="height:10px;">
+						    <tr>
+						      <th>Job code</th>
+						      <th>Status</th>
+						      <th>Designation</th>
+						      <th>Client</th>
+						    </tr>
+						  </thead>
+						   <tr ng-repeat="position in allPositionsForRequisition">
+						      <td><b><a style="cursor: pointer;" ng-click="editPosition(position.jobcode)">{{position.jobcode}}</a></b></td>
+						      <td><b>{{position.status}}</b></td>
+						      <td><b>{{position.designation}}</b></td>
+						      <td><b>{{position.client}}</b></td>
+						    </tr>
+					</table>
+			
+			
+		</div>
+		
 		<br>
+		
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-show="showApprovalBtn"
 				ng-disabled="updateRequisition.$invalid || disableApprovalBtn"

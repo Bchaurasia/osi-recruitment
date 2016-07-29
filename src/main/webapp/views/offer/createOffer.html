@@ -9,7 +9,7 @@
 		</div>
 		
 		<!-- -->
-			<div class="ui segment backColor ">
+			<div class="ui segment ">
 				<div class="row" style="padding-left:0%;padding-top:1%">
 					<div class="input-field col s6">
 						<input placeholder="Enter Candidate Name" ng-minlength="3"
@@ -62,7 +62,7 @@
 					</div>
 				</div>
 		</div>
-		<div class="ui segment backColor ">
+		<div class="ui segment  ">
 			<div class="row" style="padding-left:0%">
 				<div class="input-field col s6">
 					<input placeholder="Enter your current Employer"
@@ -112,7 +112,7 @@
 				</table>
 			</div>
 		</div>
-		<div class="ui segment backColor">
+		<div class="ui segment ">
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<input name="client" class="form-control" type="text"
@@ -340,11 +340,11 @@
 				<tbody>
 					<tr class="animate-repeat"
 						ng-repeat="data in candidate.approvalList" style="font-size: 80%">
-						<td>{{data.updatedDate | date:'medium'}}</a></td>
-						<td>{{data.name}}</a></td>
-						<td>{{data.status}}</td>
-						<td>{{data.hrComment}}</td>
-						<td>{{data.comment}}</td>
+						<td><b>{{data.updatedDate | date:'medium'}}</b></a></td>
+						<td><b>{{data.name}}</b></a></td>
+						<td><b>{{data.status}}</b></td>
+						<td><b>{{data.hrComment}}</b></td>
+						<td><b>{{data.comment}}</b></td>
 					</tr>
 				</tbody>
 			</table>
