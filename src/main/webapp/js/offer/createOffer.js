@@ -126,30 +126,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.selectGrade($scope.level);
 			 hideFinalStatusFun();
 		}
-
-		var listlength=$scope.candidate.approvalList.length;
-		for(var i=0; i<$scope.candidate.approvalList.length;i++){
-			
-			if($scope.candidate.approvalList[listlength-1].emailId===$scope.user.emailId){
-				$scope.showDiv=true;
-			}
-			else{
-				$scope.showDiv=false;
-			}
-			if($scope.candidate.approvalList[listlength-1].status=="Rejected" || $scope.candidate.approvalList[listlength-1].status=="Rejected"){
-				$scope.showApprovalBtn = true;
-	    		$scope.showRejectBtn = true;
-	    		$scope.showNegotiateBtn = true; 
-			}else if($scope.candidate.approvalList[listlength-1].status=="Approved"){
-				$scope.showApprovalBtn = true;
-				$scope.showRejectBtn = false;
-	    		$scope.showNegotiateBtn = false; 
-			}else{
-				$scope.showApprovalBtn = false;
-	    		$scope.showRejectBtn = false;
-	    		$scope.showNegotiateBtn = false; 
-			}
-		}
 	}).catch(function(data){
 		$log.error(data);
 	})
@@ -220,39 +196,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$log.error("error saving offer..." + data);
 		});
 	}
-    $scope.ApprovedOffer = function(){
-    	$scope.candidate.offerStatus="Approved";
-    	$scope.candidate.approval.updatedDate=new Date();
-    	$scope.candidate.approval.status=$scope.candidate.offerStatus;
-    	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
-    		$log.info("sending Notification");
-    		$scope.sendNotification(data.msg,'/offer');
-		  }).error(function(data) {
-			$log.error("error saving offer..." + data);
-		});
-	}
-    $scope.RejectOffer = function(){
-    	$scope.candidate.offerStatus="Rejected";
-    	$scope.candidate.approval.updatedDate=new Date();
-    	$scope.candidate.approval.status=$scope.candidate.offerStatus;
-    	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
-    		$log.info("sending Notification");
-    		$scope.sendNotification(data.msg,'/offer');
-		  }).error(function(data) {
-			$log.error("error saving offer..." + data);
-		});
-	}
-    $scope.NegotiateOffer = function(){
-    	$scope.candidate.offerStatus ="Under Negotiation";
-    	$scope.candidate.approval.updatedDate=new Date();
-    	$scope.candidate.approval.status=$scope.candidate.offerStatus;
-    	$http.post('resources/offerStatus', $scope.candidate).success(function(data, status) {
-    		$log.info("sending Notification");
-    		$scope.sendNotification(data.msg,'/offer');
-		  }).error(function(data) {
-			$log.error("error saving offer..." + data);
-		});
-	}
+
     hideFinalStatusFun();
     function hideFinalStatusFun(){
     	if($scope.candidate.offerStatus === "Rejected" || $scope.candidate.offerStatus === "Approved"){
