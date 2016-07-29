@@ -33,6 +33,18 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.currencyList = ["INR","USD","GBP","EUR"];
 	$scope.candidate.currency="INR";
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
+	$scope.show1=true;
+	$scope.show2=false;
+	$scope.show3=false;
+	$scope.show4=false;
+	$scope.chkQualification=true;
+	
+	$scope.first="active ";
+	$scope.second="disabled ";
+	$scope.third="disabled ";
+	$scope.fourth="disabled ";
+	
+	
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -73,7 +85,20 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.deleteQualification = function(index){
 		if (!($scope.candidate.qualifications.length - 1 == 0)) {
 			$scope.candidate.qualifications.splice(index,1);
+			$scope.checkDisability($scope.candidate.qualifications);
 		} 
+	}
+	
+	
+	$scope.checkQualification = function(){
+		for(var i=0; i<$scope.candidate.qualifications.length; i++){
+			if($scope.candidate.qualifications[i].qualification == ""){				
+				 $scope.chkQualification=true;
+			}
+			else{
+				$scope.chkQualification=false;
+			}
+		}
 	}
 	
 	$scope.jobCodeSl = function(){
@@ -133,6 +158,102 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    	  $scope.message = "failed!Fields marked in Red need to be filled";
 		    }
 		  }
+	 
+	 $scope.adjustTags = function(){
+		 if($scope.enableFirstNext()==true && $scope.first!="active "){
+			 $scope.first="disabled ";
+		 }else{$scope.first="";}
+		 
+		 if($scope.enableSecondNext()==true && $scope.second!="active "){
+			 $scope.second="disabled ";
+		 }else{$scope.second="";}
+		 
+		 if($scope.enableThirdNext()==true && $scope.third!="active "){
+			 $scope.third="disabled ";
+		 }else{$scope.third="";}
+		 
+		 if($scope.CreateCandidate.$invalid==true && $scope.fourth!="active "){
+			 $scope.fourth="disabled ";
+		 }else{$scope.fourth="";}
+	 }
+	 
+	 
+	 $scope.next = function(nextShow){	
+		 if(nextShow=='show1'){
+			 $scope.show1=true;
+			 $scope.show2=$scope.show3=$scope.show4=false;			
+			 $scope.adjustTags();
+			 $scope.first="active ";
+		 }
+		 else if(nextShow=='show2'){
+			 $scope.show1=$scope.show3=$scope.show4=false;
+			 $scope.show2=true;
+			 $scope.adjustTags();
+			 $scope.second="active ";
+		 }
+		 else if(nextShow=='show3'){
+			 $scope.show1=$scope.show2=$scope.show4=false;			 
+			 $scope.show3=true;		
+			 $scope.adjustTags();
+			 $scope.third="active ";
+		 }
+		 else if(nextShow=='show4'){
+			 $scope.show1=$scope.show2=$scope.show3=false;
+			 $scope.show4=true;			 
+			 $scope.adjustTags();
+			 $scope.fourth="active ";
+		 }
+		 
+	 }
+	 $scope.previous=function(previousShow){
+		 
+		 if(previousShow=='show1'){
+			 $scope.show1=true;
+			 $scope.show2=$scope.show3=$scope.show4=false;	
+			 $scope.adjustTags();
+			 $scope.first="active ";
+		 }
+		 else if(previousShow=='show2'){
+			 $scope.show2=true;
+			 $scope.show1=$scope.show3=$scope.show4=false;			 
+			 $scope.adjustTags();
+			 $scope.second="active ";
+		 }
+		 else if(previousShow=='show3'){
+			 $scope.show3=true;
+			 $scope.show1=$scope.show2=$scope.show4=false;			 
+			 $scope.adjustTags();
+			 $scope.third="active ";
+		 }
+	 }
+	 $scope.enableFirstNext = function(){
+			if($scope.CreateCandidate.candidateName.$invalid || $scope.CreateCandidate.emailId.$invalid || $scope.CreateCandidate.mobileNo.$invalid || $scope.CreateCandidate.skypeId.$invalid || $scope.CreateCandidate.currentLocation.$invalid){
+				return true;
+			}  
+			else{
+				return false;
+			}
+		 }
+	 $scope.enableSecondNext = function(){
+		 		
+		 		var chkQualification = $scope.checkQualification();
+				if($scope.chkQualification){
+		 		//if($scope.CreateCandidate.pso.$error.required){
+					return true;
+				}  
+				else{
+					return false;
+				}
+		 	
+		 }
+	 $scope.enableThirdNext = function(){
+			if($scope.CreateCandidate.experience.$invalid || $scope.CreateCandidate.pskilss.$invalid || $scope.candidate.designation.$invalid){
+				return true;
+			}  
+			else{
+				return false;
+			}
+		 }
 	 
 	 $scope.uploadFileIntoDB = function (files) {
 			$scope.fileName = "";
