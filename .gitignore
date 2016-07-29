@@ -8,3 +8,4 @@
 /data/elasticsearch/nodes
 /.idea/
 /node_modules/
+/src/main/
