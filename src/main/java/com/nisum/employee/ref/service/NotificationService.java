@@ -723,9 +723,16 @@ public class NotificationService {
 			MethodInvocationException {
 
 		String userId = requisitionApproverDetails.getApproverEmailId();
-		String message = "Approve the Requisition";
+		/*String message = "Approve the Requisition";
 		String readStatus = "No";
-		updateUserNotification(userId, message, readStatus);
+		updateUserNotification(userId, message, readStatus);*/
+		
+		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+		List<String> HR_Emails = new ArrayList<String>();
+
+		for (UserInfo ui : info) {
+			HR_Emails.add(ui.getEmailId());
+		}
 
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
@@ -740,18 +747,26 @@ public class NotificationService {
 		StringWriter writer = new StringWriter();
 		jobRequisitionTemplate.merge(context, writer);
 
-		Message message2 = getMessage();
+		/*Message message2 = getMessage();
 		message2.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(requisitionApproverDetails.getHrEmailId()));
 		message2.setSubject(OSI_TECHNOLOGIES + " " + requisitionApproverDetails.getJobRequisitionId()
 				+ " Requisition has been approved");
 		message2.setContent(writer.toString(), TEXT_HTML);
-		Transport.send(message2);
+		Transport.send(message2);*/		
+		
+		String toMail = requisitionApproverDetails.getRequisitionManagerEmail();
+		for (String hrEMails : HR_Emails) {
+			if (toMail == null || toMail == "")
+				toMail = hrEMails;
+			else
+				toMail = toMail + "," + hrEMails;
+		}
 
 		Message message3 = getMessage();
 		message3.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(requisitionApproverDetails.getRequisitionManagerEmail()));
-		message3.setSubject(OSI_TECHNOLOGIES + " " + requisitionApproverDetails.getJobRequisitionId()
+				InternetAddress.parse(toMail));
+		message3.setSubject(OSI_TECHNOLOGIES + " : " + requisitionApproverDetails.getJobRequisitionId()
 				+ " Requisition has been approved");
 		message3.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message3);
