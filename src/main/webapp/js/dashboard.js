@@ -167,7 +167,7 @@ $scope.state = false;
 						data4.push(value.Inactive)
 						data5.push(value.Rejected)
 						data6.push(value.Selected)
-					 $scope.newData.push([value.Position,value.Total]);
+					 $scope.newData.push({'name': value.Position, 'y':value.Total, 'drilldown': value.Position });
 					});
 				 series.push({name:'Active',data:data1});
 				 series.push({name:'OnHold',data:data2});
@@ -176,7 +176,7 @@ $scope.state = false;
 				 series.push({name:'Rejected',data:data5});
 				 series.push({name:'Selected',data:data6});
 				 
-				    
+				    console.log($scope.newData);
 				 
 				 /*
 					 * if($scope.designationWithStatusCount.length>10)
@@ -246,31 +246,7 @@ $scope.state = false;
 				        series: [{
 				            name: 'Brands',
 				            colorByPoint: true,
-				            data: [{
-				                name: 'Microsoft Internet Explorer',
-				                y: 56.33,
-				                drilldown: 'Microsoft Internet Explorer'
-				            }, {
-				                name: 'Chrome',
-				                y: 24.03,
-				                drilldown: 'Chrome'
-				            }, {
-				                name: 'Firefox',
-				                y: 10.38,
-				                drilldown: 'Firefox'
-				            }, {
-				                name: 'Safari',
-				                y: 4.77,
-				                drilldown: 'Safari'
-				            }, {
-				                name: 'Opera',
-				                y: 0.91,
-				                drilldown: 'Opera'
-				            }, {
-				                name: 'Proprietary or Undetectable',
-				                y: 0.2,
-				                drilldown: null
-				            }]
+				            data: $scope.newData
 				        }],
 				        drilldown: {
 				            series: [{
