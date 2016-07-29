@@ -26,6 +26,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.finalStatusList = ["Offered","Rejected"];
 	$scope.candidate.currency="INR";
 	$scope.init = function(){
+		hideFinalStatusFun();
 		$scope.profile = offerService.getData();
 		$scope.candidate.emailId = $scope.profile.candidateEmail;
 		$scope.candidate.jobcodeProfile = $scope.profile.currentPositionId;
@@ -196,8 +197,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$log.error("error saving offer..." + data);
 		});
 	}
-
-    hideFinalStatusFun();
     function hideFinalStatusFun(){
     	if($scope.candidate.offerStatus === "Rejected" || $scope.candidate.offerStatus === "Approved"){
 			$scope.hideFinalStatus=false;
