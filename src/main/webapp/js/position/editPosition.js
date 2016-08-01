@@ -3,7 +3,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		
 	$scope.hideRounds= true;
 	$scope.hideSkills = true;
-	$scope.accordianFlag = true;
+	//$scope.accordianFlag = true;
 	$scope.page = "Edit Position";
 	$scope.enableDisableButton = true;
 	$scope.data = {};
@@ -92,9 +92,9 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	
 	function setUsers(data){
 		$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
-		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+		//$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
-		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
+		//$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];
 	}
 	
 	$scope.setData = function() {

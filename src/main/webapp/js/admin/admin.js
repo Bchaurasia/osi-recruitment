@@ -18,7 +18,7 @@ app.controller("adminCtrl", ['$scope','$rootScope','$http', '$filter', '$timeout
                ];
     
    $scope.checkUser =  function (){
-		if($rootScope.user.emailId == "sware@nisum.com"){
+		if($rootScope.user.emailId == "arajak@nisum.com"){
 			var s = {
 					heading: 'ES Data Sync', 
 					route:'admin.datasync'

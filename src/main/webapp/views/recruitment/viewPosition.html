@@ -99,13 +99,13 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
+					<!-- <div class="input-field col s6">
 						<select placeholder="Select Hiring HR" ng-model="hrManager"
 							ng-options="o.name for o in hrManagers"
 							class="form-control input-sm" required>
 							<option>Select Hiring Managers</option>
 						</select> <label>Hiring HR<b class="mandatory">*</b></label>
-					</div>
+					</div> -->
 					<div class="input-field col s6">
 						<select placeholder="Select Priority" ng-model="position.priority"
 							ng-options="o as o for o in priorities"
@@ -113,8 +113,6 @@
 							<option>{{position.priority}}</option>
 						</select> <label>Priority</label>
 					</div>
-				</div>
-				<div class="row">
 					<div class="input-field col s6">
 						<select ng-model="interviewer"
 							ng-options="o.name for o in interviewers"
@@ -122,13 +120,8 @@
 							<option value="">Select Point Of Contact</option>
 						</select> <label>Point Of Contact</label>
 					</div>
-					<div class="input-field col s6">
-						<select placeholder="Select Status" ng-model="position.status"
-							ng-options="o for o in statuses" class="form-control input-sm">
-							<option>Select Status</option>
-						</select> <label>Status</label>
-					</div>
 				</div>
+				
 				<div class="row">
 					<div class="input-field col s6">
 						<select ng-model="position.positionType"
@@ -137,7 +130,12 @@
 							<option  value="" disabled="disabled">Select Position Type</option>
 						</select> <label>Position Type</label>
 					</div>
-					
+					<div class="input-field col s6">
+						<select placeholder="Select Status" ng-model="position.status"
+							ng-options="o for o in statuses" class="form-control input-sm">
+							<option>Select Status</option>
+						</select> <label>Status</label>
+					</div>
 				</div>
 				<br />
 				

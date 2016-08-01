@@ -110,7 +110,7 @@ public class PositionService implements IPositionService {
 		position.setMaxExpYear(requisition.getMaxExpYear());
 		position.setPrimarySkills(requisition.getSkillType());
 		position.setInterviewRounds(interviewRounds);
-		position.setHiringManager(requisition.getRequisitionManager());
+		//position.setHiringManager(requisition.getRequisitionManager());
 		position.setJobcode("JOB_" + sequenceRepository.getNextSequenceId("JOB"));
 		position.setCreatedBy(requisition.getCreatedBy());
 		position.setUpdatedBy(requisition.getCreatedBy());

@@ -24,7 +24,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.approval1 = [];
 	$scope.approval2 = [];
 	
-	$scope.hr = [];
+	//$scope.hr = [];
 	$scope.requisition ={};
 	$scope.approver={};
 	$scope.approvalEmailId = "";
@@ -32,7 +32,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.requisition.skillType = {};
 	$scope.requisition.position = "";
 	$scope.requisition.client = "";
-	$scope.requisition.requisitionManager= {};
+	//$scope.requisition.requisitionManager= {};
 	$scope.requisition.minExpYear = "";
 	$scope.requisition.maxExpYear = "";
 	$scope.requisitionDate = new Date();
@@ -236,14 +236,14 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.approval2 = angular.copy($scope.approval1);
 			
 			
-			var	hrUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+			/*var	hrUser =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 
 			angular.forEach(hrUser,function(user){
 			var hr={};
 			hr.name = user.name;
 			hr.emailId = user.emailId;
 			$scope.hr.push(hr);
-			});	
+			});	*/
 				    
 	  });
 	
@@ -257,8 +257,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.submit = function(){
 		if ($scope.requisition !== undefined) {
 			
-			$scope.requisition.requisitionManager.name = $scope.role.name;
-			$scope.requisition.requisitionManager.emailId = $scope.role.emailId;
+			//$scope.requisition.requisitionManager.name = $scope.role.name;
+			//$scope.requisition.requisitionManager.emailId = $scope.role.emailId;
 			$scope.requisition.createdBy = $scope.user.emailId;
 			$scope.requisition.updatedBy = $scope.user.emailId;
 			

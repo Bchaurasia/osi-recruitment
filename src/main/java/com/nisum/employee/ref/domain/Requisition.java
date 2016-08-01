@@ -32,7 +32,7 @@ public class Requisition extends AuditEntity{
 	RequisitionUser approval1;
 	RequisitionUser approval2;
 	String comment;
-	UserVO requisitionManager;
+	//UserVO requisitionManager;
 	String status;
 	String additionalSkills;
 	String shiftTiming;

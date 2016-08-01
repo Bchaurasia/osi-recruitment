@@ -21,7 +21,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.approval1 = [];
 	$scope.approval2 = [];
 	$scope.approvalnames=[];
-	$scope.requisitionManager=[];
+	//$scope.requisitionManager=[];
 	$scope.client =[];
 	$scope.position = {};
 	$scope.reqId = 0;
@@ -108,9 +108,9 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 		//$scope.approvals =_.sortBy($scope.approvals, 'name');
 		$scope.approval2 = angular.copy($scope.approval1);
 		
-		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+		/*$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
-		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
+		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];*/
 		$scope.creator = _.find(data, function(user){ return user.emailId === $scope.requisition.createdBy});
 	}
 	
