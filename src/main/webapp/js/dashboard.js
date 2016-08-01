@@ -33,6 +33,10 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var onHoldCnt=0;
 	var rejectedCnt=0;
 	$scope.interviewData=[];
+	var totalhiredcount=0;
+	var totalselectedcount=0;
+	var totalonholdcount=0;
+	var totalrejectedcount=0;
 	
 	angular.element(document).ready(function() {
 		getTotalHired();
@@ -125,7 +129,14 @@ $scope.state = false;
 					var totalCount=0;
 					for(var h=0;h<$scope.totalPositionData.length;h++)
 					{
-					
+					 if($scope.totalPositionData[h].status=="Hired")
+						 totalhiredcount+=1;
+					 if($scope.totalPositionData[h].status=="Selected")
+						 totalselectedcount+=1;
+					 if($scope.totalPositionData[h].status=="OnHold")
+						 totalonholdcount+=1;
+					 if($scope.totalPositionData[h].status=="Rejected")
+						 totalrejectedcount+=1;
 					 
 					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Active"))
 					    { activecount+=1; totalCount+=1}
@@ -157,24 +168,204 @@ $scope.state = false;
 					}
 				
 				}
-// console.log(angular.toJson($scope.designationWithStatusCount));
+				 
+				 console.log($scope.designationWithStatusCount);
+
 			 angular.forEach($scope.designationWithStatusCount, function(value, key) 
 					{
 					    categories.push(value.Position);
 					    data1.push(value.Active);
 						data2.push(value.OnHold);
 						data3.push(value.Hired);
-						data4.push(value.Inactive)
-						data5.push(value.Rejected)
-						data6.push(value.Selected)
+						data4.push(value.Inactive);
+						data5.push(value.Rejected);
+						data6.push(value.Selected);
 					 $scope.newData.push({'name': value.Position, 'y':value.Total, 'drilldown': value.Position });
 					});
+			 
+			 
 				 series.push({name:'Active',data:data1});
 				 series.push({name:'OnHold',data:data2});
 				 series.push({name:'Hired',data:data3});
 				 series.push({name:'Inactive',data:data4});
 				 series.push({name:'Rejected',data:data5});
 				 series.push({name:'Selected',data:data6});
+				 
+				
+				 
+				 $('#requisitionDonut').highcharts({
+				        chart: {
+				            type: 'pie'
+				        },
+				        title: {
+				            text: 'Statistics'
+				        },
+				        subtitle: {
+				            text: 'Click the slices to view details.'
+				        },
+				        plotOptions: {
+				            series: {
+				                dataLabels: {
+				                    enabled: true,
+				                    format: '{point.name}: {point.y:1.0f}'
+				                }
+				            }
+				        },
+
+				        tooltip: {
+				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:1.0f}</b> of total<br/>'
+				        },
+				        series: [{
+				            name: 'Statistics',
+				            colorByPoint: true,
+				            data: [{
+				                name: 'Hired',
+				                y: 25,
+				                drilldown: 'Hired'
+				            }, {
+				                name: 'Rejected',
+				                y: 25,
+				                drilldown: 'Rejected'
+				            }, {
+				                name: 'Selected',
+				                y: 25,
+				                drilldown: 'Selected'
+				            }, {
+				                name: 'Onhold',
+				                y: 25,
+				                drilldown: 'Onhold'
+				            }]
+				        }],
+				        drilldown: {
+				            series: [{
+				                name: 'Hired',
+				                id: 'Hired',
+				                data: [
+				                       {
+				                    	   name:'Developer',
+				                    	   y:33,
+				                    	   drilldown:'client1'
+				                       },
+				                       {
+				                    	   name:'Sr Developer',
+				                    	   y:33,
+				                    	   drilldown:'client2'
+				                       },
+				                       {
+				                    	   name:'Architect',
+				                    	   y:33,
+				                    	   drilldown:'client3'
+				                       }
+				                   
+				                ]
+				            }, {
+				                name: 'Rejected',
+				                id: 'Rejected',
+				                data: [
+				                       {
+				                    	   name:'Developer',
+				                    	   y:33,
+				                    	   drilldown:'client4'
+				                       },
+				                       {
+				                    	   name:'Sr Developer',
+				                    	   y:34,
+				                    	   drilldown:'client5'
+				                       },
+				                       {
+				                    	   name:'Architect',
+				                    	   y:33,
+				                    	   drilldown:'client6'
+				                       }
+				                   
+				                ]
+				            }, {
+				                name: 'Selected',
+				                id: 'Selected',
+				                data: [
+				                       {
+				                    	   name:'Developer',
+				                    	   y:33,
+				                    	   drilldown:'client7'
+				                       },
+				                       {
+				                    	   name:'Sr Developer',
+				                    	   y:33,
+				                    	   drilldown:'client8'
+				                       },
+				                       {
+				                    	   name:'Architect',
+				                    	   y:34,
+				                    	   drilldown:'client9'
+				                       }
+				                   
+				                ]
+				            }, {
+				                name: 'Onhold',
+				                id: 'Onhold',
+				                data: [
+				                       {
+				                    	   name:'Developer',
+				                    	   y:33,
+				                    	   drilldown:'client10'
+				                       },
+				                       {
+				                    	   name:'Sr Developer',
+				                    	   y:35,
+				                    	   drilldown:'client11'
+				                       },
+				                       {
+				                    	   name:'Architect',
+				                    	   y:32,
+				                    	   drilldown:'client12'
+				                       }
+				                   
+				                ]
+				            },{
+				            	id:'client1',
+				            	data:[
+				            	      ['GAP',22],['ATS',70],['MACYS',8]]
+				            },{
+				            	id:'client2',
+				            	data:[['GAP',22],['ATS',20],['MACYS',58]]
+				            },{
+				            	id:'client3',
+				            	data:[['GAP',22],['ATS',32],['MACYS',23]]
+				            },{
+				            	id:'client4',
+				            	data:[['GAP',22],['ATS',43],['MACYS',54]]
+				            },{
+				            	id:'client5',
+				            	data:[['GAP',22],['ATS',70],['MACYS',32]]
+				            },{
+				            	id:'client6',
+				            	data:[['GAP',22],['ATS',13],['MACYS',45]]
+				            },{
+				            	id:'client7',
+				            	data:[['GAP',22],['ATS',23],['MACYS',54]]
+				            },{
+				            	id:'client8',
+				            	data:[['GAP',22],['ATS',23],['MACYS',32]]
+				            },{
+				            	id:'client9',
+				            	data:[['GAP',22],['ATS',70],['MACYS',53]]
+				            },{
+				            	id:'client10',
+				            	data:[['GAP',22],['ATS',23],['MACYS',34]]
+				            },{
+				            	id:'client11',
+				            	data:[['GAP',22],['ATS',23],['MACYS',28]]
+				            },{
+				            	id:'client12',
+				            	data:[['GAP',22],['ATS',12],['MACYS',48]]
+				            }]
+				        }
+				    });
+				 
+				  
+				 
+				 
 				 
 				    console.log($scope.newData);
 				 
@@ -198,7 +389,7 @@ $scope.state = false;
 				        },
 				        yAxis: {
 				            min: 0,
-				            tickInterval:2,
+				            tickInterval:10,
 				            title: {
 				                text: 'Number of positions'
 				            }
@@ -220,102 +411,7 @@ $scope.state = false;
 				        series
 				    });
 				 
-				  $('#requisitionDonut').highcharts({
-				        chart: {
-				            type: 'pie'
-				        },
-				        title: {
-				            text: 'Browser market shares. January, 2015 to May, 2015'
-				        },
-				        subtitle: {
-				            text: 'Click the slices to view versions. Source: netmarketshare.com.'
-				        },
-				        plotOptions: {
-				            series: {
-				                dataLabels: {
-				                    enabled: true,
-				                    format: '{point.name}: {point.y:.1f}%'
-				                }
-				            }
-				        },
-
-				        tooltip: {
-				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-				        },
-				        series: [{
-				            name: 'Brands',
-				            colorByPoint: true,
-				            data: $scope.newData
-				        }],
-				        drilldown: {
-				            series: [{
-				                name: 'Microsoft Internet Explorer',
-				                id: 'Microsoft Internet Explorer',
-				                data: [
-				                    ['v11.0', 24.13],
-				                    ['v8.0', 17.2],
-				                    ['v9.0', 8.11],
-				                    ['v10.0', 5.33],
-				                    ['v6.0', 1.06],
-				                    ['v7.0', 0.5]
-				                ]
-				            }, {
-				                name: 'Chrome',
-				                id: 'Chrome',
-				                data: [
-				                    ['v40.0', 5],
-				                    ['v41.0', 4.32],
-				                    ['v42.0', 3.68],
-				                    ['v39.0', 2.96],
-				                    ['v36.0', 2.53],
-				                    ['v43.0', 1.45],
-				                    ['v31.0', 1.24],
-				                    ['v35.0', 0.85],
-				                    ['v38.0', 0.6],
-				                    ['v32.0', 0.55],
-				                    ['v37.0', 0.38],
-				                    ['v33.0', 0.19],
-				                    ['v34.0', 0.14],
-				                    ['v30.0', 0.14]
-				                ]
-				            }, {
-				                name: 'Firefox',
-				                id: 'Firefox',
-				                data: [
-				                    ['v35', 2.76],
-				                    ['v36', 2.32],
-				                    ['v37', 2.31],
-				                    ['v34', 1.27],
-				                    ['v38', 1.02],
-				                    ['v31', 0.33],
-				                    ['v33', 0.22],
-				                    ['v32', 0.15]
-				                ]
-				            }, {
-				                name: 'Safari',
-				                id: 'Safari',
-				                data: [
-				                    ['v8.0', 2.56],
-				                    ['v7.1', 0.77],
-				                    ['v5.1', 0.42],
-				                    ['v5.0', 0.3],
-				                    ['v6.1', 0.29],
-				                    ['v7.0', 0.26],
-				                    ['v6.2', 0.17]
-				                ]
-				            }, {
-				                name: 'Opera',
-				                id: 'Opera',
-				                data: [
-				                    ['v12.x', 0.34],
-				                    ['v28', 0.24],
-				                    ['v27', 0.17],
-				                    ['v29', 0.16]
-				                ]
-				            }]
-				        }
-				    });
+				 
 
 					
 		});
