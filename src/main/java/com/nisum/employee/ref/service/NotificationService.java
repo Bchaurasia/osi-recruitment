@@ -118,6 +118,10 @@ public class NotificationService {
 	private static final String SUBMITTED_BY_USER = "submittedBy";
 	private static final String UPDATED_BY = "updatedBy";
 	private static final String UPDATED_BY_NAME = "updatedByName";
+	
+	private static final String REQUISITION_APPROVER_NAME = "requisition_approver_name";
+	private static final String RECRUITMENT_PORTAL_LINK = "osi_portal_link";
+	private static final String REQUISITION_ID = "requisition_id";
 
 	@Value("${mail.fromAddress}")
 	private String from;
@@ -167,6 +171,9 @@ public class NotificationService {
 	private String SRC_REJECT_OFFER_INFO_TO_HR;
 	@Value("${SRC_REJECT_OFFER_INFO_TO_REFERRER}")
 	private String SRC_REJECT_OFFER_INFO_TO_REFERRER;
+	
+	@Value("${OSI_PORTAL_LINK}")
+	private String OSI_PORTAL_LINK;
 
 	@Autowired
 	IProfileService profileService;
@@ -461,7 +468,9 @@ public class NotificationService {
 		Template jobRequisitionTemplate = getVelocityTemplate(SRC_JOB_REQUISITION_VM);
 
 		VelocityContext context = new VelocityContext();
-		context.put("approverName", requisitionApproverDetails.getApproverName());
+		context.put(REQUISITION_APPROVER_NAME, requisitionApproverDetails.getApproverName());
+		context.put(RECRUITMENT_PORTAL_LINK, OSI_PORTAL_LINK);
+		context.put(REQUISITION_ID, requisitionApproverDetails.getJobRequisitionId());
 
 		StringWriter writer = new StringWriter();
 		jobRequisitionTemplate.merge(context, writer);
@@ -469,7 +478,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		// message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(OSI_TECHNOLOGIES + " Please Approve the Requisition "
+		message1.setSubject(OSI_TECHNOLOGIES + " : Please Approve the Requisition "
 				+ requisitionApproverDetails.getJobRequisitionId());
 
 		message1.setContent(writer.toString(), TEXT_HTML);

@@ -26,7 +26,7 @@ db.sequence.insert({"_id":"JOB","seq":0});
 
 db.info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 
-db.info.insert({"_id":"Currency",value:["INR","USD","GBP","EUR"]});
+db.info.insert({"_id":"Currency",value:["INR","USD","GBP","EUR", "UAE"]});
 
 db.info.insert({"_id":"Locations",value: [ "Bangalore" , "Chennai", "Gurgaon", "Hyderabad", "Pune"]});
 
@@ -34,7 +34,8 @@ db.info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "J
 
 db.info.insert({"_id":"UserRoles",value: ["ROLE_HR", "ROLE_MANAGER", "ROLE_USER","ROLE_ADMIN","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]});
 
-db.info.insert({"_id":"expYears",value: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15"]});
+db.info.insert({"_id":"expYears",value: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32",
+                                         "33","34","35","36","37","38","39","40","41","42"]});
 
 db.info.insert({"_id":"expMonths",value: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]});
 
