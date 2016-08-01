@@ -294,7 +294,7 @@ public class NotificationService {
 
 		// --- Send Mails ---
 		Transport.send(msgInterviewer);
-		Transport.send(msgCandidate);
+		//Transport.send(msgCandidate);
 
 		return "Mails Sent Successfully!";
 	}
