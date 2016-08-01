@@ -1,6 +1,11 @@
 package com.nisum.employee.ref.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nisum.employee.ref.domain.Data;
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.PositionAggregate;
+import com.nisum.employee.ref.domain.Series;
 import com.nisum.employee.ref.search.PositionSearchService;
 import com.nisum.employee.ref.service.IPositionService;
 
@@ -121,4 +128,44 @@ public class PositionController {
 		List<Position> positionsDetail = positionService.retrievePositionsbasedOnPositionType(positionType);
 		return new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
 	} 
+	
+	//Dashboard
+	@Secured({"ROLE_HR","ROLE_USER","ROLE_ADMIN","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/getPositionsBasedOnStatus", method = RequestMethod.GET)
+	public ResponseEntity<?> retrievePositionsfordashboard(@RequestParam(value = "status", required = true) String status) {
+		Series series=new Series();
+		series.setId(status);
+		series.setName(status);
+		List<Position> positionsDetails = positionService.retrieveAllPositions();
+		Data data=null;
+		
+		List<Data> dataList= new ArrayList<Data>();
+		
+		Set<String> uniqueDesigns=new HashSet<String>();
+		
+		for (Position position : positionsDetails) {
+			uniqueDesigns.add(position.getDesignation());
+		}
+
+		for (String uniqueDesign : uniqueDesigns) {
+			Set<String> ClientList = new HashSet<String>();
+			data = new Data();
+			int count = 0;
+			for (Position position : positionsDetails) {
+				if (status.equals(position.getStatus()) && position.getDesignation().equals(uniqueDesign)) {
+					count++;
+					ClientList.add(position.getClient());
+				}
+			}
+			if(count !=0){
+				data.setDesignation(uniqueDesign);
+				data.setCount(count);
+				data.setClientNames( new ArrayList<String>(ClientList));
+				dataList.add(data);
+				series.setData(dataList);
+			}
+		}
+
+		return new ResponseEntity<Series>(series, HttpStatus.OK);
+	}
 }
