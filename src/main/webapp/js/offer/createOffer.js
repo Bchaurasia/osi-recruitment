@@ -22,7 +22,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			"designations":[]
 	};
 	$scope.bus = ["ET","EA","OPS"];
-	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.currencyList = ["INR","USD","GBP","EUR","UAE"];
 	$scope.finalStatusList = ["Offered","Rejected"];
 	$scope.candidate.currency="INR";
 	$scope.init = function(){

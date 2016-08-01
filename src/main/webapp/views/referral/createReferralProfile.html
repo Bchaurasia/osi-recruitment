@@ -70,7 +70,7 @@
 
 				<div class="validation-error"
 					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
-					Please specify your mobile number.</div>
+					Please specify mobile number.</div>
 				<div class="validation-error"
 					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
 					Mobile number should be numeric and 10 digit number</div>
@@ -113,8 +113,8 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter your current Location"
-					name="currentLocation" class="form-control" type="text"
+				<input placeholder="Enter current Location" name="currentLocation"
+					class="form-control" type="text"
 					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/"
 					required> <label style="position: absolute; top: -22px;">Current
 					Location<b class="mandatory">*</b>
@@ -208,10 +208,10 @@
 				</select> <label style="position: absolute; top: -22px;">Experience<b
 					class="mandatory">*</b></label> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.experience.$invalid">Please
-					specify your experience..</span>
+					specify experience..</span>
 				<div class="validation-error"
 					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
-					Please select your total experience.</div>
+					Please select total experience.</div>
 			</div>
 
 			<div class="input-field col s2">
@@ -221,10 +221,10 @@
 					<option value="" disabled="disabled">Months</option>
 				</select> <span class="validation-error"
 					ng-show="submitted && CreateCandidate.experience.$invalid">Please
-					specify your experience..</span>
+					specify experience..</span>
 				<div class="validation-error"
 					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
-					Please select your total experience.</div>
+					Please select total experience.</div>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="input-field col s6">
@@ -240,19 +240,19 @@
 				{{color}} </ui-select-choices> </ui-select>
 				<span class="validation-error"
 					ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
-					enter your key skills.</span>
+					enter key skills.</span>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter your current Employer"
-					name="currentEmployer" class="form-control" type="text"
+				<input placeholder="Enter current Employer" name="currentEmployer"
+					class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
 				<label style="position: absolute; top: -22px;">Current
 					Employer</label>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Enter your Additional Skills" name="otherSkills"
+				<input placeholder="Enter Additional Skills" name="otherSkills"
 					class="form-control" type="text" ng-model="candidate.otherSkills"
 					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label
 					style="position: absolute; top: -22px;">Additional Skills</label>
@@ -263,15 +263,16 @@
 
 		<div class="row">
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="candidate.designation" ng-change="setJobCodes()" name="currentdesignation"
-				theme="selectize" style="width: 80%">
-				   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
+				<ui-select ng-model="candidate.designation"
+					ng-change="setJobCodes()" name="currentdesignation"
+					theme="selectize" style="width: 80%"> <ui-select-match
+					placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
 				<ui-select-choices
 					repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
 				<span ng-bind-html="designation | highlight: $select.search"></span>
 				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">
-					Current Designation<b class="mandatory">*</b>
+				<label style="position: absolute; top: -22px;"> Current
+					Designation<b class="mandatory">*</b>
 				</label>
 
 			</div>
@@ -290,21 +291,21 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter your current CTC" name="currentCTC"
+				<input placeholder="Enter current CTC" name="currentCTC"
 					class="form-control" type="text" ng-model="candidate.currentCTC"
 					ng-pattern="/^[0-9]*$/"> <label
-					style="position: absolute; top: -22px;">Current CTC 
-				</label><span class="validation-error"
+					style="position: absolute; top: -22px;">Current CTC </label><span
+					class="validation-error"
 					ng-required="CreateCandidate.currentCTC.$error.pattern"
 					ng-show="CreateCandidate.currentCTC.$error.pattern"> Provide
 					a valid CTC</span>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Enter your expected CTC" name="expectedCTC"
+				<input placeholder="Enter expected CTC" name="expectedCTC"
 					class="form-control" type="text" ng-model="candidate.expectedCTC"
 					ng-pattern="/^[0-9]*$/"> <label
-					style="position: absolute; top: -22px;">Expected CTC
-				</label> <span class="validation-error"
+					style="position: absolute; top: -22px;">Expected CTC </label> <span
+					class="validation-error"
 					ng-required="CreateCandidate.expectedCTC.$error.pattern"
 					ng-show="CreateCandidate.expectedCTC.$error.pattern">
 					Provide a valid CTC </span>
@@ -313,7 +314,7 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter your Notice Period" name="noticePeriod"
+				<input placeholder="Enter Notice Period" name="noticePeriod"
 					class="form-control" type="text" ng-model="candidate.noticePeriod"
 					ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
 					style="position: absolute; top: -22px;">Notice Period(in
@@ -324,15 +325,16 @@
 					Notice period should be in days </span>
 			</div>
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="candidate.expectedDesignation" ng-change="setJobCodes()" name="expectedDesignation"
-				theme="selectize" style="width: 80%">
-				   <ui-select-match placeholder="Select Expected Designation">{{$select.selected}}</ui-select-match>
+				<ui-select ng-model="candidate.expectedDesignation"
+					ng-change="setJobCodes()" name="expectedDesignation"
+					theme="selectize" style="width: 80%"> <ui-select-match
+					placeholder="Select Expected Designation">{{$select.selected}}</ui-select-match>
 				<ui-select-choices
 					repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
 				<span ng-bind-html="designation | highlight: $select.search"></span>
 				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">
-					Expected Designation<b class="mandatory">*</b>
+				<label style="position: absolute; top: -22px;"> Expected
+					Designation
 				</label>
 
 			</div>
@@ -368,8 +370,8 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter your relation with candidate"
-					id="relationship" class="form-control" type="text"
+				<input placeholder="Enter relation with candidate" id="relationship"
+					class="form-control" type="text"
 					ng-model="candidate.referralRelation" maxlength="20" required>
 				<label style="position: absolute; top: -22px;">How do you
 					know the candidate?<b class="mandatory">*</b>
@@ -402,21 +404,26 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Enter Yes / No" id="screeningStatus"
-					class="form-control" type="text"
-					ng-model="candidate.screeningStatus" maxlength="20"> <label
-					style="position: absolute; top: -22px;">Did you screen the
-					resume?</label>
+				<select ng-model="candidate.screeningStatus" id="screeningStatus"
+					ng-options="o for o in screeningStatusList"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Screening
+						Status</option>
+				</select> <label style="position: absolute; top: -22px;">Did you
+					screen the resume?</label>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Enter Yes / No" id="compatibilityStatus"
-					class="form-control" type="text"
-					ng-model="candidate.compatibilityStatus" maxlength="20"> <label
-					style="position: absolute; top: -22px;">Will the candidate
-					fit in our culture?</label>
+				<select ng-model="candidate.compatibilityStatus"
+					id="compatibilityStatus"
+					ng-options="o for o in screeningStatusList"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Compatibility
+						Status</option>
+				</select> <label style="position: absolute; top: -22px;">Will the
+					candidate fit in our culture?</label>
 			</div>
 		</div>
-
+		<br><br>
 		<div class="row">
 			<div class="input-field col s6">
 				<input type="file" class="custom-file-input"
