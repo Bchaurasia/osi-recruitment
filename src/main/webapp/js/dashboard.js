@@ -40,10 +40,11 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 	angular.element(document).ready(function() {
 		getTotalHired();
+		getInterviewDetails();
 		getDesignationSpecificData();
 		getProfileCount();
 		getTotalRequisitions();
-		getInterviewDetails();
+		
        });
 	
 	
@@ -105,9 +106,16 @@ $scope.state = false;
 			$scope.totalRequisitions=data.length;
 		});
 	}
-	
-	
+	function getPositionsBasedOnStatus(status){
+		$scope.temp=[];
+	dashboardService.getPositionByStatus(status).then(function(data){
+	$scope.temp=data;
+	});
+	return $scope.temp;
+	}
 	function getDesignationSpecificData(){
+		
+		getPositionsBasedOnStatus("Selected");
 		var designationArray=[];
 		getTotalRequisitions();
 		designationService.getDesignation().then(function(data){
@@ -183,19 +191,26 @@ $scope.state = false;
 					 $scope.newData.push({'name': value.Position, 'y':value.Total, 'drilldown': value.Position });
 					});
 			 
-			 
 				 series.push({name:'Active',data:data1});
 				 series.push({name:'OnHold',data:data2});
 				 series.push({name:'Hired',data:data3});
 				 series.push({name:'Inactive',data:data4});
 				 series.push({name:'Rejected',data:data5});
 				 series.push({name:'Selected',data:data6});
-				 
-				
-				 
+ 
+				 $scope.data=[];
 				 $('#requisitionDonut').highcharts({
 				        chart: {
-				            type: 'pie'
+				            type: 'pie',
+				            events: {
+				            	drilldown: function (i,e) {
+				            		alert('drill Down'+JSON.stringify(i.seriesOptions));
+				            		console.log(this);
+				            		console.log(this.options.series[0].name);
+				            		console.log(this.options.series[0].data[0].name);
+				            		console.log($scope.data);
+				            		}
+				            }
 				        },
 				        title: {
 				            text: 'Statistics'
@@ -219,23 +234,7 @@ $scope.state = false;
 				        series: [{
 				            name: 'Statistics',
 				            colorByPoint: true,
-				            data: [{
-				                name: 'Hired',
-				                y: 25,
-				                drilldown: 'Hired'
-				            }, {
-				                name: 'Rejected',
-				                y: 25,
-				                drilldown: 'Rejected'
-				            }, {
-				                name: 'Selected',
-				                y: 25,
-				                drilldown: 'Selected'
-				            }, {
-				                name: 'Onhold',
-				                y: 25,
-				                drilldown: 'Onhold'
-				            }]
+				            data: $scope.interviewData
 				        }],
 				        drilldown: {
 				            series: [{
@@ -434,13 +433,16 @@ function getInterviewDetails(){
 				if(value.status!= undefined&& value.status== "Rejected")
 					 rejectedCnt++;
 				});
-		 	$scope.interviewData.push(["Hired", hiredCnt]);
-		 	$scope.interviewData.push(["Selected", selectedCnt]);
-		 	$scope.interviewData.push(["OnHold", onHoldCnt]);
-		 	$scope.interviewData.push(["Rejected", rejectedCnt]);
-		 	 
-		 	
-		 	$('#profileDount').highcharts({
+		 $scope.interviewData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
+		 $scope.interviewData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
+		 $scope.interviewData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
+		 $scope.interviewData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
+//		 $scope.interviewData.push(["Hired", hiredCnt]);
+//		 	$scope.interviewData.push(["Selected", selectedCnt]);
+//		 	$scope.interviewData.push(["OnHold", onHoldCnt]);
+//		 	$scope.interviewData.push(["Rejected", rejectedCnt]);
+//		 	 
+			$('#profileDount').highcharts({
 			        
 		 	  	chart: {
 	                // Edit chart spacing
