@@ -3,7 +3,7 @@ angular.module('myApp', ['directive.g+signin','ngMessages'])
     	  $scope.login={};
     	  $scope.login.username="";
     	  $scope.login.password="";
-    	  $scope.copyrights= "©"+new Date().getFullYear()+" OSI Technologies";
+    	  $scope.copyrights= "©" +" OSI " + new Date().getFullYear();
     	  
     	  $scope.userLogin=function(){
     		  console.log('Signed in!');
