@@ -1,6 +1,6 @@
 package com.nisum.employee.ref.domain;
 
-import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +11,7 @@ public class Data{
 	private String id;
 	private String designation;
 	private int count;
-	private List<String> clientNames;
+	Map<String,Integer> client;
+	//private List<String> clientNames;
 	
 }

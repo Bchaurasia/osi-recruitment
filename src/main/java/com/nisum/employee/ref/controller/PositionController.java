@@ -3,8 +3,10 @@ package com.nisum.employee.ref.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,15 +141,14 @@ public class PositionController {
 		Data data=null;
 		
 		List<Data> dataList= new ArrayList<Data>();
-		
 		Set<String> uniqueDesigns=new HashSet<String>();
-		
+		Map<String,Integer> clients=new HashMap<String,Integer>();
 		for (Position position : positionsDetails) {
 			uniqueDesigns.add(position.getDesignation());
 		}
 
 		for (String uniqueDesign : uniqueDesigns) {
-			Set<String> ClientList = new HashSet<String>();
+			List<String> ClientList = new ArrayList<String>();
 			data = new Data();
 			int count = 0;
 			for (Position position : positionsDetails) {
@@ -157,9 +158,16 @@ public class PositionController {
 				}
 			}
 			if(count !=0){
+				for (String client : ClientList) {
+					Integer clientCount=clients.get(client);
+					if(clientCount==null)
+						clientCount=0;
+					clients.put(client, clientCount+1);
+					
+				}
+				data.setClient(clients);
 				data.setDesignation(uniqueDesign);
 				data.setCount(count);
-				data.setClientNames( new ArrayList<String>(ClientList));
 				data.setId(status);
 				dataList.add(data);
 				series.setData(dataList);
