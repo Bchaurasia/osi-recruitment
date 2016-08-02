@@ -142,12 +142,12 @@ public class PositionController {
 		
 		List<Data> dataList= new ArrayList<Data>();
 		Set<String> uniqueDesigns=new HashSet<String>();
-		Map<String,Integer> clients=new HashMap<String,Integer>();
 		for (Position position : positionsDetails) {
 			uniqueDesigns.add(position.getDesignation());
 		}
 
 		for (String uniqueDesign : uniqueDesigns) {
+			Map<String,Integer> clients=new HashMap<String,Integer>();
 			List<String> ClientList = new ArrayList<String>();
 			data = new Data();
 			int count = 0;
