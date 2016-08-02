@@ -44,16 +44,14 @@
 					<td class="mdl-data-table__cell--non-numeric"
 						style="font-weight: bold">{{data.progress}}</td>
 					<td class="mdl-data-table__cell--non-numeric">
-						<button style="background-color: #F8F8F8; border: 0px;" href="#"
-							id="" data-tooltip="Schedule interview"
+						<button style="background-color: #F8F8F8; border: 0px;"data-tooltip="Schedule interview"
 							ng-disabled="disableSchedule(data.progress,data.status) || hasNotRole('ROLE_HR')"
 							ng-click="schedule(data.interviewerId)">
 							<span class="glyphicon glyphicon-plus"
 								style="position: relative; top: 1px; color: #034A85""></span>
 						</button>
-						<button style="background-color: #F8F8F8; border: 0px;" href=""
-							id="" data-tooltip="Submit feedback"
-							ng-disabled="disableFeedback(data.rounds) || hasNotRole('ROLE_HR,ROLE_INTERVIEWER,ROLE_MANAGER')"
+						<button style="background-color: #F8F8F8; border: 0px;" data-tooltip="Submit feedback"
+							ng-disabled="disableFeedback(data.rounds) || disableFeedbackBtn"
 							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
 							<span class="glyphicon glyphicon-envelope"
 								style="position: relative; top: 1px; color: #034A85"></span>
@@ -73,16 +71,14 @@
 					<td class="mdl-data-table__cell--non-numeric"
 						style="font-weight: bold">{{data.progress}}</td>
 					<td class="mdl-data-table__cell--non-numeric">
-						<button style="background-color: #F8F8F8; border: 0px;" href="#"
-							id="" data-tooltip="Schedule interview"
+						<button style="background-color: #F8F8F8; border: 0px;" data-tooltip="Schedule interview"
 							ng-disabled="disableSchedule(data.progress,data.status) || hasNotRole('ROLE_HR')"
 							ng-click="schedule(data.interviewerId)">
 							<span class="glyphicon glyphicon-plus"
-								style="position: relative; top: 1px; color: #034A85""></span>
+								style="position: relative; top: 1px; color: #034A85"></span>
 						</button>
-						<button style="background-color: #F8F8F8; border: 0px;" href=""
-							id="" data-tooltip="Submit feedback"
-							ng-disabled="disableFeedback(data.rounds) || hasNotRole('ROLE_HR,ROLE_INTERVIEWER,ROLE_MANAGER')"
+						<button style="background-color: #F8F8F8; border: 0px;" data-tooltip="Submit feedback"
+							ng-disabled="disableFeedback(data.rounds) || disableFeedbackBtn"
 							ng-click="feedback(data.currentPositionId,data.candidateEmail)">
 							<span class="glyphicon glyphicon-envelope"
 								style="position: relative; top: 1px; color: #034A85"></span>

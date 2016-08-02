@@ -48,9 +48,29 @@
 		
 		$scope.disableFeedback = function(rounds) {
 			if(rounds != null && rounds.length > 0){
-				return false;
+				var userExists = false;
+				angular.forEach(rounds, function(round){
+					if( !userExists && _.contains($scope.user.roles, "ROLE_HR"))
+					{
+						if(round.interviewFeedback == undefined){
+							$scope.disableFeedbackBtn = false;
+							userExists = true;
+						}else{
+							$scope.disableFeedbackBtn = true;
+						}
+					}
+					
+					else if((round.interviewSchedule.emailIdInterviewer == $scope.user.emailId))
+					{
+						if(round.interviewFeedback == undefined){
+							$scope.disableFeedbackBtn = false;
+						}else{
+							$scope.disableFeedbackBtn = true;
+						}
+					}
+				});
 			}else{
-				return true;
+				$scope.disableFeedbackBtn = true;
 			}
 		}
 		
