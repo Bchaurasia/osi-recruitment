@@ -8,8 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Series {
-
-	private String id;
 	private String name;
 	private List<Data> data;
 }

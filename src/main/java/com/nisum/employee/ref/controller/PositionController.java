@@ -134,7 +134,6 @@ public class PositionController {
 	@RequestMapping(value = "/getPositionsBasedOnStatus", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionsfordashboard(@RequestParam(value = "status", required = true) String status) {
 		Series series=new Series();
-		series.setId(status);
 		series.setName(status);
 		List<Position> positionsDetails = positionService.retrieveAllPositions();
 		Data data=null;
@@ -161,6 +160,7 @@ public class PositionController {
 				data.setDesignation(uniqueDesign);
 				data.setCount(count);
 				data.setClientNames( new ArrayList<String>(ClientList));
+				data.setId(status);
 				dataList.add(data);
 				series.setData(dataList);
 			}
