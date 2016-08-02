@@ -849,7 +849,8 @@ public class NotificationService {
 		// --- Set Interviewer Email Content ---
 		Message cancelInterview = new MimeMessage(session);
 		cancelInterview.setFrom(new InternetAddress(from));
-		String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer;
+		//String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer;
+		String toMail = toInterviewer;
 		for (String obj : HR_Emails) {
 			if (toMail == null || toMail == "")
 				toMail = obj;

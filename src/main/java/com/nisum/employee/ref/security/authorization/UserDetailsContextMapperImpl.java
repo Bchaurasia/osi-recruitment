@@ -41,9 +41,9 @@ public class UserDetailsContextMapperImpl implements UserDetailsContextMapper, S
 			Collection<? extends GrantedAuthority> authorities) {
 		 log.info("inside ldap user autherization");
 		 List<GrantedAuthority> mappedAuthorities = new ArrayList<GrantedAuthority>();
-	        if(!userService.isUserAlradyExist(username)){
+	        /*if(!userService.isUserAlradyExist(username)){
 	        	infoRepository.registerUserByEmailId(enrichUserInfo(username));
-	        }
+	        }*/
 	        mappedAuthorities = authorization.authorize(username);
 	        log.debug("User {} with role : {}", username,mappedAuthorities);
 	        return new User(username, "", true, true, true, true, mappedAuthorities);
