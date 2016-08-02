@@ -7,9 +7,8 @@
 Hi $recruiter,<br><br>
  The requested offer has been $offerStatus.
  <br><br>
- <span style="font-size:15px">Regards,</span><br>
- <span style="font-size:15px">$approverName,</span><br>
- <span style="font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>
+ <span style="font-size:15px">Regards</span><br>
+ <span style="font-size:15px">$approverName</span><br>
 </div>
 	
 <br>																			

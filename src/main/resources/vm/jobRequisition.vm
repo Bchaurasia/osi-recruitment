@@ -9,9 +9,8 @@ Hi $requisition_approver_name,<br><br>
  <br>Click here
 <a href=$osi_portal_link>$osi_portal_link</a>
 <br><br>
- <span style="font-size:15px">Regards,</span><br>
- <span style="font-size:15px">Recruitment Team,</span><br>
- <span style="font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>
+ <span style="font-size:15px">Regards</span><br>
+ <span style="font-size:15px">Recruitment Team</span><br>
 </div>
 	
 <br>																			

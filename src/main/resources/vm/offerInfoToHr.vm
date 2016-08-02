@@ -8,9 +8,8 @@ Hi ,<br><br>Please be informed that candidate $CandidateName #if($ReferredByEmai
 $jobCode. He/She will work as $Designation and will be reporting to $Manager.<br><br> 
 His/Her date of joining OSI is: $JoiningDate<br>
 Work Location:$location<br><br><br>
- <span style="font-size:15px">Regards,</span><br>
- <span style="font-size:15px">Recruitment Team,</span><br>
- <span style="font-size:15px"><a href="http://www.osi-tech.com/index.html">OSI Technologies</a></span><br>
+ <span style="font-size:15px">Regards</span><br>
+ <span style="font-size:15px">Recruitment Team</span><br>
 </div>
 	
 <br>																			
