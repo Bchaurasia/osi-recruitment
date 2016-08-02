@@ -54,14 +54,14 @@ import com.nisum.employee.ref.domain.UserNotification;
 @Service
 public class NotificationService {
 
-	private static final String CANDIDATE_APPROVAL_REQUEST = "Candidate Approval Request";
+	private static final String CANDIDATE_APPROVAL_REQUEST = " - Candidate Approval Request";
 	private static final String DD_MMM_YYYY_HH_MM = "dd-MMM-yyyy HH:mm";
 	private static final String YYYY_MM_DD_T_HH_MM_SS_SSS_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 	private static final String FILE_RESOURCE_LOADER_PATH = "file.resource.loader.path";
 	private static final String YOUR_INTERVIEW_FOR = " - Your Interview For ";
 	private static final String YOU_NEED_TO_TAKE_INTERVIEW_OF = " - You Need To Take Interview Of ";
 	private static final String SKYPE_ID = "skypeId";
-	private static final String OSI_TECHNOLOGIES = "OSI Recruitment Portal";
+	private static final String OSI_TECHNOLOGIES = "iRecruit";
 
 	private static final String LOCATION = "location";
 	private static final String ADDRESS = "address";
@@ -80,7 +80,7 @@ public class NotificationService {
 	private static final String JOBCODE = "jobcode";
 	private static final String TEXT_HTML = "text/html";
 	private static final String OF = " of ";
-	private static final String FEEDBACK_SUBMITTED_FOR = "Feedback Submitted For ";
+	private static final String FEEDBACK_SUBMITTED_FOR = " - Feedback Submitted For ";
 	private static final String RATING_LIST = "ratingList";
 	private static final String IMPROVEMENTS = "improvements";
 	private static final String STRENGTHS = "strengths";
@@ -403,8 +403,7 @@ public class NotificationService {
 		candidateTemplate.merge(context, writer);
 
 		Message message = getMessage();
-		message.setSubject(
-				FEEDBACK_SUBMITTED_FOR + interviewFeedback.getRoundName() + OF + interviewFeedback.getCandidateName());
+		message.setSubject(OSI_TECHNOLOGIES + FEEDBACK_SUBMITTED_FOR + interviewFeedback.getRoundName() + OF + interviewFeedback.getCandidateName());
 		message.setContent(writer.toString(), TEXT_HTML);
 
 		for (String obj : HR_Emails) {
@@ -478,7 +477,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		// message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(OSI_TECHNOLOGIES + " : Please Approve the Requisition "
+		message1.setSubject(OSI_TECHNOLOGIES + " - Please Approve the Requisition "
 				+ requisitionApproverDetails.getJobRequisitionId());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -508,8 +507,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(
-				CANDIDATE_APPROVAL_REQUEST + " : " + offer.getApprovedPositions() + " : " + offer.getCandidateName());
+		message1.setSubject(OSI_TECHNOLOGIES + CANDIDATE_APPROVAL_REQUEST + " : " + offer.getApprovedPositions() + " : " + offer.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
@@ -551,7 +549,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject(CANDIDATE_APPROVAL_REQUEST + " : " + offer.getCandidateName()
+		message1.setSubject(OSI_TECHNOLOGIES + CANDIDATE_APPROVAL_REQUEST + " : " + offer.getCandidateName()
 				+ " is selected for Designation :" + offer.getOrgGrade().getDesignation().getName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -588,7 +586,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
+		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -640,7 +638,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
+		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -672,7 +670,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
+		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -720,7 +718,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject("Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
+		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
@@ -775,7 +773,7 @@ public class NotificationService {
 		Message message3 = getMessage();
 		message3.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(toMail));
-		message3.setSubject(OSI_TECHNOLOGIES + " : " + requisitionApproverDetails.getJobRequisitionId()
+		message3.setSubject(OSI_TECHNOLOGIES + " - " + requisitionApproverDetails.getJobRequisitionId()
 				+ " Requisition has been approved");
 		message3.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message3);
@@ -807,7 +805,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(requisitionApproverDetails.getApproverName() + " has Rejected The Requisition "
+		message1.setSubject(OSI_TECHNOLOGIES + " - " + requisitionApproverDetails.getApproverName() + " has Rejected The Requisition "
 				+ requisitionApproverDetails.getJobRequisitionId());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -859,7 +857,7 @@ public class NotificationService {
 		}
 
 		cancelInterview.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		cancelInterview.setSubject(interviewSchedule.getRoundName() + " Interview Cancelled for :" + interviewSchedule.getCandidateName());
+		cancelInterview.setSubject(OSI_TECHNOLOGIES + " - " + interviewSchedule.getRoundName() + " Interview Cancelled for :" + interviewSchedule.getCandidateName());
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(writer.toString(), TEXT_HTML);
 		Multipart multipart = new MimeMultipart();
@@ -973,7 +971,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject("Profile has been created for: " + candidate.getCandidateName());
+		message1.setSubject(OSI_TECHNOLOGIES + " - Profile has been created for: " + candidate.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
@@ -1018,7 +1016,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject(OSI_TECHNOLOGIES + " :Profile has been approved for: " + candidate.getCandidateName());
+		message1.setSubject(OSI_TECHNOLOGIES + " - Profile has been approved for: " + candidate.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
@@ -1062,7 +1060,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject("Position updated with job code: " + position.getJobcode());
+		message1.setSubject(OSI_TECHNOLOGIES + " - Position updated with job code: " + position.getJobcode());
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
 
@@ -1106,7 +1104,7 @@ public class NotificationService {
 				toMail = toMail + "," + hrEMails;
 		}
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		message1.setSubject("Profile has been updated for: " + candidate.getCandidateName());
+		message1.setSubject(OSI_TECHNOLOGIES + " - Profile has been updated for: " + candidate.getCandidateName());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
