@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pageWidth">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion"
 		name="CreateRequisition" onvalidate>
@@ -7,6 +7,8 @@
 				<b>Create Requisition</b>
 			</h5>
 		</div>
+		
+		<div class="ui segment segmentPadding">		
 		<div class="row">
 			<div class="input-field col s6" align="left">
 				<ui-select ng-model="requisition.position" ng-change="getData()"
@@ -20,17 +22,18 @@
 					Position<b class="mandatory">*</b>
 				</label>
 			</div>
-			<div class="input-field col s6">
+			<div class="input-field col s5 rangeDiv">
 				<div class="row">
 					<div class="input-field col s6">
 						<input type="range" ng-model="requisition.minExpYear"
 							ng-change="min(requisition.minExpYear)" min="0" max="15" required />
 						<span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
 					</div>
-					<div class="input-field col s6">
+					<div class="input-field col s6 ">
 						<input type="range" ng-model="requisition.maxExpYear"
+							class="floatR"
 							ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
-						<span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
+						<span class="range-slider__value floatR">Max:{{requisition.maxExpYear}}</span>
 					</div>
 				</div>
 				<label style="margin-top: 14px">Exp. Required<b
@@ -46,7 +49,7 @@
 					min="{{today | date : 'yyyy-MM-dd' }}"
 					ng-change="reqDate(requisitionDate,targetDate)"
 					id="requisitionDate" required name="requisitionDate"> <label>Requisition
-					Date<b class="mandatory">*</b><small>[mm-dd-yyyy]</small>
+					Date<b class="mandatory">*</b><small>[dd-mon-yyyy]</small>
 				</label> <span class="validation-error" ng-show="reqErr">Requisition
 					date should not be after Target Date.</span>
 			</div>
@@ -55,7 +58,7 @@
 					ng-change="validTargetDate(requisitionDate,targetDate)"
 					min="{{today | date : 'yyyy-MM-dd' }}"
 					id="targetDate" required> <label>Target Date <b
-					class="mandatory">*</b> <small>[mm-dd-yyyy]</small></label> <span class="validation-error"
+					class="mandatory">*</b> <small>[dd-mon-yyyy]</small></label> <span class="validation-error"
 					ng-show="targetErr">Target date should not be before
 					Requsition Date.</span>
 			</div>
@@ -115,11 +118,11 @@
 				</select> <label class="label-alignment">Job Description Title</label>
 			</div>
 			<div class="input-field col s6">
-				<ui-select multiple ng-model="requisition.skillType"
+				<ui-select  multiple ng-model="requisition.skillType"
 					ng-keypress="myFunct($event)" theme="select2" ui-select-required
 					ng-disabled="disabled"> <ui-select-match
 					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
-					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+					repeat="color in pskills | orderBy:'toString()' | filter:$select.search" class=" borderSelect ">
 				{{color}} </ui-select-choices> </ui-select>
 				<label style="position: absolute; top: -22px;">Required Skills<b
 					class="mandatory">*</b></label>
@@ -165,8 +168,20 @@
 				<input type="range" ng-model="requisition.percent" min="0" max="100" />
 				<label>Percentage<b class="mandatory">*</b></label> <span
 					class="range-slider__value">{{requisition.percent}}%</span>
-			</div>
-			<div class="input-field col s1">
+
+					<div class="input-field col s1 rangeIcon">
+						<button class="glyphicon glyphicon-remove"
+							ng-show="lengthOfQualifications()"
+							ng-click="deleteQualification($index)"></button>
+						&nbsp;&nbsp;&nbsp;
+						<button id="addButtonColumn"
+							ng-disabled="checkDisability(requisition.qualification)"
+							ng-show="$last" class="glyphicon glyphicon-plus"
+							ng-click="addColumnCriteria()"></button>
+					</div>
+
+				</div>
+			<!-- <div class="input-field col s1">
 				<button class="glyphicon glyphicon-remove"
 					ng-show="lengthOfQualifications()" 
 					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
@@ -174,7 +189,7 @@
 				    ng-disabled="checkDisability(requisition.qualification)"
 					ng-show="$last" class="glyphicon glyphicon-plus"
 					ng-click="addColumnCriteria()"></button>
-			</div>
+			</div> -->
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
@@ -194,6 +209,9 @@
 				</select> <label>Approver 2</label>
 			</div>
 		</div>
+		</div>
+		
+		
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
 				ng-disabled="CreateRequisition.$invalid || disabled || disabled1 || disableCreateBtn"

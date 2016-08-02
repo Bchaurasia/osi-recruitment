@@ -3122,3 +3122,29 @@ div.field select.select-overide{
      background-color: #004D87;
      border-redious:0px;
     }
+    
+ div.ui.segment.segmentPadding{
+ 	padding-left:5%;
+ }
+ 
+ div.pageWidth{
+ 	width:90%;
+ }
+ 
+ .row .col.s1.rangeIcon{
+ 	float:right;
+ }
+ 
+ .row .col.s5.rangeDiv{
+ 	padding:0px;
+ }
+ 
+input[type="range"].floatR{
+ 	float:right;
+ }
+ 
+ span.range-slider__value.floatR{
+ 	right: 6%;
+ }
+ 
+ 
