@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pageWidth">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion"
 		name="cloneRequisition" onvalidate>
@@ -7,6 +7,8 @@
 				<b>Requisition : {{requisition.requisitionId}}</b>
 			</h5>
 		</div>
+		
+		<div class="ui segment segmentPadding">
 		<div class="row marginFromHeader">
 			<div class="row">
 				<div class="input-field col s6" align="left">
@@ -22,7 +24,7 @@
 					</label>	
 				</div>
 				
-				<div class="input-field col s6">
+				<div class="input-field col s5 rangeDiv">
 					<div class="row">
 						<div class="input-field col s6">
 							<input id="minExpYear" type="range"
@@ -32,9 +34,10 @@
 						</div>
 						<div class="input-field col s6">
 							<input id="maxExpYear" type="range"
+								class="floatR"
 								ng-model="requisition.maxExpYear" ng-disabled="false"
 								ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
-							<span class="range-slider__value">Max:{{requisition.maxExpYear}}</span>
+							<span class="range-slider__value floatR">Max:{{requisition.maxExpYear}}</span>
 						</div>
 					</div>
 					
@@ -176,8 +179,7 @@
 						max="100" /> <label>Percentage<b class="mandatory">*</b></label>
 					<span class="range-slider__value">{{requisition.percent}}%</span>
 					
-				</div>
-				<div class="input-field col s1">
+					<div class="input-field col s1 rangeIcon">
 					<button class="glyphicon glyphicon-remove"
 						ng-show="lengthOfQualifications()" 
 						ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
@@ -186,6 +188,8 @@
 						ng-show="$last" class="glyphicon glyphicon-plus"
 						ng-click="addColumnCriteria()"></button>
 				</div>
+				</div>
+				
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
@@ -205,7 +209,8 @@
 					</select> <label>Approver 2</label> 
 				</div>
 			</div>
-
+		</div>
+		</div>
 			<div align="center" class="row">
 				<button class="btn btn-info active" type="submit"
 					ng-disabled="cloneRequisition.$invalid || disabled1 || disableCloneBtn"
