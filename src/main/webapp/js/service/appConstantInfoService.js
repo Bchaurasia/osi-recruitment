@@ -8,7 +8,7 @@ app.constant('appConstants',{
 			   
 			   SUCCESS_CLASS: "alert  alert-success",
 			   ERROR_CLASS: "alert alert-danger alert-error",
-			   APP_COPY_RIGHT: new Date().getFullYear()+" OSI Technologies"
+			   APP_COPY_RIGHT: " OSI  " + new Date().getFullYear()
 		   });
 
 
