@@ -117,17 +117,18 @@
 					<option value="">Select Job	Description Title</option>
 				</select> <label class="label-alignment">Job Description Title</label>
 			</div>
-			<div class="input-field col s6">
-				<ui-select  multiple ng-model="requisition.skillType"
-					ng-keypress="myFunct($event)" theme="select2" ui-select-required
-					ng-disabled="disabled"> <ui-select-match
-					placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
-					repeat="color in pskills | orderBy:'toString()' | filter:$select.search" class=" borderSelect ">
-				{{color}} </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;">Required Skills<b
-					class="mandatory">*</b></label>
+				<div class="input-field col s6">
+					<ui-select multiple ng-model="requisition.skillType"
+						ng-keypress="myFunct($event)" theme="select2" ui-select-required
+						ng-disabled="disabled"> <ui-select-match
+						placeholder="Select Skills..">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="color in pskills | orderBy:'toString()' | filter:$select.search"
+						class=" borderSelect "> {{color}} </ui-select-choices> </ui-select>
+					<label style="position: absolute; top: -22px;">Required
+						Skills<b class="mandatory">*</b>
+					</label>
+				</div>
 			</div>
-		</div>
 		<div class="row">
 		   
 			<div class="input-field col s12">
