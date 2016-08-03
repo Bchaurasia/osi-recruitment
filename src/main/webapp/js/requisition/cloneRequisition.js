@@ -99,9 +99,9 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		//$scope.approvals =_.sortBy($scope.approvals, 'name');
 		$scope.approval2 = angular.copy($scope.approval1);
 		
-		$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
-		$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
-		$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
+		//$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
+		//$scope.hrManagers =_.sortBy($scope.hrManagers, 'name');
+		//$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.requisition.requisitionManager.emailId})[0];
 		$scope.creator = _.find(data, function(user){ return user.emailId === $scope.requisition.createdBy});
 	}
 	
