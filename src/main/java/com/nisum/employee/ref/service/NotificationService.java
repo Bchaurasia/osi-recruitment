@@ -877,10 +877,7 @@ public class NotificationService {
 		Template jobRequisitionTemplate = getVelocityTemplate(SRC_POST_REF_JOB);
 
 		ArrayList<String> skills = position.getPrimarySkills();
-		String formatedskills = skills.toString().replace(",", "-") // remove
-																	// the
-																	// commas
-				.replace("[", "") // remove the right bracket
+		String formatedskills = skills.toString().replace("[", "") // remove the right bracket
 				.replace("]", "") // remove the left bracket
 				.trim();
 
@@ -940,8 +937,7 @@ public class NotificationService {
 		engine.init();
 
 		ArrayList<String> skills = candidate.getPrimarySkills();
-		String primarySkills = skills.toString().replace(",", "-") // remove the
-																	// commas
+		String primarySkills = skills.toString()
 				.replace("[", "") // remove the right bracket
 				.replace("]", "") // remove the left bracket
 				.trim();
