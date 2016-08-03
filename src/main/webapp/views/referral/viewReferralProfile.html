@@ -119,7 +119,9 @@
 					required> <label style="position: absolute; top: -22px;">Current
 					Location<b class="mandatory">*</b>
 				</label>
-
+			<div class="validation-error"
+					ng-show="(UpdateCandidate.currentLocation.$dirty || invalidSubmitAttempt) && UpdateCandidate.currentLocation.$error.pattern">
+					Current location must be characters only.</div>
 			</div>
 
 			<!-- <div class="input-field col s6">

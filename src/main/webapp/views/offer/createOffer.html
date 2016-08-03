@@ -275,6 +275,9 @@
 							ng-model="candidate.currentLocation" required> <label
 							style="position: absolute; top: -22px;">Current Location<b
 							class="mandatory">*</b></label>
+					<div class="validation-error"
+						 ng-show="(createOffer.currentLocation.$dirty || invalidSubmitAttempt) && createOffer.currentLocation.$error.pattern">
+					               Current location must be characters only.</div>
 					</div>
 					<div class="input-field col s6">
 						<input placeholder="Enter Work Location" name="WorkLocation"
@@ -282,6 +285,9 @@
 							required> <label style="position: absolute; top: -22px;">Work
 							Location<b class="mandatory">*</b>
 						</label>
+					<div class="validation-error"
+						 ng-show="(createOffer.workLocation.$dirty || invalidSubmitAttempt) && createOffer.workLocation.$error.pattern">
+					               Current location must be characters only.</div>
 					</div>
 				</div>
 				<div class="row" style="padding-left:0%">

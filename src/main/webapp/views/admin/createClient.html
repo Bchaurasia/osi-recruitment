@@ -40,7 +40,9 @@
 					style="top: 1px; height: 29px"
 					placeholder="Enter Location Name" ng-model="otherLocation" ng-required="client.locations=='Others'"
 					ng-minlength="3">
-
+				<div class="validation-error"
+					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.pattern">
+					Other Location must be characters only.</div>	
 				<div class="validation-error"
 					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.minlength">
 					Other Location must be at least 3 characters .</div>

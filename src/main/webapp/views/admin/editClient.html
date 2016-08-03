@@ -36,6 +36,9 @@
 				<div class="validation-error"
 					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.minlength">
 					Other Location must be at least 3 characters .</div>
+				<div class="validation-error"
+					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.pattern">
+					Other Location must be characters only.</div>		
 			</div>
 		</div>
 		<br>

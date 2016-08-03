@@ -76,6 +76,10 @@
 					<div class="validation-error"
 						ng-show="UserInformation.locationId.$error.required">
 						Location is required.</div>
+				<div class="validation-error"
+					ng-show="(UserInformation.location.$dirty || invalidSubmitAttempt) && UserInformation.location.$error.pattern">
+					Current location must be characters only.</div>		
+						
 				</div>
 			</div>
 
