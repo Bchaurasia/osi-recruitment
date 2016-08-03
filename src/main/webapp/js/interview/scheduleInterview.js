@@ -173,6 +173,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 				$scope.disabled=true;
 				$scope.cls = 'alert alert-danger alert-error';
 				$scope.message = round +" is already done.";
+				$scope.interviewschedule.roundName ="";
 				$timeout( function(){ $scope.alHide(); }, 2500);	
 			}
 		})
