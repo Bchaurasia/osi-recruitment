@@ -176,6 +176,9 @@ public class PositionController {
 		List<Series.LayerTwo.Data> list = new ArrayList<>(dataList);
 		series1.setData(list);
 
+		Series ser = new Series();
+		ser.setLayer2(series1);
+		
 		//////
 
 		Set<String> uniqueDesigns = new HashSet<String>();
@@ -199,28 +202,58 @@ public class PositionController {
 					clientCount = 0;
 				clients.put(client, clientCount + 1);
 			}
-			layerThreeData.put(uniqueDesign, clients);
+			layerThreeData.put(status + ":" +uniqueDesign, clients);
 			System.err.println("list is "+layerThreeData); 
 		}
 		
+		
+		
+
+		
+		/*series2.setId(entry.getKey());
+	    for (Map.Entry<String, Integer> innerEntry : entry.getValue().entrySet()) {
+	    	data3 = new Series.LayerThree.Data();
+	    	data3.setClient(innerEntry.getKey());
+	    	data3.setCount(innerEntry.getValue());
+	    	series2.getDataList().add(data3);
+	    	ser.setLayer3(series2);
+	    }*/
+	   
+	
 
 		Series.LayerThree.Data data3 = null;
-		Series.LayerThree series2  = new Series.LayerThree();
+		List<String> data4 = null;
+		
+		List<Series.LayerThree> list1 = new ArrayList<>();
+		
+		
 		for (Map.Entry<String,Map<String, Integer>> entry : layerThreeData.entrySet()) {
+			Series.LayerThree series2  = new Series.LayerThree();
 			
 			series2.setId(entry.getKey());
-		    for (Map.Entry<String, Integer> innerEntry : entry.getValue().entrySet()) {
-		    	data3 = new Series.LayerThree.Data();
+			
+			for (Map.Entry<String, Integer> innerEntry : entry.getValue().entrySet()) {
+				data3 = new Series.LayerThree.Data();
+				data4 = new ArrayList<>();
+				
 		    	data3.setClient(innerEntry.getKey());
 		    	data3.setCount(innerEntry.getValue());
-		    }
-		    series2.getDataList().add(data3);
+		    	
+		    	data4.add(innerEntry.getKey());
+		    	data4.add(innerEntry.getValue().toString());
+		    	series2.getDataList().add(data4);
+			}
+			
+			 list1.add(series2);
+			 ser.setLayer3(list1);
+			
 		}
 		
+		
+		
 		//////
-		Series ser = new Series();
-		ser.setLayer2(series1);
-		ser.setLayer3(series2);
+		
+		
 		
 
 		return new ResponseEntity<Series>(ser, HttpStatus.OK);

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Series {
 
 	private LayerTwo layer2;
-	private LayerThree layer3;
+	private List <LayerThree> layer3;
 	
 	
 	
@@ -39,7 +39,7 @@ public class Series {
 	public static class LayerThree {
 
 		private String id;
-		private List<Data> dataList = new ArrayList<>();
+		private List<List<String>> dataList = new ArrayList<>();
 
 		@lombok.Data
 		public static class Data {
