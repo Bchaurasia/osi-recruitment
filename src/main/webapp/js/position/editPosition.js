@@ -130,8 +130,6 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		var skills =[];
 		if ($scope.position !== undefined) {
 			 $scope.position.updatedBy = $scope.user.emailId;
-			 $scope.position.hiringManager.name  = $scope.hrManager.name;
-			 $scope.position.hiringManager.emailId  = $scope.hrManager.emailId;
 			 $scope.position.designation =  $scope.designation;
 			 $scope.position.client = $scope.selClient;
 			 if($scope.interviewer != undefined){
