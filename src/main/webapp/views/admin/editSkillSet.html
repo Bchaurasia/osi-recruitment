@@ -63,11 +63,14 @@
 					<div class="card-action" style="background-color: white;">
 						<div class="row">
 							<div class="input-field col s6" align="center">
-								<input class="form-control" type="text" ng-model="newSkill"
+								<input class="form-control" type="text" name="skill" ng-model="newSkill" ng-pattern="/^[a-zA-Z][a-zA-Z0-9\(\) .#]*$/"
 									placeholder="Enter Skill..." ng-change="checkSkillSet()" required> <label
 									class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skill<b class="mandatory">*</b>
 								</label>
 								<span class="validation-error" ng-show="skillExist">This skill already exist</span>
+								<div class="validation-error" 
+								ng-show="(AddSkills.skill.$dirty || invalidSubmitAttempt) && AddSkills.skill.$error.pattern">Enter valid Skill
+								</div>
 							</div>
 							<div class="input-field col s6" align="center">
 								<button class="btn btn-info active"

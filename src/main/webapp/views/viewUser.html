@@ -71,14 +71,14 @@
 				</div> -->
 				<div class="input-field col s6">
 					<label  style="position: absolute; top: -22px;">Location <b class="mandatory">*</b> </label> 
-					<input class="form-control" ng-change="validateLocationId($data)" name="locationId" 
-					type="text"	ng-model="user.location" required>
+					<input class="form-control" ng-change="validateLocationId($data)" name="location" 
+					type="text"	ng-model="user.location" ng-pattern="/^[a-zA-Z _]*$/" required>
 					<div class="validation-error"
 						ng-show="UserInformation.locationId.$error.required">
 						Location is required.</div>
 				<div class="validation-error"
 					ng-show="(UserInformation.location.$dirty || invalidSubmitAttempt) && UserInformation.location.$error.pattern">
-					Current location must be characters only.</div>		
+					Location must be characters only.</div>		
 						
 				</div>
 			</div>

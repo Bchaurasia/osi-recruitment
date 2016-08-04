@@ -15,7 +15,7 @@
 							style="color: red;">*</b></label>
 			
 			<input placeholder="Enter Designation" ng-minlength="3" type="text"
-					ng-maxlength="30" name="designation" class="form-control"
+					ng-maxlength="30" ng-pattern="/^[a-zA-Z][a-zA-Z\(\) .]*$/" name="designation" class="form-control"
 					ng-model="designation.designation" ng-change="checkDesignaton()" required
 					placeholder="Enter Designation"> 
 					<span ng-show="designationExist" class="validation-error">Designation already exist</span>
@@ -26,6 +26,10 @@
 			<div class="validation-error"
 				ng-show="(CreateDesignation.designation.$dirty || invalidSubmitAttempt) && CreateDesignation.designation.$error.required">
 				Designation is required.
+			</div>
+			<div class="validation-error"
+				ng-show="(CreateDesignation.designation.$dirty || invalidSubmitAttempt) && CreateDesignation.designation.$error.pattern">
+				Enter valid Designation
 			</div>
 		</div>
 		<div class="input-field col s6">

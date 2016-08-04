@@ -65,7 +65,7 @@
 							</div> -->
 							<div class="input-field col s6">
 								<input class="form-control" type="text"
-									ng-pattern="/^[a-zA-Z _]*$/" ng-model="userToEdit.location"
+									ng-pattern="/^[a-zA-Z _]*$/" ng-model="userToEdit.location" name="location"
 									required> <label style="position: absolute; top: -22px;">Location<b class="mandatory">*</b></label>
 							<div class="validation-error" ng-show="(EditUserInfo.location.$dirty || invalidSubmitAttempt) && EditUserInfo.location.$error.pattern">
 									 Location must be characters only.</div>	

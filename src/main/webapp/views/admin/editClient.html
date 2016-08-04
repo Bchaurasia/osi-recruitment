@@ -29,8 +29,8 @@
 					class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Other
 					Location<b class="mandatory">*</b>
 				</label> <input type="text" name="olocation" id="olocation"
-					style="top: 1px; height: 29px"
-					placeholder="Enter Location Name" ng-model="otherLocation" ng-required="client.locations=='Others'"
+					style="top: 1px; height: 29px" 
+					placeholder="Enter Location Name" ng-model="otherLocation" ng-pattern="/^[a-zA-Z _]*$/" ng-required="client.locations=='Others'"
 					ng-minlength="3">
 
 				<div class="validation-error"
