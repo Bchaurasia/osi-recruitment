@@ -33,6 +33,9 @@
 
 		<logout logout-success-url="/login.html" delete-cookies="JSESSIONID"
 			invalidate-session="true" />
+		<session-management>
+          <concurrency-control max-sessions="1"/>
+        </session-management>
 	</http>
 	<beans:bean id="SecurityProvider"
 		class="com.nisum.employee.ref.security.SecurityProvider">
