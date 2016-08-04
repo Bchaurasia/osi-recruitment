@@ -249,16 +249,19 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter current Employer" name="currentEmployer"
 					class="form-control" type="text"
-					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
-				<label style="position: absolute; top: -22px;">Current
-					Employer</label>
+					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 _]*$/">
+				<label style="position: absolute; top: -22px;">Current Employer</label>
+			<div class="validation-error"
+					ng-show="(CreateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.currentEmployer.$error.pattern">
+					Current Employer must be alpha numeric only.</div>	
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter Additional Skills" name="otherSkills"
 					class="form-control" type="text" ng-model="candidate.otherSkills"
-					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label
-					style="position: absolute; top: -22px;">Additional Skills</label>
-
+					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
+			<div class="validation-error"
+					ng-show="(CreateCandidate.otherSkills.$dirty || invalidSubmitAttempt) && CreateCandidate.otherSkills.$error.pattern">
+					Additional Skills must be alpha numeric only.</div>
 			</div>
 
 		</div>
@@ -300,7 +303,7 @@
 					class="validation-error"
 					ng-required="CreateCandidate.currentCTC.$error.pattern"
 					ng-show="CreateCandidate.currentCTC.$error.pattern"> Provide
-					a valid CTC</span>
+					a valid CTC with numeric value</span>
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter expected CTC" name="expectedCTC"
@@ -310,7 +313,7 @@
 					class="validation-error"
 					ng-required="CreateCandidate.expectedCTC.$error.pattern"
 					ng-show="CreateCandidate.expectedCTC.$error.pattern">
-					Provide a valid CTC </span>
+					Provide a valid CTC with numeric value</span>
 			</div>
 		</div>
 
