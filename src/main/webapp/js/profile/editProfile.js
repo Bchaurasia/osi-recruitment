@@ -243,6 +243,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	
 	$scope.approveProfile = function() {
 		$scope.candidate.updatedBy  = $rootScope.user.emailId;
+		$scope.candidate.requisitionId = $scope.requisitionId;
 		profileService.approveProfile($scope.candidate).then(function(msg){
         	$scope.sendNotification(msg,'recruitment/searchProfile');
 			$log.info(msg);
