@@ -76,7 +76,6 @@
 				
 			</div>  -->
 	<div class="col-md-8 ">
-				<div id="profileDount" style="float: left;"></div>
 				<div id="requisitionDonut" style="float: left;"></div>
 		
 		<br>
@@ -166,7 +165,8 @@
 			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
 		</div>
 		<br> <br>
-		<h5 style="margin-top: 15px" align="center">Requisition for
+		<div ng-show="!showNoAppRequisitionMsg" >
+		<h5 style="margin-top: 15px" align="center" >Requisition for
 			Approval</h5>
 		<hr>
 		<div class="row" style="padding: 10px">
@@ -193,26 +193,24 @@
 								ng-click="editRequisition(requisition.requisitionId)">View
 								Details</div>
 						</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div ng-hide="!showNoAppRequisitionMsg">
-				<b style="font-size: 142%; color: #bfbbbb;">You have no
-					Requisition to approve.</b>
 			</div>
 		</div>
 
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-4" >
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
-			<h5 style="margin-top: 10px">Upcoming Events</h5>
+		<div ng-hide="!showNoInterviewMsg">
+			<h5 style="margin-top: 10px" >Upcoming Events</h5>
 			<hr style="margin-left: 15px;">
 			<div style="max-height: 250px; height: auto; overflow: auto;">
 				<div class="event"
 					ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate "
-					ng-hide="showNoInterviewMsg">
+					>
 					<div class="label">
 						<span ng-if="schedule.round == 'Technical Round 1'"
 							class="initial" style="background: #e47575">TR 1</span> <span
@@ -238,8 +236,6 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="showNoInterviewMsg">
-				<b style="font-size: 142%; color: #bfbbbb;">No Events </b>
 			</div>
 			<div class="ui feed " style="font-size: 100%;">
 				<h5 style="margin-top: 10px">Recent Activities</h5>

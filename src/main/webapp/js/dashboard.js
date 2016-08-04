@@ -44,11 +44,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.layer3Data=[];
 	angular.element(document).ready(function() {
 		getTotalHired();
-//		getInterviewDetails();
-//		getPositionData();
 		getDesignationSpecificData();
 
-//		getProfileCount();
 //		getTotalRequisitions();
 		
        });
@@ -59,21 +56,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		sharedService.setprofileUserId(candidateEmail);
 		location.href='#recruitment/interviewFeedback';
 	};
-// console.log(profileService.getProfiles());
-	
-	function getProfileCount(){		
-		var i=0;
-		
-		profileService.getProfiles().then(function(data){
-			$scope.totalProfiles=data.length;
-		}).catch(function(data){
-			
-		});		
-	
-   
-	}
-	
-	
 $scope.state = false;
     
     $scope.toggleState = function() {
@@ -87,8 +69,6 @@ $scope.state = false;
 	
 		positionService.getPosition().then(function(data){
 			$scope.totalPositionData=data;
-			// console.log(data);
-			
 			$scope.totalPositions=data.length;
 			for(var i=0;i<data.length;i++)
 				{
@@ -105,15 +85,7 @@ $scope.state = false;
 	}
 	
 	
-	function getPositionData(){
-		
-		angular.forEach($scope.positionData, function(value,key){
-			console.log($scope.positionData);
-		})
-		
-	}
-	
-	
+
 	function getTotalRequisitions(){
 		requisitionService.getAllRequisitions().then(function(data){
 			$scope.totalRequisitions=data.length;
@@ -168,8 +140,8 @@ $scope.state = false;
 				 $('#requisitionDonut').highcharts({
 				        chart: {
 				            type: 'pie',
-				            height: 200,
-				            width: 200,
+				            height: 500,
+				            width: 700,
 				            events: {
 				            	drilldown: function (i,e) {
 				            		for(i=0; i<$scope.layer3Data.length; i++){
@@ -190,7 +162,7 @@ $scope.state = false;
 				            text: 'Statistics'
 				        },
 				        subtitle: {
-				            text: 'Click the slices to view details.'
+				            text: 'Click to view last one month status.'
 				        },
 				        plotOptions: {
 				            series: {
@@ -220,74 +192,7 @@ $scope.state = false;
 	
 	
 	}
-	
-	
-function getInterviewDetails(){
-	dashboardService.getInterviewDetails().then(function(data){
-		$scope.interviewDetails = data;
-		 angular.forEach($scope.interviewDetails, function(value, key){
-// console.log(value.status);
-				if(value.status!= undefined&& value.status== "Hired")
-					 hiredCnt++;
-				if(value.status!= undefined&& value.status== "Selected")
-					 selectedCnt++;
-				if(value.status!= undefined&& value.status== "OnHold")
-					 onHoldCnt++;
-				if(value.status!= undefined&& value.status== "Rejected")
-					 rejectedCnt++;
-				if(value.status!= undefined&& value.status== "Active")
-					 activeCnt++;
-				});
-		 console.log(activeCnt);
-		 $scope.interviewData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
-		 $scope.interviewData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
-		 $scope.interviewData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
-		 $scope.interviewData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
-//		 $scope.interviewData.push(["Hired", hiredCnt]);
-//		 	$scope.interviewData.push(["Selected", selectedCnt]);
-//		 	$scope.interviewData.push(["OnHold", onHoldCnt]);
-//		 	$scope.interviewData.push(["Rejected", rejectedCnt]);
-//		 	 
-			$('#profileDount').highcharts({
-			        
-		 	  	chart: {
-	                // Edit chart spacing
-	                spacingBottom: 15,
-	                spacingTop: 0,
-	                spacingLeft: 0,
-	                spacingRight: 10,
 
-	                // Explicitly tell the width and height of a chart
-	                width: 700,
-	                height: 300
-	        },
-		            title: {
-		                text: 'Total<br>Profile<br>'+$scope.totalProfiles,
-		                align: 'center',
-		                verticalAlign: 'middle',
-		                y: 40
-		            },
-		            tooltip: {
-		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-		            },
-		            plotOptions: {
-		                pie: {
-		                    startAngle: -90,
-		                    endAngle: 90,
-		                    center: ['50%', '75%']
-		                }
-		            },
-		            series: [{
-		                type: 'pie',
-		                name: 'Position Details',
-		                innerSize: '50%',
-		                data: $scope.interviewData
-		                }]
-		        });
-	});
-}
-
-	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
@@ -382,6 +287,7 @@ function getInterviewDetails(){
 			.then(function(data){
 				// $scope.requisitionsDetails = data;
 				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
+				console.log($scope.requisitionsDetails);
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;
 				}
@@ -495,55 +401,6 @@ function getInterviewDetails(){
 	};
 	
 	// Build the chart
-    $('#container').highcharts({
-    	
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: 'profile status'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        series: [{
-            name: 'Profile status',
-            colorByPoint: true,
-            data: [{
-                name: 'hired',
-                y: 56.33
-            }, {
-                name: 'Selected',
-                y: 24.03,
-                sliced: true,
-                selected: true
-            }, {
-                name: 'on hold',
-                y: 10.38
-            }, {
-                name: 'Initiated',
-                y: 4.77
-            }, {
-                name: 'inactive',
-                y: 0.91
-            }, {
-                name: 'not initialized',
-                y: 0.2
-            }]
-        }]
-    });
+    
 
 }]);
