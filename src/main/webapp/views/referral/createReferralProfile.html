@@ -373,11 +373,13 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter relation with candidate" id="relationship"
-					class="form-control" type="text"
-					ng-model="candidate.referralRelation" maxlength="20" required>
-				<label style="position: absolute; top: -22px;">How do you
-					know the candidate?<b class="mandatory">*</b>
+					class="form-control" type="text" name="referralRelation"
+					ng-model="candidate.referralRelation" maxlength="20" ng-pattern="/^[a-zA-Z _]*$/" required>
+				<label style="position: absolute; top: -22px;">How do you know the candidate?<b class="mandatory">*</b>
 				</label>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.referralRelation.$dirty || invalidSubmitAttempt) && CreateCandidate.referralRelation.$error.pattern">
+					Candidate relation must be characters only.</div>
 			</div>
 
 			<div class="input-field col s6">
