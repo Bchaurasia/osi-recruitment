@@ -41,7 +41,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			$scope.positionObj=[];
 			$scope.jobcodelistObj=positions;
 			angular.forEach($scope.jobcodelistObj,function(position){
-				 if(position.status!== "Hired"){
+				 if(position.status == "Active"){
 					 $scope.positionObj.push(position);
 				 }
 			 });
