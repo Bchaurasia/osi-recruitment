@@ -39,7 +39,7 @@ public class Series {
 	public static class LayerThree {
 
 		private String id;
-		private List<List<String>> dataList = new ArrayList<>();
+		private List<List<String>> data = new ArrayList<>();
 
 		@lombok.Data
 		public static class Data {

@@ -203,7 +203,7 @@ public class PositionController {
 				clients.put(client, clientCount + 1);
 			}
 			layerThreeData.put(status + ":" +uniqueDesign, clients);
-			System.err.println("list is "+layerThreeData); 
+//			System.err.println("list is "+layerThreeData); 
 		}
 		
 		
@@ -241,7 +241,7 @@ public class PositionController {
 		    	
 		    	data4.add(innerEntry.getKey());
 		    	data4.add(innerEntry.getValue().toString());
-		    	series2.getDataList().add(data4);
+		    	series2.getData().add(data4);
 			}
 			
 			 list1.add(series2);

@@ -32,18 +32,24 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var selectedCnt=0;
 	var onHoldCnt=0;
 	var rejectedCnt=0;
+	var activeCnt=0;
 	$scope.interviewData=[];
 	var totalhiredcount=0;
 	var totalselectedcount=0;
 	var totalonholdcount=0;
 	var totalrejectedcount=0;
-	
+	$scope.positionData=[];
+	$scope.data=[];
+	$scope.layer2Data=[];
+	$scope.layer3Data=[];
 	angular.element(document).ready(function() {
 		getTotalHired();
-		getInterviewDetails();
+//		getInterviewDetails();
+//		getPositionData();
 		getDesignationSpecificData();
-		getProfileCount();
-		getTotalRequisitions();
+
+//		getProfileCount();
+//		getTotalRequisitions();
 		
        });
 	
@@ -93,10 +99,17 @@ $scope.state = false;
 					}
 				}
 			
-			// console.log("HiredCount "+HiredCount);
-			// console.log("total positions "+totalPositions )
 		});
 		
+		
+	}
+	
+	
+	function getPositionData(){
+		
+		angular.forEach($scope.positionData, function(value,key){
+			console.log($scope.positionData);
+		})
 		
 	}
 	
@@ -110,105 +123,66 @@ $scope.state = false;
 		$scope.temp=[];
 	dashboardService.getPositionByStatus(status).then(function(data){
 	$scope.temp=data;
+	console.log($scope.temp.layer2);
 	});
 	return $scope.temp;
 	}
+	
+	
 	function getDesignationSpecificData(){
 		
-		getPositionsBasedOnStatus("Selected");
 		var designationArray=[];
 		getTotalRequisitions();
 		designationService.getDesignation().then(function(data){
 			
-			for(var i=0;i<data.length;i++)
-				{
-				
-				designationArray.push(data[i].designation);
-				}
-		
-				 for(var j=0;j<designationArray.length;j++)
-				 {
-					var activecount=0;
-					var onholdcount=0;
-					var hiredcount=0;
-					var inactivecount=0;
-					var rejectedcount=0;
-					var selectedcount=0;
-					var totalCount=0;
-					for(var h=0;h<$scope.totalPositionData.length;h++)
-					{
-					 if($scope.totalPositionData[h].status=="Hired")
-						 totalhiredcount+=1;
-					 if($scope.totalPositionData[h].status=="Selected")
-						 totalselectedcount+=1;
-					 if($scope.totalPositionData[h].status=="OnHold")
-						 totalonholdcount+=1;
-					 if($scope.totalPositionData[h].status=="Rejected")
-						 totalrejectedcount+=1;
-					 
-					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Active"))
-					    { activecount+=1; totalCount+=1}
-					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="OnHold"))
-					    { onholdcount+=1;totalCount+=1}
-					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Hired"))
-						{ hiredcount+=1;totalCount+=1}
-					 if(($scope.totalPositionData[h].designation == designationArray[j])&&($scope.totalPositionData[h].status=="Inactive"))
-						{inactivecount+=1;totalCount+=1}
-					 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Rejected"))
-						{ rejectedcount+=1;totalCount+=1}
-					 if(($scope.totalPositionData[h].designation==designationArray[j])&&($scope.totalPositionData[h].status=="Selected"))
-						{ selectedcount+=1;totalCount+=1}
-					 
-				     }
-					
-					if(totalCount!=0)
-					{
-					$scope.designationWithStatusCount.push({
-						"Position":designationArray[j],
-						"Active"  :activecount,
-						"OnHold"  :onholdcount,
-						"Hired"   :hiredcount,
-					   "Inactive"  :inactivecount,
-					   "Rejected" :rejectedcount,
-					   "Selected" :selectedcount,
-					   "Total"    :totalCount
-					});
-					}
-				
-				}
-				 
-				 console.log($scope.designationWithStatusCount);
+			 angular.forEach($scope.totalPositionData, function(value, key){
+								if(value.status!= undefined&& value.status== "Hired")
+									 hiredCnt++;
+								if(value.status!= undefined&& value.status== "Selected")
+									 selectedCnt++;
+								if(value.status!= undefined&& value.status== "OnHold")
+									 onHoldCnt++;
+								if(value.status!= undefined&& value.status== "Rejected")
+									 rejectedCnt++;
+								if(value.status!= undefined&& value.status== "Active")
+									 activeCnt++;
+								});
+			
+						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
+						 $scope.positionData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
+						 $scope.positionData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
+						 $scope.positionData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
+						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
+						 
 
-			 angular.forEach($scope.designationWithStatusCount, function(value, key) 
-					{
-					    categories.push(value.Position);
-					    data1.push(value.Active);
-						data2.push(value.OnHold);
-						data3.push(value.Hired);
-						data4.push(value.Inactive);
-						data5.push(value.Rejected);
-						data6.push(value.Selected);
-					 $scope.newData.push({'name': value.Position, 'y':value.Total, 'drilldown': value.Position });
-					});
-			 
-				 series.push({name:'Active',data:data1});
-				 series.push({name:'OnHold',data:data2});
-				 series.push({name:'Hired',data:data3});
-				 series.push({name:'Inactive',data:data4});
-				 series.push({name:'Rejected',data:data5});
-				 series.push({name:'Selected',data:data6});
- 
-				 $scope.data=[];
+						 angular.forEach($scope.positionData, function(value, key){
+						 							dashboardService.getPositionByStatus(value.name).then(function(data){
+						 							$scope.data.push(data);
+						 							$scope.layer2Data.push($scope.data[key].layer2);
+						 							$scope.layer3Data.push($scope.data[key].layer3);
+						 							
+						 							}) ;
+						 						});
+						 
+						 
 				 $('#requisitionDonut').highcharts({
 				        chart: {
 				            type: 'pie',
+				            height: 200,
+				            width: 200,
 				            events: {
 				            	drilldown: function (i,e) {
-				            		alert('drill Down'+JSON.stringify(i.seriesOptions));
-				            		console.log(this);
-				            		console.log(this.options.series[0].name);
-				            		console.log(this.options.series[0].data[0].name);
-				            		console.log($scope.data);
+				            		for(i=0; i<$scope.layer3Data.length; i++){
+				            			for(j=0; j<$scope.layer3Data[i].length; j++)
+				            				for(k=0; k<$scope.layer3Data[i][j].data.length; k++){
+			 							var cnt=$scope.layer3Data[i][j].data[k][1];
+				            			$scope.layer3Data[i][j].data[k][1]= parseInt(cnt);
+			 							}
+				            		}
+				            		for(i=0; i<$scope.layer3Data.length; i++){
+				            			for(j=0;j<$scope.layer3Data[i].length; j++)
+				            			$scope.layer2Data.push($scope.layer3Data[i][j]);
+				            		}
 				            		}
 				            }
 				        },
@@ -234,185 +208,14 @@ $scope.state = false;
 				        series: [{
 				            name: 'Statistics',
 				            colorByPoint: true,
-				            data: $scope.interviewData
+				            data: $scope.positionData
 				        }],
 				        drilldown: {
-				            series: [{
-				                name: 'Hired',
-				                id: 'Hired',
-				                data: [
-				                       {
-				                    	   name:'Developer',
-				                    	   y:33,
-				                    	   drilldown:'client1'
-				                       },
-				                       {
-				                    	   name:'Sr Developer',
-				                    	   y:33,
-				                    	   drilldown:'client2'
-				                       },
-				                       {
-				                    	   name:'Architect',
-				                    	   y:33,
-				                    	   drilldown:'client3'
-				                       }
-				                   
-				                ]
-				            }, {
-				                name: 'Rejected',
-				                id: 'Rejected',
-				                data: [
-				                       {
-				                    	   name:'Developer',
-				                    	   y:33,
-				                    	   drilldown:'client4'
-				                       },
-				                       {
-				                    	   name:'Sr Developer',
-				                    	   y:34,
-				                    	   drilldown:'client5'
-				                       },
-				                       {
-				                    	   name:'Architect',
-				                    	   y:33,
-				                    	   drilldown:'client6'
-				                       }
-				                   
-				                ]
-				            }, {
-				                name: 'Selected',
-				                id: 'Selected',
-				                data: [
-				                       {
-				                    	   name:'Developer',
-				                    	   y:33,
-				                    	   drilldown:'client7'
-				                       },
-				                       {
-				                    	   name:'Sr Developer',
-				                    	   y:33,
-				                    	   drilldown:'client8'
-				                       },
-				                       {
-				                    	   name:'Architect',
-				                    	   y:34,
-				                    	   drilldown:'client9'
-				                       }
-				                   
-				                ]
-				            }, {
-				                name: 'Onhold',
-				                id: 'Onhold',
-				                data: [
-				                       {
-				                    	   name:'Developer',
-				                    	   y:33,
-				                    	   drilldown:'client10'
-				                       },
-				                       {
-				                    	   name:'Sr Developer',
-				                    	   y:35,
-				                    	   drilldown:'client11'
-				                       },
-				                       {
-				                    	   name:'Architect',
-				                    	   y:32,
-				                    	   drilldown:'client12'
-				                       }
-				                   
-				                ]
-				            },{
-				            	id:'client1',
-				            	data:[
-				            	      ['GAP',22],['ATS',70],['MACYS',8]]
-				            },{
-				            	id:'client2',
-				            	data:[['GAP',22],['ATS',20],['MACYS',58]]
-				            },{
-				            	id:'client3',
-				            	data:[['GAP',22],['ATS',32],['MACYS',23]]
-				            },{
-				            	id:'client4',
-				            	data:[['GAP',22],['ATS',43],['MACYS',54]]
-				            },{
-				            	id:'client5',
-				            	data:[['GAP',22],['ATS',70],['MACYS',32]]
-				            },{
-				            	id:'client6',
-				            	data:[['GAP',22],['ATS',13],['MACYS',45]]
-				            },{
-				            	id:'client7',
-				            	data:[['GAP',22],['ATS',23],['MACYS',54]]
-				            },{
-				            	id:'client8',
-				            	data:[['GAP',22],['ATS',23],['MACYS',32]]
-				            },{
-				            	id:'client9',
-				            	data:[['GAP',22],['ATS',70],['MACYS',53]]
-				            },{
-				            	id:'client10',
-				            	data:[['GAP',22],['ATS',23],['MACYS',34]]
-				            },{
-				            	id:'client11',
-				            	data:[['GAP',22],['ATS',23],['MACYS',28]]
-				            },{
-				            	id:'client12',
-				            	data:[['GAP',22],['ATS',12],['MACYS',48]]
-				            }]
-				        }
+				            series: $scope.layer2Data
+				        } 
 				    });
-				 
-				  
-				 
-				 
-				 
-				    console.log($scope.newData);
-				 
-				 /*
-					 * if($scope.designationWithStatusCount.length>10)
-					 * $scope.showColumnGraph=false;
-					 */
-				 
-				 $('#container1').highcharts({
-					    chart: {
-				            type: 'column'
-				        },
-				        title: {
-				            text: 'Statistics'
-				        },
-				        
-				        xAxis: {
-				        	categories,
-				        	
-				            crosshair: true
-				        },
-				        yAxis: {
-				            min: 0,
-				            tickInterval:10,
-				            title: {
-				                text: 'Number of positions'
-				            }
-				        },
-				        tooltip: {
-				            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-				            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-				                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-				            footerFormat: '</table>',
-				            shared: true,
-				            useHTML: true
-				        },
-				        plotOptions: {
-				            column: {
-				                pointPadding: 0.2,
-				                borderWidth: 0
-				            }
-				        },
-				        series
-				    });
-				 
-				 
-
-					
+			
+									
 		});
 	
 	
@@ -432,7 +235,10 @@ function getInterviewDetails(){
 					 onHoldCnt++;
 				if(value.status!= undefined&& value.status== "Rejected")
 					 rejectedCnt++;
+				if(value.status!= undefined&& value.status== "Active")
+					 activeCnt++;
 				});
+		 console.log(activeCnt);
 		 $scope.interviewData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
 		 $scope.interviewData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
 		 $scope.interviewData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
