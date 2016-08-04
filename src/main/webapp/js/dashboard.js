@@ -12,13 +12,14 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
 	$scope.showColumnGraph=true;
-	$scope.showNoAppRequisitionMsg = false;
+	$scope.showNoAppRequisitionMsg = true;
 	$scope.totalPositionData=[];
 	$scope.designationWithStatusCount=[];
 	$scope.totalProfiles=0;
 	$scope.HiredCount = 0;
 	$scope.totalRequisitions = 0;
 	$scope.totalPositions = 0;
+	$scope.showNoInterviewMsg = true;
 	var data1=[];
 	var data2=[];
 	var data3=[];
@@ -33,6 +34,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var onHoldCnt=0;
 	var rejectedCnt=0;
 	var activeCnt=0;
+	var inActiveCnt=0;
+	var closedCnt=0;
 	$scope.interviewData=[];
 	var totalhiredcount=0;
 	var totalselectedcount=0;
@@ -118,6 +121,10 @@ $scope.state = false;
 									 rejectedCnt++;
 								if(value.status!= undefined&& value.status== "Active")
 									 activeCnt++;
+								if(value.status!= undefined&& value.status== "Inactive")
+									 inActiveCnt++;
+								if(value.status!= undefined&& value.status== "Closed")
+									 closedCnt++;
 								});
 			
 						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
@@ -125,8 +132,8 @@ $scope.state = false;
 						 $scope.positionData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
 						 $scope.positionData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
 						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
-						 
-
+						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
+						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
 						 angular.forEach($scope.positionData, function(value, key){
 						 							dashboardService.getPositionByStatus(value.name).then(function(data){
 						 							$scope.data.push(data);
@@ -280,14 +287,18 @@ $scope.state = false;
 			}).catch(function(msg){
 			$log.error(msg);
 			});	
-	}		
+	}	
+	
+	
 	
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
 			.then(function(data){
+				$scope.showNoAppRequisitionMsg =false;
 				// $scope.requisitionsDetails = data;
 				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
 				console.log($scope.requisitionsDetails);
+				
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;
 				}
@@ -300,6 +311,7 @@ $scope.state = false;
 			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") )){
 		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
 		.then(function (data){
+			$scope.showNoInterviewMsg = false;
 			$scope.showScheduleDataInterview = data;
 			console.log(data);
 			console.log(angular.toJson($scope.showScheduleDataInterview));
@@ -315,9 +327,10 @@ $scope.state = false;
 
 	dashboardService.getAllEvents().then(function(data){
 		$scope.events = data;
+		console.log($scope.events);
 		for(i=0; i<$scope.events.length; i++){
 			var subName=$scope.events[i].username.split(" ");
-			if(subName.length==2){
+			if(subName.length>=2){
 				$scope.events[i].initial=subName[0].charAt(0).concat(subName[1].charAt(0));
 			}
 			else{

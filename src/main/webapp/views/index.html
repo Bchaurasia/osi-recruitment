@@ -71,128 +71,130 @@
 
 <div class="row">
 
-			<!--  <div class="">
+	<!--  <div class="">
 				<div id="profileGraph"></div>
 				
 			</div>  -->
 	<div class="col-md-8 ">
-				<div id="requisitionDonut" style="float: left;"></div>
-		
+		<div id="requisitionDonut" style="float: left;"></div>
+
 		<br>
-		
+
 		<!-- <div id="container1" ng-show="showColumnGraph"></div>
 		 -->
-		 <div id="container1" ng-show="showColumnGraph"></div>
-		<div  ng-show="!showColumnGraph">
+		<div id="container1" ng-show="showColumnGraph"></div>
+		<div ng-show="!showColumnGraph">
 
-		<h5 style="margin-top: 10px">Statistics</h5>
-		<hr>
-		<div ng-hide="!hideNoPositionsMsg">
-			<div class="row">
-				<div class="col-md-2">Active</div>
-				<div class=" col-md-10">
-					<div class="progress">
-						<div class="progress-bar progress-bar-success" role="progressbar"
-							aria-valuenow="" aria-valuemin="0" aria-valuemax="100"
-							ng-style="{width: (positionDetails.active + '%')}">{{graphData.Active
-							|| "0"}}/{{graphData.Total || "0"}}</div>
+			<h5 style="margin-top: 10px">Statistics</h5>
+			<hr>
+			<div ng-hide="!hideNoPositionsMsg">
+				<div class="row">
+					<div class="col-md-2">Active</div>
+					<div class=" col-md-10">
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar"
+								aria-valuenow="" aria-valuemin="0" aria-valuemax="100"
+								ng-style="{width: (positionDetails.active + '%')}">{{graphData.Active
+								|| "0"}}/{{graphData.Total || "0"}}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">InActive</div>
-				<div class=" col-md-10">
-					<div class="progress">
-						<div class="progress-bar progress-bar-info" role="progressbar"
-							aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
-							ng-style="{width: (positionDetails.inactive + '%')}">{{graphData.Inactive
-							|| "0"}}/{{graphData.Total || "0"}}</div>
+				<div class="row">
+					<div class="col-md-2">InActive</div>
+					<div class=" col-md-10">
+						<div class="progress">
+							<div class="progress-bar progress-bar-info" role="progressbar"
+								aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+								ng-style="{width: (positionDetails.inactive + '%')}">{{graphData.Inactive
+								|| "0"}}/{{graphData.Total || "0"}}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">Hired</div>
-				<div class=" col-md-10">
-					<div class="progress">
-						<div class="progress-bar progress-bar-warning" role="progressbar"
-							aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-							ng-style="{width: (positionDetails.hired + '%')}">{{graphData.Hired
-							|| "0"}}/{{graphData.Total || "0"}}</div>
+				<div class="row">
+					<div class="col-md-2">Hired</div>
+					<div class=" col-md-10">
+						<div class="progress">
+							<div class="progress-bar progress-bar-warning" role="progressbar"
+								aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+								ng-style="{width: (positionDetails.hired + '%')}">{{graphData.Hired
+								|| "0"}}/{{graphData.Total || "0"}}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">OnHold</div>
-				<div class=" col-md-10">
-					<div class="progress">
-						<div class="progress-bar progress-bar-danger" role="progressbar"
-							aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-							ng-style="{width: (positionDetails.onhold + '%')}">{{graphData.Onhold
-							|| "0"}}/{{graphData.Total || "0"}}</div>
+				<div class="row">
+					<div class="col-md-2">OnHold</div>
+					<div class=" col-md-10">
+						<div class="progress">
+							<div class="progress-bar progress-bar-danger" role="progressbar"
+								aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+								ng-style="{width: (positionDetails.onhold + '%')}">{{graphData.Onhold
+								|| "0"}}/{{graphData.Total || "0"}}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">Selected</div>
-				<div class=" col-md-10">
-					<div class="progress">
-						<div class="progress-bar" role="progressbar" aria-valuenow="44"
-							aria-valuemin="0" aria-valuemax="100"
-							ng-style="{width: (positionDetails.selected + '%')};"
-							style="background: #c1c1c1">{{graphData.Selected ||
-							"0"}}/{{graphData.Total || "0"}}</div>
+				<div class="row">
+					<div class="col-md-2">Selected</div>
+					<div class=" col-md-10">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="44"
+								aria-valuemin="0" aria-valuemax="100"
+								ng-style="{width: (positionDetails.selected + '%')};"
+								style="background: #c1c1c1">{{graphData.Selected ||
+								"0"}}/{{graphData.Total || "0"}}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-			<div class="col-md-2">Rejected</div>
-			<div class=" col-md-10">
-				<div class="progress">
-					<div class="progress-bar" role="progressbar" aria-valuenow="0"
-						aria-valuemin="0" aria-valuemax="100" ng-style="{width: (positionDetails.rejected + '%')}">{{positionDetails.rejected}}%</div>
+				<div class="row">
+					<div class="col-md-2">Rejected</div>
+					<div class=" col-md-10">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100"
+								ng-style="{width: (positionDetails.rejected + '%')}">{{positionDetails.rejected}}%</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
 
-			<b>{{positionDetails.position}}</b> <br> <br>
-			<div ng-repeat="position in designationWithStatusCount">
-				<button class="statistics-btn" ng-if="position.Total != 0"
-					ng-click="getGraphData(position.Position)">{{position.Position}}</button>
+				<b>{{positionDetails.position}}</b> <br> <br>
+				<div ng-repeat="position in designationWithStatusCount">
+					<button class="statistics-btn" ng-if="position.Total != 0"
+						ng-click="getGraphData(position.Position)">{{position.Position}}</button>
+				</div>
 			</div>
-		</div>
 		</div>
 		<div ng-hide="hideNoPositionsMsg">
 			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
 		</div>
 		<br> <br>
-		<div ng-show="!showNoAppRequisitionMsg" >
-		<h5 style="margin-top: 15px" align="center" >Requisition for
-			Approval</h5>
-		<hr>
-		<div class="row" style="padding: 10px">
-			<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-				<div class="card col-md-6"
-					ng-repeat="requisition in requisitionsDetails">
-					<div class="content">
-						<span class="right req-title">{{requisition.requisitionId}}</span>
-						<div class="header" align="left">
-							Created By: <b>{{requisition.createdBy}}</b>
+		<div ng-show="!showNoAppRequisitionMsg">
+			<h5 style="margin-top: 15px" align="center">Requisition for
+				Approval</h5>
+			<hr>
+			<div class="row" style="padding: 10px">
+				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
+					<div class="card col-md-6"
+						ng-repeat="requisition in requisitionsDetails">
+						<div class="content">
+							<span class="right req-title">{{requisition.requisitionId}}</span>
+							<div class="header" align="left">
+								Created By: <b>{{requisition.createdBy}}</b>
+							</div>
+							<div class="meta" align="left">
+								<time am-time-ago="requisition.createdDate"></time>
+							</div>
+							<hr>
+							<div class="description"
+								ng-if="requisition.status == 'INITIATED'">
+								You need to approve this requisition for <b>{{requisition.position}}</b>
+								position.
+							</div>
 						</div>
-						<div class="meta" align="left">
-							<time am-time-ago="requisition.createdDate"></time>
-						</div>
-						<hr>
-						<div class="description" ng-if="requisition.status == 'INITIATED'">
-							You need to approve this requisition for <b>{{requisition.position}}</b>
-							position.
-						</div>
-					</div>
-					<div class="extra content">
-						<div class="ui two buttons">
-							<div class="ui basic green button"
-								ng-click="editRequisition(requisition.requisitionId)">View
-								Details</div>
-						</div>
+						<div class="extra content">
+							<div class="ui two buttons">
+								<div class="ui basic green button"
+									ng-click="editRequisition(requisition.requisitionId)">View
+									Details</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -201,41 +203,40 @@
 
 	</div>
 
-	<div class="col-md-4" >
+	<div class="col-md-4">
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
-		<div ng-hide="!showNoInterviewMsg">
-			<h5 style="margin-top: 10px" >Upcoming Events</h5>
-			<hr style="margin-left: 15px;">
-			<div style="max-height: 250px; height: auto; overflow: auto;">
-				<div class="event"
-					ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate "
-					>
-					<div class="label">
-						<span ng-if="schedule.round == 'Technical Round 1'"
-							class="initial" style="background: #e47575">TR 1</span> <span
-							ng-if="schedule.round == 'Technical Round 2'" class="initial"
-							style="background: #d4ab61">TR 2</span> <span
-							ng-if="schedule.round == 'Hr Round'" class="initial"
-							style="background: #7ad27a">HR </span> <span
-							ng-if="schedule.round == 'Manager Round'" class="initial"
-							style="background: #9696dc">MR</span>
-					</div>
-					<div class="content">
-						<div class="summary" align="left">
-							You need to take interview of <a class="user"
-								ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
-							</a> for <a class="user"
-								ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
-							</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
-									MMMM Do YYYY, h:mm a' }}</time></b>.
-							<div class="date">
-								<time am-time-ago="schedule.createdDate"></time>
+			<div ng-hide="showNoInterviewMsg">
+				<h5 style="margin-top: 10px">Upcoming Events</h5>
+				<hr style="margin-left: 15px;">
+				<div style="max-height: 250px; height: auto; overflow: auto;">
+					<div class="event"
+						ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate ">
+						<div class="label">
+							<span ng-if="schedule.round == 'Technical Round 1'"
+								class="initial" style="background: #e47575">TR 1</span> <span
+								ng-if="schedule.round == 'Technical Round 2'" class="initial"
+								style="background: #d4ab61">TR 2</span> <span
+								ng-if="schedule.round == 'Hr Round'" class="initial"
+								style="background: #7ad27a">HR </span> <span
+								ng-if="schedule.round == 'Manager Round'" class="initial"
+								style="background: #9696dc">MR</span>
+						</div>
+						<div class="content">
+							<div class="summary" align="left">
+								You need to take interview of <a class="user"
+									ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
+								</a> for <a class="user"
+									ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
+								</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
+										MMMM Do YYYY, h:mm a' }}</time></b>.
+								<div class="date">
+									<time am-time-ago="schedule.createdDate"></time>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 			<div class="ui feed " style="font-size: 100%;">
 				<h5 style="margin-top: 10px">Recent Activities</h5>
@@ -243,8 +244,9 @@
 				<div align="left"
 					style="max-height: 250px; height: auto; overflow: auto;">
 					<div class="event" ng-repeat="feed in events">
-						<div class="label">
-							<span class="initial" style="width: 34px;">{{feed.initial.toUpperCase()}}</span>
+						<div class="label" style="color: black">
+							<span class="initial"
+								ng-style="{'background-color':(($index%2)==0?'#00ffff':'#ffff4d')}" tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
 						</div>
 						<div class="content">
 							<div class="summary">
