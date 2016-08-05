@@ -64,14 +64,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s6">
-				<select placeholder="Select Client" ng-model="requisition.client"
-					required ng-change="getJobDescriptionByClient(requisition.client)"
-					ng-options="o as o for o in clientList | orderBy:'toString()'"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Client</option>
-				</select> <label>Client<b class="mandatory">*</b></label>
-			</div>
+		     <div class="input-field col s6">
+					<select placeholder="Select Job Type"
+						ng-model="requisition.jobType" required
+						ng-options="o as o for o in info.jobTypes"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Job Type</option>
+					</select> <label>Job Type<b class="mandatory">*</b></label>
+				</div>
 			<div class="input-field col s6">
 				<select placeholder="Select Location"
 					ng-model="requisition.location"
@@ -109,6 +109,14 @@
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 20px">
+		<div class="input-field col s6">
+				<select placeholder="Select Client" ng-model="requisition.client"
+					required ng-change="getJobDescriptionByClient(requisition.client)"
+					ng-options="o as o for o in clientList | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option value="" disabled="disabled">Select Client</option>
+				</select> <label>Client<b class="mandatory">*</b></label>
+			</div>
 			<div class="input-field col s6">
 				<select ng-model="jobDescription"
 					ng-change="setSkillsAndJDDetails()"
@@ -117,7 +125,9 @@
 					<option value="">Select Job	Description Title</option>
 				</select> <label class="label-alignment">Job Description Title</label>
 			</div>
-				<div class="input-field col s6">
+			</div>
+		<div class="row">
+		       <div class="input-field col s6">
 					<ui-select multiple ng-model="requisition.skillType"
 						ng-keypress="myFunct($event)" theme="select2" ui-select-required
 						ng-disabled="disabled"> <ui-select-match
@@ -128,11 +138,9 @@
 						Skills<b class="mandatory">*</b>
 					</label>
 				</div>
-			</div>
-		<div class="row">
 		   
-			<div class="input-field col s12">
-				<textarea id="additionalSkills" class="materialize-textarea"
+			<div class="input-field col s6">
+				<textarea id="additionalSkills" class="materialize-textarea" style="width:78%"
 					ng-model="requisition.additionalSkills" length="120"
 					placeholder="Enter any additional Skills..."></textarea>
 				<label style="position: absolute; top: -22px;">Additional Skills</label>

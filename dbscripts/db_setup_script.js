@@ -41,6 +41,8 @@ db.info.insert({"_id":"expMonths",value: ["0", "1", "2", "3", "4", "5", "6", "7"
 
 db.info.insert({"_id":"plocation",value: ["Hyderabad", "Pune", "Bengaluru", "Chennai"]});
 
+db.info.insert({"_id":"jobTypes",value: [ "Full Time" , "Contract", " Contract to Hire"]});
+
 db.info.insert({"_id":"qualification",value: ["B.E.", "B.Tech", "MBA", "MCA", "Others"]});
 
 db.info.insert({"_id":"referredBy",value: ["Consultancy", "Referral"]});

@@ -154,38 +154,43 @@
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
-							ng-options="o for o in bus" class="form-control input-sm">
+							ng-options="o for o in bus" class="form-control input-sm" required>
 							<option value="" disabled="disabled">Select BU</option>
-						</select> <label style="position: absolute; top: -22px;"> BU: </label>
+						</select> <label style="position: absolute; top: -22px;"> BU<b
+							class="mandatory">*</b> </label>
 					</div>
 					<div class="input-field col s6">
 						<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
 							ng-options="o for o in streamData track by o"
-							class="form-control input-sm">
+							class="form-control input-sm" required>
 							<option value="" disabled="disabled">Select Stream</option>
-						</select> <label style="position: absolute; top: -22px;">Stream: </label>
+						</select> <label style="position: absolute; top: -22px;">Stream<b
+							class="mandatory">*</b> </label>
 					</div>
 				</div>
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s2">
 						<select ng-model="level" name="currency" ng-change="selectGrade(level)" 
-							ng-options="o for o in levelDatalist track by o" class="form-control input-sm">
+							ng-options="o for o in levelDatalist track by o" class="form-control input-sm" required>
 							<option value="" disabled="disabled">Select Level</option>
-						</select> <label style="position: absolute; top: -22px;"> Level: </label>
+						</select> <label style="position: absolute; top: -22px;"> Level<b
+							class="mandatory">*</b> </label>
 					</div>
 					<div class="input-field col s2">
 						<select ng-model="grade" name="grade" ng-change="selectDesignation(grade)" 
 							ng-options="o.grade for o in  designationgrades track by o.grade"
-							class="form-control input-sm">
+							class="form-control input-sm" required>
 							<option value="" disabled="disabled">Select Grade</option>
-						</select> <label style="position: absolute; top: -22px;">Grade: </label>
+						</select> <label style="position: absolute; top: -22px;">Grade<b
+							class="mandatory">*</b> </label>
 					</div>
 						<div class="col-md-2"></div>
 					<div class="input-field col s6">
 						<select ng-model="name" name="currency"
-							ng-options="o.name for o in designationdesignations track by o.grade" class="form-control input-sm">
+							ng-options="o.name for o in designationdesignations track by o.grade" class="form-control input-sm" required>
 								<option value="" disabled="disabled">Select Designation</option>
-						</select> <label style="position: absolute; top: -22px;"> Designation: </label>
+						</select> <label style="position: absolute; top: -22px;"> Designation<b
+							class="mandatory">*</b> </label>
 					</div>
 		
 				</div>
@@ -271,7 +276,7 @@
 					<div class="input-field col s6">
 						<input placeholder="Enter Current Location" name="currentLocation"
 							class="form-control" type="text"
-							ng-model="candidate.currentLocation" required> <label
+							ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/" required> <label
 							style="position: absolute; top: -22px;">Current Location<b
 							class="mandatory">*</b></label>
 					<div class="validation-error"
@@ -279,14 +284,14 @@
 					               Current location must be characters only.</div>
 					</div>
 					<div class="input-field col s6">
-						<input placeholder="Enter Work Location" name="WorkLocation"
-							class="form-control" type="text" ng-model="candidate.workLocation"
+						<input placeholder="Enter Work Location" name="workLocation"
+							class="form-control" type="text" ng-model="candidate.workLocation" ng-pattern="/^[a-zA-Z _]*$/"
 							required> <label style="position: absolute; top: -22px;">Work
 							Location<b class="mandatory">*</b>
 						</label>
 					<div class="validation-error"
 						 ng-show="(createOffer.workLocation.$dirty || invalidSubmitAttempt) && createOffer.workLocation.$error.pattern">
-					               Current location must be characters only.</div>
+					               Work location must be characters only.</div>
 					</div>
 				</div>
 				<div class="row" style="padding-left:0%">
