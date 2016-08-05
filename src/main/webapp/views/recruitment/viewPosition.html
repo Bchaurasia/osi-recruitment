@@ -28,7 +28,7 @@
 		
 		
 				<div class="row" style="margin-bottom:2%;">
-					<div class="input-field col s6">
+					<div class="input-field col s5 rangeDiv">
 						<div class="row">
 							<div class="input-field col s6">
 								<input type="range" ng-model="position.minExpYear"
@@ -38,15 +38,16 @@
 							</div>
 							<div class="input-field col s6">
 								<input type="range" ng-model="position.maxExpYear"
+									class="floatR"
 									ng-disabled="flagDisabled"
 									ng-change="max(requisition.maxExpYear)" min="0" max="15" required />
-								<span class="range-slider__value">Max:{{position.maxExpYear}}</span>
+								<span class="range-slider__value floatR">Max:{{position.maxExpYear}}</span>
 							</div>
 						</div>
 						<label style="margin-top: 14px">Experience Required<b
 							class="mandatory">*</b></label>
 					</div>
-		
+					<div class="input-field col s1"></div>
 					<div class="input-field col s6" style="margin-top: 14px">
 						<select placeholder="Select Client" ng-model="selClient"
 							ng-options="o as o for o in clients | orderBy:'toString()'"

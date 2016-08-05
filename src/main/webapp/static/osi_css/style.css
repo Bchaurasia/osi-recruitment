@@ -2672,9 +2672,7 @@ table.fc-border-separate {
 	list-style: none;
 }
 
-.ML0 {
-	margin-left: 0
-}
+
 
 .MR0 {
 	margin-right: 0;
@@ -3054,7 +3052,7 @@ button.glyphicon.glyphicon-remove,button.glyphicon.glyphicon-plus{
 }
 
 div.row.collapsible-header h5 b{
-	 font-size:175%; 
+	 font-size:150%; 
 }
 
 div.row.collapsible-header h5{
@@ -3124,7 +3122,7 @@ div.field select.select-overide{
     }
     
  div.ui.segment.segmentPadding{
- 	padding-left:5%;
+ 	padding-left:8%;
  }
  
  div.pageWidth{
@@ -3154,4 +3152,16 @@ input[type="range"].floatR{
 
 .select2-container-multi .select2-choices .select2-search-field input{
 	background-color:#f2f2f2 !important;/*Over-rides the css of select2.css for the same class light gray */
+}
+
+.input-field.col.s2.PL0 {
+	padding-left: 0px;
+}
+
+ 
+ .ui.dividing.header.FL.WD81{
+    float: left;
+    width: 81%;
+    color:rgb(238, 110, 115);
+   
 }
