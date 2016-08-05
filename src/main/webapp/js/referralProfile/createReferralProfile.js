@@ -32,7 +32,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.designations={};
 	$scope.candidate.expMonth="0";
 	$scope.requisitionId="";
-	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.currencyList = ["INR","USD","GBP","EUR","UAE"];
 	$scope.screeningStatusList= ["Yes","No"];
 	$scope.candidate.currency="INR";
 	userService.getUsers().then(function(data) {

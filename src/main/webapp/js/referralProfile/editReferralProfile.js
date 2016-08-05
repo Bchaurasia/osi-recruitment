@@ -16,7 +16,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.todayDate = new Date();
 	$scope.requisitionId = "";
 	$scope.disableUpdateBtn = false;
-	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.currencyList = ["INR","USD","GBP","EUR","UAE"];
 	$scope.candidate.currency="INR";
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
