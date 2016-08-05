@@ -7,18 +7,17 @@
 				<b>Update Profile</b>
 			</h5>
 		</div>
+	<div class="ui segment segmentPadding">
 		<div class="row">
 			<div class="input-field col s6">
-				<b class="bannerleft">{{creator.name}}</b> <label>Submitted
-					By:</label>
+					<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Submitted By : {{creator.name}}</h4>
 			</div>
 			<div class="input-field col s6">
-				<b style="position: absolute; left: 24%;">{{candidate.profileSource}}</b>
-				<label>Profile Source:</label>
+				<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Profile Source : {{candidate.profileSource}}</h4>
 			</div>
 		</div>
 		<br> <br>
-
+	
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
@@ -167,12 +166,18 @@
 				<label style="position: absolute; top: -22px;">Address</label>
 			</div>
 		</div>
-
+	</div>
+	<div class="ui segment segmentPadding">
 		<div class="row" align="left">
 			<div class="chip roundLabels" align="left">Educational Details</div>
 		</div>
-
-		<div class="row" ng-repeat="candidate in candidate.qualifications">
+		<!-- <div class="row" align="left">
+			<h4 class="ui header " >
+				<img class="ui image" src="../static/osi_images/school.png">
+				<div class="content">Educational Details</div>
+			</h2>
+		</div> -->	
+			<div class="row" ng-repeat="candidate in candidate.qualifications">
 			<div class="input-field col s6">
 				<select placeholder="Select Qualification"
 					ng-model="candidate.qualification" name="pso"
@@ -196,25 +201,28 @@
 
 			</div>
 
-			<div class="input-field col s2">
+			<div class="input-field col s2 PL0">
 				<input type="range" ng-model="candidate.percentage" min="0"
 					max="100" /> <label>Percentage<b class="mandatory">*</b></label> <span
 					class="range-slider__value">{{candidate.percentage}}%</span>
-			</div>
 
-			<div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove"
-					data-tooltip="Remove Educational Details"
-					ng-show="candidate.qualifications.length!=1"
-					ng-click="deleteQualification($index)"></button>
-				&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn" class="glyphicon glyphicon-plus"
-					data-tooltip="Add Educational Details"
-					ng-show="$last" ng-click="addColumnCriteria()"
-					ng-disabled="checkDisability(candidate.qualification)"></button>
-			</div>
+					<div class="input-field col s1 ">
+						<button class="glyphicon glyphicon-remove"
+							data-tooltip="Remove Educational Details"
+							ng-show="candidate.qualifications.length!=1"
+							ng-click="deleteQualification($index)"></button>
+						&nbsp;&nbsp;&nbsp;
+						<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+							data-tooltip="Add Educational Details" ng-show="$last"
+							ng-click="addColumnCriteria()"
+							ng-disabled="checkDisability(candidate.qualification)"></button>
+					</div>
+				</div>
+
+			
 		</div>
-
+	</div>
+	<div class="ui segment segmentPadding">
 		<div class="row" align="left">
 			<div class="chip roundLabels" align="left">Professional Details</div>
 		</div>
@@ -270,19 +278,16 @@
 				<input placeholder="Enter current Employer"
 					name="currentEmployer" class="form-control" type="text"
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
-				<label style="position: absolute; top: -22px;">Current Employer</label>
-			<div class="validation-error"
-					ng-show="(CreateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.currentEmployer.$error.pattern">
-					Current Employer must be alpha numeric only.</div>	
+				<label style="position: absolute; top: -22px;">Current
+					Employer</label>
 			</div>
 
 			<div class="input-field col s6">
 				<input placeholder="Enter Additional Skills" name="otherSkills"
 					class="form-control" type="text" ng-model="candidate.otherSkills"
-					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
-			<div class="validation-error"
-					ng-show="(CreateCandidate.otherSkills.$dirty || invalidSubmitAttempt) && CreateCandidate.otherSkills.$error.pattern">
-					Additional Skills must be alpha numeric only.</div>
+					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label
+					style="position: absolute; top: -22px;">Additional Skills</label>
+
 			</div>
 
 		</div>
@@ -303,8 +308,9 @@
 
 			</div>
 		</div>
-
-
+	</div>
+	
+	<div class="ui segment segmentPadding">
 		<div class="row" align="left">
 			<div class="chip roundLabels" align="left">Other Details</div>
 		</div>
@@ -335,7 +341,7 @@
 				</label><span class="validation-error"
 					ng-required="UpdateCandidate.currentCTC.$error.pattern"
 					ng-show="UpdateCandidate.currentCTC.$error.pattern"> Provide
-					a valid CTC with numeric value</span>
+					a valid CTC</span>
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter expected CTC" name="expectedCTC"
@@ -345,7 +351,7 @@
 				</label> <span class="validation-error"
 					ng-required="UpdateCandidate.expectedCTC.$error.pattern"
 					ng-show="UpdateCandidate.expectedCTC.$error.pattern">
-					Provide a valid CTC with numeric value</span>
+					Provide a valid CTC </span>
 			</div>
 		</div>
 
@@ -388,6 +394,7 @@
 					Notes</label>
 			</div>
 		</div>
+	</div>
 
 		<div class="row">
 		
