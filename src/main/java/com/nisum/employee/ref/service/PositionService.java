@@ -120,7 +120,10 @@ public class PositionService implements IPositionService {
 		position.setCreatedDate(new Date());
 		position.setUpdatedBy(requisition.getUpdatedBy());
 		position.setCreatedBy(requisition.getUpdatedBy());
-		position.setSecondarySkills(requisition.getAdditionalSkills());
+		if(null!=requisition.getAdditionalSkills()){
+			position.setSecondarySkills(requisition.getAdditionalSkills());
+		}
+		position.setJobType(requisition.getJobType());
 		return position;
 	}
 
