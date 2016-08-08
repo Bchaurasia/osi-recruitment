@@ -66,19 +66,26 @@
 				<div class="input-field col s6">
 					<input placeholder="Enter current Employer"
 						name="currentEmployer" class="form-control" type="text"
-						ng-model="candidate.currentEmployer"> <label
+						ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z .]*$/"> <label
 						style="position: absolute; top: -22px;" required>Current
 						Employer<b class="mandatory">*</b>
 					</label>
+					<div class="validation-error"
+						 ng-show="(createOffer.currentEmployer.$dirty || invalidSubmitAttempt) && createOffer.currentEmployer.$error.pattern">
+					              Enter valid Current Employer.</div>
+					
 				</div>
-	
+			
 				<div class="input-field col s6">
 					<input placeholder="Enter Experience (Yrs)" name="expYear"
-						class="form-control" type="text" ng-model="candidate.expYear"
-						required> <label style="position: absolute; top: -22px;">Experience
+						class="form-control" type="text" ng-model="candidate.expYear" ng-pattern="/^-?\d+\.?\d*$/" maxlength="4" required> 
+						<label style="position: absolute; top: -22px;">Experience
 						(Yrs)<b class="mandatory">*</b>
-					</label></label>
+					</label>
+					<div class="validation-error"
+					 ng-show="(createOffer.expYear.$dirty || invalidSubmitAttempt) && createOffer.expYear.$error.pattern">Experience must be numeric only.</div>
 				</div>
+				
 			</div>
 			<div class="row"
 				style=" position: relative;  width: 88.6%; margin-left: 12px; margin-bottom:25px; "
@@ -136,19 +143,24 @@
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<input placeholder="Enter Project name" name="stream"
-							class="form-control" type="text" ng-model="candidate.project"
+							class="form-control" type="text" ng-model="candidate.project"  ng-pattern="/^[a-zA-Z0-9 _.]*$/"
 							required> <label style="position: absolute; top: -22px;">Project
 							<b class="mandatory">*</b>
 						</label></label>
+						<div class="validation-error"
+						 ng-show="(createOffer.stream.$dirty || invalidSubmitAttempt) && createOffer.stream.$error.pattern">
+					               Enter valid Project Name.</div>
 					</div>
 		
 					<div class="input-field col s6">
 						<input placeholder="Enter Stream" name="hrManager"
 							class="form-control" type="text"
-							ng-model="candidate.recruiter.name" required> <label
+							ng-model="candidate.recruiter.name"   ng-pattern="/^[a-zA-Z ]*$/" required> <label
 							style="position: absolute; top: -22px;">Recruiter<b
 							class="mandatory">*</b></label> </label>
-		
+						<div class="validation-error"
+						 ng-show="(createOffer.hrManager.$dirty || invalidSubmitAttempt) && createOffer.hrManager.$error.pattern">
+					               Recruiter must be characters only.</div>
 					</div>
 				</div>
 				<div class="row" style="padding-left:0%">
@@ -296,7 +308,7 @@
 				</div>
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
-						<input placeholder="Enter profileSource" name="expYear"
+						<input placeholder="Enter profileSource" name="source"
 							class="form-control" type="text" ng-model="candidate.profileSource">
 						<label style="position: absolute; top: -22px;" required>Profile
 							Source<b class="mandatory">*</b>
