@@ -34,7 +34,6 @@ function getInformationFromCache(){
 }
 
 function getInformation(){
-	console.log('gathering new info data from backend');
 
 	return $http.get('resources/info')
 		.then(getInfoData)

@@ -171,6 +171,9 @@ $scope.state = false;
 				        subtitle: {
 				            text: 'Click to view last one month status.'
 				        },
+				        credits: {
+				            enabled: false
+				        },
 				        plotOptions: {
 				            series: {
 				                dataLabels: {
@@ -184,6 +187,7 @@ $scope.state = false;
 				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
 				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:1.0f}</b> of total<br/>'
 				        },
+				      
 				        series: [{
 				            name: 'Statistics',
 				            colorByPoint: true,
@@ -313,8 +317,6 @@ $scope.state = false;
 		.then(function (data){
 			$scope.showNoInterviewMsg = false;
 			$scope.showScheduleDataInterview = data;
-			console.log(data);
-			console.log(angular.toJson($scope.showScheduleDataInterview));
 			if(data == "" || data == null || data == undefined){
 				$scope.showNoInterviewMsg = true;
 			}
@@ -322,12 +324,10 @@ $scope.state = false;
 			$log.error(msg);
 			$scope.hideNoInterviewMsg = false;
 		});
-		console.log($scope.showScheduleDataInterview);
 	}
 
 	dashboardService.getAllEvents().then(function(data){
 		$scope.events = data;
-		console.log($scope.events);
 		for(i=0; i<$scope.events.length; i++){
 			var subName=$scope.events[i].username.split(" ");
 			if(subName.length>=2){
