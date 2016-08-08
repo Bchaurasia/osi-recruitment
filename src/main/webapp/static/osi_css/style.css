@@ -2826,7 +2826,6 @@ table.fc-border-separate {
 	margin-right: 7%;
 	height: 6%;
 	margin-bottom: 3.5em;
-	background-color: white;
 }
 
 .nav-tabs {
@@ -3164,4 +3163,16 @@ input[type="range"].floatR{
     width: 81%;
     color:rgb(238, 110, 115);
    
+}
+
+
+body div#wrapper{
+	background-color:#f0f0f5;/* #F5F3EE; */
+}
+form.collapsible-accordion{
+	    background-color: white;
+}
+
+ul.tabs{
+	background-color:transparent;
 }
