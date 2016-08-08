@@ -190,7 +190,7 @@
 					<div class="input-field col s1">
 						<button class="glyphicon glyphicon-remove"
 							data-tooltip="Remove Educational Details"
-							ng-show="candidate.qualifications.length!=1"
+							ng-show="lengthOfQualifications()"
 							ng-click="deleteQualification($index)"></button>
 						&nbsp;&nbsp;&nbsp;
 						<button id="addButtonColumn" class="glyphicon glyphicon-plus"

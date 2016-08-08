@@ -126,27 +126,16 @@
 					Current location must be characters only.</div>
 			</div>
 
-			<!-- <div class="input-field col s6">
+			<div class="input-field col s6">
 				<select ng-model="candidate.jobCode" name="jobCode"
 					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
-					ng-options="o as o for o in profilepositions track by $index"
+					ng-options="o as o for o in profilepositions track by o"
 					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Position</option>
-				</select> <label style="position: absolute; top: -22px;">Position : {{candidate.jobCode}}<b
-					class="mandatory">*</b></label>
+					<option value="">Select Position</option>
+				</select> <label style="position: absolute; top: -22px;">Position</label>
 
-			</div> -->
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="candidate.jobCode" theme="selectize"
-					style="width: 80%"
-					on-select="getRequisitionIdFromJobCode(candidate.jobCode)"
-					title="Choose a requisitionId"> <ui-select-match
-					placeholder="Select Position.">{{candidate.jobCode}}</ui-select-match>
-				<ui-select-choices
-					repeat="jobCode in profilepositions | filter: $select.search">
-				<span ng-bind-html="jobCode | highlight: $select.search"></span> </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;"> Position </label>
 			</div>
+			
 		</div>
 		<div class="row">
 			<div class="input-field col s12">
@@ -197,7 +186,7 @@
 					<div class="input-field col s1">
 						<button class="glyphicon glyphicon-remove"
 							data-tooltip="Remove Educational Details"
-							ng-show="candidate.qualifications.length!=1"
+							ng-show="lengthOfQualifications()"
 							ng-click="deleteQualification($index)"></button>
 						&nbsp;&nbsp;&nbsp;
 						<button id="addButtonColumn" class="glyphicon glyphicon-plus"

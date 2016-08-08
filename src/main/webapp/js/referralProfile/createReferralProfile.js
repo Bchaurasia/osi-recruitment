@@ -283,5 +283,13 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				console.log(msg);
 			})
 		}
-	};	
+	};
+	$scope.lengthOfQualifications = function() {
+		if($scope.candidate.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
 }]);

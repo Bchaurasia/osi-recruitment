@@ -309,4 +309,12 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		});	
 			
 	};
+	$scope.lengthOfQualifications = function() {
+		if($scope.candidate.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
 }]);
