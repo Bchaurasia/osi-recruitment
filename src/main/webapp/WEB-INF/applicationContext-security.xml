@@ -10,7 +10,7 @@
 
 	<context:component-scan base-package="com.nisum.employee.ref" />
 	<context:component-scan base-package="com.nisum.employee.ref.util" />
-	<http auto-config='true'>
+	<http auto-config='true' disable-url-rewriting="true">
 		<intercept-url pattern='/resources/api-docs/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 
 		<intercept-url pattern='/login.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
