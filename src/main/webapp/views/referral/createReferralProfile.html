@@ -267,9 +267,7 @@
 				<input placeholder="Enter Additional Skills" name="otherSkills"
 					class="form-control" type="text" ng-model="candidate.otherSkills"
 					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
-			<div class="validation-error"
-					ng-show="(CreateCandidate.otherSkills.$dirty || invalidSubmitAttempt) && CreateCandidate.otherSkills.$error.pattern">
-					Additional Skills must be alpha numeric only.</div>
+			
 			</div>
 
 		</div>
