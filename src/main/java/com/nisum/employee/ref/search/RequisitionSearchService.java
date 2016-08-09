@@ -84,9 +84,9 @@ public class RequisitionSearchService {
 		ArrayList<Requisition> requisitionsByApprover = new ArrayList<Requisition>();
 		for (Iterator<Requisition> iterator = requisitions.iterator(); iterator.hasNext();) {
 			 Requisition requisition = (Requisition) iterator.next();
-		     	if (requisition.getApproval1()!= null && emailId.equals(requisition.getApproval1().getEmailId())) {
+		     	if (requisition.getApproval1()!= null && emailId.equals(requisition.getApproval1().getEmailId()) && requisition.getApproval1().isApproved() == false && !requisition.getStatus().equals("REJECTED")) {
 		     		requisitionsByApprover.add(requisition);
-				}else if (requisition.getApproval2()!= null && requisition.getApproval1().isApproved() && emailId.equals(requisition.getApproval2().getEmailId())) {
+				}else if (requisition.getApproval2()!= null && requisition.getApproval1().isApproved() && emailId.equals(requisition.getApproval2().getEmailId()) && requisition.getApproval1().isApproved() == false && !requisition.getStatus().equals("REJECTED")) {
 					requisitionsByApprover.add(requisition);
 				}
 		    }

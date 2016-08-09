@@ -8,6 +8,7 @@ import javax.mail.internet.AddressException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.repository.RequisitionRepository;
@@ -32,6 +33,9 @@ public class RequisitionService implements IRequisitionService {
 
 	@Autowired
 	private JobRequisitionNotificationService jobRequisitionNotificationService;
+	
+	@Autowired
+	IEventService eventService;
 
 	private static final String REQUISITION_HAS_APPROVED_SUCCESSFULLY = " Requisition has been approved successfully ";
 
@@ -42,6 +46,11 @@ public class RequisitionService implements IRequisitionService {
 				.prepareRequisition(requisition);
 		requisitionSearchService.addRequisitionIndex(persistedRequisition);
 		try {
+			Event e= new Event();
+			e.setEventDesc(requisition.getRequisitionId()+ " for position "+requisition.getPosition()+" is created.");
+			e.setCategory("Management");
+			e.setEmailId(requisition.getCreatedBy());
+			eventService.setEvent(e);
 			jobRequisitionNotificationService.sendNotification(requisition);
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -60,6 +69,11 @@ public class RequisitionService implements IRequisitionService {
 	@Override
 	public void updateRequisition1(Requisition requisition)
 			throws AddressException, MessagingException {
+		Event e= new Event();
+		e.setEventDesc(requisition.getRequisitionId()+ " has been updated.");
+		e.setCategory("Management");
+		e.setEmailId(requisition.getCreatedBy());
+		eventService.setEvent(e);
 		Requisition updatereq = requisitionRepository
 				.updateRequisition(requisition);
 		requisitionSearchService.updateRequisitionIndex(updatereq);
@@ -79,6 +93,11 @@ public class RequisitionService implements IRequisitionService {
 			updateRequisition1(requisition);
 			
 			try {
+				Event e= new Event();
+				e.setEventDesc(requisition.getNoOfPositions()+ " "+requisition.getPosition()+ " positions for "+requisition.getClient() + " has been created.");
+				e.setCategory("Management");
+				e.setEmailId(requisition.getCreatedBy());
+				eventService.setEvent(e);
 				jobRequisitionNotificationService.sendNotificationForFullyApproved(requisition);
 			} catch (MessagingException e) {
 				e.printStackTrace();

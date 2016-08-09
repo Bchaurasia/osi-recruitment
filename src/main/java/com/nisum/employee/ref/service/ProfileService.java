@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.repository.InterviewDetailsRepository;
 import com.nisum.employee.ref.repository.ProfileRepository;
+import com.nisum.employee.ref.repository.UserInfoRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
 
@@ -22,6 +24,9 @@ public class ProfileService implements IProfileService{
 
 	@Autowired
 	ProfileRepository profileRepository;
+	
+	@Autowired
+	UserInfoRepository userInfoRepository;
 	
 	@Autowired
 	ProfileSearchService profileSearchService;
@@ -38,13 +43,21 @@ public class ProfileService implements IProfileService{
 	@Autowired
 	private NotificationService notificationService;
 	
+
+	@Autowired
+	IEventService eventService;
+	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
-		candidate.setIsApprovedFlag(false);
+		Event e=new Event();
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created.");
+		e.setCategory("General");
+		e.setEmailId(candidate.getCreatedBy());
+		eventService.setEvent(e);
 		profileRepository.prepareCandidate(candidate);
 		try{
 			notificationService.sendProfileCreatedNotification(candidate);
-		}catch (MessagingException e) {
-				e.printStackTrace();
+		}catch (MessagingException exp) {
+			exp.printStackTrace();
 		}
 		if(!candidate.getIsReferral()) {
 			InterviewDetails interview = prepareInterviewDetails(candidate);
@@ -53,6 +66,7 @@ public class ProfileService implements IProfileService{
 		return profileSearchService.addProfileIndex(candidate);
 	}
 	
+
 	public void approveCandidate(Profile candidate) {
 		candidate.setIsApprovedFlag(true);
 		profileRepository.prepareCandidate(candidate);	

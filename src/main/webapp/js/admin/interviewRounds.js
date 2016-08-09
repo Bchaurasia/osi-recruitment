@@ -17,7 +17,6 @@ app.controller('interviewRoundController',['$scope', '$http','$q', '$window', '$
 	$scope.message="";
 	$scope.hideError = true;
 	$scope.roundExist=false;
-	
 	infoService.getInfoById('interviewRounds')
 			   .then(function(data){
 				   	$log.info("interview Rounds---------"+angular.toJson(data))

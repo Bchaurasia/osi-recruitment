@@ -19,6 +19,7 @@
 						ng-show="clientForm.clientName.$error.pattern">
 						Enter valid name</span>
 			</div>
+			
 			<div class="input-field col s6">
 				<select placeholder="Select location" ng-model="client.locations"
 					ng-options="o as o for o in locations"
@@ -38,8 +39,9 @@
 					Location<b class="mandatory">*</b>
 				</label> <input type="text" name="olocation" id="olocation"
 					style="top: 1px; height: 29px"
-					placeholder="Enter Location Name" ng-pattern="/^[a-zA-Z _]*$/" ng-model="otherLocation" ng-required="client.locations=='Others'"
-					ng-minlength="3">					
+					placeholder="Enter Location Name" ng-pattern="/^[a-zA-Z _]*$/" ng-model="otherLocation" ng-change="checkOtherLocation()" ng-required="client.locations=='Others'"
+					ng-minlength="3">	
+				<span ng-show="locationNameError" class="validation-error">Location name already exists</span>				
 				<div class="validation-error"
 					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.minlength">
 					Other Location must be at least 3 characters .</div>
@@ -51,7 +53,7 @@
 		<div class="row" align="center">
 			<div class="input-field col s12">
 				<button class="btn btn-info active"
-					ng-disabled="clientForm.$invalid || clietNameError" type="submit"
+					ng-disabled="clientForm.$invalid || clietNameError || locationNameError" type="submit"
 					ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

@@ -19,6 +19,7 @@
 					ng-model="designation.designation" ng-change="checkDesignaton()" required
 					placeholder="Enter Designation"> 
 					<span ng-show="designationExist" class="validation-error">Designation already exist</span>
+
 			<span class="validation-error"
 					ng-show="submitted && CreateDesignation.designation.$invalid">Please
 					provide Designation
@@ -74,7 +75,7 @@
 		</div>
 		<br>
 		<div align="center" class="row">
-				<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience() || designationExist"
+			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience() || designationExist"
 				ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

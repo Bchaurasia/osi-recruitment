@@ -5,7 +5,10 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	return {
 		getPositionData : getPositionData,
 		getScheduleData : getScheduleData,
-		getScheduleDataInterview : getScheduleDataInterview
+		getScheduleDataInterview : getScheduleDataInterview,
+		getAllEvents : getAllEvents,
+		getInterviewDetails : getInterviewDetails,
+		getPositionByStatus:getPositionByStatus
 	};
 	
 	function getPositionData(obj){
@@ -32,6 +35,15 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 				data = response.data;
 		})
 		.catch(getScheduleDataError);
+	}
+	
+	function getAllEvents() {
+		return $http.get('resources/getEvents').then(function(response){
+			return response.data;
+			
+		}).catch(function(response) {
+			return "Failed to get Events!"
+		})
 	}
 	
 	function getPositionDataSuccess(response){
@@ -67,7 +79,7 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 			angular.forEach(obj.rounds, function(obj2){
 				var dbDate = new Date(obj2.interviewSchedule.interviewDateTime);
 				if(obj2.interviewSchedule.emailIdInterviewer === $rootScope.user.emailId)
-					showScheduleData.push({"cname":obj.candidateName, "round":obj2.interviewSchedule.roundName, "date":dbDate, "interviewId":obj.interviewerId,"status":obj2.interviewSchedule.roundStatus,"jobcode":obj.currentPositionId,"email":obj.candidateEmail});
+					showScheduleData.push({"cname":obj.candidateName, "round":obj2.interviewSchedule.roundName, "date":dbDate, "interviewId":obj.interviewerId,"status":obj2.interviewSchedule.roundStatus,"jobcode":obj.currentPositionId,"email":obj.candidateEmail,"createdDate":obj2.interviewSchedule.createdScheduleDate,"updatedDate":obj2.interviewSchedule.updatedScheduleDate});
 			})
 		});
 		
@@ -77,4 +89,21 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 	function getScheduleDataError(response){
 		return q.reject("Failed To Get Interview Details!");
 	}
+	function getInterviewDetails() {
+		return $http.get('resources/allInterviewDetails').then(function(response){
+			return response.data;
+			
+		}).catch(function(response) {
+			return "Failed to get Events!"
+		})
+	}
+	function getPositionByStatus(status) {
+		return $http.get('resources/getPositionsBasedOnStatus?status='+status).then(function(response){
+			return response.data;
+			
+		}).catch(function(response) {
+			return "Failed to get Events!"
+		})
+	}
+	
 }

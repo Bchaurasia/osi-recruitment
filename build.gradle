@@ -36,6 +36,10 @@ repositories {
     mavenCentral()
 }
 
+war {
+   archiveName = 'osi-recruitment-portal.war'
+}
+
 ext.springVersion = "4.0.0"
 ext.springSecurity =   "3.2.0"
 ext.springExceptionHandlerVersion = "2.0.1"
