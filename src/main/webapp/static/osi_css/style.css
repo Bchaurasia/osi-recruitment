@@ -3176,3 +3176,7 @@ form.collapsible-accordion{
 ul.tabs{
 	background-color:transparent;
 }
+
+.headerIcon{
+	width:50px;height:50px;
+}
