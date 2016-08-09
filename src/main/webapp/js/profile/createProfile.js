@@ -30,7 +30,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
-	$scope.currencyList = ["INR","USD","GBP","EUR","UAE"];
 	$scope.candidate.currency="INR";
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
 	userService.getUsers().then(function(data) {

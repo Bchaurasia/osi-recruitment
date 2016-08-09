@@ -334,7 +334,7 @@
 			</div>
 			<div class="input-field col s6">
 			<select ng-model="candidate.currency" name="profileSource"
-					ng-options="o for o in currencyList | orderBy:'toString()'"
+					ng-options="o for o in info.currencies | orderBy:'toString()'"
 					class="form-control input-sm">
 					<option value="" disabled="disabled">Select Currency</option>
 				</select> <label style="position: absolute; top: -22px;">Currency</label>
