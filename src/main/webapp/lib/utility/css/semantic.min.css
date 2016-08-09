@@ -21,6 +21,7 @@ html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
+
 }
 
 input[type=text], input[type=email], input[type=search], input[type=password]
@@ -187,7 +188,7 @@ table {
 }
 
 td, th {
-	padding: 0
+	padding: 6px 5px;
 }
 
 body, html {

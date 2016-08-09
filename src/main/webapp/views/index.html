@@ -60,6 +60,13 @@
 .ui.statistics>.statistic:first-child {
 	border-left: none;
 }
+
+.cardHeader{
+	text-align:left;
+}
+div.card.col-md-6{
+	margin-left: 1%;
+}
 </style>
 
 <!-- <div class="statistics-container" align="center"></div> -->
@@ -166,7 +173,7 @@
 			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
 		</div>
 		<br> <br>
-		<div ng-show="!showNoAppRequisitionMsg">
+		<!-- <div ng-show="!showNoAppRequisitionMsg">
 			<h5 style="margin-top: 15px" align="center">Requisition for
 				Approval</h5>
 			<hr>
@@ -199,7 +206,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 	</div>
 
@@ -262,6 +269,42 @@
 		</div>
 	</div>
 </div>
+
+<div ng-show="!showNoAppRequisitionMsg">
+	<div class="row" style="padding: 10px">
+		<div class=" col-md-3 cardHeader">
+			<h5 class="ui dividing header">Requisition for Approval</h5>
+		</div>
+		<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
+			<div class="card col-md-6"
+				ng-repeat="requisition in requisitionsDetails">
+				<div class="content">
+					<span class="right req-title">{{requisition.requisitionId}}</span>
+					<div class="header" align="left">
+						Created By: <b>{{requisition.createdBy}}</b>
+					</div>
+					<div class="meta" align="left">
+						<time am-time-ago="requisition.createdDate"></time>
+					</div>
+					<hr>
+					<div class="description" ng-if="requisition.status == 'INITIATED'">
+						You need to approve this requisition for <b>{{requisition.position}}</b>
+						position.
+					</div>
+				</div>
+				<div class="extra content">
+					<div class="ui two buttons">
+						<div class="ui basic green button"
+							ng-click="editRequisition(requisition.requisitionId)">View
+							Details</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
 <!-- <div class="row">
 	<div class="col-md-6"></div>
 	<div class="col-md-6">
