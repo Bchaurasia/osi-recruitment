@@ -20,6 +20,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.totalRequisitions = 0;
 	$scope.totalPositions = 0;
 	$scope.showNoInterviewMsg = true;
+	var todate=0;
+	var fromdate=0;
 	var data1=[];
 	var data2=[];
 	var data3=[];
@@ -41,15 +43,34 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var totalselectedcount=0;
 	var totalonholdcount=0;
 	var totalrejectedcount=0;
+	var todaysDate=new Date();
+	var previousMonthDate=new Date();
+	previousMonthDate.setMonth(previousMonthDate.getMonth()-1);
+	$scope.todate=todaysDate;
+	$scope.fromdate=previousMonthDate;
 	$scope.positionData=[];
 	$scope.data=[];
 	$scope.layer2Data=[];
 	$scope.layer3Data=[];
-	angular.element(document).ready(function() {
+	
+	
+	$scope.getData=function() {
+	
+		$scope.positionData=[];
+		var fromdate,todate,month;
+		fromdatemonth=$scope.fromdate.getMonth()+1;
+		fromdate=$scope.fromdate.getDate()+"/"+fromdatemonth+"/"+$scope.fromdate.getFullYear();
+		todatemonth=$scope.todate.getMonth()+1;
+		todate=$scope.todate.getDate()+"/"+todatemonth+"/"+$scope.todate.getFullYear();
+		$scope.fromdate=fromdate;
+		$scope.todate=todate;
 		getTotalHired();
 		getDesignationSpecificData();
-
-//		getTotalRequisitions();
+	}
+	
+	angular.element(document).ready(function() {
+		$scope.positionData=[];
+		$scope.getData();
 		
        });
 	
@@ -65,12 +86,15 @@ $scope.state = false;
         $scope.state = !$scope.state;
     };
     
+   
     
 	function getTotalHired()
 	{
 		var totalPositions=[];
-	
-		positionService.getPosition().then(function(data){
+	   
+		$scope.totalPositionData=[];
+		
+		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
 			$scope.totalPositionData=data;
 			$scope.totalPositions=data.length;
 			for(var i=0;i<data.length;i++)
@@ -96,20 +120,22 @@ $scope.state = false;
 	}
 	function getPositionsBasedOnStatus(status){
 		$scope.temp=[];
-	dashboardService.getPositionByStatus(status).then(function(data){
+	dashboardService.getPositionByStatus(status,$scope.fromdate,$scope.todate).then(function(data){
 	$scope.temp=data;
-	console.log($scope.temp.layer2);
+	//console.log($scope.temp.layer2);
 	});
 	return $scope.temp;
 	}
 	
 	
+	
 	function getDesignationSpecificData(){
-		
+		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
 		var designationArray=[];
 		getTotalRequisitions();
+		
 		designationService.getDesignation().then(function(data){
-			
+			  $scope.positionData=[];
 			 angular.forEach($scope.totalPositionData, function(value, key){
 								if(value.status!= undefined&& value.status== "Hired")
 									 hiredCnt++;
@@ -135,15 +161,17 @@ $scope.state = false;
 						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
 						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
 						 angular.forEach($scope.positionData, function(value, key){
-						 							dashboardService.getPositionByStatus(value.name).then(function(data){
+						 							dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
 						 							$scope.data.push(data);
 						 							$scope.layer2Data.push($scope.data[key].layer2);
 						 							$scope.layer3Data.push($scope.data[key].layer3);
 						 							
 						 							}) ;
+						 							
 						 						});
 						 
-						 
+							
+				
 				 $('#requisitionDonut').highcharts({
 				        chart: {
 				            type: 'pie',
@@ -162,8 +190,13 @@ $scope.state = false;
 				            			for(j=0;j<$scope.layer3Data[i].length; j++)
 				            			$scope.layer2Data.push($scope.layer3Data[i][j]);
 				            		}
+				            	//	console.log("layer 2 "+angular.toJson($scope.layer2Data));
 				            		}
+			         	 
 				            }
+				        },
+				        credits: {
+				            enabled: false
 				        },
 				        title: {
 				            text: 'Statistics'
@@ -199,7 +232,15 @@ $scope.state = false;
 	
 	
 	}
-
+	/*$scope.$watch('fromdate', function(oldValue, newValue) {
+		$scope.getData(newValue);  
+		});
+	$scope.$watch('todate', function(oldValue, newValue) {
+		$scope.getData(newValue);  
+		});*/
+	
+	
+	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
@@ -252,7 +293,7 @@ $scope.state = false;
 			_.contains($rootScope.user.roles,"ROLE_MANAGER") ||  _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") )){
 		dashboardService.getPositionData()
 		.then(function(data){
-			$scope.positionData = data;
+		//	$scope.positionData = data;
 			if(data == "" || data == null || data == undefined){
 				$scope.hideNoPositionsMsg = false;
 			}else{
@@ -297,7 +338,7 @@ $scope.state = false;
 				$scope.showNoAppRequisitionMsg =false;
 				// $scope.requisitionsDetails = data;
 				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
-				console.log($scope.requisitionsDetails);
+				//console.log($scope.requisitionsDetails);
 				
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;
@@ -313,8 +354,8 @@ $scope.state = false;
 		.then(function (data){
 			$scope.showNoInterviewMsg = false;
 			$scope.showScheduleDataInterview = data;
-			console.log(data);
-			console.log(angular.toJson($scope.showScheduleDataInterview));
+			//console.log(data);
+			//console.log(angular.toJson($scope.showScheduleDataInterview));
 			if(data == "" || data == null || data == undefined){
 				$scope.showNoInterviewMsg = true;
 			}
@@ -322,12 +363,12 @@ $scope.state = false;
 			$log.error(msg);
 			$scope.hideNoInterviewMsg = false;
 		});
-		console.log($scope.showScheduleDataInterview);
+		//console.log($scope.showScheduleDataInterview);
 	}
 
 	dashboardService.getAllEvents().then(function(data){
 		$scope.events = data;
-		console.log($scope.events);
+		//console.log($scope.events);
 		for(i=0; i<$scope.events.length; i++){
 			var subName=$scope.events[i].username.split(" ");
 			if(subName.length>=2){

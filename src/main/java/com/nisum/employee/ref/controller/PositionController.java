@@ -1,7 +1,11 @@
 package com.nisum.employee.ref.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -144,15 +148,49 @@ public class PositionController {
 		return new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
 	}
 
+	
+	//@Secured({ "ROLE_HR", "ROLE_USER", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
+//	"ROLE_REQUISITION_APPROVER" })
+@RequestMapping(value = "/getPositionsByDate", method = RequestMethod.GET)
+public ResponseEntity<?> retrievePositionsByDates(@RequestParam Map<String,String> requestParams) {
+		Date fromdate=null,todate=null;
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		List<Position> positionsDetails;
+		try{
+			fromdate=dateFormat.parse(requestParams.get("fromdate"));
+			todate=dateFormat.parse(requestParams.get("todate"));
+			
+		}catch(ParseException e)
+		{
+			
+		}
+		Series.fromDate=fromdate;
+		Series.toDate=todate;
+		positionsDetails=positionService.retrieveAllPositionsBySpecificDate();
+		
+		return new ResponseEntity<List<Position>>(positionsDetails, HttpStatus.OK);
+	}
+	
 	// Dashboard
 	@Secured({ "ROLE_HR", "ROLE_USER", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
 			"ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/getPositionsBasedOnStatus", method = RequestMethod.GET)
-	public ResponseEntity<?> retrievePositionsByStatusforDashboard(
-			@RequestParam(value = "status", required = true) String status) {
+	public ResponseEntity<?> retrievePositionsByStatusforDashboard(@RequestParam Map<String,String> requestParams) {
+		String status=requestParams.get("status");
+		Date fromdate=null,todate=null;
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try{
+			fromdate=dateFormat.parse(requestParams.get("fromdate"));
+			todate=dateFormat.parse(requestParams.get("todate"));
+			
+		}catch(ParseException e)
+		{
+			
+		}
+ 
 		Series series = new Series();
-		Series.LayerTwo layerTwoSeries=positionService.setLayerTwoDataForDashboard(status);
-		List<Series.LayerThree> layerThreeSeries=positionService.setLayerThreeDataForDashboard(status);
+		Series.LayerTwo layerTwoSeries=positionService.setLayerTwoDataForDashboard(status,fromdate,todate);
+		List<Series.LayerThree> layerThreeSeries=positionService.setLayerThreeDataForDashboard(status,fromdate,todate);
 		series.setLayer2(layerTwoSeries);
 		series.setLayer3(layerThreeSeries);
 		return new ResponseEntity<Series>(series, HttpStatus.OK);

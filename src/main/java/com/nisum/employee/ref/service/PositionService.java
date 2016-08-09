@@ -135,10 +135,13 @@ public class PositionService implements IPositionService {
 	public List<Position> retrieveAllPositionsBySpecificDate() {
 		return positionRepository.getPositionOfSpecificDate();
 	}
-	public Series.LayerTwo setLayerTwoDataForDashboard(String status) {
+	public Series.LayerTwo setLayerTwoDataForDashboard(String status,Date fromdate,Date todate) {
 		Series.LayerTwo series1 = new Series.LayerTwo();
+		Series.fromDate=fromdate;
+		Series.toDate=todate;
 		series1.setId(status);
 		series1.setName(status);
+		
 		List<Position> positionsDetails = retrieveAllPositionsBySpecificDate();
 		Series.LayerTwo.Data data = null;
 		Set<Series.LayerTwo.Data> dataList = new HashSet<Series.LayerTwo.Data>();
@@ -164,8 +167,10 @@ public class PositionService implements IPositionService {
 		return series1;
 	}
 	
-	public List<Series.LayerThree> setLayerThreeDataForDashboard(String status) {
+	public List<Series.LayerThree> setLayerThreeDataForDashboard(String status,Date fromdate,Date todate) {
 		List<Position> positionsDetails = retrieveAllPositionsBySpecificDate();
+		Series.fromDate=fromdate;
+		Series.toDate=todate;
 		Set<String> uniqueDesigns = new HashSet<String>();
 		for (Position position : positionsDetails) {
 			uniqueDesigns.add(position.getDesignation());
@@ -199,7 +204,7 @@ public class PositionService implements IPositionService {
 			Series.LayerThree series2 = new Series.LayerThree();
 
 			series2.setId(entry.getKey());
-
+			//series2.setName();
 			for (Map.Entry<String, Integer> innerEntry : entry.getValue().entrySet()) {
 				data3 = new Series.LayerThree.Data();
 				data4 = new ArrayList<>();
