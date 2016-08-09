@@ -29,7 +29,7 @@ db.sequence.insert({"_id":"EVE","seq":0});
 
 db.info.insert({"_id":"ExperienceRequired",value: ["0-2", "2-4", "4-6", "6 and Above"]});
 
-db.info.insert({"_id":"Currency",value:["INR","USD","GBP","EUR", "UAE"]});
+db.info.insert({"_id":"Currency",value:["INR","USD","GBP","EUR", "AED"]});
 
 db.info.insert({"_id":"Locations",value: [ "Bangalore" , "Chennai", "Gurgaon", "Hyderabad", "Pune"]});
 
