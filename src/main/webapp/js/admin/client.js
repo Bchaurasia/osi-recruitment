@@ -127,7 +127,16 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 							
 				}
 			}
-	
+	$scope.checkOtherLocation = function(){
+		
+		$scope.isLocationExist = _.find($scope.locations, function(loc){ return loc.toLowerCase() === $scope.otherLocation.toLowerCase() });
+        if($scope.isLocationExist)
+        	$scope.locationNameError= true;
+        else {
+        	$scope.locationNameError= false;
+        }
+                
+	}
 
 	$scope.editClient = function(data){
 		sharedService.setclientId(data.clientId);

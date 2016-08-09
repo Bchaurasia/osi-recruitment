@@ -30,9 +30,9 @@
 					Location<b class="mandatory">*</b>
 				</label> <input type="text" name="olocation" id="olocation"
 					style="top: 1px; height: 29px" 
-					placeholder="Enter Location Name" ng-model="otherLocation" ng-pattern="/^[a-zA-Z _]*$/" ng-required="client.locations=='Others'"
+					placeholder="Enter Location Name" ng-model="otherLocation" ng-pattern="/^[a-zA-Z _]*$/"  ng-change="checkOtherLocation()" ng-required="client.locations=='Others'"
 					ng-minlength="3">
-
+				<span ng-show="locationNameError" class="validation-error">Location name already exists</span>
 				<div class="validation-error"
 					ng-show="(clientForm.olocation.$dirty || invalidSubmitAttempt) && clientForm.olocation.$error.minlength">
 					Other Location must be at least 3 characters .</div>
@@ -44,7 +44,7 @@
 		<br>
 		<div align="center" class="row">
 			<div align="center" class="input-field col s11">
-				<button class="btn btn-primary" ng-disabled="clientForm.$invalid || clietNameError"
+				<button class="btn btn-primary" ng-disabled="clientForm.$invalid || clietNameError || locationNameError"
 				 type="submit" ng-click="updateClient()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

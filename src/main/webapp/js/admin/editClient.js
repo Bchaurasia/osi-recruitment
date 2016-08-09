@@ -50,6 +50,17 @@ app.controller('editClientCtrl',['$scope', '$http','$rootScope','$q', '$window',
 					
 		}
 		}
+	$scope.checkOtherLocation = function(){
+		$scope.locations = $rootScope.info.locations;
+		$scope.isLocationExist = _.find($scope.plocation, function(loc){ return loc.toLowerCase() === $scope.otherLocation.toLowerCase() });
+		
+        if($scope.isLocationExist)
+        	$scope.locationNameError= true;
+        else 
+        	$scope.locationNameError= false;
+        
+                
+	}
 	$scope.save = function(){	
 		$scope.location1.value.push($scope.otherLocation);
 		infoService.createInformation($scope.location1).then(function(msg){
