@@ -16,7 +16,8 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	$scope.newSkill="";
 	$scope.message="";
 	$scope.hideError = true;
-		
+	$scope.skillExist=false;
+
 		infoService.getInfoById('skills').then(function(skills){
 		$scope.skills1 = skills;
 		$scope.skills=skills.value.sort();

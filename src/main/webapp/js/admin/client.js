@@ -117,10 +117,8 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 		$scope.cls=appConstants.ERROR_CLASS;  	};
 
 	}
-	
-	
 	$scope.checkClientName= function(){
-				console.log("got the call");
+				console.log("got the call"+JSON.stringify($scope.clients));
 				$scope.isClientExist=_.find($scope.clients, function(clnt){ return clnt.clientName.toLowerCase() === $scope.client.clientName.toLowerCase() });
 				if($scope.isClientExist){
 					$scope.clietNameError= true;
@@ -130,11 +128,11 @@ app.controller('clientCtrl',['$scope','$rootScope','$http','$q', '$window', '$ti
 				}
 			}
 	
+
 	$scope.editClient = function(data){
 		sharedService.setclientId(data.clientId);
 		sharedService.setclientName(data.clientName);
 		$state.go('admin.client.editClient');
 		
 	}
-	
 }]);

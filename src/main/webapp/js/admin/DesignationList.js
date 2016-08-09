@@ -116,4 +116,5 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	         $anchorScroll();
 	       }
 	};
+	
 }]);

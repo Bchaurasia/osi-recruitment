@@ -6,6 +6,10 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.newA
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -21,6 +25,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.BasicDBObjectBuilder;
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.PositionAggregate;
 
@@ -107,7 +113,16 @@ public class PositionRepository {
 		List<PositionAggregate> result = groupResults.getMappedResults();
 		return result;
 	}
+	
+	public List<PositionAggregate> retrieveAllPositionsAggregateByStatus(String status) {
+		Aggregation aggregation = newAggregation(match(Criteria.where("status").is(status)),
+				group("designation").count().as("total"), project("total").and("designation").previousOperation(),
+				sort(Sort.Direction.DESC, "total"));
 
+		AggregationResults<PositionAggregate> groupResults = mongoTemplate.aggregate(aggregation, Position.class, PositionAggregate.class);
+		List<PositionAggregate> result = groupResults.getMappedResults();
+		return result;
+	}
 	/*public List<PositionAggregate> retrieveAllPositionsAggregateFromElastic() {
 
 		List<PositionAggregate> list = new ArrayList<PositionAggregate>();
@@ -142,5 +157,16 @@ public class PositionRepository {
 
 	public void updatePublishStatus(Position position) {
 		mongoOperations.save(position);
+	}
+	
+	
+	public List<Position> getPositionOfSpecificDate() {
+		 Calendar calNow = Calendar.getInstance();
+		 calNow.add(Calendar.MONTH, -1);
+		 Date dateBeforeAMonth = calNow.getTime();
+		 Query query =new Query();
+		 query.addCriteria(Criteria.where("updatedDate").gt(dateBeforeAMonth));
+		 List<Position> positionDatails = mongoOperations.find(query, Position.class);
+		 return positionDatails;
 	}
 }
