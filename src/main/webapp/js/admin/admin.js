@@ -14,19 +14,9 @@ app.controller("adminCtrl", ['$scope','$rootScope','$http', '$filter', '$timeout
                    { heading: "Designation", route:"admin.designation.list"},
                    { heading: "Skill", route:"admin.skillSet"},
                    { heading: "ROUNDS", route:"admin.interviewRound.list"},
-                   { heading: "Job Description", route:"admin.jobDescription.list"}
+                   { heading: "Job Description", route:"admin.jobDescription.list"},
+                   { heading: "ES Data Sync", route:"admin.datasync"}
                ];
-    
-   $scope.checkUser =  function (){
-		if($rootScope.user.emailId == "arajak@nisum.com"){
-			var s = {
-					heading: 'ES Data Sync', 
-					route:'admin.datasync'
-			};
-			$scope.tabs.push(s);
-		}
-	};
-    $scope.checkUser();
     
 	$scope.filterOptions = {
         filterText: "",
