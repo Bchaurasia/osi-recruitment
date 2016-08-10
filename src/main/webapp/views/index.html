@@ -71,9 +71,20 @@ input[type='date']:after {
     width: 56px;
     padding: 10px 0px 0px 0px;
 }
+.ui.cards {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 99%;
+    margin: -2.2em -.5em;
+    padding-bottom: 54px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
 
 </style>
-
 
 <!-- <div class="statistics-container" align="center"></div> -->
 <!-- <div id="btn" class="ui black huge launch right attached button"
@@ -82,7 +93,9 @@ input[type='date']:after {
 		style="display: none;">Activities</span>
 </div> -->
 
-	<div class="row" style="padding-top: 15px;padding-left: 10px;">
+
+
+			<div class="row" style="padding-top: 15px;padding-left: 10px;">
 			<div class="col-md-1" style="padding: 5px 0px 0px 0px;     width: 70px;">
 			<lable class="dateText">From</lable>
 			</div>
@@ -102,7 +115,7 @@ input[type='date']:after {
 			</div>
 	
 		
-<div  class="row" style="padding-top: 15px;padding-left:  20px; ">
+<div  class="row" style="padding-top: 15px;padding-left:  20px;padding-bottom:20px ">
 		<div id="requisitionDonut" style="float: left;" ng-if="showNoAnyPositions"></div>
 		<div ng-if="!showNoAnyPositions" style="float: left;width: 683px; height: 345px;">There is no single position to display</div>
 		<br> <br>
@@ -112,7 +125,7 @@ input[type='date']:after {
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
 			<div ng-hide="showNoInterviewMsg">
-				<h5 style="margin-top: 10px">Upcoming Events</h5>
+				<h4 style="margin-top: 10px">Upcoming Events</h5>
 				<hr style="margin-left: 15px;">
 				<div style="max-height: 250px; height: auto; overflow: auto;">
 					<div class="event"
@@ -144,7 +157,7 @@ input[type='date']:after {
 				</div>
 			</div>
 			<div class="ui feed " style="font-size: 100%;">
-				<h5 style="margin-top: 10px">Recent Activities</h5>
+				<h4 style="margin-top: 25px">Recent Activities</h5>
 				<hr style="margin-left: 15px;">
 				<div align="left"
 					style="max-height: 250px; height: auto; overflow: auto;">
@@ -174,7 +187,7 @@ input[type='date']:after {
 			<hr>
 			<div class="row" style="padding: 10px">
 				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-					<div class="card col-md-6" style="width:370px"
+					<div class="card col-md-6" style="width:370px;"
 						ng-repeat="requisition in requisitionsDetails">
 						<div class="content">
 							<span class="right req-title">{{requisition.requisitionId}}</span>
@@ -212,6 +225,7 @@ input[type='date']:after {
 	</div>
 </div>
  -->
+
 <!-- 
 <script>
 	$(".launch.button").mouseenter(function() {
@@ -229,4 +243,6 @@ input[type='date']:after {
 	$("#feed").sidebar({
 		overlay : false
 	}).sidebar('attach events', '.ui.launch.button');
-</script> -->
+</script>
+
+ -->
