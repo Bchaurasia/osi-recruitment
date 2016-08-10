@@ -4,7 +4,7 @@ app.controller('esDataSyncCtrl',['$scope','$rootScope', '$log','$http','$q',func
 		$http.post( 'resources/deleteDataIndex').
 		  success(function(data) {
 			  $scope.cls = 'alert  alert-success';
-			  $scope.message = data;
+			  $scope.message = 'Data index deleted successfully';
 			  $log.info("index deleted Successfully!"+data);
 			  $timeout( function(){ $scope.alHide(); }, 5000);
 			  $scope.reset();
@@ -18,7 +18,7 @@ app.controller('esDataSyncCtrl',['$scope','$rootScope', '$log','$http','$q',func
     	$http.post( 'resources/updateDataIndex').
 		  success(function(data) {
 			  $scope.cls = 'alert  alert-success';
-			  $scope.message = data;
+			  $scope.message = 'Data index updated successfully';
 			  $log.info("index updated Successfully!"+data);
 			  $timeout( function(){ $scope.alHide(); }, 5000);
 			  $scope.reset();
