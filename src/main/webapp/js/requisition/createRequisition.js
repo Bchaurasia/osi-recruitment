@@ -23,7 +23,9 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.clientList=[];
 	$scope.approval1 = [];
 	$scope.approval2 = [];
-	
+	$scope.flag =false;
+	$scope.flag1 =false;
+	$scope.clientInterview=false;
 	//$scope.hr = [];
 	$scope.requisition ={};
 	$scope.approver={};
@@ -208,7 +210,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.getData = function() {
  	     $scope.minErr = false;
     	 $scope.maxErr = false;
-    	 $scope.disabled1 = false;
 		  $scope.deg  =_.find($scope.designations,function(obj){
 				return obj.designation == $scope.requisition.position; 
 			});
@@ -288,6 +289,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			$scope.JobDescriptionList = data;
 		});
 	}
+	
+	
 	
 	 $scope.setSkillsAndJDDetails = function(){
 		 	$scope.requisition.jobDescription = $scope.jobDescription.jobDescriptionDetails;

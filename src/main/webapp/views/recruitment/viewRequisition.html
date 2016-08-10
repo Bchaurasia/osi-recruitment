@@ -123,7 +123,21 @@
 				<label style="margin-top: 14px">Exp. Required<b
 					class="mandatory">*</b></label>
 			</div>
-			
+			<div class="input-field col s6 checkBox">
+				<div class="row" align="left">
+					<div class="input-field col s5" >
+						<input type="checkbox" class="filled-in" id="filled-in-box"
+						ng-model="requisition.clientInterview" ng-change="change()"/> <label for="filled-in-box">Client
+						Interview</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="checkbox" class="filled-in" id="filled-in-box1"
+						ng-model="requisition.onsiteInterview" /> <label for="filled-in-box1">Onsite
+						Interview</label>
+					</div>
+				</div>
+				<label style="margin-top: 8px"><b>Additional Rounds</b></label>
+			</div>
 		</div>
 		<div class="row">
 		   <div class="input-field col s6">

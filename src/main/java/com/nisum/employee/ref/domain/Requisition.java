@@ -28,6 +28,8 @@ public class Requisition extends AuditEntity{
 	String jobDescription;
 	String jobTitle;
 	String jobType;
+	Boolean clientInterview;
+	Boolean onsiteInterview;
 	
 	List<Qualification> qualifications;
 	ArrayList<String> skillType;
