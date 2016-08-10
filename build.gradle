@@ -113,6 +113,13 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
     compile group: 'net.sf.opencsv', name: 'opencsv', version: '2.+'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.+'
+    
+    //for selenium browser tests
+    compile group: 'org.apache.poi', name: 'poi', version: '3.9'
+	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+	compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.9'
+	compile group: 'com.tngtech.java', name: 'junit-dataprovider', version: '1.10.4'
+	compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '2.6.0'
 }
 
 test {
