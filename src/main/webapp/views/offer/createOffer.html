@@ -72,9 +72,8 @@
 				<div class="input-field col s6">
 					<input placeholder="Enter current Employer"
 						name="currentEmployer" class="form-control" type="text"
-						ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z .]*$/"> <label
-						style="position: absolute; top: -22px;" required>Current
-						Employer<b class="mandatory">*</b>
+						ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z .]*$/" required> <label
+						style="position: absolute; top: -22px;" >Current Employer<b class="mandatory">*</b>
 					</label>
 					<div class="validation-error"
 						 ng-show="(createOffer.currentEmployer.$dirty || invalidSubmitAttempt) && createOffer.currentEmployer.$error.pattern">
@@ -256,8 +255,8 @@
 					<div class="input-field col s6">
 						<input placeholder="Enter current CTC" name="currentCTC"
 							class="form-control" type="number"
-							ng-model="candidate.lastDrawnCTC"> <label
-							style="position: absolute; top: -22px;">Last Drawn CTC 
+							ng-model="candidate.lastDrawnCTC" required>
+							 <label tyle="position: absolute; top: -22px;">Last Drawn CTC 
 							<b class="mandatory">*</b>
 						</label>
 		
@@ -265,8 +264,7 @@
 					<div class="input-field col s6">
 						<input placeholder="Enter expected CTC" name="expectedCTC"
 							class="form-control" type="number" ng-model="candidate.expectedCTC"
-							required> <label style="position: absolute; top: -22px;">Expected
-							CTC<b
+							required> <label style="position: absolute; top: -22px;">Expected CTC<b
 							class="mandatory">*</b>
 						</label>
 		
@@ -275,10 +273,8 @@
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<input placeholder="Enter Proposed CTC" name="proposedCTC"
-							class="form-control" type="number" ng-model="candidate.proposedCTC"
-							required> <label style="position: absolute; top: -22px;">Proposed
-							CTC<b
-							class="mandatory">*</b>
+							class="form-control" type="number" ng-model="candidate.proposedCTC" required>
+							<label style="position: absolute; top: -22px;">Proposed CTC<b class="mandatory">*</b>
 						</label>
 		
 					</div>
@@ -315,10 +311,9 @@
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<input placeholder="Enter profileSource" name="source"
-							class="form-control" type="text" ng-model="candidate.profileSource">
-						<label style="position: absolute; top: -22px;" required>Profile
-							Source<b class="mandatory">*</b>
-						</label></label>
+							class="form-control" type="text" ng-model="candidate.profileSource" required>
+						<label style="position: absolute; top: -22px;" >Profile
+							Source<b class="mandatory">*</b> </label></label>
 					</div>
 					<div class="input-field col s6">
 						<textarea class="materialize-textarea" cols="50" rows="2"
