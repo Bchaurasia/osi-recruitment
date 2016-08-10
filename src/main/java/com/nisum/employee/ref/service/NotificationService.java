@@ -75,6 +75,7 @@ public class NotificationService {
 	private static final String HR_EMAIL = "hr_emailId";
 
 	private static final String ROUND_NAME = "roundName";
+	private static final String ROUND = " Round";
 	private static final String INAME = "iname";
 	private static final String CNAME = "cname";
 	private static final String JOBCODE = "jobcode";
@@ -84,6 +85,7 @@ public class NotificationService {
 	private static final String RATING_LIST = "ratingList";
 	private static final String IMPROVEMENTS = "improvements";
 	private static final String STRENGTHS = "strengths";
+	private static final String COMMENTS = "comments";
 
 	private static final String DOMAIN_SKILL_SIZE = "domainSkillSize";
 	private static final String DOMAIN_LIST = "domainList";
@@ -395,6 +397,7 @@ public class NotificationService {
 		context.put(STRENGTHS, interviewFeedback.getStrengths());
 		context.put(IMPROVEMENTS, interviewFeedback.getImprovement());
 		context.put(SKILLS, interviewFeedback.getAdditionalSkills());
+		context.put(COMMENTS, interviewFeedback.getGeneralComment());
 		context.put(RATING_LIST, interviewFeedback.getRateSkills());
 
 		Template candidateTemplate = getVelocityTemplate(SRC_FEEDBACK_HR_VM);
@@ -403,7 +406,7 @@ public class NotificationService {
 		candidateTemplate.merge(context, writer);
 
 		Message message = getMessage();
-		message.setSubject(OSI_TECHNOLOGIES + FEEDBACK_SUBMITTED_FOR + interviewFeedback.getRoundName() + OF + interviewFeedback.getCandidateName());
+		message.setSubject(OSI_TECHNOLOGIES + FEEDBACK_SUBMITTED_FOR + interviewFeedback.getRoundName() + ROUND + OF + interviewFeedback.getCandidateName());
 		message.setContent(writer.toString(), TEXT_HTML);
 
 		for (String obj : HR_Emails) {
