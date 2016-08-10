@@ -6,8 +6,8 @@
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Hi $requisition_approver_name,<br><br>
  Please approve the Requisition $requisition_id.
- <br>Click here
-<a href=$osi_portal_link>$osi_portal_link</a>
+ <br>Click 
+<a href=$osi_portal_link>here</a>
 <br><br>
  <span style="font-size:15px">Regards</span><br>
  <span style="font-size:15px">Recruitment Team</span><br>
