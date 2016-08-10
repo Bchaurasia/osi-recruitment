@@ -105,6 +105,10 @@ public class PositionService implements IPositionService {
 	private Position buildPosition(Requisition requisition, int sequence) {
 		Position position = new Position();
 		ArrayList<String> interviewRounds = getInterviewRounds();
+		if(requisition.getOnsiteInterview())
+			interviewRounds.add("Onsite Round");
+		if(requisition.getClientInterview())
+			interviewRounds.add("Client Round");
 		position.setStatus(ACTIVE);
 		position.setPriority(PRIORITY_LOW);
 		position.setClient(requisition.getClient());

@@ -50,7 +50,7 @@ db.info.insert({"_id":"qualification",value: ["B.E.", "B.Tech", "MBA", "MCA", "O
 
 db.info.insert({"_id":"referredBy",value: ["Consultancy", "Referral"]});
 
-db.info.insert({"_id":"interviewRounds",value: ["Level 1", "Level 2", "Managerial", "HR"]});
+db.info.insert({"_id":"interviewRounds",value: ["Level 1", "Level 2", "Managerial", "HR","Client Round","Onsite Round"]});
 
 db.info.insert({"_id":"typeOfInterview",value:["Face To Face", "Telephonic", "Skype"]});
 
