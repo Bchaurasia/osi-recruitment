@@ -20,6 +20,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.totalRequisitions = 0;
 	$scope.totalPositions = 0;
 	$scope.showNoInterviewMsg = true;
+	$scope.showNoAnyPositions=false;
 	var todate=0;
 	var fromdate=0;
 	var data1=[];
@@ -64,7 +65,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		todate=$scope.todate.getDate()+"/"+todatemonth+"/"+$scope.todate.getFullYear();
 		$scope.fromdate=fromdate;
 		$scope.todate=todate;
-		getTotalHired();
 		getDesignationSpecificData();
 	}
 	
@@ -80,49 +80,17 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		sharedService.setprofileUserId(candidateEmail);
 		location.href='#recruitment/interviewFeedback';
 	};
-$scope.state = false;
+	
+    $scope.state = false;
     
     $scope.toggleState = function() {
         $scope.state = !$scope.state;
     };
     
-   
-    
-	function getTotalHired()
-	{
-		var totalPositions=[];
-	   
-		$scope.totalPositionData=[];
-		
-		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
-			$scope.totalPositionData=data;
-			$scope.totalPositions=data.length;
-			for(var i=0;i<data.length;i++)
-				{
-				
-				if(data[i].status=="Hired")
-					{
-					 $scope.HiredCount+=1;
-					}
-				}
-			
-		});
-		
-		
-	}
-	
-	
-
-	function getTotalRequisitions(){
-		requisitionService.getAllRequisitions().then(function(data){
-			$scope.totalRequisitions=data.length;
-		});
-	}
 	function getPositionsBasedOnStatus(status){
 		$scope.temp=[];
 	dashboardService.getPositionByStatus(status,$scope.fromdate,$scope.todate).then(function(data){
 	$scope.temp=data;
-	//console.log($scope.temp.layer2);
 	});
 	return $scope.temp;
 	}
@@ -132,11 +100,26 @@ $scope.state = false;
 	function getDesignationSpecificData(){
 		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
 		var designationArray=[];
-		getTotalRequisitions();
+		var totalPositionData=[];
+		hiredCnt=0;
+		selectedCnt=0;
+		rejectedCnt=0;
+		onHoldCnt=0;
+		inActiveCnt=0;
+		closedCnt=0;
+		activeCnt=0;
 		
+		
+		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
+			totalPositionData=data;
+		});
+		if(totalPositionData.length==0)
+		{
+			$scope.showNoAnyPositions=true;
+		}
 		designationService.getDesignation().then(function(data){
 			  $scope.positionData=[];
-			 angular.forEach($scope.totalPositionData, function(value, key){
+			 angular.forEach(totalPositionData, function(value, key){
 								if(value.status!= undefined&& value.status== "Hired")
 									 hiredCnt++;
 								if(value.status!= undefined&& value.status== "Selected")
@@ -152,7 +135,8 @@ $scope.state = false;
 								if(value.status!= undefined&& value.status== "Closed")
 									 closedCnt++;
 								});
-			
+			 $scope.positionData=[];
+			 console.log( $scope.positionData);
 						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
 						 $scope.positionData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
 						 $scope.positionData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
@@ -190,8 +174,7 @@ $scope.state = false;
 				            			for(j=0;j<$scope.layer3Data[i].length; j++)
 				            			$scope.layer2Data.push($scope.layer3Data[i][j]);
 				            		}
-				            	//	console.log("layer 2 "+angular.toJson($scope.layer2Data));
-				            		}
+				            	}
 			         	 
 				            }
 				        },
@@ -199,7 +182,7 @@ $scope.state = false;
 				            enabled: false
 				        },
 				        title: {
-				            text: 'Statistics'
+				            text: 'Position Statistics'
 				        },
 				        subtitle: {
 				            text: 'Click to view last one month status.'
@@ -236,14 +219,6 @@ $scope.state = false;
 	
 	
 	}
-	/*$scope.$watch('fromdate', function(oldValue, newValue) {
-		$scope.getData(newValue);  
-		});
-	$scope.$watch('todate', function(oldValue, newValue) {
-		$scope.getData(newValue);  
-		});*/
-	
-	
 	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
@@ -340,9 +315,7 @@ $scope.state = false;
 		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
 			.then(function(data){
 				$scope.showNoAppRequisitionMsg =false;
-				// $scope.requisitionsDetails = data;
 				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
-				//console.log($scope.requisitionsDetails);
 				
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;

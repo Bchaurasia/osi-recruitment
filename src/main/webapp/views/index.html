@@ -64,6 +64,14 @@
 input[type='date']:after {
   content: attr(placeholder)
 }
+.dateText{
+    text-align: center;
+    font-size: 21px;
+    font-family: initial;
+    width: 56px;
+    padding: 10px 0px 0px 0px;
+}
+
 </style>
 
 <!-- <div class="statistics-container" align="center"></div> -->
@@ -73,54 +81,35 @@ input[type='date']:after {
 		style="display: none;">Activities</span>
 </div> -->
 
-<div class="row">
 
-	<!--  <div class="">
-				<div id="profileGraph"></div>
-				
-			</div>  -->
-	<div class="col-md-8 ">
-	<div style="margin:20px 0 0 0"><input style="width:30%" type="date" ng-model="fromdate" name="fromdate"  Placeholder="From date  "><input style="width:30%" type="date"    ng-model="todate" name="todate" Placeholder="to date "> <button ng-click="getData()" style="width:15%;height:5%">Get Status!</button></div>
-		<div id="requisitionDonut" style="float: left;"></div>
-		<br> <br>
-		<div ng-show="!showNoAppRequisitionMsg">
-			<h5 style="margin-top: 15px" align="center">Requisition for
-				Approval</h5>
-			<hr>
-			<div class="row" style="padding: 10px">
-				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-					<div class="card col-md-6"
-						ng-repeat="requisition in requisitionsDetails">
-						<div class="content">
-							<span class="right req-title">{{requisition.requisitionId}}</span>
-							<div class="header" align="left">
-								Created By: <b>{{requisition.createdBy}}</b>
-							</div>
-							<div class="meta" align="left">
-								<time am-time-ago="requisition.createdDate"></time>
-							</div>
-							<hr>
-							<div class="description"
-								ng-if="requisition.status == 'INITIATED'">
-								You need to approve this requisition for <b>{{requisition.position}}</b>
-								position.
-							</div>
-						</div>
-						<div class="extra content">
-							<div class="ui two buttons">
-								<div class="ui basic green button"
-									ng-click="editRequisition(requisition.requisitionId)">View
-									Details</div>
-							</div>
-						</div>
-					</div>
-				</div>
+
+			<div class="row" style="padding-top: 15px;padding-left: 10px;">
+			<div class="col-md-1" style="padding: 5px 0px 0px 0px;     width: 70px;">
+			<lable class="dateText">From</lable>
 			</div>
-		</div>
+			
+			<input style="width: 130px; margin-right:15px;padding-left: 20px;" type="date"
+				ng-model="fromdate">
+				
+			<div class="col-md-1" style="padding: 5px 0px 0px 0px; width:50px">
+			<lable class="dateText">To</lable>
+			</div>
+			
+			<input style="width: 130px; margin-right: 15px;padding-left: 20px;" type="date"
+				ng-model="todate">
+		<button class="ui black basic button"" style="float:left; height: 32px" ng-click="getData()"> Get Status!</button>
+			
+			
+			</div>
+	
+		
+<div  class="row" style="padding-top: 15px;padding-left:  20px; ">
+		<div id="requisitionDonut" style="float: left;" ng-if="showNoAnyPositions"></div>
+		<div ng-if="!showNoAnyPositions" style="float: left;width: 683px; height: 345px;">There is no single position to display</div>
+		<br> <br>
 
-	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-4" style="margin-top: -135px; margin-left: 50px;">
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
 			<div ng-hide="showNoInterviewMsg">
@@ -177,8 +166,45 @@ input[type='date']:after {
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
+				<div ng-show="!showNoAppRequisitionMsg">
+			<h5 style="margin-top: 15px" align="center">Requisition for
+				Approval</h5>
+			<hr>
+			<div class="row" style="padding: 10px">
+				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
+					<div class="card col-md-6" style="width:370px"
+						ng-repeat="requisition in requisitionsDetails">
+						<div class="content">
+							<span class="right req-title">{{requisition.requisitionId}}</span>
+							<div class="header" align="left">
+								Created By: <b>{{requisition.createdBy}}</b>
+							</div>
+							<div class="meta" align="left">
+								<time am-time-ago="requisition.createdDate"></time>
+							</div>
+							<hr>
+							<div class="description"
+								ng-if="requisition.status == 'INITIATED'">
+								You need to approve this requisition for <b>{{requisition.position}}</b>
+								position.
+							</div>
+						</div>
+						<div class="extra content">
+							<div class="ui two buttons">
+								<div class="ui basic green button"
+									ng-click="editRequisition(requisition.requisitionId)">View
+									Details</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+
+	</div>
 <!-- <div class="row">
 	<div class="col-md-6"></div>
 	<div class="col-md-6">
