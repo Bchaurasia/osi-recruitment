@@ -29,6 +29,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.PositionAggregate;
+import com.nisum.employee.ref.domain.Series;
 
 @Repository
 public class PositionRepository {
@@ -161,11 +162,8 @@ public class PositionRepository {
 	
 	
 	public List<Position> getPositionOfSpecificDate() {
-		 Calendar calNow = Calendar.getInstance();
-		 calNow.add(Calendar.MONTH, -1);
-		 Date dateBeforeAMonth = calNow.getTime();
 		 Query query =new Query();
-		 query.addCriteria(Criteria.where("updatedDate").gt(dateBeforeAMonth));
+		 query.addCriteria(Criteria.where("updatedDate").gt(Series.fromDate).lt(Series.toDate));
 		 List<Position> positionDatails = mongoOperations.find(query, Position.class);
 		 return positionDatails;
 	}

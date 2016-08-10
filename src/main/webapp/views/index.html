@@ -61,13 +61,19 @@
 	border-left: none;
 }
 
-.cardHeader{
-	text-align:left;
+input[type='date']:after {
+  content: attr(placeholder)
 }
-div.card.col-md-6{
-	margin-left: 1%;
+.dateText{
+    text-align: center;
+    font-size: 21px;
+    font-family: initial;
+    width: 56px;
+    padding: 10px 0px 0px 0px;
 }
+
 </style>
+
 
 <!-- <div class="statistics-container" align="center"></div> -->
 <!-- <div id="btn" class="ui black huge launch right attached button"
@@ -76,141 +82,33 @@ div.card.col-md-6{
 		style="display: none;">Activities</span>
 </div> -->
 
-<div class="row">
-
-	<!--  <div class="">
-				<div id="profileGraph"></div>
+	<div class="row" style="padding-top: 15px;padding-left: 10px;">
+			<div class="col-md-1" style="padding: 5px 0px 0px 0px;     width: 70px;">
+			<lable class="dateText">From</lable>
+			</div>
+			
+			<input style="width: 130px; margin-right:15px;padding-left: 20px;" type="date"
+				ng-model="fromdate">
 				
-			</div>  -->
-	<div class="col-md-8 ">
-		<div id="requisitionDonut" style="float: left;"></div>
-
-		<br>
-
-		<!-- <div id="container1" ng-show="showColumnGraph"></div>
-		 -->
-		<div id="container1" ng-show="showColumnGraph"></div>
-		<div ng-show="!showColumnGraph">
-
-			<h5 style="margin-top: 10px">Statistics</h5>
-			<hr>
-			<div ng-hide="!hideNoPositionsMsg">
-				<div class="row">
-					<div class="col-md-2">Active</div>
-					<div class=" col-md-10">
-						<div class="progress">
-							<div class="progress-bar progress-bar-success" role="progressbar"
-								aria-valuenow="" aria-valuemin="0" aria-valuemax="100"
-								ng-style="{width: (positionDetails.active + '%')}">{{graphData.Active
-								|| "0"}}/{{graphData.Total || "0"}}</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">InActive</div>
-					<div class=" col-md-10">
-						<div class="progress">
-							<div class="progress-bar progress-bar-info" role="progressbar"
-								aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
-								ng-style="{width: (positionDetails.inactive + '%')}">{{graphData.Inactive
-								|| "0"}}/{{graphData.Total || "0"}}</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">Hired</div>
-					<div class=" col-md-10">
-						<div class="progress">
-							<div class="progress-bar progress-bar-warning" role="progressbar"
-								aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-								ng-style="{width: (positionDetails.hired + '%')}">{{graphData.Hired
-								|| "0"}}/{{graphData.Total || "0"}}</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">OnHold</div>
-					<div class=" col-md-10">
-						<div class="progress">
-							<div class="progress-bar progress-bar-danger" role="progressbar"
-								aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-								ng-style="{width: (positionDetails.onhold + '%')}">{{graphData.Onhold
-								|| "0"}}/{{graphData.Total || "0"}}</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">Selected</div>
-					<div class=" col-md-10">
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="44"
-								aria-valuemin="0" aria-valuemax="100"
-								ng-style="{width: (positionDetails.selected + '%')};"
-								style="background: #c1c1c1">{{graphData.Selected ||
-								"0"}}/{{graphData.Total || "0"}}</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">Rejected</div>
-					<div class=" col-md-10">
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0"
-								aria-valuemin="0" aria-valuemax="100"
-								ng-style="{width: (positionDetails.rejected + '%')}">{{positionDetails.rejected}}%</div>
-						</div>
-					</div>
-				</div>
-
-				<b>{{positionDetails.position}}</b> <br> <br>
-				<div ng-repeat="position in designationWithStatusCount">
-					<button class="statistics-btn" ng-if="position.Total != 0"
-						ng-click="getGraphData(position.Position)">{{position.Position}}</button>
-				</div>
+			<div class="col-md-1" style="padding: 5px 0px 0px 0px; width:50px">
+			<lable class="dateText">To</lable>
 			</div>
-		</div>
-		<div ng-hide="hideNoPositionsMsg">
-			<b style="font-size: 142%; color: #bfbbbb;">No Positions </b>
-		</div>
+			
+			<input style="width: 130px; margin-right: 15px;padding-left: 20px;" type="date"
+				ng-model="todate">
+		<button class="ui black basic button"" style="float:left; height: 32px" ng-click="getData()"> Get Status!</button>
+			
+			
+			</div>
+	
+		
+<div  class="row" style="padding-top: 15px;padding-left:  20px; ">
+		<div id="requisitionDonut" style="float: left;" ng-if="showNoAnyPositions"></div>
+		<div ng-if="!showNoAnyPositions" style="float: left;width: 683px; height: 345px;">There is no single position to display</div>
 		<br> <br>
-		<!-- <div ng-show="!showNoAppRequisitionMsg">
-			<h5 style="margin-top: 15px" align="center">Requisition for
-				Approval</h5>
-			<hr>
-			<div class="row" style="padding: 10px">
-				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-					<div class="card col-md-6"
-						ng-repeat="requisition in requisitionsDetails">
-						<div class="content">
-							<span class="right req-title">{{requisition.requisitionId}}</span>
-							<div class="header" align="left">
-								Created By: <b>{{requisition.createdBy}}</b>
-							</div>
-							<div class="meta" align="left">
-								<time am-time-ago="requisition.createdDate"></time>
-							</div>
-							<hr>
-							<div class="description"
-								ng-if="requisition.status == 'INITIATED'">
-								You need to approve this requisition for <b>{{requisition.position}}</b>
-								position.
-							</div>
-						</div>
-						<div class="extra content">
-							<div class="ui two buttons">
-								<div class="ui basic green button"
-									ng-click="editRequisition(requisition.requisitionId)">View
-									Details</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 
-	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-4" style="margin-top: -135px; margin-left: 50px;">
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
 			<div ng-hide="showNoInterviewMsg">
@@ -267,44 +165,45 @@ div.card.col-md-6{
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div ng-show="!showNoAppRequisitionMsg">
-	<div class="row" style="padding: 10px">
-		<div class=" col-md-3 cardHeader">
-			<h5 class="ui dividing header">Requisition for Approval</h5>
-		</div>
-		<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-			<div class="card col-md-6"
-				ng-repeat="requisition in requisitionsDetails">
-				<div class="content">
-					<span class="right req-title">{{requisition.requisitionId}}</span>
-					<div class="header" align="left">
-						Created By: <b>{{requisition.createdBy}}</b>
-					</div>
-					<div class="meta" align="left">
-						<time am-time-ago="requisition.createdDate"></time>
-					</div>
-					<hr>
-					<div class="description" ng-if="requisition.status == 'INITIATED'">
-						You need to approve this requisition for <b>{{requisition.position}}</b>
-						position.
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="ui two buttons">
-						<div class="ui basic green button"
-							ng-click="editRequisition(requisition.requisitionId)">View
-							Details</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
-<br>
-<br>
+				<div ng-show="!showNoAppRequisitionMsg">
+			<h5 style="margin-top: 15px" align="center">Requisition for
+				Approval</h5>
+			<hr>
+			<div class="row" style="padding: 10px">
+				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
+					<div class="card col-md-6" style="width:370px"
+						ng-repeat="requisition in requisitionsDetails">
+						<div class="content">
+							<span class="right req-title">{{requisition.requisitionId}}</span>
+							<div class="header" align="left">
+								Created By: <b>{{requisition.createdBy}}</b>
+							</div>
+							<div class="meta" align="left">
+								<time am-time-ago="requisition.createdDate"></time>
+							</div>
+							<hr>
+							<div class="description"
+								ng-if="requisition.status == 'INITIATED'">
+								You need to approve this requisition for <b>{{requisition.position}}</b>
+								position.
+							</div>
+						</div>
+						<div class="extra content">
+							<div class="ui two buttons">
+								<div class="ui basic green button"
+									ng-click="editRequisition(requisition.requisitionId)">View
+									Details</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+
+	</div>
 <!-- <div class="row">
 	<div class="col-md-6"></div>
 	<div class="col-md-6">
@@ -313,7 +212,6 @@ div.card.col-md-6{
 	</div>
 </div>
  -->
-
 <!-- 
 <script>
 	$(".launch.button").mouseenter(function() {
@@ -331,6 +229,4 @@ div.card.col-md-6{
 	$("#feed").sidebar({
 		overlay : false
 	}).sidebar('attach events', '.ui.launch.button');
-</script>
-
- -->
+</script> -->
