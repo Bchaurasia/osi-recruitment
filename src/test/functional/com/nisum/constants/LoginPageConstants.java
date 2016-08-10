@@ -13,4 +13,7 @@ public final class  LoginPageConstants {
 	public static final String PATH_LOGIN_USER_SHEET = "C:\\Users\\akakade\\git\\osi-recruitment-portal-new\\src\\resource\\LoginCredentials.xlsx";
 	public static final String ADMIN_USERNAME = "osirecruitauser";
 	public static final String GPLUS_ALL_USERS_PASSWORD = "123osi123";
+	
+	// Batch file's location to clean database
+	public static final String PATH_CLEAN_DATABASE = "C:\\Users\\akakade\\git\\osi-recruitment-portal\\src\\test\\resources\\CleanDB.bat";
 }

@@ -30,5 +30,11 @@ public final class  AdminPageConstants {
 	public static final String SB_MAX_EXP_XPATH = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[3]/form/div[2]/div/div[3]/input";
 	public static final String BT_SAVE_DESIGNATION = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[3]/form/div[3]/button";
 	public static final String MSG_DESIGNATION_ADDED_SUCCESSFULLY = ".//*[@id='wrapper']/center/div/div[3]/div/div/div/div/div/h6";
+	
+	//ES Sync Data page constants
+	public static final String BT_DELETE_DATA_INDEX = ".//*[@id='wrapper']/center/div/div[3]/div[2]/form/div[2]/div/button[1]";
+	public static final String MSG_DATA_INDEX_DELETED_SUCCESSFULLY= ".//*[@id='wrapper']/center/div/div[3]/div[2]/form/div[1]/div/div/h6";
+	public static final String BT_UPDATE_DATA_INDEX = ".//*[@id='wrapper']/center/div/div[3]/div[2]/form/div[2]/div/button[2]";
+	public static final String MSG_DATA_INDEX_UPDATED_SUCCESSFULLY= ".//*[@id='wrapper']/center/div/div[3]/div[2]/form/div[1]/div/div/h6";
 }
 
