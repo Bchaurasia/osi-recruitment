@@ -40,5 +40,6 @@ public class InterviewFeedback {
 	String managementSkillComment;
 	String communicationSkillComment;
 	String consultingAndArticulationSkillsComment;
+	String generalComment;
 	String feedbackSubmittedBy;
 }

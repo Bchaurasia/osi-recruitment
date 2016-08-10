@@ -62,18 +62,30 @@
 }
 
 input[type='date']:after {
-  content: attr(placeholder)
-}
-.dateText{
-    text-align: center;
-    font-size: 21px;
-    font-family: initial;
-    width: 56px;
-    padding: 10px 0px 0px 0px;
+	content: attr(placeholder)
 }
 
+.dateText {
+	text-align: center;
+	font-size: 21px;
+	font-family: initial;
+	width: 56px;
+	padding: 10px 0px 0px 0px;
+}
+
+.ui.cards {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin-bottom: 99%;
+	margin: -2.2em -.5em;
+	padding-bottom: 54px;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
 </style>
-
 
 <!-- <div class="statistics-container" align="center"></div> -->
 <!-- <div id="btn" class="ui black huge launch right attached button"
@@ -82,128 +94,175 @@ input[type='date']:after {
 		style="display: none;">Activities</span>
 </div> -->
 
-	<div class="row" style="padding-top: 15px;padding-left: 10px;">
-			<div class="col-md-1" style="padding: 5px 0px 0px 0px;     width: 70px;">
-			<lable class="dateText">From</lable>
-			</div>
-			
-			<input style="width: 130px; margin-right:15px;padding-left: 20px;" type="date"
-				ng-model="fromdate">
-				
-			<div class="col-md-1" style="padding: 5px 0px 0px 0px; width:50px">
-			<lable class="dateText">To</lable>
-			</div>
-			
-			<input style="width: 130px; margin-right: 15px;padding-left: 20px;" type="date"
-				ng-model="todate">
-		<button class="ui black basic button"" style="float:left; height: 32px" ng-click="getData()"> Get Status!</button>
-			
-			
-			</div>
-	
-		
-<div  class="row" style="padding-top: 15px;padding-left:  20px; ">
-		<div id="requisitionDonut" style="float: left;" ng-if="showNoAnyPositions"></div>
-		<div ng-if="!showNoAnyPositions" style="float: left;width: 683px; height: 345px;">There is no single position to display</div>
-		<br> <br>
+
+
+<div class="row" style="padding-top: 15px; padding-left: 10px;">
+	<div class="col-md-1" style="padding: 5px 0px 0px 0px; width: 70px;">
+		<lable class="dateText">From</lable>
+	</div>
+
+	<input style="width: 130px; margin-right: 15px; padding-left: 20px;"
+		type="date" ng-model="fromdate">
+
+	<div class="col-md-1" style="padding: 5px 0px 0px 0px; width: 50px">
+		<lable class="dateText">To</lable>
+	</div>
+
+	<input style="width: 130px; margin-right: 15px; padding-left: 20px;"
+		type="date" ng-model="todate">
+	<button class="ui black basic button"
+		" style="float: left; height: 32px" ng-click="getData()">Get
+		Status!</button>
+
+
+</div>
+
+
+<div class="row"
+	style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px">
+	<div id="requisitionDonut" style="float: left;"
+		ng-if="showNoAnyPositions"></div>
+	<div ng-if="!showNoAnyPositions"
+		style="float: left; width: 683px; height: 345px;">There is no
+		single position to display</div>
+	<br> <br>
 
 
 	<div class="col-md-4" style="margin-top: -135px; margin-left: 50px;">
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
-			<div ng-hide="showNoInterviewMsg">
-				<h5 style="margin-top: 10px">Upcoming Events</h5>
-				<hr style="margin-left: 15px;">
-				<div style="max-height: 250px; height: auto; overflow: auto;">
-					<div class="event"
-						ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate ">
-						<div class="label">
-							<span ng-if="schedule.round == 'Technical Round 1'"
-								class="initial" style="background: #e47575">TR 1</span> <span
-								ng-if="schedule.round == 'Technical Round 2'" class="initial"
-								style="background: #d4ab61">TR 2</span> <span
-								ng-if="schedule.round == 'Hr Round'" class="initial"
-								style="background: #7ad27a">HR </span> <span
-								ng-if="schedule.round == 'Manager Round'" class="initial"
-								style="background: #9696dc">MR</span>
-						</div>
-						<div class="content">
-							<div class="summary" align="left">
-								You need to take interview of <a class="user"
-									ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
-								</a> for <a class="user"
-									ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
-								</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
-										MMMM Do YYYY, h:mm a' }}</time></b>.
-								<div class="date">
-									<time am-time-ago="schedule.createdDate"></time>
+			<div ng-hide="!hideNoInterviewMsg">
+				<h4 style="margin-top: 10px">
+					Upcoming Events
+					</h5>
+					<hr style="margin-left: 15px;">
+					<div style="max-height: 250px; height: auto; overflow: auto;">
+						<div class="event"
+							ng-repeat="schedule in showScheduleData | orderBy:createdDate ">
+							<div class="label">
+								<span ng-if="schedule.round == 'Technical Round 1'"
+									class="initial" style="background: #e47575">TR 1</span> <span
+									ng-if="schedule.round == 'Technical Round 2'" class="initial"
+									style="background: #d4ab61">TR 2</span> <span
+									ng-if="schedule.round == 'Hr Round'" class="initial"
+									style="background: #7ad27a">HR </span> <span
+									ng-if="schedule.round == 'Manager Round'" class="initial"
+									style="background: #9696dc">MR</span>
+							</div>
+							<div class="content">
+								<div class="summary" align="left">
+									You need to take interview of <a class="user"
+										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
+									</a> for <a class="user"
+										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
+									</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
+											MMMM Do YYYY, h:mm a' }}</time></b>.
+									<div class="date">
+										<time am-time-ago="schedule.createdDate"></time>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+			</div>
+		<div class="ui feed " style="font-size: 100%;">
+			<div ng-hide="showNoInterviewMsg">
+				<h4 style="margin-top: 10px">
+					Scheduled Events
+					</h5>
+					<hr style="margin-left: 15px;">
+					<div style="max-height: 250px; height: auto; overflow: auto;">
+						<div class="event"
+							ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate ">
+							<div class="label">
+								<span ng-if="schedule.round == 'Technical Round 1'"
+									class="initial" style="background: #e47575">TR 1</span> <span
+									ng-if="schedule.round == 'Technical Round 2'" class="initial"
+									style="background: #d4ab61">TR 2</span> <span
+									ng-if="schedule.round == 'Hr Round'" class="initial"
+									style="background: #7ad27a">HR </span> <span
+									ng-if="schedule.round == 'Manager Round'" class="initial"
+									style="background: #9696dc">MR</span>
+							</div>
+							<div class="content">
+								<div class="summary" align="left">
+									You need to take interview of <a class="user"
+										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
+									</a> for <a class="user"
+										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
+									</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
+											MMMM Do YYYY, h:mm a' }}</time></b>.
+									<div class="date">
+										<time am-time-ago="schedule.createdDate"></time>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
 			<div class="ui feed " style="font-size: 100%;">
-				<h5 style="margin-top: 10px">Recent Activities</h5>
-				<hr style="margin-left: 15px;">
-				<div align="left"
-					style="max-height: 250px; height: auto; overflow: auto;">
-					<div class="event" ng-repeat="feed in events">
-						<div class="label" style="color: white">
-							<span class="initial"
-								ng-style="{'background-color':(($index%2)==0?'#7ad27a':'#e47575')}" tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
-						</div>
-						<div class="content">
-							<div class="summary">
-								{{feed.eventDesc}}<br>
-								<div class="date">
-									<time am-time-ago="feed.createdTimeStamp"></time>
+				<h4 style="margin-top: 25px">
+					Recent Activities
+					</h5>
+					<hr style="margin-left: 15px;">
+					<div align="left"
+						style="max-height: 250px; height: auto; overflow: auto;">
+						<div class="event" ng-repeat="feed in events">
+							<div class="label" style="color: white">
+								<span class="initial"
+									ng-style="{'background-color':(($index%2)==0?'#7ad27a':'#e47575')}"
+									tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
+							</div>
+							<div class="content">
+								<div class="summary">
+									{{feed.eventDesc}}<br>
+									<div class="date">
+										<time am-time-ago="feed.createdTimeStamp"></time>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 
 	</div>
 </div>
-				<div ng-show="!showNoAppRequisitionMsg">
-			<h5 style="margin-top: 15px" align="center">Requisition for
-				Approval</h5>
-			<hr>
-			<div class="row" style="padding: 10px">
-				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-					<div class="card col-md-6" style="width:370px"
-						ng-repeat="requisition in requisitionsDetails">
-						<div class="content">
-							<span class="right req-title">{{requisition.requisitionId}}</span>
-							<div class="header" align="left">
-								Created By: <b>{{requisition.createdBy}}</b>
-							</div>
-							<div class="meta" align="left">
-								<time am-time-ago="requisition.createdDate"></time>
-							</div>
-							<hr>
-							<div class="description"
-								ng-if="requisition.status == 'INITIATED'">
-								You need to approve this requisition for <b>{{requisition.position}}</b>
-								position.
-							</div>
-						</div>
-						<div class="extra content">
-							<div class="ui two buttons">
-								<div class="ui basic green button"
-									ng-click="editRequisition(requisition.requisitionId)">View
-									Details</div>
-							</div>
-						</div>
+<div ng-show="!showNoAppRequisitionMsg">
+	<h5 style="margin-top: 15px" align="center">Requisition for
+		Approval</h5>
+	<hr>
+	<div class="row" style="padding: 10px">
+		<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
+			<div class="card col-md-6" style="width: 370px;"
+				ng-repeat="requisition in requisitionsDetails">
+				<div class="content">
+					<span class="right req-title">{{requisition.requisitionId}}</span>
+					<div class="header" align="left">
+						Created By: <b>{{requisition.createdBy}}</b>
+					</div>
+					<div class="meta" align="left">
+						<time am-time-ago="requisition.createdDate"></time>
+					</div>
+					<hr>
+					<div class="description" ng-if="requisition.status == 'INITIATED'">
+						You need to approve this requisition for <b>{{requisition.position}}</b>
+						position.
 					</div>
 				</div>
-			
+				<div class="extra content">
+					<div class="ui two buttons">
+						<div class="ui basic green button"
+							ng-click="editRequisition(requisition.requisitionId)">View
+							Details</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>
+
+</div>
 <!-- <div class="row">
 	<div class="col-md-6"></div>
 	<div class="col-md-6">
@@ -212,6 +271,7 @@ input[type='date']:after {
 	</div>
 </div>
  -->
+
 <!-- 
 <script>
 	$(".launch.button").mouseenter(function() {
@@ -229,4 +289,6 @@ input[type='date']:after {
 	$("#feed").sidebar({
 		overlay : false
 	}).sidebar('attach events', '.ui.launch.button');
-</script> -->
+</script>
+
+ -->
