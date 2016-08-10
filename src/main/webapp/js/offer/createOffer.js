@@ -9,6 +9,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.managers = [];
 	$scope.approval1=[];
 	var offerLetterFile = null;
+	$scope.info = $rootScope.info;
 	$scope.invalidFile = true;
 	$scope.today=new Date();
 	$scope.candidate.comments="";
@@ -22,7 +23,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			"designations":[]
 	};
 	$scope.bus = ["ET","EA","OPS"];
-	$scope.currencyList = ["INR","USD","GBP","EUR","UAE"];
 	$scope.finalStatusList = ["Offered","Rejected"];
 	$scope.candidate.currency="INR";
 	$scope.init = function(){

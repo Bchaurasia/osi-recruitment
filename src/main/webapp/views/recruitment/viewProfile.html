@@ -145,23 +145,13 @@
 
 			<div class="input-field col s6" align="left"
 				ng-if="candidate.isReferral == true">
-				<!-- <select ng-model="candidate.jobCode" name="jobCode"
+				<select ng-model="candidate.jobCode" name="jobCode"
 					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
-					ng-options="o as o for o in profilepositions track by $index"
+					ng-options="o as o for o in profilepositions track by o"
 					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Position</option>
-				</select> <label style="position: absolute; top: -22px;">Position : {{candidate.jobCode}}<b
-					class="mandatory">*</b></label> -->
-				<ui-select ng-model="candidate.jobCode" theme="selectize"
-					style="width: 80%"
-					on-select="getRequisitionIdFromJobCode(candidate.jobCode)"
-					title="Choose a requisitionId"> <ui-select-match
-					placeholder="Select Position.">{{candidate.jobCode}}</ui-select-match>
-				<ui-select-choices
-					repeat="jobCode in profilepositions | filter: $select.search">
-				<span ng-bind-html="jobCode | highlight: $select.search"></span> </ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;"> Position </label>
-
+					<option value="">Select Position</option>
+				</select> <label style="position: absolute; top: -22px;">Position : <b
+					class="mandatory">*</b></label>
 			</div>
 		</div>
 		<div class="row">
@@ -336,7 +326,7 @@
 			<select ng-model="candidate.currency" name="profileSource"
 					ng-options="o for o in info.currencies | orderBy:'toString()'"
 					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Currency</option>
+					<option value="">Select Currency</option>
 				</select> <label style="position: absolute; top: -22px;">Currency</label>
 			</div>
 		</div>

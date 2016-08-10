@@ -61,9 +61,9 @@
 					<div class="input-field col s6">
 						<select ng-model="candidate.currency" name="currency"
 							style="background-color:white;"
-							ng-options="o for o in currencyList" class="form-control input-sm">
+							ng-options="o for o in info.currencies" class="form-control input-sm" required>
 							<option>Select Currency</option>
-						</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+						</select> <label style="position: absolute; top: -22px;"> Currency: <b class="mandatory">*</b></label>
 					</div>
 				</div>
 		</div>
