@@ -1,3 +1,5 @@
+//Author: akakade@nisum.com
+
 package com.nisum.employee.ref.login;
 
 import java.util.HashMap;
@@ -5,42 +7,43 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
-public class VerifyMainTabs extends DashboardPageConstants {
+import com.nisum.constants.DashboardPageConstants;
+
+public class VerifyMainTabs{
 
 	Map<String,Boolean> exceptionMap = new HashMap<String,Boolean>();
 	List<String> message = new LinkedList<String>();
 
 	public void userSpecificTabsOnly(WebDriver driver, String user) {
-		Assert.assertThat(driver.getTitle(), Is.is(OSI_TECHNOLOGIES_RECRUITMENT_PORTAL));
+
+		Assert.assertTrue("Incorrect page title found, Recruitment Portal was expected", driver.getTitle().contains(DashboardPageConstants.OSI_TECHNOLOGIES_RECRUITMENT_PORTAL));
 
 		switch (user){
 
 		case "Admin":
-			shouldBeVisible(driver, DASHBOARD_TAB, "Dashboard");
-			shouldBeVisible(driver, RECRUITMENT_TAB, "Recruitment");
-			shouldBeVisible(driver, REFERRAL_TAB, "Referral");
-			shouldBeVisible(driver, ADMIN_TAB, "Admin");
+			shouldBeVisible(driver, DashboardPageConstants.DASHBOARD_TAB, "Dashboard");
+			shouldBeVisible(driver, DashboardPageConstants.RECRUITMENT_TAB, "Recruitment");
+			shouldBeVisible(driver, DashboardPageConstants.REFERRAL_TAB, "Referral");
+			shouldBeVisible(driver, DashboardPageConstants.ADMIN_TAB, "Admin");
 			break;
 
 		case "SuperUser":
-			shouldBeVisible(driver, DASHBOARD_TAB, "Dashboard");
-			shouldBeVisible(driver, RECRUITMENT_TAB, "Recruitment");
-			shouldBeVisible(driver, REFERRAL_TAB, "Referral");
-			shouldNotBeVisible(driver, ADMIN_TAB, "Admin");
+			shouldBeVisible(driver, DashboardPageConstants.DASHBOARD_TAB, "Dashboard");
+			shouldBeVisible(driver, DashboardPageConstants.RECRUITMENT_TAB, "Recruitment");
+			shouldBeVisible(driver, DashboardPageConstants.REFERRAL_TAB, "Referral");
+			shouldNotBeVisible(driver, DashboardPageConstants.ADMIN_TAB, "Admin");
 			break;
 
 		case "User":
-			shouldBeVisible(driver, DASHBOARD_TAB, "Dashboard");
-			shouldNotBeVisible(driver, RECRUITMENT_TAB, "Referral");
-			shouldBeVisible(driver, REFERRAL_TAB, "Referral");
-			shouldNotBeVisible(driver, ADMIN_TAB, "Admin");
+			shouldBeVisible(driver, DashboardPageConstants.DASHBOARD_TAB, "Dashboard");
+			shouldNotBeVisible(driver, DashboardPageConstants.RECRUITMENT_TAB, "Referral");
+			shouldBeVisible(driver, DashboardPageConstants.REFERRAL_TAB, "Referral");
+			shouldNotBeVisible(driver, DashboardPageConstants.ADMIN_TAB, "Admin");
 			break;
 
 		}
