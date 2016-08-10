@@ -90,7 +90,7 @@ app.controller('scheduleInterviewCtrl',['$scope', '$http', '$window','sharedServ
 			if(_.contains($scope.user.roles, "ROLE_INTERVIEWER")){
 		    	$scope.rounds=[];
 		    		angular.forEach($scope.interviewscheduleDetails.rounds,function(round){
-				    	if(round.roundName === 'Level 1' || round.roundName === 'Level 2'){
+		    			if(round.roundName !== 'Managerial' && round.roundName !== 'HR'){
 				    		$scope.rounds.push(round);
 						}
 					});	

@@ -200,7 +200,7 @@
 						</div>
 						<p>{{data.interviewFeedback.functionalComment || "--"}}</p>
 					</div>
-					<div align="left" class="four fields" ng-show="data.interviewFeedback">
+					<div align="left" class="four fields" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.communicationSkills!=0">
 						<div class="field">
 							<label class="ui label">Communication Skills : </label>
 						</div>
@@ -214,7 +214,7 @@
 							<b>{{data.interviewFeedback.communicationSkillComment || "--"}}</b>
 						</div>
 					</div>
-					<div align="left" class="four fields" ng-show="data.interviewFeedback">
+					<div align="left" class="four fields" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.consultingAndArticulationSkills!=0">
 						<div class="field">
 							<label class="ui label">Consulting & Articulation Skills : </label>
 						</div>
@@ -245,6 +245,12 @@
 							<label class="ui label">Improvement : </label>
 						</div>
 						<b>{{data.interviewFeedback.improvement || "--"}}</b>
+					</div>
+					<div align="left" class="four fields" ng-show="data.interviewFeedback">
+						<div class="field">
+							<label class="ui label">Comment : </label>
+						</div>
+						<b>{{data.interviewFeedback.generalComment || "--"}}</b>
 					</div>
 					<div align="left" class="four fields" ng-show="data.interviewFeedback" 
 						ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">

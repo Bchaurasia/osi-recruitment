@@ -73,9 +73,14 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 				{
 					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
 					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
-					
+					$scope.tabName=$scope.interview.rounds[i].roundName;
+					if($scope.interviewFeedback.roundName !== "Level 1"
+						&& $scope.interviewFeedback.roundName !== "Level 2" 
+							&& $scope.interviewFeedback.roundName !== "Managerial" 
+								&& $scope.interviewFeedback.roundName !== "HR")
+						$scope.tabName = "Others";
 					$scope.filterbyRound = function (tab) {  
-						return _.contains(tab.rounds, $scope.interviewFeedback.roundName);
+						return _.contains(tab.rounds, $scope.tabName);
 					};  
 					     
 					$scope.tabs = [
@@ -100,7 +105,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 		   				"template":"mangementSkillset.html"
 		   			},
 		   			{	
-		   				"rounds": ["Level 1","Level 2","Managerial","HR"],
+		   				"rounds": ["Level 1","Level 2","Managerial","HR","Others"],
 		   				"heading": "Comment",
 		   				"template":"commentFeedback.html"
 		   			}
