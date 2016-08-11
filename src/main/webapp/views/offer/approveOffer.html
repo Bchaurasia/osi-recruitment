@@ -1,7 +1,16 @@
 <br>
 <div class="row" ng-show="showDiv">
 	<div class="ui raised less padded container segment" style="width:75%;">
-		<h3 align="left" class="ui dividing header">Approve Offer for - {{candidate.candidateName}}</h3>
+		<div class="row collapsible-header">
+			<div class="input-field col s1">
+				<span> <img class="headerIcon"
+					src="static/osi_images/approve.png"></img>
+				</span>
+			</div>
+			<h5 align="left">
+				Approve Offer for - {{candidate.candidateName}} 
+			</h5>
+		</div>
 		<form class="ui form" name="ApproveOffer" onvalidate>
 			<div class="ui segment"  >
 				<div align="left" class="four fields">

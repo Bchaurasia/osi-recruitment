@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.nisum.employee.ref.domain.Offer;
 import com.nisum.employee.ref.domain.OfferApprover;
+import com.nisum.employee.ref.domain.OrgBandUpdateParams;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.repository.OfferRepository;
@@ -86,6 +89,15 @@ public class OfferController {
 		return new ResponseEntity<Offer>(offerdetail, HttpStatus.OK);
 	}
 
+	@ResponseBody
+	@Secured({ "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/offerForDashboard", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveOfferDataForDashboard()
+			throws Exception {
+		List<Offer> offerdetail=offerService.retrieveOfferDataForDashboard();
+		return new ResponseEntity<List<Offer>>(offerdetail, HttpStatus.OK);
+	}
+	
 	@ResponseStatus(HttpStatus.OK)
 	@Secured({ "ROLE_ADMIN", "ROLE_HR" })
 	@RequestMapping(value = "/upload-offer-letter", method = RequestMethod.POST)
@@ -132,11 +144,22 @@ public class OfferController {
 	}
 	
 	@ResponseBody
-	@Secured({ "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/offerBands", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveBandOffer()
 			throws Exception {
 		List<ordBands> offerBandDetails = offerService.retrieveBandOfferDetails();
 		return new ResponseEntity<List<ordBands>>(offerBandDetails, HttpStatus.OK);
+	}
+	
+	
+	@ResponseBody
+	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/offerBandsList", method = RequestMethod.PUT)
+	public ResponseEntity<?> retrieveBand(@RequestBody OrgBandUpdateParams ord)
+			throws Exception {
+		offerService.retrieveBandDetails(ord);
+		String jsonObj="{\"msg\":\"Designation Updated Successfully\"}";
+		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
 }

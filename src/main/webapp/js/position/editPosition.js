@@ -46,6 +46,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		
 		positionService.getPositionByJobcode($scope.jobcode).then(function(data){
 	        $scope.position =data;
+	        $scope.selectedStatus = $scope.position.status;
 	         $scope.enableDisableButton = false;
 			}).catch(function(msg){
 	        $log.error(msg); 
@@ -176,7 +177,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		$scope.dis2 = true;
 		$scope.skillTemp=$scope.position.primarySkills;
 	}
-
+	
 	$scope.skill = function(){
 		if($scope.position.primarySkills=== undefined)
 		{
@@ -230,5 +231,12 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 			isFirstOpen: true,
 	};
 	
-	
+	$scope.confirmRejectStatus = function(status){
+		
+		if($scope.accordianFlag == true && status === "Rejected")
+			if(confirm("Associated candidate is undergoing interview process.Do you still want to reject?"))
+				$scope.position.status="Rejected";
+			else
+				$scope.position.status=$scope.selectedStatus;
+	};
 }]);

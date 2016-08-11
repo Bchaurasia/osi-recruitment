@@ -130,7 +130,7 @@ input[type='date']:after {
 	<div class="col-md-4" style="margin-top: -135px; margin-left: 50px;">
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
-			<div ng-hide="!hideNoInterviewMsg">
+			<div ng-hide="!hideNoInterviewMsg || hasNotRole('ROLE_HR') ">
 				<h4 style="margin-top: 10px">
 					Upcoming Events
 					</h5>

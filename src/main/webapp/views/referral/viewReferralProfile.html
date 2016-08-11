@@ -392,7 +392,7 @@
 				</div>
 				<div class="input-field col s2">
 					<select ng-model="candidate.tenureYear" id="tenureYear"
-						ng-options="o for o in range"
+						ng-options="o for o in info.expYears"
 						style="position: absolute; top: -15px;"
 						class="form-control input-sm" required>
 						<option value="" disabled="disabled">Years</option>
@@ -427,7 +427,7 @@
 			</div>
 		</div>
 
-			<div align="center" class="row">{{UpdateCandidate.$invalid}}{{disableUpdateBtn}}
+			<div align="center" class="row">
 				<button type="button" class="waves-effect waves-light btn"
 					align="left" ng-click="download();">
 					<i class="material-icons left">file_download</i>Download Resume
