@@ -26,6 +26,8 @@
 				<tr>
 					<th>Name</th>
 					<th>Job Code</th>
+					<th>Mobile No.</th>
+					<th>Skype Id</th>
 					<th>Interview Date</th>
 					<th>Status</th>
 					<th>Actions</th>
@@ -39,6 +41,11 @@
 						ng-click="showInterviewDetails(data.interviewerId)"
 						data-tooltip={{data.candidateEmail}}>{{data.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.jobCode}}</i></td>
+					<td class="mdl-data-table__cell--non-numeric">
+						{{data.rounds[0].interviewSchedule.candidateMobileNumber}}</td>
+					<td class="mdl-data-table__cell--non-numeric">
+						{{data.rounds[0].interviewSchedule.candidateSkypeId}}</td>
+						
 					<td class="mdl-data-table__cell--non-numeric">
 						{{data.interviewDateTime}}</td>
 					<td class="mdl-data-table__cell--non-numeric"
@@ -66,6 +73,11 @@
 						ng-click="showInterviewDetails(data.interviewerId)"
 						data-tooltip={{data.candidateEmail}}>{{data.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.jobCode}}</i></td>
+					<td class="mdl-data-table__cell--non-numeric">
+						{{data.rounds[0].interviewSchedule.candidateMobileNumber}}</td>
+					<td class="mdl-data-table__cell--non-numeric">
+						{{data.rounds[0].interviewSchedule.candidateSkypeId}}</td>
+						
 					<td class="mdl-data-table__cell--non-numeric">
 						{{data.interviewDateTime}}</td>
 					<td class="mdl-data-table__cell--non-numeric"
