@@ -93,6 +93,8 @@ public class ProfileService implements IProfileService{
 		interview.setDesignation(candidate.getDesignation());
 		interview.setHrAssigned(candidate.getHrAssigned());
 		interview.setProgress("Not Initialized");
+		interview.setCandidateMobileNumber(candidate.getMobileNo());
+		interview.setCandidateSkypeId(candidate.getSkypeId());
 		interview.setInterviewerId(candidate.getEmailId()+"_"+(int)(Math.random() * 5000 + 1));
 		if(candidate.getIsReferral()) {
 			interview.setRequisitionId(candidate.getRequisitionId());
