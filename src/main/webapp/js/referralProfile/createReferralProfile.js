@@ -41,10 +41,6 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 					$scope.recruitmentData.push(userr.name);
 				}
 			});
-			$scope.range = [];
-			for(var i=0;i<=20;i++) {
-				$scope.range.push(i);
-			}
 			
 	}).catch(function(message) {
 		$log.error(message)
