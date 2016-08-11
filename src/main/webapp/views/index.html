@@ -118,8 +118,7 @@ input[type='date']:after {
 </div>
 
 
-<div class="row"
-	style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px">
+<div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px">
 	<div id="requisitionDonut" style="float: left;"
 		ng-if="showNoAnyPositions"></div>
 	<div ng-if="!showNoAnyPositions"
@@ -228,11 +227,12 @@ input[type='date']:after {
 
 	</div>
 </div>
+</div>
 <div ng-show="!showNoAppRequisitionMsg">
-	<h5 style="margin-top: 15px" align="center">Requisition for
-		Approval</h5>
+	<h5 style="margin-top: 15px" align="center"><u>Requisition for
+		Approval</u></h5>
 	<hr>
-	<div class="row" style="padding: 10px">
+	<div class="row">
 		<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
 			<div class="card col-md-6" style="width: 370px;"
 				ng-repeat="requisition in requisitionsDetails">
