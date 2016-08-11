@@ -207,8 +207,12 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
 				console.log($scope.fromdate+"   "+$scope.todate);
 				$scope.data.push(data);
-				layer2Data.push($scope.data[key].layer2);
-				layer3Data.push($scope.data[key].layer3);
+				if($scope.data[key]!=undefined)
+				{
+					layer2Data.push($scope.data[key].layer2);
+					layer3Data.push($scope.data[key].layer3);
+				}
+				
 				for(i=0; i<layer3Data.length; i++){
        			for(j=0; j<layer3Data[i].length; j++)
        				for(k=0; k<layer3Data[i][j].data.length; k++){
