@@ -155,7 +155,7 @@
 					ng-hide="hideInterviewLocation">
 					<label> Interview Address : <b class="mandatory">*</b></label>
 					<textarea ng-model="sel.interviewLocation.address"
-						style="width: 80%;" rows="2" ng-disabled="true"
+						style="width: 80%;" rows="2" readonly="true"
 						name="interviewlocation" class="form-control"></textarea>
 				</div>
 			</div>
@@ -164,7 +164,7 @@
 				<div align="left" class="field">
 					<label> Candidate Skype Id : <b class="mandatory">*</b></label> <input
 						type="text" ng-model="interviewschedule.candidateSkypeId"
-						ng-disabled="true" name="candidateSkypeId" class="form-control"
+						readonly="true" name="candidateSkypeId" class="form-control"
 						placeholder="Enter Skype Id" />
 				</div>
 			</div>
@@ -174,9 +174,9 @@
 					<label> Candidate Mobile Number : <b class="mandatory">*</b></label>
 					<input type="text"
 						ng-model="interviewschedule.candidateMobileNumber"
-						ng-disabled="true" name="candidateMobileNumber"
+						readonly="true" name="candidateMobileNumber"
 						class="form-control" placeholder="Enter Mobile Number"
-						style="background-color: white;" />
+						 />
 				</div>
 			</div>
 
