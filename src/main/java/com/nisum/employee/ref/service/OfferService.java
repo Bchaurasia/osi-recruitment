@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.domain.Offer;
+import com.nisum.employee.ref.domain.OrgBandUpdateParams;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.repository.OfferRepository;
 
@@ -50,6 +51,10 @@ public class OfferService {
 
 	public List<ordBands> retrieveBandOfferDetails() {
 		return OfferRepository.retrieveBandOfferDetails();
+	}
+	
+	public void retrieveBandDetails(OrgBandUpdateParams ord) {
+		OfferRepository.updateDesignation(ord);
 	}
 
 	public void offerToBeApproved(Offer offer) {

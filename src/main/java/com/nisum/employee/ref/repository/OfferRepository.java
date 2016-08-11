@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,8 +18,10 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
-import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.domain.Offer;
+import com.nisum.employee.ref.domain.OfferDesignation;
+import com.nisum.employee.ref.domain.OrgBandUpdateParams;
+import com.nisum.employee.ref.domain.ordBands;
 
 
 
@@ -50,6 +53,20 @@ public class OfferRepository {
 	List<ordBands> bandList=mongoOperations.findAll(ordBands.class);
 	return bandList;
 	}
+	
+	public void updateDesignation(OrgBandUpdateParams ord){
+		Query query = new Query();
+		//query.addCriteria(Criteria.where("BU").is("ET").and("stream").is("Infra").and("levels.level").is("L0").and("levels.designations.grade").is("E0"));
+		query.addCriteria(Criteria.where("BU").is(ord.getBu()).and("stream").is(ord.getSelectStream()).and("levels.level").is(ord.getSelectLevel()).and("levels.designations.grade").is(ord.getSelectGrade()));
+		Update update = new Update();
+		
+		OfferDesignation designation = new OfferDesignation();
+		designation.setGrade(ord.getSelectGrade());
+		designation.setName(ord.getDesignation());
+		update.push("levels.$.designations", designation);
+		mongoOperations.upsert(query, update, ordBands.class);
+	}
+	
 	public void saveResumeInBucket(MultipartFile multipartFile, String candidateId){
 		DBObject metaData = new BasicDBObject();
 		metaData.put("candidateId", candidateId);

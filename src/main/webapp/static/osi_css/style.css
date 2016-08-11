@@ -3193,4 +3193,19 @@ ul.tabs{
 
 font.chk{
 	font-weight:100;
+   .orgLableStyle{
+   	font-size:initial;
+   	color: black;
+   	text-align:left;
+   	display:block;
+    }
+    
+    .range-slider__valueOrgBand {
+	background-color: #004D87;
+	padding: 4px;
+	color: white;
+	border-radius: 4px;
+	position: absolute;
+	top: 32px;
+	right: 47%;
 }
