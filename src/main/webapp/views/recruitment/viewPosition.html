@@ -144,7 +144,7 @@
 					</div>
 					<div class="input-field col s6">
 						<select placeholder="Select Status" ng-model="position.status"
-							ng-options="o for o in statuses" class="form-control input-sm">
+							ng-options="o for o in statuses" ng-change="confirmRejectStatus(position.status)" class="form-control input-sm">
 							<option>Select Status</option>
 						</select> <label>Status</label>
 					</div>
