@@ -42,6 +42,10 @@ public class OfferRepository {
 		Offer offerDetails = mongoOperations.findOne(query, Offer.class);
 		return offerDetails;
 	}
+	public List<Offer> retrieveAllOfferDetails() {
+		List<Offer> offerDetails = mongoOperations.findAll(Offer.class);
+		return offerDetails;
+	}
 	public  List<ordBands> retrieveBandOfferDetails() {
 	List<ordBands> bandList=mongoOperations.findAll(ordBands.class);
 	return bandList;

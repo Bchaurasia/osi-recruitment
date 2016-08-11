@@ -1,5 +1,6 @@
 package com.nisum.employee.ref.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -9,6 +10,7 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.ordBands;
@@ -32,6 +34,18 @@ public class OfferService {
 
 	public Offer getOfferDetail(String emailId) {
 		return OfferRepository.retrieveOfferDetails(emailId);
+	}
+	
+	public List<Offer> retrieveOfferDataForDashboard() {
+		List<Offer> offerdetail = new ArrayList<>();
+		List<Offer> offerdetaillist = OfferRepository.retrieveAllOfferDetails();
+		String loginUser=SecurityContextHolder.getContext().getAuthentication().getName();
+		for (int i = 0; i < offerdetaillist.size(); i++) {
+			if(offerdetaillist.get(i).getApproval().getEmailId().equals(loginUser)){
+				offerdetail.add(offerdetaillist.get(i));
+			}
+		}
+		return offerdetail;
 	}
 
 	public List<ordBands> retrieveBandOfferDetails() {

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +88,15 @@ public class OfferController {
 		return new ResponseEntity<Offer>(offerdetail, HttpStatus.OK);
 	}
 
+	@ResponseBody
+	@Secured({ "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/offerForDashboard", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveOfferDataForDashboard()
+			throws Exception {
+		List<Offer> offerdetail=offerService.retrieveOfferDataForDashboard();
+		return new ResponseEntity<List<Offer>>(offerdetail, HttpStatus.OK);
+	}
+	
 	@ResponseStatus(HttpStatus.OK)
 	@Secured({ "ROLE_ADMIN", "ROLE_HR" })
 	@RequestMapping(value = "/upload-offer-letter", method = RequestMethod.POST)
