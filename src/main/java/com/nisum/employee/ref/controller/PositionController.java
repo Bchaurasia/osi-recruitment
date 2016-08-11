@@ -183,8 +183,10 @@ public ResponseEntity<?> retrievePositionsByDates(@RequestParam Map<String,Strin
 		}
  
 		Series series = new Series();
-		Series.LayerTwo layerTwoSeries=positionService.setLayerTwoDataForDashboard(status,fromdate,todate);
-		List<Series.LayerThree> layerThreeSeries=positionService.setLayerThreeDataForDashboard(status,fromdate,todate);
+		Series.fromDate=fromdate;
+		Series.toDate=todate;
+		Series.LayerTwo layerTwoSeries=positionService.setLayerTwoDataForDashboard(status);
+		List<Series.LayerThree> layerThreeSeries=positionService.setLayerThreeDataForDashboard(status);
 		series.setLayer2(layerTwoSeries);
 		series.setLayer3(layerThreeSeries);
 		return new ResponseEntity<Series>(series, HttpStatus.OK);

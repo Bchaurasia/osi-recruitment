@@ -33,8 +33,8 @@ public interface IPositionService {
 	
 	public List<Position> retrievePositionsbasedOnPositionType(String positionType);
 	
-	public Series.LayerTwo setLayerTwoDataForDashboard(String status,Date todate,Date fromdate);
+	public Series.LayerTwo setLayerTwoDataForDashboard(String status);
 	
-	public List<Series.LayerThree> setLayerThreeDataForDashboard(String status,Date todate,Date fromdate);
+	public List<Series.LayerThree> setLayerThreeDataForDashboard(String status);
 	public List<Position> retrieveAllPositionsBySpecificDate();
 }

@@ -54,7 +54,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,$q,appConstants)
 		.catch(getPositionError);
 	}
 	function getPositionsByDate(fromdate,todate){
-		var inData={'fromdate':fromdate,'todate':todate};
+		
 		return $http.get('resources/getPositionsByDate?fromdate='+fromdate+'&todate='+todate).then(function(response){
 			return response.data;
 			
