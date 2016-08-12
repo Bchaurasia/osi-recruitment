@@ -1,0 +1,61 @@
+<div ng-show="message" ng-include="'notificationTemplate.html'"></div>
+
+<form role="form" class="form-horizontal">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 ">
+			<input type="text" class="form-control" ng-model="search"
+				data-tooltip="Search by Name,Email Id or Designation">
+			<div align="left">
+				&nbsp;&nbsp; <a class="btn-floating" 
+					><i class="material-icons">search</i></a>
+				&nbsp;&nbsp; <a class="btn-floating"
+					ng-show="hasRole('ROLE_HR,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER,ROLE_ADMIN')"
+					ng-click="createOrgBand()" data-tooltip="Create Designation"><i
+					class="material-icons">add</i></a>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+
+	<table class="bordered" style="width: 90%;">
+			<tr>
+				<th>Designation</th>
+				<th>Business Unit</th>
+				<th>Stream</th>
+				<th>Level</th>
+				<th>Grade</th>
+			</tr>
+			<tr class="animate-repeat"
+				ng-repeat="org in filtered = (orgBandList | filter:search) |  offset: (currentPage)*itemsPerPage | limitTo: itemsPerPage"
+				style="font-size: 80%">
+				<td class="mdl-data-table__cell--non-numeric">{{org.designation}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{org.bu}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{org.stream}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{org.level}}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{org.grade}}</td>
+			</tr>
+			<br>
+		</table>
+	<div class="row" style="width: 90%">
+			<div class="col-md-3" align="left">
+				<h5>
+					<big> Total Designations : {{filtered.length}}</big>
+				</h5>
+			</div>
+			<div class="col-md-9">
+				<ul class="pagination1 pull-right" style="cursor:pointer">
+					<li ng-class="{disabled: currentPage == 0}"><a
+						ng-click="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+					<li ng-repeat="n in range(currentPage)"
+						ng-class="{active: n == currentPage}" ng-click="setPage()"><a
+						ng-bind="n + 1"></a></li>
+					<li class="waves-effect"
+						ng-class="{disabled: currentPage == pageCount()}"><a
+						ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+				</ul>
+			</div>
+		</div>
+</form>
+
+

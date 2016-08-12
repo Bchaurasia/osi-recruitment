@@ -18,6 +18,7 @@
 				<tr>
 				    <th>Job code</th>
 					<th>Designation</th>
+					<th>Required Experience</th>
 					<th>Location</th>
 					<th>Client</th>
 					<th>Priority</th>
@@ -31,6 +32,7 @@
 						<a style="cursor: pointer;" ng-click="displayReferralPosition(data.jobcode)">{{data.jobcode}}</a>
 					</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.minExpYear}} - {{data.maxExpYear}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.client}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{data.priority}}</td>

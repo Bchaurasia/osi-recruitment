@@ -1,0 +1,89 @@
+
+<form class="col s12 m12 l10 collapsible collapsible-accordion" style="width:90%" name="createOrgBand">
+	<div class="row collapsible-header">
+			<h5 align="left">
+				<b>Create Designation</b>
+			</h5>
+	</div>
+	
+	<div class="row marginFromHeader" >
+		<div class="col-md-1"></div>
+		<div class="col-md-2"><label class="orgLableStyle"> Business Unit<b class="mandatory">*</b>   :</label></div>
+		<div class="col-md-3">
+			<select class="form-control" id="orgBandForm.bu" ng-change="filterStream()" ng-model="org.bu" required>
+			    <option value="" selected="selected">Select Business Unit</option>
+			    <option>ET</option>
+			    <option>EA</option>
+			    <option>OPS</option>
+		  	</select>
+		 </div>
+		  	
+		<div class="col-md-6"><span class="validation-error" ng-show="submitted && createOrgBand.bu.$invalid">Please provide Business Unit. </span></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2"><label class="orgLableStyle"> Stream<b class="mandatory">*</b> :</label></div>
+		<div class="col-md-3">
+			<select class="form-control" id="streams" ng-change="filterLevel()" ng-model="org.selectStream" ng-options="item for item in streams" ng-disabled="orgStreams" required>
+		  		<option value="" selected="selected">Select Stream</option>
+		  	</select>
+		</div>
+		<div class="col-md-6"><span class="validation-error" ng-show="submitted && createOrgBand.stream.$invalid">Please provide Stream.</span></div> 
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2"><label class="orgLableStyle"> Level<b class="mandatory">*</b> :</label></div>
+		<div class="col-md-3">
+			<select class="form-control" id="level" ng-change="filterGrade()" ng-model="org.selectLevel" ng-options="item for item in level"  ng-disabled="orgLevel" required>			   
+		 		<option value="" selected="selected">Select Level</option>
+		 	</select>
+		 	
+		</div>
+		<div class="col-md-6"><span class="validation-error" ng-show="submitted && createOrgBand.level.$invalid">Please provide Level.</span></div>
+	</div>
+	
+	<div class="row" ng-hide="showNewGrade">
+		<div class="col-md-1"></div> 
+		<div class="col-md-2"><label class="orgLableStyle"> Grade<b class="mandatory">*</b> :</label></div>
+		<div class="col-md-3">
+			<select class="form-control" id="grade" ng-model="org.selectGrade" ng-change="enableDesignation()" ng-options="item for item in grade" ng-disabled="orgGrade" required>
+		 		<option value="" selected="selected">Select Grade</option></select>
+		 	</select>
+		 </div>
+		 <div class="col-md-6"><span class="validation-error"ng-show="submitted && createOrgBand.Grade.$invalid">Please provide Grade.</span></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-4"><input type="checkbox"  ng-model="showNewGrade" id="newGrade" value="newGrade" ng-change="clearGrade()"> <label style="font-size:small" for="newGrade">Add New Grade, Excluding from given List</label></div>
+		<div class="col-md-5"></div>
+	</div>
+	
+	<div class="row" ng-show="showNewGrade">
+		<div class="col-md-1"></div>
+		<div class="col-md-2"><label class="orgLableStyle"> New Grade<b class="mandatory">*</b> :</label> </div>
+		<div class="col-md-5"><input type="text"  class="form-control" placeholder="Enter New Grade" ng-model="org.selectGrade" ng-change="enableDesignation()" ng-disabled="orgGrade" required></div>
+		<div class="col-md-4"><span class="validation-error" ng-show="submitted && createOrgBand.grade.$invalid">Please provide Grade.</span></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2"><label class="orgLableStyle"> Designation<b class="mandatory">*</b> :</label> </div>
+		<div class="col-md-5"><input type="text" class="form-control" placeholder="Enter Designation" id="designation" ng-model="org.designation" ng-change="validateDesignation()" ng-disabled="orgDesignation" required>
+		
+		</div>
+		<span class="validation-error" ng-show="duplicateDesignationError">Designation name already Exist. </span><br>
+		<div class="col-md-4"><span class="validation-error" ng-show="submitted && createOrgBand.designation.$invalid">Please provide Designation. </span></div>
+	</div> 
+	
+	
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-2"><button type="submit"  ng-disabled="createOrgBand.$invalid || duplicateDesignationError" class="btn btn-info active" ng-click="submitDesignation()"><span class="glyphicon glyphicon-ok-circle"></span> Submit</button></div>
+		<div class="col-md-2"><button type="button" class="btn btn-info active" ui-sref="admin.orgBand.list"><span class="glyphicon glyphicon-remove"></span> Cancel</button></div>
+		<div class="col-md-6"></div>
+	</div>
+<br>
+</form>
