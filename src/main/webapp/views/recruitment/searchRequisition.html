@@ -23,6 +23,8 @@
 					<tr>
 						<th>REQUISITION ID</th>
 						<th>DESIGNATION</th>
+						<th>JOB-TYPE</th>
+						<th>LOCATION</th>
 						<th>CLIENT</th>
 						<th>CLONE</th>
 						<th>STATUS</th>
@@ -37,6 +39,8 @@
 						<td><a style="cursor: pointer;"
 							ng-click="editRequisition(data.requisitionId)">{{data.requisitionId}}</a></td>
 						<td>{{data.position}}</td>
+						<td>{{data.jobType}}</td>
+						<td>{{data.location}}</td>	
 						<td>{{data.client}}</td>
 						<td align="center"><button style="cursor: pointer;border: none;background: none;color:#2196F3" ng-disabled="!hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
                           ng-click="cloneRequisition(data.requisitionId)" data-tooltip="Clone"><i class="material-icons">repeat_one</button></td>
