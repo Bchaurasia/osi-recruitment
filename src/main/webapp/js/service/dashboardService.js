@@ -97,9 +97,10 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 			return "Failed to get Events!"
 		})
 	}
+	
 function getPositionByStatus(status,fromdate,todate) {
 		
-		var inData={'status':status,'fromdate':fromdate,'todate':todate};
+		
 		return $http.get('resources/getPositionsBasedOnStatus?status='+status+'&fromdate='+fromdate+'&todate='+todate+'').then(function(response){
 			return response.data;
 			
