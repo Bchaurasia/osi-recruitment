@@ -233,10 +233,21 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	
 	$scope.confirmRejectStatus = function(status){
 		
-		if($scope.accordianFlag == true && status === "Rejected")
-			if(confirm("Associated candidate is undergoing interview process.Do you still want to reject?"))
-				$scope.position.status="Rejected";
-			else
-				$scope.position.status=$scope.selectedStatus;
+		if($scope.accordianFlag == true && (status === "Rejected" || status === "Inactive" || status === "OnHold")) {			
+			$location.hash('top');
+			$scope.cls = 'alert alert-danger alert-error';
+			$scope.message = "Associated candidate is undergoing interview process.You cannot change the status to "+status;			
+			$timeout( function(){ $scope.alHide(); }, 5000);
+			$scope.position.status=$scope.selectedStatus;
+		}
 	};
+	$scope.gotoAnchor = function() {
+	       var newHash = 'top';
+	       console.log("hash...." + $location.hash());
+	       if ($location.hash() !== newHash) {
+	         $location.hash('top');
+	       } else {
+	         $anchorScroll();
+	       }
+	}
 }]);
