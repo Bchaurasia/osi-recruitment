@@ -16,8 +16,10 @@
 			
 			<input placeholder="Enter Designation" ng-minlength="3" type="text"
 					ng-maxlength="30" name="designation" class="form-control"
-					ng-model="designation.designation" required
+					ng-model="designation.designation" ng-change="checkDesignaton()" required
 					placeholder="Enter Designation"> 
+					<span ng-show="designationExist" class="validation-error">Designation already exist</span>
+
 			<span class="validation-error"
 					ng-show="submitted && CreateDesignation.designation.$invalid">Please
 					provide Designation
@@ -54,7 +56,7 @@
 					<span class="range-slider__value">Min:{{designation.minExpYear}}</span>
 				</div>
 				<div class="validation-error"
-					ng-show="( CreateDesignation.minExpYear.$dirty || invalidSubmitAttempt) && CreateDesignation.minExpYear.$error.required">
+					ng-show="( CreateDesignation.minExpYear.$dirty || invalidSubmitAttempt ) && CreateDesignation.minExpYear.$error.required  ">
 					Please select minExpYear.</div>
 
 				<div class="input-field col s6">
@@ -69,7 +71,7 @@
 		</div>
 		<br>
 		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience()"
+			<button class="btn btn-info active" type="submit" ng-disabled="CreateDesignation.$invalid || invalidExperience() || designationExist"
 				ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save
 				</button>

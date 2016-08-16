@@ -6,6 +6,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		getProfileByCreateremailId : getProfileByCreateremailId,
 		updateProfile : updateProfile,
 		addProfiles : addProfiles,
+		approveProfile : approveProfile,
 		updateProfiles : updateProfiles,
 		getProfileById : getProfileById,
 		getProfiles : getProfiles,
@@ -33,13 +34,19 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		.catch(sendErrorprofileMsg);
 	}
 	function getProfiles(){
-		return $http.get('resources/profile')
+		return $http.get('resources/profiledb')
 			 .then(getProlilesData)
 			 .catch(sendErrorprofileMsg);
 	}
 	
 	function addProfiles(profile){
 		return $http.post('resources/profile', profile)
+		.then(createProfileSuccess)
+		.catch(sendCreateErrorprofileMsg);
+	}
+	
+	function approveProfile(profile){
+		return $http.post('resources/approveProfile', profile)
 		.then(createProfileSuccess)
 		.catch(sendCreateErrorprofileMsg);
 	}

@@ -60,10 +60,10 @@ public class UserInfoRepository{
 		List<String> defualtRoles = new ArrayList<String>();
 		defualtRoles.add(ROLE_USER);
 		userInfo.setEmailId(userInfo.getEmailId());
-		if(null!=userInfo.getName()){
-		userInfo.setName(userInfo.getName());
+		if(userInfo.getName()=="" || null  == userInfo.getName()){
+			userInfo.setName(userInfo.getEmailId());
 		}else{
-		userInfo.setName(userInfo.getEmailId());	
+			userInfo.setName(userInfo.getName());
 		}
 		userInfo.setCompany(OSI);
 		userInfo.setRoles(defualtRoles);

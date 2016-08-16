@@ -1,3 +1,63 @@
+
+<style>
+
+
+.sidebar {
+	position: absolute;
+	top: 0;
+	left: -160px;;
+	transition: 100ms left;
+}
+
+#navigation-toggle {
+	position: absolute;
+	left: 160px;
+	background: rgba(3, 159, 244, .95);
+	color: white;
+	text-decoration: none;
+	padding: 20px;
+}
+
+.show {
+	left: 0;
+}
+
+.navigation {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.navigation-items a {
+	display: block;
+	background-color: #444;
+	color: white;
+	line-height: 2em;
+	text-decoration: none;
+	padding: 10px 30px;
+	width: 100px;
+}
+
+.navigation-items a:hover {
+	background-color: #222;
+}
+</style>
+
+<div class="sidebar" sidebar-directive="state">
+        <a href="#" id="navigation-toggle" ng-click="toggleState()">Navigation</a>
+        <ul class="navigation">
+          <li class="navigation-items"> <a href="#">Link1</a> 
+          </li>
+          <li class="navigation-items"> <a href="#">Link2</a> 
+          </li>
+          <li class="navigation-items"> <a href="#">Link3</a> 
+          </li>
+          <li class="navigation-items"> <a href="#">Link4</a> 
+          </li>
+          <li class="navigation-items"> <a href="#">Link4</a> 
+          </li>
+        </ul>
+      </div>
 <form action="#" name="searchPosition" class="searchRequisition"
 	onvalidate>
 	<form id="integerForm" role="form" class="form-horizontal">

@@ -16,7 +16,7 @@ app.controller('interviewRoundController',['$scope', '$http','$q', '$window', '$
 	$scope.newInterviewRound="";
 	$scope.message="";
 	$scope.hideError = true;
-
+	$scope.roundExist=false;
 	infoService.getInfoById('interviewRounds')
 			   .then(function(data){
 				   	$log.info("interview Rounds---------"+angular.toJson(data))
@@ -31,7 +31,7 @@ $scope.save = function(){
 	if($scope.newInterviewRound == "" || $scope.newInterviewRound == null ||$scope.newInterviewRound == undefined){
 		$scope.hideError = false;
 	}else{
-		var IR=$scope.checkRounds();
+		var IR=!$scope.roundExist;
 		if(IR){
 		$scope.interviewRounds2.value.push($scope.newInterviewRound);
 		infoService.updateInformation($scope.interviewRounds2)
@@ -51,17 +51,12 @@ $scope.save = function(){
 }	
 
 $scope.checkRounds = function(){
-	var flag=true;
+	$scope.roundExist=false;
 	angular.forEach( $scope.interviewRounds, function(ir){
 		if($scope.newInterviewRound.toLowerCase() === ir.toLowerCase()){
-			  $scope.message="Interview Round Already Exists";
-			  $scope.cls=appConstants.ERROR_CLASS;
-			  $timeout( function(){ $scope.alHide(); }, 5000);
-			  $scope.newInterviewRound="";
-			  flag=false; 
+			$scope.roundExist=true;
 	}	
 	});
-	return flag;
 }
 
 $scope.deleteInterviewRound = function(index,interviewRound){

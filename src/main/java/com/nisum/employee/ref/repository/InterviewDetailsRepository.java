@@ -37,15 +37,20 @@ public class InterviewDetailsRepository{
 		InterviewDetails interview = mongoOperation.findOne(query, InterviewDetails.class);
 		query.fields().include("candidateEmail");
 		Update update = new Update();
-		
-		update.set("candidateName",interviewDetails.getCandidateName());
-		update.set("currentPositionId",interview.getCurrentPositionId());
-		update.set("positionId", interviewDetails.getPositionId());
-		update.set("candidateSkills",interviewDetails.getCandidateSkills());
-		update.set("clientName",interview.getClientName());
-		update.set("designation",interviewDetails.getDesignation());
-		update.set("hrAssigned",interviewDetails.getHrAssigned());
-		update.set("interviewerEmail", interviewDetails.getInterviewerEmail());
+		if(interviewDetails.getIsUpdatedFromProfile()!=null) {
+			update.set("jobCode", interviewDetails.getJobCode());
+			update.set("requisitionId", interviewDetails.getRequisitionId());
+		}
+		else {
+			update.set("candidateName",interviewDetails.getCandidateName());
+			update.set("currentPositionId",interview.getCurrentPositionId());
+			update.set("positionId", interviewDetails.getPositionId());
+			update.set("candidateSkills",interviewDetails.getCandidateSkills());
+			update.set("clientName",interview.getClientName());
+			update.set("designation",interviewDetails.getDesignation());
+			update.set("hrAssigned",interviewDetails.getHrAssigned());
+			update.set("interviewerEmail", interviewDetails.getInterviewerEmail());
+		}
 		mongoOperation.updateFirst(query, update, InterviewDetails.class);
 	}
 

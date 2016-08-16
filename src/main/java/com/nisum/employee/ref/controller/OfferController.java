@@ -1,6 +1,7 @@
 package com.nisum.employee.ref.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.domain.Offer;
 import com.nisum.employee.ref.domain.OfferApprover;
 import com.nisum.employee.ref.repository.OfferRepository;
@@ -70,7 +72,8 @@ public class OfferController {
 		}
 		offer.getApprovalList().add(offer.getApproval());
 		offer.getApprovalList().get(offer.getApprovalList().size()-1).setComment(null);
-		offer.getApprovalList().get(offer.getApprovalList().size()-1).setStatus(null);
+		offer.getApprovalList().get(offer.getApprovalList().size()-1).setStatus(offer.getOfferStatus());
+		offer.getApprovalList().get(offer.getApprovalList().size()-1).setHrComment(offer.getComments());
 		offerService.prepareOffer(offer);
 		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getApproval().getName()
 				+ " Successfully" + MSG_END;
@@ -92,5 +95,14 @@ public class OfferController {
 		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getRecruiter().getName()
 				+ " Successfully" + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@Secured({ "ROLE_HR", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/offerBands", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveBandOffer()
+			throws Exception {
+		List<ordBands> offerBandDetails = offerService.retrieveBandOfferDetails();
+		return new ResponseEntity<List<ordBands>>(offerBandDetails, HttpStatus.OK);
 	}
 }

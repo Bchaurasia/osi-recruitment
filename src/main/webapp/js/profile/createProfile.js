@@ -15,7 +15,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.recruitmentData = [];
 	$scope.fileError = true;
 	$scope.duplicateEmailIdError = false;
-	//$scope.countryCode = "+91";
 	$scope.showErrorMsg=false;
     $scope.showSuccessMsg= false;
     $scope.message = "";
@@ -32,8 +31,9 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.info = $rootScope.info;
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
+	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.candidate.currency="INR";
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
-	//$scope.candidate.percentage = "70";
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -103,6 +103,9 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
+				$scope.candidate.isCreatedByUser = false;
+				$scope.candidate.isReferral = false;
+				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;

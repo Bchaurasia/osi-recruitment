@@ -14,7 +14,10 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.sk.jobcodeProfiles = [];
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
-	
+	$scope.requisitionId = "";
+	$scope.disableUpdateBtn = false;
+	$scope.currencyList = ["INR","USD","GBP","EUR"];
+	$scope.candidate.currency="INR";
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("referral.searchReferralProfile");
@@ -84,6 +87,21 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
+		if($scope.candidate.isApprovedFlag)
+			$scope.disableUpdateBtn = true;
+			positionService.getPosition().then(function(data){
+				$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
+				//$scope.positions=data;
+				$scope.profilepositions = [];
+		 		angular.forEach($scope.positions,function(obj){
+		 			$scope.profilepositions.push(obj.jobcode);
+		 		});
+			}).catch(function(msg){
+				$scope.message=msg;
+				 $scope.cls=appConstants.ERROR_CLASS;
+				 $timeout( function(){ $scope.alHide(); }, 5000);
+			})  
+
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
 			 angular.forEach($scope.positionData, function(jobcodeProfile){
@@ -195,7 +213,16 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	         $anchorScroll();
 	       }
 	};
-	
+	$scope.getRequisitionIdFromJobCode = function(jobcode){
+		
+	    angular.forEach($scope.positions,function(obj){			
+				if(obj.jobcode === jobcode){
+					$scope.requisitionId = obj.requisitionId;
+				}
+			
+		});
+	    return $scope.requisitionId;
+	}
 	$scope.updateProfileDetails = function() {
 		if($scope.candidate !== undefined){
 			var dt = new Date();
@@ -203,10 +230,12 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	        var curr_month = dt.getMonth();
 	        var curr_year = dt.getFullYear();
 	        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
+	        $scope.candidate.requisitionId = $scope.requisitionId;
 	        $scope.candidate.designation = $scope.designation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
+	        $scope.candidate.expectedDesignation=$scope.expectedDesignation.designation;
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
@@ -222,6 +251,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 				$log.error(msg);
 	        }) 
 		}
+	
 	$scope.validateChar = function(data) {
 		if (/^[a-zA-Z _]*$/.test(data)) {
 			return true;

@@ -9,6 +9,7 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 	    getData: function() {
 	        	return data;
 	     },
+	     getBandOfferData:getBandOfferData,
 	     getOfferDataFromInterview:getOfferDataFromInterview,
 	     getOfferData:getOfferData,
 	     saveOfferData:saveOfferData
@@ -20,7 +21,7 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 		    	 return data = response.data;
 		     })
 		     .catch(function(response){
-		    	 return $q.reject('Error while retrieving interview Deatils status: ' + response.status );
+		    	 return $q.reject('Error while retrieving Offer Deatils status: ' + response.status );
 		     });
 	}
 	function getOfferData(emailId){
@@ -29,7 +30,16 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 		    	 return data = response.data;
 		     })
 		     .catch(function(response){
-		    	 return $q.reject('Error while retrieving interview Deatils status: ' + response.status );
+		    	 return $q.reject('Error while retrieving offer Deatils status: ' + response.status );
+		     });
+	}
+	function getBandOfferData(){
+		return $http.get('resources/offerBands')
+		     .then(function(response){
+		    	 return data = response.data;
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving offer Deatils status: ' + response.status );
 		     });
 	}
 	function saveOfferData(offer){

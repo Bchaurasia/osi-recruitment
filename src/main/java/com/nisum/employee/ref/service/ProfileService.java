@@ -3,14 +3,19 @@ package com.nisum.employee.ref.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.Profile;
+import com.nisum.employee.ref.repository.InterviewDetailsRepository;
 import com.nisum.employee.ref.repository.ProfileRepository;
+import com.nisum.employee.ref.repository.UserInfoRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
 
@@ -21,6 +26,9 @@ public class ProfileService implements IProfileService{
 	ProfileRepository profileRepository;
 	
 	@Autowired
+	UserInfoRepository userInfoRepository;
+	
+	@Autowired
 	ProfileSearchService profileSearchService;
 	
 	@Autowired
@@ -29,11 +37,43 @@ public class ProfileService implements IProfileService{
 	@Autowired
 	InterviewService interviewService;
 	
+	@Autowired
+	InterviewDetailsRepository interviewDetailsRepository;
+	
+	@Autowired
+	private NotificationService notificationService;
+	
+
+	@Autowired
+	IEventService eventService;
+	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
+		Event e=new Event();
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created.");
+		e.setCategory("General");
+		e.setEmailId(candidate.getCreatedBy());
+		eventService.setEvent(e);
 		profileRepository.prepareCandidate(candidate);
+		try{
+			notificationService.sendProfileCreatedNotification(candidate);
+		}catch (MessagingException exp) {
+			exp.printStackTrace();
+		}
+		if(!candidate.getIsCreatedByUser()) {
+			InterviewDetails interview = prepareInterviewDetails(candidate);
+			interviewService.prepareInterview(interview);
+		}
+		return profileSearchService.addProfileIndex(candidate);
+	}
+	
+
+	public void approveCandidate(Profile candidate) {
+		candidate.setIsApprovedFlag(true);
+		profileRepository.prepareCandidate(candidate);	
+		
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
-		return profileSearchService.addProfileIndex(candidate);
+		
 	}
 
 	private InterviewDetails prepareInterviewDetails(Profile candidate) {
@@ -45,6 +85,14 @@ public class ProfileService implements IProfileService{
 		interview.setHrAssigned(candidate.getHrAssigned());
 		interview.setProgress("Not Initialized");
 		interview.setInterviewerId(candidate.getEmailId()+"_"+(int)(Math.random() * 5000 + 1));
+		if(candidate.getIsReferral()) {
+			interview.setRequisitionId(candidate.getRequisitionId());
+			interview.setJobCode(candidate.getJobCode());
+			interview.setIsReferral(true);
+		}	
+		else {
+			interview.setIsReferral(false);
+		}
 		return interview;
 	}
 	
@@ -53,6 +101,16 @@ public class ProfileService implements IProfileService{
 			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
+			if(candidate.getIsCreatedByUser() != true) {
+				InterviewDetails interview = interviewDetailsRepository.getInterviewDetailsById(candidate.getEmailId());
+				if(candidate.getIsReferral()) {
+					//interview.setCandidateEmail(candidate.getEmailId());
+					interview.setIsUpdatedFromProfile(true);
+					interview.setRequisitionId(candidate.getRequisitionId());
+					interview.setJobCode(candidate.getJobCode());				
+				}	
+				interviewDetailsRepository.updateinterviewDetails(interview);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

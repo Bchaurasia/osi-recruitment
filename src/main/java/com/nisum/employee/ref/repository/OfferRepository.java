@@ -2,6 +2,7 @@ package com.nisum.employee.ref.repository;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,10 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
+import com.nisum.employee.ref.domain.ordBands;
 import com.nisum.employee.ref.domain.Offer;
+
+
 
 @Repository
 public class OfferRepository {
@@ -37,6 +41,10 @@ public class OfferRepository {
 				Pattern.compile(emailId, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
 		Offer offerDetails = mongoOperations.findOne(query, Offer.class);
 		return offerDetails;
+	}
+	public  List<ordBands> retrieveBandOfferDetails() {
+	List<ordBands> bandList=mongoOperations.findAll(ordBands.class);
+	return bandList;
 	}
 	public void saveResumeInBucket(MultipartFile multipartFile, String candidateId){
 		DBObject metaData = new BasicDBObject();

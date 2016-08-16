@@ -10,6 +10,10 @@ The following interview has been cancelled:<br>
 
 <table style="width:450px; border: 0px solid Gray;">
 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Candidate Name :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$candidateName</td> 
+</tr>
+
 <tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Interview Round :</td>
 <td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td> 
 </tr>

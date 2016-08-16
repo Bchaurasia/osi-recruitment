@@ -1,207 +1,236 @@
-<br>
-<div style="width: 90%" align="center">
-	<div class="row"
-		ng-show="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
-		<div class="col s1 m1 ">
-			<div class="shortcuts">
-				<ul>
-					<li><a class="btn-floating btn-large Red darken-1"
-						href="#admin/users" ng-show="hasRole('ROLE_ADMIN')"
-						data-tooltip="Search Users"><i class="material-icons">face</i></a></li>
-					<br>
-					<li><a class="btn-floating btn-large yellow darken-1"
-						href="#recruitment/searchPosition"
-						ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-						data-tooltip="Search Positions"><i class="material-icons">star</i></a></li>
-					<br>
-					<li><a class="btn-floating btn-large green"
-						href="#recruitment/searchRequisition"
-						ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-						data-tooltip="Search Requisitions"><i class="material-icons">business</i></a></li>
-					<br>
-					<li><a class="btn-floating btn-large blue"
-						href="#recruitment/searchProfile"
-						ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-						data-tooltip="Search Profiles"><i class="material-icons">group</i></a></li>
-					<br>
-					<li><a class="btn-floating btn-large pink"
-						href="#recruitment/interviewManagement"
-						ng-show="hasRole('ROLE_INTERVIEWER,ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
-						data-tooltip="Search Interviews"><i class="material-icons">reply</i></a></li>
-				</ul>
-			</div>
-		</div>
+<style>
+.statistics-container {
+	padding: 1% 8%;
+	border-bottom: 1px solid #bbadad;
+}
 
-		<div class="col s12 m5 "
-			ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
-			<h6 align="left">
-				<b>Positions</b>
-			</h6>
-			<div>
-				<ul class="collapsible" data-collapsible="accordion">
-					<li style="background-color: #035396">
-						<div class="collapsible-header white-field">
-							<span class="col s6"><b>Position</b></span> <span class="col s6"><b>Required</b></span>
-						</div>
-					</li>
-					<li ng-repeat="position in positionData">
-						<div class="collapsible-header row">
-							<span class="col s6"><a style="cursor: pointer;"
-								ng-click="editPosition(position.jobcode,position.designation)">{{position.designation}}</a></span>
-							<span class="col s6">{{position.total}}</span>
-						</div>
-					</li>
-					<li ng-hide="hideNoPositionsMsg">
-						<p style="color: red;">No Positions Available</p>
-					</li>
-				</ul>
-			</div>
-			<div ng-show="hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
-				<h6 align="left">
-					<b>Requisitions </b>
-				</h6>
-				<ul class="collapsible" data-collapsible="accordion">
-					<li style="background-color: #035396">
-						<div class="collapsible-header white-field">
-							<span class="col s6"><b>Requisition Id</b></span> <span
-								class="col s6"><b>Status</b></span>
-						</div>
-					</li>
-					<li ng-repeat="requisition in allRequisitions">
-						<div class="collapsible-header row">
-							<span class="col s6"><a style="cursor: pointer;"
-								ng-click="editRequisition(requisition.requisitionId)">
-									{{requisition.requisitionId}} </a></span> <span class="col s6">{{requisition.status}}</span>
-						</div>
-					</li>
-					<li ng-hide="hideNoRequisitionMsg">
-						<p style="color: red;">No Requisition Available.</p>
-					</li>
-				</ul>
-			</div>
-			<div ng-show="hasRole('ROLE_REQUISITION_APPROVER')">
-				<h6 align="left">
-					<b>Requisitions to Approve</b>
-				</h6>
-				<ul class="collapsible" data-collapsible="accordion">
-					<li style="background-color: #035396">
-						<div class="collapsible-header white-field">
-							<span class="col s6"><b>Requisition Id</b></span> <span
-								class="col s6"><b>Status</b></span>
-						</div>
-					</li>
-					<li ng-repeat="requisition in requisitionsDetails ">
-						<div class="collapsible-header row">
-							<span class="col s6"><a style="cursor: pointer;"
-								ng-click="editRequisition(requisition.requisitionId)">
-									{{requisition.requisitionId}} </a></span> <span class="col s6">{{requisition.status}}</span>
-						</div>
-					</li>
-					<li ng-show="showNoAppRequisitionMsg">
-						<p style="color: red;">No Requisition Available.</p>
-					</li>
-				</ul>
+.progress-container {
+	padding: 15px;
+	/* border: 1px solid #bbadad; */
+	border-radius: 5px;
+}
+
+.statistics-btn {
+	background: none;
+	padding: 4px;
+	border: 1px solid #867777;
+	border-radius: 3px;
+	margin: 5px;
+	float: left;
+}
+
+.initial {
+	width: 51px;
+	margin: 5px;
+	float: left;
+	padding: 10px 5px;
+	font-size: 171%;
+	height: 35px;
+	background: #b5b4b4;
+}
+
+.req-title {
+	background: #d0cdcd;
+	color: #777575;
+	padding: 14px;
+	font-size: 124%;
+	font-weight: bolder;
+	border-radius: 5px;
+}
+
+.total {
+	width: 100px;
+	height: 100px;
+	background: #c7c7c7;
+	border-radius: 90px;
+	padding: 26px 0;
+	background: #c7c7c7;
+	border-radius: 90px;
+	border-radius: 90px;
+}
+
+.progress-bar {
+	transition: width 1s ease-in-out;
+}
+
+.statistics-btn:clicked {
+	background: none;
+}
+
+.ui.statistics>.statistic:first-child {
+	border-left: none;
+}
+
+input[type='date']:after {
+  content: attr(placeholder)
+}
+.dateText{
+    text-align: center;
+    font-size: 21px;
+    font-family: initial;
+    width: 56px;
+    padding: 10px 0px 0px 0px;
+}
+
+</style>
+
+<!-- <div class="statistics-container" align="center"></div> -->
+<!-- <div id="btn" class="ui black huge launch right attached button"
+	style="display: absolute; left: 0px; width: 70px;">
+	<i class="material-icons">keyboard_arrow_left</i> <span class="text"
+		style="display: none;">Activities</span>
+</div> -->
+
+
+
+			<div class="row" style="padding-top: 15px;padding-left: 10px;">
+			<div class="col-md-1" style="padding: 5px 0px 0px 0px;     width: 70px;">
+			<lable class="dateText">From</lable>
 			</div>
 			
-		</div>
-		<div class="col s12 m6 "
-			ng-show="hasRole('ROLE_ADMIN,ROLE_HR,ROLE_MANAGER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')">
-			<h6 align="left">
-				<b><i class="material-icons col s1">alarm on</i>Upcoming Interviews</b>
-			</h6>
-			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #035396">
-					<div class="collapsible-header white-field">
-						<span class="col s3"><b>Name</b></span>
-						<span class="col s3"><b>Interviewer Name</b></span> 
-						<span class="col s3"><b>Round</b></span>
-						<span class="col s3"><b>Schedule Time</b></span>
-					</div>
-				</li>
-				<li ng-repeat="schedule in showScheduleData">
-					<div class="collapsible-header row">
-						<span class="col s3"><a
-							style="cursor: pointer;"
-							ng-click="showInterviewDetails(schedule.interviewId,schedule.round)">{{schedule.cname}}</a></span>
-						<span  class="col s3">{{schedule.interviewerName}} </span>	
-						<span class="col s3">{{schedule.roundStatus}}</span>
-						<span class="col s3">{{schedule.date | date:'medium'}}</span>
-					</div>
-				</li>
-				<li ng-hide="hideNoInterviewMsg">
-					<p style="color: red;">No Upcoming Interviews.</p>
-				</li>
-			</ul>
-		</div>
-		<div class="col s12 m6 " ng-show="hasRole('ROLE_INTERVIEWER,ROLE_HR,ROLE_MANAGER')">
-			<h6 align="left">
-				<b>Scheduled Interviews</b>
-			</h6>
-			<ul class="collapsible" data-collapsible="accordion">
-				<li style="background-color: #035396">
-					<div class="collapsible-header row white-field">
-						<span class="col s3"><b>Name</b></span> <span class="col s3"><b>Round</b></span>
-						<span class="col s3"><b>Schedule Time</b></span><span
-							class="col s3"><b>Status</b></span>
-					</div>
-				</li>
-				<li ng-repeat="schedule in showScheduleDataInterview">
-					<div class="collapsible-header row">
-						<span class="col s3"><a
-							style="cursor: pointer;"
-							ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}</a></span> 
-						<span class="col s3">{{schedule.round}}</span>
-						 <span class="col s3">{{schedule.date | date:'medium'}}</span> 
-						  <span class="col s3">{{schedule.status}}</span> 
-						<!--  <span class="col s3"
-							ng-show="interviewDateTimeFuture(schedule.date)">Interview
-							Pending</span> <span class="col s3"
-							ng-show="interviewDateTimePastFeedbackPending(schedule.date,schedule.status)">Feedback
-							Pending</span> <span class="col s3"
-							ng-show="interviewDateTimePastFeedback(schedule.date,schedule.status)">Feedback
-							Submitted</span> -->
-					</div>
-				</li>
-				<li ng-show="showNoInterviewMsg">
-					<p style="color: red;">No Scheduled Interviews.</p>
-				</li>
-			</ul>
-		</div>
-	</div>
+			<input style="width: 130px; margin-right:15px;padding-left: 20px;" type="date"
+				ng-model="fromdate">
+				
+			<div class="col-md-1" style="padding: 5px 0px 0px 0px; width:50px">
+			<lable class="dateText">To</lable>
+			</div>
+			
+			<input style="width: 130px; margin-right: 15px;padding-left: 20px;" type="date"
+				ng-model="todate">
+		<button class="ui black basic button"" style="float:left; height: 32px" ng-click="getData()"> Get Status!</button>
+			
+			
+			</div>
 	
-	<div>
-		<h6 align="left">
-			<b>Your Referred Profiles</b>
-		</h6>
-		<ul class="collapsible" data-collapsible="accordion">
-			<li style="background-color: #035396">
-				<div class="collapsible-header row collapsible-header white-field">
-					<span class="col s6"><b>Name</b></span>
-					 <span class="col s6"><b>Status</b></span></div>
-			</li>
-			<li ng-repeat="profile in profileData">
-				<div class="collapsible-header row">
-					<b> <span class="col s6">{{profile.candidateName}}</span> <span
-						class="col s6">{{profile.status}}</span></b>
-				</div>
-			</li>
-			<li ng-hide="hideNoStatusMsg">
-				<p style="color: red;">No Profile uploaded.</p>
-			</li>
-		</ul>
-	</div>
 		
-<!-- <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
- -->	
+<div  class="row" style="padding-top: 15px;padding-left:  20px; ">
+		<div id="requisitionDonut" style="float: left;" ng-if="showNoAnyPositions"></div>
+		<div ng-if="!showNoAnyPositions" style="float: left;width: 683px; height: 345px;">There is no single position to display</div>
+		<br> <br>
 
-	<br><br>
 
-	<!-- 	<div class="btn-floating horizontal" -->
-	<!-- 		style="bottom: 45px; right: 24px;"> -->
-	<!-- 		<a class="btn-floating btn-large red"> <i -->
-	<!-- 			class="large material-icons">mode_edit</i> -->
-	<!-- 		</a> -->
+	<div class="col-md-4" style="margin-top: -135px; margin-left: 50px;">
+		<br>
+		<div class="ui feed " style="font-size: 100%;">
+			<div ng-hide="showNoInterviewMsg">
+				<h5 style="margin-top: 10px">Upcoming Events</h5>
+				<hr style="margin-left: 15px;">
+				<div style="max-height: 250px; height: auto; overflow: auto;">
+					<div class="event"
+						ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate ">
+						<div class="label">
+							<span ng-if="schedule.round == 'Technical Round 1'"
+								class="initial" style="background: #e47575">TR 1</span> <span
+								ng-if="schedule.round == 'Technical Round 2'" class="initial"
+								style="background: #d4ab61">TR 2</span> <span
+								ng-if="schedule.round == 'Hr Round'" class="initial"
+								style="background: #7ad27a">HR </span> <span
+								ng-if="schedule.round == 'Manager Round'" class="initial"
+								style="background: #9696dc">MR</span>
+						</div>
+						<div class="content">
+							<div class="summary" align="left">
+								You need to take interview of <a class="user"
+									ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
+								</a> for <a class="user"
+									ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
+								</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
+										MMMM Do YYYY, h:mm a' }}</time></b>.
+								<div class="date">
+									<time am-time-ago="schedule.createdDate"></time>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui feed " style="font-size: 100%;">
+				<h5 style="margin-top: 10px">Recent Activities</h5>
+				<hr style="margin-left: 15px;">
+				<div align="left"
+					style="max-height: 250px; height: auto; overflow: auto;">
+					<div class="event" ng-repeat="feed in events">
+						<div class="label" style="color: white">
+							<span class="initial"
+								ng-style="{'background-color':(($index%2)==0?'#7ad27a':'#e47575')}" tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
+						</div>
+						<div class="content">
+							<div class="summary">
+								{{feed.eventDesc}}<br>
+								<div class="date">
+									<time am-time-ago="feed.createdTimeStamp"></time>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-	<!-- 	</div> -->
-
+	</div>
 </div>
+				<div ng-show="!showNoAppRequisitionMsg">
+			<h5 style="margin-top: 15px" align="center">Requisition for
+				Approval</h5>
+			<hr>
+			<div class="row" style="padding: 10px">
+				<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
+					<div class="card col-md-6" style="width:370px"
+						ng-repeat="requisition in requisitionsDetails">
+						<div class="content">
+							<span class="right req-title">{{requisition.requisitionId}}</span>
+							<div class="header" align="left">
+								Created By: <b>{{requisition.createdBy}}</b>
+							</div>
+							<div class="meta" align="left">
+								<time am-time-ago="requisition.createdDate"></time>
+							</div>
+							<hr>
+							<div class="description"
+								ng-if="requisition.status == 'INITIATED'">
+								You need to approve this requisition for <b>{{requisition.position}}</b>
+								position.
+							</div>
+						</div>
+						<div class="extra content">
+							<div class="ui two buttons">
+								<div class="ui basic green button"
+									ng-click="editRequisition(requisition.requisitionId)">View
+									Details</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+
+	</div>
+<!-- <div class="row">
+	<div class="col-md-6"></div>
+	<div class="col-md-6">
+		<h5 style="margin-top: 15px" align="center">Referred Profiles</h5>
+		<hr>
+	</div>
+</div>
+ -->
+
+<!-- 
+<script>
+	$(".launch.button").mouseenter(function() {
+		$(this).stop().animate({
+			width : '215px'
+		}, 300, function() {
+			$(this).find('.text').show();
+		});
+	}).mouseleave(function(event) {
+		$(this).find('.text').hide();
+		$(this).stop().animate({
+			width : '70px'
+		}, 300);
+	});
+	$("#feed").sidebar({
+		overlay : false
+	}).sidebar('attach events', '.ui.launch.button');
+</script>
+
+ -->

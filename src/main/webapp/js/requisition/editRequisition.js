@@ -38,14 +38,13 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 	$scope.disableApprover2CommentBox =true;
 	$scope.accordianFlag = false;
 	 $scope.previousApprover2  = false;
-	
+
 	var id;
 	$scope.init = function() {
 		if(sharedService.getRequisitionId() == undefined) {
 			$state.go("recruitment.searchRequisition");
 		}
 		id = sharedService.getRequisitionId();
-		
 		requisitionService.getRequisitionById(id).then(function(data){
 			$scope.requisition = data;
 			$scope.requisition.noOfPositions = parseInt($scope.requisition.noOfPositions);
@@ -227,7 +226,7 @@ app.controller('editRequisitionCtrl',['$scope','$state', '$http','$q', '$window'
 			 			$scope.disableApprovalBtn = $scope.requisition.approval2.approved;
 			 			$scope.disableApprover2CommentBox=false;
 						
- 					}else if($scope.user.emailId === $scope.requisition.createdBy && (_.contains($scope.user.roles, "ROLE_REQUISITION_MANAGER") || _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER"))){
+ 					}else if($scope.user.emailId === $scope.requisition.createdBy && _.contains($scope.user.roles, "ROLE_REQUISITION_APPROVER")){
  						$scope.showApprovalBtn = false;
 						$scope.showRejectBtn = false;
 						$scope.showUpdateBtn = true;
