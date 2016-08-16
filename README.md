@@ -1,5 +1,6 @@
 Required tech's
 ===============
+
 - Gradle [https://www.gradle.org/downloads]
 - Mongodb [https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.0.4-signed.msi?_ga=1.153554936.1328960631.1435177642]
 - Eclipse luna or newer is recommended [https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/lunar]
