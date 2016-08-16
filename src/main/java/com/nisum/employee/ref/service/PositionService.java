@@ -129,6 +129,9 @@ public class PositionService implements IPositionService {
 		position.setCreatedDate(new Date());
 		position.setUpdatedBy(requisition.getUpdatedBy());
 		position.setCreatedBy(requisition.getUpdatedBy());
+		position.setClientInterview(requisition.getClientInterview());
+		position.setOnsiteInterview(requisition.getOnsiteInterview());
+		
 		if(null!=requisition.getAdditionalSkills()){
 			position.setSecondarySkills(requisition.getAdditionalSkills());
 		}
