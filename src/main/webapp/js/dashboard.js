@@ -55,11 +55,12 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var layer3Data=[];
 	
 	function isValidDate(date) {
+		layer2Data=[];
+		layer3Data=[];
 		  return !! (Object.prototype.toString.call(date) === "[object Date]" && +date);
 		}
 	
 	$scope.getData=function() {
-	
 		$scope.positionData=[];
 		var fromdate,todate,month;
 		fromdatemonth=$scope.fromdate.getMonth()+1;
@@ -67,6 +68,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		todatemonth=$scope.todate.getMonth()+1;
 		todate=$scope.todate.getDate()+"/"+todatemonth+"/"+$scope.todate.getFullYear();
 		$scope.fromdate=fromdate;
+		layer2Data=[];
+		layer3Data=[];
 		$scope.todate=todate;
 		getDesignationSpecificData();
 	}
@@ -74,7 +77,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	angular.element(document).ready(function() {
 		$scope.positionData=[];
 		$scope.getData();
-		
        });
 	
 	
@@ -95,8 +97,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
 		var designationArray=[];
 		var totalPositionData=[];
-		 layer2Data=[];
-		 layer3Data=[];
 		hiredCnt=0;
 		selectedCnt=0;
 		rejectedCnt=0;
@@ -104,11 +104,11 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		inActiveCnt=0;
 		closedCnt=0;
 		activeCnt=0;
-		
+		layer2Data=[];
+		layer3Data=[];
 		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
 			totalPositionData=data;
 		});
-		
 		
 		designationService.getDesignation().then(function(data){
 			  $scope.positionData=[];
@@ -138,9 +138,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
 						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
 						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
-
-		            		
-		       			 
 			 }
 		            	
 				
@@ -151,7 +148,31 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				            width: 700,
 				            events: {
 				            	drilldown: function (i,e) {
-                                  getData();
+				            		angular.forEach($scope.positionData, function(value, key){
+				    				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
+				    					console.log($scope.fromdate+"   "+$scope.todate);
+				    					$scope.data.push(data);
+				    					
+				    					if($scope.data[key]!=undefined)
+				    					{
+				    						layer2Data.push($scope.data[key].layer2);
+				    						layer3Data.push($scope.data[key].layer3);
+				    					}
+				    					
+				    				});
+				            		}) ;
+				    					for(i=0; i<layer3Data.length; i++){
+				    	       			for(j=0; j<layer3Data[i].length; j++)
+				    	       				for(k=0; k<layer3Data[i][j].data.length; k++){
+				    						var cnt=layer3Data[i][j].data[k][1];
+				    	       			layer3Data[i][j].data[k][1]= parseInt(cnt);
+				    						}
+				    	       		}
+				    	       		for(i=0; i<layer3Data.length; i++){
+				    	       			for(j=0;j<layer3Data[i].length; j++)
+				    	       			layer2Data.push(layer3Data[i][j]);
+				    	       		}
+				    					
 				            		
 				            	}
 			         	 
@@ -199,35 +220,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 	}
 	
-	function getData(){
-		angular.forEach($scope.positionData, function(value, key){
-				
-            console.log($scope.fromdate+"   "+$scope.todate);
-            
-				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
-				console.log($scope.fromdate+"   "+$scope.todate);
-				$scope.data.push(data);
-				if($scope.data[key]!=undefined)
-				{
-					layer2Data.push($scope.data[key].layer2);
-					layer3Data.push($scope.data[key].layer3);
-				}
-				
-				for(i=0; i<layer3Data.length; i++){
-       			for(j=0; j<layer3Data[i].length; j++)
-       				for(k=0; k<layer3Data[i][j].data.length; k++){
-					var cnt=layer3Data[i][j].data[k][1];
-       			layer3Data[i][j].data[k][1]= parseInt(cnt);
-					}
-       		}
-       		for(i=0; i<layer3Data.length; i++){
-       			for(j=0;j<layer3Data[i].length; j++)
-       			layer2Data.push(layer3Data[i][j]);
-       		}
-				}) ;
-				
-			});
-	}
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
 		location.href='#recruitment/editRequisition';
