@@ -4,8 +4,10 @@
 		name="CreateCandidate" onvalidate>
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>		
 		<div class="row collapsible-header">
+	
 			<h5 align="left">
-				<b>Create Profile</b>
+				<i class="big add user basic icon" ></i>
+				<b class="headerName"> Create Profile</b>
 			</h5>
 		</div>
 		<div class="ui steps">
@@ -175,7 +177,7 @@
 							ng-model="candi.qualification" name="pso"
 							ng-options="o as o for o in info.qualification | orderBy:'toString()'"
 							class="form-control input-sm" required>
-							<!-- <option value="">Select Qualification</option> -->
+							 <option value="">Select Qualification</option>
 						</select> <label style="position: absolute; top: -22px;">Qualification<b
 							class="mandatory">*</b></label> <span class="validation-error"
 							ng-show="submitted && CreateCandidate.pso.$invalid">Please
@@ -224,7 +226,7 @@
 			</fieldset>
 
 		 <fieldset ng-show="show3">
-	
+			&nbsp;
 			<div class="row">
 				<div class="input-field col s2">
 					<select ng-model="candidate.expYear" name="experience"
@@ -291,7 +293,7 @@
 	
 			<div class="row">
 				<div class="input-field col s6" align="left">
-					<ui-select ng-model="candidate.designation" ng-change="setJobCodes()" name="currentdesignation"
+					<ui-select ng-model="candidate.designation" ng-keypress="myFunct($event)" ng-change="setJobCodes()" name="currentdesignation"
 					theme="selectize" style="width: 80%">
 					   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
@@ -309,7 +311,7 @@
 		 </fieldset>
 
 		 <fieldset ng-show="show4">
-
+			&nbsp;
 			<div class="row">
 				<div class="input-field col s6">
 					<select ng-model="candidate.profileSource" name="profileSource"
@@ -363,7 +365,7 @@
 						Notice period should be in days </span>
 				</div>
 				<div class="input-field col s6" align="left">
-					<ui-select ng-model="candidate.expectedDesignation" ng-change="setJobCodes()" name="expectedDesignation"
+					<ui-select ng-model="candidate.expectedDesignation" ng-keypress="myFunct($event)" ng-change="setJobCodes()" name="expectedDesignation"
 					theme="selectize" style="width: 80%">
 					   <ui-select-match placeholder="Select Expected Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
