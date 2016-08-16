@@ -64,14 +64,13 @@
 						<div class="row">
 							<div class="input-field col s6" align="center">
 								<input class="form-control" type="text" ng-model="newSkill"
-									placeholder="Enter Skill..." ng-change="checkSkillSet()" required> <label
+									placeholder="Enter Skill..." required> <label
 									class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Skill<b class="mandatory">*</b>
 								</label>
-								<span class="validation-error" ng-show="skillExist">This skill already exist</span>
 							</div>
 							<div class="input-field col s6" align="center">
 								<button class="btn btn-info active"
-									ng-disabled="AddSkills.$invalid || skillExist" ng-click="save();"
+									ng-disabled="AddSkills.$invalid" ng-click="save();"
 									type="submit">
 									<span class="glyphicon glyphicon-ok-circle"></span> Save
 								</button>

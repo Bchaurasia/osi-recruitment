@@ -7,7 +7,7 @@
 					<div class="row" ng-repeat="round in interviewFeedback.domainSkills">
 						<div class="col s6">{{ round.skill }}</div>
 						<div class="col s6">
-							<rating ng-model="round.rating" max="5" readonly="false"
+							<rating ng-model="round.rating" max="10" readonly="false"
 								on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 						</div>
 					</div>

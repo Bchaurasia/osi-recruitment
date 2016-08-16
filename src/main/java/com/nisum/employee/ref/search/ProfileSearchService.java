@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.nisum.employee.ref.domain.Profile;
-import com.nisum.employee.ref.repository.ProfileRepository;
 
 @Service
 public class ProfileSearchService {
@@ -18,29 +17,21 @@ public class ProfileSearchService {
 
 	@Autowired
 	private ProfileIndexRepository profileIndexRepository;
-	@Autowired
-	private ProfileRepository profileRepository;
+	
 	@Autowired
 	private ProfileIndexQueryRepository profileIndexQueryRepository;
 	
 	public List<Profile> getAllProfiles() throws Exception {
 		Iterable<Profile> profile = profileIndexRepository.findAll();
 		List<Profile> porofileList = Lists.newArrayList(profile);
-		//List<Profile> porofileList = profileRepository.retrieveAllProfiles();
-	     try{
+		/*try{
 		Collections.sort(porofileList,new Comparator<Profile>(){
             public int compare(Profile o1, Profile o2){
             	return o2.getUpdatedDate().compareTo(o1.getUpdatedDate());
             }});
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-		return porofileList;
-	}
-	
-	public List<Profile> getAllProfilesFromDB() throws Exception {
-		List<Profile> porofileList = profileRepository.retrieveAllProfiles();
-		
+		}*/
 		return porofileList;
 	}
 	

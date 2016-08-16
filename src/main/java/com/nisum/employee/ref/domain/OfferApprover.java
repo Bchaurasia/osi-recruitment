@@ -14,7 +14,6 @@ public class OfferApprover {
 	String name;
 	boolean isApproved;
 	String comment;
-	String hrComment;
 	String status;
 	@LastModifiedDate
 	private Date updatedDate;

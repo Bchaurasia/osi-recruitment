@@ -36,6 +36,10 @@
 					Positions: </label>
 			</div>
 
+			<div class="input-field col s6">
+				<span class="offer-span">{{candidate.proposedPosition}}</span> <label>Proposed
+					Position: </label>
+			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
@@ -82,35 +86,6 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<span class="offer-span">{{candidate.currency}} </span>
-				<label> Currency: </label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{bu}} </span> <label> BU: </label>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{stream}} </span> <label>Stream: </label>
-			</div>
-			<div class="input-field col s6">
-				<span class="offer-span">{{level}} </span> <label> Level: </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<span class="offer-span">{{grade.grade}} </span> <label>Grade:
-				</label>
-			</div>
-			<div class="col-md-2"></div>
-			<div class="input-field col s6">
-				<span class="offer-span"> {{name.name}} </span> <label>
-					Designation: </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.relocationExpensesOffered}}</span>
 				<label>Relocation Expenses: </label>
 			</div>
@@ -124,7 +99,7 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.singInBonus}}</span><label>Sign-on
-					Bonus:
+					Bonus (<img src="static/osi_images/rupee.png" width="9" height="11">):
 				</label>
 
 			</div>
@@ -136,19 +111,20 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.lastDrawnCTC}}</span><label>Last
-					Drawn CTC:
+					Drawn CTC (<img src="static/osi_images/rupee.png" width="9"
+					height="11">):
 				</label>
 			</div>
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.expectedCTC}}</span><label>Expected
-					CTC :
+					CTC (<img src="static/osi_images/rupee.png" width="9" height="11">):
 				</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
 				<span class="offer-span">{{candidate.proposedCTC}}</span><label>Proposed
-					CTC:
+					CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)):
 				</label>
 			</div>
 			<div class="input-field col s6">
@@ -183,64 +159,54 @@
 			</div>
 
 		</div>
-		<div
-			ng-if="(data.roundName == 'Technical Round 1') || (data.roundName == 'Technical Round 2')"
-			class="row" ng-show="data.interviewFeedback"
+		<div ng-if="(data.roundName == 'Technical Round 1') || (data.roundName == 'Technical Round 2')" class="row" ng-show="data.interviewFeedback"
 			ng-repeat="skill in data.interviewFeedback.rateSkills">
 			<div class="input-field col s6">
 				<p class="viewInterview">{{skill.skill}}</p>
 				<label>Skill :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.rating}}/5</p>
+				<p class="viewInterview">{{skill.rating}}/10</p>
 				<label>Rating :</label>
 			</div>
 		</div>
-		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
-			class="row" ng-show="data.interviewFeedback">
+		<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"  class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.managementSkillset}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.managementSkillset}}/10</p>
 				<label>Management Skills :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/10</p>
 				<label>SelfLearning & Initiative :</label>
 			</div>
 		</div>
-		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
-			class="row" ng-show="data.interviewFeedback">
+		<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')" class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/10</p>
 				<label>Customer Orientation :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/10</p>
 				<label>Business Attitude :</label>
 			</div>
 		</div>
-		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
-			class="row" ng-show="data.interviewFeedback">
+			<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')" class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/10</p>
 				<label>Flexibility :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/10</p>
 				<label>TeamWork :</label>
 			</div>
 		</div>
-		<div
-			ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')"
-			class="row" ng-show="data.interviewFeedback">
+		<div ng-if="(data.roundName == 'Manager Round') || (data.roundName == 'Hr Round')" class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/10</p>
 				<label>Onsite Suitability :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/10</p>
 				<label>Consulting & ArticulationSkills :</label>
 			</div>
 		</div>
@@ -277,19 +243,13 @@
 		</div>
 		<br>
 		<div class="row" ng-show="candidate.approvalList">
-			<div class="input-field col s12">
-				<label style="position: absolute; top: -22px;">Summary:</label>
-			</div>
-		</div>
-		<div class="row" ng-show="candidate.approvalList">
-			<table class="bordered offertable" style="font-size: 14px;">
+			<table class="bordered">
 				<thead>
 					<tr>
 						<th>Date</th>
 						<th>Approver</th>
 						<th>Status</th>
-						<th>HR Comment</th>
-						<th>Approver Comment</th>
+						<th>Comment</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -298,7 +258,6 @@
 						<td>{{data.updatedDate | date:'medium'}}</a></td>
 						<td>{{data.name}}</a></td>
 						<td>{{data.status}}</td>
-						<td>{{data.hrComment}}</td>
 						<td>{{data.comment}}</td>
 					</tr>
 				</tbody>

@@ -44,7 +44,6 @@ import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
 import com.nisum.employee.ref.domain.Offer;
 import com.nisum.employee.ref.domain.Position;
-import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.domain.UserInfo;
@@ -67,8 +66,7 @@ public class NotificationService{
 	private static final String MOBILE_NO = "mobileNo";
 	private static final String INTERVIEW_DATE_TIME = "interviewDateTime";
 	private static final String TYPE_OF_INTERVIEW = "typeOfInterview";
-	private static final String CANDIDATE_NAME = "candidateName";
-		
+	
 	private static final String ROUND_NAME = "roundName";
 	private static final String INAME = "iname";
 	private static final String CNAME = "cname";
@@ -103,14 +101,10 @@ public class NotificationService{
 	private static final String OSI_TECHNOLOGIES1 = "From The Desk Of HR : Referal Drive For ";
 	private static final String JOB_DESCRIPTION = "job_description";
 	private static final String SKILLS = "skills";
-	private static final String OTHER_SKILLS = "other_skills";
 	private static final String MIN_EXP = "min_exp";
 	private static final String MAX_EXP = "max_exp";
-	private static final String TOTAL_EXP = "total_exp";
 	private static final String QUALIFICATION = "qualification";
 	private static final String TITLE = "title";
-	private static final String CREATED_BY_USER = "created_by_user";
-	private static final String SUBMITTED_BY_USER = "submittedBy";
 	
 	@Value("${mail.fromAddress}")
 	private String from;
@@ -144,8 +138,6 @@ public class NotificationService{
 	private String SRC_OFFER_TO_BE_APPROVED_VM;
 	@Value("${SRC_OFFER_VM}")
 	private String SRC_OFFER_VM;
-	@Value("${SRC_PROFILE_VM}")
-	private String SRC_PROFILE_VM;
 	
 	
 	@Autowired
@@ -609,7 +601,6 @@ public String sendCancelMail(InterviewSchedule interviewSchedule) throws Excepti
 	   Session session = getSession();
 
 	    VelocityContext context = getVelocityContext(interviewSchedule.getCandidateName(), interviewSchedule.getJobcode(), interviewSchedule.getInterviewerName(), interviewSchedule.getRoundName());
-		context.put(CANDIDATE_NAME, interviewSchedule.getCandidateName());
 		context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
 		context.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
@@ -643,7 +634,6 @@ public String sendCancelMail(InterviewSchedule interviewSchedule) throws Excepti
 		Transport.send(cancelInterview);		
 		return "Mails Sent Successfully!";
 	}
-
 public String sendJobToReffarals(Position position, Requisition requisition)
 		 throws MessagingException {
 
@@ -698,62 +688,5 @@ public String sendJobToReffarals(Position position, Requisition requisition)
 		 return "Mails Sent Successfully!";
 
 		 }
-
-public String sendProfileCreatedNotification(Profile candidate) throws MessagingException {
-
-		 String createdBy = candidate.getCreatedBy();
-		 String message = "Profile created";
-		 String readStatus = "No";
-		 List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		   List<String> HR_Emails = new ArrayList<String>();
-
-			for (UserInfo ui : info) {
-				HR_Emails.add(ui.getEmailId());
-			}
-		 
-		 updateUserNotification(createdBy, message, readStatus);
-		 VelocityEngine engine = new VelocityEngine();
-		 engine.init();
-
-		 ArrayList<String> skills=candidate.getPrimarySkills();
-		 String primarySkills = skills.toString().replace(",", "-")  //remove the commas
-		    .replace("[", "")  //remove the right bracket
-		    .replace("]", "")  //remove the left bracket
-		    .trim(); 
-		 
-		 String totalExperience = candidate.getExpYear() +"." + candidate.getExpMonth() ;
-		 
-		 Template jobRequisitionTemplate = getVelocityTemplate(SRC_PROFILE_VM);
-		 
-		 VelocityContext context = new VelocityContext();
-		 context.put(CREATED_BY_USER, candidate.getIsCreatedByUser());
-		 context.put(CANDIDATE_NAME, candidate.getCandidateName());
-		 context.put(TOTAL_EXP, totalExperience);
-		 context.put(SKILLS, primarySkills);
-		 context.put(OTHER_SKILLS, candidate.getOtherSkills());
-		 context.put(SUBMITTED_BY_USER, candidate.getReferredByName());
-		 
-		 StringWriter writer = new StringWriter();
-		 jobRequisitionTemplate.merge(context, writer);
-
-		 Message message1 = getMessage();
-		 message1.setFrom(new InternetAddress(from));
-		 String toMail = createdBy ;
-		    for (String hrEMails : HR_Emails) {
-				if(toMail== null || toMail == "")
-					toMail = hrEMails ;
-				else 
-					toMail = toMail + "," + hrEMails;
-			}
-		 message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
-		 message1.setSubject("Profile has been created for: "+candidate.getCandidateName());
-
-		 message1.setContent(writer.toString(), TEXT_HTML);
-		 Transport.send(message1);
-
-		 return "Mails Sent Successfully!";
-
-		 }
-
 }
 

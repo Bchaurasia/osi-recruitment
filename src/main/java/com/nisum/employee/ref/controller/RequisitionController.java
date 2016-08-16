@@ -54,8 +54,6 @@ public class RequisitionController {
 		List<Requisition> requisitionsDetails = requisitionService.retrieveAllRequistions();
 		return new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
 	}
-	
-	
 
 	@Secured({ "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/requisition", method = RequestMethod.POST)

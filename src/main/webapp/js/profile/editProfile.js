@@ -15,8 +15,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
-	$scope.currencyList = ["INR","USD","GBP","EUR"];
-	$scope.requisitionId="";
+	
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("recruitment.searchProfile");
@@ -81,11 +80,8 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		$scope.creator = _.find($scope.userData, function(user){ return user.emailId === $scope.candidate.createdBy});
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
-		if($scope.candidate.isApprovedFlag) {
-			$scope.disableApproveBtn = true;
-			$scope.disableUpdateBtn = true;
-		}
-		console.log("in getdata-->: "+angular.toJson($scope.candidate));
+		
+		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
 			 angular.forEach($scope.positionData, function(jobcodeProfile){
@@ -94,18 +90,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		}).catch(function(msg){
 			$log.error(msg);
 		})
-		positionService.getPosition().then(function(data){
-			$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
-			//$scope.positions=data;
-			$scope.profilepositions = [];
-	 		angular.forEach($scope.positions,function(obj){
-	 			$scope.profilepositions.push(obj.jobcode);
-	 		});
-		}).catch(function(msg){
-			$scope.message=msg;
-			 $scope.cls=appConstants.ERROR_CLASS;
-			 $timeout( function(){ $scope.alHide(); }, 5000);
-		})
+		
 		$scope.getDesignations();
 		$scope.getExpectedDesignations();
 	})
@@ -210,16 +195,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	         $anchorScroll();
 	       }
 	};
-	$scope.getRequisitionIdFromJobCode = function(jobcode){
-		
-	    angular.forEach($scope.positions,function(obj){			
-				if(obj.jobcode === jobcode){
-					$scope.requisitionId = obj.requisitionId;
-				}
-			
-		});
-	    return $scope.requisitionId;
-	}
+	
 	$scope.updateProfileDetails = function() {
 		if($scope.candidate !== undefined){
 			var dt = new Date();
@@ -227,13 +203,10 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        var curr_month = dt.getMonth();
 	        var curr_year = dt.getFullYear();
 	        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
-	        $scope.candidate.requisitionId = $scope.requisitionId;
 	        $scope.candidate.designation = $scope.designation.designation;
-	        $scope.candidate.expectedDesignation = $scope.expectedDesignation.designation;
 	        $scope.candidate.primarySkills=$scope.sk.primarySkills;
 	        $scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfiles;
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
-	        $scope.candidate.expectedDesignation=$scope.expectedDesignation.designation;
 	        if($scope.candidate.jobcodeProfile=="")
 				 $scope.candidate.status = "Not Initialized";
 			 else
@@ -250,19 +223,6 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 				$log.error(msg);
 	        }) 
 		}
-	
-	$scope.approveProfile = function() {
-		$scope.candidate.updatedBy  = $rootScope.user.emailId;
-		profileService.approveProfile($scope.candidate).then(function(msg){
-        	$scope.sendNotification(msg,'recruitment/searchProfile');
-			$log.info(msg);
-        }).catch(function(msg){
-        	$scope.cls=appConstants.ERROR_CLASS;
-        	$scope.message=msg;
-        	$scope.gotoAnchor();
-			$log.error(msg);
-        })
-	}
 	$scope.validateChar = function(data) {
 		if (/^[a-zA-Z _]*$/.test(data)) {
 			return true;

@@ -1,10 +1,7 @@
-var app = angular.module('erApp', ['ngTagsInput','ngGrid','ngRoute','angularFileUpload','blockUI', 'ui.utils.masks', 'ui.router','xeditable','ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ui.select','ngSanitize','ngNotify','components','ngAnimate','kendo.directives','ngIdle','angularMoment']);
+var app = angular.module('erApp', ['ngTagsInput','ngGrid','ngRoute','angularFileUpload','blockUI', 'ui.utils.masks', 'ui.router','xeditable','ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ui.select','ngSanitize','ngNotify','components','ngAnimate','kendo.directives']);
 
-app.config(['$stateProvider', '$urlRouterProvider', 'KeepaliveProvider', 'IdleProvider', function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     
-	
-    IdleProvider.windowInterrupt('focus');
-	
 	$urlRouterProvider.otherwise('/');
         
     $stateProvider
@@ -122,18 +119,4 @@ app.directive('uiSelectRequired', function() {
 	  };
 });
 
-app.directive('sidebarDirective', function() {
-    return {
-        link : function(scope, element, attr) {
-            scope.$watch(attr.sidebarDirective, function(newVal) {
-                  if(newVal)
-                  {
-                    element.addClass('show'); 
-                    return;
-                  }
-                  element.removeClass('show');
-            });
-        }
-    };
-});  
 

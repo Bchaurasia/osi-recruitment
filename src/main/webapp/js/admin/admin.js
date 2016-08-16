@@ -9,7 +9,7 @@ app.controller("adminCtrl", ['$scope','$rootScope','$http', '$filter', '$timeout
     	$state.go("admin.users.list");
 
     $scope.tabs = [
-                   { heading: "Employee", route:"admin.users.list"},
+                   { heading: "Users", route:"admin.users.list"},
                    { heading: "Client", route:"admin.client.list"},
                    { heading: "Designation", route:"admin.designation.list"},
                    { heading: "Skill", route:"admin.skillSet"},

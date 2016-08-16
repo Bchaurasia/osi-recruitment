@@ -1,5 +1,5 @@
-app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$window', 'blockUI', '$timeout','$rootScope','$log','sharedService','profileService','positionService','userService', 'interviewService','designationService','appConstants', 
-									function($scope, $http, $upload , $window, blockUI, $timeout,$rootScope, $log,sharedService,profileService,positionService,userService, interviewService,designationService,appConstants) {
+app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$window', 'blockUI', '$timeout','$rootScope','$log','profileService','positionService','userService', 'interviewService','designationService','appConstants', 
+									function($scope, $http, $upload , $window, blockUI, $timeout,$rootScope, $log,profileService,positionService,userService, interviewService,designationService,appConstants) {
 	$scope.successHide2 = true;
 	$scope.errorHide2 = true;
 	$scope.candidate = {};
@@ -33,10 +33,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
 	$scope.candidate.expMonth="0";
-	$scope.requisitionId="";
-	$scope.candidate.jobCode = sharedService.getjobCode();
-	$scope.currencyList = ["INR","USD","GBP","EUR"];
-	$scope.candidate.currency="INR";
+		
 	userService.getUsers().then(function(data) {
 			$scope.userData = data;
 			angular.forEach($scope.userData, function(userr){
@@ -92,17 +89,6 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 			$log.error(msg);
 		})
 	}
-	
-	$scope.getRequisitionIdFromJobCode = function(jobcode){
-	    angular.forEach($scope.positions,function(obj){			
-				if(obj.jobcode === jobcode){
-					$scope.requisitionId = obj.requisitionId;
-				}
-			
-		});
-	    return $scope.requisitionId;
-	}
-	
 	 $scope.submit = function() {
 		 if ($scope.CreateCandidate.$valid) {
 			 $scope.submitted = false;
@@ -123,11 +109,6 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 					 $scope.candidate.status = "Not Initialized";
 				}
 		    //	$scope.candidate.plocation = $scope.selection.pLocation;
-				if(_.contains($scope.user.roles, 'ROLE_USER'))
-					$scope.candidate.isCreatedByUser = true;
-				else
-					$scope.candidate.isCreatedByUser = false;
-				$scope.candidate.isReferral = true;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.jobcodeProfile = $scope.sk.jobcodeProfile;
 		    	$scope.candidate.interviewSet = false;
@@ -135,9 +116,8 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    	$scope.candidate.createdBy = $scope.user.emailId;
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	$scope.candidate.referredBy  = $scope.user.emailId;
-		    	$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.profileSource = "Referral";
-		    	$scope.candidate.requisitionId = $scope.requisitionId; 
+		    	
 		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
@@ -253,20 +233,8 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		 $scope.cls=appConstants.ERROR_CLASS;
 		 $timeout( function(){ $scope.alHide(); }, 5000);
 	})
-		
-	positionService.getPosition().then(function(data){
-		$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
-		//$scope.positions=data;
-		$scope.profilepositions = [];
- 		angular.forEach($scope.positions,function(obj){
- 			$scope.profilepositions.push(obj.jobcode);
- 		});
-	}).catch(function(msg){
-		$scope.message=msg;
-		 $scope.cls=appConstants.ERROR_CLASS;
-		 $timeout( function(){ $scope.alHide(); }, 5000);
-	})
-	 		
+	
+ 		
 	$scope.validateEmailId = function(emailId){
 		if(emailId != undefined){
 			profileService.getProfileById(emailId).then(function(data){

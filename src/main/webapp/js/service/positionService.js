@@ -12,8 +12,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,$q,appConstants)
 		getPositionBylocation : getPositionBylocation,
 		getClients : getClients,
 		searchPositionsBySearchQuery : searchPositionsBySearchQuery,
-		getPositionsByPositionType : getPositionsByPositionType,
-		getPositionsByDate:getPositionsByDate
+		getPositionsByPositionType : getPositionsByPositionType
 	};
 	
 	function addPosition(positionObj){
@@ -53,15 +52,7 @@ function positionService($http,$filter,$rootScope,$timeout,$log,$q,appConstants)
 		.then(getPositionSuccess)
 		.catch(getPositionError);
 	}
-	function getPositionsByDate(fromdate,todate){
-		var inData={'fromdate':fromdate,'todate':todate};
-		return $http.get('resources/getPositionsByDate?fromdate='+fromdate+'&todate='+todate).then(function(response){
-			return response.data;
-			
-		}).catch(function(response) {
-			return "Failed to get positions!"
-		})
-	}
+	
 	
 	function searchPositionsBySearchQuery(searchQuery){
 		return $http.get('resources/searchPositionsBySearchQuery?searchQuery='+searchQuery)

@@ -40,14 +40,13 @@
 									<div class="input-field col s6" align="center">
 										<input class="form-control" type="text"
 											ng-model="newInterviewRound"
-											placeholder="Enter Interview Round name" ng-change="checkRounds()"  required> <label
+											placeholder="Enter Interview Round name" required> <label
 											class="lbl"> <i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;Interview
 											Round<b class="mandatory">*</b>
 										</label>
-										<span class="validation-error" ng-show="roundExist">This round already exist</span>
 									</div>
 									<div class="input-field col s6" align="center">
-										<button class="btn btn-info active" ng-disabled="ListRounds.$invalid || roundExist" ng-click="save();"
+										<button class="btn btn-info active" ng-disabled="ListRounds.$invalid" ng-click="save();"
 											type="submit">
 											<span class="glyphicon glyphicon-ok-circle"></span> Save
 										</button>

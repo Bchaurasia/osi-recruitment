@@ -39,9 +39,6 @@ public class ProfileServiceTest {
 	@Mock
 	private InterviewService interviewService;
 	
-	@Mock
-	private NotificationService notificationService;
-	
 	@Test
 	public void shouldPrepareCandidate() throws Exception {		
 		

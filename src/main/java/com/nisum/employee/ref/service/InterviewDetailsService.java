@@ -1,7 +1,6 @@
 package com.nisum.employee.ref.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -61,7 +60,6 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	}
 	
 	public InterviewDetails  scheduleInterview(InterviewSchedule interviewSchedule) throws Exception{
-		interviewSchedule.setUpdatedScheduleDate(new Date());
 		InterviewDetails interviewDetails = null;
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewSchedule.getCandidateId());
 		interviewDetails = enrichInterviewDetails(interviewDetails2 ,interviewSchedule);
@@ -144,7 +142,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	public List<InterviewDetails> getInterviewByInterviewerAndJobCode(String jobCode) {
 		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
 		Query query = new Query();
-		query.addCriteria(Criteria.where("jobCode").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)).andOperator(Criteria.where("progress").ne("Not Initialized")));
+		query.addCriteria(Criteria.where("jobCode").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
 		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
 		return checkDetails;
 	}
@@ -221,7 +219,6 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			int size = interviewDetails2.getRounds().size();
 			List<Round> rounds = interviewDetails2.getRounds();
 			interviewSchedule.setRoundStatus( interviewSchedule.getRoundName() + " Scheduled");
-			interviewSchedule.setCreatedScheduleDate(new Date());
 			rounds.add(size,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 		
 			interviewDetails2.setProgress( interviewSchedule.getRoundName() + " Scheduled");
@@ -240,7 +237,6 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 			int i=0;
 			List<Round> rounds = new ArrayList<Round>();
 			interviewSchedule.setRoundStatus( interviewSchedule.getRoundName() + " Scheduled");
-			interviewSchedule.setCreatedScheduleDate(new Date());
 			rounds.add(i,new Round(interviewSchedule.getRoundName(), interviewSchedule, null));
 			interviewDetails2.setInterviewerEmail(interviewSchedule.getEmailIdInterviewer());
 			interviewDetails2.setInterviewerName(interviewSchedule.getInterviewerName());

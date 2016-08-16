@@ -1,17 +1,13 @@
 package com.nisum.employee.ref.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class InterviewSchedule{
+public class InterviewSchedule extends AuditEntity{
 	String roundName;
 	String interviewerName;
 	String jobcode;
@@ -33,9 +29,4 @@ public class InterviewSchedule{
 	String interviewAddress;
 	String roundStatus;
 	
-	@CreatedDate	
-	private Date createdScheduleDate;
-	
-	@LastModifiedDate
-	private Date updatedScheduleDate;
 }

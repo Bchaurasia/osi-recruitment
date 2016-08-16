@@ -127,7 +127,7 @@
 			<div class="input-field col s12">
 				<p style="position: relative; top: -15px; left: 23%;">{{data.interviewSchedule.additionalNotes
 					|| "--"}}</p>
-				<label style="position: absolute; top: -22px;">Additional Notes :</label>
+				<label>Additional Notes :</label>
 			</div>
 		</div>
 		<div class="row" style="align:center">
@@ -160,7 +160,7 @@
 				<label>Skill :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.rating}}/5</p>
+				<p class="viewInterview">{{skill.rating}}/10</p>
 				<label>Rating :</label>
 			</div>
 		</div>
@@ -177,7 +177,7 @@
 				<label>Skill :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{skill.rating}}/5</p>
+				<p class="viewInterview">{{skill.rating}}/10</p>
 				<label>Rating :</label>
 			</div>
 		</div>
@@ -189,7 +189,7 @@
 		</div>
 		<div class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.communicationSkills}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.communicationSkills}}/10</p>
 				<label>Communication Skills :</label>
 			</div>
 			<div class="input-field col s6">
@@ -199,7 +199,7 @@
 		</div>
 		<div class="row" ng-show="data.interviewFeedback">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.consultingAndArticulationSkills}}/10</p>
 				<label style="position: absolute; top: -12px;">Consulting &<br> Articulation Skills :</label>
 			</div>
 			<div class="input-field col s6">
@@ -230,38 +230,38 @@
 		</div>
 		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.selfLearningAndInitiative}}/10</p>
 				<label>Self Learning & Initiative :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.customerOrientation}}/10</p>
 				<label>Customer Orientation :</label>
 			</div>
 		</div>
 		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.businessAttitude}}/10</p>
 				<label>Business Attitude :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.flexibility}}/10</p>
 				<label>Flexibility :</label>
 			</div>
 		</div>
 		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.teamWork}}/10</p>
 				<label>Team Work :</label>
 			</div>
 			<div class="input-field col s6">
-				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/5</p>
+				<p class="viewInterview">{{data.interviewFeedback.onsiteSuitability}}/10</p>
 				<label>Onsite Suitability :</label>
 			</div>
 		</div>
 		<div class="row" ng-show="data.interviewFeedback" ng-if="data.interviewFeedback.selfLearningAndInitiative!=0">
 			   <div class="input-field col s6">
 					<p class="viewInterview">{{data.interviewFeedback.managementSkillComment || "--"}}</p>
-					<label style="position: absolute; top: -12px;">Comments :</label>
+					<label>Comments :</label>
 			</div>
 		</div>
 		<div class="row" ng-show="!(data.interviewFeedback)"

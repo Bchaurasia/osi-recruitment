@@ -1,12 +1,6 @@
 app.controller('searchPositionCtrl',['$scope', '$http','$q', '$window','sharedService','$filter', '$log','positionService','appConstants','$timeout','positionService',
                                      function($scope, $http, $q, $window,sharedService,$filter, $log,positionService,appConstants,$timeout,positionService) {
 
-	 $scope.state = false;
-	    
-	    $scope.toggleState = function() {
-	        $scope.state = !$scope.state;
-	    };
-	    
 	$scope.approveBtnDisable = true;
 	$scope.errorHide = true;
 	$scope.data = {};

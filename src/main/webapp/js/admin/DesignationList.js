@@ -11,7 +11,6 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	$scope.hideError = true;
 	$scope.pskills=$rootScope.info.skills;
 	$scope.expYear=$rootScope.info.expYears;
-	$scope.designationExist=false;
 	
 	$scope.cls = sharedDataService.getClass();
 	$scope.message = sharedDataService.getmessage();
@@ -44,7 +43,7 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 
 	$scope.save = function(){
 		console.log(angular.toJson($scope.designation));
-		if($scope.designationExist == false){
+		if($scope.validateDesignation()){
 		  designationService.addDesignation($scope.designation).then(function(msg){
 			  $scope.sendSharedMessage(msg,'/admin/designation');
 		  }).catch(function(msg){ 
@@ -54,12 +53,15 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 		}
 	}
 	
-	$scope.checkDesignaton = function(){
-		$scope.isDesigExist=_.find($scope.designation1, function(desg){ return desg.designation.toLowerCase() === $scope.designation.designation.toLowerCase() });
+	$scope.validateDesignation = function(){
+		$scope.isDesigExist=_.find($scope.designation1, function(desg){ return desg.designation === $scope.designation.designation });
 		if($scope.isDesigExist){
-			$scope.designationExist=true;
+			 $scope.message="Designation Already Exists";
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $scope.sendSharedMessageWithCls($scope.message,$scope.cls,'/admin/designation');
+			return false;
 		}
-		else $scope.designationExist=false;
+		else return true;
 	}
 	$scope.skills = function(){
 		$scope.hideSkills = false;
@@ -116,5 +118,4 @@ app.controller('DesignationListCtrl',['$scope','$rootScope', '$http','$q', '$win
 	         $anchorScroll();
 	       }
 	};
-	
 }]);

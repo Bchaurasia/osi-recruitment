@@ -16,8 +16,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	$scope.newSkill="";
 	$scope.message="";
 	$scope.hideError = true;
-	$scope.skillExist=false;
-
+		
 		infoService.getInfoById('skills').then(function(skills){
 		$scope.skills1 = skills;
 		$scope.skills=skills.value.sort();
@@ -29,7 +28,7 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 		if($scope.newSkill == "" || $scope.newSkill == null ||$scope.newSkill == undefined){
 			$scope.hideError = false;
 		}else{
-			var ck=!$scope.skillExist;
+		var ck=$scope.checkSkillSet();
 		if(ck){
 		$scope.skills1.value.push($scope.newSkill);
 		
@@ -50,12 +49,17 @@ app.controller('skillSet',['$scope', '$http','$q', '$window', '$timeout','$filte
 	}
 	
 	$scope.checkSkillSet = function(){
-		$scope.skillExist=false;
+		var flag=true;
 		angular.forEach($scope.skills, function(sk){
-			if($scope.newSkill.toLowerCase()==sk.toLowerCase()){
-				$scope.skillExist=true;
+			if($scope.newSkill==sk){
+				  $scope.message="Skill Already Exists";
+				  $scope.cls=appConstants.ERROR_CLASS;
+				  $timeout( function(){ $scope.alHide(); }, 5000);
+				  $scope.newSkill = "";
+				  flag=false; 
 		}	
 		});
+		return flag;
 	}
 	
      $scope.deleteSkill = function(skill){

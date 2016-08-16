@@ -48,14 +48,6 @@ public class InterviewController {
 		}
 		return  new ResponseEntity<List<InterviewDetails>>(interviewDetails, HttpStatus.OK);
 	}
-	@RequestMapping(value = "/allInterviewDetails", method = RequestMethod.GET)
-	public ResponseEntity<?> searchAllInterviews() {
-		List<InterviewDetails> interviewDetails = null;
-			//interviewDetails =interviewDetailsService.getAll();
-			interviewDetails=interviewDetailsService.getAll();
-		
-		return  new ResponseEntity<List<InterviewDetails>>(interviewDetails, HttpStatus.OK);
-	}
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchInterviewDetailsByInterviewId", method = RequestMethod.GET)
 	public ResponseEntity<?> searchInterviewsByInterviewer(@RequestParam(value = "interviewerId", required = false) String interviewerId) {

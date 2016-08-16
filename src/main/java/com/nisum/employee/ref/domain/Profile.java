@@ -18,7 +18,6 @@ public class Profile extends AuditEntity{
 	String emailId;
 	//String qualification;
 	ArrayList<String> primarySkills;
-	String otherSkills;
 	String expYear;
 	String expMonth;
 	String uploadedFileName;
@@ -26,15 +25,13 @@ public class Profile extends AuditEntity{
 	String designation;
 	String pancardNo;
 	String passportNo;
-	String jobCode;
-	String requisitionId;
+	//String stream;
 	List<CandidateQualification> qualifications;
 	String address;
 	String notes;
 	String altmobileNo;
 	String currentEmployer;
 	String referredBy;
-	String referredByName;
 	String hrAssigned;
 	ArrayList<String> jobcodeProfile;
 	Boolean interviewSet;
@@ -51,9 +48,5 @@ public class Profile extends AuditEntity{
 	int noticePeriod; 
 	String currentLocation;
 	String expectedDesignation;
-	Boolean isApprovedFlag;
-	Boolean isCreatedByUser;
-	Boolean isReferral;
-	 String currency;
 	
 }

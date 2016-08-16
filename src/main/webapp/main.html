@@ -25,14 +25,10 @@
 <link href="lib/bootstrap/font/font-awesome.css" rel="stylesheet">
 <link href="lib/bootstrap/font/google_font.css" rel="stylesheet">
 
-
 <link href="static/osi_css/dashboard.css" rel="stylesheet">
 <link href="lib/angular/css/animation.css" rel="stylesheet">
 <link rel="stylesheet" href="lib/utility/css/kendo.common.min.css" />
  <link rel="stylesheet" href="lib/utility/css/kendo.default.min.css" />
- 
- <link rel="stylesheet" href="lib/utility/css/semantic.min.css" />
- 
  <link href="static/osi_css/style.css" rel="stylesheet">
 
 <!--Import Google Icon Font-->
@@ -41,9 +37,8 @@
 <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 <link rel="stylesheet" href="lib/materialize/css/materialize.css">
 
-<script src="lib/utility/js/jquery-1.11.2.min.js"></script>         
+ <script src="lib/utility/js/jquery-1.11.2.min.js"></script>         
 <script src="lib/angular/js/angular.min.js"></script>
-<script src="lib/angular/js/angular-idle.js"></script>
 <script src="lib/angular/js/angular-file-upload-shim.min.js"></script>
 <script src="lib/angular/js/angular-file-upload.js"></script>
 <script src="lib/angular/js/angular-ui-router.min.js"></script>
@@ -51,37 +46,37 @@
 <script src="lib/angular/js/angular-animate.min.js"></script>
 <script src="lib/angular/js/angular-strap.tpl.js"></script>
 <script src="lib/angular/js/angular-block-ui.min.js"></script>
+
 <script src="lib/utility/js/select.js"></script>
 <script src="lib/angular/js/ng-grid-1.3.2.js"></script>
 <script src="lib/utility/js/underscore-min.js"></script>
 <script src="lib/utility/js/masks.js"></script>
+
 <script src="lib/bootstrap/js/bootstrap.js"></script>
-<script src="lib/utility/js/semantic.min.js"></script>
+
 <script src="lib/utility/js/moment.js"></script>
 <script src="lib/angular/js/datetimepicker.js"></script>
 <script src="lib/angular-xeditable/js/xeditable.min.js"></script>
 <script src="lib/angular-xeditable/js/xeditable.js"></script>
 <script src="lib/angular/js/ng-grid.debug.js"></script>
+
 <script src="lib/angular/js/angular-route.js"></script>
 <script src="lib/angular/js/ng-notify.min.js"></script>
+
+<script src="lib/angular/js/highcharts-ng.js"></script>
 <script src="lib/angular/js/highcharts-ng.min.js"></script>
+<script src="lib/angular/js/highcharts.js"></script>
 <script src="js/customeDirctives/dataGrid.js"></script>
 <script src="js/customeDirctives/ngEnter.js"></script>
 <script src="lib/utility/js/kendo.all.min.js"></script>
-<script src="lib/highchart/highcharts.js"></script>
-<script src="lib/highchart/exporting.js"></script>
-<script src="lib/highchart/data.js"></script>
-<script src="lib/highchart/drilldown.js"></script>
+<script src="src/main/webapp/lib/utility/js/live.js"></script>
 
-<!-- load momentJS (required for angular-moment) -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<!-- load angular-moment -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+ <script src="lib/highchart/highcharts.js"></script>
+<script src="lib/highchart/exporting.js"></script>
 
 <script type="text/javascript" src="https://platform.linkedin.com/in.js">
 api_key: 75bm8w66omcy7b
-//onLoad: onLinkedInLoads
-
+//onLoad: onLinkedInLoad
 authorize: true
 lang: en_US
 </script>
@@ -135,6 +130,7 @@ lang: en_US
 	<script type="text/javascript" src="js/report/viewReport.js"></script>
 	<script type="text/javascript" src="js/admin/client.js"></script>
 	<script type="text/javascript" src="js/report/viewReport.js"></script>
+	<script type="text/javascript" src="js/report/highChat.js"></script>
 	<script type="text/javascript" src="lib/bootstrap/js/ng-tags-input.min.js"></script>
 	<script type="text/javascript" src="js/admin/editClient.js"></script>
 	
@@ -196,17 +192,7 @@ lang: en_US
 	<script type="text/javascript" src="js/referralPosition/searchReferralPosition.js"></script>
 	<script type="text/javascript" src="js/referralPosition/viewReferralPosition.js"></script>
 	<script type="text/javascript" src="js/service/publishReferalService.js"></script>
-	<script type="text/javascript" src="js/help.js"></script><
-	<script type="text/ng-template" id="warning-dialog.html">
-    <div class="modal-body" idle-countdown="countdown" ng-init="countdown=60"  padding: 24px; margin-top: 55px;  margin: 145px;>
-		<center>
-        	<h6 style=" positon:absolute; height: 21px;    margin: 0.5rem 0 1.4rem -9px;font-size: 14px;color: red;">Click any where to reactivate session</h6>
-		</center>
-    <progressbar  max="60" value="60" animate="false" class="progress-striped active" style=" position: absolute; height: 21px; display: block; width: 76%;border-radius: 2px;
-   		    margin: -1.5rem 0 1rem 9px; background-color: #283593;border-radius: 2px; margin: -1.1rem 0 1rem 15px; overflow: hidden;line-height: 10px;">You'll be logged out in {{countdown}} second(s).
-    </progressbar>
-   </div>
-</script>
-
+	<script type="text/javascript" src="js/help.js"></script>
+	
 </body>
-</html> 
+</html>

@@ -51,11 +51,16 @@
 					Position <b class="mandatory">*</b>
 				</label>
 			</div>
+
 			<div class="input-field col s6">
-				<select ng-model="candidate.currency" name="currency"
-					ng-options="o for o in currencyList" class="form-control input-sm">
-					<option>Select Currency</option>
-				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+				<select ng-model="candidate.proposedPosition" name="relAlowance"
+					ng-options="o as o for o in profiledesignations"
+					class="form-control input-sm" required>
+					<option value="" disabled="disabled">Select Proposed
+						Position</option>
+				</select> <label style="position: absolute; top: -22px;">Proposed
+					Position<b class="mandatory">*</b>
+				</label>
 			</div>
 		</div>
 		<div class="row">
@@ -98,12 +103,10 @@
 			</div>
 
 			<div class="input-field col s6">
-				<select ng-model="candidate.reportingManager"
-					name="reportingManager"
+				<select ng-model="candidate.reportingManager" name="pso"
 					ng-options="o.name for o in managers track by o.emailId"
 					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Reporting
-						Manager</option>
+					<option>Select Reporting Manager</option>
 				</select> <label style="position: absolute; top: -22px;">Reporting
 					Manager<b class="mandatory">*</b>
 				</label>
@@ -130,53 +133,12 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
-					ng-options="o for o in bus" class="form-control input-sm">
-					<option value="" disabled="disabled">Select BU</option>
-				</select> <label style="position: absolute; top: -22px;"> BU: </label>
-			</div>
-			<div class="input-field col s6">
-				<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
-					ng-options="o for o in streamData track by o"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Stream</option>
-				</select> <label style="position: absolute; top: -22px;">Stream: </label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s2">
-				<select ng-model="level" name="currency" ng-change="selectGrade(level)" 
-					ng-options="o for o in levelDatalist" class="form-control input-sm">
-					<option value="" disabled="disabled">Select Level</option>
-				</select> <label style="position: absolute; top: -22px;"> Level: </label>
-			</div>
-			<div class="input-field col s2">
-				<select ng-model="grade" name="currency"
-					ng-options="o.grade for o in designationData[0].designations track by o.grade"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Grade</option>
-				</select> <label style="position: absolute; top: -22px;">Grade: </label>
-			</div>
-				<div class="col-md-2"></div>
-			<div class="input-field col s6">
-				<select ng-model="name" name="currency"
-					ng-options="o.name for o in designationData[0].designations track by o.grade" class="form-control input-sm">
-						<option value="" disabled="disabled">Select Designation</option>
-				</select> <label style="position: absolute; top: -22px;"> Designation: </label>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
 				<input placeholder="Enter Relocation Allowance" name="relAlowance"
-					class="form-control" type="number"
+					class="form-control" type="text"
 					ng-model="candidate.relocationExpensesOffered" required> <label
 					style="position: absolute; top: -22px;">Relocation Expenses
-					Offered<b class="mandatory">*</b>
+					Offered (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
 				</label>
-				<div class="validation-error"
-					ng-show="(createOffer.relAlowance.$dirty  || invalidSubmitAttempt) && createOffer.relAlowance.$error.pattern">
-					Relocation Expenses Offered must be number only.</div>
 			</div>
 
 			<div class="input-field col s6">
@@ -190,17 +152,15 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Sign-on Bonus" name="bonus"
-					class="form-control" type="number" ng-model="candidate.singInBonus"
+					class="form-control" type="text" ng-model="candidate.singInBonus"
 					required> <label style="position: absolute; top: -22px;">Sign-on
-					Bonus <b
-					class="mandatory">*</b>
+					Bonus (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
 				</label>
-
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter your Notice Period" name="noticePeriod"
-					class="form-control" type="number"
-					ng-model="candidate.noticePeriod" maxlength="2" required> <label
+					class="form-control" type="text" ng-model="candidate.noticePeriod"
+					ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
 					style="position: absolute; top: -22px;">Notice Period (in
 					days)<b class="mandatory">*</b>
 				</label>
@@ -209,32 +169,26 @@
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter your current CTC" name="currentCTC"
-					class="form-control" type="number"
-					ng-model="candidate.lastDrawnCTC"> <label
-					style="position: absolute; top: -22px;">Last Drawn CTC 
-					<b class="mandatory">*</b>
-				</label>
-
+					class="form-control" type="text" ng-model="candidate.lastDrawnCTC"
+					ng-pattern="/^[0-9]*$/"> <label
+					style="position: absolute; top: -22px;">Last Drawn CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
+				</label></label>
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter your expected CTC" name="expectedCTC"
-					class="form-control" type="number" ng-model="candidate.expectedCTC"
-					required> <label style="position: absolute; top: -22px;">Expected
-					CTC<b
-					class="mandatory">*</b>
+					class="form-control" type="text" ng-model="candidate.expectedCTC"
+					ng-pattern="/^[0-9]*$/" required> <label
+					style="position: absolute; top: -22px;">Expected CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
 				</label>
-
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
 				<input placeholder="Enter Proposed CTC" name="proposedCTC"
-					class="form-control" type="number" ng-model="candidate.proposedCTC"
-					required> <label style="position: absolute; top: -22px;">Proposed
-					CTC<b
-					class="mandatory">*</b>
+					class="form-control" type="text" ng-model="candidate.proposedCTC"
+					ng-pattern="/^[0-9]*$/" required> <label
+					style="position: absolute; top: -22px;">Proposed CTC (<img src="static/osi_images/rupee.png" width="9" height="11">)<b class="mandatory">*</b>
 				</label>
-
 			</div>
 			<div class="input-field col s6">
 				<input placeholder="Enter Business Unit" name="businessUnit"
@@ -270,9 +224,10 @@
 			</div>
 			<div class="input-field col s6">
 				<textarea class="materialize-textarea" cols="50" rows="2"
-					name="notes" ng-model="candidate.comments"
+					ng-change="changeEvent()" name="notes"
+					ng-model="candidate.comments"
 					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">HR Comment</label>
+				<label style="position: absolute; top: -22px;">Comments</label>
 			</div>
 		</div>
 		<div class="row">
@@ -281,42 +236,27 @@
 					ng-model="candidate.approval"
 					ng-options="o.name for o in approval1 track by o.emailId"
 					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Approver</option>
+					<option disabled="disabled">Select Approver</option>
 				</select> <label>Approver<b class="mandatory">*</b></label>
-			</div>
-			<div class="input-field col s6">
-				<select placeholder="Select Final Status"
-					ng-model="candidate.finalStatus"
-					ng-options="o for o in finalStatusList"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Final Status</option>
-				</select> <label>Final Status</label>
 			</div>
 		</div>
 		<br>
-		<div class="row">
-			<div class="input-field col s12" ng-show="candidate.approvalList">
-				<label style="position: absolute; top: -22px;">Summary:</label>
-			</div>
-		</div>
-		<div class="row" ng-show="candidate.approvalList">
-			<table class="bordered offertable" style="font-size: 14px;">
+		<div class="row"  ng-show="candidate.approvalList">
+			<table class="bordered">
 				<thead>
 					<tr>
 						<th>Date</th>
 						<th>Approver</th>
 						<th>Status</th>
-						<th>HR Comment</th>
-						<th>Approver Comment</th>
+						<th>Comment</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="animate-repeat"
 						ng-repeat="data in candidate.approvalList" style="font-size: 80%">
-						<td>{{data.updatedDate | date:'medium'}}</a></td>
+						<td>{{data.updatedDate  | date:'medium'}}</a></td>
 						<td>{{data.name}}</a></td>
 						<td>{{data.status}}</td>
-						<td>{{data.hrComment}}</td>
 						<td>{{data.comment}}</td>
 					</tr>
 				</tbody>
@@ -325,10 +265,8 @@
 		<br>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
-				ng-disabled="createOffer.$invalid || disableSendApproval"
-				ng-click="approve()">
-				<span class="glyphicon glyphicon-ok-circle"></span> Send for
-				Approval
+				ng-disabled="createOffer.$invalid || disableSendApproval" ng-click="approve()">
+				<span class="glyphicon glyphicon-ok-circle"></span> Send for Approval
 			</button>
 			<button class="btn btn-info active" type="submit"
 				ng-disabled="createOffer.$invalid" ng-click="saveOffer()">

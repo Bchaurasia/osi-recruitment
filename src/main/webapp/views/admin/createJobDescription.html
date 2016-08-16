@@ -24,7 +24,7 @@
 							ng-model="jobDescription.jobDescriptionName" 
 							ng-change="validateJDName(jobDescription.jobDescriptionName)"
 							placeholder="Enter Title" required>
-						<label class="lbl" for="jobDescription" style="position: absolute; top: -22px;">Title<b
+						<label class="lbl" for="jobDescription" style="position: absolute; top: -22px;">Job Description Title<b
 								style="color: red;">*</b></label>	 
 							<span class="validation-error"									
 								ng-show="submitted && CreateJobDescription.name.$invalid">Please
@@ -64,7 +64,7 @@
 
 				<div class="row">
 					<div class="input-field col s12">
-						<label>Job Description<b class="mandatory">*</b> &nbsp;&nbsp;&nbsp;<small>(Max.500 Chars)</small></label>
+						<label>Job Description Details<b class="mandatory">*</b> &nbsp;&nbsp;&nbsp;<small>(500 chars)</small></label>
 						<textarea  class="materialize-textarea" 
 							ng-keyup="jdDetailsCharLimit(jobDescription.jobDescriptionDetails)"
 							ng-model="jobDescription.jobDescriptionDetails"

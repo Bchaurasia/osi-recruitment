@@ -34,6 +34,4 @@ public class Requisition extends AuditEntity{
 	String comment;
 	UserVO requisitionManager;
 	String status;
-	String additionalSkills;
-	String shiftTiming;
 }

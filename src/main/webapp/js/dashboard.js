@@ -1,5 +1,5 @@
-app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService','positionService','designationService',
-                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService,positionService,designationService) {
+app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService',
+                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService) {
 	
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
@@ -11,214 +11,13 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.profileData=[];
 	$scope.allRequisitions=[];
 	$scope.requisitionsDetails=[];
-	$scope.showColumnGraph=true;
-	$scope.showNoAppRequisitionMsg = true;
-	$scope.totalPositionData=[];
-	$scope.designationWithStatusCount=[];
-	$scope.totalProfiles=0;
-	$scope.HiredCount = 0;
-	$scope.totalRequisitions = 0;
-	$scope.totalPositions = 0;
-	$scope.showNoInterviewMsg = true;
-	$scope.showNoAnyPositions=false;
-	var todate=0;
-	var fromdate=0;
-	var data1=[];
-	var data2=[];
-	var data3=[];
-	var data4=[];
-	var data5=[];
-	var data6=[];
-	var categories=[];
-	var series=[];
-	$scope.newData=[];
-	var hiredCnt=0;
-	var selectedCnt=0;
-	var onHoldCnt=0;
-	var rejectedCnt=0;
-	var activeCnt=0;
-	var inActiveCnt=0;
-	var closedCnt=0;
-	$scope.interviewData=[];
-	var totalhiredcount=0;
-	var totalselectedcount=0;
-	var totalonholdcount=0;
-	var totalrejectedcount=0;
-	var todaysDate=new Date();
-	var previousMonthDate=new Date();
-	previousMonthDate.setMonth(previousMonthDate.getMonth()-1);
-	$scope.todate=todaysDate;
-	$scope.fromdate=previousMonthDate;
-	$scope.positionData=[];
-	$scope.data=[];
-	$scope.layer2Data=[];
-	$scope.layer3Data=[];
-	
-	
-	$scope.getData=function() {
-	
-		$scope.positionData=[];
-		var fromdate,todate,month;
-		fromdatemonth=$scope.fromdate.getMonth()+1;
-		fromdate=$scope.fromdate.getDate()+"/"+fromdatemonth+"/"+$scope.fromdate.getFullYear();
-		todatemonth=$scope.todate.getMonth()+1;
-		todate=$scope.todate.getDate()+"/"+todatemonth+"/"+$scope.todate.getFullYear();
-		$scope.fromdate=fromdate;
-		$scope.todate=todate;
-		getDesignationSpecificData();
-	}
-	
-	angular.element(document).ready(function() {
-		$scope.positionData=[];
-		$scope.getData();
-		
-       });
-	
+	$scope.showNoAppRequisitionMsg = false;
 	
 	$scope.feedback = function(jobcode,candidateEmail) {
 		sharedService.setjobCode(jobcode);
 		sharedService.setprofileUserId(candidateEmail);
 		location.href='#recruitment/interviewFeedback';
 	};
-	
-    $scope.state = false;
-    
-    $scope.toggleState = function() {
-        $scope.state = !$scope.state;
-    };
-    
-	function getPositionsBasedOnStatus(status){
-		$scope.temp=[];
-	dashboardService.getPositionByStatus(status,$scope.fromdate,$scope.todate).then(function(data){
-	$scope.temp=data;
-	});
-	return $scope.temp;
-	}
-	
-	
-	
-	function getDesignationSpecificData(){
-		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
-		var designationArray=[];
-		var totalPositionData=[];
-		hiredCnt=0;
-		selectedCnt=0;
-		rejectedCnt=0;
-		onHoldCnt=0;
-		inActiveCnt=0;
-		closedCnt=0;
-		activeCnt=0;
-		
-		
-		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
-			totalPositionData=data;
-		});
-		if(totalPositionData.length==0)
-		{
-			$scope.showNoAnyPositions=true;
-		}
-		designationService.getDesignation().then(function(data){
-			  $scope.positionData=[];
-			 angular.forEach(totalPositionData, function(value, key){
-								if(value.status!= undefined&& value.status== "Hired")
-									 hiredCnt++;
-								if(value.status!= undefined&& value.status== "Selected")
-									 selectedCnt++;
-								if(value.status!= undefined&& value.status== "OnHold")
-									 onHoldCnt++;
-								if(value.status!= undefined&& value.status== "Rejected")
-									 rejectedCnt++;
-								if(value.status!= undefined&& value.status== "Active")
-									 activeCnt++;
-								if(value.status!= undefined&& value.status== "Inactive")
-									 inActiveCnt++;
-								if(value.status!= undefined&& value.status== "Closed")
-									 closedCnt++;
-								});
-			 $scope.positionData=[];
-			 console.log( $scope.positionData);
-						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
-						 $scope.positionData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
-						 $scope.positionData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
-						 $scope.positionData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
-						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
-						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
-						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
-						 angular.forEach($scope.positionData, function(value, key){
-						 							dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
-						 							$scope.data.push(data);
-						 							$scope.layer2Data.push($scope.data[key].layer2);
-						 							$scope.layer3Data.push($scope.data[key].layer3);
-						 							
-						 							}) ;
-						 							
-						 						});
-						 
-							
-				
-				 $('#requisitionDonut').highcharts({
-				        chart: {
-				            type: 'pie',
-				            height: 500,
-				            width: 700,
-				            events: {
-				            	drilldown: function (i,e) {
-				            		for(i=0; i<$scope.layer3Data.length; i++){
-				            			for(j=0; j<$scope.layer3Data[i].length; j++)
-				            				for(k=0; k<$scope.layer3Data[i][j].data.length; k++){
-			 							var cnt=$scope.layer3Data[i][j].data[k][1];
-				            			$scope.layer3Data[i][j].data[k][1]= parseInt(cnt);
-			 							}
-				            		}
-				            		for(i=0; i<$scope.layer3Data.length; i++){
-				            			for(j=0;j<$scope.layer3Data[i].length; j++)
-				            			$scope.layer2Data.push($scope.layer3Data[i][j]);
-				            		}
-				            	}
-			         	 
-				            }
-				        },
-				        credits: {
-				            enabled: false
-				        },
-				        title: {
-				            text: 'Position Statistics'
-				        },
-				        subtitle: {
-				            text: 'Click to view last one month status.'
-				        },
-				        credits: {
-				            enabled: false
-				        },
-				        plotOptions: {
-				            series: {
-				                dataLabels: {
-				                    enabled: true,
-				                    format: '{point.name}: {point.y:1.0f}'
-				                }
-				            }
-				        },
-
-				        tooltip: {
-				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:1.0f}</b> of total<br/>'
-				        },
-				      
-				        series: [{
-				            name: 'Statistics',
-				            colorByPoint: true,
-				            data: $scope.positionData
-				        }],
-				        drilldown: {
-				            series: $scope.layer2Data
-				        } 
-				    });
-			
-									
-		});
-	
-	
-	}
 	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
@@ -227,21 +26,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
 	$scope.showInterviewDetails = function(interviewId,interviewRound) {
 		sharedService.setInterviewId(interviewId);
-		sharedService.setinterviewRound(interviewRound);
 		location.href='#recruitment/interviewDetails';
 	};
-	
-	$scope.showFeedback = function(interviewId,candidateEmailId,positionId,status) {
-		if (status.indexOf("Scheduled") !=-1) {
-			sharedService.setjobCode(positionId);
-			sharedService.setprofileUserId(candidateEmailId);
-			location.href='#recruitment/interviewFeedback';
-		}
-		else {
-			sharedService.setInterviewId(interviewId);
-			location.href='#recruitment/interviewDetails';
-		}
-	}
 	
 	$scope.editPosition = function(jobcodeProfile,designation) {
 		sharedService.setjobCode(jobcodeProfile);
@@ -272,7 +58,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			_.contains($rootScope.user.roles,"ROLE_MANAGER") ||  _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") )){
 		dashboardService.getPositionData()
 		.then(function(data){
-		//	$scope.positionData = data;
+			$scope.positionData = data;
 			if(data == "" || data == null || data == undefined){
 				$scope.hideNoPositionsMsg = false;
 			}else{
@@ -307,16 +93,13 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			}).catch(function(msg){
 			$log.error(msg);
 			});	
-	}	
-	
-	
+	}		
 	
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
 			.then(function(data){
-				$scope.showNoAppRequisitionMsg =false;
+				//$scope.requisitionsDetails = data;
 				$scope.requisitionsDetails = _.filter(data, function(requisition){ return requisition.status === 'INITIATED' || requisition.status === 'PARTIALY APPROVED'; })
-				
 				if(_.isEmpty($scope.requisitionsDetails) ){
 					$scope.showNoAppRequisitionMsg = true;
 				}
@@ -329,9 +112,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") )){
 		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
 		.then(function (data){
-			$scope.showNoInterviewMsg = false;
 			$scope.showScheduleDataInterview = data;
-			
+			console.log(angular.toJson($scope.showScheduleDataInterview));
 			if(data == "" || data == null || data == undefined){
 				$scope.showNoInterviewMsg = true;
 			}
@@ -339,61 +121,47 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			$log.error(msg);
 			$scope.hideNoInterviewMsg = false;
 		});
-
 	}
-
-	dashboardService.getAllEvents().then(function(data){
-		$scope.events = data;
-		
-		for(i=0; i<$scope.events.length; i++){
-			var subName=$scope.events[i].username.split(" ");
-			if(subName.length>=2){
-				$scope.events[i].initial=subName[0].charAt(0).concat(subName[1].charAt(0));
-			}
-			else{
-				$scope.events[i].initial=subName[0].charAt(0);
-			}
-		}
-	});
-
-	$scope.getGraphData = function(position) {
-		var graphDetails = _.find($scope.designationWithStatusCount, function (o) { return o.Position == position; });
-		$scope.graphData = graphDetails;
-		$scope.positionDetails = {};
-		$scope.positionDetails.position = graphDetails.Position;
-		$scope.positionDetails.active = Math.round((graphDetails.Active * 100)/graphDetails.Total);
-		$scope.positionDetails.inactive = Math.round((graphDetails.Inactive * 100)/graphDetails.Total);
-		$scope.positionDetails.hired = Math.round((graphDetails.Hired * 100)/graphDetails.Total);
-		$scope.positionDetails.onhold = Math.round((graphDetails.Onhold * 100)/graphDetails.Total);
-		$scope.positionDetails.selected = Math.round((graphDetails.Selected * 100)/graphDetails.Total);
-	}
-	
 	
 	/*
-	 * if(!_.isUndefined($rootScope.user) &&
-	 * (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") ||
-	 * _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER"))){
-	 * requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
-	 * $scope.allRequisitions=data; if(_.isEmpty(data) ){
-	 * $scope.hideNoRequisitionMsg = false; }else{ $scope.hideNoRequisitionMsg =
-	 * true; } }).catch(function(msg){ $log.error(msg); }); }
-	 * 
-	 * if(!_.isUndefined($rootScope.user) &&
-	 * _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
-	 * requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
-	 * .then(function(data){ $scope.requisitionsDetails = data; })
-	 * .catch(function(msg){ $log.error(msg); }); }
-	 * 
-	 * if(!_.isUndefined($rootScope.user) &&
-	 * (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") ||
-	 * _.contains($rootScope.user.roles,"ROLE_HR") ||
-	 * _.contains($rootScope.user.roles,"ROLE_MANAGER")))){
-	 * dashboardService.getScheduleDataInterview($rootScope.user.emailId)
-	 * .then(function (data){ $scope.showScheduleDataInterview = data; if(data == "" ||
-	 * data == null || data == undefined){ $scope.showNoInterviewMsg = true; }
-	 * }).catch(function(msg){ $log.error(msg); $scope.hideNoInterviewMsg =
-	 * false; }); }
-	 */
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") 
+			|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER"))){
+		requisitionService.getRequisitionBycreatedId($rootScope.user.emailId).then(function(data){
+			 $scope.allRequisitions=data;
+			if(_.isEmpty(data) ){
+				$scope.hideNoRequisitionMsg = false;
+			}else{
+				$scope.hideNoRequisitionMsg = true;
+			}
+			}).catch(function(msg){
+			$log.error(msg);
+			});	
+	}		
+	
+	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
+		requisitionService.getRequisitionBasedOnApproverId($rootScope.user.emailId)
+			.then(function(data){
+				$scope.requisitionsDetails = data;
+			})
+			.catch(function(msg){
+				$log.error(msg);
+			});
+	}
+	
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
+			|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER")))){
+		dashboardService.getScheduleDataInterview($rootScope.user.emailId)
+		.then(function (data){
+			$scope.showScheduleDataInterview = data;
+			if(data == "" || data == null || data == undefined){
+				$scope.showNoInterviewMsg = true;
+			}
+		}).catch(function(msg){
+			$log.error(msg);
+			$scope.hideNoInterviewMsg = false;
+		});
+	}
+	*/
 	$scope.interviewDateTimeFuture = function(date) {
 		var today = new Date();
 		if(today < date)
@@ -425,6 +193,55 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	};
 	
 	// Build the chart
-    
+    $('#container').highcharts({
+    	
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'profile status'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Profile status',
+            colorByPoint: true,
+            data: [{
+                name: 'hired',
+                y: 56.33
+            }, {
+                name: 'Selected',
+                y: 24.03,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'on hold',
+                y: 10.38
+            }, {
+                name: 'Initiated',
+                y: 4.77
+            }, {
+                name: 'inactive',
+                y: 0.91
+            }, {
+                name: 'not initialized',
+                y: 0.2
+            }]
+        }]
+    });
 
 }]);
