@@ -14,28 +14,62 @@
 			</h5>
 		</div>
 		
-		<div class="ui segment segmentPadding">		
+		<div class="ui segment segmentPadding">
 		<div class="row">
+			<div class="input-field col s6">
+					<select placeholder="Select Business Unit"
+						ng-model="org.bu" required
+						ng-change="filterStream()"
+						class="form-control input-sm">
+						<option value="" selected="selected">Select Business Unit</option>
+						<option>ET</option>
+			    		<option>EA</option>
+			    		<option>OPS</option>
+					</select> <label>Business Unit<b class="mandatory">*</b></label>
+			</div>
+			<div class="input-field col s6">
+					<select placeholder="Select Stream"
+						ng-model="org.selectStream"
+						ng-options="item for item in streams" required
+						ng-change="filterLevel()"
+						ng-disabled="orgStreams"
+						class="form-control input-sm">
+						<option value="" selected="selected">Select Stream</option>						
+					</select> <label>Stream<b class="mandatory">*</b></label>
+			</div>					
+		 </div>					
+		<div class="row">			
+			<div class="input-field col s6">
+					<select placeholder="Select Level"
+						ng-model="org.selectLevel"
+						ng-options="item for item in level" required
+						ng-change="filterGrade()"
+						class="form-control input-sm">
+						<option value="" selected="selected">Select Level</option>						
+					</select> <label>Level<b class="mandatory">*</b></label>
+			</div>
 			<div class="input-field col s6" align="left">
-				<ui-select ng-model="requisition.position" ng-change="getData()"
-				theme="selectize" style="width: 80%">
+				<ui-select ng-model="requisition.position"
+				theme="selectize" style="width: 81%">
 				   <ui-select-match placeholder="Select Designation">{{$select.selected}}</ui-select-match>
 				<ui-select-choices
-					repeat="designation in designation1 | orderBy:'toString()'| filter: $select.search">
+					repeat="designation in designationNames | orderBy:'toString()'| filter: $select.search">
 				<span ng-bind-html="designation | highlight: $select.search"></span>
 				</ui-select-choices> </ui-select>
 				<label style="position: absolute; top: -22px;">
 					Position<b class="mandatory">*</b>
 				</label>
 			</div>
-			<div class="input-field col s5 rangeDiv">
+		</div>	
+		<div class="row">			
+			<div class="input-field col s12 rangeDiv">
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s5">
 						<input type="range" ng-model="requisition.minExpYear"
 							ng-change="min(requisition.minExpYear)" min="0" max="15" required />
 						<span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
 					</div>
-					<div class="input-field col s6 ">
+					<div class="input-field col s5">
 						<input type="range" ng-model="requisition.maxExpYear"
 							class="floatR"
 							ng-change="max(requisition.maxExpYear)" min="0" max="15" required />

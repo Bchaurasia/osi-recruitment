@@ -88,7 +88,6 @@ app.controller('createOrgBand',['$scope','$http','orgBandService','$state','appC
 					
 			}
 		}
-		console.log($scope.streams);
 	}
 	
 	$scope.filterLevel = function(){
@@ -106,12 +105,10 @@ app.controller('createOrgBand',['$scope','$http','orgBandService','$state','appC
 			$scope.level.push($scope.levels[i].level);
 		}
 		for(var i=0;i<$scope.orgBandList.length;i++){
-			console.log("stream1"+$scope.org.selectStream+"stream2"+$scope.orgBandList[i].stream);
 			if($scope.org.selectStream == $scope.orgBandList[i].stream){
 				designationsPerStream.push($scope.orgBandList[i].designation.toLowerCase());
 			}		
 		}
-		console.log(angular.toJson(designationsPerStream)+" length"+designationsPerStream.lenagth);
 	}
 	
 	$scope.filterGrade = function(){
@@ -154,7 +151,6 @@ app.controller('createOrgBand',['$scope','$http','orgBandService','$state','appC
 	}
 	
 	$scope.submitDesignation = function(){
-		console.log(angular.toJson($scope.org));
 		orgBandService.updateOrgBand($scope.org).then(function(msg){
 			 $scope.sendSharedMessage(msg.msg,'/admin/orgBand/orgBand/list');
 		}).catch(function(data){

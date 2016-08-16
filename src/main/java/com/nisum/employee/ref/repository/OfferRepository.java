@@ -56,7 +56,6 @@ public class OfferRepository {
 	
 	public void updateDesignation(OrgBandUpdateParams ord){
 		Query query = new Query();
-		//query.addCriteria(Criteria.where("BU").is("ET").and("stream").is("Infra").and("levels.level").is("L0").and("levels.designations.grade").is("E0"));
 		query.addCriteria(Criteria.where("BU").is(ord.getBu()).and("stream").is(ord.getSelectStream()).and("levels.level").is(ord.getSelectLevel()).and("levels.designations.grade").is(ord.getSelectGrade()));
 		Update update = new Update();
 		

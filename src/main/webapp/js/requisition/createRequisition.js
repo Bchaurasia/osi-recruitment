@@ -1,5 +1,5 @@
-app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService','jobDescriptionService',
-                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService,jobDescriptionService) {
+app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService','jobDescriptionService','orgBandService',
+                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService,jobDescriptionService,orgBandService) {
 	
 	$scope.hideQualification = true;
 	$scope.calendar = true;
@@ -124,7 +124,67 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$scope.message=msg;
 		 $scope.cls=appConstants.ERROR_CLASS;
 		 $timeout( function(){ $scope.alHide(); }, 5000);
+	});		
+	
+	orgBandService.getOrgBands().then(function(data){
+		$scope.orgBand = data;
+	}).catch(function(data){
+		$scope.message=msg;
+		 $scope.cls=appConstants.ERROR_CLASS;
+		 $timeout( function(){ $scope.alHide(); }, 5000);
 	});
+	
+	$scope.filterStream = function() {
+		$scope.streams=[];
+		$scope.firstLevelOrgBand=[];
+		$scope.orgStreams=false;
+		
+		for(var i=0;i<$scope.orgBand.length;i++){
+			if($scope.orgBand[i].bu==$scope.org.bu){				
+					$scope.streams.push($scope.orgBand[i].stream);
+					$scope.firstLevelOrgBand.push($scope.orgBand[i]);
+					
+			}
+		}
+	}
+	
+	$scope.filterLevel = function(){
+		$scope.level=[];
+		$scope.levels=[];
+		$scope.orgLevel=false;
+		
+		for(var i=0;i<$scope.firstLevelOrgBand.length;i++){
+			
+			if($scope.firstLevelOrgBand[i].stream==$scope.org.selectStream){
+				$scope.levels = $scope.firstLevelOrgBand[i].levels;
+			}
+		}
+		for(var i=0;i<$scope.levels.length;i++){
+			$scope.level.push($scope.levels[i].level);
+		}
+	}
+	
+	$scope.filterGrade = function(){
+		$scope.grade=[];
+		$scope.grades=[];
+		$scope.designationNames=[];
+		$scope.orgGrade=false;
+		
+		for(var i=0;i<$scope.levels.length;i++){
+			
+			if($scope.levels[i].level==$scope.org.selectLevel){				
+				$scope.grades = $scope.levels[i].designations;
+			}
+		}
+		for(var i=0;i<$scope.grades.length;i++){
+			if($scope.grade.indexOf($scope.grades[i].grade)==-1){
+				$scope.grade.push($scope.grades[i].grade);
+			}			
+			$scope.designationNames.push($scope.grades[i].name);
+		}
+	
+	}
+
 	
 	clientService.getClientInfo().then(setClientList);
 
