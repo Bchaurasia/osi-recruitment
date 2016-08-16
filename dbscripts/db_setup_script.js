@@ -91,7 +91,7 @@ db.userInfo.insert({"_id":"tpotluri@osius.com",'name':"Raju Kanumury","mobileNum
 //ADMIN role
 db.userInfo.insert({"_id":"rlingala@osius.com",'name':"Ranjith Lingala","mobileNumber":"9966889726",location:"Hyderabad",skypeId:"rlingala",roles:["ROLE_HR","ROLE_ADMIN"]});
 
-db.clientInfo.insert([{"_id":"MACYS","clientName":"Macy’s","locations":"Hyderabad"},
+db.clientInfo.insert([{"_id":"MACYS","clientName":"Macy's","locations":"Hyderabad"},
                 	  {"_id":"GAP","clientName":"GAP","locations":"SF"},
                 	  {"_id":"BOULDER LOGIC","clientName":"Boulder logic","locations":"SF"},
                 	  {"_id":"PROLOGIC","clientName":"Prologic","locations":"SF"},
