@@ -1,3 +1,5 @@
+// Author: akakade@nisum.com
+
 package com.nisum.qatests;
 
 import java.util.concurrent.TimeUnit;
@@ -48,6 +50,7 @@ public class TestElasticDataSync {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(AdminPageConstants.BT_UPDATE_DATA_INDEX)).click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(500);
 		String updateActualMessage = driver.findElement(By.xpath(AdminPageConstants.MSG_DATA_INDEX_UPDATED_SUCCESSFULLY)).getText();
 		String updateExpectedMessage = "Data index updated successfully";
 		Assert.assertEquals(updateExpectedMessage, updateActualMessage);
@@ -59,6 +62,7 @@ public class TestElasticDataSync {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(AdminPageConstants.BT_DELETE_DATA_INDEX)).click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(500);
 		String deleteActualMessage = driver.findElement(By.xpath(AdminPageConstants.MSG_DATA_INDEX_DELETED_SUCCESSFULLY)).getText();
 		String deleteExpectedMessage = "Data index deleted successfully";
 		Assert.assertEquals(deleteExpectedMessage, deleteActualMessage);
