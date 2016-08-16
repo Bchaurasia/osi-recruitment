@@ -3209,3 +3209,8 @@ font.chk{
 	top: 32px;
 	right: 47%;
 }
+
+.headerName{
+	position:relative;
+	top:5px;
+}
