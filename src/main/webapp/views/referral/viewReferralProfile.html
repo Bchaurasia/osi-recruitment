@@ -410,7 +410,7 @@
 			</div>
 
 			<div class="row">
-				<div class="input-field col s6">
+				<!-- <div class="input-field col s6">
 					<input placeholder="Enter Yes / No" id="screeningStatus"
 						class="form-control" type="text"
 						ng-model="candidate.screeningStatus" maxlength="20"> <label
@@ -423,6 +423,25 @@
 						ng-model="candidate.compatibilityStatus" maxlength="20"> <label
 						style="position: absolute; top: -22px;">Will the candidate
 						fit in our culture?</label>
+				</div> -->
+				<div class="input-field col s6">
+					<select ng-model="candidate.screeningStatus" id="screeningStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Screening
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Did you
+						screen the resume?</label>
+				</div>
+				<div class="input-field col s6">
+					<select ng-model="candidate.compatibilityStatus"
+						id="compatibilityStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Compatibility
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Will the
+						candidate fit in our culture?</label>
 				</div>
 			</div>
 		</div>

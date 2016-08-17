@@ -15,6 +15,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
 	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
+	$scope.screeningStatusList= ["Yes","No"];
 	$scope.requisitionId="";
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
@@ -95,8 +96,11 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$scope.disableApproveBtn = true;
 			$scope.disableUpdateBtn = true;
 		}
-		if($scope.candidate.status !== "Not Initialized")
+		if($scope.candidate.isReferral)
+			$scope.disableProfileSource = true;
+		if($scope.candidate.status !== "Not Initialized"){
 			$scope.disableUpdateBtn = true;
+		}
 		console.log("in getdata-->: "+angular.toJson($scope.candidate));
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
