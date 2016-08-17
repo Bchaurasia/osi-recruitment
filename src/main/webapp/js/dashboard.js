@@ -141,11 +141,29 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
 						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
 			 }
-		            
 			 
-		
-				
-				 $('#requisitionDonut').highcharts({
+			 
+			 function afterSetExtremes(e) {
+
+			        var chart = $('#requisitionDonut').highcharts();
+
+			        chart.showLoading('Loading data from server...');
+			        $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?start=' + Math.round(e.min) +
+			                '&end=' + Math.round(e.max) + '&callback=?', function (data) {
+
+			            chart.series[0].setData(data);
+			            chart.hideLoading();
+			        });
+			    }
+
+			    // See source code from the JSONP handler at https://github.com/highcharts/highcharts/blob/master/samples/data/from-sql.php
+			    $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?callback=?', function (data) {
+
+			        // Add a null value for the end date
+			        data = [].concat(data, [[Date.UTC(2011, 9, 14, 19, 59), null, null, null, null]]);
+
+			        // create the chart
+			        $('#requisitionDonut').highcharts({
 				        chart: {
 				            type: 'pie',
 				            height: 500,
@@ -216,6 +234,82 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				            series: layer2Data
 				        } 
 				    });
+			    });
+		            
+			 
+		
+				
+				 /*$('#requisitionDonut').highcharts({
+				        chart: {
+				            type: 'pie',
+				            height: 500,
+				            width: 700,
+				            events: {
+				            	drilldown: function (i,e) {
+				            		angular.forEach($scope.positionData, function(value, key){
+				    				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
+				    					$scope.data.push(data);
+				    					
+				    					if($scope.data[key]!=undefined)
+				    					{
+				    						layer2Data.push($scope.data[key].layer2);
+				    						layer3Data.push($scope.data[key].layer3);
+				    					}
+				    					
+				    				});
+				            		}) ;
+				    					for(i=0; i<layer3Data.length; i++){
+				    	       			for(j=0; j<layer3Data[i].length; j++)
+				    	       				for(k=0; k<layer3Data[i][j].data.length; k++){
+				    						var cnt=layer3Data[i][j].data[k][1];
+				    	       			layer3Data[i][j].data[k][1]= parseInt(cnt);
+				    						}
+				    	       		}
+				    	       		for(i=0; i<layer3Data.length; i++){
+				    	       			for(j=0;j<layer3Data[i].length; j++)
+				    	       			layer2Data.push(layer3Data[i][j]);
+				    	       		}
+				    					
+				            		
+				            	}
+			         	 
+				            }
+				        },
+				        credits: {
+				            enabled: false
+				        },
+				        title: {
+				            text: 'Position Statistics'
+				        },
+				        subtitle: {
+				            text: 'Click to view last one month status.'
+				        },
+				        credits: {
+				            enabled: false
+				        },
+				        plotOptions: {
+				            series: {
+				                dataLabels: {
+				                    enabled: true,
+				                    format: '{point.name}: {point.y:1.0f}'
+				                }
+				            }
+				        },
+
+				        tooltip: {
+				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:1.0f}</b> of total<br/>'
+				        },
+				      
+				        series: [{
+				            name: 'Statistics',
+				            colorByPoint: true,
+				            data: $scope.positionData
+				        }],
+				        drilldown: {
+				            series: layer2Data
+				        } 
+				    });*/
 			
 									
 		});
