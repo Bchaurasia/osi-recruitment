@@ -66,7 +66,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		fromdatemonth=$scope.fromdate.getMonth()+1;
 		fromdate=$scope.fromdate.getDate()+"/"+fromdatemonth+"/"+$scope.fromdate.getFullYear();
 		todatemonth=$scope.todate.getMonth()+1;
-		todate=$scope.todate.getDate()+"/"+todatemonth+"/"+$scope.todate.getFullYear();
+		todateday=$scope.todate.getDate()+1;
+		todate=todateday+"/"+todatemonth+"/"+$scope.todate.getFullYear();
 		$scope.fromdate=fromdate;
 		layer2Data=[];
 		layer3Data=[];
@@ -153,7 +154,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				            	drilldown: function (i,e) {
 				            		angular.forEach($scope.positionData, function(value, key){
 				    				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
-				    					console.log($scope.fromdate+"   "+$scope.todate);
 				    					$scope.data.push(data);
 				    					
 				    					if($scope.data[key]!=undefined)
