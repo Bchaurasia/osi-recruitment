@@ -49,7 +49,7 @@ public class ProfileSearchService {
 		if(data.contains("@")){
 			profilesList = profileIndexRepository.findProfilesByEmailIdContainsAllIgnoreCase(data);
 		}else{
-			profilesList = profileIndexQueryRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCase(data);
+			profilesList = profileIndexQueryRepository.findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCaseOrMobileNoContainsOrSkypeIdContains(data);
 		}
 		
 		return profilesList;

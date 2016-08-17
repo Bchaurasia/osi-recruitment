@@ -19,8 +19,8 @@ public class RequisitionIndexQueryRepository {
 	@Autowired
 	private ElasticsearchTemplate elasticsearchTemplate;
 
-	List<Requisition> findByRequisitionDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWithOrderByUpdatedDateDesc(String query) {
-		QueryBuilder qb = QueryBuilders.multiMatchQuery(query, "client", "requisitionId", "position");
+	List<Requisition> findByRequisitionDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWithOrderByUpdatedDateDescOrJobTypeContainsOrLocationContains(String query) {
+		QueryBuilder qb = QueryBuilders.multiMatchQuery(query, "client", "requisitionId", "position","jobType","location");
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(qb).withPageable(new PageRequest(0, 100))
 				.build();
 		return elasticsearchTemplate.queryForList(searchQuery, Requisition.class);
