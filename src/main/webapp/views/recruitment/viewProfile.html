@@ -148,10 +148,9 @@
 				<select ng-model="candidate.jobCode" name="jobCode"
 					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
 					ng-options="o as o for o in profilepositions track by o"
-					class="form-control input-sm" required>
+					class="form-control input-sm">
 					<option value="">Select Position</option>
-				</select> <label style="position: absolute; top: -22px;">Position : <b
-					class="mandatory">*</b></label>
+				</select> <label style="position: absolute; top: -22px;">Position</label>
 			</div>
 		</div>
 		<div class="row">
@@ -316,7 +315,7 @@
 			<div class="input-field col s6">
 				<select ng-model="candidate.profileSource" name="profileSource"
 					ng-options="o as o for o in profileSources | orderBy:'toString()'"
-					class="form-control input-sm" required>
+					class="form-control input-sm" ng-disabled="disableProfileSource" required>
 					<option value="" disabled="disabled">Select Source</option>
 				</select> <label style="position: absolute; top: -22px;">Source<b
 					class="mandatory">*</b></label>
@@ -428,7 +427,7 @@
 			</div>
 
 			<div class="row" ng-if="candidate.profileSource=='Referral'">
-				<div class="input-field col s6">
+				<!-- <div class="input-field col s6">
 					<input placeholder="Enter Yes / No" id="screeningStatus"
 						class="form-control" type="text"
 						ng-model="candidate.screeningStatus" maxlength="20"> <label
@@ -441,6 +440,25 @@
 						ng-model="candidate.compatibilityStatus" maxlength="20"> <label
 						style="position: absolute; top: -22px;">Will the candidate
 						fit in our culture?</label>
+				</div> -->
+				<div class="input-field col s6">
+					<select ng-model="candidate.screeningStatus" id="screeningStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Screening
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Did you
+						screen the resume?</label>
+				</div>
+				<div class="input-field col s6">
+					<select ng-model="candidate.compatibilityStatus"
+						id="compatibilityStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Compatibility
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Will the
+						candidate fit in our culture?</label>
 				</div>
 			</div>
 	</div>
