@@ -106,6 +106,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		activeCnt=0;
 		layer2Data=[];
 		layer3Data=[];
+		
 		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
 			totalPositionData=data;
 		});
@@ -139,7 +140,9 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
 						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
 			 }
-		            	
+		            
+			 
+		
 				
 				 $('#requisitionDonut').highcharts({
 				        chart: {
