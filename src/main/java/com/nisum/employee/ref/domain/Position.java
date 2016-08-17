@@ -33,7 +33,6 @@ public class Position  extends AuditEntity{
 	String targetDate;
 	boolean publishStatus;
 	String jobType;
-	Boolean clientInterview;
-	Boolean onsiteInterview;
+	
 	
 }
