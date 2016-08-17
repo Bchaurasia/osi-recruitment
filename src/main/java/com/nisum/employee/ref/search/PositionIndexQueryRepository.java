@@ -19,8 +19,8 @@ public class PositionIndexQueryRepository {
 	@Autowired
 	private ElasticsearchTemplate elasticsearchTemplate;
 
-	List<Position> findPositionsByDesignationStartingWithOrClientStartingWithAllIgnoreCase(String query) {
-		QueryBuilder qb = QueryBuilders.multiMatchQuery(query, "jobcode", "designation", "client","status");
+	List<Position> findPositionsByDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrJobTypeOrJobLocationContains(String query) {
+		QueryBuilder qb = QueryBuilders.multiMatchQuery(query, "jobcode", "designation", "client","status","jobType","location");
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(qb).withPageable(new PageRequest(0, 100))
 				.build();
 		return elasticsearchTemplate.queryForList(searchQuery, Position.class);

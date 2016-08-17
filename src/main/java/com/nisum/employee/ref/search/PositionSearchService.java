@@ -40,7 +40,7 @@ public class PositionSearchService {
 
 	public List<Position> getPostionByDesignationOrClient(String data) throws Exception {
 		List<Position> positionList = indexRepositoryImpl
-				.findPositionsByDesignationStartingWithOrClientStartingWithAllIgnoreCase(data);
+				.findPositionsByDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrJobTypeOrJobLocationContains(data);
 		return positionList;
 
 	}
