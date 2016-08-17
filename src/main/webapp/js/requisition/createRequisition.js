@@ -23,10 +23,10 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.clientList=[];
 	$scope.approval1 = [];
 	$scope.approval2 = [];
-	
-	$scope.clientInterview=false;
-	//$scope.hr = [];
 	$scope.requisition ={};
+	$scope.requisition.clientInterview=false;
+	$scope.requisition.onsiteInterview=false;
+	//$scope.hr = [];
 	$scope.approver={};
 	$scope.approvalEmailId = "";
 	$scope.approvalDetails = [];
