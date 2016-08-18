@@ -3169,7 +3169,7 @@ input[type="range"].floatR{
 
 
 body div#wrapper{
-	background-color:#f0f0f5;/* #F5F3EE; */
+	/* background-color:#f0f0f5; *//* #F5F3EE; */
 }
 form.collapsible-accordion{
 	    background-color: white;
@@ -3214,3 +3214,14 @@ font.chk{
 	position:relative;
 	top:5px;
 }
+
+form table#profileSearchTable.ui.striped.table.searchTable{
+	border-radius:0px !important;
+	background-color:red;
+	
+}
+
+ tbody#profileSTbody.searchTBody{
+	font-size:150% ;
+}
+

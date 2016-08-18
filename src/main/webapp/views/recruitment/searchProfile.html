@@ -16,7 +16,8 @@
 			<div class="col-md-1" align="center" />
 		</div>
 
-		<table class="bordered" style="width: 90%">
+		<table id="profileSearchTable" class="ui striped table searchTable"
+		 style="width: 90%;border-radius: 0px;">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -30,7 +31,7 @@
 					
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="searchTBody" id="profileSTbody">
 				<tr class="animate-repeat"
 					ng-repeat="profile in profiles  | orderBy:'-updatedDate' | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
 					style="font-size: 80%">
