@@ -1,5 +1,5 @@
-app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService','positionService','designationService',
-                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService,positionService,designationService) {
+app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService','positionService','designationService','offerService','$state','interviewService',
+                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService,positionService,designationService,offerService,$state,interviewService) {
 	
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
@@ -53,7 +53,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.data=[];
 	var layer2Data=[];
 	var layer3Data=[];
-	
+	$scope.offerData=false;
 	function isValidDate(date) {
 		layer2Data=[];
 		layer3Data=[];
@@ -78,6 +78,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	angular.element(document).ready(function() {
 		$scope.positionData=[];
 		$scope.getData();
+		
        });
 	
 	
@@ -94,6 +95,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
     };
     
 	
+   
 	function getDesignationSpecificData(){
 		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
 		var designationArray=[];
@@ -145,7 +147,27 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			 
 		
 				
-				 $('#requisitionDonut').highcharts({
+				 function afterSetExtremes(e) {
+
+			        var chart = $('#requisitionDonut').highcharts();
+
+			        chart.showLoading('Loading data from server...');
+			        $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?start=' + Math.round(e.min) +
+			                '&end=' + Math.round(e.max) + '&callback=?', function (data) {
+
+			            chart.series[0].setData(data);
+			            chart.hideLoading();
+			        });
+			    }
+
+			    // See source code from the JSONP handler at https://github.com/highcharts/highcharts/blob/master/samples/data/from-sql.php
+			    $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?callback=?', function (data) {
+
+			        // Add a null value for the end date
+			        data = [].concat(data, [[Date.UTC(2011, 9, 14, 19, 59), null, null, null, null]]);
+
+			        // create the chart
+			        $('#requisitionDonut').highcharts({
 				        chart: {
 				            type: 'pie',
 				            height: 500,
@@ -216,10 +238,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				            series: layer2Data
 				        } 
 				    });
-			
-									
-		});
-	
+			    });
+		});	
 	
 	}
 	
@@ -311,7 +331,16 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			$log.error(msg);
 			});	
 	}	
-	
+	$scope.selectCandidate = function(offer) {
+		interviewService.getInterviewDetailsByCandidateId(offer.emailId).then(function(offerdata){
+			 if( _.contains($rootScope.user.roles, "ROLE_REQUISITION_APPROVER")){
+					offerService.setData(offerdata);
+					$state.go("offer.approveOffer");
+				}
+			}).catch(function(data){
+				$log.error(data);
+			})
+	}
 	
 	
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
@@ -325,6 +354,16 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				}
 			})
 			.catch(function(msg){
+				$log.error(msg);
+			});
+	}
+	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
+		
+		 offerService.getOfferForDashboard().then(function(data){
+			console.log(data);
+			$scope.offerData=true;
+			$scope.offers=data;
+			}).catch(function(msg){
 				$log.error(msg);
 			});
 	}
