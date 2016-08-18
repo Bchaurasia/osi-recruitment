@@ -156,8 +156,14 @@
 						 ng-show="(createOffer.stream.$dirty || invalidSubmitAttempt) && createOffer.stream.$error.pattern">
 					               Enter valid Project Name.</div>
 					</div>
-		
 					<div class="input-field col s6">
+						<input placeholder="Enter profileSource" name="source"
+							class="form-control" type="text" ng-model="candidate.profileSource" required>
+						<label style="position: absolute; top: -22px;" >Profile
+							Source<b class="mandatory">*</b> </label></label>
+					</div>
+		
+					<!-- <div class="input-field col s6">
 						<input placeholder="Enter Stream" name="hrManager"
 							class="form-control" type="text"
 							ng-model="candidate.recruiter.name"   ng-pattern="/^[a-zA-Z ]*$/" required> <label
@@ -166,22 +172,22 @@
 						<div class="validation-error"
 						 ng-show="(createOffer.hrManager.$dirty || invalidSubmitAttempt) && createOffer.hrManager.$error.pattern">
 					               Recruiter must be characters only.</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
 							ng-options="o for o in bus" class="form-control input-sm" required>
-							<option value="" disabled="disabled">Select BU</option>
-						</select> <label style="position: absolute; top: -22px;"> BU<b
+							<option value="" disabled="disabled">Select functional group</option>
+						</select> <label style="position: absolute; top: -22px;"> Functional Group<b
 							class="mandatory">*</b> </label>
 					</div>
 					<div class="input-field col s6">
 						<select ng-model="stream" name="currency" ng-change="selectLevel(stream)"
 							ng-options="o for o in streamData track by o"
 							class="form-control input-sm" required>
-							<option value="" disabled="disabled">Select Stream</option>
-						</select> <label style="position: absolute; top: -22px;">Stream<b
+							<option value="" disabled="disabled">Select functional area</option>
+						</select> <label style="position: absolute; top: -22px;">Functional Area<b
 							class="mandatory">*</b> </label>
 					</div>
 				</div>
@@ -258,7 +264,7 @@
 							ng-model="candidate.lastDrawnCTC" required>
 							 <label tyle="position: absolute; top: -22px;">Last Drawn CTC 
 							<b class="mandatory">*</b>
-						</label>
+						</label><span class="validation-error" ng-show="(candidate.lastDrawnCTC <=0) ?  true : false">Current CTC should be greater than 0</span>
 		
 					</div>
 					<div class="input-field col s6">
@@ -266,7 +272,7 @@
 							class="form-control" type="number" ng-model="candidate.expectedCTC"
 							required> <label style="position: absolute; top: -22px;">Expected CTC<b
 							class="mandatory">*</b>
-						</label>
+						</label><span class="validation-error" ng-show="(candidate.expectedCTC <=0) ?  true : false">Expected CTC should be greater than 0</span>
 		
 					</div>
 				</div>
@@ -275,15 +281,15 @@
 						<input placeholder="Enter Proposed CTC" name="proposedCTC"
 							class="form-control" type="number" ng-model="candidate.proposedCTC" required>
 							<label style="position: absolute; top: -22px;">Proposed CTC<b class="mandatory">*</b>
-						</label>
+						</label><span class="validation-error" ng-show="(candidate.proposedCTC <=0) ?  true : false">Proposed CTC should be greater than 0</span>
 		
 					</div>
+					
 					<div class="input-field col s6">
-						<input placeholder="Enter Business Unit" name="businessUnit"
-							class="form-control" type="text" ng-model="candidate.businessUnit"
-							required> <label style="position: absolute; top: -22px;">Business
-							Unit<b class="mandatory">*</b>
-						</label>
+						<textarea class="materialize-textarea" cols="50" rows="2"
+							name="notes" ng-model="candidate.comments"
+							placeholder="Enter any additional notes..." style="width:77%"></textarea>
+						<label style="position: absolute; top: -22px;">HR Comment</label>
 					</div>
 				</div>
 				<div class="row" style="padding-left:0%">
@@ -310,20 +316,6 @@
 				</div>
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
-						<input placeholder="Enter profileSource" name="source"
-							class="form-control" type="text" ng-model="candidate.profileSource" required>
-						<label style="position: absolute; top: -22px;" >Profile
-							Source<b class="mandatory">*</b> </label></label>
-					</div>
-					<div class="input-field col s6">
-						<textarea class="materialize-textarea" cols="50" rows="2"
-							name="notes" ng-model="candidate.comments"
-							placeholder="Enter any additional notes..." style="width:77%"></textarea>
-						<label style="position: absolute; top: -22px;">HR Comment</label>
-					</div>
-				</div>
-				<div class="row" style="padding-left:0%">
-					<div class="input-field col s6">
 						<select placeholder="Select Approver 1"
 							ng-model="candidate.approval"
 							ng-options="o.name for o in approval1 track by o.emailId"
@@ -336,7 +328,7 @@
 							ng-model="candidate.finalStatus" ng-disabled="hideFinalStatus"
 							ng-options="o for o in finalStatusList"
 							class="form-control input-sm">
-							<option value="" disabled="disabled">Select Final Status</option>
+							<option value="">Select Final Status</option>
 						</select> <label>Final Status</label>
 					</div>
 				</div>
@@ -375,7 +367,7 @@
 		<br>
 		<div align="center" class="row">
 			<button class="btn btn-info active" ng-hide="hasNotRole('ROLE_HR')"
-				ng-disabled="createOffer.$invalid || disableSendApproval"
+				ng-disabled="createOffer.$invalid || disableSendApproval || candidate.finalStatus"
 				ng-click="approve()">
 				<span class="glyphicon glyphicon-ok-circle"></span> Send for
 				Approval
