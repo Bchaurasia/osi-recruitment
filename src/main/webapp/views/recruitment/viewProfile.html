@@ -29,7 +29,7 @@
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
 					ng-maxlength="30" name="candidateName" class="form-control"
 					type="text" ng-model="candidate.candidateName"
-					ng-pattern="/^[a-zA-Z _]*$/" required> <label
+					ng-pattern="/^[a-zA-Z ]*$/" required> <label
 					style="position: absolute; top: -22px;">Candidate Name<b
 					class="mandatory">*</b></label> <span class="validation-error"
 					ng-show="submitted && UpdateCandidate.candidateName.$invalid">Please
@@ -275,7 +275,7 @@
 					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 \_\-]*$/">
 				<label style="position: absolute; top: -22px;">Current Employer</label>
 			<div class="validation-error"
-					ng-show="(CreateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.currentEmployer.$error.pattern">
+					ng-show="(UpdateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.UpdateCandidate.$error.pattern">
 					Current Employer must be alpha numeric only.</div>	
 			</div>
 
