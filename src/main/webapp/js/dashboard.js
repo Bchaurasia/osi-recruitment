@@ -361,8 +361,12 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		
 		 offerService.getOfferForDashboard().then(function(data){
-			$scope.offerData=true;
 			$scope.offers=data;
+			
+			if($scope.offers!=undefined)
+				{
+				$scope.offerData=true;
+				}
 			}).catch(function(msg){
 				$log.error(msg);
 			});
