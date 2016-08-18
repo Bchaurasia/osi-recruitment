@@ -154,6 +154,8 @@
 						required> <label style="position: absolute; top: -22px;">Current
 						Location<b class="mandatory">*</b>
 					</label>
+					<div class="validation-error" ng-show="(CreateCandidate.currentLocation.$dirty || invalidSubmitAttempt) && CreateCandidate.currentLocation.$error.pattern">
+					Current Location must be characters only.</div>
 				</div>
 			</div>
 			<div class="row">
@@ -276,9 +278,10 @@
 				<div class="input-field col s6">
 					<input placeholder="Enter current Employer"
 						name="currentEmployer" class="form-control" type="text"
-						ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z _]*$/">
-					<label style="position: absolute; top: -22px;">Current
-						Employer</label>
+						ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 \_\-]*$/">
+					<label style="position: absolute; top: -22px;">Current Employer</label>
+				<div class="validation-error" ng-show="(CreateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.currentEmployer.$error.pattern">
+					Current Employer must be alpha numeric only.</div>
 				</div>
 	
 				<div class="input-field col s6">
