@@ -61,6 +61,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		}
 	
 	$scope.getData=function() {
+		console.log("called");
 		$scope.positionData=[];
 		var fromdate,todate,month;
 		fromdatemonth=$scope.fromdate.getMonth()+1;
@@ -97,7 +98,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	function getDesignationSpecificData(){
 		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
 		var designationArray=[];
-		var totalPositionData=[];
+		$scope.totalPositionData=[];
 		hiredCnt=0;
 		selectedCnt=0;
 		rejectedCnt=0;
@@ -109,136 +110,137 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		layer3Data=[];
 		
 		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
-			totalPositionData=data;
-		});
-		
-		designationService.getDesignation().then(function(data){
-			  $scope.positionData=[];
-			 angular.forEach(totalPositionData, function(value, key){
-								if(value.status!= undefined&& value.status== "Hired")
-									 hiredCnt++;
-								if(value.status!= undefined&& value.status== "Selected")
-									 selectedCnt++;
-								if(value.status!= undefined&& value.status== "OnHold")
-									 onHoldCnt++;
-								if(value.status!= undefined&& value.status== "Rejected")
-									 rejectedCnt++;
-								if(value.status!= undefined&& value.status== "Active")
-									 activeCnt++;
-								if(value.status!= undefined&& value.status== "Inactive")
-									 inActiveCnt++;
-								if(value.status!= undefined&& value.status== "Closed")
-									 closedCnt++;
-								});
-			 var sum=hiredCnt+selectedCnt+onHoldCnt+rejectedCnt+activeCnt+inActiveCnt+closedCnt;
-			 if(sum!=0){
-			 $scope.showNoAnyPositions=true;
-						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
-						 $scope.positionData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
-						 $scope.positionData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
-						 $scope.positionData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
-						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
-						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
-						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
-			 }
-			 
-			 
-			 function afterSetExtremes(e) {
+			$scope.totalPositionData=data;
+           console.log("data -----"+angular.toJson($scope.totalPositionData));
+           
+           designationService.getDesignation().then(function(data){
+ 			  $scope.positionData=[];
+ 			 angular.forEach($scope.totalPositionData, function(value, key){
+ 								if(value.status!= undefined&& value.status== "Hired")
+ 									 hiredCnt++;
+ 								if(value.status!= undefined&& value.status== "Selected")
+ 									 selectedCnt++;
+ 								if(value.status!= undefined&& value.status== "OnHold")
+ 									 onHoldCnt++;
+ 								if(value.status!= undefined&& value.status== "Rejected")
+ 									 rejectedCnt++;
+ 								if(value.status!= undefined&& value.status== "Active")
+ 									 activeCnt++;
+ 								if(value.status!= undefined&& value.status== "Inactive")
+ 									 inActiveCnt++;
+ 								if(value.status!= undefined&& value.status== "Closed")
+ 									 closedCnt++;
+ 								});
+ 			 var sum=hiredCnt+selectedCnt+onHoldCnt+rejectedCnt+activeCnt+inActiveCnt+closedCnt;
+ 			 if(sum!=0){
+ 			 $scope.showNoAnyPositions=true;
+ 						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
+ 						 $scope.positionData.push({'name': "Hired", 'y':hiredCnt, 'drilldown': "Hired" });
+ 						 $scope.positionData.push({'name': "Selected", 'y':selectedCnt, 'drilldown': "Selected" });
+ 						 $scope.positionData.push({'name': "OnHold", 'y':onHoldCnt, 'drilldown': "OnHold" });
+ 						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
+ 						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
+ 						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
+ 			 }
+ 			 
+ 			 
+ 			 function afterSetExtremes(e) {
 
-			        var chart = $('#requisitionDonut').highcharts();
+ 			        var chart = $('#requisitionDonut').highcharts();
 
-			        chart.showLoading('Loading data from server...');
-			        $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?start=' + Math.round(e.min) +
-			                '&end=' + Math.round(e.max) + '&callback=?', function (data) {
+ 			        chart.showLoading('Loading data from server...');
+ 			        $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?start=' + Math.round(e.min) +
+ 			                '&end=' + Math.round(e.max) + '&callback=?', function (data) {
 
-			            chart.series[0].setData(data);
-			            chart.hideLoading();
-			        });
-			    }
+ 			            chart.series[0].setData(data);
+ 			            chart.hideLoading();
+ 			        });
+ 			    }
 
-			    // See source code from the JSONP handler at https://github.com/highcharts/highcharts/blob/master/samples/data/from-sql.php
-			    $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?callback=?', function (data) {
+ 			    // See source code from the JSONP handler at https://github.com/highcharts/highcharts/blob/master/samples/data/from-sql.php
+ 			    $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?callback=?', function (data) {
 
-			        // Add a null value for the end date
-			        data = [].concat(data, [[Date.UTC(2011, 9, 14, 19, 59), null, null, null, null]]);
+ 			        // Add a null value for the end date
+ 			        data = [].concat(data, [[Date.UTC(2011, 9, 14, 19, 59), null, null, null, null]]);
 
-			        // create the chart
-			        $('#requisitionDonut').highcharts({
-				        chart: {
-				            type: 'pie',
-				            height: 500,
-				            width: 700,
-				            events: {
-				            	drilldown: function (i,e) {
-				            		angular.forEach($scope.positionData, function(value, key){
-				    				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
-				    					$scope.data.push(data);
-				    					
-				    					if($scope.data[key]!=undefined)
-				    					{
-				    						layer2Data.push($scope.data[key].layer2);
-				    						layer3Data.push($scope.data[key].layer3);
-				    					}
-				    					
-				    				});
-				            		}) ;
-				    					for(i=0; i<layer3Data.length; i++){
-				    	       			for(j=0; j<layer3Data[i].length; j++)
-				    	       				for(k=0; k<layer3Data[i][j].data.length; k++){
-				    						var cnt=layer3Data[i][j].data[k][1];
-				    	       			layer3Data[i][j].data[k][1]= parseInt(cnt);
-				    						}
-				    	       		}
-				    	       		for(i=0; i<layer3Data.length; i++){
-				    	       			for(j=0;j<layer3Data[i].length; j++)
-				    	       			layer2Data.push(layer3Data[i][j]);
-				    	       		}
-				    					
-				            		
-				            	}
-			         	 
-				            }
-				        },
-				        credits: {
-				            enabled: false
-				        },
-				        title: {
-				            text: 'Position Statistics'
-				        },
-				        subtitle: {
-				            text: 'Click to view last one month status.'
-				        },
-				        credits: {
-				            enabled: false
-				        },
-				        plotOptions: {
-				            series: {
-				                dataLabels: {
-				                    enabled: true,
-				                    format: '{point.name}: {point.y:1.0f}'
-				                }
-				            }
-				        },
+ 			        // create the chart
+ 			        $('#requisitionDonut').highcharts({
+ 				        chart: {
+ 				            type: 'pie',
+ 				            height: 500,
+ 				            width: 700,
+ 				            events: {
+ 				            	drilldown: function (i,e) {
+ 				            		angular.forEach($scope.positionData, function(value, key){
+ 				    				dashboardService.getPositionByStatus(value.name,$scope.fromdate,$scope.todate).then(function(data){
+ 				    					$scope.data.push(data);
+ 				    					
+ 				    					if($scope.data[key]!=undefined)
+ 				    					{
+ 				    						layer2Data.push($scope.data[key].layer2);
+ 				    						layer3Data.push($scope.data[key].layer3);
+ 				    					}
+ 				    					
+ 				    				});
+ 				            		}) ;
+ 				    					for(i=0; i<layer3Data.length; i++){
+ 				    	       			for(j=0; j<layer3Data[i].length; j++)
+ 				    	       				for(k=0; k<layer3Data[i][j].data.length; k++){
+ 				    						var cnt=layer3Data[i][j].data[k][1];
+ 				    	       			layer3Data[i][j].data[k][1]= parseInt(cnt);
+ 				    						}
+ 				    	       		}
+ 				    	       		for(i=0; i<layer3Data.length; i++){
+ 				    	       			for(j=0;j<layer3Data[i].length; j++)
+ 				    	       			layer2Data.push(layer3Data[i][j]);
+ 				    	       		}
+ 				    					
+ 				            		
+ 				            	}
+ 			         	 
+ 				            }
+ 				        },
+ 				        credits: {
+ 				            enabled: false
+ 				        },
+ 				        title: {
+ 				            text: 'Position Statistics'
+ 				        },
+ 				        subtitle: {
+ 				            text: 'Click to view last one month status.'
+ 				        },
+ 				        credits: {
+ 				            enabled: false
+ 				        },
+ 				        plotOptions: {
+ 				            series: {
+ 				                dataLabels: {
+ 				                    enabled: true,
+ 				                    format: '{point.name}: {point.y:1.0f}'
+ 				                }
+ 				            }
+ 				        },
 
-				        tooltip: {
-				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:1.0f}</b> of total<br/>'
-				        },
-				      
-				        series: [{
-				            name: 'Statistics',
-				            colorByPoint: true,
-				            data: $scope.positionData
-				        }],
-				        drilldown: {
-				            series: layer2Data
-				        } 
-				    });
-			    });
-		});
+ 				        tooltip: {
+ 				            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+ 				            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:1.0f}</b> of total<br/>'
+ 				        },
+ 				      
+ 				        series: [{
+ 				            name: 'Statistics',
+ 				            colorByPoint: true,
+ 				            data: $scope.positionData
+ 				        }],
+ 				        drilldown: {
+ 				            series: layer2Data
+ 				        } 
+ 				    });
+ 			    });
+ 		});
+ 	
+	});
 	
-	
-	}
+}
 	
 	$scope.editRequisition = function(requisitionId) {
 		sharedService.setRequisitionId(requisitionId);
