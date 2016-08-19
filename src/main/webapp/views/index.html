@@ -119,7 +119,7 @@ input[type='date']:after {
 
 
 <div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px">
-	<div id="requisitionDonut" style="float: left;"
+	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"
 		ng-show="showNoAnyPositions"></div>
 	<div ng-show="!showNoAnyPositions"
 		style="float: left; width: 683px; height: 345px;">There is no
@@ -127,14 +127,14 @@ input[type='date']:after {
 	<br> <br>
 
 
-	<div class="col-md-4" style="margin-top: -135px; margin-left: 50px;">
+	<div class="col-md-4" style="margin-top: -80px; margin-left: 50px; width:415px">
 		<br>
 		<div class="ui feed " style="font-size: 100%;">
 			<div ng-hide="!hideNoInterviewMsg || hasNotRole('ROLE_HR') ">
-				<h4 style="margin-top: 10px">
+				<h4 style="height:1px; width:80%;height: 1px;">
 					Upcoming Events
-					</h5>
-					<hr style="margin-left: 15px;">
+					</h4>
+					<hr style="background-color: black; height:1px; width: 80%">
 					<div style="max-height: 250px; height: auto; overflow: auto;">
 						<div class="event"
 							ng-repeat="schedule in showScheduleData | orderBy:createdDate ">
@@ -166,10 +166,10 @@ input[type='date']:after {
 			</div>
 		<div class="ui feed " style="font-size: 100%;">
 			<div ng-hide="showNoInterviewMsg">
-				<h4 style="margin-top: 10px">
+				<h4 style="margin-top: 10px;height: 1px;">
 					Scheduled Events
-					</h5>
-					<hr style="margin-left: 15px;">
+					</h4>
+					<hr style="background-color: black; height:1px; width: 80%">
 					<div style="max-height: 250px; height: auto; overflow: auto;">
 						<div class="event"
 							ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate ">
@@ -199,11 +199,21 @@ input[type='date']:after {
 						</div>
 					</div>
 			</div>
+			<div ng-show="offerData">
+			<h4 style="margin-top: 10px; height: 1px;">Offer To Be Approved</h4>
+			<hr style="background-color: black; height:1px; width: 80%;">
+				<div class="summary" align="left" ng-repeat="offer in offers">
+									You need to approve offer of the position <b>{{offer.approvedPositions}}</b>  for  <a class="user"
+										ng-click="selectCandidate(offer)">{{offer.candidateName}}
+									</a> 
+									</div>
+								</div>
+			</div>
 			<div class="ui feed " style="font-size: 100%;">
-				<h4 style="margin-top: 25px">
+				<h4 style="margin-top: 25px; height: 1px;" noshade>
 					Recent Activities
-					</h5>
-					<hr style="margin-left: 15px;">
+					</h4>
+					<hr style="background-color: black; height:1px; width: 80%">
 					<div align="left"
 						style="max-height: 250px; height: auto; overflow: auto;">
 						<div class="event" ng-repeat="feed in events">
@@ -229,14 +239,14 @@ input[type='date']:after {
 </div>
 </div>
 <div ng-show="!showNoAppRequisitionMsg">
-	<h5 style="margin-top: 15px" align="center"><u>Requisition for
-		Approval</u></h5>
-	<hr>
+	<h4 style="margin-top: 15px;height: 1px" align="center"     height: 1px;>Requisition for
+		Approval</h4>
+	<hr style="background-color: black; height:1px; width: 15%">
 	<div class="row">
 		<div class="ui cards" ng-hide="showNoAppRequisitionMsg">
-			<div class="card col-md-6" style="width: 370px;"
+			<div class="card col-md-6   " style="width: 370px;margin-top: 20px;margin-left: 20px;"
 				ng-repeat="requisition in requisitionsDetails">
-				<div class="content">
+				<div class="content collapsible collapsible-accordion">
 					<span class="right req-title">{{requisition.requisitionId}}</span>
 					<div class="header" align="left">
 						Created By: <b>{{requisition.createdBy}}</b>

@@ -76,6 +76,17 @@ public class OfferController {
 				e.printStackTrace();
 			}
 		}
+		if (offer.getFinalStatus().equals("Declined")) {
+			try {
+				notificationService.offerDeclinedByCandidateNotificationToHRTeam(offer, profile);
+				if (profile.getReferredBy() != null) {
+					notificationService.offerDeclinedByCandidateNotificationToReferredBy(offer, profile);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		offerService.prepareOffer(offer);
 		return new ResponseEntity<Offer>(offer, HttpStatus.OK);
 	}
@@ -138,7 +149,7 @@ public class OfferController {
 		}
 		offerService.prepareOffer(offer);
 		
-		String jsonObj = MSG_START + "Offer saved and Notification send to " + offer.getRecruiter().getName()
+		String jsonObj = MSG_START + "Offer saved and Notification send to recruitment team"
 				+ " Successfully" + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}

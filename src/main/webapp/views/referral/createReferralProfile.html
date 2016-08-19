@@ -19,7 +19,7 @@
 				<input placeholder="Enter Candidate Name" ng-minlength="3"
 					ng-maxlength="30" name="candidateName" class="form-control"
 					ng-change="toggleProDisable()" type="text"
-					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/">
+					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z ]*$/">
 				<label style="position: absolute; top: -22px;">Candidate
 					Name<b class="mandatory">*</b>
 				</label> <span class="validation-error"
@@ -122,7 +122,7 @@
 			<div class="input-field col s6">
 				<input placeholder="Enter current Location" name="currentLocation"
 					class="form-control" type="text"
-					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/"
+					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z ]*$/"
 					required> <label style="position: absolute; top: -22px;">Current
 					Location<b class="mandatory">*</b>
 				</label>
