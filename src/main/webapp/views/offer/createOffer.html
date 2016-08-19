@@ -95,17 +95,6 @@
 			<div class="row"
 				style=" position: relative;  width: 88.6%; margin-left: 12px; margin-bottom:25px; "
 				>
-				<!-- <div class="row" style="padding-right:15%;font-weight:bold;padding-top:5px">
-					<label class="col s4" style="padding-right:10%;font-size: medium;" >Qualification</label>
-					<label class="col s4" style="font-size: medium;">Stream</label>
-					<label class="col s4"  style="padding-left:10%;font-size: medium;">Percentage</label>
-				</div>
-				
-				<div class="row" ng-repeat="data in candidate.qualification" style="padding-left:-10%">
-					<span class="col s4" style="padding-right:15%"> {{data.qualification}}</span>
-					<span class="col s4" style="padding-right:16%"> {{data.stream || "--"}}</span> 
-					<span class="col s4" style="padding-right:19%">{{data.percentage}}</span>
-				</div> -->
 				
 				<table class="ui single line table" >
 				 <thead>
@@ -162,24 +151,13 @@
 						<label style="position: absolute; top: -22px;" >Profile
 							Source<b class="mandatory">*</b> </label></label>
 					</div>
-		
-					<!-- <div class="input-field col s6">
-						<input placeholder="Enter Stream" name="hrManager"
-							class="form-control" type="text"
-							ng-model="candidate.recruiter.name"   ng-pattern="/^[a-zA-Z ]*$/" required> <label
-							style="position: absolute; top: -22px;">Recruiter<b
-							class="mandatory">*</b></label> </label>
-						<div class="validation-error"
-						 ng-show="(createOffer.hrManager.$dirty || invalidSubmitAttempt) && createOffer.hrManager.$error.pattern">
-					               Recruiter must be characters only.</div>
-					</div> -->
 				</div>
 				<div class="row" style="padding-left:0%">
 					<div class="input-field col s6">
 						<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
 							ng-options="o for o in bus" class="form-control input-sm" required>
-							<option value="" disabled="disabled">Select functional group</option>
-						</select> <label style="position: absolute; top: -22px;"> Functional Group<b
+							<option value="" disabled="disabled">Select BU</option>
+						</select> <label style="position: absolute; top: -22px;"> BU<b
 							class="mandatory">*</b> </label>
 					</div>
 					<div class="input-field col s6">

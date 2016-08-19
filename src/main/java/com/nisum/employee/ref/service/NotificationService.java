@@ -308,7 +308,7 @@ public class NotificationService {
 
 		// --- Send Mails ---
 		Transport.send(msgInterviewer);
-		//Transport.send(msgCandidate);
+		Transport.send(msgCandidate);
 
 		return "Mails Sent Successfully!";
 	}
@@ -855,8 +855,8 @@ public class NotificationService {
 		// --- Set Interviewer Email Content ---
 		Message cancelInterview = new MimeMessage(session);
 		cancelInterview.setFrom(new InternetAddress(from));
-		//String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer;
-		String toMail = toInterviewer;
+		String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer;
+		//String toMail = toInterviewer;
 		for (String obj : HR_Emails) {
 			if (toMail == null || toMail == "")
 				toMail = obj;
