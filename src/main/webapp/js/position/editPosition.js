@@ -233,7 +233,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	
 	$scope.confirmRejectStatus = function(status){
 		
-		if($scope.accordianFlag == true && (status === "Rejected" || status === "Inactive" || status === "OnHold")) {			
+		if($scope.accordianFlag == true && (status === "Rejected" || status === "Inactive")) {			
 			$scope.gotoAnchor();
 			$scope.cls = 'alert alert-danger alert-error';
 			$scope.message = "Associated candidate is undergoing interview process.You cannot change the status to "+status;			
