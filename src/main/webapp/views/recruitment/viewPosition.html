@@ -112,13 +112,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<!-- <div class="input-field col s6">
-						<select placeholder="Select Hiring HR" ng-model="hrManager"
-							ng-options="o.name for o in hrManagers"
-							class="form-control input-sm" required>
-							<option>Select Hiring Managers</option>
-						</select> <label>Hiring HR<b class="mandatory">*</b></label>
-					</div> -->
 					<div class="input-field col s6">
 						<select placeholder="Select Priority" ng-model="position.priority"
 							ng-options="o as o for o in priorities"
@@ -154,7 +147,6 @@
 				
 			</div>
 				
-		
 				<div ng-show="accordianFlag" id="positionTable"  style=" margin-bottom: 3%;">
 							<!-- <label style="position: absolute; top: -22px;"><b>Shortlisted Candidates for this position:</b></label> -->
 						<h4 class="ui dividing header" align="left">Shortlisted Candidates for this position:</h4>	
@@ -174,28 +166,7 @@
 						      <td><b>{{interviewCandidate.status || "--"}}</b></td>
 						    </tr>
 						</table>
-						
-						
-							<!-- <div class="collapsible-header" style="background-color: #7EA7C7; text-align: left;">
-								<span class="col s3"><b>Person</b></span>
-								<span class="col s3"><b>Email Id</b></span>
-								<span class="col s3"><b>Progress</b></span>
-								<span class="col s3"><b>Last Round Status</b></span>
-							</div>
-							<div class="collapsible-header row" style="text-align: left;" ng-repeat="interviewCandidate in interviewCandidates">
-								<span class="col s3"><a
-										style="cursor: pointer;" ng-click="showInterviewDetails(interviewCandidate.interviewerId)">{{interviewCandidate.candidateName}}</a></span>
-								<span class="col s3"><b>{{interviewCandidate.candidateEmail}}</b></span>
-								<span class="col s3"><b>{{interviewCandidate.progress}}</b></span>
-								<span class="col s3"><b>{{interviewCandidate.status || "--"}}</b></span>
-							</div> -->
-							
-							
-	
-				
 				</div>
-		
-		
 		
 		<div align="center" class="row">
 			<button class="btn btn-info active" type="submit"
