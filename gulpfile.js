@@ -17,15 +17,13 @@ gulp.task('lint', function() {
 gulp.task('minifyCss', function () {
 	gulp.src('src/main/webapp/static/**/*.css')
 	.pipe(cssmin())
-	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('src/main/webapp/dist/static'));
+	.pipe(gulp.dest('src/main/webapp/static'));
 });
 
 gulp.task('minifyjs', function () {
 	gulp.src('src/main/webapp/js/**/*.js')
 	.pipe(jsmin())
-	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('src/main/webapp/dist/js'));
+	.pipe(gulp.dest('src/main/webapp/js'));
 });
 
 gulp.task('less', function () {
