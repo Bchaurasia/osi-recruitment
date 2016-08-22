@@ -28,10 +28,10 @@ public class InterviewSearchService {
 		return interviewDetailsList;
 	}
 	
-	public List<InterviewDetails> getInterviewDetailsByNameAndStatus(String jobCode, String candidateName, String progress){
+	public List<InterviewDetails> getInterviewDetailsByNameAndStatus(String jobCode, String candidateName, String progress,String candidateMobileNo,String candidateSkypeId){
 		List<InterviewDetails> interviewDetailsList = null;
 		try {
-			interviewDetailsList = interviewIndexRepository.findByJobCodeContainsOrCandidateNameStartingWithOrProgressStartingWithAllIgnoreCase(jobCode,candidateName, progress);	
+			interviewDetailsList = interviewIndexRepository.findByJobCodeContainsOrCandidateNameStartingWithOrProgressStartingWithAllIgnoreCaseOrCandidateMobileNumberContainsOrCandidateSkypeIdContains(jobCode,candidateName, progress,candidateMobileNo,candidateSkypeId);	
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}

@@ -4,8 +4,8 @@
 <div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
-Hi Team HR,<br><br>Please be informed that candidate $CandidateName #if($ReferredByEmail) referred by $ReferredByName ($ReferredByEmail) #end has been rejected for the
-$jobCode.<br><br><br>
+Hi $ReferredByName ,<br><br>Please be informed that your referral $CandidateName who is supposed to join us on $EDOJ has declined the accepted offer.
+<br><br><br>
  <span style="font-size:15px">Regards</span><br>
  <span style="font-size:15px">Recruitment Team</span><br>
 </div>
@@ -20,4 +20,3 @@ $jobCode.<br><br><br>
 
 </body>
 </html>
-

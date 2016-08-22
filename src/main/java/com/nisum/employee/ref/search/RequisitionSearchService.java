@@ -41,7 +41,7 @@ public class RequisitionSearchService {
 	}
 	
 	public List<Requisition> getRequisitionReqIdOrPositionOrClientByNameOrStatus(String data) throws Exception {
-		List<Requisition> requisitionList = requisitionIndexQueryRepository.findByRequisitionDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWithOrderByUpdatedDateDesc(data);
+		List<Requisition> requisitionList = requisitionIndexQueryRepository.findByRequisitionDesignationStartingWithOrClientStartingWithAllIgnoreCaseOrStatusStartingWithOrderByUpdatedDateDescOrJobTypeContainsOrLocationContains(data);
 		return requisitionList;
 	}
 	

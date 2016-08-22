@@ -6,7 +6,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
 				<input type="text" class="form-control" ng-model="searchTxt"
-					placeholder="" ng-enter="searchRequisition()"data-tooltip="Search by Requisition Id, Designation or Client ">
+					placeholder="" ng-enter="searchRequisition()"data-tooltip="Search by Requisition Id, Designation ,Job-Type ,Location or Client ">
 				<div align="left">
 					&nbsp;&nbsp; <a class="btn-floating" ng-click="searchRequisition()"data-tooltip="Search Requisition"><i
 						class="material-icons">search</i></a>&nbsp;&nbsp; <a
@@ -18,7 +18,8 @@
 				<div class="col-md-1"></div>
 			</div>
 
-			<table class="bordered" style="width: 90%">
+			<!-- <table class="bordered" style="width: 90%"> -->
+			<table class="ui striped table searchTable" style="width: 90%">
 				<thead>
 					<tr>
 						<th>Requisition Id</th>

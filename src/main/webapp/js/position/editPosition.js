@@ -1,5 +1,5 @@
-app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService','interviewService','publishReferalService',
-                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService,interviewService,publishReferalService) {
+app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService','$q','$timeout','$rootScope','$location', '$log','ngNotify','clientService','appConstants','positionService','userService', 'designationService','interviewService','publishReferalService','$anchorScroll',
+                                      function($scope, $state, $http,sharedService,$q,$timeout, $rootScope, $location,$log,ngNotify,clientService,appConstants,positionService,userService, designationService,interviewService,publishReferalService,$anchorScroll) {
 		
 	$scope.hideRounds= true;
 	$scope.hideSkills = true;
@@ -233,8 +233,8 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	
 	$scope.confirmRejectStatus = function(status){
 		
-		if($scope.accordianFlag == true && (status === "Rejected" || status === "Inactive" || status === "OnHold")) {			
-			$location.hash('top');
+		if($scope.accordianFlag == true && (status === "Rejected" || status === "Inactive")) {			
+			$scope.gotoAnchor();
 			$scope.cls = 'alert alert-danger alert-error';
 			$scope.message = "Associated candidate is undergoing interview process.You cannot change the status to "+status;			
 			$timeout( function(){ $scope.alHide(); }, 5000);
@@ -243,7 +243,6 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	};
 	$scope.gotoAnchor = function() {
 	       var newHash = 'top';
-	       console.log("hash...." + $location.hash());
 	       if ($location.hash() !== newHash) {
 	         $location.hash('top');
 	       } else {
