@@ -97,7 +97,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	
    
     function getDesignationSpecificData(){
-		console.log("these are dates "+$scope.fromdate+"  "+$scope.todate);
 		var designationArray=[];
 		$scope.totalPositionData=[];
 		hiredCnt=0;
@@ -112,7 +111,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		
 		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
 			$scope.totalPositionData=data;
-           console.log("data -----"+angular.toJson($scope.totalPositionData));
            
            designationService.getDesignation().then(function(data){
  			  $scope.positionData=[];
