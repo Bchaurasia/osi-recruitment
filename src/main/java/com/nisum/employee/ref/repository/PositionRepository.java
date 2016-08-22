@@ -163,7 +163,7 @@ public class PositionRepository {
 	
 	public List<Position> getPositionOfSpecificDate() {
 		 Query query =new Query();
-		 query.addCriteria(Criteria.where("updatedDate").gt(Series.fromDate).lt(Series.toDate));
+		 query.addCriteria(Criteria.where("updatedDate").gt(Series.fromDate).lte(Series.toDate));
 		 List<Position> positionDatails = mongoOperations.find(query, Position.class);
 		 return positionDatails;
 	}

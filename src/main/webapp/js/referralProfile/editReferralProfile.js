@@ -16,7 +16,6 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.todayDate = new Date();
 	$scope.requisitionId = "";
 	$scope.disableUpdateBtn = false;
-	
 	$scope.show1=true;
 	$scope.show2=false;
 	$scope.show3=false;
@@ -27,7 +26,8 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.second="";
 	$scope.third="";
 	$scope.fourth="";
-	
+	$scope.screeningStatusList= ["Yes","No"];
+
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("referral.searchReferralProfile");

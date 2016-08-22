@@ -12,7 +12,8 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 	     getBandOfferData:getBandOfferData,
 	     getOfferDataFromInterview:getOfferDataFromInterview,
 	     getOfferData:getOfferData,
-	     saveOfferData:saveOfferData
+	     saveOfferData:saveOfferData,
+	     getOfferForDashboard:getOfferForDashboard
 		
 	};
 	function getOfferDataFromInterview(queryText){
@@ -35,6 +36,15 @@ function offerService($http,$filter,$rootScope, appConstants, $q, $timeout, $log
 	}
 	function getBandOfferData(){
 		return $http.get('resources/offerBands')
+		     .then(function(response){
+		    	 return data = response.data;
+		     })
+		     .catch(function(response){
+		    	 return $q.reject('Error while retrieving offer Band Deatils status: ' + response.status );
+		     });
+	}
+	function getOfferForDashboard(){
+		return $http.get('resources/offerForDashboard')
 		     .then(function(response){
 		    	 return data = response.data;
 		     })

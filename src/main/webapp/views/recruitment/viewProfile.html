@@ -13,7 +13,6 @@
 				<b>Update Profile</b>
 			</h5>
 		</div>
-		
 		<div class="ui steps" style="width:100%;">
 		  <a class="{{first}}step" ng-click="next('show1')">
 		    <i class="user icon"></i>
@@ -43,6 +42,65 @@
 		      <div class="description">Enter Other Details</div>
 		    </div>
 		  </a>
+		  <div class="ui segment segmentPadding">
+		<div class="row">
+			<div class="input-field col s6">
+					<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Submitted By : {{candidate.referredByName}}</h4>
+			</div>
+			<div class="input-field col s6">
+				<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Profile Source : {{candidate.profileSource}}</h4>
+			</div>
+		</div>
+		<br> <br>
+	
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter Candidate Name" ng-minlength="3"
+					ng-maxlength="30" name="candidateName" class="form-control"
+					type="text" ng-model="candidate.candidateName"
+					ng-pattern="/^[a-zA-Z ]*$/" required> <label
+					style="position: absolute; top: -22px;">Candidate Name<b
+					class="mandatory">*</b></label> <span class="validation-error"
+					ng-show="submitted && UpdateCandidate.candidateName.$invalid">Please
+					provide candidate name</span>
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.required">
+					Candidate Name is required.</div>
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.pattern">
+					Candidate Name must be characters only.</div>
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.minlength">
+					Candidate Name must be at least 3 characters .</div>
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.maxlength">
+					Candidate Name must be less then 30 characters .</div>
+			</div>
+			<div class="input-field col s6">
+				<input type="email" name="emailId" class="form-control"
+					ng-model="candidate.emailId" disabled="true"
+					ng-blur="validateEmailId(candidate.emailId)"
+					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
+					placeholder="Enter Email Id." required> <label
+					style="position: absolute; top: -22px;">Email Id <b
+					class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="submitted && UpdateCandidate.emailId.$invalid">Please
+					provide a valid email address</span> <span class="validation-error"
+					ng-show="duplicateEmailIdError">User with this email id
+					already exists. </span>
+
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.required">
+					Please specify the email ID.</div>
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.emailId.$touched || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.$pristine">
+					Please specify the email ID.</div>
+				<div class="validation-error"
+					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.pattern">
+					Please check the given Email Address.</div>
+			</div>
+
 		</div>
 		
 		<fieldset ng-show="show1">
@@ -160,7 +218,7 @@
 						Provide a valid Skype Id</span>
 				</div>
 			</div>
-	
+			
 			<!--  starts here  -->
 			<div class="row">
 				<div class="input-field col s6">
@@ -185,6 +243,15 @@
 					</select> <label style="position: absolute; top: -22px;">Position : <b
 						class="mandatory">*</b></label>
 				</div>
+				<div class="input-field col s6" align="left"
+				ng-if="candidate.isReferral == true">
+				<select ng-model="candidate.jobCode" name="jobCode"
+					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
+					ng-options="o as o for o in profilepositions track by o"
+					class="form-control input-sm">
+					<option value="">Select Position</option>
+				</select> <label style="position: absolute; top: -22px;">Position</label>
+
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
@@ -289,7 +356,6 @@
 						enter key skills.</span>
 				</div>
 			</div>
-	
 			<div class="row">
 	
 				<div class="input-field col s6">
@@ -309,6 +375,19 @@
 						style="position: absolute; top: -22px;">Additional Skills</label>
 				
 				</div>
+				</div>
+
+		<div class="row">
+
+			<div class="input-field col s6">
+				<input placeholder="Enter current Employer"
+					name="currentEmployer" class="form-control" type="text"
+					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 \_\-]*$/">
+				<label style="position: absolute; top: -22px;">Current Employer</label>
+			<div class="validation-error"
+					ng-show="(UpdateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.UpdateCandidate.$error.pattern">
+					Current Employer must be alpha numeric only.</div>	
+
 			</div>
 			
 			<div class="row">
@@ -341,8 +420,7 @@
 						<option value="" disabled="disabled">Select Source</option>
 					</select> <label style="position: absolute; top: -22px;">Source<b
 						class="mandatory">*</b></label>
-	
-				</div>
+							</div>
 				<div class="input-field col s6">
 				<select ng-model="candidate.currency" name="profileSource"
 						ng-options="o for o in info.currencies | orderBy:'toString()'"
@@ -350,6 +428,48 @@
 						<option value="">Select Currency</option>
 					</select> <label style="position: absolute; top: -22px;">Currency</label>
 				</div>
+				<div class="ui segment segmentPadding">
+		<div class="row" align="left">
+			<div class="chip roundLabels" align="left">Other Details</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select ng-model="candidate.profileSource" name="profileSource"
+					ng-options="o as o for o in profileSources | orderBy:'toString()'"
+					class="form-control input-sm" ng-disabled="disableProfileSource" required>
+					<option value="" disabled="disabled">Select Source</option>
+				</select> <label style="position: absolute; top: -22px;">Source<b
+					class="mandatory">*</b></label>
+
+			</div>
+			<div class="input-field col s6">
+			<select ng-model="candidate.currency" name="profileSource"
+					ng-options="o for o in info.currencies | orderBy:'toString()'"
+					class="form-control input-sm">
+					<option value="">Select Currency</option>
+				</select> <label style="position: absolute; top: -22px;">Currency</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter current CTC" name="currentCTC"
+					class="form-control" type="text" ng-model="candidate.currentCTC"
+					ng-pattern="/^[0-9]*$/"> <label
+					style="position: absolute; top: -22px;">Current CTC 
+				</label><span class="validation-error"
+					ng-required="UpdateCandidate.currentCTC.$error.pattern"
+					ng-show="UpdateCandidate.currentCTC.$error.pattern"> Provide a valid CTC with numeric value</span>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Enter expected CTC" name="expectedCTC"
+					class="form-control" type="text" ng-model="candidate.expectedCTC"
+					ng-pattern="/^[0-9]*$/"> <label
+					style="position: absolute; top: -22px;">Expected CTC 
+				</label> <span class="validation-error"
+					ng-required="UpdateCandidate.expectedCTC.$error.pattern"
+					ng-show="UpdateCandidate.expectedCTC.$error.pattern">
+					Provide a valid CTC with numeric value</span>
+
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
@@ -450,7 +570,7 @@
 			</div>
 	
 			<div class="row" ng-if="candidate.profileSource=='Referral'">
-				<div class="input-field col s6">
+			<div class="input-field col s6">
 						<input placeholder="Enter Yes / No" id="screeningStatus"
 							class="form-control" type="text"
 							ng-model="candidate.screeningStatus" maxlength="20"> <label
@@ -463,6 +583,38 @@
 							ng-model="candidate.compatibilityStatus" maxlength="20"> <label
 							style="position: absolute; top: -22px;">Will the candidate
 							fit in our culture?</label>
+									<!-- <div class="input-field col s6">
+					<input placeholder="Enter Yes / No" id="screeningStatus"
+						class="form-control" type="text"
+						ng-model="candidate.screeningStatus" maxlength="20"> <label
+						style="position: absolute; top: -22px;">Did you screen the
+						resume?</label>
+				</div>
+				<div class="input-field col s6">
+					<input placeholder="Enter Yes / No" id="compatibilityStatus"
+						class="form-control" type="text"
+						ng-model="candidate.compatibilityStatus" maxlength="20"> <label
+						style="position: absolute; top: -22px;">Will the candidate
+						fit in our culture?</label>
+				</div> -->
+				<div class="input-field col s6">
+					<select ng-model="candidate.screeningStatus" id="screeningStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Screening
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Did you
+						screen the resume?</label>
+				</div>
+				<div class="input-field col s6">
+					<select ng-model="candidate.compatibilityStatus"
+						id="compatibilityStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Compatibility
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Will the
+						candidate fit in our culture?</label>
 				</div>
 			</div>
 

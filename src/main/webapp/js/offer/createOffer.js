@@ -23,7 +23,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			"designations":[]
 	};
 	$scope.bus = ["ET","EA","OPS"];
-	$scope.finalStatusList = ["Offered","Rejected"];
+	$scope.finalStatusList = ["Offered","Rejected","Declined"];
 	$scope.candidate.currency="INR";
 	$scope.init = function(){
 		hideFinalStatusFun();
@@ -40,8 +40,8 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 				$scope.candidate.approvedPositions=$scope.candidate1.designation;
 				$scope.candidate.currentEmployer=$scope.candidate1.currentEmployer;
 				$scope.candidate.recruiter=$scope.candidate1.hrAssigned;
-				$scope.candidate.lastDrawnCTC=$scope.candidate1.currentCTC;
-				$scope.candidate.expectedCTC=$scope.candidate1.expectedCTC;
+				$scope.candidate1.currentCTC >0 ? $scope.candidate.lastDrawnCTC=$scope.candidate1.currentCTC : null;
+				$scope.candidate1.expectedCTC >0 ? $scope.candidate.expectedCTC=$scope.candidate1.expectedCTC : null;
 				$scope.candidate.noticePeriod=$scope.candidate1.noticePeriod;
 				$scope.candidate.currentLocation=$scope.candidate1.currentLocation;
 				$scope.candidate.profileSource=$scope.candidate1.profileSource;
@@ -125,6 +125,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			$scope.selectStream($scope.bu);
 			$scope.selectLevel($scope.stream);
 			$scope.selectGrade($scope.level);
+			$scope.selectDesignation($scope.grade);
 			 hideFinalStatusFun();
 		}
 	}).catch(function(data){
@@ -208,5 +209,9 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		}else{
 			$scope.disableSendApproval=false;
 		}
+    }
+    
+    $scope.checkCTC = function(CTC){
+    	$scope.errorMsg = (CTC <=0) ?  true : false;
     }
  }]);

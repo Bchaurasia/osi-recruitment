@@ -63,6 +63,7 @@ app.controller("viewPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	    positionService.getPositionByJobcode($scope.jobcode).then(function(data){
 	    	$scope.position =data;
 			$scope.enableDisableButton = false;
+			 console.log("----"+JSON.stingify($scope.position));
 	    }).catch(function(msg){
 	    	$log.error(msg); 
 	    })
@@ -102,7 +103,6 @@ app.controller("viewPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		     position1.salary = $scope.position.salary;
 		     position1.minExpYear=$scope.position.minExpYear;
 		     position1.maxExpYear=$scope.position.maxExpYear;
-		     console.log(angular.toJson("data----"+position1));
 		     positionService.updatePosition(position1).then(
 			    function(msg){
 			    	$scope.sendNotification(msg,'recruitment/searchPosition');
@@ -175,6 +175,7 @@ app.controller("viewPositionCtrl",   ['$scope','$state', '$http','sharedService'
 		$scope.position.primarySkills=$scope.skill;
 		$scope.position.minExpYear = $scope.deg.minExpYear;
 		$scope.position.maxExpYear = $scope.deg.maxExpYear;
+		 console.log("----"+JSON.stingify($scope.position));
 	};
 	designationService.getDesignation().then(function(data){
 	$scope.designations=data;

@@ -4,7 +4,7 @@
 		<div class="row" style="width: 90%">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
-				<input type="text" class="form-control" ng-model="search"  ng-enter="searchProfileQuery()"data-tooltip="Search by Name,Email Id or Designation">
+				<input type="text" class="form-control" ng-model="search"  ng-enter="searchProfileQuery()"data-tooltip="Search by Name,Email Id, Designation,Mobile No. or Skype Id">
 				<div align="left">
 					&nbsp;&nbsp; <a class="btn-floating"
 						ng-click="searchProfileQuery()"data-tooltip="Search Profile"><i class="material-icons">search</i></a>&nbsp;&nbsp;
@@ -16,32 +16,35 @@
 			<div class="col-md-1" align="center" />
 		</div>
 
-		<table class="bordered" style="width: 90%">
+		<table id="profileSearchTable" class="ui striped table searchTable"
+		 style="width: 90%;border-radius: 0px;">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Email Id</th>
+					<th>Mobile No.</th>
+					<th>Skype Id</th>
 					<th>Current Designation</th>
 					<th>Referred By</th>
 					<th>Profile Source</th>
 					<th>Status</th>
-					<th>Mobile No.</th>
-					<th>Skype Id</th>
+					
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="searchTBody" id="profileSTbody">
 				<tr class="animate-repeat"
 					ng-repeat="profile in profiles  | orderBy:'-updatedDate' | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"
 					style="font-size: 80%">
 					<td class="mdl-data-table__cell--non-numeric"><a
 						style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.mobileNo}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.skypeId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.designation}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.createdBy}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.profileSource}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.mobileNo}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.skypeId}}</td>
+					
 				</tr>
 			</tbody>
 		</table>

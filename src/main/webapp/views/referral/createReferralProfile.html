@@ -9,7 +9,6 @@
 				<b>Create Profile</b>
 			</h5>
 		</div>
-		
 		<div class="ui steps" style="width:100%;">
 		  <a class="{{first}}step" ng-click="next('show1')">
 		    <i class="user icon"></i>
@@ -39,6 +38,88 @@
 		      <div class="description">Enter Other Details</div>
 		    </div>
 		  </a>
+		  <div class="ui segment segmentPadding">
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter Candidate Name" ng-minlength="3"
+					ng-maxlength="30" name="candidateName" class="form-control"
+					ng-change="toggleProDisable()" type="text"
+					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z ]*$/">
+				<label style="position: absolute; top: -22px;">Candidate
+					Name<b class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
+					provide candidate name</span>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.required">
+					Candidate Name is required.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.pattern">
+					Candidate Name must be characters only.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
+					Candidate Name must be at least 3 characters .</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.maxlength">
+					Candidate Name must be less then 30 characters .</div>
+			</div>
+			<div class="input-field col s6">
+				<input type="email" name="emailId" class="form-control"
+					ng-model="candidate.emailId"
+					ng-blur="validateEmailId(candidate.emailId)"
+					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
+					placeholder="Enter Email Id" required> <label
+					style="position: absolute; top: -22px;">Email Id <b
+					class="mandatory">*</b>
+				</label> <span class="validation-error"
+					ng-show="submitted && CreateCandidate.emailId.$invalid">Please
+					provide a valid email address</span> <span class="validation-error"
+					ng-show="duplicateEmailIdError">User with this email id
+					already exists. </span>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.required">
+					Please specify the email ID.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.emailId.$touched || invalidSubmitAttempt) && CreateCandidate.emailId.$error.$pristine">
+					Please specify the email ID.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.pattern">
+					Please check the given Email Address.</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<label style="position: absolute; top: -22px;">Mobile Number
+					<b class="mandatory">*</b>
+				</label> <input type="text" placeholder="Enter Mobile number"
+					name="mobileNo" class="form-control" ng-model="candidate.mobileNo"
+					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11" required>
+				<span class="validation-error"
+					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
+					provide a MobileNo</span>
+
+				<div class="validation-error"
+					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
+					Please specify mobile number.</div>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
+					Mobile number should be numeric and 10 digit number</div>
+			</div>
+
+			<div class="input-field col s6">
+				<input placeholder="Enter alternate Mobile number"
+					name="altmobileNo" class="form-control" type="text"
+					ng-model="candidate.altmobileNo" maxlength="11"
+					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"> <label
+					style="position: absolute; top: -22px;">Alternate Mobile
+					Number </label>
+				<div class="validation-error"
+					ng-show="(CreateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.altmobileNo.$error.pattern">
+					Mobile number should be numeric and 10 digit number</div>
+			</div>
+
 		</div>
 		
 		<fieldset ng-show="show1">
@@ -124,7 +205,6 @@
 						Mobile number should be numeric and 10 digit number</div>
 				</div>
 			</div>
-	
 			<div class="row">
 				<div class="input-field col s6">
 					<input placeholder="Enter Passport number" name="passportNo"
@@ -146,6 +226,18 @@
 						ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
 						Provide a valid Skype Id</span>
 				</div>
+				</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Enter current Location" name="currentLocation"
+					class="form-control" type="text"
+					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z ]*$/"
+					required> <label style="position: absolute; top: -22px;">Current
+					Location<b class="mandatory">*</b>
+				</label>
+			<div class="validation-error"
+					ng-show="(CreateCandidate.currentLocation.$dirty || invalidSubmitAttempt) && CreateCandidate.currentLocation.$error.pattern">
+					Current location must be characters only.</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">

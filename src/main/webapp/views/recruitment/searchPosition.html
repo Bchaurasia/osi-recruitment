@@ -66,7 +66,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<input type="text" class="form-control" ng-model="searchQuery"
-					ng-enter="searchPositionQuery()"data-tooltip="Search by Job code, Designation,Status or Client">
+					ng-enter="searchPositionQuery()"data-tooltip="Search by Job code, Designation,Status, Client,Job-Type or Location">
 				<div align="left">
 					&nbsp;&nbsp; <a class="btn-floating"
 						ng-click="searchPositionQuery()"data-tooltip="Search Position"><i class="material-icons">search</i></a>
@@ -75,7 +75,7 @@
 			<br>
 
 		</div>
-		<table class="bordered" style="width: 90%">
+		<table class="ui striped table searchTable" style="width: 90%">
 			<thead>
 				<tr>
 					<th>Job code</th>
