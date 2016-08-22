@@ -1,471 +1,495 @@
-<div class="row pageWidth">
+
+<div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="CreateCandidate" onvalidate>
+		name="CreateCandidate" novalidate>
 		<div class="row collapsible-header">
-			<div class="input-field col s1">
-				<span >
-					<img class="headerIcon" src="static/osi_images/createPro.png" ></img>
-				</span>
-			</div>
 			<h5 align="left">
+				<i class="big add user basic icon" ></i>
 				<b>Create Profile</b>
 			</h5>
 		</div>
 		
-		<div class="ui segment segmentPadding">
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter Candidate Name" ng-minlength="3"
-					ng-maxlength="30" name="candidateName" class="form-control"
-					ng-change="toggleProDisable()" type="text"
-					ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/">
-				<label style="position: absolute; top: -22px;">Candidate
-					Name<b class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
-					provide candidate name</span>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.required">
-					Candidate Name is required.</div>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.pattern">
-					Candidate Name must be characters only.</div>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
-					Candidate Name must be at least 3 characters .</div>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.maxlength">
-					Candidate Name must be less then 30 characters .</div>
-			</div>
-			<div class="input-field col s6">
-				<input type="email" name="emailId" class="form-control"
-					ng-model="candidate.emailId"
-					ng-blur="validateEmailId(candidate.emailId)"
-					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
-					placeholder="Enter Email Id" required> <label
-					style="position: absolute; top: -22px;">Email Id <b
-					class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.emailId.$invalid">Please
-					provide a valid email address</span> <span class="validation-error"
-					ng-show="duplicateEmailIdError">User with this email id
-					already exists. </span>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.required">
-					Please specify the email ID.</div>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.emailId.$touched || invalidSubmitAttempt) && CreateCandidate.emailId.$error.$pristine">
-					Please specify the email ID.</div>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.pattern">
-					Please check the given Email Address.</div>
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<label style="position: absolute; top: -22px;">Mobile Number
-					<b class="mandatory">*</b>
-				</label> <input type="text" placeholder="Enter Mobile number"
-					name="mobileNo" class="form-control" ng-model="candidate.mobileNo"
-					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11" required>
-				<span class="validation-error"
-					ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
-					provide a MobileNo</span>
-
-				<div class="validation-error"
-					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
-					Please specify mobile number.</div>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
-					Mobile number should be numeric and 10 digit number</div>
-			</div>
-
-			<div class="input-field col s6">
-				<input placeholder="Enter alternate Mobile number"
-					name="altmobileNo" class="form-control" type="text"
-					ng-model="candidate.altmobileNo" maxlength="11"
-					ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"> <label
-					style="position: absolute; top: -22px;">Alternate Mobile
-					Number </label>
-				<div class="validation-error"
-					ng-show="(CreateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.altmobileNo.$error.pattern">
-					Mobile number should be numeric and 10 digit number</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter Passport number" name="passportNo"
-					class="form-control" type="text" ng-model="candidate.passportNo"
-					ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/"> <label
-					style="position: absolute; top: -22px;">Passport No</label> <span
-					class="validation-error"
-					ng-show="(CreateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && CreateCandidate.passportNo.$error.pattern">
-					Provide a valid passport number</span>
-			</div>
-
-			<div class="input-field col s6">
-				<input placeholder="Enter Skype Id" name="skypeId"
-					class="form-control" type="text" ng-model="candidate.skypeId"
-					ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required><label
-					style="position: absolute; top: -22px;">Skype Id <b
-					class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
-					Provide a valid Skype Id</span>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter current Location" name="currentLocation"
-					class="form-control" type="text"
-					ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/"
-					required> <label style="position: absolute; top: -22px;">Current
-					Location<b class="mandatory">*</b>
-				</label>
-			<div class="validation-error"
-					ng-show="(CreateCandidate.currentLocation.$dirty || invalidSubmitAttempt) && CreateCandidate.currentLocation.$error.pattern">
-					Current location must be characters only.</div>
-			</div>
-
-			<div class="input-field col s6">
-				<select ng-model="candidate.jobCode" name="jobCode"
-					ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
-					ng-options="o for o in profilepositions track by o"
-					class="form-control input-sm">
-					<option value="">Select Position</option>
-				</select> <label style="position: absolute; top: -22px;">Position</label>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
-					style="width: 88%" ng-change="changeEvent()" name="notes"
-					ng-model="candidate.address" placeholder="Enter current address"></textarea>
-				<label style="position: absolute; top: -22px;">Address</label>
-			</div>
+		<div class="ui steps" style="width:100%;">
+		  <a class="{{first}}step" ng-click="next('show1')">
+		    <i class="user icon"></i>
+		    <div class="content">
+		      <div class="title">Personal Details</div>
+		      <div class="description">Enter Personal Information</div>
+		    </div>
+		  </a>
+		  <a class="{{second}}step" ng-click="next('show2')">
+		  	<i class="student icon"></i>
+		    <div class="content">
+		      <div class="title">Educational Details</div>
+		      <div class="description">Enter Educational Details</div>
+		    </div>
+		  </a>
+		  <a class="{{third}}step" ng-click="next('show3')">
+		  	<i class="laptop icon"></i>
+		    <div class="content">
+		      <div class="title">Professional Details</div>
+		      <div class="description">Enter Professional Details</div>
+		    </div>
+		  </a>
+		  <a class="{{fourth}}step" ng-click="next('show4')">
+		  	<i class="street view icon"></i>
+		    <div class="content">
+		      <div class="title">Other Information</div>
+		      <div class="description">Enter Other Details</div>
+		    </div>
+		  </a>
 		</div>
 		
-		
-		<div class="row" align="left">
-			<!-- 			<h5 class="col-md-8 col-sm-8 col-xs-8" align="left">Professional -->
-			<!-- 				Details</h5> -->
-		</div>
-		
-	</div>
-	<div class="ui segment segmentPadding">
-	
-		<div class="row" align="left">
-			<div class="chip roundLabels" style="padding-left: 20px">Educational
-				Details</div>
-		</div>
-
-		<div class="row" ng-repeat="candidate in candidate.qualifications">
-			<div class="input-field col s6">
-				<select placeholder="Select Qualification"
-					ng-model="candidate.qualification" name="pso"
-					ng-options="o as o for o in info.qualification | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="">Select Qualification</option>
-				</select> <label style="position: absolute; top: -22px;">Qualification<b
-					class="mandatory">*</b></label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.pso.$invalid">Please
-					provide Qualification</span>
-				<div class="validation-error"
-					ng-show="( CreateCandidate.pso.$dirty || invalidSubmitAttempt) && CreateCandidate.pso.$error.required">
-					qualification is required.</div>
-			</div>
-
-			<div class="input-field col s3">
-				<input placeholder="Enter Stream" name="stream" class="form-control"
-					type="text" ng-model="candidate.stream" ng-maxlength="35"
-					ng-pattern="/^[a-zA-Z _.]*$/"> <label
-					style="position: absolute; top: -22px;">Specialization </label>
-
-			</div>
-
-			<div class="input-field col s2">
-				<input type="range" ng-model="candidate.percentage" min="0"
-					max="100" /> <label>Percentage<b class="mandatory">*</b></label> <span
-					class="range-slider__value">{{candidate.percentage}}%</span>
-					<div class="input-field col s1">
-						<button class="glyphicon glyphicon-remove"
-							data-tooltip="Remove Educational Details"
-							ng-show="lengthOfQualifications()"
-							ng-click="deleteQualification($index)"></button>
-						&nbsp;&nbsp;&nbsp;
-						<button id="addButtonColumn" class="glyphicon glyphicon-plus"
-							data-tooltip="Add Educational Details"
-							ng-show="$last" ng-click="addColumnCriteria()"
-							ng-disabled="checkDisability(candidate.qualification)"></button>
-					</div>
+		<fieldset ng-show="show1">
+			
+			<div class="row marginFromHeader">
+				<div class="input-field col s6">
+					<input placeholder="Enter Candidate Name" ng-minlength="3"
+						ng-maxlength="30" name="candidateName" class="form-control"
+						ng-change="toggleProDisable()" type="text"
+						ng-model="candidate.candidateName" ng-pattern="/^[a-zA-Z _]*$/">
+					<label style="position: absolute; top: -22px;">Candidate
+						Name<b class="mandatory">*</b>
+					</label> <span class="validation-error"
+						ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
+						provide candidate name</span>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.required">
+						Candidate Name is required.</div>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.pattern">
+						Candidate Name must be characters only.</div>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
+						Candidate Name must be at least 3 characters .</div>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.maxlength">
+						Candidate Name must be less then 30 characters .</div>
 				</div>
-
-			
-		</div>
-	</div>
+				<div class="input-field col s6">
+					<input type="email" name="emailId" class="form-control"
+						ng-model="candidate.emailId"
+						ng-blur="validateEmailId(candidate.emailId)"
+						ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
+						placeholder="Enter Email Id" required> <label
+						style="position: absolute; top: -22px;">Email Id <b
+						class="mandatory">*</b>
+					</label> <span class="validation-error"
+						ng-show="submitted && CreateCandidate.emailId.$invalid">Please
+						provide a valid email address</span> <span class="validation-error"
+						ng-show="duplicateEmailIdError">User with this email id
+						already exists. </span>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.required">
+						Please specify the email ID.</div>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.emailId.$touched || invalidSubmitAttempt) && CreateCandidate.emailId.$error.$pristine">
+						Please specify the email ID.</div>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.pattern">
+						Please check the given Email Address.</div>
+				</div>
 	
-	<div class="ui segment segmentPadding">
-		<div class="row" align="left">
-			<div class="chip roundLabels" align="left">Professional Details</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s2">
-				<select ng-model="candidate.expYear" name="experience"
-					ng-options="o as o for o in info.expYears"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Years</option>
-				</select> <label style="position: absolute; top: -22px;">Experience<b
-					class="mandatory">*</b></label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.experience.$invalid">Please
-					specify experience..</span>
-				<div class="validation-error"
-					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
-					Please select total experience.</div>
 			</div>
-
-			<div class="input-field col s2">
-				<select ng-model="candidate.expMonth" name="expMonths"
-					ng-options="o as o for o in info.expMonths"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Months</option>
-				</select> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.experience.$invalid">Please
-					specify experience..</span>
-				<div class="validation-error"
-					ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
-					Please select total experience.</div>
-			</div>
-			<div class="col-md-2"></div>
-			<div class="input-field col s6">
-
-				<label style="position: absolute; top: -22px;">Skills Set<b
-					class="mandatory">*</b>:
-				</label>
-				<ui-select multiple ng-model="sk.primarySkills"
-					ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-					ui-select-required ng-disabled="disabled"> <ui-select-match
-					placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
-					repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
-				{{color}} </ui-select-choices> </ui-select>
-				<span class="validation-error"
-					ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
-					enter key skills.</span>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter current Employer" name="currentEmployer"
-					class="form-control" type="text"
-					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 \_\-]*$/">
-				<label style="position: absolute; top: -22px;">Current Employer</label>
-			<div class="validation-error"
-					ng-show="(CreateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.currentEmployer.$error.pattern">
-					Current Employer must be alpha numeric only.</div>	
-			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter Additional Skills" name="otherSkills"
-					class="form-control" type="text" ng-model="candidate.otherSkills"
-					ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
-			
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="candidate.designation"
-					ng-change="setJobCodes()" name="currentdesignation"
-					theme="selectize" style="width: 80%"> <ui-select-match
-					placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
-				<ui-select-choices
-					repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
-				<span ng-bind-html="designation | highlight: $select.search"></span>
-				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;"> Current
-					Designation<b class="mandatory">*</b>
-				</label>
-
-			</div>
-		</div>
-	</div>
 	
-	<div class="ui segment segmentPadding">
-		<div class="row" align="left">
-			<div class="chip roundLabels" align="left">Other Details</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="candidate.currency" name="currency"
-					ng-options="o for o in info.currencies" class="form-control input-sm">
-					<option value="">Select Currency</option>
-				</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+			<div class="row">
+				<div class="input-field col s6">
+					<label style="position: absolute; top: -22px;">Mobile Number
+						<b class="mandatory">*</b>
+					</label> <input type="text" placeholder="Enter Mobile number"
+						name="mobileNo" class="form-control" ng-model="candidate.mobileNo"
+						ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/" maxlength="11" required>
+					<span class="validation-error"
+						ng-show="submitted && CreateCandidate.mobileNo.$invalid">Please
+						provide a MobileNo</span>
+	
+					<div class="validation-error"
+						ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
+						Please specify mobile number.</div>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
+						Mobile number should be numeric and 10 digit number</div>
+				</div>
+	
+				<div class="input-field col s6">
+					<input placeholder="Enter alternate Mobile number"
+						name="altmobileNo" class="form-control" type="text"
+						ng-model="candidate.altmobileNo" maxlength="11"
+						ng-pattern="/^((0091)|0?)[1-9]{1}\d{9}$/"> <label
+						style="position: absolute; top: -22px;">Alternate Mobile
+						Number </label>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.altmobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.altmobileNo.$error.pattern">
+						Mobile number should be numeric and 10 digit number</div>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter current CTC" name="currentCTC"
-					class="form-control" type="text" ng-model="candidate.currentCTC"
-					ng-pattern="/^[0-9]*$/"> <label
-					style="position: absolute; top: -22px;">Current CTC </label><span
-					class="validation-error"
-					ng-required="CreateCandidate.currentCTC.$error.pattern"
-					ng-show="CreateCandidate.currentCTC.$error.pattern"> Provide
-					a valid CTC with numeric value</span>
+	
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Enter Passport number" name="passportNo"
+						class="form-control" type="text" ng-model="candidate.passportNo"
+						ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$/"> <label
+						style="position: absolute; top: -22px;">Passport No</label> <span
+						class="validation-error"
+						ng-show="(CreateCandidate.passportNo.$dirty  || invalidSubmitAttempt) && CreateCandidate.passportNo.$error.pattern">
+						Provide a valid passport number</span>
+				</div>
+	
+				<div class="input-field col s6">
+					<input placeholder="Enter Skype Id" name="skypeId"
+						class="form-control" type="text" ng-model="candidate.skypeId"
+						ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required><label
+						style="position: absolute; top: -22px;">Skype Id <b
+						class="mandatory">*</b>
+					</label> <span class="validation-error"
+						ng-show="(CreateCandidate.skypeId.$dirty  || invalidSubmitAttempt) && CreateCandidate.skypeId.$error.pattern">
+						Provide a valid Skype Id</span>
+				</div>
 			</div>
-			<div class="input-field col s6">
-				<input placeholder="Enter expected CTC" name="expectedCTC"
-					class="form-control" type="text" ng-model="candidate.expectedCTC"
-					ng-pattern="/^[0-9]*$/"> <label
-					style="position: absolute; top: -22px;">Expected CTC </label> <span
-					class="validation-error"
-					ng-required="CreateCandidate.expectedCTC.$error.pattern"
-					ng-show="CreateCandidate.expectedCTC.$error.pattern">
-					Provide a valid CTC with numeric value</span>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter Notice Period" name="noticePeriod"
-					class="form-control" type="text" ng-model="candidate.noticePeriod"
-					ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
-					style="position: absolute; top: -22px;">Notice Period(in
-					days)<b class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-required="CreateCandidate.noticePeriod.$error.pattern"
-					ng-show="CreateCandidate.noticePeriod.$error.pattern">
-					Notice period should be in days </span>
-			</div>
-			<div class="input-field col s6" align="left">
-				<ui-select ng-model="candidate.expectedDesignation"
-					ng-change="setJobCodes()" name="expectedDesignation"
-					theme="selectize" style="width: 80%"> <ui-select-match
-					placeholder="Select Expected Designation">{{$select.selected}}</ui-select-match>
-				<ui-select-choices
-					repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
-				<span ng-bind-html="designation | highlight: $select.search"></span>
-				</ui-select-choices> </ui-select>
-				<label style="position: absolute; top: -22px;"> Expected
-					Designation
-				</label>
-
-			</div>
-
-		</div>
-		<!-- <div class="row">
-			<div class="input-field col s6">
-				<select ng-model="candidate.hrAssigned" name="referredBy"
-					ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select</option>
-				</select> <label style="position: absolute; top: -22px;">Recruiter
-					Assigned <b class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="submitted && CreateCandidate.referredBy.$invalid">Please
-					specify who is referred</span>
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Enter current Location" name="currentLocation"
+						class="form-control" type="text"
+						ng-model="candidate.currentLocation" ng-pattern="/^[a-zA-Z _]*$/"
+						required> <label style="position: absolute; top: -22px;">Current
+						Location<b class="mandatory">*</b>
+					</label>
 				<div class="validation-error"
-					ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
-					referred is required.</div>
+						ng-show="(CreateCandidate.currentLocation.$dirty || invalidSubmitAttempt) && CreateCandidate.currentLocation.$error.pattern">
+						Current location must be characters only.</div>
+				</div>
+	
+				<div class="input-field col s6">
+					<select ng-model="candidate.jobCode" name="jobCode"
+						ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
+						ng-options="o for o in profilepositions track by o"
+						class="form-control input-sm">
+						<option value="">Select Position</option>
+					</select> <label style="position: absolute; top: -22px;">Position</label>
+	
+				</div>
 			</div>
-		</div> -->
-
-		<div class="row">
-			<div class="input-field col s12">
-				<textarea class="materialize-textarea" cols="50" rows="2"
-					style="width: 88%" ng-change="changeEvent()" name="notes"
-					ng-model="candidate.notes"
-					placeholder="Enter any additional notes..."></textarea>
-				<label style="position: absolute; top: -22px;">Additional
-					Notes</label>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea class="materialize-textarea" cols="50" rows="2"
+						style="width: 88%" ng-change="changeEvent()" name="notes"
+						ng-model="candidate.address" placeholder="Enter current address"></textarea>
+					<label style="position: absolute; top: -22px;">Address</label>
+				</div>
 			</div>
-		</div>
+		
+		
+		<button class="btn btn-info active" ng-disabled="enableFirstNext()" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
+		
+	</fieldset>
+	
+		
+	<fieldset ng-show="show2">
+			&nbsp;	
+			<div class="row" ng-repeat="candidate in candidate.qualifications">
+				<div class="input-field col s6">
+					<select placeholder="Select Qualification"
+						ng-model="candidate.qualification" name="pso"
+						ng-options="o as o for o in info.qualification | orderBy:'toString()'"
+						class="form-control input-sm" required>
+						<option value="">Select Qualification</option>
+					</select> <label style="position: absolute; top: -22px;">Qualification<b
+						class="mandatory">*</b></label> <span class="validation-error"
+						ng-show="submitted && CreateCandidate.pso.$invalid">Please
+						provide Qualification</span>
+					<div class="validation-error"
+						ng-show="( CreateCandidate.pso.$dirty || invalidSubmitAttempt) && CreateCandidate.pso.$error.required">
+						qualification is required.</div>
+				</div>
+	
+				<div class="input-field col s3">
+					<input placeholder="Enter Stream" name="stream" class="form-control"
+						type="text" ng-model="candidate.stream" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Specialization </label>
+	
+				</div>
+	
+				<div class="input-field col s2">
+					<input type="range" ng-model="candidate.percentage" min="0"
+						max="100" /> <label>Percentage<b class="mandatory">*</b></label> <span
+						class="range-slider__value">{{candidate.percentage}}%</span>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Educational Details"
+								ng-show="lengthOfQualifications()"
+								ng-click="deleteQualification($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Educational Details"
+								ng-show="$last" ng-click="addColumnCriteria()"
+								ng-disabled="checkDisability(candidate.qualification)"></button>
+						</div>
+					</div>
+	
+				
+			</div>
 
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter relation with candidate" id="relationship"
-					class="form-control" type="text" name="referralRelation"
-					ng-model="candidate.referralRelation" maxlength="20" ng-pattern="/^[a-zA-Z _]*$/" required>
-				<label style="position: absolute; top: -22px;">How do you know the candidate?<b class="mandatory">*</b>
-				</label>
+		<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
+		<button class="btn btn-info active" ng-disabled="enableSecondNext()" ng-click="next('show3')"> Next <i class="long arrow right icon"></i> </button>
+		
+	</fieldset>
+	
+	<fieldset ng-show="show3">
+			&nbsp;
+			<div class="row">
+				<div class="input-field col s2">
+					<select ng-model="candidate.expYear" name="experience"
+						ng-options="o as o for o in info.expYears"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Years</option>
+					</select> <label style="position: absolute; top: -22px;">Experience<b
+						class="mandatory">*</b></label> <span class="validation-error"
+						ng-show="submitted && CreateCandidate.experience.$invalid">Please
+						specify experience..</span>
+					<div class="validation-error"
+						ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
+						Please select total experience.</div>
+				</div>
+	
+				<div class="input-field col s2">
+					<select ng-model="candidate.expMonth" name="expMonths"
+						ng-options="o as o for o in info.expMonths"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Months</option>
+					</select> <span class="validation-error"
+						ng-show="submitted && CreateCandidate.experience.$invalid">Please
+						specify experience..</span>
+					<div class="validation-error"
+						ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
+						Please select total experience.</div>
+				</div>
+				<div class="col-md-2"></div>
+				<div class="input-field col s6">
+	
+					<label style="position: absolute; top: -22px;">Skills Set<b
+						class="mandatory">*</b>:
+					</label>
+					<ui-select multiple ng-model="sk.primarySkills"
+						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+						ui-select-required ng-disabled="disabled"> <ui-select-match
+						placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+					{{color}} </ui-select-choices> </ui-select>
+					<span class="validation-error"
+						ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
+						enter key skills.</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Enter current Employer" name="currentEmployer"
+						class="form-control" type="text"
+						ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 \_\-]*$/">
+					<label style="position: absolute; top: -22px;">Current Employer</label>
 				<div class="validation-error"
-					ng-show="(CreateCandidate.referralRelation.$dirty || invalidSubmitAttempt) && CreateCandidate.referralRelation.$error.pattern">
-					Candidate relation must be characters only.</div>
+						ng-show="(CreateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.currentEmployer.$error.pattern">
+						Current Employer must be alpha numeric only.</div>	
+				</div>
+				<div class="input-field col s6">
+					<input placeholder="Enter Additional Skills" name="otherSkills"
+						class="form-control" type="text" ng-model="candidate.otherSkills"
+						ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
+				
+				</div>
+	
 			</div>
-
-			<div class="input-field col s6">
-				<label style="position: absolute; top: -22px;">Since how
-					long do you know the candidate?<b class="mandatory">*</b>
-				</label>
+	
+			<div class="row">
+				<div class="input-field col s6" align="left">
+					<ui-select ng-model="candidate.designation"
+						ng-change="setJobCodes()" name="currentdesignation"
+						theme="selectize" style="width: 80%"> <ui-select-match
+						placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
+					<ui-select-choices
+						repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
+					<span ng-bind-html="designation | highlight: $select.search"></span>
+					</ui-select-choices> </ui-select>
+					<label style="position: absolute; top: -22px;"> Current
+						Designation<b class="mandatory">*</b>
+					</label><span class="validation-error"
+						ng-show="submitted && candidate.designation.$invalid">Please
+						specify Designation..</span>
+	
+				</div>
 			</div>
-			<div class="input-field col s2">
-				<select ng-model="candidate.tenureYear" id="tenureYear"
-					ng-options="o for o in info.expYears"
-					style="position: absolute; top: -15px;"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Years</option>
-				</select>
+		
+		<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
+		<button class="btn btn-info active" ng-disabled="enableThirdNext()" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
+	
+	</fieldset>
+	
+	<fieldset ng-show="show4">
+		&nbsp;
+			<div class="row">
+				<div class="input-field col s6">
+					<select ng-model="candidate.currency" name="currency"
+						ng-options="o for o in info.currencies" class="form-control input-sm">
+						<option value="">Select Currency</option>
+					</select> <label style="position: absolute; top: -22px;"> Currency: </label>
+				</div>
 			</div>
-
-			<div class="input-field col s2">
-				<select ng-model="candidate.tenureMonth" id="tenureMonth"
-					ng-options="o for o in info.expMonths"
-					style="position: absolute; top: -15px;"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Months</option>
-				</select>
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Enter current CTC" name="currentCTC"
+						class="form-control" type="text" ng-model="candidate.currentCTC"
+						ng-pattern="/^[0-9]*$/"> <label
+						style="position: absolute; top: -22px;">Current CTC </label><span
+						class="validation-error"
+						ng-required="CreateCandidate.currentCTC.$error.pattern"
+						ng-show="CreateCandidate.currentCTC.$error.pattern"> Provide
+						a valid CTC with numeric value</span>
+				</div>
+				<div class="input-field col s6">
+					<input placeholder="Enter expected CTC" name="expectedCTC"
+						class="form-control" type="text" ng-model="candidate.expectedCTC"
+						ng-pattern="/^[0-9]*$/"> <label
+						style="position: absolute; top: -22px;">Expected CTC </label> <span
+						class="validation-error"
+						ng-required="CreateCandidate.expectedCTC.$error.pattern"
+						ng-show="CreateCandidate.expectedCTC.$error.pattern">
+						Provide a valid CTC with numeric value</span>
+				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<select ng-model="candidate.screeningStatus" id="screeningStatus"
-					ng-options="o for o in screeningStatusList"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Screening
-						Status</option>
-				</select> <label style="position: absolute; top: -22px;">Did you
-					screen the resume?</label>
+	
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Enter Notice Period" name="noticePeriod"
+						class="form-control" type="text" ng-model="candidate.noticePeriod"
+						ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
+						style="position: absolute; top: -22px;">Notice Period(in
+						days)<b class="mandatory">*</b>
+					</label> <span class="validation-error"
+						ng-required="CreateCandidate.noticePeriod.$error.pattern"
+						ng-show="CreateCandidate.noticePeriod.$error.pattern">
+						Notice period should be in days </span>
+				</div>
+				<div class="input-field col s6" align="left">
+					<ui-select ng-model="candidate.expectedDesignation"
+						ng-change="setJobCodes()" name="expectedDesignation"
+						theme="selectize" style="width: 80%"> <ui-select-match
+						placeholder="Select Expected Designation">{{$select.selected}}</ui-select-match>
+					<ui-select-choices
+						repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
+					<span ng-bind-html="designation | highlight: $select.search"></span>
+					</ui-select-choices> </ui-select>
+					<label style="position: absolute; top: -22px;"> Expected
+						Designation
+					</label>
+	
+				</div>
+	
 			</div>
-			<div class="input-field col s6">
-				<select ng-model="candidate.compatibilityStatus"
-					id="compatibilityStatus"
-					ng-options="o for o in screeningStatusList"
-					class="form-control input-sm">
-					<option value="" disabled="disabled">Select Compatibility
-						Status</option>
-				</select> <label style="position: absolute; top: -22px;">Will the
-					candidate fit in our culture?</label>
+			<!-- <div class="row">
+				<div class="input-field col s6">
+					<select ng-model="candidate.hrAssigned" name="referredBy"
+						ng-options="o as o for o in recruitmentData | orderBy:'toString()'"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select</option>
+					</select> <label style="position: absolute; top: -22px;">Recruiter
+						Assigned <b class="mandatory">*</b>
+					</label> <span class="validation-error"
+						ng-show="submitted && CreateCandidate.referredBy.$invalid">Please
+						specify who is referred</span>
+					<div class="validation-error"
+						ng-show="( CreateCandidate.referredBy.$dirty || invalidSubmitAttempt) && CreateCandidate.referredBy.$error.required">
+						referred is required.</div>
+				</div>
+			</div> -->
+	
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea class="materialize-textarea" cols="50" rows="2"
+						style="width: 88%" ng-change="changeEvent()" name="notes"
+						ng-model="candidate.notes"
+						placeholder="Enter any additional notes..."></textarea>
+					<label style="position: absolute; top: -22px;">Additional
+						Notes</label>
+				</div>
 			</div>
-		</div>
-		<br><br>
-		<div class="row">
-			<div class="input-field col s6">
-				<input type="file" class="custom-file-input"
-					ng-file-select="upload($files)" valid-file required /> <small
-					ng-hide="fileError" class="mandatory-field">File
-					Externsions Accepted: [doc, docx, pdf]</small> <br> <label
-					style="position: absolute; top: -22px;">Upload Resume<b
-					class="mandatory">*</b>
-				</label>
+	
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Enter relation with candidate" id="relationship"
+						class="form-control" type="text" name="referralRelation"
+						ng-model="candidate.referralRelation" maxlength="20" ng-pattern="/^[a-zA-Z _]*$/" required>
+					<label style="position: absolute; top: -22px;">How do you know the candidate?<b class="mandatory">*</b>
+					</label>
+					<div class="validation-error"
+						ng-show="(CreateCandidate.referralRelation.$dirty || invalidSubmitAttempt) && CreateCandidate.referralRelation.$error.pattern">
+						Candidate relation must be characters only.</div>
+				</div>
+	
+				<div class="input-field col s6">
+					<label style="position: absolute; top: -22px;">Since how
+						long do you know the candidate?<b class="mandatory">*</b>
+					</label>
+				</div>
+				<div class="input-field col s2">
+					<select ng-model="candidate.tenureYear" id="tenureYear"
+						ng-options="o for o in info.expYears"
+						style="position: absolute; top: -15px;"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Years</option>
+					</select>
+				</div>
+	
+				<div class="input-field col s2">
+					<select ng-model="candidate.tenureMonth" id="tenureMonth"
+						ng-options="o for o in info.expMonths"
+						style="position: absolute; top: -15px;"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Months</option>
+					</select>
+				</div>
 			</div>
-		</div>
-	</div>
-		<div align="center" class="row">
-			<button class="btn btn-info active" type="submit"
-				ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"
-				ng-click="submit()">
-				<span class="glyphicon glyphicon-ok-circle"></span> Create
-			</button>
-			<button class="btn btn-info active"
-				ui-sref="referral.searchReferralProfile">
-				<span class="glyphicon glyphicon-remove"></span> Cancel
-			</button>
-		</div>
+	
+			<div class="row">
+				<div class="input-field col s6">
+					<select ng-model="candidate.screeningStatus" id="screeningStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Screening
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Did you
+						screen the resume?</label>
+				</div>
+				<div class="input-field col s6">
+					<select ng-model="candidate.compatibilityStatus"
+						id="compatibilityStatus"
+						ng-options="o for o in screeningStatusList"
+						class="form-control input-sm">
+						<option value="" disabled="disabled">Select Compatibility
+							Status</option>
+					</select> <label style="position: absolute; top: -22px;">Will the
+						candidate fit in our culture?</label>
+				</div>
+			</div>
+			<br><br>
+			<div class="row">
+				<div class="input-field col s6">
+					<input type="file" class="custom-file-input"
+						ng-file-select="upload($files)" valid-file required /> <small
+						ng-hide="fileError" class="mandatory-field">File
+						Externsions Accepted: [doc, docx, pdf]</small> <br> <label
+						style="position: absolute; top: -22px;">Upload Resume<b
+						class="mandatory">*</b>
+					</label>
+				</div>
+			</div>
+			
+			<div align="center" class="row">
+				<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError" ng-click="submit()"> <span class="glyphicon glyphicon-ok-circle"></span> Create </button>
+				<button class="btn btn-info active" ui-sref="referral.searchReferralProfile"><span class="glyphicon glyphicon-remove"></span> Cancel </button>
+			</div>
+		</fieldset>
+		&nbsp;
 	</form>
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
