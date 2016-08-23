@@ -175,17 +175,7 @@
 						ng-show="(UpdateCandidate.currentLocation.$dirty || invalidSubmitAttempt) && UpdateCandidate.currentLocation.$error.pattern">
 						Current location must be characters only.</div>
 				</div>
-	
-				<div class="input-field col s6" align="left"
-					ng-if="candidate.isReferral == true">
-					<select ng-model="candidate.jobCode" name="jobCode"
-						ng-change="getRequisitionIdFromJobCode(candidate.jobCode)"
-						ng-options="o as o for o in profilepositions track by o"
-						class="form-control input-sm" required>
-						<option value="">Select Position</option>
-					</select> <label style="position: absolute; top: -22px;">Position : <b
-						class="mandatory">*</b></label>
-				</div>
+				
 				<div class="input-field col s6" align="left"
 				ng-if="candidate.isReferral == true">
 				<select ng-model="candidate.jobCode" name="jobCode"
@@ -338,7 +328,7 @@
 				<div class="input-field col s6" align="left">
 					
 					<ui-select ng-model="candidate.designation" ng-change="setJobCodes()" name="currentdesignation"
-					theme="selectize" style="width: 80%">
+					theme="selectize" style="width: 80%" required>
 					   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
 						repeat="designation in designations | orderBy:'toString()'| filter: $select.search">
@@ -480,7 +470,7 @@
 			<div class="row" ng-if="candidate.profileSource=='Referral'">
 				<div class="input-field col s6">
 					<input placeholder="Enter relation with candidate"
-							id="relationship" class="form-control" type="text" name="referralRelation"
+							id="relationship" class="form-control" type="text" name="referralRelation" disabled
 							ng-model="candidate.referralRelation" maxlength="20" ng-pattern="/^[a-zA-Z _]*$/" required>
 						<label style="position: absolute; top: -22px;">How do you know the candidate?<b class="mandatory">*</b>
 						</label>
@@ -497,7 +487,7 @@
 				</div>
 				<div class="input-field col s2">
 						<select ng-model="candidate.tenureYear" id="tenureYear"
-							ng-options="o for o in info.expYears"
+							ng-options="o for o in info.expYears" disabled
 							style="position: absolute; top: -15px;"
 							class="form-control input-sm" required>
 							<option value="" disabled="disabled">Years</option>
@@ -506,7 +496,7 @@
 	
 				<div class="input-field col s2">
 						<select ng-model="candidate.tenureMonth" id="tenureMonth"
-							ng-options="o for o in info.expMonths"
+							ng-options="o for o in info.expMonths" disabled
 							style="position: absolute; top: -15px;"
 							class="form-control input-sm" required>
 							<option value="" disabled="disabled">Months</option>
@@ -517,7 +507,7 @@
 			<div class="row" ng-if="candidate.profileSource=='Referral'">
 			<div class="input-field col s6">
 						<input placeholder="Enter Yes / No" id="screeningStatus"
-							class="form-control" type="text"
+							class="form-control" type="text" disabled
 							ng-model="candidate.screeningStatus" maxlength="20"> <label
 							style="position: absolute; top: -22px;">Did you screen the
 							resume?</label>
@@ -528,39 +518,6 @@
 							ng-model="candidate.compatibilityStatus" maxlength="20"> <label
 							style="position: absolute; top: -22px;">Will the candidate
 							fit in our culture?</label>
-									<!-- <div class="input-field col s6">
-					<input placeholder="Enter Yes / No" id="screeningStatus"
-						class="form-control" type="text"
-						ng-model="candidate.screeningStatus" maxlength="20"> <label
-						style="position: absolute; top: -22px;">Did you screen the
-						resume?</label>
-				</div>
-				<div class="input-field col s6">
-					<input placeholder="Enter Yes / No" id="compatibilityStatus"
-						class="form-control" type="text"
-						ng-model="candidate.compatibilityStatus" maxlength="20"> <label
-						style="position: absolute; top: -22px;">Will the candidate
-						fit in our culture?</label>
-				</div> -->
-				<div class="input-field col s6">
-					<select ng-model="candidate.screeningStatus" id="screeningStatus"
-						ng-options="o for o in screeningStatusList"
-						class="form-control input-sm">
-						<option value="" disabled="disabled">Select Screening
-							Status</option>
-					</select> <label style="position: absolute; top: -22px;">Did you
-						screen the resume?</label>
-				</div>
-				<div class="input-field col s6">
-					<select ng-model="candidate.compatibilityStatus"
-						id="compatibilityStatus"
-						ng-options="o for o in screeningStatusList"
-						class="form-control input-sm">
-						<option value="" disabled="disabled">Select Compatibility
-							Status</option>
-					</select> <label style="position: absolute; top: -22px;">Will the
-						candidate fit in our culture?</label>
-				</div>
 			</div>
 			</div>
 			<div class="row">

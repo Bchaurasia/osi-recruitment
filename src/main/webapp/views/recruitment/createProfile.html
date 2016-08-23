@@ -297,7 +297,7 @@
 			<div class="row">
 				<div class="input-field col s6" align="left">
 					<ui-select ng-model="candidate.designation" ng-keypress="myFunct($event)" ng-change="setJobCodes()" name="currentdesignation"
-					theme="selectize" style="width: 80%">
+					theme="selectize" style="width: 80%" required>
 					   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
 						repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
