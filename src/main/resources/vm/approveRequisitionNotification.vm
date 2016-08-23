@@ -5,7 +5,7 @@
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Hi,<br><br>
- The Requisition with RequisitionId $requisitionId has been approved by $approverName and $noOfPositions position(s) has been created.
+ The Requisition with Requisition Id $requisitionId has been approved by $approverName and $noOfPositions position(s) have been created.
  <br><br>
  <span style="font-size:15px">Regards</span><br>
  <span style="font-size:15px">Recruitment Team</span><br>
