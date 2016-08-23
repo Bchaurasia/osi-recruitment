@@ -67,7 +67,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		fromdatemonth=$scope.fromdate.getMonth()+1;
 		fromdate=$scope.fromdate.getDate()+"/"+fromdatemonth+"/"+$scope.fromdate.getFullYear();
 		todatemonth=$scope.todate.getMonth()+1;
-		todateday=$scope.todate.getDate()+1;
+		todateday=$scope.todate.getDate()+2;
 		todate=todateday+"/"+todatemonth+"/"+$scope.todate.getFullYear();
 		$scope.fromdate=fromdate;
 		layer2Data=[];

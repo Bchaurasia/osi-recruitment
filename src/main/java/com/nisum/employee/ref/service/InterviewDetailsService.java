@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
@@ -43,10 +44,19 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	@Autowired
 	private ProfileSearchService profileSearchService;
 	
+	@Autowired
+	IEventService eventService;
+	
+	
 	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws Exception{
 		InterviewDetails interviewDetails = null;
 		InterviewDetails interviewDetails2 = interviewDetailsRepository.getInterviewDetailsById(interviewFeedback.getCandidateId());
 		if(interviewDetails2.getInterviewerId() != null){
+			Event e= new Event();
+			e.setEventDesc("Feedback for "+interviewFeedback.getRoundName()+" interview of "+interviewFeedback.getCandidateName()+" has been submitted.");
+			e.setCategory("Management");
+			e.setEmailId(interviewFeedback.getFeedbackSubmittedBy());
+			eventService.setEvent(e);
 			interviewDetails = enrichInterviewDetails2(interviewDetails2, interviewFeedback);
 			interviewDetailsRepository.scheduleInterview(interviewDetails);
 			interviewDetails=interviewSearchService.updateInterviewDetailsIndex(interviewDetails);

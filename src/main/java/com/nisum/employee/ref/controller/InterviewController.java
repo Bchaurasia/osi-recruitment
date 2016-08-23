@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nisum.employee.ref.domain.Event;
 import com.nisum.employee.ref.domain.InterviewDetails;
 import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
 import com.nisum.employee.ref.search.InterviewSearchService;
+import com.nisum.employee.ref.service.IEventService;
 import com.nisum.employee.ref.service.InterviewDetailsService;
 
 @Controller
@@ -34,6 +36,7 @@ public class InterviewController {
 	@Autowired
 	InterviewSearchService interviewSearchService;
 	
+	private IEventService eventService;
 	
 	@Secured({"ROLE_ADMIN","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/searchInterviewDetails", method = RequestMethod.GET)
@@ -109,8 +112,10 @@ public class InterviewController {
 	public ResponseEntity<?> saveFeedback(@RequestBody InterviewFeedback interviewFeedback) throws Exception {
 		try {
 			interviewDetailsService.saveFeedback(interviewFeedback);
-		} catch (MessagingException e) {
-			e.printStackTrace();
+			
+			
+		} catch (MessagingException m) {
+			m.printStackTrace();
 		}
 		return new ResponseEntity<InterviewFeedback>(interviewFeedback, HttpStatus.OK);
 	}
