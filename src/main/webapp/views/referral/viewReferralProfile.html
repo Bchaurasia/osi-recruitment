@@ -1,8 +1,8 @@
 
-<div class="row">
+<div class="row"  >
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="UpdateCandidate" onvalidate>
+	<form id="formAlign" class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="UpdateCandidate" novalidate>
 		<div class="row collapsible-header">
 			<div class="input-field col s1">
 				<span >
@@ -182,7 +182,7 @@
 				<label style="position: absolute; top: -22px;">Address</label>
 			</div>
 		</div>
-		<button class="btn btn-info active" ng-disabled="enableFirstNext()" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
+		<button class="btn btn-info active" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
 	</fieldset>
 	
 	<fieldset ng-show="show2">
@@ -232,7 +232,7 @@
 		<button class="btn btn-warning active" ng-click="previous('show1')">
 					Previous <i class="long arrow left icon"></i>
 				</button>
-		<button class="btn btn-info active" ng-disabled="enableSecondNext()"
+		<button class="btn btn-info active"
 					ng-click="next('show3')">
 					Next <i class="long arrow right icon"></i>
 				</button>
@@ -317,7 +317,7 @@
 			</div>
 		</div>
 		<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
-		<button class="btn btn-info active" ng-disabled="enableThirdNext()" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
+		<button class="btn btn-info active" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
 	<!-- </div> -->
 	</fieldset>
 	
@@ -502,4 +502,4 @@
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 </div>
 <br>
-<br>
+

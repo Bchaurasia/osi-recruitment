@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="UpdateCandidate" onvalidate>
+	<form id="formAlign" class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="UpdateCandidate" novalidate>
 		
 		<div class="row collapsible-header">
 			<div class="input-field col s1">
@@ -13,7 +13,8 @@
 				<b>Update Profile</b>
 			</h5>
 		</div>
-		<div class="ui steps" style="width:100%;">
+		<div class="row">
+		<div class="ui steps" style="width:100%">
 		  <a class="{{first}}step" ng-click="next('show1')">
 		    <i class="user icon"></i>
 		    <div class="content">
@@ -42,69 +43,11 @@
 		      <div class="description">Enter Other Details</div>
 		    </div>
 		  </a>
-		  <div class="ui segment segmentPadding">
-		<div class="row">
-			<div class="input-field col s6">
-					<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Submitted By : {{candidate.referredByName}}</h4>
-			</div>
-			<div class="input-field col s6">
-				<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Profile Source : {{candidate.profileSource}}</h4>
-			</div>
-		</div>
-		<br> <br>
-	
-		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Enter Candidate Name" ng-minlength="3"
-					ng-maxlength="30" name="candidateName" class="form-control"
-					type="text" ng-model="candidate.candidateName"
-					ng-pattern="/^[a-zA-Z ]*$/" required> <label
-					style="position: absolute; top: -22px;">Candidate Name<b
-					class="mandatory">*</b></label> <span class="validation-error"
-					ng-show="submitted && UpdateCandidate.candidateName.$invalid">Please
-					provide candidate name</span>
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.required">
-					Candidate Name is required.</div>
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.pattern">
-					Candidate Name must be characters only.</div>
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.minlength">
-					Candidate Name must be at least 3 characters .</div>
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.candidateName.$dirty || invalidSubmitAttempt) && UpdateCandidate.candidateName.$error.maxlength">
-					Candidate Name must be less then 30 characters .</div>
-			</div>
-			<div class="input-field col s6">
-				<input type="email" name="emailId" class="form-control"
-					ng-model="candidate.emailId" disabled="true"
-					ng-blur="validateEmailId(candidate.emailId)"
-					ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/"
-					placeholder="Enter Email Id." required> <label
-					style="position: absolute; top: -22px;">Email Id <b
-					class="mandatory">*</b>
-				</label> <span class="validation-error"
-					ng-show="submitted && UpdateCandidate.emailId.$invalid">Please
-					provide a valid email address</span> <span class="validation-error"
-					ng-show="duplicateEmailIdError">User with this email id
-					already exists. </span>
-
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.required">
-					Please specify the email ID.</div>
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.emailId.$touched || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.$pristine">
-					Please specify the email ID.</div>
-				<div class="validation-error"
-					ng-show="(UpdateCandidate.emailId.$dirty || invalidSubmitAttempt) && UpdateCandidate.emailId.$error.pattern">
-					Please check the given Email Address.</div>
-			</div>
-
-		</div>
+		 </div>
+		 </div>
 		
 		<fieldset ng-show="show1">
-			<div class="row marginFromHeader">
+			<div class="row">
 				<div class="input-field col s6">
 						<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Submitted By : {{candidate.referredByName}}</h4>
 				</div>
@@ -112,7 +55,7 @@
 					<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Profile Source : {{candidate.profileSource}}</h4>
 				</div>
 			</div>
-			<br> <br>
+			<br>
 		
 			<div class="row">
 				<div class="input-field col s6">
@@ -253,6 +196,7 @@
 				</select> <label style="position: absolute; top: -22px;">Position</label>
 
 			</div>
+			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<textarea class="materialize-textarea" cols="50" rows="2"
@@ -261,7 +205,7 @@
 					<label style="position: absolute; top: -22px;">Address</label>
 				</div>
 			</div>
-			<button class="btn btn-info active" ng-disabled="enableFirstNext()" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
+			<button class="btn btn-info active" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
 		</fieldset>
 		
 		<fieldset ng-show="show2">
@@ -309,7 +253,7 @@
 				</div>
 			</div>
 			<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
-			<button class="btn btn-info active" ng-disabled="enableSecondNext()" ng-click="next('show3')"> Next <i class="long arrow right icon"></i></button>
+			<button class="btn btn-info active" ng-click="next('show3')"> Next <i class="long arrow right icon"></i></button>
 		</fieldset>
 		
 		<fieldset ng-show="show3">
@@ -407,7 +351,8 @@
 				</div>
 			</div>
 			<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
-			<button class="btn btn-info active" ng-disabled="enableThirdNext()" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
+			<button class="btn btn-info active" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
+		</div>
 		</fieldset>
 				
 		<fieldset ng-show="show4">
@@ -428,7 +373,7 @@
 						<option value="">Select Currency</option>
 					</select> <label style="position: absolute; top: -22px;">Currency</label>
 				</div>
-				<div class="ui segment segmentPadding">
+				</div>
 		<div class="row" align="left">
 			<div class="chip roundLabels" align="left">Other Details</div>
 		</div>
@@ -469,7 +414,7 @@
 					ng-required="UpdateCandidate.expectedCTC.$error.pattern"
 					ng-show="UpdateCandidate.expectedCTC.$error.pattern">
 					Provide a valid CTC with numeric value</span>
-
+			</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
@@ -617,7 +562,7 @@
 						candidate fit in our culture?</label>
 				</div>
 			</div>
-
+			</div>
 			<div class="row">
 				<div align="center" class="row" >
 						<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
@@ -632,3 +577,4 @@
 	</form>
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 </div>
+<br>

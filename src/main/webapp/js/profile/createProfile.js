@@ -88,7 +88,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		} 
 	}
 	
-	$scope.checkQualification = function(){
+	/*$scope.checkQualification = function(){
 		for(var i=0; i<$scope.candidate.qualifications.length; i++){
 			if($scope.candidate.qualifications[i].qualification == "" || $scope.candidate.qualifications[i].qualification == undefined){				
 				 $scope.chkQualification=true;
@@ -98,7 +98,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				$scope.chkQualification=false;
 			}
 		}		
-	}
+	}*/
 	
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
@@ -157,24 +157,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    }
 		  }
 	 
-	 /*$scope.adjustTags = function(){
-		 if($scope.enableFirstNext()==true && $scope.first!="active "){
-			 $scope.first="disabled ";
-		 }else{$scope.first="";}
-		 
-		 if($scope.enableSecondNext()==true && $scope.second!="active "){
-			 $scope.second="disabled ";
-		 }else{$scope.second="";}
-		 
-		 if($scope.enableThirdNext()==true && $scope.third!="active "){
-			$scope.third="disabled ";
-		 }else{$scope.third="";}
-		 
-		 if($scope.CreateCandidate.$invalid==true && $scope.fourth!="active "){
-			 $scope.fourth="disabled ";
-		 }else{$scope.fourth="";}
-	 }	*/
-	 
 	 $scope.next = function(nextShow){	
 		 if(nextShow=='show1'){
 			 $scope.show1=true;
@@ -202,54 +184,28 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		 }
 		 
 	 }
-	 $scope.previous=function(previousShow){
+$scope.previous=function(previousShow){
 		 
 		 if(previousShow=='show1'){
 			 $scope.show1=true;
-			 $scope.show2=$scope.show3=$scope.show4=false;	
+			 $scope.show2=$scope.show3=$scope.show4=false;
+			 $scope.second=$scope.third=$scope.fourth="";
 			 $scope.first="active ";
 		 }
 		 else if(previousShow=='show2'){
 			 $scope.show2=true;
-			 $scope.show1=$scope.show3=$scope.show4=false;			 
+			 $scope.show1=$scope.show3=$scope.show4=false;
+			 $scope.first=$scope.third=$scope.fourth="";
 			 $scope.second="active ";
 		 }
 		 else if(previousShow=='show3'){
 			 $scope.show3=true;
-			 $scope.show1=$scope.show2=$scope.show4=false;			 
+			 $scope.show1=$scope.show2=$scope.show4=false;	
+			 $scope.first=$scope.second=$scope.fourth="";
 			 $scope.third="active ";
 		 }
 	 }
-	 $scope.enableFirstNext = function(){
-		/*	if($scope.CreateCandidate.candidateName.$invalid || $scope.CreateCandidate.emailId.$invalid || $scope.CreateCandidate.mobileNo.$invalid || $scope.CreateCandidate.skypeId.$invalid || $scope.CreateCandidate.currentLocation.$invalid){				
-				return true;				
-			}  
-			else{
-				return false;
-				
-			}	*/		
-		 return false;	 
-	 }
-	 $scope.enableSecondNext = function(){
-		 	/*	$scope.checkQualification();
-				if($scope.chkQualification){
-					return true;
-				}  
-				else{
-					return false;
-				}	*/
-		 return false;
-		 }
-	 $scope.enableThirdNext = function(){
-			/*if($scope.CreateCandidate.experience.$invalid || $scope.CreateCandidate.pskilss.$invalid || ($scope.candidate.designation=="" || $scope.candidate.designation==undefined)){
-				return true;
-			}  
-			else{
-				return false;
-			}*/
-		 return false;
-		 }
-	 
+
 	 $scope.uploadFileIntoDB = function (files) {
 			$scope.fileName = "";
 			$scope.errorMsg = "";
