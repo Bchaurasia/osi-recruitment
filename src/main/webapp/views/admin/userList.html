@@ -16,13 +16,15 @@
 				</div>
 			</div>
 		</div>
-		<table class="bordered" style="width: 80%;">
+		<table class="ui striped table searchTable" >
+			<thead>	
 			<tr>
 				<th>Name</th>
 				<th>Email ID</th>
 				<th>Roles</th>
 				<th>Edit</th>
 			</tr>
+			</thead>
 
 			<tr class="animate-repeat"
 				ng-repeat="user in filtered = (users | filter:searchQuery) |  offset: (currentPage)*itemsPerPage | limitTo: itemsPerPage"
@@ -60,3 +62,5 @@
 		</div>
 	</form>
 </form>
+
+<BR>

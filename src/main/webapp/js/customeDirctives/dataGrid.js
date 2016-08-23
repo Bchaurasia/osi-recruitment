@@ -35,7 +35,7 @@ angular.module('components', [])
             	            	
             	body = body.concat('</div></div><br><div>');
           	
-                body = body.concat('<table class="bordered" style="width: '+$attrs.width+'">'+
+                body = body.concat('<table class="ui striped table searchTable" style="width: '+$attrs.width+'">'+
                           '<thead>'+
                            '<tr>');
 

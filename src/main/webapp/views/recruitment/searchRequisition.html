@@ -19,7 +19,7 @@
 			</div>
 
 			<!-- <table class="bordered" style="width: 90%"> -->
-			<table class="ui striped table searchTable" style="width: 90%">
+			<table class="ui striped table searchTable" >
 				<thead>
 					<tr>
 						<th>Requisition Id</th>
@@ -43,9 +43,9 @@
 						<td>{{data.jobType}}</td>
 						<td>{{data.location}}</td>	
 						<td>{{data.client}}</td>
-						<td align="center"><button style="cursor: pointer;border: none;background: none;color:#2196F3" ng-disabled="!hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
+						<td align="center" class="searchPositionIconTd" ><button style="cursor: pointer;border: none;background: none;color:#2196F3;" ng-disabled="!hasRole('ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER')"
                           ng-click="cloneRequisition(data.requisitionId)" data-tooltip="Clone"><i class="material-icons">repeat_one</button></td>
-						<td align="center"  >
+						<td align="center" class="searchPositionIconTd">
 							<i class="material-icons" style="color:#2196F3 ;font-size: 25px; " data-tooltip="{{data.status}}">{{getStatusIcon(data.status)}}</i>
 						</td>
 					</tr>

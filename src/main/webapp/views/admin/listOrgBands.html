@@ -18,7 +18,8 @@
 		</div>
 	</div>
 
-	<table class="bordered" style="width: 90%;">
+	<table class="ui striped table searchTable" style="width: 90%;">
+		<thead>
 			<tr>
 				<th>Designation</th>
 				<th>Business Unit</th>
@@ -26,7 +27,8 @@
 				<th>Level</th>
 				<th>Grade</th>
 			</tr>
-			<tr class="animate-repeat"
+		</thead>
+		<tr class="animate-repeat"
 				ng-repeat="org in filtered = (orgBandList | filter:search) |  offset: (currentPage)*itemsPerPage | limitTo: itemsPerPage"
 				style="font-size: 80%">
 				<td class="mdl-data-table__cell--non-numeric">{{org.designation}}</td>
@@ -57,5 +59,5 @@
 			</div>
 		</div>
 </form>
-
+<br>
 
