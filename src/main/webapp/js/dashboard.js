@@ -32,6 +32,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var categories=[];
 	var series=[];
 	$scope.newData=[];
+	var joinedCnt=0;
 	var hiredCnt=0;
 	var selectedCnt=0;
 	var onHoldCnt=0;
@@ -99,6 +100,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
     function getDesignationSpecificData(){
 		var designationArray=[];
 		$scope.totalPositionData=[];
+		joinedCnt=0;
 		hiredCnt=0;
 		selectedCnt=0;
 		rejectedCnt=0;
@@ -115,6 +117,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
            designationService.getDesignation().then(function(data){
  			  $scope.positionData=[];
  			 angular.forEach($scope.totalPositionData, function(value, key){
+ 				 				if(value.status!= undefined&& value.status== "Joined")
+ 				 					joinedCnt++;
  								if(value.status!= undefined&& value.status== "Hired")
  									 hiredCnt++;
  								if(value.status!= undefined&& value.status== "Selected")
@@ -140,6 +144,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
  						 $scope.positionData.push({'name': "Rejected", 'y':rejectedCnt, 'drilldown': "Rejected" });
  						 $scope.positionData.push({'name': "Inactive", 'y':inActiveCnt, 'drilldown': "Inactive" });
  						 $scope.positionData.push({'name': "Closed", 'y':closedCnt, 'drilldown': "Closed" });
+ 						$scope.positionData.push({'name': "Joined", 'y':joinedCnt, 'drilldown': "Joined" });
  			 }
  			 
  			 
