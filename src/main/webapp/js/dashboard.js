@@ -134,7 +134,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
  								if(value.status!= undefined&& value.status== "Closed")
  									 closedCnt++;
  								});
- 			 var sum=hiredCnt+selectedCnt+onHoldCnt+rejectedCnt+activeCnt+inActiveCnt+closedCnt;
+ 			 var sum=hiredCnt+selectedCnt+onHoldCnt+rejectedCnt+activeCnt+inActiveCnt+closedCnt+joinedCnt;
  			 if(sum!=0){
  			 $scope.showNoAnyPositions=true;
  						 $scope.positionData.push({'name': "Active", 'y':activeCnt, 'drilldown': "Active" });
@@ -378,10 +378,18 @@ if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_IN
 		|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") )){
 	dashboardService.getScheduleDataInterview($rootScope.user.emailId)
 	.then(function (data){
+		var scheduleInterviewData=[];
+		angular.forEach(data,function(value,key){
+			if((value.status!='Level 1 Feedback Submitted')&&(value.status!='Level 2 Feedback Submitted')&&(value.status!='HR Feedback Submitted'))
+				{
+				scheduleInterviewData.push(value);
+				console.log(value);
+				}
+		});
 		$scope.showNoInterviewMsg = false;
-		$scope.showScheduleDataInterview = data;
+		$scope.showScheduleDataInterview = scheduleInterviewData;
 		
-		if(data == "" || data == null || data == undefined){
+		if(data == "" || data == null || data == undefined ||(scheduleInterviewData.length==0)){
 			$scope.showNoInterviewMsg = true;
 		}
 	}).catch(function(msg){
