@@ -62,7 +62,7 @@ public class RequisitionController {
 	@ResponseBody
 	public ResponseEntity<?> createRequisition(@RequestBody Requisition requisition) throws Exception {
 		requisitionService.prepareRequisition(requisition);
-		String jsonObj = MSG_START + "Requisition created successfully and sent notification to "
+		String jsonObj = MSG_START + "Requisition created successfully and notification sent to "
 				+ requisition.getApproval1().getName() + "." + MSG_END;
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
@@ -73,7 +73,7 @@ public class RequisitionController {
 	public ResponseEntity<String> updateRequisition(@RequestBody Requisition requisition) throws Exception {
 		log.info("Updating requisition");
 		RequisitionApproverDetails requisitionApproverDetails = requisitionService.updateRequisition(requisition);
-		String message = "Requisition successfully updated and sent notification to "
+		String message = "Requisition updated successfully and notification sent to "
 				+ requisitionApproverDetails.getApproverName() + ".";
 		String jsonObj = "{\"msg\":\"" + message + "\"}";
 		return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
