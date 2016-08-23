@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="UpdateCandidate" onvalidate>
+	<form id="formAlign" class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="UpdateCandidate" novalidate>
 		
 		<div class="row collapsible-header">
 			<div class="input-field col s1">
@@ -13,7 +13,8 @@
 				<b>Update Profile</b>
 			</h5>
 		</div>
-		<div class="ui steps" style="width:100%;">
+		<div class="row">
+		<div class="ui steps" style="width:100%">
 		  <a class="{{first}}step" ng-click="next('show1')">
 		    <i class="user icon"></i>
 		    <div class="content">
@@ -42,7 +43,9 @@
 		      <div class="description">Enter Other Details</div>
 		    </div>
 		  </a>
-		  <div class="ui segment segmentPadding">
+		 </div>
+		 </div>
+		  
 		<div class="row">
 			<div class="input-field col s6">
 					<h4 class="ui dividing header FL WD81" align="left" class="formControlWidth">Submitted By : {{candidate.referredByName}}</h4>
@@ -253,6 +256,7 @@
 				</select> <label style="position: absolute; top: -22px;">Position</label>
 
 			</div>
+			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<textarea class="materialize-textarea" cols="50" rows="2"
@@ -261,7 +265,7 @@
 					<label style="position: absolute; top: -22px;">Address</label>
 				</div>
 			</div>
-			<button class="btn btn-info active" ng-disabled="enableFirstNext()" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
+			<button class="btn btn-info active" ng-click="next('show2')">Next  <i class="long arrow right icon"></i></button>
 		</fieldset>
 		
 		<fieldset ng-show="show2">
@@ -309,7 +313,7 @@
 				</div>
 			</div>
 			<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
-			<button class="btn btn-info active" ng-disabled="enableSecondNext()" ng-click="next('show3')"> Next <i class="long arrow right icon"></i></button>
+			<button class="btn btn-info active" ng-click="next('show3')"> Next <i class="long arrow right icon"></i></button>
 		</fieldset>
 		
 		<fieldset ng-show="show3">
@@ -407,7 +411,8 @@
 				</div>
 			</div>
 			<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
-			<button class="btn btn-info active" ng-disabled="enableThirdNext()" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
+			<button class="btn btn-info active" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
+		</div>
 		</fieldset>
 				
 		<fieldset ng-show="show4">
@@ -428,7 +433,7 @@
 						<option value="">Select Currency</option>
 					</select> <label style="position: absolute; top: -22px;">Currency</label>
 				</div>
-				<div class="ui segment segmentPadding">
+				</div>
 		<div class="row" align="left">
 			<div class="chip roundLabels" align="left">Other Details</div>
 		</div>
@@ -469,7 +474,7 @@
 					ng-required="UpdateCandidate.expectedCTC.$error.pattern"
 					ng-show="UpdateCandidate.expectedCTC.$error.pattern">
 					Provide a valid CTC with numeric value</span>
-
+			</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
@@ -617,7 +622,7 @@
 						candidate fit in our culture?</label>
 				</div>
 			</div>
-
+			</div>
 			<div class="row">
 				<div align="center" class="row" >
 						<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
@@ -632,3 +637,4 @@
 	</form>
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 </div>
+<br>

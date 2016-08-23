@@ -3193,7 +3193,6 @@ ul.tabs{
 
 font.chk{
 	font-weight:100;
-   .orgLableStyle{
    	font-size:initial;
    	color: black;
    	text-align:left;
@@ -3215,13 +3214,7 @@ font.chk{
 	top:5px;
 }
 
-form table#profileSearchTable.ui.striped.table.searchTable{
-	border-radius:0px !important;
-	background-color:red;
-	
+#formAlign{
+	width:90%;
+	 margin-left:5%;
 }
-
- tbody#profileSTbody.searchTBody{
-	font-size:150% ;
-}
-
