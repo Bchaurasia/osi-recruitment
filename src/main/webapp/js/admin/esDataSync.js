@@ -1,4 +1,4 @@
-app.controller('esDataSyncCtrl',['$scope','$rootScope', '$log','$http','$q','$timeout',function($scope,$rootScope,$log, $http,$q,$timeout){
+app.controller('esDataSyncCtrl',['$scope','$rootScope', '$log','$http','$q','$timeout','sharedDataService',function($scope,$rootScope,$log, $http,$q,$timeout,sharedDataService){
 	
 	$scope.deleteIndex = function(){
 		$http.post( 'resources/deleteDataIndex').

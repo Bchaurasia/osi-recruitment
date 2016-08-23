@@ -85,6 +85,9 @@ input[type='date']:after {
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
+.datediv{
+margin-left: 59px;
+}
 </style>
 
 <!-- <div class="statistics-container" align="center"></div> -->
@@ -139,24 +142,23 @@ input[type='date']:after {
 						<div class="event"
 							ng-repeat="schedule in showScheduleData | orderBy:createdDate ">
 							<div class="label">
-								<span ng-if="schedule.round == 'Technical Round 1'"
-									class="initial" style="background: #e47575">TR 1</span> <span
-									ng-if="schedule.round == 'Technical Round 2'" class="initial"
-									style="background: #d4ab61">TR 2</span> <span
-									ng-if="schedule.round == 'Hr Round'" class="initial"
-									style="background: #7ad27a">HR </span> <span
-									ng-if="schedule.round == 'Manager Round'" class="initial"
-									style="background: #9696dc">MR</span>
+								<span ng-if="schedule.round == 'Level 1'"
+									class="initial" style="background: #ff0000">TR 1</span> <span
+									ng-if="schedule.round == 'Level 2'" class="initial"
+									style="background: #3366ff">TR 2</span> <span
+									ng-if="schedule.round == 'HR'" class="initial"
+									style="background: #66ff33">HR </span> 
 							</div>
 							<div class="content">
+							
 								<div class="summary" align="left">
-									You need to take interview of <a class="user"
-										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
-									</a> for <a class="user"
+								 <a class="user"
 										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
-									</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
+									</a>interview of <a class="user"
+										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
+									</a> is on <b><time>{{ schedule.date | amDateFormat: 'dddd,
 											MMMM Do YYYY, h:mm a' }}</time></b>.
-									<div class="date">
+									<div class="date datediv" >
 										<time am-time-ago="schedule.createdDate"></time>
 									</div>
 								</div>
@@ -174,16 +176,15 @@ input[type='date']:after {
 						<div class="event"
 							ng-repeat="schedule in showScheduleDataInterview | orderBy:createdDate ">
 							<div class="label">
-								<span ng-if="schedule.round == 'Technical Round 1'"
-									class="initial" style="background: #e47575">TR 1</span> <span
-									ng-if="schedule.round == 'Technical Round 2'" class="initial"
-									style="background: #d4ab61">TR 2</span> <span
-									ng-if="schedule.round == 'Hr Round'" class="initial"
-									style="background: #7ad27a">HR </span> <span
-									ng-if="schedule.round == 'Manager Round'" class="initial"
-									style="background: #9696dc">MR</span>
+								<span ng-if="schedule.round == 'Level 1'"
+									class="initial" style="background: #ff0000">TR 1</span> <span
+									ng-if="schedule.round == 'Level 2'" class="initial"
+									style="background: #3366ff">TR 2</span> <span
+									ng-if="schedule.round == 'HR'" class="initial"
+									style="background: #66ff33">HR </span> 
 							</div>
 							<div class="content">
+							
 								<div class="summary" align="left">
 									You need to take interview of <a class="user"
 										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.cname}}
@@ -191,7 +192,7 @@ input[type='date']:after {
 										ng-click="feedback(schedule.jobcode,schedule.email)">{{schedule.round}}
 									</a> on <b><time>{{ schedule.date | amDateFormat: 'dddd,
 											MMMM Do YYYY, h:mm a' }}</time></b>.
-									<div class="date">
+									<div class="date datediv">
 										<time am-time-ago="schedule.createdDate"></time>
 									</div>
 								</div>
@@ -219,13 +220,13 @@ input[type='date']:after {
 						<div class="event" ng-repeat="feed in events">
 							<div class="label" style="color: white">
 								<span class="initial"
-									ng-style="{'background-color':(($index%2)==0?'#7ad27a':'#e47575')}"
+									ng-style="{'background-color':(($index%2)==0?'#ff0000':'#66ff33')}"
 									tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
 							</div>
 							<div class="content">
 								<div class="summary">
 									{{feed.eventDesc}}<br>
-									<div class="date">
+									<div class="date datediv">
 										<time am-time-ago="feed.createdTimeStamp"></time>
 									</div>
 								</div>
