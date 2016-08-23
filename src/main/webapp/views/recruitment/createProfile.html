@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<form id="example-advanced-form" class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="CreateCandidate" onvalidate>
+		name="CreateCandidate" novalidate>
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>		
 		<div class="row collapsible-header">
 	
@@ -184,9 +184,9 @@
 							class="mandatory">*</b></label> <span class="validation-error"
 							ng-show="submitted && CreateCandidate.pso.$invalid">Please
 							provide Qualification</span>
-						<div class="validation-error"
+						<!-- <div class="validation-error"
 							ng-show="( CreateCandidate.pso.$dirty || invalidSubmitAttempt) && CreateCandidate.pso.$error.required">
-							qualification is required.</div>
+							qualification is required.</div> -->
 					</div>
 
 					<div class="input-field col s3">
@@ -306,7 +306,6 @@
 					<label style="position: absolute; top: -22px;">
 						Current Designation<b class="mandatory">*</b>
 					</label>
-	
 				</div>
 			</div>
 			<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
@@ -376,7 +375,7 @@
 					<span ng-bind-html="designation | highlight: $select.search"></span>
 					</ui-select-choices> </ui-select>
 					<label style="position: absolute; top: -22px;">
-						Expected Designation<b class="mandatory">*</b>
+						Expected Designation
 					</label>
 	
 				</div>

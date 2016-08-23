@@ -39,9 +39,9 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.chkQualification=true;
 	
 	$scope.first="active ";
-	$scope.second="disabled ";
-	$scope.third="disabled ";
-	$scope.fourth="disabled ";
+	$scope.second="";
+	$scope.third="";
+	$scope.fourth="";
 	
 	
 	userService.getUsers().then(function(data) {
@@ -88,16 +88,16 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		} 
 	}
 	
-	
 	$scope.checkQualification = function(){
 		for(var i=0; i<$scope.candidate.qualifications.length; i++){
-			if($scope.candidate.qualifications[i].qualification == ""){				
+			if($scope.candidate.qualifications[i].qualification == "" || $scope.candidate.qualifications[i].qualification == undefined){				
 				 $scope.chkQualification=true;
+				 break;
 			}
 			else{
 				$scope.chkQualification=false;
 			}
-		}
+		}		
 	}
 	
 	$scope.jobCodeSl = function(){
@@ -134,7 +134,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    	$scope.candidate.createdBy = $scope.user.emailId;
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	
-		    	console.log(angular.toJson($scope.candidate));
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
 				    $scope.CreateCandidate.$setPristine();
@@ -158,7 +157,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    }
 		  }
 	 
-	 $scope.adjustTags = function(){
+	 /*$scope.adjustTags = function(){
 		 if($scope.enableFirstNext()==true && $scope.first!="active "){
 			 $scope.first="disabled ";
 		 }else{$scope.first="";}
@@ -168,39 +167,38 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		 }else{$scope.second="";}
 		 
 		 if($scope.enableThirdNext()==true && $scope.third!="active "){
-			 $scope.third="disabled ";
+			$scope.third="disabled ";
 		 }else{$scope.third="";}
 		 
 		 if($scope.CreateCandidate.$invalid==true && $scope.fourth!="active "){
 			 $scope.fourth="disabled ";
 		 }else{$scope.fourth="";}
-	 }
-	 
+	 }	*/
 	 
 	 $scope.next = function(nextShow){	
 		 if(nextShow=='show1'){
 			 $scope.show1=true;
 			 $scope.show2=$scope.show3=$scope.show4=false;			
-			 $scope.adjustTags();
 			 $scope.first="active ";
+			 $scope.fourth=$scope.second=$scope.third="";
 		 }
 		 else if(nextShow=='show2'){
 			 $scope.show1=$scope.show3=$scope.show4=false;
 			 $scope.show2=true;
-			 $scope.adjustTags();
 			 $scope.second="active ";
+			 $scope.fourth=$scope.first=$scope.third="";
 		 }
 		 else if(nextShow=='show3'){
 			 $scope.show1=$scope.show2=$scope.show4=false;			 
 			 $scope.show3=true;		
-			 $scope.adjustTags();
 			 $scope.third="active ";
+			 $scope.fourth=$scope.second=$scope.first="";
 		 }
 		 else if(nextShow=='show4'){
 			 $scope.show1=$scope.show2=$scope.show3=false;
 			 $scope.show4=true;			 
-			 $scope.adjustTags();
 			 $scope.fourth="active ";
+			 $scope.first=$scope.second=$scope.third="";
 		 }
 		 
 	 }
@@ -209,49 +207,47 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		 if(previousShow=='show1'){
 			 $scope.show1=true;
 			 $scope.show2=$scope.show3=$scope.show4=false;	
-			 $scope.adjustTags();
 			 $scope.first="active ";
 		 }
 		 else if(previousShow=='show2'){
 			 $scope.show2=true;
 			 $scope.show1=$scope.show3=$scope.show4=false;			 
-			 $scope.adjustTags();
 			 $scope.second="active ";
 		 }
 		 else if(previousShow=='show3'){
 			 $scope.show3=true;
 			 $scope.show1=$scope.show2=$scope.show4=false;			 
-			 $scope.adjustTags();
 			 $scope.third="active ";
 		 }
 	 }
 	 $scope.enableFirstNext = function(){
-			if($scope.CreateCandidate.candidateName.$invalid || $scope.CreateCandidate.emailId.$invalid || $scope.CreateCandidate.mobileNo.$invalid || $scope.CreateCandidate.skypeId.$invalid || $scope.CreateCandidate.currentLocation.$invalid){
-				return true;
+		/*	if($scope.CreateCandidate.candidateName.$invalid || $scope.CreateCandidate.emailId.$invalid || $scope.CreateCandidate.mobileNo.$invalid || $scope.CreateCandidate.skypeId.$invalid || $scope.CreateCandidate.currentLocation.$invalid){				
+				return true;				
 			}  
 			else{
 				return false;
-			}
-		 }
+				
+			}	*/		
+		 return false;	 
+	 }
 	 $scope.enableSecondNext = function(){
-		 		
-		 		var chkQualification = $scope.checkQualification();
+		 	/*	$scope.checkQualification();
 				if($scope.chkQualification){
-		 		//if($scope.CreateCandidate.pso.$error.required){
 					return true;
 				}  
 				else{
 					return false;
-				}
-		 	
+				}	*/
+		 return false;
 		 }
 	 $scope.enableThirdNext = function(){
-			if($scope.CreateCandidate.experience.$invalid || $scope.CreateCandidate.pskilss.$invalid || $scope.candidate.designation.$invalid){
+			/*if($scope.CreateCandidate.experience.$invalid || $scope.CreateCandidate.pskilss.$invalid || ($scope.candidate.designation=="" || $scope.candidate.designation==undefined)){
 				return true;
 			}  
 			else{
 				return false;
-			}
+			}*/
+		 return false;
 		 }
 	 
 	 $scope.uploadFileIntoDB = function (files) {
