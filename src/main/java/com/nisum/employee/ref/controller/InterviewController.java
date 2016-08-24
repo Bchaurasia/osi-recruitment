@@ -114,8 +114,8 @@ public class InterviewController {
 			interviewDetailsService.saveFeedback(interviewFeedback);
 			
 			
-		} catch (MessagingException m) {
-			m.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
 		return new ResponseEntity<InterviewFeedback>(interviewFeedback, HttpStatus.OK);
 	}
