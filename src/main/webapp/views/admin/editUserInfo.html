@@ -49,10 +49,13 @@
 			                      
 							</div>
 							<div class="input-field col s6">
-								<input class="form-control" ng-change="validateSkypeId($data)"
-									type="text" ng-model="userToEdit.skypeId" required> <label style="position: absolute; top: -22px;">Skype
+								<input class="form-control" ng-change="validateSkypeId($data)" name="skypeId"
+									type="text" ng-model="userToEdit.skypeId" ng-pattern="/^[a-zA-Z][a-zA-Z0-9.-_]{5,31}$/" required> <label style="position: absolute; top: -22px;">Skype
 									ID<b class="mandatory">*</b>
 								</label>
+								<span class="validation-error"
+						ng-show="(EditUserInfo.skypeId.$dirty  || invalidSubmitAttempt) && EditUserInfo.skypeId.$error.pattern">
+						Provide a valid Skype Id</span>
 							</div>
 						</div>
 						<div class="row">

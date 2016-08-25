@@ -22,11 +22,11 @@
 					<th>Name</th>
 					<th>Email Id</th>
 					<th>Mobile No.</th>
-					<th>Skype Id</th>
 					<th>Current Designation</th>
 					<th>Referred By</th>
 					<th>Profile Source</th>
 					<th>Status</th>
+					<th>State</th>
 					
 				</tr>
 			</thead>
@@ -38,11 +38,11 @@
 						style="cursor: pointer;" ng-click="editProfile(profile)">{{profile.candidateName}}</a></td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.mobileNo}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.skypeId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.designation}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.createdBy}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.profileSource}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.isApproved}}</td>
 					
 				</tr>
 			</tbody>

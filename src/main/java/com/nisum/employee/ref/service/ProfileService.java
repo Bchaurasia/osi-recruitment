@@ -69,6 +69,7 @@ public class ProfileService implements IProfileService{
 
 	public void approveCandidate(Profile candidate) {
 		candidate.setIsApprovedFlag(true);
+		candidate.setIsApproved("Approved");
 		profileRepository.prepareCandidate(candidate);	
 		try {
 			profileSearchService.updateProfileIndex(candidate);

@@ -97,7 +97,11 @@ public class ProfileController {
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody Profile candidate) throws Exception{
-			Profile profile = profileService.prepareCandidate(candidate);
+		candidate.setIsApproved("-");
+		if(candidate.getIsReferral()){
+			candidate.setIsApproved("Not Approved");
+		}
+		Profile profile = profileService.prepareCandidate(candidate);
 			String jsonObj=MSG+ profile.getCandidateName() +"'s profile successfully created\"}";
 			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}

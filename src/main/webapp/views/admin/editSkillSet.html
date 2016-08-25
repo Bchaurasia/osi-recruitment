@@ -11,23 +11,22 @@
 		</div>
 	</div>
 	<table class="ui striped table searchTable" style="width: 50%">
-		
+
 		<thead>
-		<tr>
-			<!-- <th width="20%">#</th> -->
-			<th width="60%">SKILLS</th>
-			<th width="40%">DELETE</th>
-		</tr>
+			<tr>
+				<!-- <th width="20%">#</th> -->
+				<th width="60%">SKILLS</th>
+				<th width="40%">DELETE</th>
+			</tr>
 		</thead>
-		<tr class="animate-repeat"
-		
-			ng-repeat="skill in filtered = (skills | filter:search) |  offset: (currentPage)*itemsPerPage | limitTo: itemsPerPage">
-			<!-- <td>{{$index +1}}</td> -->
-			<!-- <td>{{((currentPage)*itemsPerPage +1)}}</td> -->
-			<td class="td-style">{{skill}}</td>
-			<td align="center"><a class="glyphicon glyphicon-remove"
-				ng-click="deleteSkill(skill)" data-tooltip="Delete Skill"></a></td>
-		</tr>
+		<tbody>
+			<tr class="animate-repeat" style="font-size:85%;"
+				ng-repeat="skill in filtered = (skills | filter:search) |  offset: (currentPage)*itemsPerPage | limitTo: itemsPerPage">
+				<td class="td-style">{{skill}}</td>
+				<td align="center"><a class="glyphicon glyphicon-remove"
+					ng-click="deleteSkill(skill)" data-tooltip="Delete Skill"></a></td>
+			</tr>
+		</tbody>
 	</table>
 	<br>
 	<div class="row">

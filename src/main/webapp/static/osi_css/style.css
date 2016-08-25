@@ -3228,12 +3228,14 @@ font.chk{
 
 table.ui.striped.table.searchTable,table.ui.striped.table.searchTable thead tr th{
 	border-radius:0px ;
+	
 }
 
 table.ui.striped.table.searchTable{
 	width: 90%;
 	font-size:105%;
 	font-weight: 100;
+	border:none;
 }
  
 table.ui.striped.table.searchTable td.searchPositionIconTd{
@@ -3253,3 +3255,17 @@ table.ui.striped.table.searchTable th{
 	padding-top:10px;
 	padding-bottom:10px;
 }
+
+
+
+table.ui.striped.table.searchTable tr td {
+    border-bottom: 1px solid rgba(34, 36, 38, 0.0980392);
+    border-top: none;
+}
+
+ table.ui.striped.table.searchTable tr:last-child td{
+	border-bottom:1px solid #ee6e73;
+}
+/*table.ui.striped.table.searchTable tr td:last-child{
+	border-right:1px solid rgba(34, 36, 38, 0.0980392);
+} */

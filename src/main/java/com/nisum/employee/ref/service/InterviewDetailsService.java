@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.nisum.employee.ref.domain.Event;
@@ -18,6 +19,7 @@ import com.nisum.employee.ref.domain.InterviewFeedback;
 import com.nisum.employee.ref.domain.InterviewSchedule;
 import com.nisum.employee.ref.domain.Profile;
 import com.nisum.employee.ref.domain.Round;
+import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.repository.InterviewDetailsRepository;
 import com.nisum.employee.ref.search.InterviewSearchService;
 import com.nisum.employee.ref.search.ProfileSearchService;
@@ -46,6 +48,9 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 	
 	@Autowired
 	IEventService eventService;
+	
+	@Autowired
+	private UserService userService;
 	
 	
 	public InterviewDetails  saveFeedback(InterviewFeedback interviewFeedback) throws Exception{
@@ -323,6 +328,7 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		pro.get(0).setStatus(interviewDetails2.getProgress());
 		profileService.updateCandidateStatus(pro.get(0).getEmailId(), interviewDetails2.getProgress());
 		profileSearchService.updateProfileIndex(pro.get(0));
-		notificationService.sendCancelMail(interviewSchedule);
+		List<UserInfo> userInfo = userService.retrieveUserById(SecurityContextHolder.getContext().getAuthentication().getName());
+		notificationService.sendCancelMail(interviewSchedule,userInfo.get(0).getName());
 	}
 }

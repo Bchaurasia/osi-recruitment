@@ -56,5 +56,6 @@ public class Profile extends AuditEntity{
 	Boolean isReferral;
 	String currency;
 	String updatedByName;
+	String isApproved;
 	
 }
