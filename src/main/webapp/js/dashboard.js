@@ -312,8 +312,17 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		
 		dashboardService.getScheduleData()
 		.then(function (data){
-			$scope.showScheduleData = data;
-			if(data == "" || data == null || data == undefined){
+			console.log(angular.toJson(data));
+			var scheduleInterviewData=[];
+			angular.forEach(data,function(value,key){
+				if((value.roundStatus!='Level 1 Feedback Submitted')&&(value.roundStatus!='Level 2 Feedback Submitted')&&(value.roundStatus!='HR Feedback Submitted'))
+					{
+					scheduleInterviewData.push(value);
+					console.log(value);
+					}
+			})
+			$scope.showScheduleData = scheduleInterviewData;
+			if(data == "" || data == null || data == undefined ||scheduleInterviewData.length==0 ){
 				$scope.hideNoInterviewMsg = false;
 			}
 		}).catch(function(msg){
