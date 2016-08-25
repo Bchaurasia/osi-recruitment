@@ -3,8 +3,7 @@ angular.module('erApp')
 		                             reportService]);
 function reportService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 	return {
-		getReportDataByJobCode : getReportDataByJobCode
-		
+		getReportDataByJobCode : getReportDataByJobCode,
 	};
 	
 	
@@ -20,5 +19,6 @@ function reportService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 	function sendErrorprofileMsg(msg){
 		return $q.reject("Failed To Get Profile!"+msg);
 	}
+	
 	
 }

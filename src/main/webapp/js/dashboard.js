@@ -79,7 +79,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	angular.element(document).ready(function() {
 		$scope.positionData=[];
 		$scope.getData();
-		
+		reqData()
        });
 	
 	
@@ -96,7 +96,13 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
     };
     
 	
-   
+   function reqData(){
+	   requisitionService.getAllRequisitions().then(function(data){
+		$scope.requisitionData=data;
+		console.log(data);
+		
+	   });
+   }
     function getDesignationSpecificData(){
 		var designationArray=[];
 		$scope.totalPositionData=[];
