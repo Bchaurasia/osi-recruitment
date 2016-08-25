@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 @Data()
+@JsonInclude(JsonInclude.Include.NON_NULL)
 //@Document(collection = "offer")
 public class Offer extends AuditEntity {
 
@@ -29,7 +32,7 @@ public class Offer extends AuditEntity {
 	private int noticePeriod;
 	private int relocationExpensesOffered;
 	private String currentLocation;
-	private String WorkLocation;
+	private String workLocation;
 	private String comments;
 	private OfferApprover approval;
 	private UserVO reportingManager;

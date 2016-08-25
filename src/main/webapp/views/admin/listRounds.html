@@ -19,12 +19,14 @@
 					<!-- 					<th width="40px">Delete</th> -->
 				</tr>
 				</thead>
-				<tr ng-repeat="interviewRound in interviewRounds">
-					<td class="mdl-data-table__cell--non-numeric">{{$index +1}}</td>
-					<td class="mdl-data-table__cell--non-numeric" class="td-style"
-						align="center">{{interviewRound}}</td>
-					<!-- 					<td class="mdl-data-table__cell--non-numeric" align="center"><a class="glyphicon glyphicon-remove" ng-click="deleteInterviewRound($index,interviewRound)"></a></td> -->
-				</tr>
+				<tbody>
+					<tr ng-repeat="interviewRound in interviewRounds" style="font-size:85%;">
+						<td class="mdl-data-table__cell--non-numeric">{{$index +1}}</td>
+						<td class="mdl-data-table__cell--non-numeric" class="td-style"
+							align="center">{{interviewRound}}</td>
+						<!-- 					<td class="mdl-data-table__cell--non-numeric" align="center"><a class="glyphicon glyphicon-remove" ng-click="deleteInterviewRound($index,interviewRound)"></a></td> -->
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	<br><br>

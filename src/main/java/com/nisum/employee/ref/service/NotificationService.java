@@ -70,6 +70,7 @@ public class NotificationService {
 	private static final String INTERVIEW_DATE_TIME = "interviewDateTime";
 	private static final String TYPE_OF_INTERVIEW = "typeOfInterview";
 	private static final String CANDIDATE_NAME = "candidateName";
+	private static final String CANCELLED_BY_NAME = "cancelledByName";
 	private static final String HR_NAME = "hr_name";
 	private static final String HR_CONTACT_DETAILS = "hr_contactNo";
 	private static final String HR_EMAIL = "hr_emailId";
@@ -827,7 +828,7 @@ public class NotificationService {
 		userNotification.setRead(readStatus);
 	}
 
-	public String sendCancelMail(InterviewSchedule interviewSchedule) throws Exception {
+	public String sendCancelMail(InterviewSchedule interviewSchedule, String cancelledByName) throws Exception {
 
 		String to = interviewSchedule.getCandidateId();
 		String toInterviewer = interviewSchedule.getEmailIdInterviewer();
@@ -847,6 +848,7 @@ public class NotificationService {
 		context.put(TYPE_OF_INTERVIEW, interviewSchedule.getTypeOfInterview());
 		context.put(INTERVIEW_DATE_TIME, interviewSchedule.getInterviewDateTime());
 		context.put(LOCATION, interviewSchedule.getInterviewLocation());
+		context.put(CANCELLED_BY_NAME, cancelledByName);
 		Template cancelInterviewTemplate = getVelocityTemplate(SRC_CANCELINTERVIEW_VM);
 
 		StringWriter writer = new StringWriter();

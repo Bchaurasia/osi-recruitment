@@ -12,7 +12,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.info = $rootScope.info;
 	$scope.invalidFile = true;
 	$scope.today=new Date();
-	$scope.candidate.comments="";
 	$scope.candidate.offerStatus="";
 	$scope.candidate.finalStatus="";
 	$scope.candidate.orgGrade={};
@@ -25,112 +24,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	$scope.bus = ["ET","EA","OPS"];
 	$scope.finalStatusList = ["Offered","Rejected","Declined"];
 	$scope.candidate.currency="INR";
-	$scope.init = function(){
-		hideFinalStatusFun();
-		$scope.profile = offerService.getData();
-		$scope.candidate.emailId = $scope.profile.candidateEmail;
-		$scope.candidate.jobcodeProfile = $scope.profile.currentPositionId;
-		$scope.candidate.requisitionId = $scope.profile.requisitionId;
-		$http.get('resources/profile?emailId='+$scope.candidate.emailId)
-		 .then(function(response){
-				$scope.candidate1=response.data[0];
-				$scope.candidate.candidateName = $scope.candidate1.candidateName;
-				$scope.candidate.qualification=$scope.candidate1.qualifications;
-				$scope.candidate.expYear=$scope.candidate1.expYear;
-				$scope.candidate.approvedPositions=$scope.candidate1.designation;
-				$scope.candidate.currentEmployer=$scope.candidate1.currentEmployer;
-				$scope.candidate.recruiter=$scope.candidate1.hrAssigned;
-				$scope.candidate1.currentCTC >0 ? $scope.candidate.lastDrawnCTC=$scope.candidate1.currentCTC : null;
-				$scope.candidate1.expectedCTC >0 ? $scope.candidate.expectedCTC=$scope.candidate1.expectedCTC : null;
-				$scope.candidate.noticePeriod=$scope.candidate1.noticePeriod;
-				$scope.candidate.currentLocation=$scope.candidate1.currentLocation;
-				$scope.candidate.profileSource=$scope.candidate1.profileSource;
-			})
-		 .catch(function(){
-			 console.log("fail to get data");
-		 });
-		
-	}
-	$scope.selectStream = function(bu){
-		$scope.streamData=[];
-		$scope.candidate.orgGrade.orgBand=bu.orgBand;
-		angular.forEach($scope.orgBands,function(band) {
-			if(_.isEqual(band.bu, bu)){
-				$scope.streamData.push(band.stream);
-			}
-		});
-	};
-	$scope.selectLevel = function(stream){
-		$scope.levelDatalist=[];
-		angular.forEach($scope.orgBands,function(band) {
-			if(_.isEqual(band.stream, stream)){
-				$scope.levelData=band.levels;
-			}
-		});
-		angular.forEach($scope.levelData,function(band) {
-				$scope.levelDatalist.push(band.level);
-		});
-	};
-	$scope.selectGrade = function(selectedLevel){
-		$scope.designationgrades=[];
-		$scope.designationData= _.filter($scope.levelData , 
-				function(level1){ 
-					return _.isEqual(level1.level, selectedLevel); 
-					});
-		$scope.designationgrades = _.uniq($scope.designationData[0].designations, function(design){
-			return design.grade;
-		});
-		console.log(angular.toJson($scope.designationgrades));
-	};
-	$scope.selectDesignation = function(selectedGrade){
-		$scope.designationdesignations=[];
-		$scope.designationdesignations = _.filter($scope.designationData[0].designations, function(design){
-			 if(_.isEqual(design.grade, selectedGrade.grade)){
-				return design.name;
-			}
-		});
-		console.log(angular.toJson($scope.designationdesignations));
-	};
-	offerService.getBandOfferData().then(function(data){
-		$scope.orgBands=data;
-	}).catch(function(msg){
-		$scope.message=msg;
-		 $scope.cls=appConstants.ERROR_CLASS;
-		 $timeout( function(){ $scope.alHide(); }, 5000);
-	})
-	
-	designationService.getDesignation().then(function(data){
-		$scope.designations=data;
-		$scope.profiledesignations = [];
- 		angular.forEach($scope.designations,function(obj){
- 			$scope.profiledesignations.push(obj.designation);
- 		});
-	}).catch(function(msg){
-		$scope.message=msg;
-		 $scope.cls=appConstants.ERROR_CLASS;
-		 $timeout( function(){ $scope.alHide(); }, 5000);
-	})
-	$scope.init();
-	offerService.getOfferData($scope.candidate.emailId).then(function(offerdata){
-		if(offerdata!==""){
-			$scope.candidate=offerdata;
-			$scope.candidate.comments="";
-			$scope.candidate.approval.comment=""
-			$scope.bu=$scope.candidate.orgGrade.bu;
-			$scope.stream=$scope.candidate.orgGrade.stream;
-			$scope.level=$scope.candidate.orgGrade.level;
-			$scope.grade=$scope.candidate.orgGrade.designation;
-			$scope.name=$scope.candidate.orgGrade.designation;
-			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
-			$scope.selectStream($scope.bu);
-			$scope.selectLevel($scope.stream);
-			$scope.selectGrade($scope.level);
-			$scope.selectDesignation($scope.grade);
-			 hideFinalStatusFun();
-		}
-	}).catch(function(data){
-		$log.error(data);
-	})
 	
 	userService.getUsers().then(
 			function(data){
@@ -151,16 +44,164 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			});
 		}).catch();
 	
-	var GET_POSTION_DETAILS='resources/searchPositionsBasedOnJobCode?jobcode='+$scope.candidate.jobcodeProfile;
-	var RELEASE_OFFER='resources/save-offer';
+	$scope.init = function(){
+		$scope.profile = offerService.getData();
+		$scope.candidate.candidateName = "";
+		$scope.candidate.emailId = "";
+		$scope.candidate.jobcodeProfile ="";
+		$scope.candidate.requisitionId ="";
+		
+		$scope.candidate.candidateName = $scope.profile.candidateName;
+		$scope.candidate.emailId = $scope.profile.candidateEmail;
+		$scope.candidate.jobcodeProfile = $scope.profile.currentPositionId;
+		$scope.candidate.requisitionId = $scope.profile.requisitionId;
+		
+		getProfileData()
+	      .then(getOfferBandsData)
+	      .then(getOfferData)
+	      .then(getPositionDetails);
+		
+	}
 	
-	$http.get(GET_POSTION_DETAILS).success(function(data2, status, headers, config) {
-		$scope.candidate.client = data2.client;
-		$scope.candidate.recruiter = data2.hiringManager;
-	}).error(function(data, status, headers, config) {
-		$log.error(data);
-	});
+	 var getProfileData = function(){
+		var deferred = $q.defer();
+		$timeout(function() {
+			$http.get('resources/profile?emailId='+$scope.candidate.emailId)
+		 .then(function(response){
+				$scope.candidate1=response.data[0];
+				$scope.candidate.qualification=$scope.candidate1.qualifications;
+				$scope.candidate.expYear=$scope.candidate1.expYear;
+				$scope.candidate.approvedPositions=$scope.candidate1.designation;
+				$scope.candidate.currentEmployer=$scope.candidate1.currentEmployer;
+				$scope.candidate.recruiter=$scope.candidate1.hrAssigned;
+				$scope.candidate1.currentCTC >0 ? $scope.candidate.lastDrawnCTC=$scope.candidate1.currentCTC : null;
+				$scope.candidate1.expectedCTC >0 ? $scope.candidate.expectedCTC=$scope.candidate1.expectedCTC : null;
+				$scope.candidate.noticePeriod=$scope.candidate1.noticePeriod;
+				$scope.candidate.currentLocation=$scope.candidate1.currentLocation;
+				$scope.candidate.profileSource=$scope.candidate1.profileSource;
+			})
+		 .catch(function(){
+			 console.log("fail to get data");
+		 });
+		      deferred.resolve('thread1');
+		    }, 50);
 
+		    return deferred.promise;
+		
+	}
+	
+	var getOfferBandsData = function(){
+		 var deferred = $q.defer();
+		    $timeout(function() {
+		    	offerService.getBandOfferData().then(function(data){
+					$scope.orgBands=data;
+				}).catch(function(msg){
+					$scope.message=msg;
+					 $scope.cls=appConstants.ERROR_CLASS;
+					 $timeout( function(){ $scope.alHide(); }, 5000);
+				});
+				
+		      deferred.resolve('thread2');
+		    }, 50);
+
+		    return deferred.promise;
+	}
+	
+	var getOfferData = function(){
+		var deferred = $q.defer();
+
+	    $timeout(function() {
+	    	offerService.getOfferData($scope.candidate.emailId).then(function(offerdata){
+	    		if(offerdata!==""){
+	    			$scope.candidate=offerdata;
+	    			$scope.candidate.approval.comment=""
+	    			
+	    			$q.when()
+	    			.then(function () { $scope.bu=$scope.candidate.orgGrade.bu;
+	    				                $scope.selectStream($scope.bu); })
+	    			
+	                .then(function () { $scope.stream=$scope.candidate.orgGrade.stream;
+	                                    $scope.selectLevel($scope.stream); })
+	    			
+	    			.then(function () { $scope.level=$scope.candidate.orgGrade.level;
+	    			                    $scope.selectGrade($scope.level); })
+	    			
+	    			.then(function () { $scope.grade=$scope.candidate.orgGrade.designation;
+	    			                    $scope.selectDesignation($scope.grade); })
+	    			
+	    			.then(function () { $scope.name=$scope.candidate.orgGrade.designation; });
+	    			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
+	    			 hideFinalStatusFun();
+	    		}
+	    	}).catch(function(data){
+	    		$log.error(data);
+	    	});
+	      deferred.resolve('thread3');
+	    }, 50);
+
+	    return deferred.promise;
+	}
+	
+	var getPositionDetails = function(){
+		 var deferred = $q.defer();
+		    $timeout(function() {
+		    	var GET_POSTION_DETAILS='resources/searchPositionsBasedOnJobCode?jobcode='+$scope.candidate.jobcodeProfile;
+		    	
+		    	$http.get(GET_POSTION_DETAILS).success(function(data2, status, headers, config) {
+		    		$scope.candidate.client = data2.client;
+		    		$scope.candidate.recruiter = data2.hiringManager;
+		    	}).error(function(data, status, headers, config) {
+		    		$log.error(data);
+		    	});
+		      deferred.resolve('thread4');
+		    }, 50);
+
+		    return deferred.promise;
+	}
+	
+	$scope.selectStream = function(bu){
+		$scope.stream="";
+		$scope.streamData=[];
+		$scope.candidate.orgGrade.orgBand=bu.orgBand;
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.bu, bu)){
+				$scope.streamData.push(band.stream);
+			}
+		});
+	};
+	$scope.selectLevel = function(stream){
+		$scope.level="";
+		$scope.levelDatalist=[];
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.stream, stream)){
+				$scope.levelData=band.levels;
+			}
+		});
+		angular.forEach($scope.levelData,function(band) {
+				$scope.levelDatalist.push(band.level);
+		});
+	};
+	$scope.selectGrade = function(selectedLevel){
+		$scope.grade = undefined;
+		$scope.designationgrades=[];
+		$scope.designationData= _.filter($scope.levelData , 
+				function(level1){ 
+					return _.isEqual(level1.level, selectedLevel); 
+					});
+		$scope.designationgrades = _.uniq($scope.designationData[0].designations, function(design){
+			return design.grade;
+		});
+	};
+	$scope.selectDesignation = function(selectedGrade){
+		$scope.name = undefined;
+		$scope.designationdesignations=[];
+		$scope.designationdesignations = _.filter($scope.designationData[0].designations, function(design){
+			 if(_.isEqual(design.grade, selectedGrade.grade)){
+				return design.name;
+			}
+		});
+	};
+	
 	$scope.saveOffer = function() {
 		$scope.candidate.orgGrade.bu=$scope.bu;
 		$scope.candidate.orgGrade.stream=$scope.stream;
@@ -171,6 +212,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		if($scope.candidate.finalStatus!==null){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}
+		var RELEASE_OFFER='resources/save-offer';
 		$http.post(RELEASE_OFFER, $scope.candidate).success(function(data, status) {
 			$log.info("saved offer...");
 			$scope.sendNotification("Offer Saved Successfully",'/offer');
@@ -193,6 +235,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
     	$scope.candidate.approval.updatedDate=new Date();
     	$http.post('resources/approveOffer', $scope.candidate).success(function(data, status) {
     		$log.info("sending Notification");
+    		$scope.candidate.comments="";
     		$scope.sendNotification(data.msg,'/offer');
 		  }).error(function(data) {
 			$log.error("error saving offer..." + data);
@@ -214,4 +257,5 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
     $scope.checkCTC = function(CTC){
     	$scope.errorMsg = (CTC <=0) ?  true : false;
     }
+    $scope.init();
  }]);
