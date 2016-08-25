@@ -84,7 +84,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 			 console.log("fail to get data");
 		 });
 		      deferred.resolve('thread1');
-		    }, 50);
+		    }, 70);
 
 		    return deferred.promise;
 		
@@ -102,7 +102,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 				});
 				
 		      deferred.resolve('thread2');
-		    }, 50);
+		    }, 70);
 
 		    return deferred.promise;
 	}
@@ -131,13 +131,13 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	    			
 	    			.then(function () { $scope.name=$scope.candidate.orgGrade.designation; });
 	    			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
-	    			 hideFinalStatusFun();
 	    		}
+	    		hideFinalStatusFun();
 	    	}).catch(function(data){
 	    		$log.error(data);
 	    	});
 	      deferred.resolve('thread3');
-	    }, 50);
+	    }, 70);
 
 	    return deferred.promise;
 	}
@@ -154,7 +154,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		    		$log.error(data);
 		    	});
 		      deferred.resolve('thread4');
-		    }, 50);
+		    }, 70);
 
 		    return deferred.promise;
 	}
@@ -209,7 +209,7 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
 		$scope.candidate.orgGrade.designation.name=$scope.name.name;
 		console.log(angular.toJson($scope.candidate));
-		if($scope.candidate.finalStatus!==null){
+		if($scope.candidate.finalStatus!==""){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}
 		var RELEASE_OFFER='resources/save-offer';
