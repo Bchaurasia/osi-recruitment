@@ -27,7 +27,7 @@ app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','sharedSer
 				console.log(value.candidateName);
 				value.isApproved = "-";
 			}
-			;
+			console.log("=="+JSON.stringify($scope.profiles));
 		});
 	}
 	/*$scope.getCandidateName=function(emailId){
