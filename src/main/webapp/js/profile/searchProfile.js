@@ -15,20 +15,6 @@ app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','sharedSer
    function setProfiles(data) {
 		$scope.profiles = data;
 		$scope.currentPage = 0;
-		angular.forEach($scope.profiles, function(value, key) {
-			if (value.isReferral == true) {
-				if (value.isApprovedFlag == true) {
-					console.log(value.candidateName);
-					value.isApproved = "Approved";
-				} else {
-					value.isApproved = " Not Approved";
-				}
-			} else {
-				console.log(value.candidateName);
-				value.isApproved = "-";
-			}
-			console.log("=="+JSON.stringify($scope.profiles));
-		});
 	}
 	/*$scope.getCandidateName=function(emailId){
 		profileService.getProfileByCreateremailId(emailId).then(function(data){
