@@ -11,38 +11,38 @@ The details of your interview are: <br>
  
 <table style="width:100%; border: 0px solid Gray;">
 
-<tr><td style="width:20%;border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Interview Round :</td>
-<td style="width:70%;border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td> 
+<tr><td style="width:20%;border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Interview Round :</td>
+<td style="width:70%;border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$roundName</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Type of Interview:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$typeOfInterview</td> 
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Type of Interview:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$typeOfInterview</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Date Of Interview:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$interviewDateTime</td> 
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Date Of Interview:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$interviewDateTime</td> 
 </tr>
 
 #if ($typeOfInterview  == "Face To Face")
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Location:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$address</td>
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Location:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$address</td>
 </tr>
 #end
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Job Description:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$job_description</td>
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Job Description:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$job_description</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>HR Name:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$hr_name</td>
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>HR Name:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$hr_name</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>HR Contact No:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$hr_contactNo</td>
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>HR Contact No:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$hr_contactNo</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>HR EMailId:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$hr_emailId</td>
+<tr><td style="border:none; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>HR EMailId:</td>
+<td style="border:none;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$hr_emailId</td>
 </tr>
 
 </table>

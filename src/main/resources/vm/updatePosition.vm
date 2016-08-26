@@ -8,30 +8,30 @@ Hi ,<br><br>Position with Job Code $jobCode has been updated.<br><br>
 
 <table style="width:450px; border: 0px solid Gray;">
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Designation :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$designation</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Designation :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$designation</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Location : </td>
-<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$location</td>
+<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><b>Location : </td>
+<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;">$location</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Primary Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$skills</td>
+<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Primary Skills :</td>
+<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$skills</td>
 </tr>
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Status :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$status</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Status :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$status</td> 
 </tr>
 #if($positionType)
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Type :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$positionType</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Type :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$positionType</td> 
 </tr>
 #end
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Created By :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$createdBy</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Created By :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$createdBy</td> 
 </tr>
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Updated By :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$UpdatedBy</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Updated By :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$UpdatedBy</td> 
 </tr>
 </table><br><br>
 
