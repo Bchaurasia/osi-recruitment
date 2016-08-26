@@ -9,7 +9,7 @@ app.controller('searchReferralProfileCtrl',['$scope', '$http','$q', '$window','s
 	{
 		$scope.profiles = data;
 		$scope.selectedProfiles=[];
-	    angular.forEach($scope.profiles,function(profile){
+	    angular.forEach($scope.profiles,function(profile){	    	
 	    	console.log("::profile job code::"+profile.jobCode);
 	    	if(profile.jobCode == null || profile.jobCode == "")
 	    		profile.jobCode="No JoBCode";

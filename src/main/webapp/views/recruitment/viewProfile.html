@@ -309,21 +309,10 @@
 						style="position: absolute; top: -22px;">Additional Skills</label>
 				
 				</div>
-				</div>
-
-		<div class="row">
-
-			<div class="input-field col s6">
-				<input placeholder="Enter current Employer"
-					name="currentEmployer" class="form-control" type="text"
-					ng-model="candidate.currentEmployer" ng-pattern="/^[a-zA-Z0-9 \_\-]*$/">
-				<label style="position: absolute; top: -22px;">Current Employer</label>
-			<div class="validation-error"
-					ng-show="(UpdateCandidate.currentEmployer.$dirty || invalidSubmitAttempt) && CreateCandidate.UpdateCandidate.$error.pattern">
-					Current Employer must be alpha numeric only.</div>	
-
 			</div>
-			
+
+		
+
 			<div class="row">
 				<div class="input-field col s6" align="left">
 					
@@ -342,31 +331,11 @@
 			</div>
 			<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
 			<button class="btn btn-info active" ng-click="next('show4')">Next  <i class="long arrow right icon"></i></button>
-		</div>
 		</fieldset>
 				
 		<fieldset ng-show="show4">
 			&nbsp;
-			<div class="row">
-				<div class="input-field col s6">
-					<select ng-model="candidate.profileSource" name="profileSource"
-						ng-options="o as o for o in profileSources | orderBy:'toString()'"
-						class="form-control input-sm" required>
-						<option value="" disabled="disabled">Select Source</option>
-					</select> <label style="position: absolute; top: -22px;">Source<b
-						class="mandatory">*</b></label>
-							</div>
-				<div class="input-field col s6">
-				<select ng-model="candidate.currency" name="profileSource"
-						ng-options="o for o in info.currencies | orderBy:'toString()'"
-						class="form-control input-sm">
-						<option value="">Select Currency</option>
-					</select> <label style="position: absolute; top: -22px;">Currency</label>
-				</div>
-				</div>
-		<div class="row" align="left">
-			<div class="chip roundLabels" align="left">Other Details</div>
-		</div>
+			
 		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="candidate.profileSource" name="profileSource"
@@ -405,31 +374,10 @@
 					ng-show="UpdateCandidate.expectedCTC.$error.pattern">
 					Provide a valid CTC with numeric value</span>
 			</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<input placeholder="Enter current CTC" name="currentCTC"
-						class="form-control" type="text" ng-model="candidate.currentCTC"
-						ng-pattern="/^[0-9]*$/"> <label
-						style="position: absolute; top: -22px;">Current CTC 
-					</label><span class="validation-error"
-						ng-required="UpdateCandidate.currentCTC.$error.pattern"
-						ng-show="UpdateCandidate.currentCTC.$error.pattern"> Provide a valid CTC with numeric value</span>
-				</div>
-				<div class="input-field col s6">
-					<input placeholder="Enter expected CTC" name="expectedCTC"
-						class="form-control" type="text" ng-model="candidate.expectedCTC"
-						ng-pattern="/^[0-9]*$/"> <label
-						style="position: absolute; top: -22px;">Expected CTC 
-					</label> <span class="validation-error"
-						ng-required="UpdateCandidate.expectedCTC.$error.pattern"
-						ng-show="UpdateCandidate.expectedCTC.$error.pattern">
-						Provide a valid CTC with numeric value</span>
-				</div>
-			</div>
-	
-			<div class="row">
-				<div class="input-field col s6">
+		</div>
+			
+		<div class="row">
+			<div class="input-field col s6">
 					<input placeholder="Enter Notice Period" name="noticePeriod"
 						class="form-control" type="text" ng-model="candidate.noticePeriod"
 						ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
@@ -439,8 +387,8 @@
 						ng-required="UpdateCandidate.noticePeriod.$error.pattern"
 						ng-show="UpdateCandidate.noticePeriod.$error.pattern">
 						Notice period should be in days </span>
-				</div>
-				<div class="input-field col s6" align="left">
+			</div>
+			<div class="input-field col s6" align="left">
 					
 					<ui-select ng-model="candidate.expectedDesignation" ng-change="setJobCodes()" name="expectedDesignation"
 					theme="selectize" style="width: 80%">
@@ -453,7 +401,7 @@
 						Expected Designation
 					</label>
 	
-				</div>
+			</div>
 	
 			</div>
 	
