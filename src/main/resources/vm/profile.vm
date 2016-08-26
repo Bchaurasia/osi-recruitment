@@ -10,25 +10,25 @@ Hi, <br><br>
 <br><br> 
  <table style="width:450px; border: 0px solid Gray;">
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Candidate Name :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$candidateName</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Candidate Name :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$candidateName</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Total Experience : </td>
-<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$total_exp</td>
+<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><b>Total Experience : </td>
+<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;">$total_exp</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Primary Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$skills</td>
+<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Primary Skills :</td>
+<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$skills</td>
 </tr>
 #if($other_skills)
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Other Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$other_skills</td>
+<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Other Skills :</td>
+<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$other_skills</td>
 </tr>
 #end
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Submitted By :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$submittedBy</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Submitted By :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$submittedBy</td> 
 </tr>
 </table><br><br>
   

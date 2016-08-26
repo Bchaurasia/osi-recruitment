@@ -10,28 +10,28 @@ Hi $iname,<br><br>
 
 <table style="width:450px; border: 0px solid Gray;">
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;text-color:black;"><b>Candidate Name :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$cname</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Candidate Name :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$cname</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Round Of interview : </td>
-<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><hr style="font-family:verdana;border-width:0px;font-size:12px;">$roundName</td>
+<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><b>Round Of interview : </td>
+<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;">$roundName</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Date Of Interview :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:12px;">$interviewDateTime</td>
+<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Date Of Interview :</td>
+<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$interviewDateTime</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Type Of Interview :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:13px;">$typeOfInterview</td>
+<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Type Of Interview :</td>
+<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$typeOfInterview</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000; text-align:left; background-color:#F9FCF7;"><hr style="font-family:calibri;border-width:0px; font-size:15px;"><b>Candidate Mobile Number :</td>
-<td style="border: 0px ; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:13px;">$mobileNo</td>
+<tr><td style="border: 0px solid #000000; text-align:left; background-color:#F9FCF7;"><b>Candidate Mobile Number :</td>
+<td style="border: 0px ; text-align:left;background-color: #F9FCF7;">$mobileNo</td>
 </tr>
 
-<tr><td style="border: 0px  solid #000000; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:15px;"><b>Skype Id :</td>
-<td style="border: 0px ; text-align:left;background-color: #F9FCF7;"><hr style="font-family:calibri;border-width:0px;font-size:10px;">$skypeId</td>
+<tr><td style="border: 0px  solid #000000; text-align:left;background-color: #F9FCF7;"><b>Skype Id :</td>
+<td style="border: 0px ; text-align:left;background-color: #F9FCF7;">$skypeId</td>
 </tr>
 
 </table><br><br>
