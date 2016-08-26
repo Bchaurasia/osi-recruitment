@@ -95,16 +95,6 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		} 
 	}
 	
-	/*$scope.checkQualification = function(){
-		for(var i=0; i<$scope.candidate.qualifications.length; i++){
-			if($scope.candidate.qualifications[i].qualification == ""){				
-				 $scope.chkQualification=true;
-			}
-			else{
-				$scope.chkQualification=false;
-			}
-		}
-	}*/
 	
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
@@ -127,6 +117,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	 $scope.submit = function() {
 		 if ($scope.CreateCandidate.$valid) {
 			 $scope.submitted = false;
+			 $scope.candidate.confirm = "Yes";
 		    	var dt = new Date();
 		    	var curr_date = dt.getDate();
 		        var curr_month = dt.getMonth();
@@ -183,7 +174,62 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    }
 		  }
 	 
-
+	 $scope.saveProfile = function() {
+		 if ($scope.CreateCandidate.$valid) {
+			 $scope.submitted = false;
+			 $scope.candidate.confirm = "No";
+		    	var dt = new Date();
+		    	var curr_date = dt.getDate();
+		        var curr_month = dt.getMonth();
+		        var curr_year = dt.getFullYear();
+		        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
+		        var skills =[];
+				if ($scope.candidate !== undefined) {
+					angular.forEach($scope.position.primarySkills, function(value, key) {
+						 skills.push(value.text);
+						});
+					 $scope.candidate.primarySkills = skills;
+				}
+				if ($scope.candidate !== undefined) {
+					 $scope.candidate.status = "Not Initialized";
+				}
+		
+				$scope.candidate.isReferral = true;
+		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
+		    	$scope.candidate.interviewSet = false;
+		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
+		    	$scope.candidate.createdBy = $scope.user.emailId;
+		    	$scope.candidate.updatedBy  = $scope.user.emailId;
+		    	$scope.candidate.referredBy  = $scope.user.emailId;
+		    	$scope.candidate.referredByName = $scope.user.name;
+		    	$scope.candidate.profileSource = "Referral";
+		    	console.log("job code selected is::"+$scope.candidate.jobCode);
+		    	$scope.candidate.requisitionId = $scope.getRequisitionIdFromJobCode($scope.candidate.jobCode);
+		    	console.log("requisition id selected is::"+$scope.candidate.requisitionId);
+		    	console.log(angular.toJson($scope.candidate));
+		    	profileService.addProfiles($scope.candidate).then(function(msg){
+		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
+				    $scope.CreateCandidate.$setPristine();
+				    $scope.candidate={};
+				    $scope.sk.primarySkills="";
+				    $log.info(msg);
+				    $scope.sendNotification(msg,'referral/searchReferralProfile');
+		    	}).catch(function(msg){
+		    		
+		    		$scope.message=msg;
+		    		$scope.cls=appConstants.ERROR_CLASS;
+					$log.error(msg);
+		    	})
+		 }
+		 else {
+		    	  $scope.submitted = true;
+		    	  $scope.showErrorMsg=true;
+		    	  $scope.cls=appConstants.ERROR_CLASS;
+		    	  $scope.message = "failed!Fields marked in Red need to be filled";
+		    }
+		  }
+	 
+	 
 	 $scope.next = function(nextShow){	
 		 if(nextShow=='show1'){
 			 $scope.show1=true;

@@ -110,6 +110,58 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	 $scope.submit = function() {
 		 if ($scope.CreateCandidate.$valid) {
 			 $scope.submitted = false;
+			 $scope.candidate.confirm= "Yes";
+		    	var dt = new Date();
+		    	var curr_date = dt.getDate();
+		        var curr_month = dt.getMonth();
+		        var curr_year = dt.getFullYear();
+		        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
+		        var skills =[];
+				if ($scope.candidate !== undefined) {
+					angular.forEach($scope.position.primarySkills, function(value, key) {
+						 skills.push(value.text);
+						});
+					 $scope.candidate.primarySkills = skills;
+				}
+				if ($scope.candidate !== undefined) {
+					 $scope.candidate.status = "Not Initialized";
+				}
+				//$scope.candidate.isCreatedByUser = false;
+				$scope.candidate.isReferral = false;
+				$scope.candidate.referredByName = $scope.user.name;
+		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
+		    	$scope.candidate.interviewSet = false;
+		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
+		    	$scope.candidate.createdBy = $scope.user.emailId;
+		    	$scope.candidate.updatedBy  = $scope.user.emailId;
+		    	
+		    	profileService.addProfiles($scope.candidate).then(function(msg){
+		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
+				    $scope.CreateCandidate.$setPristine();
+				    $scope.candidate={};
+				    $scope.selection.pLocation="";
+				    $scope.sk.primarySkills="";
+				    $log.info(msg);
+				    $scope.sendNotification(msg,'recruitment/searchProfile');
+		    	}).catch(function(msg){
+		    		
+		    		var cls=appConstants.ERROR_CLASS;
+		    		$scope.sendNotificationWithStyle(msg,cls,'');
+					$log.error(msg);
+		    	})
+		 }
+		 else {
+		    	  $scope.submitted = true;
+		    	  $scope.showErrorMsg=true;
+		    	  $scope.cls=appConstants.ERROR_CLASS;
+		    	  $scope.message = "failed!Fields marked in Red need to be filled";
+		    }
+		  }
+	 	
+	 $scope.saveProfile = function() {
+		 if ($scope.CreateCandidate.$valid) {
+			 $scope.submitted = false;
+			 $scope.candidate.confirm= "No";
 		    	var dt = new Date();
 		    	var curr_date = dt.getDate();
 		        var curr_month = dt.getMonth();

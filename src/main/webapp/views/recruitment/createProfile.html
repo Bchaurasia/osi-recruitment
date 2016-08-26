@@ -406,11 +406,20 @@
 	
 			<div align="center" class="row">
 			<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
+				
+				<button class="btn btn-info active" type="submit"
+					ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"
+					ng-click="saveProfile()">
+					<span class="glyphicon glyphicon-open-file"></span> Save
+				</button>
+				
+				
 				<button class="btn btn-success active" type="submit"
 					ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"
 					ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Submit
 				</button>
+				
 				<button class="btn btn-danger active"
 					ui-sref="recruitment.searchProfile">
 					<span class="glyphicon glyphicon-remove"></span> Cancel

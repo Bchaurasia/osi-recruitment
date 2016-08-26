@@ -57,5 +57,6 @@ public class Profile extends AuditEntity{
 	String currency;
 	String updatedByName;
 	String isApproved;
+	String confirm;
 	
 }
