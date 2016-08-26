@@ -209,7 +209,10 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
 		$scope.candidate.orgGrade.designation.name=$scope.name.name;
 		console.log(angular.toJson($scope.candidate));
-		if($scope.candidate.finalStatus!==""){
+		if($scope.candidate.finalStatus == null){
+			 $scope.candidate.finalStatus = "";
+		}
+		if($scope.candidate.finalStatus != ""){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}
 		var RELEASE_OFFER='resources/save-offer';
