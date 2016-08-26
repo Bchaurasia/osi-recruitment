@@ -92,7 +92,7 @@ app.controller("editPositionCtrl",   ['$scope','$state', '$http','sharedService'
 	$scope.init();
 	
 	function setUsers(data){
-		$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_INTERVIEWER"); });
+		$scope.interviewers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		//$scope.hrManagers =_.filter(data, function(user){ return _.contains(user.roles, "ROLE_HR"); });
 		$scope.interviewer =_.filter($scope.interviewers, function(user){ return user.emailId === $scope.position.interviewer})[0];
 		//$scope.hrManager = _.filter($scope.hrManagers, function(user){ return user.emailId === $scope.position.hiringManager.emailId})[0];

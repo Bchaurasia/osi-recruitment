@@ -226,7 +226,8 @@ margin-left: 59px;
 								<div class="summary">
 									{{feed.eventDesc}}<br>
 									<div class="date datediv">
-										<time am-time-ago="feed.createdTimeStamp"></time>
+									<b><time>{{ feed.createdTimeStamp | amDateFormat: 'dddd,
+											MMMM Do YYYY, h:mm a' }}</time></b>
 									</div>
 								</div>
 							</div>
