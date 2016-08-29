@@ -55,18 +55,11 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.candidate.emailId = $scope.profile.candidateEmail;
 		$scope.candidate.jobcodeProfile = $scope.profile.currentPositionId;
 		$scope.candidate.requisitionId = $scope.profile.requisitionId;
-		
-		getProfileData()
-	      .then(getOfferBandsData)
-	      .then(getOfferData)
-	      .then(getPositionDetails);
-		
+		getProfileData();
 	}
 	
 	 var getProfileData = function(){
-		var deferred = $q.defer();
-		$timeout(function() {
-			$http.get('resources/profile?emailId='+$scope.candidate.emailId)
+		$http.get('resources/profile?emailId='+$scope.candidate.emailId)
 		 .then(function(response){
 				$scope.candidate1=response.data[0];
 				$scope.candidate.qualification=$scope.candidate1.qualifications;
@@ -79,38 +72,26 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 				$scope.candidate.noticePeriod=$scope.candidate1.noticePeriod;
 				$scope.candidate.currentLocation=$scope.candidate1.currentLocation;
 				$scope.candidate.profileSource=$scope.candidate1.profileSource;
+				getOfferBandsData();
 			})
 		 .catch(function(){
 			 console.log("fail to get data");
 		 });
-		      deferred.resolve('thread1');
-		    }, 70);
-
-		    return deferred.promise;
 		
 	}
 	
 	var getOfferBandsData = function(){
-		 var deferred = $q.defer();
-		    $timeout(function() {
 		    	offerService.getBandOfferData().then(function(data){
 					$scope.orgBands=data;
+					getOfferData();
 				}).catch(function(msg){
 					$scope.message=msg;
 					 $scope.cls=appConstants.ERROR_CLASS;
 					 $timeout( function(){ $scope.alHide(); }, 5000);
 				});
-				
-		      deferred.resolve('thread2');
-		    }, 70);
-
-		    return deferred.promise;
 	}
 	
 	var getOfferData = function(){
-		var deferred = $q.defer();
-
-	    $timeout(function() {
 	    	offerService.getOfferData($scope.candidate.emailId).then(function(offerdata){
 	    		if(offerdata!==""){
 	    			$scope.candidate=offerdata;
@@ -133,18 +114,13 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 	    			$scope.candidate.expectedJoiningDate=new Date($scope.candidate.expectedJoiningDate);
 	    		}
 	    		hideFinalStatusFun();
+	    		getPositionDetails();
 	    	}).catch(function(data){
 	    		$log.error(data);
 	    	});
-	      deferred.resolve('thread3');
-	    }, 70);
-
-	    return deferred.promise;
 	}
 	
 	var getPositionDetails = function(){
-		 var deferred = $q.defer();
-		    $timeout(function() {
 		    	var GET_POSTION_DETAILS='resources/searchPositionsBasedOnJobCode?jobcode='+$scope.candidate.jobcodeProfile;
 		    	
 		    	$http.get(GET_POSTION_DETAILS).success(function(data2, status, headers, config) {
@@ -153,10 +129,6 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		    	}).error(function(data, status, headers, config) {
 		    		$log.error(data);
 		    	});
-		      deferred.resolve('thread4');
-		    }, 70);
-
-		    return deferred.promise;
 	}
 	
 	$scope.selectStream = function(bu){
