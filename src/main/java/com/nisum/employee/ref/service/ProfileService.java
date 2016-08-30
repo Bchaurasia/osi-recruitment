@@ -1,6 +1,7 @@
 package com.nisum.employee.ref.service;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -49,7 +50,7 @@ public class ProfileService implements IProfileService{
 	
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		Event e=new Event();
-		e.setEventDesc("Profile of "+candidate.getCandidateName()+" has created.");
+		e.setEventDesc("Profile of "+candidate.getCandidateName()+" was created.");
 		e.setCategory("General");
 		e.setEmailId(candidate.getCreatedBy());
 		eventService.setEvent(e);
@@ -110,6 +111,17 @@ public class ProfileService implements IProfileService{
 	
 	public void updateCandidate(Profile candidate) {
 		try {
+			List<Profile> profileList = getProfileByEmailId(candidate.getEmailId());
+			 for (int i=0; i< profileList.size(); i++)
+             {
+                 if(profileList.get(i).getCandidateName() != candidate.getCandidateName()){
+                	 Event e=new Event();
+             		e.setEventDesc("Profile name "+profileList.get(i).getCandidateName()+" is changed to " +candidate.getCandidateName());
+             		e.setCategory("General");
+             		e.setEmailId(candidate.getCreatedBy());
+             		eventService.setEvent(e);
+                 }
+             }
 			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
