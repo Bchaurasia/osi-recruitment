@@ -122,9 +122,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
    function reqData(){
 	   requisitionService.getAllRequisitions().then(function(data){
 		$scope.requisitionData=data;
-		console.log(data);
-		
-	   });
+	 });
    }
     function getDesignationSpecificData(){
 		var designationArray=[];
@@ -344,7 +342,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		
 		dashboardService.getScheduleData()
 		.then(function (data){
-			console.log(angular.toJson(data));
 			var scheduleInterviewData=[];
 			angular.forEach(data,function(value,key){
 				if((value.roundStatus!='Level 1 Feedback Submitted')&&(value.roundStatus!='Level 2 Feedback Submitted')&&(value.roundStatus!='HR Feedback Submitted'))
