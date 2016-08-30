@@ -110,6 +110,8 @@ public class ProfileService implements IProfileService{
 	
 	public void updateCandidate(Profile candidate) {
 		try {
+			
+			 
 			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
