@@ -473,8 +473,8 @@
 						<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
 						<button type="button" class="btn btn-info active" align="left" ng-click="download();"><i class="material-icons left">file_download</i>Download Resume </button>
 						<button class="btn btn-info active" type="submit" ng-show="candidate.isReferral && hasRole('ROLE_HR')" ng-disabled="disableApproveBtn" ng-click="approveProfile()"> <span class="glyphicon glyphicon-ok-circle"></span> Approve </button>
-						<button class="btn btn-info active" type="submit" ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn" ng-click="updateProfileDetails()"> <span class="glyphicon glyphicon-ok-circle"></span> Update </button>
-						<button class="btn btn-primary active" type="submit" ng-show="candidate.confirm=='No'" ng-disabled="disableApproveBtn" ng-click="submit()"> <span class="glyphicon glyphicon-ok-circle"></span> Submit </button>
+						<button class="btn btn-primary active" type="submit" ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn" ng-click="updateProfileDetails()"> <span class="glyphicon glyphicon-ok-circle"></span> Update </button>
+						<button class="btn btn-success active" type="submit" ng-show="candidate.confirm=='No'" ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn" ng-click="submit()"> <span class="glyphicon glyphicon-ok-circle"></span> Submit </button>
 						<button class="btn btn-danger active" ui-sref="recruitment.searchProfile"> <span class="glyphicon glyphicon-remove"></span> Cancel </button>
 				</div>
 			</div>

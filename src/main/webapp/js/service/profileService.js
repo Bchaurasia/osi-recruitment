@@ -6,6 +6,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		getProfileByCreateremailId : getProfileByCreateremailId,
 		updateProfile : updateProfile,
 		addProfiles : addProfiles,
+		saveProfile : saveProfile,
 		approveProfile : approveProfile,
 		updateProfiles : updateProfiles,
 		getProfileById : getProfileById,

@@ -14,7 +14,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.sk.jobcodeProfiles = [];
 	$scope.sk.primarySkills = [];
 	$scope.todayDate = new Date();
-	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
+	$scope.profileSources = ["Consultancy","Job Sites"];
 	$scope.screeningStatusList= ["Yes","No"];
 	$scope.requisitionId="";
 	
@@ -108,8 +108,11 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$scope.disableApproveBtn = true;
 			$scope.disableUpdateBtn = true;
 		}
-		if($scope.candidate.isReferral)
+		if($scope.candidate.isReferral){
+			$scope.profileSources.push("Referral");
 			$scope.disableProfileSource = true;
+		}
+			
 		if($scope.candidate.status !== "Not Initialized"){
 			$scope.disableUpdateBtn = true;
 		}
