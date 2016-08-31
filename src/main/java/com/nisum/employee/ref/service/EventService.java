@@ -54,6 +54,12 @@ public class EventService implements IEventService {
 		return eventRepo.retieveEvents();
 	
 	}
+	@Override
+		public List<Event> getUserEvents(String emailId) {
+		// TODO Auto-generated method stub
+		return eventRepo.retieveUserEvents(emailId);
+	
+	}
 	
 	@Override
 	public List<Event> getEventsForGeneral() {

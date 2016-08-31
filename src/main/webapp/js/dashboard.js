@@ -56,6 +56,9 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	var layer2Data=[];
 	var layer3Data=[];
 	$scope.offerData=false;
+	$scope.showHighcharts= true;
+	$scope.userData= false;
+
 	function isValidDate(date) {
 		layer2Data=[];
 		layer3Data=[];
@@ -404,6 +407,25 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				$log.error(msg);
 			});
 	}
+	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_USER")){
+		$scope.showHighcharts= false;
+		$scope.userData= true;
+		$scope.events=[];
+		console.log($rootScope.user.emailId);
+		dashboardService.getUserEvents($rootScope.user.emailId).then(function(data){
+			$scope.events=data; 
+			for(i=0; i<$scope.events.length; i++){
+				var subName=$scope.events[i].username.split(" ");
+				if(subName.length>=2){
+					$scope.events[i].initial=subName[0].charAt(0).concat(subName[1].charAt(0));
+				}
+				else{
+					$scope.events[i].initial=subName[0].charAt(0);
+				}
+			}
+	});
+		
+}
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		
 		 offerService.getOfferForDashboard().then(function(data){
@@ -443,8 +465,10 @@ if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_IN
 
 }
 
-if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") || _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") || _.contains($rootScope.user.roles,"ROLE_MANAGER")))
-{
+if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
+		|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") ||
+		_.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") )){
+
 dashboardService.getAllEvents().then(function(data){
 	$scope.events = data;
 	
@@ -456,26 +480,11 @@ dashboardService.getAllEvents().then(function(data){
 		else{
 			$scope.events[i].initial=subName[0].charAt(0);
 		}
-	}
+		
+}
+	
 });
 }
-else if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_USER"))
-	{
-	dashboardService.getUserEvents().then(function(data){
-		$scope.events = data;
-		
-		for(i=0; i<$scope.events.length; i++){
-			var subName=$scope.events[i].username.split(" ");
-			if(subName.length>=2){
-				$scope.events[i].initial=subName[0].charAt(0).concat(subName[1].charAt(0));
-			}
-			else{
-				$scope.events[i].initial=subName[0].charAt(0);
-			}
-		}
-	});
-	
-	}
 
 $scope.getGraphData = function(position) {
 	var graphDetails = _.find($scope.designationWithStatusCount, function (o) { return o.Position == position; });

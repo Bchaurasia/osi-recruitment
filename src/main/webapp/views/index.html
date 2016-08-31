@@ -120,8 +120,8 @@ margin-left: 59px;
 
 </div> -->
 
+<div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 
-<div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show='showPositionRequisitionTable'>
 	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"
 		ng-show="showNoAnyPositions"></div>
 	<div ng-show="!showNoAnyPositions"
@@ -244,8 +244,11 @@ margin-left: 59px;
 						</div>
 					</div>
 			</div>
+</div>
+</div>
+</div>
+<div ng-show="showHighcharts">
 
-<div ng-show='showPositionRequisitionTable'>
 <i class="download icon large" style="margin-left:950; cursor: pointer;" id="btnExport" tooltip="Download this table"></i>
 <div style="width:80%;padding-bottom:5%" id="reqTable">
 <table class="ui table" style="margin-top:0px">
@@ -270,6 +273,7 @@ margin-left: 59px;
 </table>
 </div>
 </div>
+
 <div ng-show="!showNoAppRequisitionMsg">
 	<h4 style="margin-top: 15px;height: 1px" align="center"     height: 1px;>Requisition for
 		Approval</h4>
@@ -305,6 +309,31 @@ margin-left: 59px;
 	</div>
 
 </div>
+			<div class="ui feed " style="font-size: 100%; width:60%" ng-show="userData">
+				<h4 style="margin-top: 25px; height: 1px;" noshade>
+					Recent Activities
+					</h4>
+					<hr style="background-color: black; height:1px; width: 50%">
+					<div align="left"
+						style="margin-left: 245px; height: auto; overflow: auto;">
+						<div class="event" ng-repeat="feed in events">
+							<div class="label" style="color: white">
+								<span class="initial"
+									ng-style="{'background-color':(($index%2)==0?'#ff0000':'#66ff33')}"
+									tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
+							</div>
+							<div class="content">
+								<div class="summary">
+									{{feed.eventDesc}}<br>
+									<div class="date datediv">
+									<b><time>{{ feed.createdTimeStamp | amDateFormat: 'dddd,
+											MMMM Do YYYY, h:mm a' }}</time></b>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
 <!-- <div class="row">
 	<div class="col-md-6"></div>
 	<div class="col-md-6">

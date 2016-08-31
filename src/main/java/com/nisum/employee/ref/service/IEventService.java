@@ -8,4 +8,5 @@ public interface IEventService {
 public void setEvent(Event event);
 public List<Event> getEvents();
 public List<Event> getEventsForGeneral();
+public List<Event> getUserEvents(String emailId);
 }
