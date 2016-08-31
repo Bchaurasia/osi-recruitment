@@ -8,7 +8,8 @@ function dashboardService($http,$filter,$rootScope,$timeout,appConstants,$q) {
 		getScheduleDataInterview : getScheduleDataInterview,
 		getAllEvents : getAllEvents,
 		getInterviewDetails : getInterviewDetails,
-		getPositionByStatus:getPositionByStatus
+		getPositionByStatus:getPositionByStatus,
+		getUserEvents: getUserEvents
 	};
 	
 	function getPositionData(obj){
@@ -108,4 +109,12 @@ function getPositionByStatus(status,fromdate,todate) {
 			return "Failed to get Events!"
 		})
 	}
+function getUserEvents(emailId){
+	return $http.get('resources/getUserEvents?emailId='+emailId).then(function(response){
+		return response.data;
+		
+	}).catch(function(response) {
+		return "Failed to get Events!"
+	})
+}
 }

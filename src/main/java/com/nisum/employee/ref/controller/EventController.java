@@ -57,4 +57,12 @@ public class EventController {
 		
 		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/getUserEvents", method = RequestMethod.GET)
+	public ResponseEntity<?> retrieveUserEvents(
+		@RequestParam(value = "emailId", required = true) String emailId) {
+		List<Event> eventDetails = eventService.getUserEvents(emailId);
+		
+		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
+	}
 }

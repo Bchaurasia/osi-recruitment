@@ -47,4 +47,14 @@ public List<Event> retieveEventsForGeneral(){
 	return allEvents;
 
 	}
+
+
+public List<Event> retieveUserEvents(String emailId) {
+	Query query = new Query();
+	query.addCriteria(Criteria.where("emailId").is(emailId));
+	query.with(new Sort(new Order(Sort.Direction.DESC, "createdTimeStamp")));
+	query.limit(10);	
+	List<Event> allUserEvents=mongoOperations.find(query,Event.class);
+	return allUserEvents;
+}
 }
