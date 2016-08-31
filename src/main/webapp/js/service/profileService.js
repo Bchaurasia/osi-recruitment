@@ -45,6 +45,12 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		.catch(sendCreateErrorprofileMsg);
 	}
 	
+	function saveProfile(profile){
+		return $http.post('resources/saveProfile', profile)
+		.then(createProfileSuccess)
+		.catch(sendCreateErrorprofileMsg);
+	}
+	
 	function approveProfile(profile){
 		return $http.post('resources/approveProfile', profile)
 		.then(createProfileSuccess)

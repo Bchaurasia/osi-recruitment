@@ -102,9 +102,24 @@ public class ProfileController {
 			candidate.setIsApproved("Not Approved");
 		}
 		Profile profile = profileService.prepareCandidate(candidate);
-			String jsonObj=MSG+ profile.getCandidateName() +"'s profile successfully created\"}";
+			String jsonObj=MSG+ profile.getCandidateName() +"'s profile successfully Submitted..!\"}";
 			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
 	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
+	@RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<?> saveUser(@RequestBody Profile candidate) throws Exception{
+		candidate.setIsApproved("-");
+		if(candidate.getIsReferral()){
+			candidate.setIsApproved("Not Approved");
+		}
+		Profile profile = profileService.prepareCandidateForSaveProfile(candidate);
+			String jsonObj=MSG+ profile.getCandidateName() +"'s Profile Successfully Saved..!\"}";
+			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
+	}
+	
+	
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/approveProfile", method = RequestMethod.POST)

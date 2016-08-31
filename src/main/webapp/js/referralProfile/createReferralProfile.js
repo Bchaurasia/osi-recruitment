@@ -203,11 +203,9 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    	$scope.candidate.referredBy  = $scope.user.emailId;
 		    	$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.profileSource = "Referral";
-		    	console.log("job code selected is::"+$scope.candidate.jobCode);
 		    	$scope.candidate.requisitionId = $scope.getRequisitionIdFromJobCode($scope.candidate.jobCode);
-		    	console.log("requisition id selected is::"+$scope.candidate.requisitionId);
-		    	console.log(angular.toJson($scope.candidate));
-		    	profileService.addProfiles($scope.candidate).then(function(msg){
+		    	
+		    	profileService.saveProfile($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
 				    $scope.CreateCandidate.$setPristine();
 				    $scope.candidate={};
@@ -314,12 +312,6 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				$scope.fileError = false;
 				document.getElementById("uploadFile").value = "";
 				$scope.uploadError = false;
-			}
-			document.getElementById("uploadFile").onchange = function() {
-			    if(uploadFile.value) {
-			        document.getElementById("submit").disabled = false; 
-			        $scope.uploadError = false;
-			    }  
 			}
 		};
 	

@@ -88,17 +88,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		} 
 	}
 	
-	/*$scope.checkQualification = function(){
-		for(var i=0; i<$scope.candidate.qualifications.length; i++){
-			if($scope.candidate.qualifications[i].qualification == "" || $scope.candidate.qualifications[i].qualification == undefined){				
-				 $scope.chkQualification=true;
-				 break;
-			}
-			else{
-				$scope.chkQualification=false;
-			}
-		}		
-	}*/
 	
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
@@ -177,7 +166,6 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-				//$scope.candidate.isCreatedByUser = false;
 				$scope.candidate.isReferral = false;
 				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
@@ -186,7 +174,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    	$scope.candidate.createdBy = $scope.user.emailId;
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	
-		    	profileService.addProfiles($scope.candidate).then(function(msg){
+		    	profileService.saveProfile($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
 				    $scope.CreateCandidate.$setPristine();
 				    $scope.candidate={};
@@ -294,12 +282,7 @@ $scope.previous=function(previousShow){
 				document.getElementById("uploadFile").value = "";
 				$scope.uploadError = false;
 			}
-			document.getElementById("uploadFile").onchange = function() {
-			    if(uploadFile.value) {
-			        document.getElementById("submit").disabled = false; 
-			        $scope.uploadError = false;
-			    }  
-			}
+	
 		};
 	
 	$scope.status = {

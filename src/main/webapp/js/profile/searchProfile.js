@@ -13,7 +13,16 @@ app.controller('searchProfileCtrl',['$scope', '$http','$q', '$window','sharedSer
 	   	profileService.searchProfile($scope.search).then(setProfiles);
    }
    function setProfiles(data) {
-		$scope.profiles = data;
+	   $scope.tempProfiles = data;
+	   $scope.profiles = [];
+	   angular.forEach($scope.tempProfiles,function(profile){	    	
+	    	console.log("::profile job code::"+profile.jobCode);
+	    	if(!(profile.isReferral == true && profile.confirm == "No"))
+	    	{
+	    		$scope.profiles.push(profile);
+	    	}
+	    	
+	    });
 		$scope.currentPage = 0;
 	}
 	/*$scope.getCandidateName=function(emailId){

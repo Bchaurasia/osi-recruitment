@@ -394,7 +394,7 @@
 	
 			<div class="row">
 				<div class="input-field col s6">
-					<input type="file" class="custom-file-input"
+					<input type="file" class="custom-file-input" id="uploadFile"
 						ng-file-select="upload($files)" valid-file required /> <small
 						ng-hide="fileError" class="mandatory-field">File
 						Externsions Accepted: [doc, docx, pdf]</small> <br> <label
@@ -412,7 +412,6 @@
 					ng-click="saveProfile()">
 					<span class="glyphicon glyphicon-open-file"></span> Save
 				</button>
-				
 				
 				<button class="btn btn-success active" type="submit"
 					ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"

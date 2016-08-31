@@ -83,17 +83,6 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$scope.candidate.qualifications.splice(index,1);
 		} 
 	}
-	/*$scope.checkQualification = function(){
-		for(var i=0; i<$scope.candidate.qualifications.length; i++){
-			if($scope.candidate.qualifications[i].qualification == "" || $scope.candidate.qualifications[i].qualification == undefined){				
-				 $scope.chkQualification=true;
-				 break;
-			}
-			else{
-				$scope.chkQualification=false;
-			}
-		}		
-	}*/
 	
 	$scope.status = {
 		    isFirstOpen: true,
@@ -124,7 +113,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		if($scope.candidate.status !== "Not Initialized"){
 			$scope.disableUpdateBtn = true;
 		}
-		console.log("in getdata-->: "+angular.toJson($scope.candidate));
+		
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
 			 angular.forEach($scope.positionData, function(jobcodeProfile){
@@ -250,10 +239,6 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	        $scope.candidate.updatedBy  = $scope.user.emailId;
 	        $scope.candidate.status = "Not Initialized";
 	        $scope.candidate.updatedByName = $scope.user.name;
-	        /*if($scope.candidate.jobcodeProfile=="")
-				 $scope.candidate.status = "Not Initialized";
-			 else
-				 $scope.candidate.status = "Initialized";*/
 			}
 			
 	        profileService.updateProfile($scope.candidate).then(function(msg){
@@ -280,6 +265,59 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$log.error(msg);
         })
 	}
+	
+	$scope.submit = function() {
+		 if ($scope.candidate !== undefined) {
+			 $scope.submitted = false;
+			 $scope.candidate.confirm= "Yes";
+		    	var dt = new Date();
+		    	var curr_date = dt.getDate();
+		        var curr_month = dt.getMonth();
+		        var curr_year = dt.getFullYear();
+		        var timeStamp = curr_date + "-" + curr_month + "-" + curr_year;
+		        var skills =[];
+				if ($scope.candidate !== undefined) {
+					angular.forEach($scope.sk.primarySkills, function(value, key) {
+						 skills.push(value.text);
+						});
+					 $scope.candidate.primarySkills = skills;
+				}
+				if ($scope.candidate !== undefined) {
+					 $scope.candidate.status = "Not Initialized";
+				}
+				//$scope.candidate.isCreatedByUser = false;
+				$scope.candidate.isReferral = false;
+				$scope.candidate.referredByName = $scope.user.name;
+		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
+		    	$scope.candidate.interviewSet = false;
+		    	$scope.candidate.uploadedFileName = $scope.candidate.emailId + "_" + $scope.uploadedFileName;
+		    	$scope.candidate.createdBy = $scope.user.emailId;
+		    	$scope.candidate.updatedBy  = $scope.user.emailId;
+		    	
+		    	profileService.addProfiles($scope.candidate).then(function(msg){
+		    		$scope.sendNotification(msg,'recruitment/searchProfile');
+					$log.info(msg);
+		    		//$scope.uploadFileIntoDB($scope.uploadedFile);		    		
+				    //$scope.CreateCandidate.$setPristine();
+				    $scope.candidate={};
+				   // $scope.selection.pLocation="";
+				    $scope.sk.primarySkills="";
+				   
+		    	}).catch(function(msg){
+		    		
+		    		var cls=appConstants.ERROR_CLASS;
+		    		$scope.sendNotificationWithStyle(msg,cls,'');
+					$log.error(msg);
+		    	})
+		 }
+		 else {
+		    	  $scope.submitted = true;
+		    	  $scope.showErrorMsg=true;
+		    	  $scope.cls=appConstants.ERROR_CLASS;
+		    	  $scope.message = "failed!Fields marked in Red need to be filled";
+		    }
+		  }
+	
 	$scope.validateChar = function(data) {
 		if (/^[a-zA-Z _]*$/.test(data)) {
 			return true;
@@ -347,18 +385,6 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		});	
 			
 	};
-	
-	$scope.checkQualification = function(){
-		for(var i=0; i<$scope.candidate.qualifications.length; i++){
-			if($scope.candidate.qualifications[i].qualification == "" || $scope.candidate.qualifications[i].qualification == undefined){				
-				 $scope.chkQualification=true;
-				 break;
-			}
-			else{
-				$scope.chkQualification=false;
-			}
-		}		
-	}
 	
 	
 $scope.next = function(nextShow){	
