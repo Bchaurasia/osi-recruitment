@@ -120,8 +120,8 @@ margin-left: 59px;
 
 </div> -->
 
-<div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 
+<div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"
 		ng-show="showNoAnyPositions"></div>
 	<div ng-show="!showNoAnyPositions"
@@ -165,7 +165,7 @@ margin-left: 59px;
 						</div>
 					</div>
 			</div>
-		<div class="ui feed " style="font-size: 100%;  width: 27%;">
+		<div class="ui feed " style="font-size: 100%;">
 			<div ng-hide="showNoInterviewMsg">
 				<h4 style="margin-top: 10px;height: 1px;">
 					Scheduled Events
@@ -209,17 +209,7 @@ margin-left: 59px;
 									</div>
 								</div>
 			</div>
-			
-		</div>
-			
-
-	</div>
-	
-</div>
-<!-- </div>
-</div>
- -->
-<div class="ui feed " style="font-size: 100%;">
+			<div class="ui feed " style="font-size: 100%;">
 				<h4 style="margin-top: 25px; height: 1px;" noshade>
 					Recent Activities
 					</h4>
@@ -244,11 +234,12 @@ margin-left: 59px;
 						</div>
 					</div>
 			</div>
-</div>
+		</div>
+
+	</div>
 </div>
 </div>
 <div ng-show="showHighcharts">
-
 <i class="download icon large" style="margin-left:950; cursor: pointer;" id="btnExport" tooltip="Download this table"></i>
 <div style="width:80%;padding-bottom:5%" id="reqTable">
 <table class="ui table" style="margin-top:0px">
@@ -271,9 +262,8 @@ margin-left: 59px;
   
   </tbody>
 </table>
-</div>
-</div>
-
+		</div>
+		</div>
 <div ng-show="!showNoAppRequisitionMsg">
 	<h4 style="margin-top: 15px;height: 1px" align="center"     height: 1px;>Requisition for
 		Approval</h4>
