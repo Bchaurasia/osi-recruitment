@@ -204,6 +204,9 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		$scope.candidate.orgGrade.level=$scope.level;
 		$scope.candidate.orgGrade.designation.grade=$scope.grade.grade;
 		$scope.candidate.orgGrade.designation.name=$scope.name.name;
+		if($scope.candidate.finalStatus == null){
+			 $scope.candidate.finalStatus = "";
+		}
     	if($scope.candidate.finalStatus!==""){
 			$scope.candidate.offerStatus=$scope.candidate.finalStatus;
 		}
