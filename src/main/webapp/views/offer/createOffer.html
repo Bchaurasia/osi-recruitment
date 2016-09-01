@@ -186,11 +186,12 @@
 							class="mandatory">*</b> </label>
 					</div>
 						<div class="col-md-2"></div>
-					<div class="input-field col s6">
-						<select ng-model="name" name="currency"
-							ng-options="o.name for o in designationdesignations track by o.grade" class="form-control input-sm" required>
-								<option value="" disabled="disabled">Select Designation</option>
-						</select> <label style="position: absolute; top: -22px;"> Designation<b
+						<div class="input-field col s6">
+						<select ng-model="name" name="designation"
+							ng-options="o.name for o in designationdesignations track by o.name"
+							class="form-control input-sm" required>
+							<option value="" disabled="disabled">Select Designation</option>
+						</select> <label style="position: absolute; top: -22px;">Designation<b
 							class="mandatory">*</b> </label>
 					</div>
 		
