@@ -90,6 +90,11 @@
 		<div class="ui two column centered grid">
 			<div class="center aligned column">
 				<div class="ui buttons row">
+				<button class="ui teal button" ng-model="candidate"
+					ng-click="reset()">
+					<span class="glyphicon glyphicon-refresh"></span> Reset
+				</button>
+				<div class="or"></div>
 					<button class="ui large primary button" type="submit"
 						ng-hide="hideSubmit" ng-click="submit()" ng-show="submitShow"
 						ng-disabled="feedback_form.$invalid">Submit</button>

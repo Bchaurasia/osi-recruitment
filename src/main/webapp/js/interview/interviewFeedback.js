@@ -61,73 +61,77 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			$scope.interviewFeedback.rateSkills =[];
 			$scope.interviewFeedback.domainSkills=[];
 			$scope.position = response[2].data;
-			for(var i=0; i<$scope.position.primarySkills.length;i++){
-					$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":""}); 
-			$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
-			}
-			for(i=0;$scope.interview.rounds.length;i++){
-				
-				if(_.isNull($scope.interview.rounds[i].interviewFeedback)
-				&& ( $scope.interview.rounds[i].interviewSchedule.emailIdInterviewer === sessionStorage.userId
-				  || _.contains($scope.user.roles, "ROLE_HR")))
-				{
-					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
-					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
-					$scope.tabName=$scope.interview.rounds[i].roundName;
-					if($scope.interviewFeedback.roundName !== "Level 1"
-						&& $scope.interviewFeedback.roundName !== "Level 2" 
-							&& $scope.interviewFeedback.roundName !== "Managerial" 
-								&& $scope.interviewFeedback.roundName !== "HR")
-						$scope.tabName = "Others";
-					$scope.filterbyRound = function (tab) {  
-						return _.contains(tab.rounds, $scope.tabName);
-					};  
-					     
-					$scope.tabs = [
-				   	{	
-	               		"rounds": ["Level 1","Level 2"],
-						"heading": "Technical",
-						"template":"technicalFeedback.html"
-					},
-		   			{	
-						"rounds": ["Level 1","Level 2","Managerial","HR"],
-		   				"heading": "Functional",
-		   				"template":"functionalFeedback.html"
-		   			},
-		   			{	
-		   				"rounds": ["Level 1","Level 2","Managerial","HR"],
-		   				"heading": "Soft Skills",
-		   				"template":"softSkillsFeedback.html"
-		   			},		   			
-		   			{	
-		   				"rounds": ["Managerial","HR"],
-		   				"heading": "Management Skills",
-		   				"template":"mangementSkillset.html"
-		   			},
-		   			{	
-		   				"rounds": ["Level 1","Level 2","Managerial","HR","Others"],
-		   				"heading": "Comment",
-		   				"template":"commentFeedback.html"
-		   			}
-		   		];
-
-					$scope.hideSubmit=false;
-					break;
-				}
-				
-				else if(($scope.interview.rounds[i].roundName=="HR")){
-					$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
-					$scope.interviewFeedback = $scope.interview.rounds[i].interviewFeedback;
-					$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
-					$scope.hideSubmit=true;
-				}
-			}
-			
+			$scope.setInitialValue();
 			},
 			function(errorMsg) {
 				$log.error("-------"+errorMsg);
 			}
 		);
+	
+	$scope.setInitialValue= function(){
+	$scope.interviewFeedback.rateSkills=[];
+	for(var i=0; i<$scope.position.primarySkills.length;i++){
+			$scope.interviewFeedback.rateSkills.push({"skill":$scope.position.primarySkills[i], "rating":""}); 
+	$log.error(angular.toJson($scope.interviewFeedback.rateSkills));
+	}
+	for(i=0;$scope.interview.rounds.length;i++){
+		
+		if(_.isNull($scope.interview.rounds[i].interviewFeedback)
+		&& ( $scope.interview.rounds[i].interviewSchedule.emailIdInterviewer === sessionStorage.userId
+		  || _.contains($scope.user.roles, "ROLE_HR")))
+		{
+			$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
+			$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+			$scope.tabName=$scope.interview.rounds[i].roundName;
+			if($scope.interviewFeedback.roundName !== "Level 1"
+				&& $scope.interviewFeedback.roundName !== "Level 2" 
+					&& $scope.interviewFeedback.roundName !== "Managerial" 
+						&& $scope.interviewFeedback.roundName !== "HR")
+				$scope.tabName = "Others";
+			$scope.filterbyRound = function (tab) {  
+				return _.contains(tab.rounds, $scope.tabName);
+			};  
+			     
+			$scope.tabs = [
+		   	{	
+           		"rounds": ["Level 1","Level 2"],
+				"heading": "Technical",
+				"template":"technicalFeedback.html"
+			},
+   			{	
+				"rounds": ["Level 1","Level 2","Managerial","HR"],
+   				"heading": "Functional",
+   				"template":"functionalFeedback.html"
+   			},
+   			{	
+   				"rounds": ["Level 1","Level 2","Managerial","HR"],
+   				"heading": "Soft Skills",
+   				"template":"softSkillsFeedback.html"
+   			},		   			
+   			{	
+   				"rounds": ["Managerial","HR"],
+   				"heading": "Management Skills",
+   				"template":"mangementSkillset.html"
+   			},
+   			{	
+   				"rounds": ["Level 1","Level 2","Managerial","HR","Others"],
+   				"heading": "Comment",
+   				"template":"commentFeedback.html"
+   			}
+   		];
+
+			$scope.hideSubmit=false;
+			break;
+		}
+		
+		else if(($scope.interview.rounds[i].roundName=="HR")){
+			$scope.interviewSchedule = $scope.interview.rounds[i].interviewSchedule;
+			$scope.interviewFeedback = $scope.interview.rounds[i].interviewFeedback;
+			$scope.interviewFeedback.roundName=$scope.interview.rounds[i].roundName;
+			$scope.hideSubmit=true;
+		}
+	}
+	}
 	
 	$scope.max = 10;
 	$scope.percent=0;
@@ -135,6 +139,7 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
     $scope.overStar = value;
     $scope.starValue = value;
     $scope.percent = 100 * (value / $scope.max);
+	    
         if($scope.percent==10)
         {
             $scope.tooltip= "Poor" ;
@@ -160,7 +165,8 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
     
     $scope.starColor = function(event)
     {
-            if($scope.percent==10)
+	    	  console.log("event triggered:"+event); 
+	    	 if($scope.percent==10)
             {
                 $(event.currentTarget).css('color','#ffd699');
                 
@@ -206,7 +212,6 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 					$scope.cls = 'alert  alert-success';
 					$scope.message = "Feedback Submitted Successfully!";
 					$timeout( function(){ $scope.alHide(); }, 5000);
-					$scope.reset();
 					$log.info("Feedback Submitted Successfully!");
 				}).
 				error(function(data) {
@@ -217,6 +222,13 @@ app.controller('interviewFeedbackCtrl',['$scope', '$http','$q', '$window','share
 			}, 1000);
 	}
 	
+	
+	 $scope.reset = function(){
+		 $scope.interviewFeedback = {};
+		 $scope.interviewFeedback.rateSkills =[];
+		 $scope.interviewFeedback.domainSkills=[];
+		 $scope.setInitialValue();
+		 }
 	$scope.alHide =  function(){
 	    $scope.message = "";
 	    $scope.cls = '';

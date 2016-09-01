@@ -57,6 +57,7 @@ public class EventController {
 		
 		return new ResponseEntity<List<Event>>(eventDetails, HttpStatus.OK);
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/getUserEvents", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveUserEvents(

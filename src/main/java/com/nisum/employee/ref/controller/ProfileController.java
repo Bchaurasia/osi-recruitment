@@ -97,7 +97,7 @@ public class ProfileController {
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> registerUser(@RequestBody Profile candidate) throws Exception{
-		candidate.setIsApproved("-");
+		candidate.setIsApproved("Approved");
 		if(candidate.getIsReferral()){
 			candidate.setIsApproved("Not Approved");
 		}

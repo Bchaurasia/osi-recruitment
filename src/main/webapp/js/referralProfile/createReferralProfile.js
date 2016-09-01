@@ -174,6 +174,13 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    }
 		  }
 	 
+		
+	 $scope.reset = function(){
+       $scope.candidate = null;
+       angular.element("input[type='file']").val(null);
+       $scope.sk.primarySkills = null;
+     }
+	 
 	 $scope.saveProfile = function() {
 		 if ($scope.CreateCandidate.$valid) {
 			 $scope.submitted = false;

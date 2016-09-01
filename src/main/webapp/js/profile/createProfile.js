@@ -197,13 +197,26 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		    }
 		  }
 	 
-	 $scope.next = function(nextShow){	
-		 if(nextShow=='show1'){
-			 $scope.show1=true;
-			 $scope.show2=$scope.show3=$scope.show4=false;			
-			 $scope.first="active ";
-			 $scope.fourth=$scope.second=$scope.third="";
-		 }
+	 
+		 $scope.reset = function(){
+			 $scope.candidate = {};
+			 $scope.candidate.qualifications=[{
+					qualification:'',
+					stream:'',
+					percentage:'70'
+				}];
+			 
+			 angular.element("input[type='file']").val(null);
+			 $scope.sk.primarySkills = undefined;
+			 }
+		 
+		 $scope.next = function(nextShow){	
+			 if(nextShow=='show1'){
+				 $scope.show1=true;
+				 $scope.show2=$scope.show3=$scope.show4=false;			
+				 $scope.first="active ";
+				 $scope.fourth=$scope.second=$scope.third="";
+			 }
 		 else if(nextShow=='show2'){
 			 $scope.show1=$scope.show3=$scope.show4=false;
 			 $scope.show2=true;
