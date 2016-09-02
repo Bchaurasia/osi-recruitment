@@ -176,9 +176,16 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	 
 		
 	 $scope.reset = function(){
-       $scope.candidate = null;
+       $scope.candidate = {};
+       $scope.candidate.qualifications=[{
+			qualification:'',
+			stream:'',
+			percentage:'70'
+		}];
+       $scope.candidate.expMonth="0";
+       $scope.candidate.tenureMonth ="0";
        angular.element("input[type='file']").val(null);
-       $scope.sk.primarySkills = null;
+       $scope.sk.primarySkills = undefined;
      }
 	 
 	 $scope.saveProfile = function() {

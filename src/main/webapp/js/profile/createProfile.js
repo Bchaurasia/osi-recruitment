@@ -205,7 +205,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 					stream:'',
 					percentage:'70'
 				}];
-			 
+			 $scope.candidate.expMonth="0";
 			 angular.element("input[type='file']").val(null);
 			 $scope.sk.primarySkills = undefined;
 			 }
