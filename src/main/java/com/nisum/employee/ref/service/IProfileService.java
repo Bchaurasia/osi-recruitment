@@ -11,6 +11,8 @@ import com.nisum.employee.ref.domain.Profile;
 
 public interface IProfileService {
 	Profile prepareCandidate(Profile candidate) throws Exception;
+	
+	Profile prepareCandidateForSaveProfile(Profile candidate) throws Exception;
 
 	void updateCandidate(Profile candidate);
 	

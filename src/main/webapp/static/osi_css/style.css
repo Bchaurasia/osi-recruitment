@@ -3266,3 +3266,14 @@ table.ui.striped.table.searchTable tr td {
  table.ui.striped.table.searchTable tr:last-child td{
 	border-bottom:1px solid #ee6e73;
 }
+
+
+button.reset{
+	margin-top: 2% !important;
+    float: right;
+}
+
+h5.headerTitleCreateProfile{
+	display:inline block;
+	float:left;
+}

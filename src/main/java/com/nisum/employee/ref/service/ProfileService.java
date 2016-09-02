@@ -186,6 +186,10 @@ public class ProfileService implements IProfileService{
 		
 		return profileRepository.getData( emailId);
 	}
+	public Profile prepareCandidateForSaveProfile(Profile candidate) throws Exception {		
+		profileRepository.prepareCandidate(candidate);		
+		return profileSearchService.addProfileIndex(candidate);
+	}
 	
 	
 }

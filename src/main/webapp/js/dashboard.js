@@ -21,7 +21,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.totalPositions = 0;
 	$scope.showNoInterviewMsg = true;
 	$scope.showNoAnyPositions=false;
-	$scope.showPositionRequisitionTable=false;
 	var todate=0;
 	var fromdate=0;
 	var data1=[];
@@ -77,11 +76,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		layer2Data=[];
 		layer3Data=[];
 		$scope.todate=todate;
-		if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
-				|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER")||_.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")  )){
 		getDesignationSpecificData();
-		$scope.showPositionRequisitionTable=true;
-		}
 	}
 	
 	angular.element(document).ready(function() {
@@ -468,7 +463,6 @@ if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_IN
 if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
 		|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") ||
 		_.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") )){
-
 dashboardService.getAllEvents().then(function(data){
 	$scope.events = data;
 	
@@ -480,12 +474,10 @@ dashboardService.getAllEvents().then(function(data){
 		else{
 			$scope.events[i].initial=subName[0].charAt(0);
 		}
-		
-}
+	}
 	
 });
 }
-
 $scope.getGraphData = function(position) {
 	var graphDetails = _.find($scope.designationWithStatusCount, function (o) { return o.Position == position; });
 	$scope.graphData = graphDetails;

@@ -280,6 +280,14 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		}
 	}
 	
+	
+	
+	 $scope.reset = function(){
+       $scope.requisition = null;
+       $scope.targetDate = null;
+       $scope.requisition.skillType = null;
+    }
+	
 	$scope.JobDescriptionList=[];
 	$scope.jobDescription = {};
 	

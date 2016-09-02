@@ -5,10 +5,14 @@
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>		
 		<div class="row collapsible-header">
 	
-			<h5 align="left">
+			<h5 align="left" class="headerTitleCreateProfile">
 				<i class="big add user basic icon" ></i>
 				<b class="headerName"> Create Profile</b>
 			</h5>
+			<button class="ui teal button reset" ng-model="candidate"
+					ng-click="reset()">
+					<span class="glyphicon glyphicon-refresh"></span> Reset
+				</button>
 		</div>
 		<div class="ui steps"  style="width:100%">
 		  <a class="{{first}}step" ng-click="next('show1')">
@@ -54,16 +58,16 @@
 						ng-show="submitted && CreateCandidate.candidateName.$invalid">Please
 						provide candidate name</span>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.required">
+						ng-show="CreateCandidate.candidateName.required">
 						Candidate Name is required.</div>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.candidateName.$dirty  || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.pattern">
+						ng-show="CreateCandidate.candidateName.$error.pattern">
 						Candidate Name must be characters only.</div>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.minlength">
+						ng-show="CreateCandidate.candidateName.$error.minlength">
 						Candidate Name must be at least 3 characters .</div>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.candidateName.$dirty || invalidSubmitAttempt) && CreateCandidate.candidateName.$error.maxlength">
+						ng-show="CreateCandidate.candidateName.$error.maxlength">
 						Candidate Name must be less then 30 characters .</div>
 				</div>
 				<div class="input-field col s6">
@@ -75,18 +79,16 @@
 						style="position: absolute; top: -22px;">Email Id <b
 						class="mandatory">*</b>
 					</label> <span class="validation-error"
-						ng-show="submitted && CreateCandidate.emailId.$invalid">Please
-						provide a valid email address</span> <span class="validation-error"
 						ng-show="duplicateEmailIdError">User with this email id
-						already exists. </span>
+						already exists. </span> 
 					<div class="validation-error"
-						ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.required">
+						ng-show="CreateCandidate.emailId.required">
 						Please specify the email ID.</div>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.emailId.$touched || invalidSubmitAttempt) && CreateCandidate.emailId.$error.$pristine">
+						ng-show="CreateCandidate.emailId.$error.$pristine">
 						Please specify the email ID.</div>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.emailId.$dirty || invalidSubmitAttempt) && CreateCandidate.emailId.$error.pattern">
+						ng-show="CreateCandidate.emailId.$error.pattern">
 						Please check the given Email Address.</div>
 				</div>
 	
@@ -104,10 +106,10 @@
 						provide a MobileNo</span>
 	
 					<div class="validation-error"
-						ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.required">
+						ng-show="CreateCandidate.mobileNo.required">
 						Please specify mobile number.</div>
 					<div class="validation-error"
-						ng-show="(CreateCandidate.mobileNo.$dirty || invalidSubmitAttempt) && CreateCandidate.mobileNo.$error.pattern">
+						ng-show="CreateCandidate.mobileNo.$error.pattern">
 						Mobile number should be numeric and 10 digit number</div>
 				</div>
 	
@@ -236,12 +238,8 @@
 						class="form-control input-sm" required>
 						<option value="" disabled="disabled">Years</option>
 					</select> <label style="position: absolute; top: -22px;">Experience<b
-						class="mandatory">*</b></label> <span class="validation-error"
-						ng-show="submitted && CreateCandidate.experience.$invalid">Please
-						specify experience..</span>
-					<div class="validation-error"
-						ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
-						Please select total experience.</div>
+						class="mandatory">*</b></label> 
+					
 				</div>
 	
 				<div class="input-field col s2">
@@ -249,12 +247,8 @@
 						ng-options="o as o for o in info.expMonths"
 						class="form-control input-sm" required>
 						<option value="" disabled="disabled">Months</option>
-					</select> <span class="validation-error"
-						ng-show="submitted && CreateCandidate.experience.$invalid">Please
-						specify experience..</span>
-					<div class="validation-error"
-						ng-show="( CreateCandidate.experience.$dirty || invalidSubmitAttempt) && CreateCandidate.experience.$error.required">
-						Please select total experience.</div>
+					</select>
+					
 				</div>
 				<div class="col-md-2"></div>
 				<div class="input-field col s6">
@@ -394,7 +388,7 @@
 	
 			<div class="row">
 				<div class="input-field col s6">
-					<input type="file" class="custom-file-input"
+					<input type="file" class="custom-file-input" id="uploadFile"
 						ng-file-select="upload($files)" valid-file required /> <small
 						ng-hide="fileError" class="mandatory-field">File
 						Externsions Accepted: [doc, docx, pdf]</small> <br> <label
@@ -413,13 +407,12 @@
 					<span class="glyphicon glyphicon-open-file"></span> Save
 				</button>
 				
-				
 				<button class="btn btn-success active" type="submit"
 					ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"
 					ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Submit
 				</button>
-				
+			
 				<button class="btn btn-danger active"
 					ui-sref="recruitment.searchProfile">
 					<span class="glyphicon glyphicon-remove"></span> Cancel

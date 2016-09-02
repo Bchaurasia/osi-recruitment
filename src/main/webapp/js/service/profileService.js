@@ -6,6 +6,7 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 		getProfileByCreateremailId : getProfileByCreateremailId,
 		updateProfile : updateProfile,
 		addProfiles : addProfiles,
+		saveProfile : saveProfile,
 		approveProfile : approveProfile,
 		updateProfiles : updateProfiles,
 		getProfileById : getProfileById,
@@ -41,6 +42,12 @@ function profileService($http,$filter,$rootScope,appConstants,$q) {
 	
 	function addProfiles(profile){
 		return $http.post('resources/profile', profile)
+		.then(createProfileSuccess)
+		.catch(sendCreateErrorprofileMsg);
+	}
+	
+	function saveProfile(profile){
+		return $http.post('resources/saveProfile', profile)
 		.then(createProfileSuccess)
 		.catch(sendCreateErrorprofileMsg);
 	}
