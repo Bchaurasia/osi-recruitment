@@ -58,6 +58,120 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.showHighcharts= true;
 	$scope.userData= false;
 
+	
+	/*-------------------------------------------------------------*/
+	var jobDetails=[];
+	var interviewed=[];
+	$scope.getInterviewDetails=function() {
+		var jobCount=0;
+		var tmpCntr=0;
+		var position={};
+		jobDetails=[];
+		var offrcntr;
+		
+		positionService.getPosition().then(function(data){
+			jobCount=data.length;
+			offrcntr=0;
+			data.forEach(function(item) {
+				position={};
+				position.jobcode=item.jobcode;
+				position.requisitionId=item.requisitionId;
+				position.totalInterviewed=0;
+				position.offered=0;
+				position.declined=0;
+				jobDetails.push(position);
+				$http.get('resources/getInterviewByJobCode?jobCode='+item.jobcode).then(function(data){
+					jobCount--;
+					
+					var interviewDetails=data.data;
+					//console.log("------------------------------------\n"+JSON.stringify(interviewDetails));
+					var tmpObj={};
+					if(interviewDetails.length>0){
+						
+						tmpObj.jobcode=interviewDetails[0].jobCode;
+						tmpObj.length=interviewDetails.length;
+						interviewed[tmpCntr++]=tmpObj;
+						interviewDetails.forEach(function(interview){
+							
+							if(interview.roundName=="HR" && interview.status=="Selected"){
+								offrcntr++;
+								$http.get('resources/offer?emailId='+interview.candidateEmail).then(function(response){
+									offrcntr--;
+									offerDetail = response.data;
+									//console.log(JSON.stringify(offerDetail));
+									if(offerDetail!="" && ( offerDetail.offerStatus=="Approved" || offerDetail.offerStatus=="Rejected"))
+									{
+										for(var i=0;i<jobDetails.length;i++)
+										{
+											if(jobDetails[i].jobcode==offerDetail.jobcodeProfile)
+												{
+												 	offerDetail.offerStatus=="Approved"?jobDetails[i].offered+=1:jobDetails[i].declined+=1;
+												 	break;
+												}
+										}
+									}
+									
+									if(offrcntr==0)
+										{
+											console.log("====================================\n"+JSON.stringify(jobDetails));
+										}
+
+								//console.log("-------------------\n Offer:"+JSON.stringify(Offer));
+								})
+							}
+							
+						});		
+						
+					}
+					if(jobCount==0)
+					{
+						$scope.fillInterviewDetails();
+					}
+				});
+				
+			});
+			
+		});
+			
+	
+	}
+	
+	$scope.fillInterviewDetails=function(){
+		
+		if(interviewed.length==0)
+		{
+			for(var i=0;i<jobDetails.length;i++)
+			{
+				jobDetails[i].totalInterviewed=0;	
+			}
+		}
+		else
+		{
+			for(var i=0;i<jobDetails.length;i++)
+			{
+				var flag=false;
+				for(var j=0;j<interviewed.length;j++)
+				{
+					if(jobDetails[i].jobcode==interviewed[j].jobcode)
+					{
+						jobDetails[i].totalInterviewed=interviewed[j].length;
+						flag=true;
+						break;
+					}
+				}
+				if(!flag){
+					jobDetails[i].totalInterviewed=0;
+				}
+			}
+			//console.log("Interviewed:"+JSON.stringify(interviewed));
+			//.log("---------------------------------\n"+JSON.stringify(jobDetails));
+		}
+	}
+	
+	
+//-------------------------------------------------------------------------	
+	
+	
 	function isValidDate(date) {
 		layer2Data=[];
 		layer3Data=[];

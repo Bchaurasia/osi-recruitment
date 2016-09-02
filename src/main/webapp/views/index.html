@@ -119,7 +119,9 @@ margin-left: 59px;
 
 
 </div> -->
-
+<div>
+<Button ng-click="getInterviewDetails()">Click Me</Button>
+</div>
 
 <div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"
@@ -240,10 +242,9 @@ margin-left: 59px;
 </div>
 </div>
 <div ng-show="showHighcharts">
-<i class="download icon large" style="margin-left:850; cursor: pointer;" id="btnExport" tooltip="Download this table"></i>
+<i class="download icon large" style="margin-left:950; cursor: pointer;" id="btnExport" tooltip="Download this table"></i>
 <div style="width:80%;padding-bottom:5%" id="reqTable">
-
-<table class="ui striped table searchTable" style="margin-top:0px">
+<table class="ui table" style="margin-top:0px">
   <thead>
     <tr><th>Job Code</th>
     <th>Req Date</th>
