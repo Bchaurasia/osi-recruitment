@@ -69,7 +69,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		jobDetails=[];
 		var offrcntr;
 		
-		positionService.getPosition().then(function(data){
+		positionService.getPositionByRequisitionId().then(function(data){
 			jobCount=data.length;
 			offrcntr=0;
 			data.forEach(function(item) {
