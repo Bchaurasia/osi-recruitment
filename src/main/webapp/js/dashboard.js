@@ -58,11 +58,18 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.showHighcharts= true;
 	$scope.userData= false;
 	$scope.showSubMenu=false;
+	$scope.errorMsg=false;
 	
 	/*-------------------------------------------------------------*/
 	var jobDetails=[];
 	var interviewed=[];
-	$scope.getInterviewDetails=function(req_id) {
+	$scope.getInterviewDetails=function(req_id,req_status) {
+		if(req_status=='INITIATED'){
+			$scope.errorMsg=true;
+		}else{
+			$scope.errorMsg=false;
+		}
+		
 		$scope.showSubMenu=true;
 		var jobCount=0;
 		var tmpCntr=0;
@@ -114,7 +121,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 									
 									if(offrcntr==0)
 										{
-											console.log("====================================\n"+JSON.stringify(jobDetails));
+											console.log("====================================\n"+jobDetails.length);
 										}
 
 								//console.log("-------------------\n Offer:"+JSON.stringify(Offer));
@@ -135,6 +142,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		});
 		
 		$scope.reqDetails=jobDetails;
+		console.log($scope.reqDetails);
 	
 	}
 	

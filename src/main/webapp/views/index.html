@@ -238,7 +238,7 @@ margin-left: 59px;
 	</div>
 </div>
 </div>
-<div ng-show="showHighcharts">
+<div class="row" ng-show="showHighcharts">
 <i class="download icon large" style="margin-left:160px; cursor: pointer;" ng-click='downloadTable1();'  tooltip="Download this table"></i>
 <i ng-show="showSubMenu" class="download icon large" style="margin-left:1180px; cursor: pointer;" ng-click='downloadTable2();' tooltip="Download this table"></i>
 <div >
@@ -253,7 +253,7 @@ margin-left: 59px;
      <th>Recruiter</th>
   </tr></thead><tbody>
     <tr ng-repeat="requisition in requisitionData">
-      <td><a href ng-click="getInterviewDetails(requisition.requisitionId);">{{requisition.requisitionId}}</a></td>
+      <td><a href ng-click="getInterviewDetails(requisition.requisitionId,requisition.status);">{{requisition.requisitionId}}</a></td>
       <td>{{requisition.requisitionDate}}</td>
       <td>{{requisition.status}}</td>
       <td>{{requisition.targetDate}}</td>
@@ -266,7 +266,7 @@ margin-left: 59px;
 </div>
 <div ng-show="showSubMenu">
 
-<div style="width:40%;padding-bottom:5%;float:right" id="subTable">
+<div  style="width:40%;padding-bottom:5%;float:right" id="subTable" ng-hide="errorMsg">
 <table class="ui striped table searchTable" style="margin-top:0px">
   <thead>
     <tr><th>Req Id</th>
@@ -284,17 +284,17 @@ margin-left: 59px;
       <td>{{detail.offered}}</td>
       <td>{{detail.declined}}</td>
     </tr>
-  
   </tbody>
 </table>
 </div>
 </div>
 </div>
+<div ng-show="errorMsg" align="center" style="margin-top:80px; ""><h3 style="font-family: initial"">Requisition is not approved yet</h3></div>
 </div>
 
 
-<div ng-show="!showNoAppRequisitionMsg">
-	<h4 style="margin-top: 15px;height: 1px" align="center"     height: 1px;>Requisition for
+<div  ng-show="!showNoAppRequisitionMsg">
+	<h4 style="margin-top: 15px;height: 1px" align="center">Requisition for
 		Approval</h4>
 	<hr style="background-color: black; height:1px; width: 15%">
 	<div class="row">
