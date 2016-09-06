@@ -31,7 +31,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.pskills=$scope.info.skills;
 	$scope.designations={};
 	$scope.candidate.currency="INR";
-	$scope.profileSources = ["Consultancy","Job Sites"];
+	$scope.profileSources = ["Consultancy","Job Sites","Referral"];
 	$scope.show1=true;
 	$scope.show2=false;
 	$scope.show3=false;
