@@ -119,9 +119,6 @@ margin-left: 59px;
 
 
 </div> -->
-<div>
-<Button ng-click="getInterviewDetails()">Click Me</Button>
-</div>
 
 <div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"
@@ -242,9 +239,11 @@ margin-left: 59px;
 </div>
 </div>
 <div ng-show="showHighcharts">
-<i class="download icon large" style="margin-left:950; cursor: pointer;" id="btnExport" tooltip="Download this table"></i>
-<div style="width:80%;padding-bottom:5%" id="reqTable">
-<table class="ui table" style="margin-top:0px">
+<i class="download icon large" style="margin-left:160px; cursor: pointer;" ng-click='downloadTable1();'  tooltip="Download this table"></i>
+<i ng-show="showSubMenu" class="download icon large" style="margin-left:1180px; cursor: pointer;" ng-click='downloadTable2();' tooltip="Download this table"></i>
+<div >
+<div style="width:60%;padding-bottom:5%;float:left" id="reqTable">
+<table class="ui striped table searchTable" style="margin-top:0px">
   <thead>
     <tr><th>Job Code</th>
     <th>Req Date</th>
@@ -254,7 +253,7 @@ margin-left: 59px;
      <th>Recruiter</th>
   </tr></thead><tbody>
     <tr ng-repeat="requisition in requisitionData">
-      <td><a href ng-click="showAnotherTable(requisition.requisitionId)">{{requisition.requisitionId}}</a></td>
+      <td><a href ng-click="getInterviewDetails(requisition.requisitionId);">{{requisition.requisitionId}}</a></td>
       <td>{{requisition.requisitionDate}}</td>
       <td>{{requisition.status}}</td>
       <td>{{requisition.targetDate}}</td>
@@ -264,8 +263,36 @@ margin-left: 59px;
   
   </tbody>
 </table>
-		</div>
-		</div>
+</div>
+<div ng-show="showSubMenu">
+
+<div style="width:40%;padding-bottom:5%;float:right" id="subTable">
+<table class="ui striped table searchTable" style="margin-top:0px">
+  <thead>
+    <tr><th>Req Id</th>
+    <th>Job Code</th>
+    <th> Total Interviewed</th>
+    <th>Offered</th>
+    <th>Declined</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr ng-repeat="detail in reqDetails">
+      <td>{{detail.requisitionId}}</td>
+      <td>{{detail.jobcode}}</td>
+      <td>{{detail.totalInterviewed}}</td>
+      <td>{{detail.offered}}</td>
+      <td>{{detail.declined}}</td>
+    </tr>
+  
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
 <div ng-show="!showNoAppRequisitionMsg">
 	<h4 style="margin-top: 15px;height: 1px" align="center"     height: 1px;>Requisition for
 		Approval</h4>

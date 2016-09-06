@@ -57,19 +57,20 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.offerData=false;
 	$scope.showHighcharts= true;
 	$scope.userData= false;
-
+	$scope.showSubMenu=false;
 	
 	/*-------------------------------------------------------------*/
 	var jobDetails=[];
 	var interviewed=[];
-	$scope.getInterviewDetails=function() {
+	$scope.getInterviewDetails=function(req_id) {
+		$scope.showSubMenu=true;
 		var jobCount=0;
 		var tmpCntr=0;
 		var position={};
 		jobDetails=[];
 		var offrcntr;
 		
-		positionService.getPositionByRequisitionId().then(function(data){
+		positionService.getPositionByRequisitionId(req_id).then(function(data){
 			jobCount=data.length;
 			offrcntr=0;
 			data.forEach(function(item) {
@@ -132,7 +133,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			});
 			
 		});
-			
+		
+		$scope.reqDetails=jobDetails;
 	
 	}
 	
@@ -197,7 +199,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.positionData=[];
 		$scope.getData();
 		reqData();
-		$("#btnExport").click(function(e) {
+		/*$("#btnExport").click(function(e) {
 	        //getting values of current time for generating the file name
 	        var dt = new Date();
 	        var day = dt.getDate();
@@ -219,10 +221,44 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	        a.click();
 	        //just in case, prevent default behaviour
 	        e.preventDefault();
-	    });
+	    });*/
        });
+
 	
+	$scope.downloadTable=function(){
+		console.log($scope.divname);
+		 var dt = new Date();
+	        var day = dt.getDate();
+	        var month = dt.getMonth() + 1;
+	        var year = dt.getFullYear();
+	        var hour = dt.getHours();
+	        var mins = dt.getMinutes();
+	        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+	        //creating a temporary HTML link element (they support setting file names)
+	        var a = document.createElement('a');
+	        //getting data from our div that contains the HTML table
+	        var data_type = 'data:application/vnd.ms-excel';
+	        var table_div = document.getElementById($scope.divname);
+	        console.log(table_div);
+	        var table_html = table_div.outerHTML.replace(/ /g, '%20');
+	        a.href = data_type + ', ' + table_html;
+	        //setting the file name
+	        a.download = 'requisition_table_' + postfix + '.xls';
+	        //triggering the function
+	        a.click();
+	        //just in case, prevent default behaviour
+	      //  e.preventDefault();
+	}
 	
+	$scope.downloadTable1=function(){
+		$scope.divname=  "reqTable";
+		$scope.downloadTable();
+	}
+	$scope.downloadTable2=function(){
+		
+		$scope.divname= "subTable";
+		$scope.downloadTable();
+	}
 	$scope.feedback = function(jobcode,candidateEmail) {
 		sharedService.setjobCode(jobcode);
 		sharedService.setprofileUserId(candidateEmail);
