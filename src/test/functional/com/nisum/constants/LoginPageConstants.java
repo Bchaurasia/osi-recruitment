@@ -5,6 +5,8 @@ package com.nisum.constants;
 public final class  LoginPageConstants {
 
 	public static final String LOGIN_URL = "http://localhost:8080/osi-recruitment-portal/login.html";
+	public static final String MAIN_URL = "http://localhost:8080/osi-recruitment-portal/main.html#/";
+	public static final String DATA_SYNC_URL = "http://localhost:8080/osi-recruitment-portal/main.html#/admin/datasync";
 	public static final String GOOGLE_SIGIN_BUTTON = "signInG";
 	public static final String ID_EMAIL = "//*[@id='Email']";
 	public static final String ID_PASSWD = "//*[@id='Passwd']";

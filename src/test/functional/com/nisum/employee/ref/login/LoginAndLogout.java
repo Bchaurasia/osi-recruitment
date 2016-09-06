@@ -33,7 +33,7 @@ public class LoginAndLogout{
 		driver.findElement(By.xpath(DashboardPageConstants.ID_LOGOUT)).click();
 	}
 
-	public void loginUser(WebDriver driver, String USERNAME, String PASSWORD) throws InterruptedException {
+	public String loginUser(WebDriver driver, String USERNAME, String PASSWORD) throws InterruptedException {
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(LoginPageConstants.LOGIN_URL);
@@ -72,6 +72,9 @@ public class LoginAndLogout{
 		driver.switchTo().window(mainId);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
+		Thread.sleep(1000);
 		Assert.assertTrue("Incorrect page title found, Recruitment Portal was expected", driver.getTitle().contains(DashboardPageConstants.OSI_TECHNOLOGIES_RECRUITMENT_PORTAL));
+		String currentURL = driver.getCurrentUrl();
+		return currentURL;
 	}
 }
