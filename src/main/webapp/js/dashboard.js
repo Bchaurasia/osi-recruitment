@@ -121,10 +121,10 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 										}
 									}
 									
-									if(offrcntr==0)
+									/*if(offrcntr==0)
 										{
 											console.log("====================================\n"+jobDetails.length);
-										}
+										}*/
 
 								//console.log("-------------------\n Offer:"+JSON.stringify(Offer));
 								})
@@ -144,8 +144,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		});
 		
 		$scope.reqDetails=jobDetails;
-		console.log($scope.reqDetails);
-	
 	}
 	
 	$scope.fillInterviewDetails=function(){
