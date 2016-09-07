@@ -239,8 +239,12 @@ margin-left: 59px;
 </div>
 </div>
 <div class="row" ng-show="showHighcharts">
-<i class="download icon large" style="margin-left:160px; cursor: pointer;" ng-click='downloadTable1();'  tooltip="Download this table"></i>
-<i ng-show="showSubMenu" class="download icon large" style="margin-left:1180px; cursor: pointer;" ng-click='downloadTable2();' tooltip="Download this table"></i>
+<h3 align="center" style="font-family: serif;  margin-bottom: 0px">Requisition Details</h3>
+<hr style="background-color: black; height:1px; width: 50%; margin-top: 3px">
+<div class="row">
+<i class="download icon large" style="margin-left:160px; cursor: pointer; " ng-click='downloadTable1();'  tooltip="Download this table"></i>
+<i class="download icon large" ng-show="downloadOption"   style="margin-right: 30px;float:right" cursor: pointer;" ng-click='downloadTable2();' tooltip="Download this table"></i>
+</div>
 <div >
 <div style="width:60%;padding-bottom:5%;float:left" id="reqTable">
 <table class="ui striped table searchTable" style="margin-top:0px">

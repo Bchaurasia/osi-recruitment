@@ -59,15 +59,17 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.userData= false;
 	$scope.showSubMenu=false;
 	$scope.errorMsg=false;
-	
+	$scope.downloadOption=false;
 	/*-------------------------------------------------------------*/
 	var jobDetails=[];
 	var interviewed=[];
 	$scope.getInterviewDetails=function(req_id,req_status) {
 		if(req_status=='INITIATED'){
 			$scope.errorMsg=true;
+			$scope.downloadOption=false;
 		}else{
 			$scope.errorMsg=false;
+			$scope.downloadOption=true;
 		}
 		
 		$scope.showSubMenu=true;
