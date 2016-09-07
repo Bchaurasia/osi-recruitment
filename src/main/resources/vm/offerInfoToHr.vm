@@ -4,7 +4,7 @@
 <div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
-Hi ,<br><br>Please be informed that candidate $CandidateName #if($ReferredByEmail) referred by $ReferredByName ($ReferredByEmail) #end has been hired for the
+Hi Team HR,<br><br>Please be informed that candidate $CandidateName #if($ReferredByEmail) referred by $ReferredByName ($ReferredByEmail) #end has been hired for the
 $jobCode. He/She will work as $Designation and will be reporting to $Manager.<br><br> 
 His/Her date of joining OSI is: $JoiningDate<br>
 Work Location:$location<br><br><br>
