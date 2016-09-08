@@ -60,6 +60,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.showSubMenu=false;
 	$scope.errorMsg=false;
 	$scope.downloadOption=false;
+	$scope.searchQuery="";
 	/*-------------------------------------------------------------*/
 	var jobDetails=[];
 	var interviewed=[];
@@ -121,10 +122,10 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 										}
 									}
 									
-									/*if(offrcntr==0)
+									if(offrcntr==0)
 										{
 											console.log("====================================\n"+jobDetails.length);
-										}*/
+										}
 
 								//console.log("-------------------\n Offer:"+JSON.stringify(Offer));
 								})
@@ -144,8 +145,31 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		});
 		
 		$scope.reqDetails=jobDetails;
-	}
+		console.log($scope.reqDetails);
 	
+	}
+	$scope.searchPositionQuery = function(){
+		if(sharedService.getDesignation() != undefined && sharedService.getDesignation() != null) {
+			$scope.searchQuery=sharedService.getDesignation();
+			sharedService.setDesignation(null);
+		}	
+		positionService.searchPositionsBySearchQuery($scope.searchQuery).then(function(data){
+			$scope.positions = _.filter(data, function(obj){ return obj.status === "Active"; });
+		    	$scope.selectedPositions=[];
+		    		angular.forEach($scope.positions,function(position){
+				    	if(position.positionType === undefined || (position.positionType != undefined && position.positionType !="Private")){
+				    		$scope.selectedPositions.push(position);
+						}
+					});	
+		    		
+		    		$scope.positions = angular.copy($scope.selectedPositions);
+		    		console.log($scope.positions);
+				$scope.currentPage = 0;
+				$scope.searchQuery="";
+		}).catch(function(msg){
+	   	  console.log("Failed To Load Data! ---> "+msg);
+	     });
+	}
 	$scope.fillInterviewDetails=function(){
 		
 		if(interviewed.length==0)
@@ -207,29 +231,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.positionData=[];
 		$scope.getData();
 		reqData();
-		/*$("#btnExport").click(function(e) {
-	        //getting values of current time for generating the file name
-	        var dt = new Date();
-	        var day = dt.getDate();
-	        var month = dt.getMonth() + 1;
-	        var year = dt.getFullYear();
-	        var hour = dt.getHours();
-	        var mins = dt.getMinutes();
-	        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-	        //creating a temporary HTML link element (they support setting file names)
-	        var a = document.createElement('a');
-	        //getting data from our div that contains the HTML table
-	        var data_type = 'data:application/vnd.ms-excel';
-	        var table_div = document.getElementById('reqTable');
-	        var table_html = table_div.outerHTML.replace(/ /g, '%20');
-	        a.href = data_type + ', ' + table_html;
-	        //setting the file name
-	        a.download = 'requisition_table_' + postfix + '.xls';
-	        //triggering the function
-	        a.click();
-	        //just in case, prevent default behaviour
-	        e.preventDefault();
-	    });*/
+		$scope.searchPositionQuery();
+		
        });
 
 	

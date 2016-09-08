@@ -332,13 +332,45 @@ margin-left: 59px;
 	</div>
 
 </div>
-			<div class="ui feed " style="font-size: 100%; width:60%" ng-show="userData">
+<div ng-show="userData">
+<a>Create profile</a><br>
+<a>About Organization</a>
+
+<div class="ui feed " style="font-size: 100%;width: 800px;float: left;">
+<h4 style="margin-right: 135px; height: 1px;" noshade>
+					Open Positions
+					</h4>
+<hr style="background-color: black; height:1px; width: 60%;float: left;margin-left: 155px;margin-top: 10px;">
+	<table class="ui striped table searchTable" style="width: 80%; float:left; margin-left:20px; margin-top: 0px;">
+			<thead>
+				<tr>
+				    <th>Job code</th>
+					<th>Designation</th>
+					<th>Job Type</th>
+					<th>Exp</th>
+					<th>Location</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="animate-repeat" ng-repeat="data in positions"	style="font-size: 80%">
+					<td class="mdl-data-table__cell--non-numeric">
+						<a style="cursor: pointer;" ng-click="displayReferralPosition(data.jobcode)">{{data.jobcode}}</a>
+					</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.designation}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.jobType}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.minExpYear}} - {{data.maxExpYear}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{data.location}}</td>
+				</tr>
+			</tbody>
+		</table>
+</div>
+			<div class="ui feed " style="font-size: 100%;width: 400px;float: right;" >
 				<h4 style="margin-top: 25px; height: 1px;" noshade>
 					Recent Activities
 					</h4>
-					<hr style="background-color: black; height:1px; width: 50%">
+					<hr style="background-color: black; height:1px; width: 80%">
 					<div align="left"
-						style="margin-left: 245px; height: auto; overflow: auto;">
+						style="max-height: 250px; height: auto; overflow: auto;">
 						<div class="event" ng-repeat="feed in events">
 							<div class="label" style="color: white">
 								<span class="initial"
@@ -357,6 +389,35 @@ margin-left: 59px;
 						</div>
 					</div>
 			</div>
+
+</div>
+
+<!-- 
+			<div class="ui feed " style="font-size: 100%; width:60%" ng-show="userData">
+				<h4 style="margin-top: 25px; height: 1px;" noshade>
+					Recent Activities
+					</h4>
+					<hr style="background-color: black; height:1px; width: 50%">
+					<div align="left"
+						style="margin-left: ; height: auto; overflow: auto;">
+						<div class="event" ng-repeat="feed in events">
+							<div class="label" style="color: white">
+								<span class="initial"
+									ng-style="{'background-color':(($index%2)==0?'#ff0000':'#66ff33')}"
+									tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
+							</div>
+							<div class="content">
+								<div class="summary">
+									{{feed.eventDesc}}<br>
+									<div class="date datediv">
+									<b><time>{{ feed.createdTimeStamp | amDateFormat: 'dddd,
+											MMMM Do YYYY, h:mm a' }}</time></b>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div> -->
 <!-- <div class="row">
 	<div class="col-md-6"></div>
 	<div class="col-md-6">
