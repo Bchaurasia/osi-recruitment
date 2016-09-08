@@ -220,10 +220,10 @@ app.controller('createOfferCtrl',['$scope','$state','$http','$upload','$q','$win
 		});
 	}
     function hideFinalStatusFun(){
-    	if($scope.candidate.offerStatus === "Rejected" || $scope.candidate.offerStatus === "Approved"){
-			$scope.hideFinalStatus=false;
-		}else{
+    	if($scope.candidate.offerStatus === "" || $scope.candidate.offerStatus === "Waiting for approval"){
 			$scope.hideFinalStatus=true;
+		}else{
+			$scope.hideFinalStatus=false;
 		}
     	if($scope.candidate.offerStatus === "Waiting for approval" || $scope.candidate.offerStatus === "Offered"){
     		$scope.disableSendApproval=true;
