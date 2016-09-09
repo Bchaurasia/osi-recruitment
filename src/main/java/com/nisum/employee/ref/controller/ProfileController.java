@@ -110,10 +110,8 @@ public class ProfileController {
 	@RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> saveUser(@RequestBody Profile candidate) throws Exception{
-		candidate.setIsApproved("-");
-		if(candidate.getIsReferral()){
-			candidate.setIsApproved("Not Approved");
-		}
+			candidate.setIsApproved("Saved");
+		
 		Profile profile = profileService.prepareCandidateForSaveProfile(candidate);
 			String jsonObj=MSG+ profile.getCandidateName() +"'s Profile Successfully Saved..!\"}";
 			return new ResponseEntity<String>(jsonObj, HttpStatus.OK);
