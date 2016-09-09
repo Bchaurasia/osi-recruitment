@@ -61,7 +61,16 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		stream:'',
 		percentage:'70'
 	}];
-	
+	$scope.candidate.certifications=[{
+		certification:'',
+		institute:'',
+		score:'70'
+	}];
+	$scope.candidate.trainings=[{
+		training:'',
+		trainingInstitute:'',
+		trainingDuration:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -70,7 +79,22 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		};
 		$scope.candidate.qualifications.push(addQualification);
 	};
-	
+	$scope.addCertificationCriteria = function() {
+		var addCertification = {		
+				certification:'',
+				institute:'',
+				score:'70'
+		};
+		$scope.candidate.certifications.push(addCertification);
+	};
+	$scope.addTrainingCriteria = function() {
+	var addTraining = {		
+			training:'',
+			trainingInstitute:'',
+			trainingDuration:''
+	};
+	$scope.candidate.trainings.push(addTraining);
+	};
 	$scope.checkDisability = function(qualification){
 		if(qualification){
 			//$scope.disableCreateBtn  =  false;
@@ -87,7 +111,16 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 			$scope.candidate.qualifications.splice(index,1);
 		} 
 	}
-	
+	$scope.deleteCertification = function(index){
+		if (!($scope.candidate.certifications.length - 1 == 0)) {
+			$scope.candidate.certifications.splice(index,1);
+		} 
+	}
+	$scope.deleteTraining = function(index){
+		if (!($scope.candidate.trainings.length - 1 == 0)) {
+			$scope.candidate.trainings.splice(index,1);
+		} 
+	}
 	$http.get('resources/user').success(function(data, status, headers, config) {
 		$scope.userData = data;
 		angular.forEach($scope.userData, function(userr){
@@ -100,6 +133,10 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	});
 	profileService.getProfileById($scope.userId).then(function(data){
 		$scope.candidate = data;
+		if($scope.candidate.profileType == 'Experienced')
+			$scope.showExperienced = true;
+		else
+			$scope.showExperienced = false;
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
 		  console.log("in getdata-->: "+angular.toJson($scope.candidate));
@@ -376,7 +413,22 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 			return true;
 		}
 	};
-	 
+	$scope.lengthOfCertifications = function() {
+		if($scope.candidate.certifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfTrainings = function() {
+		if($scope.candidate.trainings.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
 	 $scope.next = function(nextShow){	
 		 if(nextShow=='show1'){
 			 $scope.show1=true;

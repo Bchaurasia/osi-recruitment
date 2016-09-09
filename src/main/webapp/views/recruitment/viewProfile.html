@@ -29,7 +29,7 @@
 		      <div class="description">Enter Educational Details</div>
 		    </div>
 		  </a>
-		  <a class="{{third}}step" ng-click="next('show3')">
+		  <a class="{{third}}step" ng-click="next('show3')" ng-show="showExperienced">
 		  	<i class="laptop icon"></i>
 		    <div class="content">
 		      <div class="title">Professional Details</div>
@@ -242,8 +242,86 @@
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
-			<button class="btn btn-info active" ng-click="next('show3')"> Next <i class="long arrow right icon"></i></button>
+			<div class="row" ng-repeat="candidate in candidate.certifications" ng-hide="showExperienced">
+				<div class="input-field col s6">
+					<input placeholder="Enter Certification Name" name="certification" class="form-control"
+						type="text" ng-model="candidate.certification" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Certification </label>
+				</div>
+	
+				<div class="input-field col s3">
+					<input placeholder="Enter Institute/Organization" name="institute" class="form-control"
+						type="text" ng-model="candidate.institute" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Institute/Organization </label>
+	
+				</div>
+	
+				<div class="input-field col s2">
+					<input type="range" ng-model="candidate.score" min="0"
+						max="100" /> <label>Percentage<b class="mandatory">*</b></label> <span
+						class="range-slider__value">{{candidate.score}}%</span>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Certification Details"
+								ng-show="lengthOfCertifications()"
+								ng-click="deleteCertification($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Certification Details"
+								ng-show="$last" ng-click="addCertificationCriteria()"
+								ng-disabled="checkDisability(candidate.certification)"></button>
+						</div>
+					</div>				
+			</div>
+			<div class="row" ng-repeat="candidate in candidate.trainings" ng-hide="showExperienced">
+				<div class="input-field col s6">
+					<input placeholder="Enter Training Name" name="training" class="form-control"
+						type="text" ng-model="candidate.training" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Training Attended </label>
+				</div>
+	
+				<div class="input-field col s3">
+					<input placeholder="Enter Institute/Organization" name="trainingInstitute" class="form-control"
+						type="text" ng-model="candidate.trainingInstitute" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Institute/Organization </label>
+	
+				</div>
+	
+				<div class="input-field col s2">
+					<input placeholder="Enter Training Duration" name="trainingDuration"
+						class="form-control" type="text" ng-model="candidate.trainingDuration"
+						ng-pattern="/^[0-9]*$/" maxlength="3"> <label
+						style="position: absolute; top: -22px;">Training Duration(in
+						days)<b class="mandatory">*</b>
+					</label> <span class="validation-error"
+						ng-required="CreateCandidate.trainingDuration.$error.pattern"
+						ng-show="CreateCandidate.trainingDuration.$error.pattern">
+						Training Duration should be in days </span>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Training Details"
+								ng-show="lengthOfTrainings()"
+								ng-click="deleteTraining($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Training Details"
+								ng-show="$last" ng-click="addTrainingCriteria()"
+								ng-disabled="checkDisability(candidate.training)"></button>
+						</div>
+					</div>				
+			</div>
+			<div ng-if="showExperienced == true">
+				<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
+				<button class="btn btn-info active" ng-click="next('show3')"> Next <i class="long arrow right icon"></i> </button>
+			</div>	
+			<div ng-if="showExperienced == false">
+				<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
+				<button class="btn btn-info active" ng-click="next('show4')"> Next <i class="long arrow right icon"></i> </button>
+			</div>
 		</fieldset>
 		
 		<fieldset ng-show="show3">
@@ -252,7 +330,7 @@
 				<div class="input-field col s2">
 					<select ng-model="candidate.expYear" name="experience"
 						ng-options="o as o for o in info.expYears"
-						class="form-control input-sm" required>
+						class="form-control input-sm" ng-required="showExperienced">
 						<option value="" disabled="disabled">Years</option>
 					</select> <label style="position: absolute; top: -22px;">Experience<b
 						class="mandatory">*</b></label> <span class="validation-error"
@@ -266,7 +344,7 @@
 				<div class="input-field col s2">
 					<select ng-model="candidate.expMonth" name="expMonths"
 						ng-options="o as o for o in info.expMonths"
-						class="form-control input-sm" required>
+						class="form-control input-sm" ng-required="showExperienced">
 						<option value="" disabled="disabled">Months</option>
 					</select> <span class="validation-error"
 						ng-show="submitted && UpdateCandidate.experience.$invalid">Please
@@ -281,7 +359,7 @@
 					<label style="position: absolute; top: -22px;">Skills Set<b class="mandatory">*</b></label>
 					<ui-select multiple ng-model="sk.primarySkills"
 						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-						ui-select-required ng-disabled="disabled"> <ui-select-match
+						ng-required="showExperienced" ng-disabled="disabled"> <ui-select-match
 						placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
 						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 					{{color}} </ui-select-choices> </ui-select>
@@ -317,7 +395,7 @@
 				<div class="input-field col s6" align="left">
 					
 					<ui-select ng-model="candidate.designation" ng-change="setJobCodes()" name="currentdesignation"
-					theme="selectize" style="width: 80%" required>
+					theme="selectize" style="width: 80%" ng-required="showExperienced">
 					   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
 						repeat="designation in designations | orderBy:'toString()'| filter: $select.search">
@@ -335,7 +413,7 @@
 				
 		<fieldset ng-show="show4">
 			&nbsp;
-			
+		<div ng-show="showExperienced">	
 		<div class="row">
 			<div class="input-field col s6">
 				<select ng-model="candidate.profileSource" name="profileSource"
@@ -380,7 +458,7 @@
 			<div class="input-field col s6">
 					<input placeholder="Enter Notice Period" name="noticePeriod"
 						class="form-control" type="text" ng-model="candidate.noticePeriod"
-						ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
+						ng-pattern="/^[0-9]*$/" maxlength="2" ng-required="showExperienced"> <label
 						style="position: absolute; top: -22px;">Notice Period(in
 						days)<b class="mandatory">*</b>
 					</label> <span class="validation-error"
@@ -419,7 +497,7 @@
 				<div class="input-field col s6">
 					<input placeholder="Enter relation with candidate"
 							id="relationship" class="form-control" type="text" name="referralRelation" disabled
-							ng-model="candidate.referralRelation" maxlength="20" ng-pattern="/^[a-zA-Z _]*$/" required>
+							ng-model="candidate.referralRelation" maxlength="20" ng-pattern="/^[a-zA-Z _]*$/" ng-required="showExperienced">
 						<label style="position: absolute; top: -22px;">How do you know the candidate?<b class="mandatory">*</b>
 						</label>
 					<div class="validation-error"
@@ -437,7 +515,7 @@
 						<select ng-model="candidate.tenureYear" id="tenureYear"
 							ng-options="o for o in info.expYears" disabled
 							style="position: absolute; top: -15px;"
-							class="form-control input-sm" required>
+							class="form-control input-sm" ng-required="showExperienced">
 							<option value="" disabled="disabled">Years</option>
 						</select>
 				</div>
@@ -446,12 +524,43 @@
 						<select ng-model="candidate.tenureMonth" id="tenureMonth"
 							ng-options="o for o in info.expMonths" disabled
 							style="position: absolute; top: -15px;"
-							class="form-control input-sm" required>
+							class="form-control input-sm" ng-required="showExperienced">
 							<option value="" disabled="disabled">Months</option>
 						</select>
 				</div>
 			</div>
+		</div>
+		<div ng-hide="showExperienced">
+				<div class="input-field col s6">
 	
+					<label style="position: absolute; top: -22px;">Skills Set<b
+						class="mandatory">*</b>:
+					</label>
+					<ui-select multiple ng-model="sk.primarySkills"
+						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+						ng-required="showExperienced" ng-disabled="disabled"> <ui-select-match
+						placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+					{{color}} </ui-select-choices> </ui-select>
+					<span class="validation-error"
+						ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
+						enter key skills.</span>
+				</div>
+				<div class="input-field col s6">
+					<input placeholder="Enter Additional Skills" name="otherSkills"
+						class="form-control" type="text" ng-model="candidate.otherSkills"
+						ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
+				
+				</div>
+				<div class="row">
+				<div class="input-field col s12">
+					<textarea class="materialize-textarea" cols="50" rows="2"
+						style="width: 88%" ng-change="changeEvent()" name="project"
+						ng-model="candidate.project" placeholder="Enter undertaken Projects"></textarea>
+					<label style="position: absolute; top: -22px;">Projects Undertaken</label>
+				</div>
+			</div>
+		</div>
 			<!-- <div class="row" ng-if="candidate.profileSource=='Referral'">
 				<div class="input-field col s6">
 							<input placeholder="Enter Yes / No" id="screeningStatus"
@@ -469,8 +578,16 @@
 				</div>
 			</div> -->
 			<div class="row">
-				<div align="center" class="row" >
+				<div align="center" class="row" ng-if="showExperienced == true">
 						<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
+						<button type="button" class="btn btn-info active" align="left" ng-click="download();"><i class="material-icons left">file_download</i>Download Resume </button>
+						<button class="btn btn-info active" type="submit" ng-show="candidate.isReferral && hasRole('ROLE_HR')" ng-disabled="disableApproveBtn" ng-click="approveProfile()"> <span class="glyphicon glyphicon-ok-circle"></span> Approve </button>
+						<button class="btn btn-primary active" type="submit" ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn" ng-click="updateProfileDetails()"> <span class="glyphicon glyphicon-ok-circle"></span> Update </button>
+						<button class="btn btn-success active" type="submit" ng-show="candidate.confirm=='No'" ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn" ng-click="submit()"> <span class="glyphicon glyphicon-ok-circle"></span> Submit </button>
+						<button class="btn btn-danger active" ui-sref="recruitment.searchProfile"> <span class="glyphicon glyphicon-remove"></span> Cancel </button>
+				</div>
+				<div align="center" class="row" ng-if="showExperienced == false">
+						<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
 						<button type="button" class="btn btn-info active" align="left" ng-click="download();"><i class="material-icons left">file_download</i>Download Resume </button>
 						<button class="btn btn-info active" type="submit" ng-show="candidate.isReferral && hasRole('ROLE_HR')" ng-disabled="disableApproveBtn" ng-click="approveProfile()"> <span class="glyphicon glyphicon-ok-circle"></span> Approve </button>
 						<button class="btn btn-primary active" type="submit" ng-disabled="UpdateCandidate.$invalid || duplicateEmailIdError || disableUpdateBtn" ng-click="updateProfileDetails()"> <span class="glyphicon glyphicon-ok-circle"></span> Update </button>

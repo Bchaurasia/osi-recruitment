@@ -29,6 +29,8 @@ public class Profile extends AuditEntity{
 	String jobCode;
 	String requisitionId;
 	List<CandidateQualification> qualifications;
+	List<CandidateCertification> certifications;
+	List<CandidateTraining> trainings;
 	String address;
 	String notes;
 	String altmobileNo;
@@ -58,5 +60,6 @@ public class Profile extends AuditEntity{
 	String updatedByName;
 	String isApproved;
 	String confirm;
-	
+	String project;
+	String profileType;
 }
