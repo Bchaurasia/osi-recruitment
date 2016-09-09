@@ -3271,8 +3271,15 @@ table.ui.striped.table.searchTable tr td {
 button.reset{
 	margin-top: 2% !important;
     float: right;
+    
 }
 
+button.reset:hover{
+	  
+	    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+    
 h5.headerTitleCreateProfile{
 	display:inline block;
 	float:left;
