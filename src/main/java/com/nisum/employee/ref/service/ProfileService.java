@@ -25,29 +25,28 @@ public class ProfileService implements IProfileService{
 
 	@Autowired
 	ProfileRepository profileRepository;
-	
+
 	@Autowired
 	UserInfoRepository userInfoRepository;
-	
+
 	@Autowired
 	ProfileSearchService profileSearchService;
-	
+
 	@Autowired
 	InterviewSearchService interviewSearchService;
-	
+
 	@Autowired
 	InterviewService interviewService;
-	
+
 	@Autowired
 	InterviewDetailsRepository interviewDetailsRepository;
-	
+
 	@Autowired
 	private NotificationService notificationService;
-	
 
 	@Autowired
 	IEventService eventService;
-	
+
 	public Profile prepareCandidate(Profile candidate) throws Exception {
 		Event e=new Event();
 		e.setEventDesc("Profile of "+candidate.getCandidateName()+" was created.");
@@ -66,7 +65,6 @@ public class ProfileService implements IProfileService{
 		}
 		return profileSearchService.addProfileIndex(candidate);
 	}
-	
 
 	public void approveCandidate(Profile candidate) {
 		candidate.setIsApprovedFlag(true);
@@ -80,11 +78,10 @@ public class ProfileService implements IProfileService{
 		try{
 			notificationService.sendProfileApprovedNotification(candidate);
 		}catch (MessagingException e) {
-				e.printStackTrace();
+			e.printStackTrace();
 		}
 		InterviewDetails interview = prepareInterviewDetails(candidate);
 		interviewService.prepareInterview(interview);
-		
 	}
 
 	private InterviewDetails prepareInterviewDetails(Profile candidate) {
@@ -108,39 +105,41 @@ public class ProfileService implements IProfileService{
 		}
 		return interview;
 	}
-	
+
 	public void updateCandidate(Profile candidate) {
 		try {
 			List<Profile> profileList = getProfileByEmailId(candidate.getEmailId());
-			 for (int i=0; i< profileList.size(); i++)
-            {
-                if(profileList.get(i).getCandidateName() != candidate.getCandidateName()){
-               	 Event e=new Event();
-            		e.setEventDesc("Profile name "+profileList.get(i).getCandidateName()+" is changed to " +candidate.getCandidateName());
-            		e.setCategory("General");
-            		e.setEmailId(candidate.getCreatedBy());
-            		eventService.setEvent(e);
-                }
-            }
+			for (int i=0; i< profileList.size(); i++)
+			{
+				if(profileList.get(i).getCandidateName() != candidate.getCandidateName() && candidate.getConfirm().equals("Yes")){
+					Event e=new Event();
+					e.setEventDesc("Profile name "+profileList.get(i).getCandidateName()+" is changed to " +candidate.getCandidateName());
+					e.setCategory("General");
+					e.setEmailId(candidate.getCreatedBy());
+					eventService.setEvent(e);
+				}
+			}
 
 			candidate.setUpdatedDate(new Date());
 			profileRepository.updateCandidate(candidate);
 			profileSearchService.updateProfileIndex(candidate);
-			try{
-				notificationService.sendProfileUpdatedNotification(candidate);
-			}catch (MessagingException e) {
+			if(candidate.getConfirm().equals("Yes")){
+				try{
+					notificationService.sendProfileUpdatedNotification(candidate);
+				}catch (MessagingException e) {
 					e.printStackTrace();
+				}
 			}
-			
+
 			/*if(!candidate.getIsReferral()) {
 				InterviewDetails interview = interviewDetailsRepository.getInterviewDetailsById(candidate.getEmailId());
 				interview.setIsUpdatedFromProfile(true);
 				interview.setRequisitionId(candidate.getRequisitionId());
 				interview.setJobCode(candidate.getJobCode());				
-			
+
 				interviewDetailsRepository.updateinterviewDetails(interview);
 			}*/
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -148,48 +147,45 @@ public class ProfileService implements IProfileService{
 	public void updateCandidateStatus(String email,String status){
 		profileRepository.updateCandidateStatus(email, status);
 	}
-	
+
 	public List<Profile> getProfileByEmailId(String emailId) {
 		return profileRepository.retrieveCandidateDetails(emailId);
 	}
-	
+
 	public Profile getCandidateByEmailId(String emailId) {
 		return profileRepository.getCandidate(emailId);
 	}
-	
+
 	public List<Profile> retrieveProfileByJobCode(String jobcodeProfile) {
 		return profileRepository.retrieveProfileByJobCode(jobcodeProfile);
 	}
-	
+
 	public List<Profile> getProfileByProfileCreatedId(String profilecreatedBy) {
 		return profileRepository.retrieveProfileByProfileCreatedBy(profilecreatedBy);
 	}
-	
+
 	public List<Profile> retrieveAllProfiles() {
 		return profileRepository.retrieveAllProfiles();
 	}
-	
+
 	public Profile deleteProfileBasedOnEmailId(String emailId) {
 		return profileRepository.deleteProfileBasedOnEmailId(emailId);
 	}
-	
+
 	public void saveResume(MultipartFile multipartFile, String candidateId) {
 		profileRepository.saveResumeInBucket(multipartFile, candidateId);
 	}
-	
+
 	public String[] getResume(String emailId) throws Exception {
 		return profileRepository.getResume(emailId);
 	}
-	
-	
+
 	public List<GridFSDBFile> getFileData(String emailId) throws Exception {
-		
+
 		return profileRepository.getData( emailId);
 	}
 	public Profile prepareCandidateForSaveProfile(Profile candidate) throws Exception {		
 		profileRepository.prepareCandidate(candidate);		
 		return profileSearchService.addProfileIndex(candidate);
 	}
-	
-	
 }

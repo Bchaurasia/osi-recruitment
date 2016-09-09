@@ -62,13 +62,28 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
         $scope.candidate.jobCode = sharedService.getjobCode();
         sharedService.setjobCode(null);
 }
-	
+	$scope.showProfile = function(profile){		
+		$scope.showProfileForm = true;
+		if(profile == 'experienced')
+			$scope.showExperienced = true;
+		else
+			$scope.showExperienced = false;
+	}
 	$scope.candidate.qualifications=[{
 		qualification:'',
 		stream:'',
 		percentage:'70'
 	}];
-	
+	$scope.candidate.certifications=[{
+		certification:'',
+		institute:'',
+		score:'70'
+	}];
+	$scope.candidate.trainings=[{
+		training:'',
+		trainingInstitute:'',
+		trainingDuration:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -77,7 +92,22 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		};
 		$scope.candidate.qualifications.push(addQualification);
 	};
-	
+	$scope.addCertificationCriteria = function() {
+		var addCertification = {		
+				certification:'',
+				institute:'',
+				score:'70'
+		};
+		$scope.candidate.certifications.push(addCertification);
+	};
+	$scope.addTrainingCriteria = function() {
+	var addTraining = {		
+			training:'',
+			trainingInstitute:'',
+			trainingDuration:''
+		};
+		$scope.candidate.trainings.push(addTraining);
+	};
 	$scope.checkDisability = function(qualification){
 		if(qualification){
 			//$scope.disableCreateBtn  =  false;
@@ -94,8 +124,16 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 			$scope.candidate.qualifications.splice(index,1);
 		} 
 	}
-	
-	
+	$scope.deleteCertification = function(index){
+		if (!($scope.candidate.certifications.length - 1 == 0)) {
+			$scope.candidate.certifications.splice(index,1);
+		} 
+	}
+	$scope.deleteTraining = function(index){
+		if (!($scope.candidate.trainings.length - 1 == 0)) {
+			$scope.candidate.trainings.splice(index,1);
+		} 
+	}
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
 			$scope.positionData = data;
@@ -133,6 +171,10 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
+				if($scope.showExperienced == true)
+					$scope.candidate.profileType = "Experienced";
+				else
+					$scope.candidate.profileType = "Fresher";
 				/*if(_.contains($scope.user.roles, 'ROLE_USER'))
 					$scope.candidate.isCreatedByUser = true;
 				else
@@ -207,7 +249,10 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-		
+				if($scope.showExperienced == true)
+					$scope.candidate.profileType = "Experienced";
+				else
+					$scope.candidate.profileType = "Fresher";
 				$scope.candidate.isReferral = true;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
 		    	$scope.candidate.interviewSet = false;
@@ -406,6 +451,22 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	};
 	$scope.lengthOfQualifications = function() {
 		if($scope.candidate.qualifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfCertifications = function() {
+		if($scope.candidate.certifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfTrainings = function() {
+		if($scope.candidate.trainings.length == 1){
 			return false;
 		}
 		else {

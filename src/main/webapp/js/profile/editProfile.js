@@ -57,7 +57,16 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		stream:'',
 		percentage:'70'
 	}];
-	
+	$scope.candidate.certifications=[{
+		certification:'',
+		institute:'',
+		score:'70'
+	}];
+	$scope.candidate.trainings=[{
+		training:'',
+		trainingInstitute:'',
+		trainingDuration:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -66,7 +75,22 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		};
 		$scope.candidate.qualifications.push(addQualification);
 	};
-	
+	$scope.addCertificationCriteria = function() {
+		var addCertification = {		
+				certification:'',
+				institute:'',
+				score:'70'
+		};
+		$scope.candidate.certifications.push(addCertification);
+	};
+	$scope.addTrainingCriteria = function() {
+	var addTraining = {		
+			training:'',
+			trainingInstitute:'',
+			trainingDuration:''
+		};
+		$scope.candidate.trainings.push(addTraining);
+	};
 	$scope.checkDisability = function(qualification){
 		if(qualification){
 			//$scope.disableCreateBtn  =  false;
@@ -83,7 +107,16 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			$scope.candidate.qualifications.splice(index,1);
 		} 
 	}
-	
+	$scope.deleteCertification = function(index){
+		if (!($scope.candidate.certifications.length - 1 == 0)) {
+			$scope.candidate.certifications.splice(index,1);
+		} 
+	}
+	$scope.deleteTraining = function(index){
+		if (!($scope.candidate.trainings.length - 1 == 0)) {
+			$scope.candidate.trainings.splice(index,1);
+		} 
+	}
 	$scope.status = {
 		    isFirstOpen: true,
 		    isFirstDisabled: false
@@ -101,6 +134,10 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	});
 	profileService.getProfileById($scope.userId).then(function(data){
 		$scope.candidate = data;
+		if($scope.candidate.profileType == 'Experienced')
+			$scope.showExperienced = true;
+		else
+			$scope.showExperienced = false;
 		$scope.creator = _.find($scope.userData, function(user){ return user.emailId === $scope.candidate.createdBy});
 		$scope.sk.jobcodeProfiles = $scope.candidate.jobcodeProfile;
 		$scope.sk.primarySkills = $scope.candidate.primarySkills;
@@ -439,4 +476,28 @@ $scope.previous=function(previousShow){
 	 }
 }
 
+$scope.lengthOfQualifications = function() {
+	if($scope.candidate.qualifications.length == 1){
+		return false;
+	}
+	else {
+		return true;
+	}
+};
+$scope.lengthOfCertifications = function() {
+	if($scope.candidate.certifications.length == 1){
+		return false;
+	}
+	else {
+		return true;
+	}
+};
+$scope.lengthOfTrainings = function() {
+	if($scope.candidate.trainings.length == 1){
+		return false;
+	}
+	else {
+		return true;
+	}
+};
 }]);
