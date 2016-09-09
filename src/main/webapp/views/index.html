@@ -87,7 +87,38 @@ input[type='date']:after {
 }
 .datediv{
 margin-left: 59px;
+      
+  .jssorb05 {
+                    position: absolute;
+                }
+                .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+                    position: absolute;
+                  
+                    width: 16px;
+                    height: 16px;
+                    background: url(../img/b05.png) no-repeat;
+                    overflow: hidden;
+                    cursor: pointer;
+                }
+   
 }
+
+ .jssora11l, .jssora11r {
+                    display: block;
+                    position: absolute;
+                    /* size of arrow element */
+                    width: 37px;
+                    height: 37px;
+                    cursor: pointer;
+                    background: url(../img/a11.png) no-repeat;
+                    overflow: hidden;
+                }
+                .jssora11l { background-position: -11px -41px; }
+                .jssora11r { background-position: -71px -41px; }
+                .jssora11l:hover { background-position: -131px -41px; }
+                .jssora11r:hover { background-position: -191px -41px; }
+                .jssora11l.jssora11ldn { background-position: -251px -41px; }
+                .jssora11r.jssora11rdn { background-position: -311px -41px; }
 </style>
 
 <!-- <div class="statistics-container" align="center"></div> -->
@@ -333,8 +364,55 @@ margin-left: 59px;
 
 </div>
 <div ng-show="userData">
-<a>Create profile</a><br>
-<a>About Organization</a>
+
+
+
+<span style="float:right"><a style="margin: 20px; font-family: initial; font-size:15px">Create profile</a>
+<a style="margin: 20px; font-family: initial; font-size:15px">About Organization</a>
+</span>
+ <div class="container" style="width:100%;">
+       <div id="slider1_container" style="visibility: hidden; position: relative; margin: 0 auto; width: 1140px; height: 300px; overflow: hidden;">
+
+
+            <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+
+                background-color: #000; top: 0px; left: 0px;width: 100%; height:100%;">
+                </div>
+                <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+
+                top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+            </div>
+
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1140px; height: 300px;
+            overflow: hidden;">
+                <div>
+                    <img u="image" src2="views/slider/img/innovation.png" />
+                </div>
+                <div>
+                    <img u="image" src2="views/slider/img/integrate.png" />
+                </div>
+                <div>
+                    <img u="image" src2="views/slider/img/operate.png" />
+                </div>
+               
+            </div>
+             <div u="navigator" class="jssorb05" style="bottom: 16px; right: 6px;">
+                <div u="prototype"></div>
+            </div>
+
+        <span u="arrowleft" class="jssora11l" style="top: 123px; left: 129px;">
+            </span>
+             <span u="arrowright" class="jssora11r" style="top: 123px; right: 127px;">
+            </span>
+           
+            <a style="display: none" href="http://www.jssor.com">Bootstrap Carousel</a>
+        </div>
+      
+    </div>
+<!-- -------------------------- -->
 
 <div class="ui feed " style="font-size: 100%;width: 800px;float: left;">
 <h4 style="margin-right: 135px; height: 1px;" noshade>
@@ -365,10 +443,10 @@ margin-left: 59px;
 		</table>
 </div>
 			<div class="ui feed " style="font-size: 100%;width: 400px;float: right;" >
-				<h4 style="margin-top: 25px; height: 1px;" noshade>
+				<h4 style=" height: 1px;" noshade>
 					Recent Activities
 					</h4>
-					<hr style="background-color: black; height:1px; width: 80%">
+					<hr style="background-color: black; height:1px; width: 80%; magin-top:25px">
 					<div align="left"
 						style="max-height: 250px; height: auto; overflow: auto;">
 						<div class="event" ng-repeat="feed in events">
@@ -389,197 +467,14 @@ margin-left: 59px;
 						</div>
 					</div>
 			</div>
-			
-    <script type="text/javascript" src="views/slider/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="views/slider/js/jssor.slider-21.1.5.mini.js"></script>
-    <!-- use jssor.slider-21.1.5.debug.js instead for debug -->
-    <script>
-        jQuery(document).ready(function ($) {
-            
-            var jssor_1_SlideshowTransitions = [
-                                                {$Duration:1200,x:-0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-                                                {$Duration:1200,x:0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2}
-                                              ];
-
-
-            
-            var jssor_1_options = {
-              $AutoPlay: true,
-              $SlideshowOptions: {
-                $Class: $JssorSlideshowRunner$,
-                $Transitions: jssor_1_SlideshowTransitions,
-                $TransitionsOrder: 1
-              },
-              $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$
-              },
-              $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-              }
-            };
-            
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-            
-            //responsive code begin
-            //you can remove responsive code if you don't want the slider scales while window resizing
-            function ScaleSlider() {
-                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-                if (refSize) {
-                    refSize = Math.min(refSize, 600);
-                    jssor_1_slider.$ScaleWidth(refSize);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            }
-            ScaleSlider();
-            $(window).bind("load", ScaleSlider);
-            $(window).bind("resize", ScaleSlider);
-            $(window).bind("orientationchange", ScaleSlider);
-            //responsive code end
-        });
-    </script>
-
-    <style>
-        
-        /* jssor slider bullet navigator skin 01 css */
-        /*
-        .jssorb01 div           (normal)
-        .jssorb01 div:hover     (normal mouseover)
-        .jssorb01 .av           (active)
-        .jssorb01 .av:hover     (active mouseover)
-        .jssorb01 .dn           (mousedown)
-        */
-        .jssorb01 {
-            position: absolute;
-        }
-        .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
-            position: absolute;
-            /* size of bullet elment */
-            width: 12px;
-            height: 12px;
-            filter: alpha(opacity=70);
-            opacity: .7;
-            overflow: hidden;
-            cursor: pointer;
-            border: #000 1px solid;
-        }
-        .jssorb01 div { background-color: gray; }
-        .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
-        .jssorb01 .av { background-color: #fff; }
-        .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
-
-        /* jssor slider arrow navigator skin 05 css */
-        /*
-        .jssora05l                  (normal)
-        .jssora05r                  (normal)
-        .jssora05l:hover            (normal mouseover)
-        .jssora05r:hover            (normal mouseover)
-        .jssora05l.jssora05ldn      (mousedown)
-        .jssora05r.jssora05rdn      (mousedown)
-        */
-        .jssora05l, .jssora05r {
-            display: block;
-            position: absolute;
-            /* size of arrow element */
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            background: url('views/slider/img/a17.png') no-repeat;
-            overflow: hidden;
-        }
-        .jssora05l { background-position: -10px -40px; }
-        .jssora05r { background-position: -70px -40px; }
-        .jssora05l:hover { background-position: -130px -40px; }
-        .jssora05r:hover { background-position: -190px -40px; }
-        .jssora05l.jssora05ldn { background-position: -250px -40px; }
-        .jssora05r.jssora05rdn { background-position: -310px -40px; }
-    </style>
-
-
-    <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
-        <!-- Loading Screen -->
-        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('views/slider/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-        </div>
-        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="views/slider/img/01.jpg" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="views/slider/img/02.jpg" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="views/slider/img/03.jpg" />
-            </div>
-            <div data-p="112.50" style="display: none;">
-                <img data-u="image" src="views/slider/img/04.jpg" />
-            </div>
-        
-        </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb01" style="bottom:16px;right:16px;">
-            <div data-u="prototype" style="width:12px;height:12px;"></div>
-        </div>
-        <!-- Arrow Navigator -->
-        <span data-u="arrowleft" class="jssora05l" style="top:0px;left:8px;width:40px;height:40px;" data-autocenter="2"></span>
-        <span data-u="arrowright" class="jssora05r" style="top:0px;right:8px;width:40px;height:40px;" data-autocenter="2"></span>
-    </div>
-</div>
-
-<!-- 
-			<div class="ui feed " style="font-size: 100%; width:60%" ng-show="userData">
-				<h4 style="margin-top: 25px; height: 1px;" noshade>
-					Recent Activities
-					</h4>
-					<hr style="background-color: black; height:1px; width: 50%">
-					<div align="left"
-						style="margin-left: ; height: auto; overflow: auto;">
-						<div class="event" ng-repeat="feed in events">
-							<div class="label" style="color: white">
-								<span class="initial"
-									ng-style="{'background-color':(($index%2)==0?'#ff0000':'#66ff33')}"
-									tooltip="{{feed.username}}">{{feed.initial.toUpperCase()}}</span>
-							</div>
-							<div class="content">
-								<div class="summary">
-									{{feed.eventDesc}}<br>
-									<div class="date datediv">
-									<b><time>{{ feed.createdTimeStamp | amDateFormat: 'dddd,
-											MMMM Do YYYY, h:mm a' }}</time></b>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-			</div> -->
-<!-- <div class="row">
-	<div class="col-md-6"></div>
-	<div class="col-md-6">
-		<h5 style="margin-top: 15px" align="center">Referred Profiles</h5>
-		<hr>
 	</div>
-</div>
- -->
 
-<!-- 
-<script>
-	$(".launch.button").mouseenter(function() {
-		$(this).stop().animate({
-			width : '215px'
-		}, 300, function() {
-			$(this).find('.text').show();
-		});
-	}).mouseleave(function(event) {
-		$(this).find('.text').hide();
-		$(this).stop().animate({
-			width : '70px'
-		}, 300);
-	});
-	$("#feed").sidebar({
-		overlay : false
-	}).sidebar('attach events', '.ui.launch.button');
-</script>
+  <script src="views/slider/js/bootstrap.min.js"></script>
+   
+   
+    <script src="views/slider/js/ie10-viewport-bug-workaround.js"></script>
 
- -->
+    
+    <script type="text/javascript" src="views/slider/js/jssor.slider.mini.js"></script>
+  
+
