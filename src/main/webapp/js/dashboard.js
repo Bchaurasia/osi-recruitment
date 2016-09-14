@@ -677,7 +677,7 @@ jQuery(document).ready(function ($) {
 		
         $ArrowKeyNavigation: true, 
 		$SlideEasing: $JssorEasing$.$EaseOutQuint,  
-		$SlideDuration: 4000,   
+		$SlideDuration: 3000,   
 		$MinDragOffsetToSlide: 10,     
 		$SlideSpacing: 0, 	
 		$Cols: 1,         

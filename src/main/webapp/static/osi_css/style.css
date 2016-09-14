@@ -3291,3 +3291,7 @@ div input[type="radio"].radioProfile{
 	left:0;
 	text-align:right;
 }
+
+.imageHolder{
+	cursor:pointer;
+}
