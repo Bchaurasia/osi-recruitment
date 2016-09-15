@@ -34,7 +34,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.requisitionId="";
 	$scope.screeningStatusList= ["Yes","No"];
 	$scope.candidate.currency="INR";
-	$scope.proficiencies=["Beginner","Proficient","Expert"];
+	$scope.proficiencies=["Beginner","Intermediate","Expert"];
 	
 	$scope.show1=true;
 	$scope.show2=false;
@@ -126,10 +126,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		};
 		$scope.candidate.languages.push(addLanguage);
 	};
-	$scope.update = function(index){
-		$scope.candidate.languages[index+1].read= !$scope.candidate.languages[index+1].read;
-		$scope.var1=10;
-	}
+	
 	$scope.checkDisability = function(qualification){
 		if(qualification){
 			//$scope.disableCreateBtn  =  false;
@@ -251,6 +248,25 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 			stream:'',
 			percentage:'70'
 		}];
+       if($scope.showExperienced == false) {
+    	   $scope.candidate.certifications=[{
+    			certification:'',
+    			institute:'',
+    			score:'70'
+    		}];
+    		$scope.candidate.trainings=[{
+    			training:'',
+    			trainingInstitute:'',
+    			trainingDuration:''
+    		}];
+    		$scope.candidate.languages=[{
+    			language:'',
+    			read:false,
+    			write:false,
+    			speak:false,
+    			proficiency:''
+    		}];
+       }
        $scope.candidate.expMonth="0";
        $scope.candidate.tenureMonth ="0";
        angular.element("input[type='file']").val(null);

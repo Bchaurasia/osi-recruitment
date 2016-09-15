@@ -16,7 +16,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.todayDate = new Date();
 	$scope.profileSources = ["Consultancy","Job Sites"];
 	$scope.screeningStatusList= ["Yes","No"];
-	$scope.proficiencies=["Beginner","Proficient","Expert"];
+	$scope.proficiencies=["Beginner","Intermediate","Expert"];
 	$scope.requisitionId="";
 	
 	$scope.show1=true;
