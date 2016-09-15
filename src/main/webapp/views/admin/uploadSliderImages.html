@@ -1,0 +1,40 @@
+<div class="container">
+<div class="ui small images">
+<table>
+<tr>
+<td>
+	<label for="file-input1"> 
+	<img class="imageHolder" id="myImage1" src="/views/slider/img/uploadImage.png">
+		<button class="circular mini ui icon blue button close" style="margin-top:0px" ng-click="clearImage(1)" >
+			<i class="remove icon"></i>
+		</button>
+	</label> 
+	<input id="file-input1" type="file" style="display:none" accept="image/*" /> 
+	
+	</td>
+	
+	<td>
+	<label for="file-input2"> 
+	<img class="imageHolder" id="myImage2" src="/views/slider/img/uploadImage.png">
+		<button class="circular mini ui icon blue button close" style="margin-top:0px" ng-click="clearImage(2)" >
+			<i class="remove icon"></i>
+		</button>
+	</label> 
+	<input id="file-input2" type="file" style="display:none" accept="image/*" /> 
+	</td>
+	
+	<td>
+	<label for="file-input3"> 
+	<img class="imageHolder" id="myImage3"
+		src="/views/slider/img/uploadImage.png">
+		<button class="circular mini ui icon blue button close"
+			ng-click="clearImage(3)" style="margin-top:0px" ng-disabled="closeButton3">
+			<i class="remove icon"></i>
+		</button>
+	</label> 
+	<input id="file-input3" type="file"  style="display:none" accept="image/*" />
+	</td>
+ </tr>
+</table>	
+</div>
+</div>

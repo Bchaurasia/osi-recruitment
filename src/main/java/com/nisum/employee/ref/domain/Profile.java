@@ -31,6 +31,7 @@ public class Profile extends AuditEntity{
 	List<CandidateQualification> qualifications;
 	List<CandidateCertification> certifications;
 	List<CandidateTraining> trainings;
+	List<CandidateLanguage> languages;
 	String address;
 	String notes;
 	String altmobileNo;
