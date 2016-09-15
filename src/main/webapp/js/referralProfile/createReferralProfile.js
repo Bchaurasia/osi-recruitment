@@ -34,6 +34,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.requisitionId="";
 	$scope.screeningStatusList= ["Yes","No"];
 	$scope.candidate.currency="INR";
+	$scope.proficiencies=["Beginner","Proficient","Expert"];
 	
 	$scope.show1=true;
 	$scope.show2=false;
@@ -84,6 +85,13 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		trainingInstitute:'',
 		trainingDuration:''
 	}];
+	$scope.candidate.languages=[{
+		language:'',
+		read:false,
+		write:false,
+		speak:false,
+		proficiency:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -101,13 +109,27 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		$scope.candidate.certifications.push(addCertification);
 	};
 	$scope.addTrainingCriteria = function() {
-	var addTraining = {		
+		var addTraining = {		
 			training:'',
 			trainingInstitute:'',
 			trainingDuration:''
 		};
 		$scope.candidate.trainings.push(addTraining);
 	};
+	$scope.addLanguageCriteria = function() {
+		var addLanguage = {		
+				language:'',
+				read:false,
+				write:false,
+				speak:false,
+				proficiency:''
+		};
+		$scope.candidate.languages.push(addLanguage);
+	};
+	$scope.update = function(index){
+		$scope.candidate.languages[index+1].read= !$scope.candidate.languages[index+1].read;
+		$scope.var1=10;
+	}
 	$scope.checkDisability = function(qualification){
 		if(qualification){
 			//$scope.disableCreateBtn  =  false;
@@ -132,6 +154,11 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.deleteTraining = function(index){
 		if (!($scope.candidate.trainings.length - 1 == 0)) {
 			$scope.candidate.trainings.splice(index,1);
+		} 
+	}
+	$scope.deleteLanguage = function(index){
+		if (!($scope.candidate.languages.length - 1 == 0)) {
+			$scope.candidate.languages.splice(index,1);
 		} 
 	}
 	$scope.jobCodeSl = function(){
@@ -467,6 +494,14 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	};
 	$scope.lengthOfTrainings = function() {
 		if($scope.candidate.trainings.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfLanguages = function() {
+		if($scope.candidate.languages.length == 1){
 			return false;
 		}
 		else {

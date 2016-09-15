@@ -3290,8 +3290,13 @@ div input[type="radio"].radioProfile{
 	display:block inline;
 	left:0;
 	text-align:right;
+	height:20px;
 }
-
+div input[type="checkbox"].checkboxProfile{
+	visibility:visible !important;
+	left:0px;
+	height:20px;
+}
 .imageHolder{
 	cursor:pointer;
 }

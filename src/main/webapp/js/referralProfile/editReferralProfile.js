@@ -27,7 +27,8 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.third="";
 	$scope.fourth="";
 	$scope.screeningStatusList= ["Yes","No"];
-
+	$scope.proficiencies=["Beginner","Proficient","Expert"];
+	
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
 			$state.go("referral.searchReferralProfile");
@@ -71,6 +72,13 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 		trainingInstitute:'',
 		trainingDuration:''
 	}];
+	$scope.candidate.languages=[{
+		language:'',
+		read:false,
+		write:false,
+		speak:false,
+		proficiency:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -93,7 +101,17 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 			trainingInstitute:'',
 			trainingDuration:''
 	};
-	$scope.candidate.trainings.push(addTraining);
+		$scope.candidate.trainings.push(addTraining);
+	};
+	$scope.addLanguageCriteria = function() {
+		var addLanguage = {		
+				language:'',
+				read:false,
+				write:false,
+				speak:false,
+				proficiency:''
+		};
+		$scope.candidate.languages.push(addLanguage);
 	};
 	$scope.checkDisability = function(qualification){
 		if(qualification){
@@ -121,6 +139,12 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 			$scope.candidate.trainings.splice(index,1);
 		} 
 	}
+	$scope.deleteLanguage = function(index){
+		if (!($scope.candidate.languages.length - 1 == 0)) {
+			$scope.candidate.languages.splice(index,1);
+		} 
+	}
+	
 	$http.get('resources/user').success(function(data, status, headers, config) {
 		$scope.userData = data;
 		angular.forEach($scope.userData, function(userr){
@@ -423,6 +447,14 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	};
 	$scope.lengthOfTrainings = function() {
 		if($scope.candidate.trainings.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfLanguages = function() {
+		if($scope.candidate.languages.length == 1){
 			return false;
 		}
 		else {

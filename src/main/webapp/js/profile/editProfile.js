@@ -16,6 +16,7 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.todayDate = new Date();
 	$scope.profileSources = ["Consultancy","Job Sites"];
 	$scope.screeningStatusList= ["Yes","No"];
+	$scope.proficiencies=["Beginner","Proficient","Expert"];
 	$scope.requisitionId="";
 	
 	$scope.show1=true;
@@ -67,6 +68,13 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 		trainingInstitute:'',
 		trainingDuration:''
 	}];
+	$scope.candidate.languages=[{
+		language:'',
+		read:false,
+		write:false,
+		speak:false,
+		proficiency:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -90,6 +98,16 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 			trainingDuration:''
 		};
 		$scope.candidate.trainings.push(addTraining);
+	};
+	$scope.addLanguageCriteria = function() {
+		var addLanguage = {		
+				language:'',
+				read:false,
+				write:false,
+				speak:false,
+				proficiency:''
+		};
+		$scope.candidate.languages.push(addLanguage);
 	};
 	$scope.checkDisability = function(qualification){
 		if(qualification){
@@ -115,6 +133,11 @@ app.controller('editProfileCtrl',['$scope', '$state', '$http', '$window','shared
 	$scope.deleteTraining = function(index){
 		if (!($scope.candidate.trainings.length - 1 == 0)) {
 			$scope.candidate.trainings.splice(index,1);
+		} 
+	}
+	$scope.deleteLanguage = function(index){
+		if (!($scope.candidate.languages.length - 1 == 0)) {
+			$scope.candidate.languages.splice(index,1);
 		} 
 	}
 	$scope.status = {
@@ -494,6 +517,14 @@ $scope.lengthOfCertifications = function() {
 };
 $scope.lengthOfTrainings = function() {
 	if($scope.candidate.trainings.length == 1){
+		return false;
+	}
+	else {
+		return true;
+	}
+};
+$scope.lengthOfLanguages = function() {
+	if($scope.candidate.languages.length == 1){
 		return false;
 	}
 	else {
