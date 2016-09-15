@@ -61,6 +61,8 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.errorMsg=false;
 	$scope.downloadOption=false;
 	$scope.searchQuery="";
+	$scope.showReqTable=false;
+	$scope.showPositionDetails=false;
 	/*-------------------------------------------------------------*/
 	var jobDetails=[];
 	var interviewed=[];
@@ -569,6 +571,28 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	});
 		
 }
+	
+	if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER")
+			||  _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") 
+			|| _.contains($rootScope.user.roles,"ROLE_MANAGER")|| _.contains($rootScope.user.roles,"ROLE_ADMIN")|| 
+			_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") )){
+	
+		$scope.events=[];
+		console.log($rootScope.user.emailId);
+		dashboardService.getUserEvents($rootScope.user.emailId).then(function(data){
+			$scope.events=data; 
+			for(i=0; i<$scope.events.length; i++){
+				var subName=$scope.events[i].username.split(" ");
+				if(subName.length>=2){
+					$scope.events[i].initial=subName[0].charAt(0).concat(subName[1].charAt(0));
+				}
+				else{
+					$scope.events[i].initial=subName[0].charAt(0);
+				}
+			}
+	});
+		
+}
 	if(!_.isUndefined($rootScope.user) && _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER")){
 		
 		 offerService.getOfferForDashboard().then(function(data){
@@ -608,9 +632,7 @@ if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_IN
 
 }
 
-if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_INTERVIEWER") 
-		|| _.contains($rootScope.user.roles,"ROLE_HR") || _.contains($rootScope.user.roles,"ROLE_MANAGER") ||
-		_.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") )){
+if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_HR") )){
 dashboardService.getAllEvents().then(function(data){
 	$scope.events = data;
 	
@@ -726,7 +748,13 @@ jQuery(document).ready(function ($) {
 });
 
 
+if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_HR")
+		|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_APPROVER") 
+		|| _.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER"))){
+	$scope.showReqTable=true;
+	$scope.showPositionDetails=true;
 
+}
 
 }]);
 

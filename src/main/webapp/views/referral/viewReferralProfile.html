@@ -247,7 +247,7 @@
 	
 				<div class="input-field col s2">
 					<input type="range" ng-model="candidate.score" min="0"
-						max="100" /> <label>Percentage<b class="mandatory">*</b></label> <span
+						max="100" /> <label>Percentage</label> <span
 						class="range-slider__value">{{candidate.score}}%</span>
 						<div class="input-field col s1">
 							<button class="glyphicon glyphicon-remove"
@@ -283,7 +283,7 @@
 						class="form-control" type="text" ng-model="candidate.trainingDuration"
 						ng-pattern="/^[0-9]*$/" maxlength="3"> <label
 						style="position: absolute; top: -22px;">Training Duration(in
-						days)<b class="mandatory">*</b>
+						days)
 					</label> <span class="validation-error"
 						ng-required="CreateCandidate.trainingDuration.$error.pattern"
 						ng-show="CreateCandidate.trainingDuration.$error.pattern">
@@ -324,9 +324,9 @@
 					<select placeholder="Select Proficiency"
 						ng-model="candidate.proficiency"
 						ng-options="o for o in proficiencies"
-						class="form-control input-sm" required>
+						class="form-control input-sm">
 						<option value="" disabled="disabled">Select Proficiency Level</option>
-					</select> <label>Proficiency Level<b class="mandatory">*</b></label>
+					</select> <label>Proficiency Level</label>
 						<div class="input-field col s1">
 							<button class="glyphicon glyphicon-remove"
 								data-tooltip="Remove Training Details"
