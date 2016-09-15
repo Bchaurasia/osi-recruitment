@@ -180,5 +180,18 @@ app.config(['$stateProvider', '$urlRouterProvider','$routeProvider', function($s
     		permission: function(authorizationService,$route) {
     			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
             }
-    	}});;
+    	}})
+    	.state('admin.upload', {url:'/uploadImages', views: {'': {templateUrl: 'views/admin/uploadSlider.html', controller: 'imageUpload'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
+    	.state('admin.upload.images', {url:'/uploadImages/upload', views: {'': {templateUrl: 'views/admin/uploadSliderImages.html', controller: 'imageUpload'}},
+    	resolve : {
+    		permission: function(authorizationService,$route) {
+    			return authorizationService.permissionCheck(["ROLE_ADMIN"]);
+            }
+    	}})
+    	;;
 }]);

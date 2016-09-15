@@ -13,10 +13,10 @@
 		</div>
 		 <div class="row">
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-35px;">Fresher</input>
+				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;"><font size="3">Fresher</font></input>
 			</div>
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-50px;">Experienced</input>
+				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;"><font size="3">Experienced</font></input>
 			</div>
 			
 		</div> 
@@ -310,6 +310,46 @@
 						</div>
 					</div>				
 			</div>
+			<div class="row" ng-repeat="candidate in candidate.languages" ng-hide="showExperienced">
+				<div class="input-field col s6">
+					<input placeholder="Enter Language" name="language" class="form-control"
+						type="text" ng-model="candidate.language" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z]*$/"> <label
+						style="position: absolute; top: -22px;">Language </label>
+				</div>
+	
+				<div class="input-field col s3" align="left">						
+							
+					<label style="left:0px;">Read
+					<input type="checkbox" ng-model="candidate.read" class="checkboxProfile"/></label>
+					<label style="left:100px;">Write
+					<input type="checkbox" ng-model="candidate.write" class="checkboxProfile"/></label>
+					<label style="left:200px;">Speak
+					<input type="checkbox" ng-model="candidate.speak" class="checkboxProfile"/></label>							
+							
+				</div>
+	
+				<div class="input-field col s2">
+					<select placeholder="Select Proficiency"
+						ng-model="candidate.proficiency"
+						ng-options="o for o in proficiencies"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select Proficiency Level</option>
+					</select> <label>Proficiency Level<b class="mandatory">*</b></label>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Training Details"
+								ng-show="lengthOfLanguages()"
+								ng-click="deleteLanguage($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Training Details"
+								ng-show="$last" ng-click="addLanguageCriteria()"
+								ng-disabled="checkDisability(candidate.language)"></button>
+						</div>
+					</div>				
+			</div>
+			
 	<div ng-if="showExperienced == true">
 		<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
 		<button class="btn btn-info active" ng-click="next('show3')"> Next <i class="long arrow right icon"></i> </button>
