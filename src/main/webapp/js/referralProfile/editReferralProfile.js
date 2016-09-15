@@ -27,7 +27,7 @@ app.controller('editReferralProfileCtrl',['$scope', '$state', '$http', '$window'
 	$scope.third="";
 	$scope.fourth="";
 	$scope.screeningStatusList= ["Yes","No"];
-	$scope.proficiencies=["Beginner","Proficient","Expert"];
+	$scope.proficiencies=["Beginner","Intermediate","Expert"];
 	
 	$scope.init = function() {
 		if(sharedService.getprofileUserId() == undefined) {
