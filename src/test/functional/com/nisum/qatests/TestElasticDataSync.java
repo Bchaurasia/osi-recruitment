@@ -3,6 +3,7 @@
 package com.nisum.qatests;
 
 import static org.junit.Assert.assertEquals;
+import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,8 +46,10 @@ public class TestElasticDataSync {
 	public void elasticDataSync() throws Exception {
 
 		String mainURL = loginObject.loginUser(driver, LoginPageConstants.ADMIN_USERNAME, LoginPageConstants.GPLUS_ALL_USERS_PASSWORD );
+		Thread.sleep(1000);
 		assertEquals(LoginPageConstants.MAIN_URL, mainURL);
 		String dataSyncURL = navigateToESDataSyncTab();
+		Thread.sleep(1000);
 		assertEquals(LoginPageConstants.DATA_SYNC_URL, dataSyncURL);
 		deleteDataIndex();
 		updateDataIndex();

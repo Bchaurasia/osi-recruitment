@@ -15,8 +15,8 @@ public final class  AdminPageConstants {
 	//Client page constants
 	public static final String BT_ADD_CLIENT = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[2]/div/div[2]/div/a/i";
 	public static final String TF_CLIENT_NAME = ".//*[@id='clientName']";
-	public static final String DD_CLIENT_LOCATION = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[2]/form/div[1]/div[2]/select";
-	public static final String BT_SAVE_CLIENT_INFORMATION = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[2]/form/div[2]/div/button[1]";
+	public static final String DD_CLIENT_LOCATION = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[2]/form/div[2]/div[2]/select";
+	public static final String BT_SAVE_CLIENT_INFORMATION = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[2]/form/div[4]/div/button[1]";
 	public static final String BT_CANCEL_CLIENT = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[2]/form/div[2]/div/button[2]";
 	public static final String MSG_CLIENT_ADDED_SUCCESSFULLY = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[1]/h5";
 
@@ -30,7 +30,7 @@ public final class  AdminPageConstants {
 	public static final String SB_MAX_EXP_XPATH = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[3]/form/div[2]/div/div[3]/input";
 	public static final String BT_SAVE_DESIGNATION = ".//*[@id='wrapper']/center/div/div[3]/div/div/div[3]/form/div[3]/button";
 	public static final String MSG_DESIGNATION_ADDED_SUCCESSFULLY = ".//*[@id='wrapper']/center/div/div[3]/div/div/div/div/div/h6";
-	
+
 	//ES Sync Data page constants
 	public static final String BT_DELETE_DATA_INDEX = ".//*[@id='wrapper']/center/div/div[3]/div[2]/form/div[2]/div/button[1]";
 	public static final String MSG_DATA_INDEX_DELETED_SUCCESSFULLY= ".//*[@id='wrapper']/center/div/div[3]/div[2]/form/div[1]/div/div/h6";

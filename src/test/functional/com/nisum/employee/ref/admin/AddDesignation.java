@@ -1,5 +1,6 @@
 package com.nisum.employee.ref.admin;
 
+import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -11,14 +12,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import com.nisum.constants.AdminPageConstants;
 import com.nisum.constants.DashboardPageConstants;
 import com.nisum.constants.LoginPageConstants;
 import com.nisum.excelReaderLibrary.ExcelDataConfig;
-import junit.framework.Assert;
 
 public class AddDesignation {
 
+	WebDriverWait wait;
 	ExcelDataConfig config = new ExcelDataConfig(LoginPageConstants.PATH_LOGIN_USER_SHEET);
 
 	int sheetnumber = 3; // Designation List tab
@@ -35,14 +38,13 @@ public class AddDesignation {
 
 	public void setDesignation(WebDriver driver) throws InterruptedException {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.findElement(By.xpath(DashboardPageConstants.ADMIN_TAB)).click();
+		wait = new WebDriverWait(driver, 10);
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.findElement(By.xpath(AdminPageConstants.DESIGNATION_SUB_TAB)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DashboardPageConstants.ADMIN_TAB))).click();
 
+		wait.until(ExpectedConditions.urlContains("admin/users"));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(AdminPageConstants.DESIGNATION_SUB_TAB))).click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
 		readDesignationFromExcel(driver);
 	}
 
@@ -74,18 +76,22 @@ public class AddDesignation {
 		Set<String> designations =  skillSetsForDesignations.keySet();
 		for (String designation : designations) {
 
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			driver.findElement(By.className(AdminPageConstants.BT_ADD_DESIGNATION_CLASS_NAME)).click();
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			driver.findElement(By.name(AdminPageConstants.TF_CREATE_DESIGNATION_NAME)).sendKeys(designation);
 			Thread.sleep(500);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.findElement(By.className(AdminPageConstants.DD_SKILL_SETS_CLASSNAME)).click();
+
+			WebElement addDesignationBt = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(AdminPageConstants.BT_ADD_DESIGNATION_CLASS_NAME)));
+			addDesignationBt.click();
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.name(AdminPageConstants.TF_CREATE_DESIGNATION_NAME))).sendKeys(designation);
+
+			Thread.sleep(500);
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.className(AdminPageConstants.DD_SKILL_SETS_CLASSNAME))).click();
+
 			skillSet = skillSetsForDesignations.get(designation);
 			for (String skills : skillSet) {
-				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				driver.findElement(By.xpath(AdminPageConstants.DD_SKILL_SETS_XPATH)).sendKeys(skills);
-				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(AdminPageConstants.DD_SKILL_SETS_XPATH))).sendKeys(skills);
+
 				driver.findElement(By.xpath(AdminPageConstants.DD_SKILL_SETS_XPATH)).sendKeys(Keys.ENTER);
 			}
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -99,16 +105,15 @@ public class AddDesignation {
 
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			driver.findElement(By.xpath(AdminPageConstants.BT_SAVE_DESIGNATION)).click();
-			
+
 			Thread.sleep(1000);
-			
+
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			String actualMessage = driver.findElement(By.xpath(AdminPageConstants.MSG_DESIGNATION_ADDED_SUCCESSFULLY)).getText();
 			String expectedMessage = designation + " Designation Created successfully";
-			Assert.assertEquals(expectedMessage, actualMessage);
-			
+			assertEquals(expectedMessage, actualMessage);
+
 			Thread.sleep(4000);
-			
 		}
 	}
 

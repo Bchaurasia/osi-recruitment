@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriver.TargetLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 
 import com.nisum.constants.DashboardPageConstants;
@@ -18,24 +20,23 @@ import com.nisum.constants.LoginPageConstants;
 
 public class LoginAndLogout{
 
+	WebDriverWait wait;
+
 	public void logoutUser(WebDriver driver) throws InterruptedException {
 
-		driver.findElement(By.xpath(DashboardPageConstants.ID_WRAPPER)).click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, 10);
 
-		do {    
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.findElement(By.xpath(DashboardPageConstants.ID_WRAPPER)).click();
+		WebElement idWrapper = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DashboardPageConstants.ID_WRAPPER)));
+		idWrapper.click();
 
-		}
-		while (!driver.findElement(By.xpath(DashboardPageConstants.ID_LOGOUT)).isDisplayed());
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.findElement(By.xpath(DashboardPageConstants.ID_LOGOUT)).click();
+		WebElement logoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DashboardPageConstants.ID_LOGOUT)));
+		logoutButton.click();
 	}
 
 	public String loginUser(WebDriver driver, String USERNAME, String PASSWORD) throws InterruptedException {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, 10);
+
 		driver.get(LoginPageConstants.LOGIN_URL);
 
 		WebElement signInWithGoogle = driver.findElement(By.id(LoginPageConstants.GOOGLE_SIGIN_BUTTON));
@@ -53,25 +54,18 @@ public class LoginAndLogout{
 		username.sendKeys(USERNAME);
 		username.sendKeys(Keys.ENTER);
 
-		Thread.sleep(5000);
-		WebElement password = target.activeElement().findElement(By.xpath(LoginPageConstants.ID_PASSWD));
-		password.sendKeys(PASSWORD);
-
+		WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LoginPageConstants.ID_PASSWD)));
+		passwordField.sendKeys(PASSWORD);
 		target.activeElement().sendKeys(Keys.TAB);
-
 		WebElement loginButton = target.activeElement().findElement(By.xpath(LoginPageConstants.SIGN_IN_BUTTON));
 		loginButton.click();
 
-		do{
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		}while(!driver.findElement(By.xpath(LoginPageConstants.GPLUS_ALLOW_ACCESS_BUTTON)).isEnabled());
-
-		driver.findElement(By.xpath(LoginPageConstants.GPLUS_ALLOW_ACCESS_BUTTON)).click();
+		WebElement allowButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(LoginPageConstants.GPLUS_ALLOW_ACCESS_BUTTON)));
+		allowButton.click();
 
 		driver.switchTo().window(mainId);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+
 		Thread.sleep(1000);
 		Assert.assertTrue("Incorrect page title found, Recruitment Portal was expected", driver.getTitle().contains(DashboardPageConstants.OSI_TECHNOLOGIES_RECRUITMENT_PORTAL));
 		String currentURL = driver.getCurrentUrl();

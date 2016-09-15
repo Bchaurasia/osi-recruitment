@@ -2,26 +2,28 @@
 
 package com.nisum.qatests;
 
-import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-import com.nisum.excelReaderLibrary.ExcelDataConfig;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import com.nisum.constants.LoginPageConstants;
 import com.nisum.employee.ref.login.LoginAndLogout;
 import com.nisum.employee.ref.login.VerifyMainTabs;
+import com.nisum.excelReaderLibrary.ExcelDataConfig;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
 
 @RunWith(DataProviderRunner.class)
 public class TestMultiUserLogin {
 
 	private WebDriver driver;
+	WebDriverWait wait;
 	LoginAndLogout loginObject = new LoginAndLogout();
 	VerifyMainTabs tab = new VerifyMainTabs();
 
@@ -29,9 +31,13 @@ public class TestMultiUserLogin {
 	public void setUp() throws Exception {
 
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
-		driver = new ChromeDriver();
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-extensions");
+		driver = new ChromeDriver(options);
+
+		wait = new WebDriverWait(driver, 10);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
@@ -44,14 +50,11 @@ public class TestMultiUserLogin {
 	}
 
 	// negative test case with Invalid users 
-	@Test(expected=NoSuchElementException.class)
+	@Test(expected=TimeoutException.class)
 	@UseDataProvider("invalidData")
 	public void loginWithInvalidUser(String osiUser, String osiPassword, String osiUsertype) throws Exception {
 
 		loginObject.loginUser(driver, osiUser, osiPassword);
-		tab.userSpecificTabsOnly(driver, osiUsertype);
-		loginObject.logoutUser(driver);
-
 	}
 
 	@DataProvider
