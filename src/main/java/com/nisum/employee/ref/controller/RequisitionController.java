@@ -47,7 +47,7 @@ public class RequisitionController {
 		return new ResponseEntity<List<Requisition>>(requisitionsDetails, HttpStatus.OK);
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
+	@Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_HR", "ROLE_MANAGER", "ROLE_REQUISITION_MANAGER", "ROLE_REQUISITION_APPROVER" })
 	@ResponseBody
 	@RequestMapping(value = "/requisition", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveAllRequisitions() {

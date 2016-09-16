@@ -1,7 +1,7 @@
 angular.module('erApp')
 		   .service('positionService',['$http','$filter','$rootScope','appConstants','$q', '$timeout',	positionService]);
 
-function positionService($http,$filter,$rootScope,$timeout,$log,$q,appConstants) {
+function positionService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 	return {
 		createPosition : addPosition,
 		updatePosition : updatePosition,
