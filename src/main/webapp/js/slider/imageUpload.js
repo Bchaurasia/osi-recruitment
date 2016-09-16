@@ -1,8 +1,11 @@
+
 app.controller('imageUpload',['$scope','$http','$state',function($scope,$http,$state){
 	
 	$scope.imagearray={};
 	$scope.imagearray.imageInfo=[];
-	
+	$scope.addImage=[];
+	$scope.imageUpload=true;
+	$scope.addMoreImages=false;
     function insertRecipeImage(inputString, inputIndex, fileName) {
         if (inputString.files && inputString.files[0]) {
             var reader = new FileReader();
@@ -100,6 +103,12 @@ app.controller('imageUpload',['$scope','$http','$state',function($scope,$http,$s
             }
     	}
     });
-
-	
+$scope.addMore= function(){
+	$scope.imageUpload=true;
+	$scope.addMoreImages=false;
+}
+$scope.uploadImage=function(){
+	$scope.imageUpload=false;
+	$scope.addMoreImages=true;
+}
 }]);

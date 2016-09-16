@@ -1,40 +1,38 @@
-<div class="container">
-<div class="ui small images">
+
+
+<div class="container" ng-show="imageUpload">
+<div class="ui small images" >
+<h2 style="font-family: -webkit-body;">Add File</h2>
+
 <table>
-<tr>
-<td>
+<tr >
+		
+	<td>
+	
+	<input type="text" ng-model="fileName" placeholder="Add file name" style="width:80%; font-family: -webkit-body;">
+	</td>
+	<td>
 	<label for="file-input1"> 
 	<img class="imageHolder" id="myImage1" src="/views/slider/img/uploadImage.png">
 		<button class="circular mini ui icon blue button close" style="margin-top:0px" ng-click="clearImage(1)" >
 			<i class="remove icon"></i>
 		</button>
 	</label> 
-	<input id="file-input1" type="file" style="display:none" accept="image/*" /> 
-	
+	<input id="file-input1" type="file" style="display:none" accept="image/*" />
+	</td> 
+	<td>
+	<button class="btn btn-info active" ng-click="uploadImage()">Upload Image  </button>
 	</td>
 	
-	<td>
-	<label for="file-input2"> 
-	<img class="imageHolder" id="myImage2" src="/views/slider/img/uploadImage.png">
-		<button class="circular mini ui icon blue button close" style="margin-top:0px" ng-click="clearImage(2)" >
-			<i class="remove icon"></i>
-		</button>
-	</label> 
-	<input id="file-input2" type="file" style="display:none" accept="image/*" /> 
-	</td>
-	
-	<td>
-	<label for="file-input3"> 
-	<img class="imageHolder" id="myImage3"
-		src="/views/slider/img/uploadImage.png">
-		<button class="circular mini ui icon blue button close"
-			ng-click="clearImage(3)" style="margin-top:0px" ng-disabled="closeButton3">
-			<i class="remove icon"></i>
-		</button>
-	</label> 
-	<input id="file-input3" type="file"  style="display:none" accept="image/*" />
 	</td>
  </tr>
+ 
 </table>	
 </div>
+
+</div>
+<div ng-show="addMoreImages">
+	<h2 style="font-family: initial">Add more images</h2>
+	<a class="btn-floating" data-tooltip="Uoload more images" ng-click="addMore()">
+	<i class="material-icons">add</i></a>
 </div>
