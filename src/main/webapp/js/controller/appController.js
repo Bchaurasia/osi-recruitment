@@ -193,7 +193,6 @@ return input.slice(start);
 
 app.run(function($rootScope, Idle, $log, Keepalive){
     Idle.watch();
-    $log.debug('app started.');
 });
 
 app.directive('ngEnter', function() {

@@ -165,7 +165,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 					});	
 		    		
 		    		$scope.positions = angular.copy($scope.selectedPositions);
-		    		console.log($scope.positions);
 				$scope.currentPage = 0;
 				$scope.searchQuery="";
 		}).catch(function(msg){
@@ -556,7 +555,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.showHighcharts= false;
 		$scope.userData= true;
 		$scope.events=[];
-		console.log($rootScope.user.emailId);
 		dashboardService.getUserEvents($rootScope.user.emailId).then(function(data){
 			$scope.events=data; 
 			for(i=0; i<$scope.events.length; i++){
