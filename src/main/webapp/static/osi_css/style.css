@@ -12,7 +12,7 @@ html {
 }
 
 body {
-	background: url(../../static/images/body-bg.png);
+	background: url(../../static/osi_images/body-bg.png);
 	background-repeat: repeat;
 	font: 13px/1.7em 'Open Sans';
 	margin: 0;
@@ -1441,7 +1441,7 @@ html {
 }
 
 body {
-	background: url(../../static/images/body-bg.png);
+	background: url(../../static/osi_images/body-bg.png);
 	background-repeat: repeat;
 	font: 13px/1.7em 'Open Sans';
 	margin: 0;
