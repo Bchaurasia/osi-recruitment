@@ -92,7 +92,7 @@ public class PositionController {
 		return new ResponseEntity<List<Position>>(positions, HttpStatus.OK);
 	}
 
-	@Secured({ "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
+	@Secured({"ROLE_USER", "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
 			"ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/searchPositionsBasedOnJobCode", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionsBasedOnJobCode(
@@ -102,7 +102,7 @@ public class PositionController {
 				: new ResponseEntity<Position>(positionsDetail, HttpStatus.OK);
 	}
 
-	@Secured({ "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
+	@Secured({ "ROLE_USER", "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
 			"ROLE_REQUISITION_APPROVER" })
 	@RequestMapping(value = "/searchPositionsBasedOnRequisitionId", method = RequestMethod.GET)
 	public ResponseEntity<?> retrievePositionsBasedOnRequisitionId(
