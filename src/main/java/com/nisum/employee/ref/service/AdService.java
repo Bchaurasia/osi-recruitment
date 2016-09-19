@@ -10,8 +10,9 @@ public class AdService implements IAdService{
 	AdRepository adRepository;
 
 	@Override
-	public String uploadImage(MultipartFile multipartFile) {
+	public String uploadImage(String fileName,MultipartFile multipartFile) {
 		// TODO Auto-generated method stub
+		adRepository.uploadImageToCloud(fileName, multipartFile);
 		return null;
 	}
 	

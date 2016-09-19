@@ -1,22 +1,29 @@
 
-app.controller('imageUpload',['$scope','$http','$state',function($scope,$http,$state){
+app.controller('imageUpload',['$scope','$http','$state','advService',function($scope,$http,$state,advService){
 	
 	$scope.imagearray={};
 	$scope.imagearray.imageInfo=[];
 	$scope.addImage=[];
 	$scope.imageUpload=true;
 	$scope.addMoreImages=false;
+	$scope.fileName=undefined;
+	
     function insertRecipeImage(inputString, inputIndex, fileName) {
         if (inputString.files && inputString.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-
                 var imageInfoObject = {
                     "image": e.target.result,
                     "imageName": fileName,
                     "imagePos": inputIndex
                 };
-
+                if($scope.fileName==""||$scope.fileName==undefined)
+                	{
+                	   $scope.fileName=fileName;
+                	}
+                advService.setImageInCloud($scope.fileName,e.target.result).then(function(data){
+                	
+                });
                 var imageInfoPos;
                 var imageInfo = $scope.imagearray.imageInfo;
 
@@ -46,7 +53,7 @@ app.controller('imageUpload',['$scope','$http','$state',function($scope,$http,$s
         var imageID = 'myImage' + inputIndex;
         var image = document.getElementById(imageID);
         image.src = "/views/slider/img/uploadImage.png";
-        
+        $scope.fileName="";
         var fileName = 'file-input' + inputIndex;
         document.getElementById(fileName).value = null;
         
@@ -86,26 +93,11 @@ app.controller('imageUpload',['$scope','$http','$state',function($scope,$http,$s
     	}
     });
 
-    $("#file-input2").change(function() {
-    	if(this.files[0]!=undefined){
-        	var status = validateInputImage("file-input2", 2, this);
-        	if(status ==1 ){
-        		$scope.$apply();
-            }
-    	}
-    });
-
-    $("#file-input3").change(function() {
-    	if(this.files[0]!=undefined){
-            var status = validateInputImage("file-input3", 3, this);
-            if(status ==1 ){
-            	$scope.$apply();
-            }
-    	}
-    });
 $scope.addMore= function(){
+	$scope.clearImage(1);
 	$scope.imageUpload=true;
 	$scope.addMoreImages=false;
+	
 }
 $scope.uploadImage=function(){
 	$scope.imageUpload=false;
