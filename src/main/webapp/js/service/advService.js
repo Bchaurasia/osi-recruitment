@@ -4,9 +4,30 @@ function  advService($http){
 		setImageInCloud:setImageInCloud
 	}
 	
+	/*function setImageInCloud(imageName,files) {
+        if (files && ( files.length==1 )) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[0];
+                $upload.upload({
+                    url: 'resources/uploadSliderImages',
+                    file: file,
+                    params: {
+                    	imageName: imageName
+                    }
+                }).then(function(response){
+       	    	 return response;
+       	     }).catch(function(response) {
+       		     return "Failed to upload Image!"
+       	     });
+                }
+        }
+        
+	};*/
+	
+	
 	function setImageInCloud(imageName,file){
 		var formData = new FormData();
-	    formData.append("fileName", file);
+	    formData.append("file", file);
 		formData.append("imageName",imageName);
 		
 		
@@ -18,9 +39,9 @@ function  advService($http){
 	    	 return response;
 	     }).catch(function(response) {
 		     return "Failed to upload Image!"
-	     });
+	     });}
 	        
 		
 	     
-	}
+	
 }

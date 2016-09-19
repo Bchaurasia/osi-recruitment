@@ -1,5 +1,5 @@
 
-app.controller('imageUpload',['$scope','$http','$state','advService',function($scope,$http,$state,advService){
+app.controller('imageUpload',['$scope','$http','$state','advService','$upload',function($scope,$http,$state,advService,$upload){
 	
 	$scope.imagearray={};
 	$scope.imagearray.imageInfo=[];
@@ -7,6 +7,29 @@ app.controller('imageUpload',['$scope','$http','$state','advService',function($s
 	$scope.imageUpload=true;
 	$scope.addMoreImages=false;
 	$scope.fileName=undefined;
+	var imageInfoObject={};
+	
+	$scope.uploadFileIntoCloud = function (files) {
+		
+        if (files && ( files.length==1 )) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[0];
+                $upload.upload({
+                    url: 'resources/uploadSliderImages',
+                    file: file,
+                    params: {
+                    	imageName:$scope.fileName
+                    }
+                }).progress(function (evt) {
+                }).success(function (data, status, headers, config) {
+                	$log.info("Image Uploaded!")
+                }).error(function (data, status, headers, config) {
+                	$log.error("Image Upload Failed! ---> "+data);
+                });
+            }
+        }
+        
+	};
 	
     function insertRecipeImage(inputString, inputIndex, fileName) {
         if (inputString.files && inputString.files[0]) {
@@ -21,9 +44,12 @@ app.controller('imageUpload',['$scope','$http','$state','advService',function($s
                 	{
                 	   $scope.fileName=fileName;
                 	}
-                advService.setImageInCloud($scope.fileName,e.target.result).then(function(data){
+                
+                $scope.uploadFileIntoCloud(e.target.result);
+                
+                /*advService.setImageInCloud($scope.fileName,e.target.result).then(function(data){
                 	
-                });
+                });*/
                 var imageInfoPos;
                 var imageInfo = $scope.imagearray.imageInfo;
 
@@ -93,6 +119,30 @@ app.controller('imageUpload',['$scope','$http','$state','advService',function($s
             }
     	}
     });
+    $scope.uploadFileIntoCloud = function (files) {
+    	$scope.fileName = "";
+		$scope.errorMsg = "";
+		$scope.showSuccessMsg = false;
+		$scope.showErrorMsg = false;
+        if (files && ( files.length==1 )) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[0];
+                $upload.upload({
+                    url: 'resources/fileUpload',
+                    file: file,
+                    params: {
+                        candidateId: $scope.candidate.emailId
+                    }
+                }).progress(function (evt) {
+                }).success(function (data, status, headers, config) {
+                	$log.info("Resume Uploaded!")
+                }).error(function (data, status, headers, config) {
+                	$log.error("Resume Upload Failed! ---> "+data);
+                });
+            }
+        }
+        
+	};
 
 $scope.addMore= function(){
 	$scope.clearImage(1);
