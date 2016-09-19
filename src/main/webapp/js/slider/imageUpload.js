@@ -73,6 +73,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService',function($s
     function validateInputImage(inputID, inputIndex, inputString) {
 
         var imagePath = document.getElementById(inputID).value;
+        console.log(imagePath);
         var size = inputString.files[0].size / 1048576;
 
         if (imagePath.lastIndexOf("\\") != -1)

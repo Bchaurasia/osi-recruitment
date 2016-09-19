@@ -4,19 +4,14 @@ function  advService($http){
 		setImageInCloud:setImageInCloud
 	}
 	
-	function setImageInCloud(imageName,imageFile){
+	function setImageInCloud(imageName,file){
 		var formData = new FormData();
-		 var file;
-		 if (imageFile && ( imageFile.length==1 )) 
-		 {
-	            for (var i = 0; i < imageFile.length; i++) {
-	             
-	                formData.append("file", imageFile);
-	            }
-		 }
-		   formData.append("imageName",imageName);
+	    formData.append("fileName", file);
+		formData.append("imageName",imageName);
+		
+		
         return $http.post('resources/uploadSliderImages',formData, 
-        		{
+        {
         	      transformRequest: angular.identity, 
         	      headers: {'Content-Type': undefined}
          }).then(function(response){

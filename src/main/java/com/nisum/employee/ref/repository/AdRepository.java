@@ -1,10 +1,14 @@
 package com.nisum.employee.ref.repository;
+import javax.servlet.annotation.MultipartConfig;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.cloudinary.*;
 import com.cloudinary.utils.ObjectUtils;
 
+@MultipartConfig
 @Repository
 public class AdRepository{
 
