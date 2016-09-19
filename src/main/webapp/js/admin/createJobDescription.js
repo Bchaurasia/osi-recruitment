@@ -77,11 +77,11 @@ app.controller('createJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', 
 	       }
 	};
 	
-	$scope.jdDetailsCharLimit = function(jdDescription) {
+	/*$scope.jdDetailsCharLimit = function(jdDescription) {
 		if (jdDescription.length > 500) {
 		  $scope.jdDescritptionErr = true;
 	   }else{
 		$scope.jdDescritptionErr = false;
 	   }
-	};
+	};*/
 }]);

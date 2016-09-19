@@ -10,7 +10,6 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 	$scope.pskills=$rootScope.info.skills;
 	$scope.expYear=$rootScope.info.expYears;
 	
-	$scope.jdDescritptionErr = false;
 	$scope.hideSkills = true;
 	$scope.skillsErr = false;
 	$scope.jdDetailsErr = false;
@@ -104,11 +103,5 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 			$scope.disableBtn = false;
 		}
 	};
-	 $scope.jdDetailsCharLimit = function(jdDescription) {
-		    if (jdDescription.length > 500) {
-		 	   $scope.jdDescritptionErr = true;
-	        }else{
-			   $scope.jdDescritptionErr = false;
-		   }
-	 };
+	
 }]);
