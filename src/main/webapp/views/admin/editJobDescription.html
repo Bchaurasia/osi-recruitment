@@ -37,16 +37,14 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<label>Job Description Details<b class="mandatory">*</b>&nbsp;&nbsp;&nbsp;<small>(500 chars)</small></label>
+				<label>Job Description Details<b class="mandatory">*</b></label>
 			</div>
 			<br>
 			<div class="input-field col s12">
 				<textarea id="textarea1" class="materialized-textarea" 
-					ng-keyup="jdDetailsCharLimit(deg.jobDescriptionDetails)"
 					ng-model="deg.jobDescriptionDetails"
 					ng-change="validateJDDetails(deg.jobDescriptionDetails)"
 					placeholder="Enter job description details..." required></textarea>
-					<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>	
 			</div>
 		</div>
 

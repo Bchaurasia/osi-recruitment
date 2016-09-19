@@ -12,7 +12,7 @@ html {
 }
 
 body {
-	background: url(../../static/osi_images/body-bg.png);
+	background: url(../../static/images/body-bg.png);
 	background-repeat: repeat;
 	font: 13px/1.7em 'Open Sans';
 	margin: 0;
@@ -1441,7 +1441,7 @@ html {
 }
 
 body {
-	background: url(../../static/osi_images/body-bg.png);
+	background: url(../../static/images/body-bg.png);
 	background-repeat: repeat;
 	font: 13px/1.7em 'Open Sans';
 	margin: 0;
@@ -3290,13 +3290,8 @@ div input[type="radio"].radioProfile{
 	display:block inline;
 	left:0;
 	text-align:right;
-	height:20px;
 }
-div input[type="checkbox"].checkboxProfile{
-	visibility:visible !important;
-	left:0px;
-	height:20px;
-}
-.imageHolder{
-	cursor:pointer;
+div input.textHeight{
+	height:30px !important;
+	width:77%;
 }
