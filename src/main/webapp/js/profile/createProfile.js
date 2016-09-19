@@ -32,6 +32,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	$scope.designations={};
 	$scope.candidate.currency="INR";
 	$scope.profileSources = ["Consultancy","Job Sites"];
+	$scope.proficiencies=["Beginner","Intermediate","Expert"];
 	$scope.show1=true;
 	$scope.show2=false;
 	$scope.show3=false;
@@ -54,13 +55,35 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	}).catch(function(message) {
 		$log.error(message)
 	});
-	
+	$scope.showProfile = function(profile){		
+		$scope.showProfileForm = true;
+		if(profile == 'experienced')
+			$scope.showExperienced = true;
+		else
+			$scope.showExperienced = false;
+	}
 	$scope.candidate.qualifications=[{
 		qualification:'',
 		stream:'',
 		percentage:'70'
 	}];
-	
+	$scope.candidate.certifications=[{
+		certification:'',
+		institute:'',
+		score:'70'
+	}];
+	$scope.candidate.trainings=[{
+		training:'',
+		trainingInstitute:'',
+		trainingDuration:''
+	}];
+	$scope.candidate.languages=[{
+		language:'',
+		read:false,
+		write:false,
+		speak:false,
+		proficiency:''
+	}];
 	$scope.addColumnCriteria = function() {
 		var addQualification = {		
 				qualification:'',
@@ -69,7 +92,32 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 		};
 		$scope.candidate.qualifications.push(addQualification);
 	};
-	
+	$scope.addCertificationCriteria = function() {
+		var addCertification = {		
+				certification:'',
+				institute:'',
+				score:'70'
+		};
+		$scope.candidate.certifications.push(addCertification);
+	};
+	$scope.addTrainingCriteria = function() {
+		var addTraining = {		
+			training:'',
+			trainingInstitute:'',
+			trainingDuration:''
+		};
+		$scope.candidate.trainings.push(addTraining);
+	};
+	$scope.addLanguageCriteria = function() {
+		var addLanguage = {		
+				language:'',
+				read:false,
+				write:false,
+				speak:false,
+				proficiency:''
+		};
+		$scope.candidate.languages.push(addLanguage);
+	};
 	$scope.checkDisability = function(qualification){
 		if(qualification){
 			//$scope.disableCreateBtn  =  false;
@@ -87,7 +135,21 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 			$scope.checkDisability($scope.candidate.qualifications);
 		} 
 	}
-	
+	$scope.deleteCertification = function(index){
+		if (!($scope.candidate.certifications.length - 1 == 0)) {
+			$scope.candidate.certifications.splice(index,1);
+		} 
+	}
+	$scope.deleteTraining = function(index){
+		if (!($scope.candidate.trainings.length - 1 == 0)) {
+			$scope.candidate.trainings.splice(index,1);
+		} 
+	}
+	$scope.deleteLanguage = function(index){
+		if (!($scope.candidate.languages.length - 1 == 0)) {
+			$scope.candidate.languages.splice(index,1);
+		} 
+	}
 	
 	$scope.jobCodeSl = function(){
 		positionService.getPositionByDesignation($scope.candidate.designation).then(function(data){
@@ -116,7 +178,10 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 					 $scope.candidate.status = "Not Initialized";
 				}
 				//$scope.candidate.isCreatedByUser = false;
-				$scope.candidate.profileType = "Experienced";
+				if($scope.showExperienced == true)
+					$scope.candidate.profileType = "Experienced";
+				else
+					$scope.candidate.profileType = "Fresher";
 				$scope.candidate.isReferral = false;
 				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
@@ -167,7 +232,10 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 				if ($scope.candidate !== undefined) {
 					 $scope.candidate.status = "Not Initialized";
 				}
-				$scope.candidate.profileType = "Experienced";
+				if($scope.showExperienced == true)
+					$scope.candidate.profileType = "Experienced";
+				else
+					$scope.candidate.profileType = "Fresher";
 				$scope.candidate.isReferral = false;
 				$scope.candidate.referredByName = $scope.user.name;
 		    	$scope.candidate.primarySkills=$scope.sk.primarySkills;
@@ -208,6 +276,25 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 					stream:'',
 					percentage:'70'
 				}];
+			 if($scope.showExperienced == false) {
+		    	   $scope.candidate.certifications=[{
+		    			certification:'',
+		    			institute:'',
+		    			score:'70'
+		    		}];
+		    		$scope.candidate.trainings=[{
+		    			training:'',
+		    			trainingInstitute:'',
+		    			trainingDuration:''
+		    		}];
+		    		$scope.candidate.languages=[{
+		    			language:'',
+		    			read:false,
+		    			write:false,
+		    			speak:false,
+		    			proficiency:''
+		    		}];
+		       }
 			 $scope.candidate.expMonth="0";
 			 angular.element("input[type='file']").val(null);
 			 $scope.sk.primarySkills = undefined;
@@ -363,4 +450,28 @@ $scope.previous=function(previousShow){
 			})
 		}
 	};	
+	$scope.lengthOfCertifications = function() {
+		if($scope.candidate.certifications.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfTrainings = function() {
+		if($scope.candidate.trainings.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
+	$scope.lengthOfLanguages = function() {
+		if($scope.candidate.languages.length == 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	};
 }]);
