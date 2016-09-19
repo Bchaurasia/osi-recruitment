@@ -457,7 +457,7 @@
 			<div class="input-field col s6">
 				<select ng-model="candidate.profileSource" name="profileSource"
 					ng-options="o as o for o in profileSources | orderBy:'toString()'"
-					class="form-control input-sm" ng-disabled="disableProfileSource" required>
+					class="form-control input-sm" ng-disabled="disableProfileSource" ng-required="showExperienced">
 					<option value="" disabled="disabled">Select Source</option>
 				</select> <label style="position: absolute; top: -22px;">Source<b
 					class="mandatory">*</b></label>

@@ -11,12 +11,12 @@
 				<span class="glyphicon glyphicon-refresh"></span> Reset
 				</button>
 		</div>
-		 <div class="row">
+		 <div class="row" ng-show="showRadioProfile">
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;"><font size="3">Fresher</font></input>
+				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;top:10%;"><font size="3">Fresher</font></input>
 			</div>
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;"><font size="3">Experienced</font></input>
+				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;top:10%;"><font size="3">Experienced</font></input>
 			</div>
 			
 		</div> 
