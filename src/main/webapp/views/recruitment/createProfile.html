@@ -1,7 +1,6 @@
 <div class="row">
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
-	<form id="formAlign" class="col s12 m12 l10 collapsible collapsible-accordion"
-		name="CreateCandidate" novalidate>
+	
 		<div ng-show="message" ng-include="'notificationTemplate.html'"></div>		
 		<div class="row collapsible-header">
 	
@@ -14,6 +13,17 @@
 					<span class="glyphicon glyphicon-refresh"></span> Reset
 				</button>
 		</div>
+		<div class="row">
+			<div class="input-field col s3">
+				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;top:10%;"><font size="3">Fresher</font></input>
+			</div>
+			<div class="input-field col s3">
+				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;top:10%;"><font size="3">Experienced</font></input>
+			</div>
+			
+		</div>
+		<form id="formAlign" class="col s12 m12 l10 collapsible collapsible-accordion"
+		name="CreateCandidate" novalidate ng-show="showProfileForm">
 		<div class="ui steps"  style="width:100%">
 		  <a class="{{first}}step" ng-click="next('show1')">
 		    <i class="user icon"></i>
@@ -29,7 +39,7 @@
 		      <div class="description">Enter Educational Details</div>
 		    </div>
 		  </a>
-		  <a class="{{third}}step" ng-click="next('show3')">
+		  <a class="{{third}}step" ng-click="next('show3')" ng-show="showExperienced">
 		  	<i class="laptop icon"></i>
 		    <div class="content">
 		      <div class="title">Professional Details</div>
@@ -220,13 +230,125 @@
 
 
 				</div>
-				<button class="btn btn-warning active" ng-click="previous('show1')">
-					Previous <i class="long arrow left icon"></i>
-				</button>
-				<button class="btn btn-info active"
-					ng-click="next('show3')">
-					Next <i class="long arrow right icon"></i>
-				</button>
+				<div class="row" ng-repeat="candidate in candidate.certifications" ng-hide="showExperienced">
+				<div class="input-field col s6">
+					<input placeholder="Enter Certification Name" name="certification" class="form-control"
+						type="text" ng-model="candidate.certification" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Certification </label>
+				</div>
+	
+				<div class="input-field col s3">
+					<input placeholder="Enter Institute/Organization" name="institute" class="form-control"
+						type="text" ng-model="candidate.institute" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Institute/Organization </label>
+	
+				</div>
+	
+				<div class="input-field col s2">
+					<input type="range" ng-model="candidate.score" min="0"
+						max="100" /> <label>Percentage</label> <span
+						class="range-slider__value">{{candidate.score}}%</span>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Certification Details"
+								ng-show="lengthOfCertifications()"
+								ng-click="deleteCertification($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Certification Details"
+								ng-show="$last" ng-click="addCertificationCriteria()"
+								ng-disabled="checkDisability(candidate.certification)"></button>
+						</div>
+					</div>				
+			</div>
+			<div class="row" ng-repeat="candidate in candidate.trainings" ng-hide="showExperienced">
+				<div class="input-field col s6">
+					<input placeholder="Enter Training Name" name="training" class="form-control"
+						type="text" ng-model="candidate.training" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Training Attended </label>
+				</div>
+	
+				<div class="input-field col s3">
+					<input placeholder="Enter Institute/Organization" name="trainingInstitute" class="form-control"
+						type="text" ng-model="candidate.trainingInstitute" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z _.]*$/"> <label
+						style="position: absolute; top: -22px;">Institute/Organization </label>
+	
+				</div>
+	
+				<div class="input-field col s2">
+					<input placeholder="Enter Duration" name="trainingDuration"
+						class="form-control" type="text" ng-model="candidate.trainingDuration"
+						ng-pattern="/^[0-9]*$/" maxlength="3"> <label
+						style="position: absolute; top: -22px;">Training Duration(in
+						days)
+					</label> <span class="validation-error"
+						ng-required="CreateCandidate.trainingDuration.$error.pattern"
+						ng-show="CreateCandidate.trainingDuration.$error.pattern">
+						Training Duration should be in days </span>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Training Details"
+								ng-show="lengthOfTrainings()"
+								ng-click="deleteTraining($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Training Details"
+								ng-show="$last" ng-click="addTrainingCriteria()"
+								ng-disabled="checkDisability(candidate.training)"></button>
+						</div>
+					</div>				
+			</div>
+			<div class="row" ng-repeat="candidate in candidate.languages" ng-hide="showExperienced">
+				<div class="input-field col s6">
+					<input placeholder="Enter Language" name="language" class="form-control"
+						type="text" ng-model="candidate.language" ng-maxlength="35"
+						ng-pattern="/^[a-zA-Z]*$/"> <label
+						style="position: absolute; top: -22px;">Language </label>
+				</div>
+	
+				<div class="input-field col s3" align="left">						
+							
+					<label style="left:0px;top:-200%;margin-left: 10px;">Read
+					<input type="checkbox" ng-model="candidate.read" class="checkboxProfile"/></label>
+					<label style="left:100px;top:-200%;margin-left: 10px;">Write
+					<input type="checkbox" ng-model="candidate.write" class="checkboxProfile"/></label>
+					<label style="left:200px;top:-200%;margin-left: 10px;">Speak
+					<input type="checkbox" ng-model="candidate.speak" class="checkboxProfile"/></label>							
+							
+				</div>
+	
+				<div class="input-field col s2">
+					<select placeholder="Select Proficiency"
+						ng-model="candidate.proficiency"
+						ng-options="o for o in proficiencies"
+						class="form-control input-sm" >
+						<option value="" disabled="disabled">Select Proficiency Level</option>
+					</select> <label>Proficiency Level</label>
+						<div class="input-field col s1">
+							<button class="glyphicon glyphicon-remove"
+								data-tooltip="Remove Training Details"
+								ng-show="lengthOfLanguages()"
+								ng-click="deleteLanguage($index)"></button>
+							&nbsp;&nbsp;&nbsp;
+							<button id="addButtonColumn" class="glyphicon glyphicon-plus"
+								data-tooltip="Add Training Details"
+								ng-show="$last" ng-click="addLanguageCriteria()"
+								ng-disabled="checkDisability(candidate.language)"></button>
+						</div>
+					</div>				
+			</div>
+			<div ng-if="showExperienced == true">
+				<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
+				<button class="btn btn-info active" ng-click="next('show3')"> Next <i class="long arrow right icon"></i> </button>
+			</div>	
+			<div ng-if="showExperienced == false">
+				<button class="btn btn-warning active" ng-click="previous('show1')"> Previous <i class="long arrow left icon"></i></button>
+				<button class="btn btn-info active" ng-click="next('show4')"> Next <i class="long arrow right icon"></i> </button>
+			</div>
 			</fieldset>
 
 		 <fieldset ng-show="show3">
@@ -235,7 +357,7 @@
 				<div class="input-field col s2">
 					<select ng-model="candidate.expYear" name="experience"
 						ng-options="o as o for o in info.expYears"
-						class="form-control input-sm" required>
+						class="form-control input-sm"  ng-required="showExperienced">
 						<option value="" disabled="disabled">Years</option>
 					</select> <label style="position: absolute; top: -22px;">Experience<b
 						class="mandatory">*</b></label> 
@@ -245,7 +367,7 @@
 				<div class="input-field col s2">
 					<select ng-model="candidate.expMonth" name="expMonths"
 						ng-options="o as o for o in info.expMonths"
-						class="form-control input-sm" required>
+						class="form-control input-sm"  ng-required="showExperienced">
 						<option value="" disabled="disabled">Months</option>
 					</select>
 					
@@ -257,7 +379,7 @@
 					</label>
 					<ui-select multiple ng-model="sk.primarySkills"
 						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
-						ui-select-required ng-disabled="disabled"> <ui-select-match
+						ng-required="showExperienced" ng-disabled="disabled"> <ui-select-match
 						placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
 						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
 					{{color}} </ui-select-choices> </ui-select>
@@ -291,7 +413,7 @@
 			<div class="row">
 				<div class="input-field col s6" align="left">
 					<ui-select ng-model="candidate.designation" ng-keypress="myFunct($event)" ng-change="setJobCodes()" name="currentdesignation"
-					theme="selectize" style="width: 80%" required>
+					theme="selectize" style="width: 80%"  ng-required="showExperienced">
 					   <ui-select-match placeholder="Select Current Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
 						repeat="designation in profiledesignations | orderBy:'toString()'| filter: $select.search">
@@ -308,11 +430,12 @@
 
 		 <fieldset ng-show="show4">
 			&nbsp;
+			<div ng-show="showExperienced">
 			<div class="row">
 				<div class="input-field col s6">
 					<select ng-model="candidate.profileSource" name="profileSource"
 						ng-options="o as o for o in profileSources | orderBy:'toString()'"
-						class="form-control input-sm" required>
+						class="form-control input-sm" ng-required="showExperienced">
 						<option value="" disabled="disabled">Select Source</option>
 					</select> <label style="position: absolute; top: -22px;">Source<b
 						class="mandatory">*</b></label>
@@ -352,7 +475,7 @@
 				<div class="input-field col s6">
 					<input placeholder="Enter Notice Period" name="noticePeriod"
 						class="form-control" type="text" ng-model="candidate.noticePeriod"
-						ng-pattern="/^[0-9]*$/" maxlength="2" required> <label
+						ng-pattern="/^[0-9]*$/" maxlength="2"  ng-required="showExperienced"> <label
 						style="position: absolute; top: -22px;">Notice Period (in
 						days)<b class="mandatory">*</b>
 					</label> <span class="validation-error"
@@ -385,7 +508,39 @@
 						Notes</label>
 				</div>
 			</div>
+	</div>
+		<div ng-hide="showExperienced">
+				<div class="input-field col s6">
 	
+					<label style="position: absolute; top: -22px;">Skills Set<b
+						class="mandatory">*</b>:
+					</label>
+					<ui-select multiple ng-model="sk.primarySkills"
+						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+						ng-required="showExperienced" ng-disabled="disabled"> <ui-select-match
+						placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
+						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">
+					{{color}} </ui-select-choices> </ui-select>
+					<span class="validation-error"
+						ng-show="submitted && CreateCandidate.pskilss.$invalid">Please
+						enter key skills.</span>
+				</div>
+				<div class="input-field col s6">
+					<input placeholder="Enter Additional Skills" name="otherSkills"
+						class="form-control" type="text" ng-model="candidate.otherSkills"
+						ng-pattern="/^[a-zA-Z0-9 \_\- \,]*$/"> <label style="position: absolute; top: -22px;">Additional Skills</label>
+				
+				</div>
+				<div class="row"></div>
+				<div class="row">
+				<div class="input-field col s12">
+					<textarea class="materialize-textarea" cols="50" rows="5"
+						style="width: 88%;height: 50%;" ng-change="changeEvent()" name="project"
+						ng-model="candidate.project" placeholder="Enter undertaken Projects"></textarea>
+					<label style="position: absolute; top: -22px;">Projects Undertaken</label>
+				</div>
+			</div>
+		</div>
 			<div class="row">
 				<div class="input-field col s6">
 					<input type="file" class="custom-file-input" id="uploadFile"
@@ -398,26 +553,36 @@
 				</div>
 			</div>
 	
-			<div align="center" class="row">
-			<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
+			<div align="center" class="row" ng-if="showExperienced == true">
+				<button class="btn btn-warning active"  ng-click="previous('show3')">Previous  <i class="long arrow left icon"></i></button>
 				
-				<button class="btn btn-info active" type="submit"
-					ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"
-					ng-click="saveProfile()">
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError" ng-click="saveProfile()">
 					<span class="glyphicon glyphicon-open-file"></span> Save
 				</button>
 				
-				<button class="btn btn-success active" type="submit"
-					ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"
-					ng-click="submit()">
+				<button class="btn btn-success active" type="submit" ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"	ng-click="submit()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Submit
 				</button>
 			
-				<button class="btn btn-danger active"
-					ui-sref="recruitment.searchProfile">
+				<button class="btn btn-danger active" ui-sref="recruitment.searchProfile">
 					<span class="glyphicon glyphicon-remove"></span> Cancel
 				</button>
-			</div>			
+			</div>		
+			<div align="center" class="row" ng-if="showExperienced == false">
+				<button class="btn btn-warning active"  ng-click="previous('show2')">Previous  <i class="long arrow left icon"></i></button>
+				
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError" ng-click="saveProfile()">
+					<span class="glyphicon glyphicon-open-file"></span> Save
+				</button>
+				
+				<button class="btn btn-success active" type="submit" ng-disabled="CreateCandidate.$invalid || uploadError || duplicateEmailIdError"	ng-click="submit()">
+					<span class="glyphicon glyphicon-ok-circle"></span> Submit
+				</button>
+			
+				<button class="btn btn-danger active" ui-sref="recruitment.searchProfile">
+					<span class="glyphicon glyphicon-remove"></span> Cancel
+				</button>
+			</div>		
 			 </fieldset>
 			&nbsp;
 		</form>
