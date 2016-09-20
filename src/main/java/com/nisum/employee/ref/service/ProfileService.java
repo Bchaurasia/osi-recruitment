@@ -114,7 +114,7 @@ public class ProfileService implements IProfileService{
 				System.out.println();
 				Event e=new Event();
 				System.out.println(profileList.get(i).getCandidateName()+"  "+candidate.getCandidateName());
-				if( candidate.getConfirm().equals("Yes"))
+				if((candidate.getConfirm()).contentEquals("Yes"))
 				{
 					if(((profileList.get(i).getCandidateName()).contentEquals(candidate.getCandidateName()) ==false ) ){
 					
