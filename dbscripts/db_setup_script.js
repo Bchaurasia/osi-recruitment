@@ -22,6 +22,8 @@ db.createCollection("sequence");
 print("sequence Collection Created!");
 db.createCollection("event");
 print("event Collection Created!");
+db.createCollection("advertisement");
+print("event Collection Created!");
 
 db.sequence.insert({"_id":"REQ","seq":0});
 db.sequence.insert({"_id":"JOB","seq":0});

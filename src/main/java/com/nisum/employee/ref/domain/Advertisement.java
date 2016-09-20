@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Advertisement {
 	
 	@Id
-	String adv_id;
+	String advId;
 	String url;
 	String name;
 	Date createdDate;
