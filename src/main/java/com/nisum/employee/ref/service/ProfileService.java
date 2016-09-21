@@ -111,24 +111,26 @@ public class ProfileService implements IProfileService{
 			List<Profile> profileList = getProfileByEmailId(candidate.getEmailId());
 			for (int i=0; i< profileList.size(); i++)
 			{
-				System.out.println();
 				Event e=new Event();
-				
-				if(((profileList.get(i).getCandidateName()).contentEquals(candidate.getCandidateName()) ==false ) && candidate.getConfirm().equals("Yes"))
+				if((candidate.getConfirm()).contentEquals("Yes"))
 				{
-					
-					e.setEventDesc("Profile name "+profileList.get(i).getCandidateName()+" is changed to " +candidate.getCandidateName());
-					e.setCategory("General");
-					e.setEmailId(candidate.getUpdatedBy());
-					e.setUsername(candidate.getUpdatedByName());
-					eventService.setEvent(e);
-				}else{
-					e.setEventDesc("Profile of "+candidate.getCandidateName()+" was updated.");
-					e.setCategory("General");
-					e.setEmailId(candidate.getUpdatedBy());
-					e.setUsername(candidate.getUpdatedByName());
-					eventService.setEvent(e);
-				}
+					if((profileList.get(i).getCandidateName()).contentEquals(candidate.getCandidateName()) ==false  )
+					{
+						
+						e.setEventDesc("Profile name "+profileList.get(i).getCandidateName()+" is changed to " +candidate.getCandidateName());
+						e.setCategory("General");
+						e.setEmailId(candidate.getUpdatedBy());
+						e.setUsername(candidate.getUpdatedByName());
+						eventService.setEvent(e);
+					}else{
+						e.setEventDesc("Profile of "+candidate.getCandidateName()+" was updated.");
+						e.setCategory("General");
+						e.setEmailId(candidate.getUpdatedBy());
+						e.setUsername(candidate.getUpdatedByName());
+						eventService.setEvent(e);
+					}
+			    }
+			
 			}
 
 			candidate.setUpdatedDate(new Date());
