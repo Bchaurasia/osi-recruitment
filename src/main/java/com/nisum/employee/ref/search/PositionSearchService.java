@@ -43,6 +43,11 @@ public class PositionSearchService {
 
 		return positionList;
 	}
+	public List<Position> getPositionForRequisitionId(String reqId)
+	{
+		List<Position> positionList=indexRepositoryImpl.findPositionForRequisitionId(reqId);
+		return positionList;
+	}
 
 	public List<Position> getPostionByDesignationOrClient(String data) throws Exception {
 		List<Position> positionList = indexRepositoryImpl

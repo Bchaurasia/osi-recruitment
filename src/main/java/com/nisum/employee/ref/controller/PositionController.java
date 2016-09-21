@@ -111,6 +111,17 @@ public class PositionController {
 		return (null == positionsDetail) ? new ResponseEntity<String>("Positions are not found", HttpStatus.NOT_FOUND)
 				: new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
 	}
+	
+
+	@Secured({ "ROLE_USER","ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
+			"ROLE_REQUISITION_APPROVER" })
+	@RequestMapping(value = "/searchPositionsBasedOnRequisitionIdFromElastic", method = RequestMethod.GET)
+	public ResponseEntity<?> retrievePositionsBasedOnRequisitionIdFromElatic(
+			@RequestParam(value = "requisitionId", required = true) String requisitionId) {
+		List<Position> positionsDetail =positionSearchService.getPositionForRequisitionId(requisitionId);
+		return (null == positionsDetail) ? new ResponseEntity<String>("Positions are not found", HttpStatus.NOT_FOUND)
+				: new ResponseEntity<List<Position>>(positionsDetail, HttpStatus.OK);
+	}
 
 	@Secured({"ROLE_USER", "ROLE_HR", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_INTERVIEWER", "ROLE_REQUISITION_MANAGER",
 			"ROLE_REQUISITION_APPROVER" })
