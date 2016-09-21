@@ -39,13 +39,11 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
         
 	};
 	
-	function getLatestSliderImages(){
 		advService.getLatestSliderImages().then(function(data){
-			console.log(data);
+	    $scope.sliderImages=data;
 		});
-	}
 	
-	getLatestSliderImages();
+	
 	
     function insertSliderImage(inputString, inputIndex, fileName) {
         if (inputString.files && inputString.files[0]) {

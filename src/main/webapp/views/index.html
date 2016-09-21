@@ -91,23 +91,39 @@ margin-left: 59px;
  
    
 }
-                
- .jssora11l, .jssora11r {
-                    display: block;
-                    position: absolute;
-                    /* size of arrow element */
-                    width: 37px;
-                    height: 37px;
-                    cursor: pointer;
-                    background: url(views/slider/img/a11.png) no-repeat;
-                    overflow: hidden;
-                }
-                .jssora11l { background-position: -11px -41px; }
-                .jssora11r { background-position: -71px -41px; }
-                .jssora11l:hover { background-position: -131px -41px; }
-                .jssora11r:hover { background-position: -191px -41px; }
-                .jssora11l.jssora11ldn { background-position: -251px -41px; }
-                .jssora11r.jssora11rdn { background-position: -311px -41px; }
+    .flexslider-container {
+		width: 100%;
+		height: 200px;
+		margin: 10px auto;
+	}            
+ 
+.flex-nav-next {
+    right: 50px; /*this value should be the width of the buttons can be in percent if needed*/
+    left:auto;
+    margin-left: -20px; /* this is minus the value of the right for flex-next plus the amount of space you want in between the buttons*/
+}
+
+.flex-direction-nav {
+    position:absolute;
+    top: 324px;
+    right: 50px;
+    text-align:right;
+}
+
+.flex-direction-nav li { 
+    display:inline-block; 
+    margin-left:10px; /*amount of space you want between buttons*/
+}
+
+
+.flexslider .flex-direction-nav a,
+.flexslider .flex-direction-nav a {
+display: block; /* I added this line */
+}
+
+.flex-direction-nav .flex-next { right: 0 !important; margin-right: -40px; opacity: 1 !important; }
+.flex-direction-nav .flex-prev { left: 0 !important; opacity: 1 !important; margin-left: -40px; }
+.flexslider { width: 90%; margin: 0 auto; }
 </style>
 
 <!-- <div class="statistics-container" align="center"></div> -->
@@ -139,13 +155,13 @@ margin-left: 59px;
 
 
 </div> -->
- <div class="container" style="width:100%;">
+<!--  <div class="container" style="width:100%;">
        <div id="slider1_container" style="visibility: hidden; position: relative; margin: 0 auto; width: 1140px; height: 300px; overflow: hidden;">
 
 
          
 
-            <!-- Slides Container -->
+            Slides Container
             <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1140px; height: 300px;
             overflow: hidden;">
                 <div>
@@ -170,7 +186,18 @@ margin-left: 59px;
        
         </div>
       
+    </div> -->
+    <div  class="container" style="width:100%;">
+    <flex-slider flex-slide="s in slides"  id="mainslider">
+    <li>
+        <img style="height:400px; width:100%;" ng-src="{{s}}">
+        
+    </li>
+</flex-slider>
     </div>
+    
+    
+    
 <div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 <div ng-show="showPositionDetails">
 	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"

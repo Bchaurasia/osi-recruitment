@@ -43,7 +43,6 @@ public class AdvController {
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
-	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/getSliderImages", method = RequestMethod.GET)
     public ResponseEntity<?> retrieveLatestSliderImages(){
 		List<Advertisement> advDetails = adService.getImages();
