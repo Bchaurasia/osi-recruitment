@@ -35,7 +35,6 @@ public String uploadImageToCloud(Advertisement adv,MultipartFile multipartFile){
 			    ObjectUtils.asMap("public_id", multipartFile.getOriginalFilename()));
 		        adv.setUrl(resultMap.get("url").toString());
 		        mongoOperations.save(adv);
-		System.out.println(adv.getUrl());
 		
 	} catch (IOException e) {
 		// TODO Auto-generated catch block

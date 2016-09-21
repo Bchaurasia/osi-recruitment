@@ -41,7 +41,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
 	
 	function getLatestSliderImages(){
 		advService.getLatestSliderImages().then(function(data){
-			console.log(data);
+			$scope.sliderImages=data;
 		});
 	}
 	
@@ -59,6 +59,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
         }
     };
 
+ 
     
     $scope.clearImage = function(inputIndex) {
         var imageID = 'myImage' + inputIndex;
