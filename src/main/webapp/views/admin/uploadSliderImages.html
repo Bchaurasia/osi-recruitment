@@ -3,38 +3,41 @@
 <div class="container" ng-show="imageUpload">
 	<div class="ui small images">
 		<h2 style="font-family: -webkit-body;">Please upload your Image</h2>
-        
+
 		<label for="file-input1"> <img class="imageHolder"
-						id="myImage1" src="/views/slider/img/uploadImage.png">
-						<button class="circular mini ui icon blue button close"
-							style="margin-top: 0px" ng-click="clearImage(1)">
-							<i class="remove icon"></i>
-						</button>
-				</label> <input id="file-input1" type="file" style="display: none" enctype="multipart/form-data"
-					 name="file" ng-file-select="upload($files)"/></td>
-		
-				
+			id="myImage1" src="/views/slider/img/uploadImage.png">
+			<button class="circular mini ui icon blue button close"
+				style="margin-top: 0px" ng-click="clearImage(1)">
+				<i class="remove icon"></i>
+			</button>
+		</label> <input id="file-input1" type="file" style="display: none"
+			enctype="multipart/form-data" name="file"
+			ng-file-select="upload($files)" />
+		</td>
+
+
 	</div>
 
 </div>
-<div>
+
+    <div >
 	<table class="ui striped table searchTable">
-		<thead>
+	<thead>
 			<tr>
-				<td></td>
-				<td style="margin-left: 60px">Current Slider Images</td>
-				<td></td>
+			<td></td>
+			<td style="margin-left:60px"> Current Slider Images</td>
+			<td></td>
 			</tr>
-		</thead>
-		<tbody>
-			<tr class="animate-repeat">
-
-				<td ng-repeat="image in sliderImages">
-				<img style="height: 120px; width: 120px;" class="imageHolder"
-					id="myImage1" ng-src="{{image.url}}"> <br>{{image.name}}</td>
-			</tr>
-		</tbody>
-	</table>
-
-
-</div>
+			</thead>
+			<tbody>
+				<tr class="animate-repeat" >
+					
+					<td ng-repeat="image in scliderImages"><img style="height:120px; width:120px;" class="imageHolder"
+						id="myImage1" ng-src="{{image.url}}">
+						<br>{{image.name}}</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	
+	</div>
