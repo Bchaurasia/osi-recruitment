@@ -2,11 +2,12 @@
 
 <div class="container" ng-show="imageUpload">
 	<div class="ui small images">
-		<h2 style="font-family: -webkit-body;">Please upload your Image</h2>
+		<h3 style="margin-top: 15px;height: 1px" align="center">Please upload your Image</h3>
+	<hr style="background-color: black; height:1px; width: 25%">
 <table>
 <tr>
 <td>
-<input type="text" ng-model="fileName" placeholder="Choose filename">
+<input type="text" ng-model="fileName" class="font-class" placeholder="Choose filename">
 </td>
 <td>
 		<label for="file-input1"> <img class="imageHolder"
@@ -19,7 +20,7 @@
 			enctype="multipart/form-data" name="file"
 			ng-file-select="selectedFile=$files" accept="image/*" />
 			</td>
-			<td><button ng-click="upload()">Upload Image</button></td>
+			<td><button class="ui teal button" ng-click="upload()">Upload Image</button></td>
 			</tr>
 	</table>	
 
@@ -28,25 +29,27 @@
 </div>
 
 <div>
+<h3 style="margin-top: 15px;height: 1px" align="center">Current slider images</h3>
+	<hr style="background-color: black; height:1px; width: 15%">
 	<table class="ui striped table searchTable">
 		<thead>
 		<tr>
-		<th>Name</th>
-		<th>Creation Date</th>
-		<th>Image</th>
-		<th>Flag</th>
+		<th class="font-class">Name</th>
+		<th class="font-class">Creation Date</th>
+		<th class="font-class">Image</th>
+		<th class="font-class">Flag</th>
 		</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="image in sliderImages">
-				<td>{{image.name}}</td>
+			<tr class="animate-repeat" ng-repeat="image in sliderImages">
+				<td class="font-class">{{image.name}}</td>
 
-				<td><time>{{ image.createdDate | amDateFormat: 'dddd,
+				<td class="font-class"><time>{{ image.createdDate | amDateFormat: 'dddd,
 						MMMM Do YYYY, h:mm a' }}</time></td>
 
-				<td><img style="height: 50px; width: 50px;"
+				<td class="mdl-data-table__cell--non-numeric"><img style="height: 50px; width: 50px;"
 					class="imageHolder" id="myImage1" ng-src="{{image.url}}"> </td>
-				<td>{{image.flag}}</td>
+				<td class="font-class">{{image.flag}}</td>
 			</tr>
 		</tbody>
 	</table>

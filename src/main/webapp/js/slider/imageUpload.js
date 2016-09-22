@@ -35,7 +35,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
                     }
                 }).progress(function (evt) {
                 }).success(function (data, status, headers, config) {
-                	
+                	getSliderImages();
                 	$log.info("Image Uploaded!")
                 	
                 }).error(function (data, status, headers, config) {

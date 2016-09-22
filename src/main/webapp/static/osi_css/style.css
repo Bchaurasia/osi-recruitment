@@ -3422,15 +3422,14 @@ html[xmlns] .flexslider .slides {
   display: block;
   width: 60px;
   height: 60px;
-  margin: -20px 0 0;
+  margin: 70px 0 0;
   position: absolute;
   top: 50%;
   z-index: 10;
   overflow: hidden;
   opacity: 0;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.8);
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+  color: white;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -3441,11 +3440,25 @@ html[xmlns] .flexslider .slides {
   font-family:"Arial";
     font-size: 40px;
     line-height:1;
-    display: inline-block;
+    opacity:1;
+}
+.flex-direction-nav a.flex-prev:before {
     content:'<';
+    font-size:82px;
+	  color: black;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
+	
 }
 .flex-direction-nav a.flex-next:before {
-    content:'>';
+  content:'>';
+  font-size:82px;
+    color: black;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
+
 }
 @media screen and (max-width: 860px) {
     .flex-direction-nav .flex-prev { left: 570px; }
@@ -3454,14 +3467,17 @@ html[xmlns] .flexslider .slides {
 .flex-direction-nav .flex-prev { left: -50px; }
 .flex-direction-nav .flex-next { right: -50px; }
 .flexslider:hover .flex-direction-nav .flex-prev {
-  opacity: 0.7;
+  opacity: 1;
   left: 10px;
 }
 .flexslider:hover .flex-direction-nav .flex-prev:hover {
-  opacity: 2;
+  opacity: 1;
+}
+.flexslider:hover .flex-direction-nav .flex-next:hover {
+  opacity: 1;
 }
 .flexslider:hover .flex-direction-nav .flex-next {
-  opacity: 0.7;
+  opacity: 1;
   right: 10px;
 }
 
