@@ -3,7 +3,12 @@
 <div class="container" ng-show="imageUpload">
 	<div class="ui small images">
 		<h2 style="font-family: -webkit-body;">Please upload your Image</h2>
-
+<table>
+<tr>
+<td>
+<input type="text" ng-model="fileName" placeholder="Choose filename">
+</td>
+<td>
 		<label for="file-input1"> <img class="imageHolder"
 			id="myImage1" src="/views/slider/img/uploadImage.png">
 			<button class="circular mini ui icon blue button close"
@@ -12,32 +17,39 @@
 			</button>
 		</label> <input id="file-input1" type="file" style="display: none"
 			enctype="multipart/form-data" name="file"
-			ng-file-select="upload($files)" />
-		</td>
-
+			ng-file-select="selectedFile=$files" accept="image/*" />
+			</td>
+			<td><button ng-click="upload()">Upload Image</button></td>
+			</tr>
+	</table>	
 
 	</div>
 
 </div>
 
-    <div >
+<div>
 	<table class="ui striped table searchTable">
-	<thead>
-			<tr>
-			<td></td>
-			<td style="margin-left:60px"> Current Slider Images</td>
-			<td></td>
+		<thead>
+		<tr>
+		<th>Name</th>
+		<th>Creation Date</th>
+		<th>Image</th>
+		<th>Flag</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="image in sliderImages">
+				<td>{{image.name}}</td>
+
+				<td><time>{{ image.createdDate | amDateFormat: 'dddd,
+						MMMM Do YYYY, h:mm a' }}</time></td>
+
+				<td><img style="height: 50px; width: 50px;"
+					class="imageHolder" id="myImage1" ng-src="{{image.url}}"> </td>
+				<td>{{image.flag}}</td>
 			</tr>
-			</thead>
-			<tbody>
-				<tr class="animate-repeat" >
-					
-					<td ng-repeat="image in scliderImages"><img style="height:120px; width:120px;" class="imageHolder"
-						id="myImage1" ng-src="{{image.url}}">
-						<br>{{image.name}}</td>
-				</tr>
-			</tbody>
-		</table>
-	
-	
-	</div>
+		</tbody>
+	</table>
+
+
+</div>

@@ -12,7 +12,7 @@ html {
 }
 
 body {
-	background: url(../../static/images/body-bg.png);
+	background: url(../../static/osi_images/body-bg.png);
 	background-repeat: repeat;
 	font: 13px/1.7em 'Open Sans';
 	margin: 0;
@@ -1244,14 +1244,14 @@ table.fc-border-separate {
 }
 
 .fc-header-left .fc-button-prev .fc-button-inner {
-	background: url('../static/images/icons-sa7c41345d9.png') no-repeat;
+	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
 	background-position: 0 -351px;
 	height: 16px;
 	width: 11px;
 }
 
 .fc-header-left .fc-button-next .fc-button-inner {
-	background: url('../static/images/icons-sa7c41345d9.png') no-repeat;
+	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
 	background-position: 0 -367px;
 	height: 16px;
 	width: 11px;
@@ -1441,7 +1441,7 @@ html {
 }
 
 body {
-	background: url(../../static/images/body-bg.png);
+	background: url(../../static/osi_images/body-bg.png);
 	background-repeat: repeat;
 	font: 13px/1.7em 'Open Sans';
 	margin: 0;
@@ -2608,14 +2608,14 @@ table.fc-border-separate {
 }
 
 .fc-header-left .fc-button-prev .fc-button-inner {
-	background: url('../static/images/icons-sa7c41345d9.png') no-repeat;
+	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
 	background-position: 0 -351px;
 	height: 16px;
 	width: 11px;
 }
 
 .fc-header-left .fc-button-next .fc-button-inner {
-	background: url('../static/images/icons-sa7c41345d9.png') no-repeat;
+	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
 	background-position: 0 -367px;
 	height: 16px;
 	width: 11px;

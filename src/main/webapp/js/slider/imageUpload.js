@@ -9,10 +9,16 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
 	$scope.fileName=undefined;
 	var imageInfoObject={};
 	$scope.image={};
+	$scope.selectedFile={};
+	angular.element(document).ready(function() {
+		getSliderImages();
+	 });
 	
-	$scope.upload = function (files) {
+	
+	$scope.upload = function () {
+		    console.log($scope.fileName);
+		$scope.uploadFileIntoCloud($scope.selectedFile);
 			
-			$scope.uploadFileIntoCloud(files);
 
 	};
 	
@@ -24,13 +30,14 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
                 $upload.upload({
                     url: 'resources/uploadSliderImages',
                     file: file,
-                    /*params: {
+                    params: {
                     	imageName:$scope.fileName
-                    }*/
+                    }
                 }).progress(function (evt) {
                 }).success(function (data, status, headers, config) {
+                	
                 	$log.info("Image Uploaded!")
-                	console.log("Image Uploaded!");
+                	
                 }).error(function (data, status, headers, config) {
                 	$log.error("Image Upload Failed! ---> "+data);
                 });
@@ -38,11 +45,12 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
         }
         
 	};
-	
+	function getSliderImages(){
 		advService.getLatestSliderImages().then(function(data){
 	    $scope.sliderImages=data;
 
 		});
+	}
 	
 	
 	
