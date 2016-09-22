@@ -21,7 +21,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
 			
 
 	};
-	
+
 	$scope.uploadFileIntoCloud = function (files) {
 		
         if (files && ( files.length==1 )) {
@@ -39,7 +39,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
                 	$log.info("Image Uploaded!")
                 	
                 }).error(function (data, status, headers, config) {
-                	$log.error("Image Upload Failed! ---> "+data);
+                	getSliderImages();
                 });
             }
         }
@@ -48,7 +48,6 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
 	function getSliderImages(){
 		advService.getLatestSliderImages().then(function(data){
 	    $scope.sliderImages=data;
-	    console.log($scope.sliderImages);
 		});
 	}
 	

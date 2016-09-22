@@ -584,7 +584,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") )){
 	
 		$scope.events=[];
-		console.log($rootScope.user.emailId);
 		dashboardService.getUserEvents($rootScope.user.emailId).then(function(data){
 			$scope.events=data; 
 			for(i=0; i<$scope.events.length; i++){
@@ -710,13 +709,11 @@ $('#mainslider').flexslider({
 	 directionNav: true
 	});
 advService.getLatestSliderImages().then(function(data){
-	console.log(data);
 	var array=[];
 	array.push(data[0].url);
 	array.push(data[1].url);
 	array.push(data[2].url);
-	$scope.slides=array;
-	console.log($scope.slides);
+	 $scope.slides=array;
 });
 
 }]);
