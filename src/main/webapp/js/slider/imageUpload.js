@@ -48,7 +48,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
 	function getSliderImages(){
 		advService.getLatestSliderImages().then(function(data){
 	    $scope.sliderImages=data;
-
+	    console.log($scope.sliderImages);
 		});
 	}
 	
