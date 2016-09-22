@@ -34,11 +34,11 @@ public class AdvController {
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/uploadSliderImages", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadImage(HttpServletRequest request, Model model,
-			@RequestParam(value = "file") MultipartFile multipartFile
-		
+			@RequestParam(value = "file") MultipartFile multipartFile,
+			@RequestParam(value = "imageName")String fileName
 			) throws Exception {
-		System.out.println("multipartFile "+multipartFile);
-        adService.uploadImage(multipartFile.getOriginalFilename(), multipartFile);
+		
+        adService.uploadImage(fileName, multipartFile);
 		return new ResponseEntity<String>("Image uploaded successfully", HttpStatus.OK);
 	}
 	
