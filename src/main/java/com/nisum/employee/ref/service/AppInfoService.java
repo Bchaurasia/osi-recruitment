@@ -36,10 +36,10 @@ public class AppInfoService implements IAppInfoService{
 	public void updateInterviewRoundsInfo(InfoEntity info) {
 		skillsRequired.updateInfo(info);
 	}
-    public InputStream getFileData() throws Exception {
+    public InputStream getFileData(String fileName) throws Exception {
     	InputStream in = null;
     	try {
-    		in = this.getClass().getClassLoader().getResourceAsStream("OSI_Recruitment_Portal_Help_v1.0.docx");
+    		in = this.getClass().getClassLoader().getResourceAsStream(fileName);
            
          }catch(Exception ex){
         	 ex.printStackTrace();

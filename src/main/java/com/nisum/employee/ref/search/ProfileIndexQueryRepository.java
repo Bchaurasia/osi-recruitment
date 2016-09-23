@@ -20,7 +20,7 @@ public class ProfileIndexQueryRepository {
 	private ElasticsearchTemplate elasticsearchTemplate;
 
 	List<Profile> findProfilesByEmailIdStartingWithOrCandidateNameStartingWithOrDesignationStartingWithAllIgnoreCaseOrMobileNoContainsOrIsApprovedDesignationStartingWithAllIgnoreCase(String query) {
-		QueryBuilder qb = QueryBuilders.multiMatchQuery(query, "emailId", "candidateName", "designation","mobileNo","isApproved");
+		QueryBuilder qb = QueryBuilders.multiMatchQuery(query, "emailId", "candidateName", "designation","mobileNo","isApproved","profileType");
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(qb).withPageable(new PageRequest(0, 100))
 				.build();
 		return elasticsearchTemplate.queryForList(searchQuery, Profile.class);

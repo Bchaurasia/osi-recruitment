@@ -4,7 +4,7 @@
 		<div class="row" style="width: 90%">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
-				<input type="text" class="form-control" ng-model="search"  ng-enter="searchProfileQuery()"data-tooltip="Search by Name,Email Id, Designation,Mobile No. or State">
+				<input type="text" class="form-control" ng-model="search"  ng-enter="searchProfileQuery()"data-tooltip="Search by Name,Email Id, Designation,Type,Mobile No. or State">
 				<div align="left">
 					&nbsp;&nbsp; <a class="btn-floating"
 						ng-click="searchProfileQuery()"data-tooltip="Search Profile"><i class="material-icons">search</i></a>&nbsp;&nbsp;
@@ -23,7 +23,7 @@
 					<th>Email Id</th>
 					<th>Mobile No.</th>
 					<th>Current Designation</th>
-					<th>Referred By</th>
+					<th>Type</th>
 					<th>Profile Source</th>
 					<th>Status</th>
 					<th>State</th>
@@ -39,7 +39,7 @@
 					<td class="mdl-data-table__cell--non-numeric">{{profile.emailId}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.mobileNo}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.designation}}</td>
-					<td class="mdl-data-table__cell--non-numeric">{{profile.createdBy}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{profile.profileType}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.profileSource}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.status}}</td>
 					<td class="mdl-data-table__cell--non-numeric">{{profile.isApproved}}</td>

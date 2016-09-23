@@ -1,7 +1,8 @@
-app.controller('helpCtrl',['$scope', '$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI', function($scope, $http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope,blockUI) {
+app.controller('helpCtrl',['$scope', '$rootScope','$http', '$window','sharedService', '$timeout','$filter','$q', '$log', '$rootScope','blockUI', function($scope, $rootScope,$http,$window, sharedService, $timeout,$filter, $q, $log, $rootScope,blockUI) {
 	$scope.downloadHelpDoc = function () {
 		
-		$http.get('resources/helpFileDownload?candidateId='+'test', {responseType: 'arraybuffer'})
+		console.log('user id is 1111:'+$rootScope.user.emailId);
+		$http.get('resources/helpFileDownload?candidateId='+$rootScope.user.emailId, {responseType: 'arraybuffer'})
 	       .then(function (response) {
 	    	   var data = response.data;
 	    	    $scope.headers = response.headers();
