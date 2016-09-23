@@ -710,10 +710,16 @@ $('#mainslider').flexslider({
 	});
 advService.getLatestSliderImages().then(function(data){
 	var array=[];
+	if(data.length>=1){
 	array.push(data[0].url);
 	array.push(data[1].url);
 	array.push(data[2].url);
 	 $scope.slides=array;
+	}else{
+		array.push('views/slider/img/innovation.png','views/slider/img/integrate.png','views/slider/img/operate.png');
+		$scope.slides=array;
+		console.lod($scope.slides);
+	}
 });
 
 }]);
