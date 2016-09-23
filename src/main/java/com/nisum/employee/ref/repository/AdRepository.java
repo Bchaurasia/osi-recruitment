@@ -23,11 +23,11 @@ public class AdRepository{
 	@Autowired
 	private MongoOperations mongoOperations;
 	
-public String uploadImageToCloud(Advertisement adv,MultipartFile multipartFile){
+public void uploadImageToCloud(Advertisement adv,MultipartFile multipartFile){
 	
 	Cloudinary cloudinary = new Cloudinary();
-	cloudinary = new Cloudinary( ObjectUtils.asMap("cloud_name", "dfle3ulxr",
-			"api_key", "167436732849363", "api_secret", "p2bwKi7estuE78crJS2G2N6oPB8"));
+	cloudinary = new Cloudinary( ObjectUtils.asMap("cloud_name", "drozpmklt",
+			"api_key", "422659358876324", "api_secret", "yNOYiU6GHFeUtkwucZaNGQXnWaw"));
 	try {
 		
 		InputStream inputStream = multipartFile.getInputStream();
@@ -45,7 +45,7 @@ public String uploadImageToCloud(Advertisement adv,MultipartFile multipartFile){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	return adv.getUrl();
+
 }
 public List<Advertisement> retieveCurrentSliderImages(){	
 	

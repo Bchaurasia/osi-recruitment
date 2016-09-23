@@ -19,15 +19,14 @@ public class AdService implements IAdService{
 	SequenceRepository sequenceRepository;
 
 	@Override
-	public String uploadImage(String fileName,MultipartFile multipartFile) {
+	public void uploadImage(String fileName,MultipartFile multipartFile) {
 		Advertisement adv=new Advertisement();
 		adv.setName(fileName);
 		adv.setCreatedDate(new Date());
 		adv.setFlag("ACTIVE");
 	    adv.setAdvId("ADV_" + sequenceRepository.getNextSequenceId("ADV"));
 	
-		String cloudinaryURL=adRepository.uploadImageToCloud(adv, multipartFile);
-		return cloudinaryURL;
+		adRepository.uploadImageToCloud(adv, multipartFile);
 	}
 	
 	@Override

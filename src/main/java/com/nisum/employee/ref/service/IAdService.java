@@ -7,6 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nisum.employee.ref.domain.Advertisement;
 
 public interface IAdService{
-	public String uploadImage(String fileName,MultipartFile multipartFile);
+	public void uploadImage(String fileName,MultipartFile multipartFile);
 	public List<Advertisement> getImages() ;
 }

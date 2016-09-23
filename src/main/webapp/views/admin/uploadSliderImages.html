@@ -41,7 +41,7 @@
 		</tr>
 		</thead>
 		<tbody>
-			<tr class="animate-repeat" ng-repeat="image in sliderImages">
+			<tr class="animate-repeat" ng-repeat="image in sliderImages track by $index">
 				<td class="font-class">{{image.name}}</td>
 
 				<td class="font-class"><time>{{ image.createdDate | amDateFormat: 'dddd,
