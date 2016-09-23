@@ -26,8 +26,8 @@ public class AdRepository{
 public void uploadImageToCloud(Advertisement adv,MultipartFile multipartFile){
 	
 	Cloudinary cloudinary = new Cloudinary();
-	cloudinary = new Cloudinary( ObjectUtils.asMap("cloud_name", "drozpmklt",
-			"api_key", "422659358876324", "api_secret", "yNOYiU6GHFeUtkwucZaNGQXnWaw"));
+	cloudinary = new Cloudinary( ObjectUtils.asMap("cloud_name", "ositechportal",
+			"api_key", "452716473993951", "api_secret", "ZTEPtvDxsycEiC9hpbBxHwDp-Ec"));
 	try {
 		
 		InputStream inputStream = multipartFile.getInputStream();
