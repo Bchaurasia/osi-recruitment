@@ -28,18 +28,26 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
             for (var i = 0; i < files.length; i++) {
                 var file = files[0];
                 $upload.upload({
-                    url: 'resources/uploadSliderImages',
+                	url: 'resources/uploadSliderImages',
                     file: file,
                     params: {
                     	imageName:$scope.fileName
+                    },
+                	transformRequest: angular.identity,
+                    transformResponse: angular.identity,
+                    headers: {
+                      'Content-Type': undefined
                     }
+                    
                 }).progress(function (evt) {
                 }).success(function (data, status, headers, config) {
                 	
-                	$log.info("Image Uploaded!")
+                	$log.info("Image Uploaded!");
+                	getSliderImages();
                 	
                 }).error(function (data, status, headers, config) {
-                 	getSliderImages();
+                	
+                	$log.info("Image Upload failed");
                 });
             }
         }

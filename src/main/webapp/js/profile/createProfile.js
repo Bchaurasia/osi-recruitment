@@ -363,7 +363,13 @@ $scope.previous=function(previousShow){
 	                    file: file,
 	                    params: {
 	                        candidateId: $scope.candidate.emailId
+	                    },
+	                	transformRequest: angular.identity,
+	                    transformResponse: angular.identity,
+	                    headers: {
+	                      'Content-Type': undefined
 	                    }
+	                    
 	                }).progress(function (evt) {
 	                }).success(function (data, status, headers, config) {
 	                	$log.info("Resume Uploaded!")
