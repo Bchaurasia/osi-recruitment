@@ -1,0 +1,523 @@
+.control-group {
+	width: 100%;
+	/* margin-left: 47%; */
+}
+
+.field-control {
+	width: 250px;
+}
+
+.form-control {
+	/* margin-left: 16%; */
+	width: 100%;
+	height: 32;
+	border-radius: 0px;
+	border: 1px solid gray;
+	/* -moz-box-shadow: 0 0 1px 1px #888;
+	-webkit-box-shadow: 0 0 1px 1px#888;
+	box-shadow: 0 0 1px 1px #888; */
+}
+
+textarea {
+	/* margin-left: 16%; */
+	width: 250;
+	border-radius: 0px;
+	border: 1px solid gray;
+	/* 	-moz-box-shadow: 0 0 1px 1px #888;
+	-webkit-box-shadow: 0 0 1px 1px#888;
+	box-shadow: 0 0 1px 1px #888; */
+	height: 50px;
+}
+
+.help-block {
+	color: red;
+}
+
+.searchPosition {
+	margin-bottom: -5%;
+}
+
+.lbl {
+	font-size: 100%;
+	text-align: left;
+	/* margin-left: -50%; */
+	 /* osition:absolute; */
+	/* top:97px;
+	left:30px; */
+}
+
+.lbl2 {
+	font-weight: bold;
+	margin-left: -60%;
+	font-size: 11pt;
+	margin-top: 25%;
+}
+
+.form-container {
+	position: relative;
+	width: 1050px;
+	border: 1px solid #d6d6d6;
+	/* background-color: #F0F0F0; */
+	background-color: #EBFAEB;
+	border-radius: 12px;
+}
+
+.gridStyle {
+	border: 1px solid rgb(212, 212, 212);
+	width: 988px;
+	height: 318px
+}
+
+.gridStyleProfile {
+	border: 1px solid rgb(212, 212, 212);
+	width: 988px;
+	height: 318px
+}
+
+.gridStylePosition {
+	border: 1px solid rgb(212, 212, 212);
+	width: 988px;
+	height: 318px
+}
+
+#designations, #candidateName {
+	color: black;
+	position: absolute;
+	left: 30px;
+	top: 72px;
+	width: 153px;
+	height: 32px;
+}
+
+#searchBtn {
+	position: absolute;
+	top: 34px;
+	left: 190px;
+	width: 90px;
+	/* border-top-left-radius:2px;
+	border-bottom-left-radius:2p */
+	x;
+}
+
+#rsBtn {
+	position: absolute;
+	top: 34px;
+	left: 200px;
+}
+
+#rsBtn1 {
+	margin-left: -228%;
+	height: 31px;
+}
+
+#approveBtn {
+	position: absolute;
+	top: 34px;
+	left: 300px;
+}
+
+#searcCanhBtn {
+	position: absolute;
+	top: 8px;
+	right: 175px;
+}
+
+.form-container-mg {
+	/* position:relative; */
+	width: 1000px;
+	height: 55px;
+	border: 1px solid #d6d6d6;
+	background-color: #F0F0F0;
+	border-radius: 12px;
+}
+
+.positionMg {
+	padding-bottom: 100px;
+}
+
+.ngPagerButton {
+	width: 50px;
+	border: 1px solid gray;
+	border-radius: 10px;
+}
+
+.ngGridMaxPagesNumber {
+	font-weight: bold;
+}
+
+#designation, #intNotes, #dLabel, #typeOfInterview, #location, #skypeID,
+	#emailIdInterviewer, #jc, #jobcode, #exp, #secondarySkills,
+	#noOfPositions, #location, #client, #cname, #qualification,
+	#selectbasic, #Skills, #mobileNo, #presentLocation, #pancardNo,
+	#passportNo, #emailId, #stream, #altmobileNo, #currentEmployee,
+	#plocation, #currentEmployer, #profilecreatedBy, #referredBy, #uname,
+	#interviewerName, #duration, #intName, #emailId, #intName, #sround,
+	#fround, #categories, #interviewers, #progress, #skill {
+	width: 100%;
+}
+
+#experience {
+	width: 120px;
+}
+
+#expMonths {
+	width: 120px;
+	position: absolute;
+	top: 231px;
+	right: 150px;
+}
+
+.tableTd {
+	padding-right: 20px;
+}
+
+#tdid {
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+.ft {
+	position: relative;
+	bottom: 0px;
+	background: black;
+	width: 100%;
+	height: 10%;
+}
+
+.ngRowCountPicker {
+	display: none;
+}
+
+.custom-file-input {
+	color: black;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+	visibility: hidden;
+}
+
+.custom-file-input::before {
+	content: 'Select File';
+	color: white;
+	background: -webkit-linear-gradient(top, #337ab7, #337ab7);
+	border: 1px solid #999;
+	border-radius: 9px;
+	padding: 5px 5px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.custom-file-input:hover::before {
+	border-color: black;
+}
+
+.searchprofile-container {
+	position: relative;
+	top: -40px;
+	width: 87%;
+	left: -6px;
+	border: 1px solid #d6d6d6;
+	border-radius: 12px;
+}
+
+.searchposition-container {
+	position: relative;
+	top: -40px;
+	width: 87%;
+	border: 1px solid #d6d6d6;
+	border-radius: 12px;
+	height: auto;
+}
+
+.interview-container {
+	position: relative;
+	top: -40px;
+	left: -100px;
+	width: 1200px;
+	border: 1px solid #d6d6d6;
+	border-radius: 12px;
+}
+
+.admin-container {
+	top: -40px;
+	width: 1050px;
+	border: 1px solid #d6d6d6;
+	border-radius: 12px;
+}
+
+.createprofile-container {
+	position: relative;
+	height: 580px;
+	width: 1050px;
+	border: 1px solid #d6d6d6;
+	border-radius: 12px;
+}
+
+.createposition-container {
+	position: relative;
+	width: 1050px;
+	border: 1px solid #d6d6d6;
+	border-radius: 12px;
+}
+
+.editprofile-container {
+	position: relative;
+	width: 1050px;
+	border: 1px solid #d6d6d6;
+	/* background-color: #F0F0F0; */
+	background-color: #E0EEEE;
+	border-radius: 12px;
+}
+
+.headerclass-createPosition {
+	position: relative;
+	top: -20px;
+	left: -28%;
+	font-size: 200%;
+	color: #08497F;
+}
+
+.headerclass-createProfile {
+	position: relative;
+	top: -20px;
+	left: -29%;
+	font-size: 200%;
+	color: #08497F;
+}
+
+.headerclass-searchProfile {
+	position: relative;
+	top: -40px;
+	left: -29%;
+	color: #004E89;
+	font-size: 200%;
+}
+
+.headerclass-searchPosiiton {
+	position: relative;
+	top: -40px;
+	left: -28%;
+	color: #004E89; `
+	font-size: 200%;
+}
+
+.select2-container-multi .select2-choices .select2-search-field input {
+	font-size: 83%;
+	color: black;
+}
+
+.select2-drop-mask {
+	min-width: 60%;
+}
+
+.dropdown-toggle {
+	border-radius: 0px;
+}
+
+#interviewSearchBtn {
+	position: absolute;
+	top: 77px;
+	right: -87px;
+}
+
+.headerclass1 {
+	position: relative;
+	top: -20px;
+	left: 0%;
+	font-size: 150%;
+	color: #08497F;
+	font-weight: bolder;
+}
+
+.headerclass {
+	position: relative;
+	top: -20px;
+	left: 0%;
+	font-size: 200%;
+	color: #08497F;
+	font-weight: bolder;
+}
+
+.headerclassinterview {
+	position: relative;
+	top: -20px;
+	left: -10%;
+	font-size: 200%;
+	color: #08497F;
+	font-weight: bolder;
+}
+
+.interviewFeedback {
+	font-family: serif;
+}
+
+.accordionBg {
+	background-color: #F5F5F5;
+}
+
+.accordionHeader {
+	color: white;
+}
+
+.td-style {
+	padding: 5px;
+}
+
+#interview {
+	width: 93%;
+	position: relative;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+.interviewtable {
+	/* position: absolute;
+	left: 55px; */
+	width: 740;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+#interview td, #interview th {
+	font-size: 0.93em;
+	border: 1px solid #000000;
+	padding: 3px 7px 2px 7px;
+}
+
+#interview th {
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: #EAEAEA;
+	color: black;
+}
+
+#interview tr.alt td {
+	color: #000000;
+	background-color: #EAF2D3;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.interview-class {
+	width: 740px;
+}
+
+.skillSetTable {
+	/* position: absolute;
+	left: 55px; */
+	width: 200px;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+#users {
+	border-collapse: collapse;
+	/* background-color: white; */
+}
+.usersTable {
+	width: 85%;
+	border-collapse: collapse;
+	/* background-color: #F8F8F8; */
+}
+
+#users td, #users th {
+	font-size: 0.93em;
+	border: 1px solid #B2B0B0;
+	padding: 3px 7px 2px 7px;
+}
+
+#users th {
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: #9B9C9D;
+	color: black;
+}
+
+#users tr.alt td {
+	color: #000000;
+	background-color: #EAF2D3;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.users-class {
+	width: 85%;
+}
+
+//---------
+#manageClient {
+	width: 740;
+	border-collapse: collapse;
+	background-color: #F8F8F8;
+}
+
+#manageClient td, #manageClient th {
+	font-size: 0.93em;
+	border: 1px solid #B2B0B0;
+	padding: 3px 7px 2px 7px;
+	background-color: #F8F8F8;
+}
+
+#manageClient th {
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #9B9C9D;
+	color: black;
+}
+
+#manageClient tr.alt td {
+	color: #000000;
+	background-color: #EAF2D3;
+}
+
+ul {
+	list-style-type: none;
+}
+
+//------------------
+#timeSLots {
+	width: 740;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+#timeSLots td, #timeSLots tr {
+	text-align: center;
+	font-size: 0.93em;
+	padding: 3px 12px 3px 12px;
+}
+
+#timeSLots th {
+	font-size-adjust: inherit;
+	text-align: center;
+}
+
+.interview-schedule {
+	position: relative;
+	left: 30px;
+}
+
+.interview-feedback {
+	position: relative;
+	left: 30px;
+}
+
+.mandatory{
+	color: red;
+}
