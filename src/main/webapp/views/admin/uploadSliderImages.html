@@ -2,53 +2,61 @@
 
 <div class="container" ng-show="imageUpload">
 	<div class="ui small images">
-		<h3 style="margin-top: 15px;height: 1px" align="center">Please upload your Image</h3>
-	<hr style="background-color: black; height:1px; width: 25%">
-<table>
-<tr>
-<td>
-<input type="text" ng-model="fileName" class="font-class" placeholder="Choose filename">
-</td>
-<td>
-		<label for="file-input1"> <img class="imageHolder"
-			id="myImage1" src="/views/slider/img/uploadImage.png">
-			<button class="circular mini ui icon blue button close"
-				style="margin-top: 0px" ng-click="clearImage(1)">
-				<i class="remove icon"></i>
-			</button>
-		</label> <input id="file-input1" type="file" style="display: none"
-			enctype="multipart/form-data" name="file"
-			ng-file-select="selectedFile=$files" accept="image/*" />
-			</td>
-			<td><button class="ui teal button" ng-click="upload()">Upload Image</button></td>
-			</tr>
-	</table>	
-
+		<h3 style="margin-top: 15px; height: 1px" align="center">Please
+			upload your Image</h3>
+		<hr style="background-color: black; height: 1px; width: 25%">
+		<form name="myForm">
+			<table>
+				<tr>
+					<td><input type="text" ng-model="fileName" class="font-class"
+						placeholder="Choose filename" name="filename" required >
+						<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                    <span ng-show="myForm.fileame.$error.required">File name is required.</span>
+                    </span>
+						
+						</td>
+					<td><label for="file-input1"> <img class="imageHolder"
+							id="myImage1" src="/views/slider/img/uploadImage.png">
+							<button class="circular mini ui icon blue button close"
+								 style="margin-top: 0px" ng-click="clearImage(1)">
+								<i class="remove icon"></i>
+							</button>
+					</label> <input id="file-input1" type="file" style="display: none"
+						enctype="multipart/form-data" name="file"
+						ng-file-select="selectedFile=$files" accept="image/*" /></td>
+					<td><button class="ui teal button" ng-disabled="myForm.filename.$pristine && myForm.filename.$dirty || myForm.filename.$invalid || imageNotSelected " ng-click="upload()">Upload
+							Image</button></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 
 </div>
 
 <div>
-<h3 style="margin-top: 15px;height: 1px" align="center">Current slider images</h3>
-	<hr style="background-color: black; height:1px; width: 15%">
+	<h3 style="margin-top: 15px; height: 1px" align="center">Current
+		slider images</h3>
+	<hr style="background-color: black; height: 1px; width: 15%">
 	<table class="ui striped table searchTable">
 		<thead>
-		<tr>
-		<th class="font-class">Name</th>
-		<th class="font-class">Creation Date</th>
-		<th class="font-class">Image</th>
-		<th class="font-class">Flag</th>
-		</tr>
+			<tr>
+				<th class="font-class">Name</th>
+				<th class="font-class">Creation Date</th>
+				<th class="font-class">Image</th>
+				<th class="font-class">Flag</th>
+			</tr>
 		</thead>
 		<tbody>
-			<tr class="animate-repeat" ng-repeat="image in sliderImages track by $index">
+			<tr class="animate-repeat"
+				ng-repeat="image in sliderImages track by $index">
 				<td class="font-class">{{image.name}}</td>
 
-				<td class="font-class"><time>{{ image.createdDate | amDateFormat: 'dddd,
-						MMMM Do YYYY, h:mm a' }}</time></td>
+				<td class="font-class"><time>{{ image.createdDate |
+						amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}</time></td>
 
-				<td class="mdl-data-table__cell--non-numeric"><img style="height: 50px; width: 50px;"
-					class="imageHolder" id="myImage1" ng-src="{{image.url}}"> </td>
+				<td class="mdl-data-table__cell--non-numeric"><img
+					style="height: 50px; width: 50px;" class="imageHolder"
+					id="myImage1" ng-src="{{image.url}}"></td>
 				<td class="font-class">{{image.flag}}</td>
 			</tr>
 		</tbody>
