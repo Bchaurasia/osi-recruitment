@@ -714,7 +714,7 @@ advService.getLatestSliderImages().then(function(data){
 	    array.push(data[0].url);
 	if(data[1]!=undefined)
 	    array.push(data[1].url);
-	ifdata[2]!=undefined)
+	if(data[2]!=undefined)
 	    array.push(data[2].url);
 	 $scope.slides=array;
 	}else{
