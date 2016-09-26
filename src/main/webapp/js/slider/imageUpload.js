@@ -10,13 +10,13 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
 	var imageInfoObject={};
 	$scope.image={};
 	$scope.selectedFile={};
+	$scope.imageNotSelected=true;
 	angular.element(document).ready(function() {
 		getSliderImages();
 	 });
 	
 	
 	$scope.upload = function () {
-		    console.log($scope.fileName);
 		$scope.uploadFileIntoCloud($scope.selectedFile);
 			
 
@@ -76,6 +76,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
  
     
     $scope.clearImage = function(inputIndex) {
+    	$scope.imageNotSelected=true;
         var imageID = 'myImage' + inputIndex;
         var image = document.getElementById(imageID);
         image.src = "/views/slider/img/uploadImage.png";
@@ -112,6 +113,7 @@ app.controller('imageUpload',['$scope','$http','$state','advService','$upload','
     };
 
     $("#file-input1").change(function() {
+    	$scope.imageNotSelected=false;
     	if(this.files[0]!=undefined){
             var status = validateInputImage("file-input1", 1, this);
             if(status ==1 ){
