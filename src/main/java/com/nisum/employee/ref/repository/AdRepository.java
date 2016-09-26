@@ -26,13 +26,13 @@ public class AdRepository{
 public void uploadImageToCloud(Advertisement adv,MultipartFile multipartFile){
 	
 	Cloudinary cloudinary = new Cloudinary();
-	cloudinary = new Cloudinary( ObjectUtils.asMap("cloud_name", "ositechportal",
-			"api_key", "452716473993951", "api_secret", "ZTEPtvDxsycEiC9hpbBxHwDp-Ec"));
+	cloudinary = new Cloudinary( ObjectUtils.asMap("cloud_name", "drozpmklt",
+			"api_key", "422659358876324", "api_secret", "yNOYiU6GHFeUtkwucZaNGQXnWaw"));
 	try {
 		
 		InputStream inputStream = multipartFile.getInputStream();
 		Map resultMap  = cloudinary.uploader().uploadLargeRaw(inputStream, 
-			    ObjectUtils.asMap("public_id", multipartFile.getOriginalFilename()));
+			    ObjectUtils.asMap("public_id", adv.getName()));
 		        adv.setUrl(resultMap.get("url").toString());
 		        mongoOperations.save(adv);
 		
