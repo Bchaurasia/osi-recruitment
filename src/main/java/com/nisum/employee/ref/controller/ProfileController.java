@@ -23,9 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nisum.employee.ref.domain.Profile;
+import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.search.ProfileSearchService;
 import com.nisum.employee.ref.service.IAppInfoService;
 import com.nisum.employee.ref.service.IProfileService;
+import com.nisum.employee.ref.service.UserService;
 
 import gherkin.deps.net.iharder.Base64.InputStream;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +46,9 @@ public class ProfileController {
 	
 	@Autowired
 	private IAppInfoService infoService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_HR","ROLE_MANAGER","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"})
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -180,7 +185,27 @@ public class ProfileController {
 	
 	@RequestMapping(value = "/helpFileDownload", method = RequestMethod.GET)
 	public ResponseEntity<HttpServletResponse> downHelpDoc(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "candidateId", required = true) String candidateId) throws Exception {
-		BufferedInputStream file = (BufferedInputStream) infoService.getFileData();
+		
+		List<UserInfo> userInfo = null;
+		String fileName = null;
+		if(candidateId !=null && !candidateId.isEmpty()){
+				userInfo = userService.retrieveUserById(candidateId);
+		}
+		if(userInfo !=null && !userInfo.isEmpty()){
+			List<String>roles = userInfo.get(0).getRoles();
+			if(roles.contains("ROLE_HR"))
+				fileName = "Role_HR_Help.docx";
+			else if(roles.contains("ROLE_USER"))
+				fileName = "Role_user_help.docx";
+			else if(roles.contains("ROLE_REQUISITION_MANAGER") || roles.contains("ROLE_REQUISITION_APPROVER"))
+				fileName = "Role_Requisition_Approver_Help.docx";
+			else if(roles.contains("ROLE_INTERVIEWER"))
+				fileName = "Role_Interviewer_help.docx";
+			else if(roles.contains("ROLE_MANAGER"))
+				fileName = "Role_Manager_help.docx";
+		}
+		
+		BufferedInputStream file = (BufferedInputStream) infoService.getFileData(fileName);
 		if(file!=null){
     	response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 		response.setContentLength(file.available());

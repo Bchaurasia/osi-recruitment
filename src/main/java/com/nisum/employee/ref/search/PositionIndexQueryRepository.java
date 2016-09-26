@@ -40,5 +40,17 @@ public class PositionIndexQueryRepository {
 		}
 		return positionlist;
 	}
+	
+	List<Position> findPositionForRequisitionId(String reqId){
+		List<Position> positionlist = null;
+		QueryBuilder qb = QueryBuilders.matchPhrasePrefixQuery("requisitionId", reqId);
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(qb).build();
+		try {
+			positionlist = elasticsearchTemplate.queryForList(searchQuery, Position.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return positionlist;
+	}
 
 }

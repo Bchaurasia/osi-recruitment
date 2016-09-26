@@ -90,7 +90,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		jobDetails=[];
 		var offrcntr;
 		
-		positionService.getPositionByRequisitionId(req_id).then(function(data){
+		positionService.searchPositionByRequisitionId(req_id).then(function(data){
 			jobCount=data.length;
 			offrcntr=0;
 			data.forEach(function(item) {
@@ -293,7 +293,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
     
 	
    function reqData(){
-	   requisitionService.getAllRequisitions().then(function(data){
+	   requisitionService.searchRequisition("").then(function(data){
 		$scope.requisitionData=data;
 	 });
    }
@@ -718,7 +718,6 @@ advService.getLatestSliderImages().then(function(data){
 	}else{
 		array.push('views/slider/img/innovation.png','views/slider/img/integrate.png','views/slider/img/operate.png');
 		$scope.slides=array;
-		console.lod($scope.slides);
 	}
 });
 

@@ -103,5 +103,13 @@ app.controller('editJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', '$
 			$scope.disableBtn = false;
 		}
 	};
-	
+
+/*	 $scope.jdDetailsCharLimit = function(jdDescription) {
+		    if (jdDescription.length > 500) {
+		 	   $scope.jdDescritptionErr = true;
+	        }else{
+			   $scope.jdDescritptionErr = false;
+		   }
+	 };*/
+
 }]);

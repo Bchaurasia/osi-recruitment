@@ -13,7 +13,8 @@ function positionService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 		getClients : getClients,
 		searchPositionsBySearchQuery : searchPositionsBySearchQuery,
 		getPositionsByPositionType : getPositionsByPositionType,
-		getPositionsByDate:getPositionsByDate
+		getPositionsByDate:getPositionsByDate,
+		searchPositionByRequisitionId:searchPositionByRequisitionId
 	};
 	
 	function addPosition(positionObj){
@@ -78,6 +79,11 @@ function positionService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 
 	function getPositionByRequisitionId(requisitionId){
 		return $http.get('resources/searchPositionsBasedOnRequisitionId?requisitionId='+requisitionId)
+		.then(getPositionSuccess)
+		.catch(getPositionError);
+	}
+	function searchPositionByRequisitionId(requisitionId){
+		return $http.get('resources/searchPositionsBasedOnRequisitionIdFromElastic?requisitionId='+requisitionId)
 		.then(getPositionSuccess)
 		.catch(getPositionError);
 	}

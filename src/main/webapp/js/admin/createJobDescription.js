@@ -21,7 +21,8 @@ app.controller('createJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', 
 	}
 
 	$scope.save = function(){
-		     $scope.jobDescription.jobDescriptionName = $scope.jobDescription.jobDescriptionName.trim();
+
+		      $scope.jobDescription.jobDescriptionName = $scope.jobDescription.jobDescriptionName.trim();
 			  jobDescriptionService.addJobDescription($scope.jobDescription).then(function(msg){
 				  $scope.sendSharedMessage(msg,'/admin/jobDescription');
 			  }).catch(function(msg){ 
@@ -56,19 +57,21 @@ app.controller('createJobDescriptionCtrl',['$scope','$rootScope', '$http','$q', 
 	       }
 	}
 	$scope.validateJDName= function(jdName) {
-            jobDescriptionService.validateJDName(jdName.trim()).then(function(data){
-                    if(data.length !== 0){
-                            $scope.jdNameErr = true;
-                    }else{
-                            $scope.jdNameErr = false;
-                    }
-            }).catch(function(msg){
-                    $scope.message=msg;
-                     $scope.cls=appConstants.ERROR_CLASS;
-                     $scope.gotoAnchor();
-                     $timeout( function(){ $scope.alHide(); }, 5000);
-            });
-	}
+
+        jobDescriptionService.validateJDName(jdName.trim()).then(function(data){
+                if(data.length !== 0){
+                        $scope.jdNameErr = true;
+                }else{
+                        $scope.jdNameErr = false;
+                }
+        }).catch(function(msg){
+                $scope.message=msg;
+                 $scope.cls=appConstants.ERROR_CLASS;
+                 $scope.gotoAnchor();
+                 $timeout( function(){ $scope.alHide(); }, 5000);
+        });
+  }
+
 
 	$scope.charLimit = function($event, limitNum) {
 	       limitField =$event.currentTarget;

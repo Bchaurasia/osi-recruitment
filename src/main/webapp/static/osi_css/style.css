@@ -1244,14 +1244,15 @@ table.fc-border-separate {
 }
 
 .fc-header-left .fc-button-prev .fc-button-inner {
-	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
+	background: url('../static/nisum_images/icons-sa7c41345d9.png') no-repeat;
 	background-position: 0 -351px;
 	height: 16px;
 	width: 11px;
 }
 
 .fc-header-left .fc-button-next .fc-button-inner {
-	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
+
+	background: url('../static/nisum_images/icons-sa7c41345d9.png') no-repeat;
 	background-position: 0 -367px;
 	height: 16px;
 	width: 11px;
@@ -2608,14 +2609,22 @@ table.fc-border-separate {
 }
 
 .fc-header-left .fc-button-prev .fc-button-inner {
+<<<<<<< HEAD
 	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
+=======
+	background: url('../static/images/icons-sa7c41345d9.png') no-repeat;
+>>>>>>> 4da31a6cb8f29cce82fcdb36853c072581524a56
 	background-position: 0 -351px;
 	height: 16px;
 	width: 11px;
 }
 
 .fc-header-left .fc-button-next .fc-button-inner {
+<<<<<<< HEAD
 	background: url('../static/osi_images/icons-sa7c41345d9.png') no-repeat;
+=======
+	background: url('../static/images/icons-sa7c41345d9.png') no-repeat;
+>>>>>>> 4da31a6cb8f29cce82fcdb36853c072581524a56
 	background-position: 0 -367px;
 	height: 16px;
 	width: 11px;
@@ -3297,6 +3306,7 @@ div input[type="checkbox"].checkboxProfile{
 	left:0px;
 	height:20px;
 }
+<<<<<<< HEAD
 div input.textHeight{
 	height:30px !important;
 	width:77%;
@@ -3498,3 +3508,8 @@ html[xmlns] .flexslider .slides {
  * RESPONSIVE
  * ====================================================================================================================*/
 
+=======
+.imageHolder{
+	cursor:pointer;
+}
+>>>>>>> 4da31a6cb8f29cce82fcdb36853c072581524a56

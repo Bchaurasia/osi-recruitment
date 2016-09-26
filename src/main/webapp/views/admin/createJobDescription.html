@@ -62,9 +62,12 @@
 							ng-model="jobDescription.jobDescriptionDetails"
 							placeholder="Enter job description details..." required></textarea>
 					</div>
+					<!-- <div class="col-md-3" align="left">
+						<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>
+					</div> -->
 				</div>
 			<div align="center">
-				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdNameErr || jdDescritptionErr " ng-click="save()">
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdNameErr || jdDescritptionErr" ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save 
 				</button>
 				&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.jobDescription.list"

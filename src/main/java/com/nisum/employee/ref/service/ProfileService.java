@@ -114,22 +114,26 @@ public class ProfileService implements IProfileService{
 				Event e=new Event();
 				if((candidate.getConfirm()).contentEquals("Yes"))
 				{
-					if(((profileList.get(i).getCandidateName()).contentEquals(candidate.getCandidateName()) ==false ) ){
-					
+
+					if((profileList.get(i).getCandidateName()).contentEquals(candidate.getCandidateName()) ==false  )
+					{
+						
+
 						e.setEventDesc("Profile name "+profileList.get(i).getCandidateName()+" is changed to " +candidate.getCandidateName());
 						e.setCategory("General");
 						e.setEmailId(candidate.getUpdatedBy());
 						e.setUsername(candidate.getUpdatedByName());
 						eventService.setEvent(e);
-				}else{
+
+					}else{
+
 						e.setEventDesc("Profile of "+candidate.getCandidateName()+" was updated.");
 						e.setCategory("General");
 						e.setEmailId(candidate.getUpdatedBy());
 						e.setUsername(candidate.getUpdatedByName());
 						eventService.setEvent(e);
-				}
-				
-				}
+					}
+			    }
 			}
 
 			candidate.setUpdatedDate(new Date());

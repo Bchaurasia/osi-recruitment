@@ -11,5 +11,5 @@ public interface IAppInfoService {
 	void updateInfo(InfoEntity info);
 	void updateDesigInfo(InfoEntity info);
 	void updateInterviewRoundsInfo(InfoEntity info);
-	InputStream getFileData() throws Exception;
+	InputStream getFileData(String fileName) throws Exception;
 }
