@@ -2,6 +2,7 @@ package com.nisum.employee.ref.service;
 
 import java.io.File;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -46,6 +49,7 @@ import com.nisum.employee.ref.domain.InterviewSchedule;
 import com.nisum.employee.ref.domain.Offer;
 import com.nisum.employee.ref.domain.Position;
 import com.nisum.employee.ref.domain.Profile;
+import com.nisum.employee.ref.domain.RegisterUser;
 import com.nisum.employee.ref.domain.Requisition;
 import com.nisum.employee.ref.domain.RequisitionApproverDetails;
 import com.nisum.employee.ref.domain.UserInfo;
@@ -179,6 +183,8 @@ public class NotificationService {
 	@Value("${SRC_OFFER_DECLINED_INFO_TO_REFERRER}")
 	private String SRC_OFFER_DECLINED_INFO_TO_REFERRER;
 	
+	@Value("${SRC_REGISTER_USER_VM}")
+	private String SRC_REGISTER_USER_VM;
 	
 	@Value("${OSI_PORTAL_LINK}")
 	private String OSI_PORTAL_LINK;
@@ -191,6 +197,12 @@ public class NotificationService {
 
 	@Autowired
 	UserNotificationService userNotificationService;
+	
+	@Autowired
+    private ServletContext servletContext;
+	
+	@Autowired
+	ServletRequest servletRequest;
 
 	public String sendScheduleMail(InterviewSchedule interviewSchedule, String mobileNo, String altMobileNo,
 			String skypeId) throws Exception {
@@ -1084,5 +1096,31 @@ public class NotificationService {
 			
 		}
 		return toMail;
+	}
+	
+	public void sendVerificationMailToRegisteredUser(RegisterUser registerUser) throws AddressException, MessagingException,
+	ResourceNotFoundException, ParseErrorException,
+	MethodInvocationException, MalformedURLException {
+		VelocityEngine engine = new VelocityEngine();
+		engine.init();
+
+		Template registerUserTemplate = getVelocityTemplate(SRC_REGISTER_USER_VM);
+
+		VelocityContext context = new VelocityContext();
+		String link = servletRequest.getScheme()+"://"+servletRequest.getServerName()+":"+servletRequest.getServerPort()
+				+servletContext.getContextPath()+"/resources/verifyUser?versionId="+registerUser.getVersionId();
+		context.put("verificationLink", link);
+
+		StringWriter writer = new StringWriter();
+		registerUserTemplate.merge(context, writer);
+
+		Message message1 = getMessage();
+		message1.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(registerUser.getEmailId()));
+		message1.setSubject(OSI_TECHNOLOGIES + " - Email verification link for "
+				+ registerUser.getFirstname() + " "	+ registerUser.getLastname());
+
+		message1.setContent(writer.toString(), TEXT_HTML);
+		Transport.send(message1);
 	}
 }
