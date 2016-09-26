@@ -379,13 +379,8 @@ public class NotificationService {
 
 	public void sendFeedbackMail(InterviewFeedback interviewFeedback) throws MessagingException {
 
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
+		String toMail = null;
+		toMail = getHRMailId(toMail);
 		VelocityContext context = getVelocityContext(interviewFeedback.getCandidateName(),
 				interviewFeedback.getJobcode(), interviewFeedback.getInterviewerName(),
 				interviewFeedback.getRoundName());
@@ -414,11 +409,9 @@ public class NotificationService {
 		Message message = getMessage();
 		message.setSubject(OSI_TECHNOLOGIES + FEEDBACK_SUBMITTED_FOR + interviewFeedback.getRoundName() + ROUND + OF + interviewFeedback.getCandidateName());
 		message.setContent(writer.toString(), TEXT_HTML);
-
-		for (String obj : HR_Emails) {
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(obj));
-			Transport.send(message);
-		}
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		Transport.send(message);
+		
 	}
 
 	private Template getVelocityTemplate(String templetName) {
@@ -529,13 +522,6 @@ public class NotificationService {
 		String message = "Approve the Offer";
 		String readStatus = "No";
 		updateUserNotification(null,message, readStatus);
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
@@ -551,12 +537,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		String toMail = null;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + CANDIDATE_APPROVAL_REQUEST + " : " + offer.getCandidateName()
 				+ " is selected for Designation :" + offer.getOrgGrade().getDesignation().getName());
@@ -608,20 +589,10 @@ public class NotificationService {
 		//String userId = offer.getRecruiter().getEmailId();
 		String message = "Candidate Selected";
 		String readStatus = "No";
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		updateUserNotification(null, message, readStatus);
-
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
-
 		Template jobRequisitionTemplate = getVelocityTemplate(SRC_OFFER_INFO_TO_HR);
-
 		String ReferredByName = profile.getReferredByName();
 		String ReferredByEmail = profile.getReferredBy();
 
@@ -640,12 +611,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		String toMail = null;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is selected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
@@ -692,13 +658,6 @@ public class NotificationService {
 		//String userId = offer.getRecruiter().getEmailId();
 		String message = "Candidate Rejected";
 		String readStatus = "No";
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		updateUserNotification(null, message, readStatus);
 
 		VelocityEngine engine = new VelocityEngine();
@@ -720,12 +679,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		String toMail = null;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
@@ -743,13 +697,6 @@ public class NotificationService {
 		String readStatus = "No";
 		updateUserNotification(userId, message, readStatus);*/
 		
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
@@ -772,13 +719,7 @@ public class NotificationService {
 		Transport.send(message2);*/		
 		
 		String toMail = requisitionApproverDetails.getRequisitionManagerEmail();
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
-
+		toMail = getHRMailId(toMail);
 		Message message3 = getMessage();
 		message3.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(toMail));
@@ -833,14 +774,7 @@ public class NotificationService {
 		String to = interviewSchedule.getCandidateId();
 		String toInterviewer = interviewSchedule.getEmailIdInterviewer();
 		Date date = change12HrsTo24HrsFormat(interviewSchedule.getInterviewDateTime());
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
 		Session session = getSession();
-
 		VelocityContext context = getVelocityContext(interviewSchedule.getCandidateName(),
 				interviewSchedule.getJobcode(), interviewSchedule.getInterviewerName(),
 				interviewSchedule.getRoundName());
@@ -859,13 +793,7 @@ public class NotificationService {
 		cancelInterview.setFrom(new InternetAddress(from));
 		String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer;
 		//String toMail = toInterviewer;
-		for (String obj : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = obj;
-			else
-				toMail = toMail + "," + obj;
-		}
-
+		toMail = getHRMailId(toMail);
 		cancelInterview.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		cancelInterview.setSubject(OSI_TECHNOLOGIES + " - " + interviewSchedule.getRoundName() + " Interview Cancelled for :" + interviewSchedule.getCandidateName());
 		BodyPart messageBodyPart = new MimeBodyPart();
@@ -935,13 +863,6 @@ public class NotificationService {
 		String createdBy = candidate.getCreatedBy();
 		String message = "Profile created";
 		String readStatus = "No";
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		updateUserNotification(createdBy, message, readStatus);
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
@@ -970,12 +891,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		message1.setFrom(new InternetAddress(from));
 		String toMail = createdBy;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Profile has been created for: " + candidate.getCandidateName());
 
@@ -990,14 +906,6 @@ public class NotificationService {
 		String createdBy = candidate.getCreatedBy();
 		String message = "Profile approved";
 		String readStatus = "No";
-
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		updateUserNotification(createdBy, message, readStatus);
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
@@ -1015,12 +923,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		// message1.setFrom(new InternetAddress(from));
 		String toMail = createdBy;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Profile has been approved for: " + candidate.getCandidateName());
 
@@ -1047,24 +950,12 @@ public class NotificationService {
 		context.put("UpdatedBy", position.getUpdatedBy());
 		context.put("positionType", position.getPositionType());
 
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		StringWriter writer = new StringWriter();
 		positionUpdateTemplate.merge(context, writer);
 		Message message1 = getMessage();
 		message1.setFrom(new InternetAddress(from));
 		String toMail = createdBy;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Position updated with job code: " + position.getJobcode());
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -1074,12 +965,7 @@ public class NotificationService {
 
 	public void sendProfileUpdatedNotification(Profile candidate) throws MessagingException {
 		String createdBy = candidate.getCreatedBy();
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
+	
 		/*
 		 * String message = "Profile updated"; String readStatus = "No";
 		 * 
@@ -1103,12 +989,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		message1.setFrom(new InternetAddress(from));
 		String toMail = createdBy;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Profile has been updated for: " + candidate.getCandidateName());
 
@@ -1123,15 +1004,7 @@ public class NotificationService {
 
 		String message = "Offer Declined by";
 		String readStatus = "No";
-		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
-		List<String> HR_Emails = new ArrayList<String>();
-
-		for (UserInfo ui : info) {
-			HR_Emails.add(ui.getEmailId());
-		}
-
 		updateUserNotification(null, message, readStatus);
-
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
@@ -1151,12 +1024,7 @@ public class NotificationService {
 
 		Message message1 = getMessage();
 		String toMail = null;
-		for (String hrEMails : HR_Emails) {
-			if (toMail == null || toMail == "")
-				toMail = hrEMails;
-			else
-				toMail = toMail + "," + hrEMails;
-		}
+		toMail = getHRMailId(toMail);
 		message1.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Offer Declined by "
@@ -1202,4 +1070,19 @@ public class NotificationService {
 		Transport.send(message1);
 	}
 
+	
+	public String getHRMailId(String toMail){
+		
+		List<UserInfo> info = userService.retrieveUserByRole(ROLE_HR);
+		if(info !=null && !info.isEmpty()){
+			for (UserInfo ui : info) {
+				if (toMail == null || toMail == "")
+					toMail = ui.getEmailId();
+				else
+					toMail = toMail + "," + ui.getEmailId();
+			}
+			
+		}
+		return toMail;
+	}
 }

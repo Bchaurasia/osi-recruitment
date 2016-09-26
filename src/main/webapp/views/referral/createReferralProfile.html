@@ -11,12 +11,12 @@
 				<span class="glyphicon glyphicon-refresh"></span> Reset
 				</button>
 		</div>
-		 <div class="row">
+		 <div class="row" ng-show="showRadioProfile">
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;"><font size="3">Fresher</font></input>
+				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;top:10%;"><font size="3">Fresher</font></input>
 			</div>
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;"><font size="3">Experienced</font></input>
+				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;top:10%;"><font size="3">Experienced</font></input>
 			</div>
 			
 		</div> 
@@ -208,7 +208,7 @@
 						provide Qualification</span>
 					<div class="validation-error"
 						ng-show="( CreateCandidate.pso.$dirty || invalidSubmitAttempt) && CreateCandidate.pso.$error.required">
-						qualification is required.</div>
+						Qualification is required.</div>
 				</div>
 	
 				<div class="input-field col s3">
@@ -320,11 +320,11 @@
 	
 				<div class="input-field col s3" align="left">						
 							
-					<label style="left:0px;">Read
+					<label style="left:0px;top:-200%;margin-left: 10px;">Read
 					<input type="checkbox" ng-model="candidate.read" class="checkboxProfile"/></label>
-					<label style="left:100px;">Write
+					<label style="left:100px;top:-200%;margin-left: 10px;">Write
 					<input type="checkbox" ng-model="candidate.write" class="checkboxProfile"/></label>
-					<label style="left:200px;">Speak
+					<label style="left:200px;top:-200%;margin-left: 10px;">Speak
 					<input type="checkbox" ng-model="candidate.speak" class="checkboxProfile"/></label>							
 							
 				</div>

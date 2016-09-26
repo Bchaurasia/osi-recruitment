@@ -91,86 +91,26 @@ margin-left: 59px;
  
    
 }
-                
- .jssora11l, .jssora11r {
-                    display: block;
-                    position: absolute;
-                    /* size of arrow element */
-                    width: 37px;
-                    height: 37px;
-                    cursor: pointer;
-                    background: url(views/slider/img/a11.png) no-repeat;
-                    overflow: hidden;
-                }
-                .jssora11l { background-position: -11px -41px; }
-                .jssora11r { background-position: -71px -41px; }
-                .jssora11l:hover { background-position: -131px -41px; }
-                .jssora11r:hover { background-position: -191px -41px; }
-                .jssora11l.jssora11ldn { background-position: -251px -41px; }
-                .jssora11r.jssora11rdn { background-position: -311px -41px; }
+    .flexslider-container {
+		width: 100%;
+		height: 200px;
+		margin: 10px auto;
+	}            
+ 
+
 </style>
 
-<!-- <div class="statistics-container" align="center"></div> -->
-<!-- <div id="btn" class="ui black huge launch right attached button"
-	style="display: absolute; left: 0px; width: 70px;">
-	<i class="material-icons">keyboard_arrow_left</i> <span class="text"
-		style="display: none;">Activities</span>
-</div> -->
-
-
-<!-- 
-<div class="row" style="padding-top: 15px; padding-left: 10px;">
-	<div class="col-md-1" style="padding: 5px 0px 0px 0px; width: 70px;">
-		<lable class="dateText">From</lable>
-	</div>
-
-	<input style="width: 130px; margin-right: 15px; padding-left: 20px;"
-		type="date" ng-model="fromdate">
-
-	<div class="col-md-1" style="padding: 5px 0px 0px 0px; width: 50px">
-		<lable class="dateText">To</lable>
-	</div>
-
-	<input style="width: 130px; margin-right: 15px; padding-left: 20px;"
-		type="date" ng-model="todate">
-	<button class="ui black basic button"
-		" style="float: left; height: 32px" ng-click="getData()">Get
-		Status!</button>
-
-
-</div> -->
- <div class="container" style="width:100%;">
-       <div id="slider1_container" style="visibility: hidden; position: relative; margin: 0 auto; width: 1140px; height: 300px; overflow: hidden;">
-
-
-         
-
-            <!-- Slides Container -->
-            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1140px; height: 300px;
-            overflow: hidden;">
-                <div>
-                    <img u="image" src2="views/slider/img/innovation.png" />
-                </div>
-                <div>
-                    <img u="image" src2="views/slider/img/integrate.png" />
-                </div>
-                <div>
-                    <img u="image" src2="views/slider/img/operate.png" />
-                </div>
-               
-            </div>
-             <div u="navigator" class="jssorb05" style="bottom: 16px; right: 6px;">
-                <div u="prototype"></div>
-            </div>
-
-        <span u="arrowleft" class="jssora11l" style="top: 123px; left: 8px;">
-            </span>
-         <span u="arrowright" class="jssora11r" style="top: 123px; right:8px;">
-              </span>
-       
-        </div>
-      
+    <div  class="container" style="width:100%;">
+    <flex-slider flex-slide="s in slides track by $index"  id="mainslider">
+    <li>
+        <img style="height:400px; width:100%;" ng-src="{{s}}">
+        
+    </li>
+</flex-slider>
     </div>
+    
+    
+    
 <div class="row" style="padding-top: 15px; padding-left: 20px; padding-bottom: 20px" ng-show="showHighcharts">
 <div ng-show="showPositionDetails">
 	<div id="requisitionDonut" style="float: left; " class="collapsible collapsible-accordion"
@@ -394,7 +334,7 @@ margin-left: 59px;
 <a style="margin: 20px; font-family: initial; font-size:15px">About Organization</a>
 </span> -->
 
-<div class="ui feed " style="font-size: 100%;width: 800px;float: left;">
+<div class="ui feed " style="font-size: 100%;width: 800px;float: left; margin-bottom: 70px;">
 <h4 style="margin-right: 135px; height: 1px;" noshade>
 					Open Positions
 					</h4>

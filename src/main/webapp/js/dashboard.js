@@ -1,6 +1,14 @@
-app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService','positionService','designationService','offerService','$state','interviewService',
-                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService,positionService,designationService,offerService,$state,interviewService) {
+app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeout','$q', '$rootScope', '$log', 'sharedService', 'dashboardService','infoService','profileService','requisitionService','positionService','designationService','offerService','$state','interviewService','advService',
+                                 function($scope, $http, $upload, $filter, $timeout, $q, $rootScope,$log, sharedService, dashboardService,infoService,profileService,requisitionService,positionService,designationService,offerService,$state,interviewService,advService) {
 	
+//	
+//	$scope.slides = [
+//	  				'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
+//	  				'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
+//	  				'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
+//	  				'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
+//	  			];
+
 	$scope.positionData = {};
 	$scope.info = $rootScope.info;
 	$scope.showScheduleData = [];
@@ -165,7 +173,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 					});	
 		    		
 		    		$scope.positions = angular.copy($scope.selectedPositions);
-		    		console.log($scope.positions);
 				$scope.currentPage = 0;
 				$scope.searchQuery="";
 		}).catch(function(msg){
@@ -556,7 +563,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.showHighcharts= false;
 		$scope.userData= true;
 		$scope.events=[];
-		console.log($rootScope.user.emailId);
 		dashboardService.getUserEvents($rootScope.user.emailId).then(function(data){
 			$scope.events=data; 
 			for(i=0; i<$scope.events.length; i++){
@@ -578,7 +584,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 			_.contains($rootScope.user.roles,"ROLE_REQUISITION_MANAGER") )){
 	
 		$scope.events=[];
-		console.log($rootScope.user.emailId);
 		dashboardService.getUserEvents($rootScope.user.emailId).then(function(data){
 			$scope.events=data; 
 			for(i=0; i<$scope.events.length; i++){
@@ -691,61 +696,6 @@ $scope.showInterview = function(obj, obj2) {
 };
 
 
-jQuery(document).ready(function ($) {
-    var options = {
-        $AutoPlay: true,           
-		$Idle: 2000,     
-		$PauseOnHover: 1,     
-		
-        $ArrowKeyNavigation: true, 
-		$SlideEasing: $JssorEasing$.$EaseOutQuint,  
-		$SlideDuration: 3000,   
-		$MinDragOffsetToSlide: 10,     
-		$SlideSpacing: 0, 	
-		$Cols: 1,         
-		$ParkingPosition: 0,      
-		$UISearchMode: 1,   
-		$PlayOrientation: 1,              
-		$DragOrientation: 3, 
-		
-        $ArrowNavigatorOptions: {   
-		$Class: $JssorArrowNavigator$,         
-		$ChanceToShow: 2,                   
-		$AutoCenter: 2,
-		$Steps: 1,   
-		$Scale: false                  
-		},
-
-        $BulletNavigatorOptions: {          
-		$Class: $JssorBulletNavigator$,              
-		$ChanceToShow: 2,           
-		$AutoCenter: 1,               
-		$Steps: 1,       
-		$Rows: 1,     
-		$SpacingX: 12, 
-		$SpacingY: 4,   
-		$Orientation: 1,     
-		$Scale: false    
-		}
-    };
-
-    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
-
-    function ScaleSlider() {
-        var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-        if (parentWidth) {
-            jssor_slider1.$ScaleWidth(parentWidth - 30);
-        }
-        else
-            window.setTimeout(ScaleSlider, 30);
-    }
-    ScaleSlider();
-
-    $(window).bind("load", ScaleSlider);
-    $(window).bind("resize", ScaleSlider);
-    $(window).bind("orientationchange", ScaleSlider);
-    //responsive code end
-});
 
 
 if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_HR")
@@ -755,6 +705,22 @@ if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_HR
 	$scope.showPositionDetails=true;
 
 }
+$('#mainslider').flexslider({  
+	 directionNav: true
+	});
+advService.getLatestSliderImages().then(function(data){
+	var array=[];
+	if(data.length>=1){
+	array.push(data[0].url);
+	array.push(data[1].url);
+	array.push(data[2].url);
+	 $scope.slides=array;
+	}else{
+		array.push('views/slider/img/innovation.png','views/slider/img/integrate.png','views/slider/img/operate.png');
+		$scope.slides=array;
+		console.lod($scope.slides);
+	}
+});
 
 }]);
 

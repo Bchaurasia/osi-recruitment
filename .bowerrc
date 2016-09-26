@@ -1,3 +1,28 @@
 {
   "directory": "src/main/webapp/lib/bower_components"
-}
+
+  
+  
+  
+  
+    <div >
+	<table class="ui striped table searchTable">
+	<thead>
+			<tr>
+			<td></td>
+			<td style="margin-left:60px"> Current Slider Images</td>
+			<td></td>
+			</tr>
+			</thead>
+			<tbody>
+				<tr class="animate-repeat" >
+					
+					<td ng-repeat="image in scliderImages"><img style="height:120px; width:120px;" class="imageHolder"
+						id="myImage1" ng-src="{{image.url}}">
+						<br>{{image.name}}</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	
+	</div>

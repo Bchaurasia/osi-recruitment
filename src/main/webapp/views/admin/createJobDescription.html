@@ -19,21 +19,15 @@
 			<div class="row">
 				<div class="input-field col s6">
 						<input  type="text"
-							id="jobDescription"
-							name="jobDescription" class="form-control"
-							ng-model="jobDescription.jobDescriptionName" 
-							ng-change="validateJDName(jobDescription.jobDescriptionName)"
+							id="jobDescription" name="jobDescription" class="form-control"
+							ng-model="jobDescription.jobDescriptionName" ng-pattern="/(^[A-Za-z ]{5,30}$)/"
+							ng-blur="validateJDName(jobDescription.jobDescriptionName)"
 							placeholder="Enter Title" required>
 						<label class="lbl" for="jobDescription" style="position: absolute; top: -22px;">Title<b
 								style="color: red;">*</b></label>	 
 							<span class="validation-error"									
-								ng-show="submitted && CreateJobDescription.name.$invalid">Please
-								provide Job Description Title</span>
-						<div class="validation-error"
-							ng-show="(CreateJobDescription.name.$dirty || invalidSubmitAttempt) && CreateJobDescription.name.$error.required">
-							Job Description Title is required.</div>
-						<span class="validation-error" ng-show="jdNameLengthErr">Title Name should be atleast 5 chars.</span>
-						<span class="validation-error" ng-show="jdNameMaxLengthErr">Job Description Title exceeded 30 chars.</span>	
+								ng-show="CreateJobDescription.jobDescription.$error.pattern">Title should be of 5 to 30 characters only</span>
+						
 						<span class="validation-error" ng-show="jdNameErr">Job Title already exists.&nbsp;&nbsp;&nbsp;&nbsp;</span>	
 					</div>
 				
@@ -68,13 +62,9 @@
 							ng-model="jobDescription.jobDescriptionDetails"
 							placeholder="Enter job description details..." required></textarea>
 					</div>
-					<div class="col-md-3" align="left">
-						<span class="validation-error" ng-show="jdDescritptionErr">Job Description Details exceeded 500 chars.</span>
-					</div>
 				</div>
 			<div align="center">
-				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdNameErr || jdDescritptionErr 
-						|| jdNameMaxLengthErr || jdNameLengthErr" ng-click="save()">
+				<button class="btn btn-info active" type="submit" ng-disabled="CreateJobDescription.$invalid || jdNameErr || jdDescritptionErr " ng-click="save()">
 					<span class="glyphicon glyphicon-ok-circle"></span> Save 
 				</button>
 				&nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="admin.jobDescription.list"

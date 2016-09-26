@@ -35,6 +35,7 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	$scope.screeningStatusList= ["Yes","No"];
 	$scope.candidate.currency="INR";
 	$scope.proficiencies=["Beginner","Intermediate","Expert"];
+	$scope.showRadioProfile = true;
 	
 	$scope.show1=true;
 	$scope.show2=false;
@@ -60,6 +61,9 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 	});
 	
 	if(sharedService.getjobCode() != undefined && sharedService.getjobCode() != null) {
+		$scope.showProfileForm = true;
+		$scope.showExperienced = true;
+		$scope.showRadioProfile = false;
         $scope.candidate.jobCode = sharedService.getjobCode();
         sharedService.setjobCode(null);
 }
@@ -211,12 +215,9 @@ app.controller("createReferralProfileCtrl", ['$scope', '$http','$upload','$windo
 		    	$scope.candidate.updatedBy  = $scope.user.emailId;
 		    	$scope.candidate.referredBy  = $scope.user.emailId;
 		    	$scope.candidate.referredByName = $scope.user.name;
-		    	$scope.candidate.profileSource = "Referral";
-		    	//$scope.candidate.requisitionId = $scope.requisitionId; 
-		    	console.log("job code selected is::"+$scope.candidate.jobCode);
+		    	$scope.candidate.profileSource = "Referral";		    	
 		    	$scope.candidate.requisitionId = $scope.getRequisitionIdFromJobCode($scope.candidate.jobCode);
-		    	console.log("requisition id selected is::"+$scope.candidate.requisitionId);
-		    	console.log(angular.toJson($scope.candidate));
+		    	
 		    	profileService.addProfiles($scope.candidate).then(function(msg){
 		    		$scope.uploadFileIntoDB($scope.uploadedFile);		    		
 				    $scope.CreateCandidate.$setPristine();
