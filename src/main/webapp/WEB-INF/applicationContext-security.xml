@@ -15,6 +15,8 @@
 
 		<intercept-url pattern='/login.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<intercept-url pattern="/loginfailure.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern='/registerUser.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
+		<intercept-url pattern='/resources/register/**' access='IS_AUTHENTICATED_ANONYMOUSLY' />
 		<access-denied-handler error-page="/accessdenied.html" />
 
 		<intercept-url pattern='/resources/log.html' access='IS_AUTHENTICATED_ANONYMOUSLY' />
