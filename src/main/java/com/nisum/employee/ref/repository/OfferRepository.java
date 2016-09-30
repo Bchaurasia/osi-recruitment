@@ -83,4 +83,12 @@ public class OfferRepository {
 	        e.printStackTrace();
 	    }
 	}
+	public List<Offer> retrieveOfferForJobCode(String jobCode) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("jobcodeProfile").regex(
+				Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+		List<Offer> offerDetails = mongoOperations.find(query, Offer.class);
+		return offerDetails;
+	}
+	
 }

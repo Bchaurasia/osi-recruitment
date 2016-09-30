@@ -121,14 +121,12 @@ public class PositionService implements IPositionService {
 		position.setInterviewRounds(interviewRounds);
 		//position.setHiringManager(requisition.getRequisitionManager());
 		position.setJobcode("JOB_" + sequenceRepository.getNextSequenceId("JOB"));
-		position.setCreatedBy(requisition.getCreatedBy());
-		position.setUpdatedBy(requisition.getCreatedBy());
 		position.setJobProfile(requisition.getJobDescription());
 		position.setTargetDate(requisition.getTargetDate());
 		position.setUpdatedDate(new Date());
 		position.setCreatedDate(new Date());
 		position.setUpdatedBy(requisition.getUpdatedBy());
-		position.setCreatedBy(requisition.getUpdatedBy());
+		position.setCreatedBy(requisition.getCreatedBy());
 		
 		if(null!=requisition.getAdditionalSkills()){
 			position.setSecondarySkills(requisition.getAdditionalSkills());

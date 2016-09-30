@@ -331,4 +331,12 @@ public class InterviewDetailsService implements IInterviewDetailsService{
 		List<UserInfo> userInfo = userService.retrieveUserById(SecurityContextHolder.getContext().getAuthentication().getName());
 		notificationService.sendCancelMail(interviewSchedule,userInfo.get(0).getName());
 	}
+	
+	public List<InterviewDetails> getInterviewDetailsForReport(String jobCode) {
+		MongoOperations mongoOperations = (MongoOperations) mongoTemplate;
+		Query query = new Query();
+		query.addCriteria(Criteria.where("jobCode").regex(Pattern.compile(jobCode, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+		List<InterviewDetails> checkDetails = mongoOperations.find(query, InterviewDetails.class);
+		return checkDetails;
+	}
 }

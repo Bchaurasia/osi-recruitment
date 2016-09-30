@@ -75,5 +75,10 @@ public class OfferService {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Offer> retrieveOfferForJobCode(String jobCode){
+		List<Offer> offers = OfferRepository.retrieveOfferForJobCode(jobCode);
+		return offers;
+	}
 
 }

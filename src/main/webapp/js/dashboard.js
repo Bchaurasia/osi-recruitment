@@ -71,6 +71,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	$scope.searchQuery="";
 	$scope.showReqTable=false;
 	$scope.showPositionDetails=false;
+	$scope.reqIdForInterviewReport="";
 	/*-------------------------------------------------------------*/
 	var jobDetails=[];
 	var interviewed=[];
@@ -90,71 +91,10 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		jobDetails=[];
 		var offrcntr;
 		
-		positionService.searchPositionByRequisitionId(req_id).then(function(data){
-			jobCount=data.length;
-			offrcntr=0;
-			data.forEach(function(item) {
-				position={};
-				position.jobcode=item.jobcode;
-				position.requisitionId=item.requisitionId;
-				position.totalInterviewed=0;
-				position.offered=0;
-				position.declined=0;
-				jobDetails.push(position);
-				$http.get('resources/getInterviewByJobCode?jobCode='+item.jobcode).then(function(data){
-					jobCount--;
-					
-					var interviewDetails=data.data;
-					//console.log("------------------------------------\n"+JSON.stringify(interviewDetails));
-					var tmpObj={};
-					if(interviewDetails.length>0){
-						
-						tmpObj.jobcode=interviewDetails[0].jobCode;
-						tmpObj.length=interviewDetails.length;
-						interviewed[tmpCntr++]=tmpObj;
-						interviewDetails.forEach(function(interview){
-							
-							if(interview.roundName=="HR" && interview.status=="Selected"){
-								offrcntr++;
-								$http.get('resources/offer?emailId='+interview.candidateEmail).then(function(response){
-									offrcntr--;
-									offerDetail = response.data;
-									//console.log(JSON.stringify(offerDetail));
-									if(offerDetail!="" && ( offerDetail.offerStatus=="Approved" || offerDetail.offerStatus=="Rejected"))
-									{
-										for(var i=0;i<jobDetails.length;i++)
-										{
-											if(jobDetails[i].jobcode==offerDetail.jobcodeProfile)
-												{
-												 	offerDetail.offerStatus=="Approved"?jobDetails[i].offered+=1:jobDetails[i].declined+=1;
-												 	break;
-												}
-										}
-									}
-									
-									if(offrcntr==0)
-										{
-											console.log("====================================\n"+jobDetails.length);
-										}
-
-								//console.log("-------------------\n Offer:"+JSON.stringify(Offer));
-								})
-							}
-							
-						});		
-						
-					}
-					if(jobCount==0)
-					{
-						$scope.fillInterviewDetails();
-					}
-				});
-				
-			});
-			
+		$scope.reqIdForInterviewReport = req_id;
+		positionService.getInterviewOfferDetailsByJobCode(req_id).then(function(data){
+			$scope.reqDetails = data;
 		});
-		
-		$scope.reqDetails=jobDetails;
 		console.log($scope.reqDetails);
 	
 	}
@@ -243,41 +183,43 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		$scope.searchPositionQuery();
 		
        });
-
-	
-	$scope.downloadTable=function(){
-		console.log($scope.divname);
-		 var dt = new Date();
-	        var day = dt.getDate();
-	        var month = dt.getMonth() + 1;
-	        var year = dt.getFullYear();
-	        var hour = dt.getHours();
-	        var mins = dt.getMinutes();
-	        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-	        //creating a temporary HTML link element (they support setting file names)
-	        var a = document.createElement('a');
-	        //getting data from our div that contains the HTML table
-	        var data_type = 'data:application/vnd.ms-excel';
-	        var table_div = document.getElementById($scope.divname);
-	        console.log(table_div);
-	        var table_html = table_div.outerHTML.replace(/ /g, '%20');
-	        a.href = data_type + ', ' + table_html;
-	        //setting the file name
-	        a.download = 'requisition_table_' + postfix + '.xls';
-	        //triggering the function
-	        a.click();
-	        //just in case, prevent default behaviour
-	      //  e.preventDefault();
-	}
-	
 	$scope.downloadTable1=function(){
-		$scope.divname=  "reqTable";
-		$scope.downloadTable();
+		$http.get('resources/downloadReqReportFromDashboard', {responseType: 'arraybuffer'})
+	       .then(function (response) {
+	    	   var data = response.data;
+	    	    $scope.headers = response.headers();
+	    	   var contetType =  $scope.headers['content-type'];
+ 	            var fileName = 'Requisition-details';
+	            var link = document.createElement("a");
+	            var file = new Blob([data], {type: contetType});
+	           var fileURL = window.URL.createObjectURL(file);
+	           link.href = fileURL;
+	           link.download = fileName;
+	           link.click();
+		
+		}).error(function(data, status, headers, config) {
+			$log.error("excel download Failed!! ---> "+data);
+		});	
 	}
 	$scope.downloadTable2=function(){
 		
-		$scope.divname= "subTable";
-		$scope.downloadTable();
+		console.log('Req id for interview report:'+$scope.reqIdForInterviewReport);
+		$http.get('resources/downloadInterviewReportFromDashboard?requisitionId='+$scope.reqIdForInterviewReport, {responseType: 'arraybuffer'})
+	       .then(function (response) {
+	    	   var data = response.data;
+	    	    $scope.headers = response.headers();
+	    	   var contetType =  $scope.headers['content-type'];
+ 	            var fileName = 'Interview-details';
+	            var link = document.createElement("a");
+	            var file = new Blob([data], {type: contetType});
+	           var fileURL = window.URL.createObjectURL(file);
+	           link.href = fileURL;
+	           link.download = fileName;
+	           link.click();
+		
+		}).error(function(data, status, headers, config) {
+			$log.error("excel download Failed for interview!! ---> "+data);
+		});	
 	}
 	$scope.feedback = function(jobcode,candidateEmail) {
 		sharedService.setjobCode(jobcode);

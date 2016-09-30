@@ -13,10 +13,10 @@
 		</div>
 		 <div class="row" ng-show="showRadioProfile">
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher')" style="left:-40px;top:10%;"><font size="3">Fresher</font></input>
+				<input type="radio" class="radioProfile" ng-model="profileType"  value="fresher" ng-change="showProfile('fresher');reset()" style="left:-40px;top:10%;"><font size="3">Fresher</font></input>
 			</div>
 			<div class="input-field col s3">
-				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced')" style="left:-55px;top:10%;"><font size="3">Experienced</font></input>
+				<input type="radio" class="radioProfile" ng-model="profileType" value="experienced" ng-change="showProfile('experienced');reset()" style="left:-55px;top:10%;"><font size="3">Experienced</font></input>
 			</div>
 			
 		</div> 
@@ -245,13 +245,14 @@
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Certification </label>
 				</div>
-	
 				<div class="input-field col s3">
 					<input placeholder="Enter Institute/Organization" name="institute" class="form-control"
-						type="text" ng-model="candidate.institute" ng-maxlength="35"
+						type="text" ng-model="candidate.institute" ng-maxlength="5"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Institute/Organization </label>
-	
+	                 <span class="validation-error"
+						ng-show="CreateCandidate.institute.$error.maxlength">
+						Institute Name must be less then 35 characters</span>
 				</div>
 	
 				<div class="input-field col s2">
@@ -277,6 +278,9 @@
 						type="text" ng-model="candidate.training" ng-maxlength="35"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Training Attended </label>
+						<span class="validation-error"
+						ng-show="CreateCandidate.training.$error.maxlength">
+						Training Name must be less then 35 characters</span>
 				</div>
 	
 				<div class="input-field col s3">
@@ -284,7 +288,9 @@
 						type="text" ng-model="candidate.trainingInstitute" ng-maxlength="35"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Institute/Organization </label>
-	
+	                 <span class="validation-error"
+						ng-show="CreateCandidate.trainingInstitute.$error.maxlength">
+						Institute Name must be less then 35 characters</span>
 				</div>
 	
 				<div class="input-field col s2">
@@ -313,9 +319,12 @@
 			<div class="row" ng-repeat="candidate in candidate.languages" ng-hide="showExperienced">
 				<div class="input-field col s6">
 					<input placeholder="Enter Language" name="language" class="form-control"
-						type="text" ng-model="candidate.language" ng-maxlength="35"
+						type="text" ng-model="candidate.language" ng-maxlength="15"
 						ng-pattern="/^[a-zA-Z]*$/"> <label
 						style="position: absolute; top: -22px;">Language </label>
+						<span class="validation-error"
+						ng-show="CreateCandidate.language.$error.maxlength">
+						Language Name must be less then 15 characters</span>
 				</div>
 	
 				<div class="input-field col s3" align="left">						
@@ -390,7 +399,7 @@
 						class="mandatory">*</b>:
 					</label>
 					<ui-select multiple ng-model="sk.primarySkills"
-						ng-keypress="myFunct($event)" name="pskilss" theme="select2"
+						ng-keypress="myFunct($event)" name="pskilss" theme="select2" ui-select-required
 						ng-required="showExperienced" ng-disabled="disabled"> <ui-select-match
 						placeholder="Select Skills">{{$item}}</ui-select-match> <ui-select-choices
 						repeat="color in pskills | orderBy:'toString()' | filter:$select.search">

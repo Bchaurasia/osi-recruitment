@@ -278,9 +278,9 @@ margin-left: 59px;
     <tr ng-repeat="detail in reqDetails">
       <td>{{detail.requisitionId}}</td>
       <td>{{detail.jobcode}}</td>
-      <td>{{detail.totalInterviewed}}</td>
-      <td>{{detail.offered}}</td>
-      <td>{{detail.declined}}</td>
+      <td>{{detail.inteviewCounter}}</td>
+      <td>{{detail.offeredCounter}}</td>
+      <td>{{detail.declinedCounter}}</td>
     </tr>
   </tbody>
 </table>
@@ -308,7 +308,7 @@ margin-left: 59px;
 						<time am-time-ago="requisition.createdDate"></time>
 					</div>
 					<hr>
-					<div class="description" ng-if="requisition.status == 'INITIATED'">
+					<div class="description" ng-if="requisition.status == 'INITIATED' || requisition.status == 'PARTIALY APPROVED'">
 						You need to approve this requisition for <b>{{requisition.position}}</b>
 						position.
 					</div>

@@ -72,7 +72,7 @@ public class RequisitionService implements IRequisitionService {
 		Event e= new Event();
 		e.setEventDesc(requisition.getRequisitionId()+ " has been updated.");
 		e.setCategory("Management");
-		e.setEmailId(requisition.getCreatedBy());
+		e.setEmailId(requisition.getUpdatedBy());
 		eventService.setEvent(e);
 		Requisition updatereq = requisitionRepository
 				.updateRequisition(requisition);
@@ -96,7 +96,7 @@ public class RequisitionService implements IRequisitionService {
 				Event e= new Event();
 				e.setEventDesc(requisition.getNoOfPositions()+ " "+requisition.getPosition()+ " positions for "+requisition.getClient() + " has been created.");
 				e.setCategory("Management");
-				e.setEmailId(requisition.getCreatedBy());
+				e.setEmailId(requisition.getUpdatedBy());
 				eventService.setEvent(e);
 				jobRequisitionNotificationService.sendNotificationForFullyApproved(requisition);
 			} catch (MessagingException e) {

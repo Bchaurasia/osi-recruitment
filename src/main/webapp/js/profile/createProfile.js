@@ -270,7 +270,7 @@ app.controller("createProfileCtrl", ['$scope', '$http','$upload','$window', 'blo
 	 
 		 $scope.reset = function(){
 			 $scope.candidate = {};
-			 location.reload();
+			 //location.reload();
 			 $scope.candidate.qualifications=[{
 					qualification:'',
 					stream:'',

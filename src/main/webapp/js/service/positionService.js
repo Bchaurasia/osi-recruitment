@@ -14,7 +14,8 @@ function positionService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 		searchPositionsBySearchQuery : searchPositionsBySearchQuery,
 		getPositionsByPositionType : getPositionsByPositionType,
 		getPositionsByDate:getPositionsByDate,
-		searchPositionByRequisitionId:searchPositionByRequisitionId
+		searchPositionByRequisitionId:searchPositionByRequisitionId,
+		getInterviewOfferDetailsByJobCode:getInterviewOfferDetailsByJobCode
 	};
 	
 	function addPosition(positionObj){
@@ -123,5 +124,10 @@ function positionService($http,$filter,$rootScope,appConstants,$q,$timeout) {
 	
 	function getPositionFailure(response){
 		return $q.reject("Failed To Get Clients! Response");
+	}
+	function getInterviewOfferDetailsByJobCode(requisitionId){
+		return $http.get('resources/getReportBasedOnPositionandInterview?requisitionId='+requisitionId)
+		.then(getPositionSuccess)
+		.catch(getPositionFailure);
 	}
 }
