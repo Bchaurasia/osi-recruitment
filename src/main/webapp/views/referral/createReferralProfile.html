@@ -212,11 +212,14 @@
 				</div>
 	
 				<div class="input-field col s3">
-					<input placeholder="Enter Stream" name="stream" class="form-control"
+					<input placeholder="Enter Stream" name="stream{{$index}}" class="form-control"
 						type="text" ng-model="candidate.stream" ng-maxlength="35"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Specialization </label>
-	
+	             <span class="validation-error"
+						ng-show="CreateCandidate.stream{{$index}}.$error.maxlength">Specialization must be less then 35 characters</span>
+						<span class="validation-error" ng-show="CreateCandidate.stream{{$index}}.$error.pattern">
+					Specialization must be characters only</span>
 				</div>
 	
 				<div class="input-field col s2">
@@ -240,19 +243,27 @@
 			</div>
 			<div class="row" ng-repeat="candidate in candidate.certifications" ng-hide="showExperienced">
 				<div class="input-field col s6">
-					<input placeholder="Enter Certification Name" name="certification" class="form-control"
+					<input placeholder="Enter Certification Name" name="certification{{$index}}" class="form-control"
 						type="text" ng-model="candidate.certification" ng-maxlength="35"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Certification </label>
+				  <span class="validation-error"
+						ng-show="CreateCandidate.certification{{$index}}.$error.maxlength">Certificate Name must be less then 35 characters</span>
+			      <span class="validation-error" ng-show="CreateCandidate.certification{{$index}}.$error.pattern">
+					Certification name must be characters only</span>
 				</div>
 				<div class="input-field col s3">
-					<input placeholder="Enter Institute/Organization" name="institute" class="form-control"
+					<input placeholder="Enter Institute/Organization" name="institute{{$index}}" class="form-control"
 						type="text" ng-model="candidate.institute" ng-maxlength="5"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Institute/Organization </label>
 	                 <span class="validation-error"
 						ng-show="CreateCandidate.institute.$error.maxlength">
 						Institute Name must be less then 35 characters</span>
+					<span class="validation-error"
+						ng-show="CreateCandidate.institute{{$index}}.$error.maxlength">Institute Name must be less then 35 characters</span>
+				<span class="validation-error" ng-show="CreateCandidate.institute{{$index}}.$error.pattern">
+					Institute name must be characters only</span>
 				</div>
 	
 				<div class="input-field col s2">
@@ -274,23 +285,29 @@
 			</div>
 			<div class="row" ng-repeat="candidate in candidate.trainings" ng-hide="showExperienced">
 				<div class="input-field col s6">
-					<input placeholder="Enter Training Name" name="training" class="form-control"
+					<input placeholder="Enter Training Name" name="training{{$index}}" class="form-control"
 						type="text" ng-model="candidate.training" ng-maxlength="35"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Training Attended </label>
 						<span class="validation-error"
 						ng-show="CreateCandidate.training.$error.maxlength">
 						Training Name must be less then 35 characters</span>
+					<span class="validation-error"
+						ng-show="CreateCandidate.training{{$index}}.$error.maxlength">Training Name must be less then 35 characters</span>
+				<span class="validation-error" ng-show="CreateCandidate.training{{$index}}.$error.pattern">
+					Training name must be characters only</span>
 				</div>
 	
 				<div class="input-field col s3">
-					<input placeholder="Enter Institute/Organization" name="trainingInstitute" class="form-control"
+					<input placeholder="Enter Institute/Organization" name="trainingInstitute{{$index}}" class="form-control"
 						type="text" ng-model="candidate.trainingInstitute" ng-maxlength="35"
 						ng-pattern="/^[a-zA-Z _.]*$/"> <label
 						style="position: absolute; top: -22px;">Institute/Organization </label>
 	                 <span class="validation-error"
-						ng-show="CreateCandidate.trainingInstitute.$error.maxlength">
+						ng-show="CreateCandidate.trainingInstitute{{$index}}.$error.maxlength">
 						Institute Name must be less then 35 characters</span>
+				<span class="validation-error" ng-show="CreateCandidate.trainingInstitute{{$index}}.$error.pattern">
+					Institute name must be characters only</span>
 				</div>
 	
 				<div class="input-field col s2">
@@ -318,13 +335,14 @@
 			</div>
 			<div class="row" ng-repeat="candidate in candidate.languages" ng-hide="showExperienced">
 				<div class="input-field col s6">
-					<input placeholder="Enter Language" name="language" class="form-control"
+					<input placeholder="Enter Language" name="language{{$index}}" class="form-control"
 						type="text" ng-model="candidate.language" ng-maxlength="15"
 						ng-pattern="/^[a-zA-Z]*$/"> <label
 						style="position: absolute; top: -22px;">Language </label>
-						<span class="validation-error"
-						ng-show="CreateCandidate.language.$error.maxlength">
-						Language Name must be less then 15 characters</span>
+				 <span class="validation-error"
+						ng-show="CreateCandidate.language{{$index}}.$error.maxlength">Language Name must be less then 15 characters</span>
+					<span class="validation-error" ng-show="CreateCandidate.language{{$index}}.$error.pattern">
+					Language name must be characters only</span>
 				</div>
 	
 				<div class="input-field col s3" align="left">						
