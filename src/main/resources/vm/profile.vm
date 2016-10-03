@@ -1,10 +1,16 @@
-<html>
+<html xmlns:v="urn:schemas-microsoft-com:vml">
 <body style="font-family:calibri; font-size:15px; background-color:#F9FCF7;">
 
 <div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
 <table style="width:100%" background="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg">
+<!--[if gte mso 9]>
+<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+           <v:fill type="tile" src="http://www.thiespublishing.com/images/arrow.gif" />
+</v:background>
+<![endif]-->
 <tr>
 <td>
+
 <div style="padding-left:20px; padding-right:20px;">
 <p style="color: black;font-size:15px; font-family:Calibri;">
 Hi, <br><br>
@@ -13,25 +19,25 @@ Hi, <br><br>
 <br><br> 
  <table style="width:450px; border: 0px solid Gray;">
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Candidate Name :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$candidateName</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px;"><b>Candidate Name :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px;">$candidateName</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;"><b>Total Experience : </td>
-<td style="border: 0px solid #000000;text-align:left;background-color: #F9FCF7;">$total_exp</td>
+<tr><td style="border: 0px solid #000000;text-align:left;"><b>Total Experience : </td>
+<td style="border: 0px solid #000000;text-align:left;">$total_exp</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Primary Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$skills</td>
+<tr><td style="border: 0px solid #000000;text-align:left; "><b>Primary Skills :</td>
+<td style="border: 0px solid #000000; text-align:left;">$skills</td>
 </tr>
 #if($other_skills)
-<tr><td style="border: 0px solid #000000;text-align:left; background-color: #F9FCF7;"><b>Other Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;background-color: #F9FCF7;">$other_skills</td>
+<tr><td style="border: 0px solid #000000;text-align:left; "><b>Other Skills :</td>
+<td style="border: 0px solid #000000; text-align:left;">$other_skills</td>
 </tr>
 #end
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Submitted By :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$submittedBy</td> 
+<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; "><b>Submitted By :</td>
+<td style="border: 0px solid #000000;text-align:left;size: 9px 9px;">$submittedBy</td> 
 </tr>
 </table><br><br>
   
