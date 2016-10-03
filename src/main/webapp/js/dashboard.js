@@ -720,7 +720,6 @@ advService.getLatestSliderImages().then(function(data){
 	}else{
 		array.push('views/slider/img/innovation.png','views/slider/img/integrate.png','views/slider/img/operate.png');
 		$scope.slides=array;
-		console.lod($scope.slides);
 	}
 });
 
