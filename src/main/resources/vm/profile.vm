@@ -2,7 +2,14 @@
 <body style="font-family:calibri; font-size:15px; background-color:#F9FCF7;">
 
 <div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
-<table style="width:100%" background="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg">
+<td background="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg" height="300" width="850" bgcolor="#D9E3E3">
+<!--[if gte mso 9]>
+<v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:300px; width:850px;top:0;left:0;border:0;z-index:1;' src="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg"/>
+<v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:300px; width:850px;top:-5;left:-10;border:0;z-index:2;'>
+<div>
+<![endif]-->
+<!-- This is where you nest a table with the content that will float over the image -->
+<table style="width:100%">
 <tr>
 <td>
 <div style="padding-left:20px; padding-right:20px;">
@@ -40,13 +47,14 @@ Hi, <br><br>
 </div>
 </td>
 </tr>
-</table>	
-<div style="background-color:#D9E1E3;height:50px;border:1px solid #004C7F;border-bottom-color: #D9E1E3">
+</table>
+
+<div style="background-color:#D9E1E3;height:50px;border:1px solid #004C7F;border-bottom-color: #D9E1E3;width:100%">
 <a href="http://osi-tech.com" target="_blank" style="font-size: 35px;text-decoration: blink;">
   <img src="http://res.cloudinary.com/dezw8ubjn/image/upload/c_scale,h_35,w_180/v1474961866/osi-logo2_moiygl.png" style="width:350px; height:40px" /> </a>
 </div>
 
 </div>
-
+</td>	
 </body>
 </html>
