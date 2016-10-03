@@ -656,12 +656,13 @@ advService.getLatestSliderImages().then(function(data){
 	    array.push(data[0].url);
 	if(data[1]!=undefined)
 	    array.push(data[1].url);
-	if(data[2]!=undefined)
+	ifdata[2]!=undefined)
 	    array.push(data[2].url);
 	 $scope.slides=array;
 	}else{
 		array.push('views/slider/img/innovation.png','views/slider/img/integrate.png','views/slider/img/operate.png');
 		$scope.slides=array;
+		console.lod($scope.slides);
 	}
 });
 
