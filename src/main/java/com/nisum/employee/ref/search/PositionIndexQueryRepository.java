@@ -31,7 +31,7 @@ public class PositionIndexQueryRepository {
 
 	List<Position> findPositionsBetweenSpecificDates() {
 		List<Position> positionlist = null;
-		QueryBuilder qb = QueryBuilders.rangeQuery("updatedDate").gt(Series.fromDate.getTime()).lte(Series.toDate.getTime());
+		QueryBuilder qb = QueryBuilders.rangeQuery("updatedDate").gte(Series.fromDate.getTime()).lte(Series.toDate.getTime());
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(qb).build();
 		try {
 			positionlist = elasticsearchTemplate.queryForList(searchQuery, Position.class);

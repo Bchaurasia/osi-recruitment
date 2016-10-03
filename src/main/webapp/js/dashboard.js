@@ -95,7 +95,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		positionService.getInterviewOfferDetailsByJobCode(req_id).then(function(data){
 			$scope.reqDetails = data;
 		});
-		console.log($scope.reqDetails);
 	
 	}
 	$scope.searchPositionQuery = function(){
@@ -116,7 +115,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				$scope.currentPage = 0;
 				$scope.searchQuery="";
 		}).catch(function(msg){
-	   	  console.log("Failed To Load Data! ---> "+msg);
 	     });
 	}
 	$scope.fillInterviewDetails=function(){
@@ -203,7 +201,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	}
 	$scope.downloadTable2=function(){
 		
-		console.log('Req id for interview report:'+$scope.reqIdForInterviewReport);
 		$http.get('resources/downloadInterviewReportFromDashboard?requisitionId='+$scope.reqIdForInterviewReport, {responseType: 'arraybuffer'})
 	       .then(function (response) {
 	    	   var data = response.data;
@@ -242,6 +239,7 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
     function getDesignationSpecificData(){
 		var designationArray=[];
 		$scope.totalPositionData=[];
+		 $scope.positionData=[];
 		joinedCnt=0;
 		hiredCnt=0;
 		selectedCnt=0;
@@ -255,9 +253,9 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 		
 		positionService.getPositionsByDate($scope.fromdate,$scope.todate).then(function(data){
 			$scope.totalPositionData=data;
-           
            designationService.getDesignation().then(function(data){
- 			  $scope.positionData=[];
+        	   
+ 			 
  			 angular.forEach($scope.totalPositionData, function(value, key){
  				 				if(value.status!= undefined&& value.status== "Joined")
  				 					joinedCnt++;
@@ -395,7 +393,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 	};
 	
 	$scope.showAnotherTable=function(reqid){
-		console.log("Req_id is "+reqid);
 	}
 	$scope.showInterviewDetails = function(interviewId,interviewRound) {
 		sharedService.setInterviewId(interviewId);
@@ -449,7 +446,6 @@ app.controller("dashboardCtrl", ['$scope', '$http', '$upload','$filter', '$timeo
 				if((value.roundStatus!='Level 1 Feedback Submitted')&&(value.roundStatus!='Level 2 Feedback Submitted')&&(value.roundStatus!='HR Feedback Submitted'))
 					{
 					scheduleInterviewData.push(value);
-					console.log(value);
 					}
 			})
 			$scope.showScheduleData = scheduleInterviewData;
@@ -563,7 +559,6 @@ if(!_.isUndefined($rootScope.user) && (_.contains($rootScope.user.roles,"ROLE_IN
 			if((value.status!='Level 1 Feedback Submitted')&&(value.status!='Level 2 Feedback Submitted')&&(value.status!='HR Feedback Submitted'))
 				{
 				scheduleInterviewData.push(value);
-				console.log(value);
 				}
 		});
 		$scope.showNoInterviewMsg = false;
@@ -656,13 +651,12 @@ advService.getLatestSliderImages().then(function(data){
 	    array.push(data[0].url);
 	if(data[1]!=undefined)
 	    array.push(data[1].url);
-	ifdata[2]!=undefined)
+	if(data[2]!=undefined)
 	    array.push(data[2].url);
 	 $scope.slides=array;
 	}else{
 		array.push('views/slider/img/innovation.png','views/slider/img/integrate.png','views/slider/img/operate.png');
 		$scope.slides=array;
-		console.lod($scope.slides);
 	}
 });
 

@@ -173,7 +173,7 @@ public ResponseEntity<?> retrievePositionsByDates(@RequestParam Map<String,Strin
 		}
 		Series.fromDate=fromdate;
 		Series.toDate=todate;
-		positionsDetails=positionSearchService.retrieveAllPositionsBySpecificDate();
+		positionsDetails=positionService.retrieveAllPositionsBySpecificDate();
 		
 		return new ResponseEntity<List<Position>>(positionsDetails, HttpStatus.OK);
 	}
@@ -198,8 +198,8 @@ public ResponseEntity<?> retrievePositionsByDates(@RequestParam Map<String,Strin
 		Series series = new Series();
 		Series.fromDate=fromdate;
 		Series.toDate=todate;
-		Series.LayerTwo layerTwoSeries=positionSearchService.setLayerTwoDataForDashboard(status);
-		List<Series.LayerThree> layerThreeSeries=positionSearchService.setLayerThreeDataForDashboard(status);
+		Series.LayerTwo layerTwoSeries=positionService.setLayerTwoDataForDashboard(status);
+		List<Series.LayerThree> layerThreeSeries=positionService.setLayerThreeDataForDashboard(status);
 		series.setLayer2(layerTwoSeries);
 		series.setLayer3(layerThreeSeries);
 		return new ResponseEntity<Series>(series, HttpStatus.OK);
