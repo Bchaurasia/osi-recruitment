@@ -3,11 +3,11 @@
 
 
 <table>
-<td background="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg" height="300" width="850" bgcolor="#cccccc">
+<td background="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg" height="300" width="850" bgcolor="#D9E1E5">
 <!--[if gte mso 9]>
-<v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:300px; width:850px;top:0;left:0;border:0;z-index:1;' src="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg"/>
-<v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:300px; width:850px;top:-5;left:-10;border:0;z-index:2;'>
-<div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black;border-color:#004C7F;">
+<v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:300px; width:850px;top:0;left:0;z-index:1;' src="http://res.cloudinary.com/drozpmklt/image/upload/c_scale,h_300,w_850/v1475159464/background_vbpsvu.jpg"/>
+<v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:300px; width:850px;top:-5;left:-10;z-index:2;'>
+<div style=" color:black;">
 <div>
 <![endif]-->
 <!-- This is where you nest a table with the content that will float over the image -->
@@ -20,27 +20,27 @@ Hi, <br><br>
   Profile has been created for the candidate. 
 #if($created_by_user == true) HR is requested to approve the same.#end
 <br><br> 
- <table style="width:450px; border: 0px solid Gray;">
+ <table style="width:450px;">
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; "><b>Candidate Name :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px;">$candidateName</td> 
+<tr><td style="text-align:left;size: 9px 9px; "><b>Candidate Name :</td>
+<td style="text-align:left;size: 9px 9px;">$candidateName</td> 
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left;"><b>Total Experience : </td>
-<td style="border: 0px solid #000000;text-align:left;">$total_exp</td>
+<tr><td style="text-align:left;"><b>Total Experience : </td>
+<td style="text-align:left;">$total_exp</td>
 </tr>
 
-<tr><td style="border: 0px solid #000000;text-align:left;"><b>Primary Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;">$skills</td>
+<tr><td style="text-align:left;"><b>Primary Skills :</td>
+<td style="text-align:left;">$skills</td>
 </tr>
 #if($other_skills)
-<tr><td style="border: 0px solid #000000;text-align:left; "><b>Other Skills :</td>
-<td style="border: 0px solid #000000; text-align:left;">$other_skills</td>
+<tr><td style="text-align:left; "><b>Other Skills :</td>
+<td style=" text-align:left;">$other_skills</td>
 </tr>
 #end
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; "><b>Submitted By :</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; ">$submittedBy</td> 
+<tr><td style=" text-align:left;size: 9px 9px; "><b>Submitted By :</td>
+<td style="text-align:left;size: 9px 9px; ">$submittedBy</td> 
 </tr>
 </table><br><br>
   
