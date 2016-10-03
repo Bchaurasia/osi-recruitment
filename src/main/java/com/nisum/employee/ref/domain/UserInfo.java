@@ -27,5 +27,4 @@ public class UserInfo {
 	List<String> skills;
 	List<String> categories;
 	List<TimeSlots> timeSlots;
-	String password;
 }

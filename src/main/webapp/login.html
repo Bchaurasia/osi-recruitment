@@ -25,9 +25,6 @@
 
 <link href="lib/bootstrap/font/font-awesome.css" rel="stylesheet">
 <link href="lib/bootstrap/font/google_font.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="lib/Semantic-UI-CSS/semantic.min.css">
-<script src="lib/Semantic-UI-CSS/semantic.min.js"></script>
 
 <!-- material design css and js -->
 
@@ -57,7 +54,6 @@
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Font+Name">
 <script type="text/javascript" src="lib/utility/js/docs.js"></script>
-
 <!-- <script type="text/javascript" src="js/linkedin_login.js"></script>
 
 
@@ -70,74 +66,73 @@
 </head>
 
 <body ng-app="myApp" ng-controller="myContoler">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="navbar navbar-fixed-top">
-				<div class="navbar-inner">
-					<div class="container" style="padding: 32px 0 34px 0;">
-						<div class="custom-header">
-							<a href="login.html" class="col-md-2" id="liginLogoAncher"> <img
-								class="navbar-brand" src="static/osi_images/logo.png"
-								alt="OSI Technologies" id="logostyleLogin" /></a>
-							<h1 class="col-md-4" style="font-size: 300%; color: white;">Recruitment
-								Portal</h1>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="navbar navbar-fixed-top">
+					<div class="navbar-inner">
+						<div class="container" style="padding: 32px 0 34px 0;">
+							<div class="custom-header">
+								<a href="login.html" class="col-md-2" id="liginLogoAncher">
+									<img
+									class="navbar-brand" src="static/osi_images/logo.png"
+									alt="OSI Technologies" id="logostyleLogin" /></a>
+								<h1 class="col-md-4" style="font-size: 300%; color: white;">Recruitment
+									Portal</h1>
+							</div>
 						</div>
+						<!-- /container -->
 					</div>
-					<!-- /container -->
+					<!-- /navbar-inner -->
 				</div>
-				<!-- /navbar-inner -->
 			</div>
 		</div>
-	</div>
-	<!-- /navbar -->
-	<div
-		style="padding-left: 20%; padding-right: 25%; padding-top: -2%; padding-bottom: -1%">
-		<div class="row well">
+		<!-- /navbar -->
+		<div
+			style="padding-left: 20%; padding-right: 25%; padding-top: -2%; padding-bottom: -1%">
+			<div class="row well">
 
-			<div class="col-md-1"></div>
-			<div class="col-md-5" style="border-right: 1px solid black;">
-				<form class="form-horizontal login-form"
-					action="j_spring_security_check" method="post" id="ldapUserlogin"
-					autocomplete="off" name="ldapUserlogin">
-					<h6 style="color: black;">Sign in with your OSI account</h6>
-					<div class="row margin">
-						<div class="input-field col s12">
-							<i class="mdi-social-person-outline prefix"></i> <input
-								type="email" class="validate" name="username"
-								ng-model="login.username" id="custom-input-username"
-								ng-pattern="/^[a-zA-Z]+@osius\.com$/" required> <label
-								for="custom-input-username" class="center-align">Email</label>
-						</div>
-						<div ng-messages="ldapUserlogin.username.$error" role="alert">
-							<div class="error-alert" ng-message="pattern"
-								style="margin-left: -40px">
-								Enter OSI credentials<br>(Example: username@osius.com)
+				<div class="col-md-1"></div>
+				<div class="col-md-5" style="border-right: 1px solid black;">
+					<form class="form-horizontal login-form"
+						action="j_spring_security_check" method="post" id="ldapUserlogin"
+						autocomplete="off" name="ldapUserlogin">
+						<h6 style="color: black;">Sign in with your OSI account</h6>
+						<div class="row margin">
+							<div class="input-field col s12">
+								<i class="mdi-social-person-outline prefix"></i> <input
+									type="email" class="validate" name="username"
+									ng-model="login.username" id="custom-input-username"
+									ng-pattern="/^[a-zA-Z]+@osius\.com$/" required> <label
+									for="custom-input-username" class="center-align">Email</label>
 							</div>
-
-						</div>
-
-						<span class="help-block"></span>
-						<div class="input-field col s12">
-							<i class="mdi-action-lock-outline prefix"></i> <input
-								type="password" name="password" ng-model="login.password"
-								id="custom-input-password" required> <label
-								for="custom-input-password">Password</label>
-						</div>
-						<div ng-messages="ldapUserlogin.password.$error" role="alert">
-						</div>
-					</div>
-					<input type="hidden" ng-model="login.j_username" name="j_username"
-						value="{{login.username}}" /> <input type="hidden"
-						ng-model="login.j_password" name="j_password"
-						value="{{login.password}}" />
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<div class="login-help">
-								<p></p>
+							<div ng-messages="ldapUserlogin.username.$error" role="alert">
+								<div class="error-alert" ng-message="pattern" style="margin-left: -40px">Enter OSI
+									credentials<br>(Example: username@osius.com)</div>
+									
+							</div>
+							
+							<span class="help-block"></span>
+							<div class="input-field col s12">
+								<i class="mdi-action-lock-outline prefix"></i> <input
+									type="password" name="password" ng-model="login.password"
+									id="custom-input-password" required> <label
+									for="custom-input-password">Password</label>
+							</div>
+							<div ng-messages="ldapUserlogin.password.$error" role="alert">
 							</div>
 						</div>
-					</div>
-					<!-- <div class="form-group">
+						<input type="hidden" ng-model="login.j_username" name="j_username"
+							value="{{login.username}}" /> <input type="hidden"
+							ng-model="login.j_password" name="j_password"
+							value="{{login.password}}" />
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="login-help">
+									<p></p>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="form-group">
 								<div class="row">
 								
 									<label><input type="checkbox"> Remember me</label>
@@ -147,7 +142,7 @@
 						
 						</div>
  -->
-					<!-- <div class="form-group">
+						<!-- <div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
 									<label><input type="checkbox"> Remember me</label>
@@ -156,109 +151,91 @@
 						</div>
  -->
 
-					<div class="form-group">
-						<div class="row">
-							<div class="input-field col s12">
-								<button class="waves-effect waves-light btn col s10"
-									type="submit" ng-click="userLogin()"
-									ng-disabled="ldapUserlogin.$invalid">Login</button>
+						 <div class="form-group">
+							<div class="row">
+								<div class="input-field col s12">
+									<button class="waves-effect waves-light btn col s10"
+										type="submit" ng-click="userLogin()"
+										ng-disabled="ldapUserlogin.$invalid">Login</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<!-- <div class="input-field col s6 m6 l6">
+						<div class="row">
+							<!-- <div class="input-field col s6 m6 l6">
 								<p class="margin medium-small">
 									<a href="register.html">Register Now!</a>
 								</p>
 							</div> -->
-						<div class="input-field col s6 m6 l6">
-							<p class="margin right-align medium-small">
-								<a href="https://login.osius.com/showLogin.cc" target="_blank">Forgot
-									password?</a>
-							</p>
-						</div>
-					</div>
-
-				</form>
-			</div>
-			<div class="col-md-6">
-				<!-- <h6 align="left" class="headerTitleCreateProfile">
-						<i class="big add user basic icon"></i> <b class="headerName">New
-							User? </b> <br><a href="">Register Now </a>
-	
-					</h6> -->
-				<div class="row">
-					<div class="col-md-4">
-						<i class="big add user basic icon" style="font-size: 42px"></i>
-					</div>
-					<div class="col-md-8" align="left">
-						<h6 style="color: black;">New User? </h6><br>
-						<a href="registerUser.html" style="padding-left: 10px;font-size: 16px">Register Now </a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="row google-signin field">
-					<div style="display: none">
-						<form id="login-form" action="j_spring_security_check"
-							method="post">
-							<div class="center">
-								<input type="text" name="j_username" id="j_username"
-									maxlength="50" /> <input type="password" name="j_password"
-									id="j_password" maxlength="50" /> <input type="submit"
-									value="Login" id="login-submit" />
+							<div class="input-field col s6 m6 l6">
+								<p class="margin right-align medium-small">
+									<a href="https://login.osius.com/showLogin.cc" target="_blank">Forgot
+										password?</a>
+								</p>
 							</div>
-						</form>
-					</div>
-					<div ng-app="directive.g+signin">
-						<google-plus-signin
-							clientid="982095460700-r2em1ubormovperomp1vlbm0r3m54rlt.apps.googleusercontent.com">
-						<div class=" btn-group">
-							<button type="button" id="signInG"
-								class="btn btn-block btn-social btn-google">
-								<i class="fa fa-google-plus"></i>Sign in with google+
-							</button>
 						</div>
-						</google-plus-signin>
+
+					</form>
+				</div>
+				<div class="col-md-2">
+					<div class="row google-signin field">
+						<div style="display: none">
+							<form id="login-form" action="j_spring_security_check"
+								method="post">
+								<div class="center">
+									<input type="text" name="j_username" id="j_username"
+										maxlength="50" /> <input type="password" name="j_password"
+										id="j_password" maxlength="50" /> <input type="submit"
+										value="Login" id="login-submit" />
+								</div>
+							</form>
+						</div>
+						<div ng-app="directive.g+signin">
+							<google-plus-signin
+								clientid="982095460700-r2em1ubormovperomp1vlbm0r3m54rlt.apps.googleusercontent.com">
+							<div class=" btn-group">
+								<button type="button" id="signInG"
+									class="btn btn-block btn-social btn-google">
+									<i class="fa fa-google-plus"></i>Sign in with google+
+								</button>
+							</div>
+							</google-plus-signin>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- <div class="btn-group" style="padding-left: 35px">
+				<!-- <div class="btn-group" style="padding-left: 35px">
 					<button type="button" id="linkedIn"
 						class="btn btn-block btn-social btn-linkedIn" disabled="true">
 						<i class="fa fa-linkedin"></i> Sign in with Linkedin
 					</button>
 				</div> -->
 
-			<div id="profiles"></div>
+				<div id="profiles"></div>
+			</div>
 		</div>
-	</div>
 	</div>
 
 	<!-- /account-container -->
-	<div class="footer mdl-shadow--4dp">
-		<div class="footer-inner">
-			<div class="row" align="right" style="margin-right: 20px">
-				<div class="col-md-2" align="left">
-					<img src="static/osi_images/fb.png" alt="Facebook" title="Facebook"
-						class="logoStyle"> <img src="static/osi_images/Twitter.png"
-						alt="Twitter" title="Twitter" class="logoStyle"> <img
-						src="static/osi_images/LinkedIn.png" alt="LinkedIn"
-						title="LinkedIn" class="logoStyle">
+		<div class="footer mdl-shadow--4dp">
+			<div class="footer-inner">
+				<div class="row" align="right" style="margin-right: 20px">
+					<div class="col-md-2" align="left">
+					<img src="static/osi_images/fb.png" alt="Facebook" title="Facebook" class="logoStyle">
+					<img src="static/osi_images/Twitter.png" alt="Twitter" title="Twitter" class="logoStyle">
+					<img src="static/osi_images/LinkedIn.png" alt="LinkedIn" title="LinkedIn" class="logoStyle">
+					</div>
+						<div class="col-md-8"></div>
+						<div class="col-md-2">
+							<a href="http://www.osius.com/">{{copyrights}}</a>
+						</div>
+						<!-- /span12 -->
+					</div>
+					<!-- /row -->
 				</div>
-				<div class="col-md-8"></div>
-				<div class="col-md-2">
-					<a href="http://www.osius.com/">{{copyrights}}</a>
-				</div>
-				<!-- /span12 -->
+				<!-- /container -->
 			</div>
-			<!-- /row -->
+			<!-- /footer-inner -->
 		</div>
-		<!-- /container -->
-	</div>
-	<!-- /footer-inner -->
-	</div>
-	<!-- /footer -->
+		<!-- /footer -->
 
 	<script src="lib/bootstrap/js/bootstrap.js"></script>
 
