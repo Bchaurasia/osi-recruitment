@@ -30,8 +30,7 @@
 		<intercept-url pattern='/**'
 			access='ROLE_USER,ROLE_HR,ROLE_ADMIN,ROLE_MANAGER,ROLE_INTERVIEWER,ROLE_REQUISITION_MANAGER,ROLE_REQUISITION_APPROVER' />
 		<form-login login-page='/login.html' default-target-url='/main.html'
-			always-use-default-target='false' authentication-failure-url="/loginFailure.html" />
-
+			always-use-default-target='false' authentication-failure-url="/login.html?authenticationFailed" />
 
 		<logout logout-success-url="/login.html" delete-cookies="JSESSIONID"
 			invalidate-session="true" />

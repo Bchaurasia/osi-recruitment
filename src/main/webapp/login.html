@@ -58,15 +58,6 @@
 	href="https://fonts.googleapis.com/css?family=Font+Name">
 <script type="text/javascript" src="lib/utility/js/docs.js"></script>
 
-<!-- <script type="text/javascript" src="js/linkedin_login.js"></script>
-
-
-<script type="text/javascript" src="https://platform.linkedin.com/in.js">
-	//here goes the api key, and the callback function
-	api_key: 75bm8w66omcy7b
-	//onLoad: onLinkedInLoad
-	authorize: true
-</script> -->
 </head>
 
 <body ng-app="myApp" ng-controller="myContoler">
@@ -99,19 +90,22 @@
 				<form class="form-horizontal login-form"
 					action="j_spring_security_check" method="post" id="ldapUserlogin"
 					autocomplete="off" name="ldapUserlogin">
-					<h6 style="color: black;">Sign in with your OSI account</h6>
+					<h6 style="color: black;">Sign in with your account</h6>
+					<span ng-show="authenticationError"><h7 style="color: red;">Invaild credentials | Check Connectivity</h7></span>
+					
 					<div class="row margin">
 						<div class="input-field col s12">
 							<i class="mdi-social-person-outline prefix"></i> <input
 								type="email" class="validate" name="username"
 								ng-model="login.username" id="custom-input-username"
-								ng-pattern="/^[a-zA-Z]+@osius\.com$/" required> <label
+								ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-0-]+(\.[a-zA-Z0-0-]+)*(\.[a-zA-Z]{2,4})$/" required> <label
 								for="custom-input-username" class="center-align">Email</label>
 						</div>
 						<div ng-messages="ldapUserlogin.username.$error" role="alert">
 							<div class="error-alert" ng-message="pattern"
 								style="margin-left: -40px">
-								Enter OSI credentials<br>(Example: username@osius.com)
+								<!-- Enter OSI credentials<br>(Example: username@osius.com) -->
+								Please check the given Email Address
 							</div>
 
 						</div>
@@ -137,24 +131,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="form-group">
-								<div class="row">
-								
-									<label><input type="checkbox"> Remember me</label>
-									<input type="checkbox" id="remember-me" /> <label
-										for="remember-me">Remember Me </label>
-								</div>
-						
-						</div>
- -->
-					<!-- <div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<div class="checkbox">
-									<label><input type="checkbox"> Remember me</label>
-								</div>
-							</div>
-						</div>
- -->
 
 					<div class="form-group">
 						<div class="row">
@@ -166,11 +142,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<!-- <div class="input-field col s6 m6 l6">
-								<p class="margin medium-small">
-									<a href="register.html">Register Now!</a>
-								</p>
-							</div> -->
 						<div class="input-field col s6 m6 l6">
 							<p class="margin right-align medium-small">
 								<a href="https://login.osius.com/showLogin.cc" target="_blank">Forgot
@@ -182,22 +153,17 @@
 				</form>
 			</div>
 			<div class="col-md-6">
-				<!-- <h6 align="left" class="headerTitleCreateProfile">
-						<i class="big add user basic icon"></i> <b class="headerName">New
-							User? </b> <br><a href="">Register Now </a>
-	
-					</h6> -->
-				<div class="row">
+				<div class="row" style="padding-top: 60px">
 					<div class="col-md-4">
 						<i class="big add user basic icon" style="font-size: 42px"></i>
 					</div>
 					<div class="col-md-8" align="left">
 						<h6 style="color: black;">New User? </h6><br>
-						<a href="registerUser.html" style="padding-left: 10px;font-size: 16px">Register Now </a>
+						<a href="registerUser.html" style="padding-left: 40px;font-size: 16px">Register Now </a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<!-- <div class="col-md-2">
 				<div class="row google-signin field">
 					<div style="display: none">
 						<form id="login-form" action="j_spring_security_check"
@@ -222,7 +188,7 @@
 						</google-plus-signin>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- <div class="btn-group" style="padding-left: 35px">
 					<button type="button" id="linkedIn"
 						class="btn btn-block btn-social btn-linkedIn" disabled="true">

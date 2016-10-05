@@ -1,5 +1,5 @@
 angular.module('myApp', ['directive.g+signin','ngMessages'])
-      .controller('myContoler', function ($scope) {
+      .controller('myContoler', function ($scope,$window) {
     	  $scope.login={};
     	  $scope.login.username="";
     	  $scope.login.password="";
@@ -28,5 +28,10 @@ angular.module('myApp', ['directive.g+signin','ngMessages'])
           // User has not authorized the G+ App!
           console.log('Not signed into Google Plus.');
         });
+        
+        $scope.init = function() {
+        	$scope.authenticationError = $window.location.href.indexOf("authenticationFailed") > -1 ? true: false;
+        	}
+        $scope.init();
         
       });
