@@ -478,10 +478,12 @@ public class NotificationService {
 		jobRequisitionTemplate.merge(context, writer);
 
 		Message message1 = getMessage();
+		String toMail = userId;
+		toMail = getHRMailId(toMail);
 		// message1.setFrom(new InternetAddress(from));
-		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(OSI_TECHNOLOGIES + " - Please Approve the Requisition "
-				+ requisitionApproverDetails.getJobRequisitionId());
+		message1.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(toMail));
+		message1.setSubject("From the desk of HR - Requisition " + requisitionApproverDetails.getJobRequisitionId()
+		 +" approval request notification");
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
@@ -539,7 +541,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		String toMail = null;
 		toMail = getHRMailId(toMail);
-		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		message1.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + CANDIDATE_APPROVAL_REQUEST + " : " + offer.getCandidateName()
 				+ " is selected for Designation :" + offer.getOrgGrade().getDesignation().getName());
 
@@ -681,7 +683,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		String toMail = null;
 		toMail = getHRMailId(toMail);
-		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		message1.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(toMail));
 		message1.setSubject(OSI_TECHNOLOGIES + " - Candidate" + " : " + offer.getCandidateName() + " is Rejected for Designation :"
 				+ offer.getOrgGrade().getDesignation().getName());
 		message1.setContent(writer.toString(), TEXT_HTML);
@@ -721,11 +723,13 @@ public class NotificationService {
 		
 		String toMail = requisitionApproverDetails.getRequisitionManagerEmail();
 		toMail = getHRMailId(toMail);
+		if(userId !=null )
+			toMail = toMail +","+ userId;
 		Message message3 = getMessage();
-		message3.setRecipients(Message.RecipientType.TO,
+		message3.setRecipients(Message.RecipientType.BCC,
 				InternetAddress.parse(toMail));
-		message3.setSubject(OSI_TECHNOLOGIES + " - " + requisitionApproverDetails.getJobRequisitionId()
-				+ " Requisition has been approved");
+		message3.setSubject("From the desk of HR - Requisition " + requisitionApproverDetails.getJobRequisitionId()
+				+ " approval notification");
 		message3.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message3);
 
@@ -784,7 +788,7 @@ public class NotificationService {
 		if(details.getApproval2()!=null)
 			toMail = toMail +  "," + details.getApproval2().getEmailId();
 	    Message message1 = getMessage();
-		message1.setFrom(new InternetAddress("OSIIndiaHR"));
+		message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(toMail));
 		message1.setSubject("From the desk of HR - Requisition "
 				+ requisitionApproverDetails.getJobRequisitionId()+ " reject notification");
@@ -825,7 +829,7 @@ public class NotificationService {
 		String toMail = interviewSchedule.getCandidateId() + "," + toInterviewer;
 		//String toMail = toInterviewer;
 		toMail = getHRMailId(toMail);
-		cancelInterview.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail));
+		cancelInterview.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(toMail));
 		cancelInterview.setSubject(OSI_TECHNOLOGIES + " - " + interviewSchedule.getRoundName() + " Interview Cancelled for :" + interviewSchedule.getCandidateName());
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent(writer.toString(), TEXT_HTML);
