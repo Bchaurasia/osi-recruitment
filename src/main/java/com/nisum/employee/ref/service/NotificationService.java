@@ -861,7 +861,7 @@ public class NotificationService {
 		Message message1 = getMessage();
 		message1.setFrom(new InternetAddress(from));
 		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-		message1.setSubject("OSI Internal Job Posting: " + position.getLocation() + " : " + position.getDesignation());
+		message1.setSubject("From The Desk Of HR : Requirement For " +position.getDesignation());
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
