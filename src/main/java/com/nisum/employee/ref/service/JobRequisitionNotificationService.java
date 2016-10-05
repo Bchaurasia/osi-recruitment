@@ -35,7 +35,7 @@ public class JobRequisitionNotificationService {
 		}
 		
 		if(REJECTED.equals(details.getStatus())){
-			notificationService.sendRejectRequisitionNotification(requisitionApproverDetails);
+			notificationService.sendRejectRequisitionNotification(details,requisitionApproverDetails);
 		}else {
 			notificationService.sendJobRequisitionNotification(requisitionApproverDetails);
 		}

@@ -178,7 +178,8 @@ public class NotificationService {
 	private String SRC_OFFER_DECLINED_INFO_TO_HR;
 	@Value("${SRC_OFFER_DECLINED_INFO_TO_REFERRER}")
 	private String SRC_OFFER_DECLINED_INFO_TO_REFERRER;
-	
+	@Value("${SRC_REJECT_REQUISITION}")
+	private String SRC_REJECT_REQUISITION;
 	
 	@Value("${OSI_PORTAL_LINK}")
 	private String OSI_PORTAL_LINK;
@@ -730,7 +731,7 @@ public class NotificationService {
 
 	}
 
-	public void sendRejectRequisitionNotification(RequisitionApproverDetails requisitionApproverDetails)
+	public void sendRejectRequisitionNotification(Requisition details,RequisitionApproverDetails requisitionApproverDetails)
 			throws AddressException, MessagingException, ResourceNotFoundException, ParseErrorException,
 			MethodInvocationException {
 
@@ -743,20 +744,50 @@ public class NotificationService {
 		VelocityEngine engine = new VelocityEngine();
 		engine.init();
 
-		// Template jobRequisitionTemplate =
-		// getVelocityTemplate(SRC_JOB_REQUISITION_VM);
-
+		Template jobRequisitionTemplate = getVelocityTemplate(SRC_REJECT_REQUISITION);
+		String creatorName = null;
+		List<UserInfo> creator = userService.retrieveUserById(userId);
+		if(creator!=null)
+			creatorName = creator.get(0).getName();
 		VelocityContext context = new VelocityContext();
-		context.put("approverName", requisitionApproverDetails.getApproverName());
-
+		context.put("requisitionId", details.getRequisitionId());
+		context.put("createdBy", creatorName);
+		context.put("comments", details.getComment());
+		context.put("rejectedBy", requisitionApproverDetails.getApproverName());
+		if (details.getApproval1() != null) {
+			context.put("approver1", details.getApproval1().getName());
+			if(details.getApproval1().getComment()!=null)
+			  context.put("app1Comments", details.getApproval1().getComment());
+			else
+				context.put("app1Comments", "--");	
+		} else {
+			context.put("approver1", "--");
+			context.put("app1Comments", "--");
+		}
+		if (details.getApproval2() != null) {
+			context.put("approver2", details.getApproval2().getName());
+			if(details.getApproval2().getComment()!=null)
+			  context.put("app2Comments", details.getApproval2().getComment());
+			else
+			  context.put("app2Comments", "--");
+		} else {
+			context.put("approver2", "--");
+			context.put("app2Comments", "--");
+		}
 		StringWriter writer = new StringWriter();
-		// jobRequisitionTemplate.merge(context, writer);
-
-		Message message1 = getMessage();
-		message1.setFrom(new InternetAddress(from));
-		message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userId));
-		message1.setSubject(OSI_TECHNOLOGIES + " - " + requisitionApproverDetails.getApproverName() + " has Rejected The Requisition "
-				+ requisitionApproverDetails.getJobRequisitionId());
+	    jobRequisitionTemplate.merge(context, writer);
+	    
+	    String toMail = userId;
+		toMail = getHRMailId(toMail);
+		if(details.getApproval1()!=null)
+			toMail = toMail +  "," + details.getApproval1().getEmailId();
+		if(details.getApproval2()!=null)
+			toMail = toMail +  "," + details.getApproval2().getEmailId();
+	    Message message1 = getMessage();
+		message1.setFrom(new InternetAddress("OSIIndiaHR"));
+		message1.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(toMail));
+		message1.setSubject("From the desk of HR - Requisition "
+				+ requisitionApproverDetails.getJobRequisitionId()+ " reject notification");
 
 		message1.setContent(writer.toString(), TEXT_HTML);
 		Transport.send(message1);
