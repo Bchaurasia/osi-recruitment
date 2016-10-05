@@ -24,6 +24,17 @@
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/*"/>
+            <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+                <property name="cacheSeconds" value="0"/>
+                <property name="useExpiresHeader" value="true"/>
+                <property name="useCacheControlHeader" value="true"/>
+                <property name="useCacheControlNoStore" value="true"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 	<util:properties id="app" location="classpath:application.properties" />
 	<context:property-placeholder
 		properties-ref="app" />
