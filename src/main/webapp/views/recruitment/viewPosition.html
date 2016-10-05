@@ -175,7 +175,7 @@
 				<span class="glyphicon glyphicon-ok-circle"></span> Update
 			</button>		
 			<button class="btn btn-info active" type="submit"
-				ng-show="position.positionType == 'Referral' && hasRole('ROLE_HR')"
+				ng-show=" hasRole('ROLE_HR')"
 				ng-click="publishJob()"
 				ng-disabled="position.publishStatus == true">
 				<span class="glyphicon glyphicon-share"></span> Publish

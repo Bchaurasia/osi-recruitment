@@ -1,54 +1,35 @@
 <html>
-<body style="font-family:calibri; font-size:15px; background-color:#F9FCF7;">
+<body style="font-family:calibri; font-size:20px; ">
+<table   style="background-color:blue;height=300px; width=850px" >
+<td bgcolor="#4d94ff">
 
-<div style="border:1px solid #004C7F;border-bottom-color: #004C7F; color:black; border-color:#004C7F;">
-<div style="padding-left:20px; padding-right:20px;">
-<p style="color: black;font-size:15px; font-family:Calibri;">
-<h2 align="center" style="color:red">Internal Job Posting OSI Technologies </h2>
 
-<table style="width:100%; border: 0px solid Gray;">
+  <a  target="_blank" style="font-size: 35px;text-decoration: blink;">
+     <img src="http://res.cloudinary.com/drozpmklt/image/upload/v1475603345/osiimage_xa6wf8.png" style="width:100%; height:90px" /> </a>
 
-<tr><td style="width:20%;border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Skills :</td>
-<td style="width:70%;border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$skills</td> 
-</tr>
+<div style="padding-left:20px; padding-right:20px; font-size: margin-left:15px">
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Experience:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$min_exp to $max_exp</td> 
-</tr>
+  <h4 style="background-color:red; color:white ;  font-family:initial; font-size:23px;"> &nbsp;&nbsp; &nbsp; Requirement : $position</h4>
+  <span style="color:yellow ;  font-family:initial; font-size:20px;">&nbsp;&nbsp;
+    Following are the reqirenments for above job
+    <ul>
+      <li>Skills : $skills</li>
+       <li>Experience : $min_exp to $max_exp </li>
+       <li>Qualification : $qualification </li>
+       <li>Job code : $jobcode </li>
+       <li>Job Description : $job_description </li>
+    </ul>
+</span>
+<h2 style="color: white">&nbsp;&nbsp;Work Location : $location </h2>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Qualification:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$qualification</td> 
-</tr>
+<div  align="center" style="color:black ;width:100%;  font-family:initial; font-size:18px; margin-top:30px; background-color: #ffe680; float: right ">
+<span>&nbsp;&nbsp;&nbsp;Please login to OSI Recruitment Portal to refer your friend</span><br>
+<h4 align="center" style="margin-top:15px">&nbsp;&nbsp;Regards ,<br>
+&nbsp;&nbsp;OSI India HR</h4>
+</div>
+</div>
 
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Job Location:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$location</td> 
-</tr>
-
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Job Code:</td>
-<td style="border: 0px solid #000000;text-align:left;size: 9px 9px; background-color:#F9FCF7;">$jobcode</td> 
-</tr>
-
-<tr><td style="border: 0px solid #000000; text-align:left;size: 9px 9px; background-color:#F9FCF7;"><b>Job Description:</td>
-<td style="border: 0px solid #000000;text-align:left;background-color:#F9FCF7;">$job_description</td> 
-</tr>
-
+</td>
 </table>
-<br><br>
-<strong>Please login to OSI Recruitment Portal and upload your friend's resume.</strong>
-<br><br>
-
- <span style="font-size:15px">Regards</span><br>
- <span style="font-size:15px">Recruitment Team</span><br>
-</div>
-
-<br>
-<div style="background-color:#D9E1E3;height:100px;border:1px solid #004C7F;border-bottom-color: #D9E1E3">
-<a href="http://osi-tech.com" target="_blank" style="font-size: 35px;text-decoration: blink;">
-  <img src="http://www.osi-tech.com/images/osi-logo2.png" style="width:350px; height:100px" > </a>
-</div>
-
-</div>
-
 </body>
-</form>
 </html>
