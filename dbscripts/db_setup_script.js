@@ -36,7 +36,16 @@ db.info.insert({"_id":"Currency",value:["INR","USD","GBP","EUR", "AED"]});
 
 db.info.insert({"_id":"Locations",value: [ "Bangalore" , "Chennai", "Gurgaon", "Hyderabad", "Pune"]});
 
-db.info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "JQuery","Java Script","Ruby","JPA","JSP","iBatis","Rest WebService","Spring","Hibernate","C","C++","Oracle","MySQL","DB2","TeraData","MongoDB","Neo4J","CouchDB"]});
+db.info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "JQuery","Java Script","Ruby","JPA","JSP","iBatis",
+                                       "Rest WebService","Spring","Hibernate","C","C++","Oracle","MySQL","DB2","TeraData","MongoDB","Neo4J","CouchDB","ORACLE SQL",
+                                       "ORACLE PL/SQL","ORACLE FORMS","ORACLE REPORTS","ORACLE XML/ BI PUBLISHER REPORTS","ORACLE AOL","ORACLE DISCOVERER REPORTS",
+                                       "SHELL SCRIPTING","ORACLE APPLICATION FRAMEWORK (OAF)","ORACLE APPLICATION DEVELOPMENT FRAMEWORK (ADF)","ORACLE SOA/BPEL",
+                                       "ORACLE WORKFLOW","ORACLE OBIEE","ORACLE PERFORMANCE TUNING","EDI ","ORACLE APPLICATION INTEGRATION ARCHITECTURE",
+                                       "HYPERION TECHNICAL","JAVA LANGUAGE","General Ledger","Accounts Payable","Accounts Receivable","Fixed Asset",
+                                       "Cash Management","India Localization","Ebiz Tax","iExpenses","iReceivables","Hyperion","Inventory","","Purchasing",
+                                       "Order Management","Advance Pricing","Warehouse Management","iProc","iSupplier","iSupport","FAH Accounting","Fusion Financials",
+                                       "Budget Planning Cloud services (BPCS)","Fusion HCM","Fusion Taleo","Fusion Sales","Fusion Procurement","Fusion Sourcing",
+                                       "Fusion Project Management","Odoo Functional","Odoo Technical Phython /Postgre"]});
 
 db.info.insert({"_id":"UserRoles",value: ["ROLE_HR", "ROLE_MANAGER", "ROLE_USER","ROLE_ADMIN","ROLE_INTERVIEWER","ROLE_REQUISITION_MANAGER","ROLE_REQUISITION_APPROVER"]});
 
@@ -103,7 +112,12 @@ db.clientInfo.insert([{"_id":"MACYS","clientName":"Macy's","locations":"Hyderaba
                 	  {"_id":"TOUCH COMMERCE","clientName":"Touch Commerce","locations":"SF"},
                 	  {"_id":"E3 RETAIL","clientName":"E3 Retail","locations":"SF"},
                 	  {"_id":"LIBERCUS","clientName":"Libercus","locations":"SF"},
-                	  {"_id":"JACOBS","clientName":"Jacobs","locations":"SF"}
+                	  {"_id":"JACOBS","clientName":"Jacobs","locations":"SF"},
+                	  {"_id":"EAORACLE","clientName":" EA Oracle","locations":"SF"},
+                	  {"_id":"EAPFST","clientName":"EA PFST","locations":"SF"},
+                	  {"_id":"EAMICROSOFT","clientName":"EA Microsoft","locations":"SF"},
+                	  {"_id":"EAOPENSOURCE","clientName":"EA Open Source","locations":"SF"},
+                	  {"_id":"EAMICROFINANCE","clientName":"EA Microfinance","locations":"SF"}
                 	  ]);
 
 db.designation.insert([{"_id":"Project Associate Trainee","maxExpYear":"1","minExpYear":"0","skills":["Java","C"]},
