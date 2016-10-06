@@ -16,9 +16,11 @@ app.controller('registerUserCtrl', ['$scope','$http','$window','$location','bloc
 				var protocol = pathArray[0];
 				var host = pathArray[2];
 				var contextName = pathArray[3];
-				var loginUrl = protocol + '//' + host+'/'+contextName;
+				var loginUrl = protocol + '//' + host+'/login.html';
 				$window.location.href = loginUrl;
+				console.log(loginUrl);
 				alert(data.data.msg);
+				
 			})
 		 .catch(function(msg){
 			 var cls="alert alert-danger alert-error";
