@@ -20,6 +20,49 @@
 		</div>
 
 		<div class="ui segment segmentPadding">
+			<div class="row" style="padding-left: 0%">
+				<div class="input-field col s6">
+					<select ng-model="bu" name="currency" ng-change="selectStream(bu)"
+						ng-options="o for o in bus" class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select BU</option>
+					</select> <label style="position: absolute; top: -22px;"> BU<b
+						class="mandatory">*</b>
+					</label>
+				</div>
+				<div class="input-field col s6">
+					<select ng-model="stream" name="currency"
+						ng-change="selectLevel(stream)"
+						ng-options="o for o in streamData track by o"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select functional
+							area</option>
+					</select> <label style="position: absolute; top: -22px;">Functional
+						Area<b class="mandatory">*</b>
+					</label>
+				</div>
+			</div>
+			<div class="row" style="padding-left: 0%">
+				<div class="input-field col s6">
+					<select ng-model="level" name="currency"
+						ng-change="selectGrade(level)"
+						ng-options="o for o in levelDatalist track by o"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select Level</option>
+					</select> <label style="position: absolute; top: -22px;"> Level<b
+						class="mandatory">*</b>
+					</label>
+				</div>
+				<div class="input-field col s6">
+					<select ng-model="grade" name="grade"
+						ng-change="selectDesignation(grade)"
+						ng-options="o.grade for o in  designationgrades track by o.grade"
+						class="form-control input-sm" required>
+						<option value="" disabled="disabled">Select Grade</option>
+					</select> <label style="position: absolute; top: -22px;">Grade<b
+						class="mandatory">*</b>
+					</label>
+				</div>
+			</div>
 			<div class="row">
 				<div class="input-field col s6" align="left">
 					<ui-select ng-model="requisition.position" ng-change="getData()"
@@ -33,29 +76,28 @@
 						class="mandatory">*</b>
 					</label>
 				</div>
+
 				<div class="input-field col s5 rangeDiv">
 					<div class="row">
 						<div class="input-field col s6">
-							<input type="range" ng-model="requisition.minExpYear"
-								ng-change="min(requisition.minExpYear)" min="0" max="15"
-								required /> <span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
+							<input type="range" ng-model="requisition.minExpYear" min=0 max=15
+								ng-change="min(requisition.minExpYear)" required="required"/> <span
+								class="range-slider__value">Min:{{requisition.minExpYear}}</span>
 						</div>
 						<div class="input-field col s6 ">
-							<input type="range" ng-model="requisition.maxExpYear"
-								class="floatR" ng-change="max(requisition.maxExpYear)" min="0"
-								max="15" required /> <span class="range-slider__value floatR">Max:{{requisition.maxExpYear}}</span>
+							<input type="range" ng-model="requisition.maxExpYear" min=0 max=15
+								class="floatR" ng-change="max(requisition.maxExpYear)" required="required"/> <span
+								class="range-slider__value floatR">Max:{{requisition.maxExpYear}}</span>
 						</div>
 					</div>
 					<label style="margin-top: 14px">Exp. Required<b
-						class="mandatory">*</b></label> <span class="validation-error"
-						ng-show="minErr"> Min Exp should not be greater than Max
-						Exp.</span> <span class="validation-error" ng-show="maxErr"> Max
-						Exp should not be less than Min Exp.</span>
+						class="mandatory">*</b></label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
 					<input type="date" ng-model="requisitionDate"
+						;
 						min="{{today | date : 'yyyy-MM-dd' }}"
 						ng-change="reqDate(requisitionDate,targetDate)"
 						id="requisitionDate" required name="requisitionDate"> <label>Requisition
@@ -91,13 +133,6 @@
 				</div>
 			</div>
 			<div class="row">
-				<!-- <div class="input-field col s6">
-				<select placeholder="Select Hiring HR" ng-model="role"
-					ng-options="o.name for o in hr | orderBy:'toString()'"
-					class="form-control input-sm" required>
-					<option value="" disabled="disabled">Select Hiring HR</option>
-				</select> <label>Hiring HR<b class="mandatory">*</b></label>
-			</div> -->
 				<div class="input-field col s6">
 					<select placeholder="Select Shift Timing"
 						ng-model="requisition.shiftTiming"
@@ -168,11 +203,12 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<textarea id="textarea1" class="materialize-textarea" 
+					<textarea id="textarea1" class="materialize-textarea"
 						ng-model="requisition.comment"
 						placeholder="Enter any comments/notes..." required></textarea>
 					<label style="position: absolute; top: -22px;">Requisition
-						Comment<b class="mandatory">*</b></label>
+						Comment<b class="mandatory">*</b>
+					</label>
 				</div>
 			</div>
 			<div class="row"
@@ -202,15 +238,6 @@
 					</div>
 
 				</div>
-				<!-- <div class="input-field col s1">
-				<button class="glyphicon glyphicon-remove"
-					ng-show="lengthOfQualifications()" 
-					ng-click="deleteQualification($index)"></button>&nbsp;&nbsp;&nbsp;
-				<button id="addButtonColumn" 
-				    ng-disabled="checkDisability(requisition.qualification)"
-					ng-show="$last" class="glyphicon glyphicon-plus"
-					ng-click="addColumnCriteria()"></button>
-			</div> -->
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
@@ -250,7 +277,6 @@
 					<label style="margin-top: 8px"><b>Additional Rounds</b></label>
 				</div>
 			</div>
-
 		</div>
 
 

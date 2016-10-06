@@ -109,15 +109,15 @@
 			<div class="input-field col s5 rangeDiv">
 				<div class="row">
 					<div class="input-field col s6">
-						<input type="range" ng-model="requisition.minExpYear"
+						<input type="range" ng-model="requisition.minExpYear" min=0 max=15
 							ng-disabled="true" ng-change="min(requisition.minExpYear)"
-							min="0" max="15" required /> <span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
+							 required /> <span class="range-slider__value">Min:{{requisition.minExpYear}}</span>
 					</div>
 					<div class="input-field col s6">
 						<input type="range" ng-model="requisition.maxExpYear"
-							class="floatR"
+							class="floatR" min=0 max=15
 							ng-disabled="true" ng-change="max(requisition.maxExpYear)"
-							min="0" max="15" required /> <span class="range-slider__value floatR">Max:{{requisition.maxExpYear}}</span>
+							 required /> <span class="range-slider__value floatR">Max:{{requisition.maxExpYear}}</span>
 					</div>
 				</div>
 				<label style="margin-top: 14px">Exp. Required<b

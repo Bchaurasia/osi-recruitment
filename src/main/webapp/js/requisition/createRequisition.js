@@ -1,5 +1,5 @@
-app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService','jobDescriptionService',
-                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService,jobDescriptionService) {
+app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$location','sharedService','$filter', '$log','appConstants','$timeout','$rootScope','designationService','clientService','requisitionService','userService','jobDescriptionService','offerService',
+                                     function($scope, $http, $q, $window,$location,sharedService,$filter, $log,appConstants,$timeout,$rootScope,designationService,clientService,requisitionService,userService,jobDescriptionService,offerService) {
 	
 	$scope.hideQualification = true;
 	$scope.calendar = true;
@@ -48,6 +48,10 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.today = new Date();
 	$scope.qualification = $scope.info.qualification;
 	$scope.previousApprover2=false;
+	$scope.designationData= {
+			"designations":[]
+	};
+	$scope.bus = ["ET","EA","OPS"];
 	
 	$scope.lengthOfQualifications = function() {
 		if($scope.requisition.qualifications.length == 1){
@@ -108,7 +112,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$scope.JobDesBtn = true;
 	}
 	
-	designationService.getDesignation().then(function(data){
+	/*designationService.getDesignation().then(function(data){
 		$scope.designations=data;
 		angular.forEach($scope.designations,function(deg){
 			$scope.designation1.push(deg.designation);
@@ -124,7 +128,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		 $scope.cls=appConstants.ERROR_CLASS;
 		 $timeout( function(){ $scope.alHide(); }, 5000);
 	});
-	
+	*/
 	clientService.getClientInfo().then(setClientList);
 
 	function setClientList(data){
@@ -320,4 +324,53 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	   $scope.previousApprover2  = true;
 		 
 	 }
+   	offerService.getBandOfferData().then(function(data){
+			$scope.orgBands=data;
+		}).catch(function(msg){
+			$scope.message=msg;
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $timeout( function(){ $scope.alHide(); }, 5000);
+	});
+   $scope.selectStream = function(bu){
+		$scope.stream="";
+		$scope.streamData=[];
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.bu, bu)){
+				$scope.streamData.push(band.stream);
+			}
+		});
+	};
+	$scope.selectLevel = function(stream){
+		$scope.level="";
+		$scope.levelDatalist=[];
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.stream, stream)){
+				$scope.levelData=band.levels;
+			}
+		});
+		angular.forEach($scope.levelData,function(band) {
+				$scope.levelDatalist.push(band.level);
+		});
+	};
+	$scope.selectGrade = function(selectedLevel){
+		$scope.grade = undefined;
+		$scope.designationgrades=[];
+		$scope.designationData= _.filter($scope.levelData , 
+				function(level1){ 
+					return _.isEqual(level1.level, selectedLevel); 
+					});
+		$scope.designationgrades = _.uniq($scope.designationData[0].designations, function(design){
+			return design.grade;
+		});
+	};
+	$scope.selectDesignation = function(selectedGrade){
+		$scope.name = undefined;
+		$scope.designation1=[];
+		$scope.designationdesignations = _.filter($scope.designationData[0].designations, function(design){
+			 if(_.isEqual(design.grade, selectedGrade.grade)){
+				 $scope.designation1.push(design.name);
+				return design.name;
+			}
+		});
+	};
 }]);
