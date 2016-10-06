@@ -20,15 +20,14 @@ public class RegisterUserController {
 	RegisterUserService registerUserService;
 	
 	@RequestMapping(value = "/send-mail",method = RequestMethod.POST)
-	public ResponseEntity<?> sendMailToUser(@RequestBody RegisterUser registerUser) {
+	public ResponseEntity<?> sendMailToUser(@RequestBody RegisterUser registerUser) throws Exception {
 		registerUserService.sendMailToUser(registerUser);
 		String jsonObj = "{\"msg\":\"Email verification link has been sent to registered email id\"}";
 		return new ResponseEntity<String>(jsonObj,HttpStatus.OK);
 
 	}
 	@RequestMapping(value = "/verify-user", method = RequestMethod.GET)
-	public ResponseEntity<?> verifyUser(@RequestParam(value = "versionId", required = false) String versionId) {
-		System.out.println("VersionId : "+versionId);
+	public ResponseEntity<?> verifyUser(@RequestParam(value = "versionId", required = false) String versionId) throws Exception {
 		RegisterUser registerUser = registerUserService.getUserDetailsFromVersionId(versionId);
 		registerUserService.saveInUserInfo(registerUser);
 		String jsonObj = "{\"msg\":\"User has been registered successfully\"}";

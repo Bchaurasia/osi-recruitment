@@ -10,10 +10,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.nisum.employee.ref.domain.UserInfo;
 import com.nisum.employee.ref.repository.UserInfoRepository;
 import com.nisum.employee.ref.security.authentication.IAuthentication;
 import com.nisum.employee.ref.security.authorization.IAuthorization;
 import com.nisum.employee.ref.service.UserService;
+import com.nisum.employee.ref.util.EncryptDecrypt;
 
 import lombok.Setter;
 
@@ -21,8 +23,6 @@ import lombok.Setter;
 public class SecurityProvider extends AbstractUserDetailsAuthenticationProvider  {
 	
 	private static final String MESSAGE = "user not found Exception ";
-
-	private static final String OSIUS = "osius";
 
 	@Setter
 	@Autowired
@@ -34,7 +34,7 @@ public class SecurityProvider extends AbstractUserDetailsAuthenticationProvider 
 	@Autowired
 	private UserService userService;
     @Autowired
-	private UserInfoRepository infoRepository;
+	private UserInfoRepository userInfoRepository;
 
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
@@ -46,15 +46,23 @@ public class SecurityProvider extends AbstractUserDetailsAuthenticationProvider 
     protected UserDetails retrieveUser(String userName, UsernamePasswordAuthenticationToken authToken)
             throws AuthenticationException {
 		List<GrantedAuthority> grantedAuthorities = null;
-		if(!userName.contains(OSIUS)){
-		authentication.authenticate(userName,authToken.getCredentials().toString());
-		 if(!userService.isUserAlradyExist(userName)){
-	        	infoRepository.isUserExists(userName);
-	        }
-		grantedAuthorities= authorization.authorize(userName);
-		return new User(userName, authToken.getCredentials().toString(), true, true, true, true, grantedAuthorities);
-    }else{
-		throw new UsernameNotFoundException(MESSAGE);
-	}
-	}
+		
+    		List<UserInfo> user = userInfoRepository.retrieveUserById(userName);
+    		try {
+				String decryptedPwd = EncryptDecrypt.decrypt(user.get(0).getPassword());
+				if(authToken.getCredentials().equals(decryptedPwd)){
+					grantedAuthorities = authorization.authorize(userName);
+					return new User(userName, authToken.getCredentials().toString(), true, true, true, true, grantedAuthorities);
+				}
+				else{
+					throw new UsernameNotFoundException(MESSAGE);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new UsernameNotFoundException(MESSAGE);
+			}
+		
+    }
+	
 }
