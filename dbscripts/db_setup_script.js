@@ -40,9 +40,9 @@ db.info.insert({"_id":"Skills",value: ["Java", "J2EE","Web Service","Struts", "J
                                        "Rest WebService","Spring","Hibernate","C","C++","Oracle","MySQL","DB2","TeraData","MongoDB","Neo4J","CouchDB","ORACLE SQL",
                                        "ORACLE PL/SQL","ORACLE FORMS","ORACLE REPORTS","ORACLE XML/ BI PUBLISHER REPORTS","ORACLE AOL","ORACLE DISCOVERER REPORTS",
                                        "SHELL SCRIPTING","ORACLE APPLICATION FRAMEWORK (OAF)","ORACLE APPLICATION DEVELOPMENT FRAMEWORK (ADF)","ORACLE SOA/BPEL",
-                                       "ORACLE WORKFLOW","ORACLE OBIEE","ORACLE PERFORMANCE TUNING","EDI ","ORACLE APPLICATION INTEGRATION ARCHITECTURE",
+                                       "ORACLE WORKFLOW","ORACLE OBIEE","ORACLE PERFORMANCE TUNING","EDI","ORACLE APPLICATION INTEGRATION ARCHITECTURE",
                                        "HYPERION TECHNICAL","JAVA LANGUAGE","General Ledger","Accounts Payable","Accounts Receivable","Fixed Asset",
-                                       "Cash Management","India Localization","Ebiz Tax","iExpenses","iReceivables","Hyperion","Inventory","","Purchasing",
+                                       "Cash Management","India Localization","Ebiz Tax","iExpenses","iReceivables","Hyperion","Inventory","Purchasing",
                                        "Order Management","Advance Pricing","Warehouse Management","iProc","iSupplier","iSupport","FAH Accounting","Fusion Financials",
                                        "Budget Planning Cloud services (BPCS)","Fusion HCM","Fusion Taleo","Fusion Sales","Fusion Procurement","Fusion Sourcing",
                                        "Fusion Project Management","Odoo Functional","Odoo Technical Phython /Postgre"]});
