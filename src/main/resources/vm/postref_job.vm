@@ -11,8 +11,7 @@
 
   <h4 style="background-color:red; color:white ;  font-family:initial; font-size:23px;"> &nbsp;&nbsp; &nbsp; Requirement : $position</h4>
   <span style="color:yellow ;  font-family:initial; font-size:20px;">&nbsp;&nbsp;
-    Following are the reqirenments for above job
-    <ul>
+    <ul style="margin-top:0px">
       <li>Skills : $skills</li>
        <li>Experience : $min_exp to $max_exp </li>
        <li>Qualification : $qualification </li>
