@@ -34,8 +34,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.requisition.position = "";
 	$scope.requisition.client = "";
 	//$scope.requisition.requisitionManager= {};
-	$scope.requisition.minExpYear = "";
-	$scope.requisition.maxExpYear = "";
+	$scope.requisition.minExpYear = 3;
+	$scope.requisition.maxExpYear = 3;
 	$scope.requisitionDate = new Date();
 	$scope.requisition.targetDate = "";
 	$scope.qualification.percent = "70";
