@@ -92,6 +92,10 @@
 					</div>
 					<label style="margin-top: 14px">Exp. Required<b
 						class="mandatory">*</b></label>
+					<span class="validation-error"
+						ng-show="minErr"> Min Exp should not be greater than Max
+						Exp.</span> <span class="validation-error" ng-show="maxErr"> Max
+						Exp should not be less than Min Exp.</span>
 				</div>
 			</div>
 			<div class="row">
