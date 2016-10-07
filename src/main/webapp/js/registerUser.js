@@ -2,6 +2,7 @@ var app = angular.module('app', ['blockUI']);
 
 app.controller('registerUserCtrl', ['$scope','$http','$window','$location','blockUI','$timeout', function($scope,$http,$window,$location,blockUI,$timeout) {
 	$scope.newUser = {};
+	var loginUrl =undefined;
   $scope.matchPasswords= function(){
 	  $scope.passwordError = ($scope.newUser.password != $scope.newUser.confirmPassword) ? true : false ;
 	  
@@ -16,7 +17,14 @@ app.controller('registerUserCtrl', ['$scope','$http','$window','$location','bloc
 				var protocol = pathArray[0];
 				var host = pathArray[2];
 				var contextName = pathArray[3];
-				var loginUrl = protocol + '//' + host+'/login.html';
+				if(contextName!=undefined)
+				{
+					loginUrl = protocol + '//' + host+'/'+contextName;
+				}
+				else
+				{
+					loginUrl = protocol + '//' + host;
+				}
 				$window.location.href = loginUrl;
 				console.log(loginUrl);
 				alert(data.data.msg);
