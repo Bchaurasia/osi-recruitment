@@ -177,9 +177,6 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.max = function(maxValue){
 		var Value1 = parseInt(maxValue);
 		var Value2 = parseInt($scope.requisition.minExpYear);
-		console.log(Value1);
-		console.log(Value2);
-		
 		if(Value1 < Value2){
 			$scope.maxErr = true;
 			$scope.disabled = true;
