@@ -177,6 +177,9 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	$scope.max = function(maxValue){
 		var Value1 = parseInt(maxValue);
 		var Value2 = parseInt($scope.requisition.minExpYear);
+		console.log(Value1);
+		console.log(Value2);
+		
 		if(Value1 < Value2){
 			$scope.maxErr = true;
 			$scope.disabled = true;
@@ -286,6 +289,11 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	 $scope.reset = function(){
        $scope.requisition = {};
        $scope.targetDate = "";
+       $scope.bu="";
+       $scope.stream="";
+		$scope.level="";
+		$scope.requisition.position = "";
+		$scope.grade = {};
        $scope.requisitionDate = new Date();
        $scope.requisition.skillType = {};
     }
@@ -328,8 +336,11 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 			 $scope.cls=appConstants.ERROR_CLASS;
 			 $timeout( function(){ $scope.alHide(); }, 5000);
 	});
-   $scope.selectStream = function(bu){
+    $scope.selectStream = function(bu){
 		$scope.stream="";
+		$scope.level="";
+		$scope.requisition.position = "";
+		$scope.grade = {};
 		$scope.streamData=[];
 		angular.forEach($scope.orgBands,function(band) {
 			if(_.isEqual(band.bu, bu)){
@@ -339,6 +350,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 	};
 	$scope.selectLevel = function(stream){
 		$scope.level="";
+		$scope.requisition.position = "";
+		$scope.grade = {};
 		$scope.levelDatalist=[];
 		angular.forEach($scope.orgBands,function(band) {
 			if(_.isEqual(band.stream, stream)){
@@ -350,7 +363,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		});
 	};
 	$scope.selectGrade = function(selectedLevel){
-		$scope.grade = undefined;
+		$scope.requisition.position = "";
+		$scope.grade = {};
 		$scope.designationgrades=[];
 		$scope.designationData= _.filter($scope.levelData , 
 				function(level1){ 
@@ -361,7 +375,7 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		});
 	};
 	$scope.selectDesignation = function(selectedGrade){
-		$scope.name = undefined;
+		$scope.requisition.position = "";
 		$scope.designation1=[];
 		$scope.designationdesignations = _.filter($scope.designationData[0].designations, function(design){
 			 if(_.isEqual(design.grade, selectedGrade.grade)){

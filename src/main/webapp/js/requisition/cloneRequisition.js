@@ -1,5 +1,5 @@
-app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window','sharedService','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','jobDescriptionService','positionService','blockUI',
-                                     function($scope,$state, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,jobDescriptionService,positionService,blockUI) {
+app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window','sharedService','$stateParams','$filter','$rootScope', '$log','appConstants','$timeout','requisitionService','designationService','clientService','userService','jobDescriptionService','positionService','blockUI','offerService',
+                                     function($scope,$state, $http, $q, $window,sharedService,$stateParams,$filter, $rootScope,$log,appConstants,$timeout,requisitionService,designationService,clientService,userService,jobDescriptionService,positionService,blockUI,offerService) {
 	$scope.hideSkills = true;
 	$scope.skillErr = false;
 	$scope.info = $rootScope.info;
@@ -30,6 +30,11 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 	$scope.disabled1 = false;
 	$scope.maxErr = false;
 	$scope.minErr = false;
+	$scope.designationData= {
+			"designations":[]
+	};
+	$scope.bus = ["ET","EA","OPS"];
+	
 	 $scope.previousApprover2  = false;
 	$scope.init = function() {
 		if(id == undefined) {
@@ -67,10 +72,11 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 				function(response){
 					$scope.designations = response[0].data;
 					angular.forEach($scope.designations,function(deg){
-						$scope.designation1.push(deg.designation);
+						//$scope.designation1.push(deg.designation);
 					})
 					if($scope.requisition.position !== undefined && !_.isEmpty($scope.designations)){
 						$scope.position = _.find($scope.designations, function(deg){ return deg.designation === $scope.requisition.position });
+						$scope.requisition.position = "";
 					}
 					$scope.clients = response[1].data;
 					$scope.JobDescriptionList = response[2].data;
@@ -187,13 +193,6 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		}
 	}
 	
-	$scope.getData = function() {
-		$scope.minErr = false;
-	    $scope.maxErr = false;
-	    $scope.disabled1 = false;
-          $scope.requisition.minExpYear = $scope.position.minExpYear;
-          $scope.requisition.maxExpYear = $scope.position.maxExpYear;
-      }
 	
 	$scope.validateSkills = function(){
 		if($scope.requisition.skillType=== undefined)
@@ -283,4 +282,59 @@ app.controller('cloneRequisitionCtrl',['$scope','$state','$http','$q', '$window'
 		   $scope.previousApprover2  = true;
 			 
 		 }
+	   	offerService.getBandOfferData().then(function(data){
+			$scope.orgBands=data;
+		}).catch(function(msg){
+			$scope.message=msg;
+			 $scope.cls=appConstants.ERROR_CLASS;
+			 $timeout( function(){ $scope.alHide(); }, 5000);
+	});
+   $scope.selectStream = function(bu){
+		$scope.stream="";
+		$scope.level="";
+		$scope.requisition.position = "";
+		$scope.grade = {};
+		$scope.streamData=[];
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.bu, bu)){
+				$scope.streamData.push(band.stream);
+			}
+		});
+	};
+	$scope.selectLevel = function(stream){
+		$scope.level="";
+		$scope.requisition.position = "";
+		$scope.grade = {};
+		$scope.levelDatalist=[];
+		angular.forEach($scope.orgBands,function(band) {
+			if(_.isEqual(band.stream, stream)){
+				$scope.levelData=band.levels;
+			}
+		});
+		angular.forEach($scope.levelData,function(band) {
+				$scope.levelDatalist.push(band.level);
+		});
+	};
+	$scope.selectGrade = function(selectedLevel){
+		$scope.requisition.position = "";
+		$scope.grade = {};
+		$scope.designationgrades=[];
+		$scope.designationData= _.filter($scope.levelData , 
+				function(level1){ 
+					return _.isEqual(level1.level, selectedLevel); 
+					});
+		$scope.designationgrades = _.uniq($scope.designationData[0].designations, function(design){
+			return design.grade;
+		});
+	};
+	$scope.selectDesignation = function(selectedGrade){
+		$scope.requisition.position = "";
+		$scope.designation1=[];
+		$scope.designationdesignations = _.filter($scope.designationData[0].designations, function(design){
+			 if(_.isEqual(design.grade, selectedGrade.grade)){
+				 $scope.designation1.push(design.name);
+				return design.name;
+			}
+		});
+	};
 }]);
