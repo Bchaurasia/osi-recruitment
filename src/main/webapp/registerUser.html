@@ -33,7 +33,6 @@
 
 <script src="lib/angular/js/angular.min.js"></script>
 <script src="lib/utility/js/jquery-1.11.2.min.js"></script>
-<script src="js/masks.js"></script>
 <script src="lib/angular/js/angular-block-ui.min.js"></script>
 <script src="lib/angular/js/angular-file-upload-shim.min.js"></script>
 <script src="lib/angular/js/angular-file-upload.js"></script>
@@ -54,7 +53,7 @@
 	<div class="col-md-1 col-sm-1 col-xs-1 "></div>
 	<body ng-app="app" ng-controller="registerUserCtrl">
 		<form class="col s12 m12 l10 collapsible collapsible-accordion"
-			tag="Create Logon" name="myForm">
+			tag="Create Logon" name="myForm" ng-hide="showSuccess">
 
 			<div class="row collapsible-header">
 				<h5 align="left" style="padding-bottom: 0px">
@@ -143,7 +142,13 @@
 			</div>
 
 		</form>
-	</body>
+		
+	
+</div>
+<div ng-show="showSuccess" style="text-align:center;" class="input-field col s12">
+<h2 style="text-align:center; font-family:serif">Thanks for registering on OSI Tech Portal </h2>
+<h4 style="font-family: initial; font-size:20px">Please check your mail for login link</h4>
+<button  class="waves-effect waves-light btn col s10" ng-click="close()"> OK</button>
 </div>
 </body>
 </html>
