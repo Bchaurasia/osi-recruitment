@@ -296,6 +296,8 @@ app.controller('createRequisitionCtrl',['$scope', '$http','$q', '$window','$loca
 		$scope.grade = {};
        $scope.requisitionDate = new Date();
        $scope.requisition.skillType = {};
+       $scope.requisition.minExpYear = 3;
+   	   $scope.requisition.maxExpYear = 3;
     }
 	
 	$scope.JobDescriptionList=[];

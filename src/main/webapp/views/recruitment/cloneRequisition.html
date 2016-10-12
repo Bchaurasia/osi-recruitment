@@ -60,7 +60,7 @@
 			<div class="row">
 				<div class="input-field col s6" align="left">
 					<ui-select ng-model="requisition.position" 
-						theme="selectize" style="width: 80%"> <ui-select-match
+						theme="selectize" style="width: 80%" required> <ui-select-match
 						placeholder="Select Designation">{{$select.selected}}</ui-select-match>
 					<ui-select-choices
 						repeat="designation in designation1 | orderBy:'toString()'| filter: $select.search">
